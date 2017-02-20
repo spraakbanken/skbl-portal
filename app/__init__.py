@@ -1,14 +1,12 @@
 import os
-from flask import Flask, request, redirect, render_template, url_for, g
-from flask_babel import Babel
+from flask import Flask, g, request, redirect, render_template, url_for
+from flask.ext.babel import Babel
 from setuptools import setup
 
 app = Flask(__name__)
 
-app.config.from_object('config')
+app.config.from_pyfile('../config.cfg')
 babel = Babel(app)
-
-
 
 @babel.localeselector
 def get_locale():
