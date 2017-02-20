@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-02-20 15:19+0000\n"
+"POT-Creation-Date: 2017-02-20 17:18+0000\n"
 "PO-Revision-Date: 2017-02-20 14:49+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sv\n"
@@ -18,15 +18,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: app/templates/layout.html:33
+#: app/templates/layout.html:35
 msgid "About SKBL"
 msgstr "Om SKBL"
 
-#: app/templates/layout.html:34
+#: app/templates/layout.html:36
 msgid "About us"
 msgstr "Om oss"
 
-#: app/templates/layout.html:44
+#: app/templates/layout.html:39
+msgid "Article authors"
+msgstr "Artikelförfattare"
+
+#: app/templates/layout.html:46
 msgid "Contact"
 msgstr "Kontakt"
+
+#: app/templates/layout.html:67
+msgid "Keywords"
+msgstr "Nyckelord"
 
