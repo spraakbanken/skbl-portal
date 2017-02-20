@@ -29,3 +29,12 @@ def about_us():
 def about_us():
     set_language_swith_link("about-us")
     return render_template('page.html', content = g.language)
+
+
+@app.route("/en/keyword", endpoint="keyword_en")
+@app.route("/sv/nyckelord", endpoint="keyword_sv")
+@app.route("/en/keyword/<keyword>", endpoint="keyword_en")
+@app.route("/sv/nyckelord/<keyword>", endpoint="keyword_sv")
+def keyword(keyword=None):
+    set_language_swith_link("keyword", keyword)
+    return render_template('page.html', content = keyword)
