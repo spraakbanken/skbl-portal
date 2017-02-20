@@ -26,7 +26,7 @@ def about_us():
 
 @app.route("/en/contact", endpoint="contact_en")
 @app.route("/sv/kontakt", endpoint="contact_sv")
-def about_us():
+def contact():
     set_language_swith_link("contact")
     return render_template('page.html', content = g.language)
 
