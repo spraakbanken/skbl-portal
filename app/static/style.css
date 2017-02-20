@@ -7,7 +7,7 @@
   border-top: 1px solid #ffc930;
 }
 
-#navbar ul.navbar-nav:first-child a{
+#navbar ul.navbar-nav a.first-menu-item{
     padding-left: 0px;
 }
 
