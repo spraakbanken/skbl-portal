@@ -55,13 +55,17 @@
 
 
     <div class="container">
-      {% block content %}{% endblock %}
-
       <div class="row">
-        <div class="border col-xs-3"><img src="http://placehold.it/280x150">verksamhet</div>
-        <div class="border col-xs-3"><img src="http://placehold.it/280x150">organisationer</div>
-        <div class="border col-xs-3"><img src="http://placehold.it/280x150">orter</div>
-        <div class="border col-xs-3"><img src="http://placehold.it/280x150">{{ gettext('Keywords') }}</div>
+        {% block content %}{% endblock %}
+      </div>
+      <hr />
+      <div id="footer" class="container-fluid">
+        <div class="row">
+          <div class="border col-md-3"><img src="http://placehold.it/280x150"><h3>Verksamhet</h3></div>
+          <div class="border col-md-3"><img src="http://placehold.it/280x150"><h3>Organisationer</h3></div>
+          <div class="border col-md-3"><img src="http://placehold.it/280x150"><h3>Orter</h3></div>
+          <div class="border col-md-3"><img src="http://placehold.it/280x150"><h3>{{ gettext('Keywords') }}</h3></div>
+        </div>
       </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
