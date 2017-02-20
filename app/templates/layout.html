@@ -17,8 +17,11 @@
   </head>
   <body>
 
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-default navbar-static-top">   
       <div class="container">
+              <div class="row">
+        <img src="http://placehold.it/80x100">
+      </div>   
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -54,6 +57,13 @@
 
     <div class="container">
       {% block content %}{% endblock %}
+
+      <div class="row">
+        <div class="border col-xs-3"><img src="http://placehold.it/280x150">verksamhet</div>
+        <div class="border col-xs-3"><img src="http://placehold.it/280x150">organisationer</div>
+        <div class="border col-xs-3"><img src="http://placehold.it/280x150">orter</div>
+        <div class="border col-xs-3"><img src="http://placehold.it/280x150">{{ gettext('Keywords') }}</div>
+      </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>        
