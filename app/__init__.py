@@ -19,7 +19,7 @@ def get_locale():
     else:
         return request.accept_languages.best_match(['sv', 'en'])
 
-def get_language_swith_link(route):
+def set_language_swith_link(route):
     if(get_locale() == 'en'):
         g.switch_language = {'url': url_for(route+'_sv'), 'label' : 'Svenska'}
     else:

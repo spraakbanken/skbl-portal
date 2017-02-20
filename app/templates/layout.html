@@ -30,8 +30,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="{{ url_for('about_'+g.language) }}">{{ gettext('About SKBL') }}</a></li>
-            <li><a href="#">{{ gettext('About us') }}</a></li>
+            <li><a href="{{ url_for('about-skbl_'+g.language) }}">{{ gettext('About SKBL') }}</a></li>
+            <li><a href="{{ url_for('about-us_'+g.language) }}">{{ gettext('About us') }}</a></li>
             
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Article authors <span class="caret"></span></a>
@@ -41,11 +41,11 @@
               </ul>
             </li>
 
-            <li><a href="#contact">{{ gettext('Contact') }}</a></li>
+            <li><a href="{{ url_for('contact_'+g.language) }}">{{ gettext('Contact') }}</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="{{ g.switch_language.url }}">{{ g.switch_language.label }}</a></li>
-          </ul>          
+            <li class="language-switch"><a href="{{ g.switch_language.url }}">{{ g.switch_language.label }}</a></li>
+          </ul>
         </div><!--/.nav-collapse -->
         
       </div>
