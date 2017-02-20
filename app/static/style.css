@@ -8,9 +8,17 @@
 }
 
 @media (min-width: 970px) {
-  #navbar ul.navbar-nav a.first-menu-item{
+  #navbar ul .first-menu-item{
     padding-left: 0px;
   }
+}
+
+a{
+  color:#000;
+}
+
+a:hover, a:focus{
+  color:#000;
 }
 
 hr{

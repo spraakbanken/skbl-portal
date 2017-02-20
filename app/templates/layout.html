@@ -3,58 +3,58 @@
   <head>
     {% block head %}
     <title>{% block title %}{% endblock %}</title>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.theme.min') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     {% endblock %}
   </head>
   <body>
-
-    <nav class="navbar navbar-default navbar-static-top">   
-      <div class="container">
-        <div class="row">
-          <div id="logo" class="col-md-4">
-            <img src="http://placehold.it/80x100">
-          </div>
-        </div>   
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a class="first-menu-item" href="{{ url_for('about-skbl_'+g.language) }}">{{ gettext('About SKBL') }}</a></li>
-            <li><a href="{{ url_for('about-us_'+g.language) }}">{{ gettext('About us') }}</a></li>
-            
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ gettext('Article authors') }} <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">one</a></li>
-                <li><a href="#">two</a></li>
-              </ul>
-            </li>
-
-            <li><a href="{{ url_for('contact_'+g.language) }}">{{ gettext('Contact') }}</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li class="language-switch"><a href="{{ g.switch_language.url }}">{{ g.switch_language.label }}</a></li>
-          </ul>
-        </div>
-        
-      </div>
-    </nav>
-
-
     <div class="container">
+      <div class="row">
+        <div id="logo" class="col-md-4">
+          <img src="http://placehold.it/80x100">
+        </div>
+      </div> 
+      <nav id="navbar" class="navbar navbardefault">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li><a class="first-menu-item" href="{{ url_for('about-skbl_'+g.language) }}">{{ gettext('About SKBL') }}</a></li>
+              <li><a href="{{ url_for('about-us_'+g.language) }}">{{ gettext('About us') }}</a></li>
+              
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ gettext('Article authors') }} <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">one</a></li>
+                  <li><a href="#">two</a></li>
+                </ul>
+              </li>
+      
+              <li><a href="{{ url_for('contact_'+g.language) }}">{{ gettext('Contact') }}</a></li>
+            </ul>
+            
+            <ul class="nav navbar-nav navbar-right">
+              <li class="language-switch"><a href="{{ g.switch_language.url }}">{{ g.switch_language.label }}</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+
+    
       <div class="row">
         {% block content %}{% endblock %}
       </div>

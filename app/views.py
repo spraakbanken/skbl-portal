@@ -1,4 +1,4 @@
-from app import app, redirect, render_template, request, get_locale, set_language_swith_link, g
+from app import app, redirect, render_template, request, get_locale, set_language_swith_link, g, serve_static_page
 
 #redirect to specific language landing-page
 @app.route('/')
@@ -14,21 +14,17 @@ def welcome():
 @app.route("/en/about-skbl", endpoint="about-skbl_en")
 @app.route("/sv/om-skbl", endpoint="about-skbl_sv")
 def about_skbl():
-    set_language_swith_link("about-skbl")
-    return render_template('page.html', content = g.language)
-
+    return serve_static_page("about-skbl")
 
 @app.route("/en/about-us", endpoint="about-us_en")
 @app.route("/sv/om-oss", endpoint="about-us_sv")
 def about_us():
-    set_language_swith_link("about-us")
-    return render_template('page.html', content = g.language)
+    return serve_static_page("about-us")
 
 @app.route("/en/contact", endpoint="contact_en")
 @app.route("/sv/kontakt", endpoint="contact_sv")
 def contact():
-    set_language_swith_link("contact")
-    return render_template('page.html', content = g.language)
+    return serve_static_page("contact")
 
 
 @app.route("/en/keyword", endpoint="keyword_en")

@@ -1,3 +1,4 @@
+# coding: utf-8
 import os
 from flask import Flask, g, request, redirect, render_template, url_for
 from flask.ext.babel import Babel
@@ -18,6 +19,14 @@ def get_locale():
         return user.locale
     else:
         return request.accept_languages.best_match(['sv', 'en'])
+
+def serve_static_page(page):
+    set_language_swith_link("about-us")
+    
+    with app.open_resource("static/pages/%s/%s.html" % (page, g.language)) as f:
+        data = f.read()
+    
+    return render_template('page_static.html', content = data.decode('utf-8'))
 
 def set_language_swith_link(route, fragment=None):
     if(get_locale() == 'en'):
