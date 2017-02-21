@@ -11,6 +11,10 @@
   #navbar ul .first-menu-item{
     padding-left: 0px;
   }
+  
+  #navbar .container-fluid, #navbar-collapse{
+    padding-left: 0px;
+  }
 }
 
 a{
@@ -27,4 +31,8 @@ hr{
 
 #footer h3, #navbar{
   text-transform: uppercase;
+}
+
+#footer h3{
+  font-size: 14px;
 }

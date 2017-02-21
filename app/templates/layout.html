@@ -60,7 +60,7 @@
           <div class="border col-md-3"><img src="http://placehold.it/255x150"><h3>Verksamhet</h3></div>
           <div class="border col-md-3"><img src="http://placehold.it/255x150"><h3>Organisationer</h3></div>
           <div class="border col-md-3"><img src="http://placehold.it/255x150"><h3>Orter</h3></div>
-          <div class="border col-md-3"><img src="http://placehold.it/255x150"><h3>{{ gettext('Keywords') }}</h3></div>
+          <div class="border col-md-3"><a href="{{ url_for('keyword_index_'+g.language) }}"><img src="http://placehold.it/255x150"><h3>{{ gettext('Keywords') }}</h3></a></div>
         </div>
       </div>
     </div>

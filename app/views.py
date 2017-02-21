@@ -8,7 +8,7 @@ def index():
 
 @app.route('/en', endpoint='index_en')
 @app.route('/sv', endpoint='index_sv')
-def welcome():
+def start():
     set_language_swith_link("index")
     return render_template('page.html', content='skbl.se')
 
@@ -28,8 +28,14 @@ def contact():
     return serve_static_page("contact", gettext("Contact"))
 
 
-@app.route("/en/keyword", endpoint="keyword_en")
-@app.route("/sv/nyckelord", endpoint="keyword_sv")
+@app.route("/en/keyword", endpoint="keyword_index_en")
+@app.route("/sv/nyckelord", endpoint="keyword_index_sv")
+def keyword_index():
+    set_language_swith_link("keyword_index")
+    return render_template('page.html', 
+                            content = 'keyword index', 
+                            title = gettext("Keywords"))
+
 @app.route("/en/keyword/<keyword>", endpoint="keyword_en")
 @app.route("/sv/nyckelord/<keyword>", endpoint="keyword_sv")
 def keyword(keyword=None):
