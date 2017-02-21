@@ -1,3 +1,17 @@
+
+/* semi-trasparent background image */
+body::after {
+  content: "";
+  background-image: url("images/skbl/background.jpg");
+  opacity: 0.3;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
 #logo{  
   margin-top: 5px;
   margin-bottom: 5px;
