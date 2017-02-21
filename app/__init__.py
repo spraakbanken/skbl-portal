@@ -1,8 +1,12 @@
 # coding: utf-8
 import os
+import json
+import urllib
 from flask import Flask, g, request, redirect, render_template, url_for
 from flask_babel import Babel
 from setuptools import setup
+from urllib2 import Request, urlopen 
+
 
 app = Flask(__name__)
 
@@ -41,6 +45,19 @@ def set_language_swith_link(route, fragment=None):
     if(fragment != None):
         g.switch_language['url'] += '/'+fragment
 
+
+def karp_query(query):
+    params = urllib.urlencode({
+                                'mode':'skbl',
+                                'resource':'skbl',
+                                'q': query
+                              })
+
+    q = Request("%s/querycount?%s" % (app.config['KARP_BACKEND'], params))
+    q.add_header('Authorization', "Basic %s" % (app.config['KARP_AUTH_HASH']))
+    response = urlopen(q).read()
+    data = json.loads(response)
+    return data
 
 @app.before_request
 def func():

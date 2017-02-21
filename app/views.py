@@ -1,5 +1,7 @@
-from app import app, redirect, render_template, request, get_locale, set_language_swith_link, g, serve_static_page
+from app import app, redirect, render_template, request, get_locale, set_language_swith_link, g, serve_static_page, karp_query
 from flask_babel import gettext
+from urllib2 import Request, urlopen 
+
 
 #redirect to specific language landing-page
 @app.route('/')
@@ -46,3 +48,24 @@ def keyword_index():
 def keyword(keyword=None):
     set_language_swith_link("keyword_index", keyword)
     return render_template('page.html', content = keyword)
+
+
+@app.route("/en/article", endpoint="article_index_en")
+@app.route("/sv/artikel", endpoint="article_index_sv")
+def article_index():
+    set_language_swith_link("article_index")
+    return render_template('page.html', 
+                            content = 'article index', 
+                            title = 'Articles')
+
+
+@app.route("/en/article/<id>", endpoint="article_en")
+@app.route("/sv/artikel/<id>", endpoint="article_sv")
+def article(id=None):
+    data = karp_query("extended||and|id.search|equals|%s" % (id))
+    set_language_swith_link("article_index", id)
+    if data['query']['hits']['total'] == 1:
+        return render_template('article.html', 
+                                article = data['query']['hits']['hits'][0]['_source'])
+    else:
+        return render_template('page.html', content = 'not found')
