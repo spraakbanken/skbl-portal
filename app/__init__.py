@@ -21,7 +21,7 @@ def get_locale():
         return request.accept_languages.best_match(['sv', 'en'])
 
 def serve_static_page(page):
-    set_language_swith_link("about-us")
+    set_language_swith_link(page)
     
     with app.open_resource("static/pages/%s/%s.html" % (page, g.language)) as f:
         data = f.read()
