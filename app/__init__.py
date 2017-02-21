@@ -1,7 +1,7 @@
 # coding: utf-8
 import os
 from flask import Flask, g, request, redirect, render_template, url_for
-from flask.ext.babel import Babel
+from flask_babel import Babel
 from setuptools import setup
 
 app = Flask(__name__)
@@ -20,13 +20,15 @@ def get_locale():
     else:
         return request.accept_languages.best_match(['sv', 'en'])
 
-def serve_static_page(page):
+def serve_static_page(page, title=''):
     set_language_swith_link(page)
     
     with app.open_resource("static/pages/%s/%s.html" % (page, g.language)) as f:
         data = f.read()
     
-    return render_template('page_static.html', content = data.decode('utf-8'))
+    return render_template('page_static.html', 
+                            content = data.decode('utf-8'), 
+                            title = title)
 
 def set_language_swith_link(route, fragment=None):
     if(get_locale() == 'en'):
@@ -47,3 +49,6 @@ def inject_custom():
     return d
 
 from app import views
+
+if __name__ == '__main__':
+    app.run()
