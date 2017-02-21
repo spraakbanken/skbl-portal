@@ -29,6 +29,12 @@ body::after {
   #navbar .container-fluid, #navbar-collapse{
     padding-left: 0px;
   }
+  
+  #search .input-group{
+    margin-top: 10px;
+    max-width: 300px;
+    float:right;
+  }  
 }
 
 a{
@@ -70,3 +76,17 @@ hr{
 .image-overlay:hover:after {
     opacity: 0;
 }
+
+.stylish-input-group .input-group-addon{
+    background: white !important; 
+}
+.stylish-input-group .form-control{
+	border-right:0; 
+	box-shadow:0 0 0; 
+	border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
+
