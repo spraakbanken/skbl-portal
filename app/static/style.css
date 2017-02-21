@@ -21,6 +21,10 @@ body::after {
   border-top: 1px solid #ffc930;
 }
 
+#search .input-group{
+  
+}
+
 @media (min-width: 800px) {
   #navbar ul .first-menu-item{
     padding-left: 0px;
@@ -80,11 +84,16 @@ hr{
 .stylish-input-group .input-group-addon{
     background: white !important; 
 }
+.stylish-input-group .form-control, #search .input-group-addon{
+	border-color:#ffc930;
+	border-radius: 0px;
+}
+
 .stylish-input-group .form-control{
 	border-right:0; 
-	box-shadow:0 0 0; 
-	border-color:#ccc;
+	box-shadow:0 0 0;
 }
+
 .stylish-input-group button{
     border:0;
     background:transparent;
