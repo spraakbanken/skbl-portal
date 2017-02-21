@@ -7,7 +7,7 @@
   border-top: 1px solid #ffc930;
 }
 
-@media (min-width: 970px) {
+@media (min-width: 800px) {
   #navbar ul .first-menu-item{
     padding-left: 0px;
   }
