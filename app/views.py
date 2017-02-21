@@ -6,6 +6,7 @@ from flask_babel import gettext
 def index():
     return redirect('/'+get_locale())
 
+
 @app.route('/en', endpoint='index_en')
 @app.route('/sv', endpoint='index_sv')
 def start():
