@@ -16,3 +16,24 @@ pybabel update -i app/translations/messages.pot -d app/translations
 
 ### Compile translations
 pybabel compile -d app/translations
+
+## TODO
+Implement list calls for:
+
+Verksamhet:
+https://ws.spraakbanken.gu.se/ws/swo/statlist?bukets=verksamhetstext.bucket
+https://ws.spraakbanken.gu.se/ws/swo/statlist?buckets=verksamhetstyp.bucket
+
+Organistion:
+https://ws.spraakbanken.gu.se/ws/swo/statlist?bukets=organisationsnamn.bucket
+https://ws.spraakbanken.gu.se/ws/swo/statlist?bukets=organisationstext.bucket
+https://ws.spraakbanken.gu.se/ws/swo/statlist?buckets=organisationstyp.bucket
+
+Platser:
+https://ws.spraakbanken.gu.se/ws/swo/statlist?bukets=plats.bucket
+
+Nyckelord:
+https://ws.spraakbanken.gu.se/ws/swo/statlist?bukets=nyckelord.bucket
+
+Artikelförfattare (obs, ful):
+https://ws.spraakbanken.gu.se/ws/swo/statlist?bukets=artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn.bucket
