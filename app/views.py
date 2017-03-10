@@ -1,4 +1,4 @@
-from app import app, redirect, render_template, request, get_locale, set_language_swith_link, g, serve_static_page, karp_query
+from app import app, redirect, render_template, request, get_locale, set_language_swith_link, g, serve_static_page, karp_query, karp_request
 from flask_babel import gettext
 from urllib2 import Request, urlopen 
 
@@ -37,9 +37,10 @@ def contact():
 @app.route("/en/keyword", endpoint="keyword_index_en")
 @app.route("/sv/nyckelord", endpoint="keyword_index_sv")
 def keyword_index():
+    data = karp_request("statlist?buckets=nyckelord.bucket")
     set_language_swith_link("keyword_index")
-    return render_template('page.html', 
-                            content = 'keyword index', 
+    return render_template('keywords.html', 
+                            keywords = data['stat_table'], 
                             title = gettext("Keywords"))
 
 

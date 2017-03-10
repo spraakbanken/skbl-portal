@@ -21,19 +21,19 @@ pybabel compile -d app/translations
 Implement list calls for:
 
 Verksamhet:
-https://ws.spraakbanken.gu.se/ws/swo/statlist?bukets=verksamhetstext.bucket
+https://ws.spraakbanken.gu.se/ws/swo/statlist?buckets=verksamhetstext.bucket
 https://ws.spraakbanken.gu.se/ws/swo/statlist?buckets=verksamhetstyp.bucket
 
 Organistion:
-https://ws.spraakbanken.gu.se/ws/swo/statlist?bukets=organisationsnamn.bucket
-https://ws.spraakbanken.gu.se/ws/swo/statlist?bukets=organisationstext.bucket
+https://ws.spraakbanken.gu.se/ws/swo/statlist?buckets=organisationsnamn.bucket
+https://ws.spraakbanken.gu.se/ws/swo/statlist?buckets=organisationstext.bucket
 https://ws.spraakbanken.gu.se/ws/swo/statlist?buckets=organisationstyp.bucket
 
 Platser:
 https://ws.spraakbanken.gu.se/ws/swo/statlist?bukets=plats.bucket
 
 Nyckelord:
-https://ws.spraakbanken.gu.se/ws/swo/statlist?bukets=nyckelord.bucket
+https://ws.spraakbanken.gu.se/ws/swo/statlist?buckets=nyckelord.bucket
 
 Artikelförfattare (obs, ful):
 https://ws.spraakbanken.gu.se/ws/swo/statlist?bukets=artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn.bucket
