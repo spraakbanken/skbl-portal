@@ -1,7 +1,10 @@
 # coding: utf-8
 import os
+import os.path
 import json
 import urllib
+import shutil
+
 from flask import Flask, g, request, redirect, render_template, url_for
 from flask_babel import Babel
 from setuptools import setup
@@ -10,7 +13,13 @@ from urllib2 import Request, urlopen
 
 app = Flask(__name__)
 
-app.config.from_pyfile('config.py')
+if os.path.exists('../config.cfg') == False:
+    print "copy config.default.cfg to config.cfg and add your config settings"
+    app.config.from_pyfile('../config.default.cfg')
+else:
+    app.config.from_pyfile('../config.cfg')
+    
+    
 babel = Babel(app)
 
 
