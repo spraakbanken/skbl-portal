@@ -1,13 +1,27 @@
 {% extends "layout.html" %}
 {% block title %}skbl.se - {{ title }}{% endblock %}
 {% block content %}
-<div class="col-md-8">
-    <h1>{{ article.name.firstname }} {{ article.name.lastname }}</h1>
-    <p>{{ article.text}}</p>
-</div>
-<div class="col-md-4">
-    <div class="image-overlay">
-        <img src="{{ article.portrait[0].url }}" alt="{{ article.portrait[0].description }}" width="360px">
+<div itemscope itemtype="http://schema.org/Person">
+    <div class="col-md-8">
+        <h1 itemprop="name">{{ article.name.firstname }} {{ article.name.lastname }}</h1>
+        <p>{{ article.text}}</p>
+    </div>
+    <div class="col-md-4">
+        <div class="image-overlay">
+            <img src="{{ article.portrait[0].url }}" itemprop="image" alt="{{ article.portrait[0].description }}" width="360px">
+        </div>
+        {{ article.portrait[0].description }}
+        <span itemprop="birthDate">{{ article.lifespan.from.date.date }}</span> &mdash; <span itemprop="deathDate">{{ article.lifespan.to.date.date }}</span>
+        
+        <h3>{{ gettext("Keywords") }}</h3>
+        {% for keyword in article.keyword %}
+            <a href="{{ url_for('keyword_'+g.language, keyword=keyword) }}">{{ keyword }}</a></span>
+        {% endfor %}
+        
+        <h3>{{ gettext("Links") }}</h3>
+        {% for link in article.externallink %}
+            <a href="{{ link.url }}">{{ link.description }}</a></span>
+        {% endfor %}          
     </div>
 </div>
 {% endblock %}
