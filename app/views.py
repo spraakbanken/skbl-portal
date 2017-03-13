@@ -34,6 +34,14 @@ def contact():
     return serve_static_page("contact", gettext("Contact"))
 
 
+@app.route("/en/search", endpoint="search_en")
+@app.route("/sv/sok", endpoint="search_sv")
+def search():
+    set_language_swith_link("search")
+    data = karp_query("extended||and|anything.search|equals|%s" % (request.args.get('q', '*')))
+    return render_template('search.html', hits = data["query"]["hits"])
+    
+
 @app.route("/en/keyword", endpoint="keyword_index_en")
 @app.route("/sv/nyckelord", endpoint="keyword_index_sv")
 def keyword_index():

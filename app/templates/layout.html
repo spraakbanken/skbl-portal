@@ -4,6 +4,7 @@
     {% block head %}
     <title>{% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Language" content="{{ g.language }}">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     
@@ -21,9 +22,9 @@
           <img src="http://placehold.it/80x100">
         </div>
         <div class="col-md-8">
-          <form id="search">
+          <form id="search" action="{{ url_for('search_'+g.language) }}">
             <div class="input-group stylish-input-group">
-              <input type="search" class="form-control"  placeholder="{{ gettext('Search') }}" >
+              <input name="q" type="search" class="form-control"  placeholder="{{ gettext('Search') }}" value="{{ request.args.get('q', '') }}" >
               <span class="input-group-addon">
                 <button type="submit">
                   <span class="glyphicon glyphicon-search"></span>
