@@ -7,10 +7,12 @@
         <p>{{ article.text}}</p>
     </div>
     <div class="col-md-4">
+        {% if article.portrait %}
         <div class="image-overlay">
             <img src="{{ article.portrait[0].url }}" itemprop="image" alt="{{ article.portrait[0].description }}" width="360px">
         </div>
         {{ article.portrait[0].description }}
+        {% endif %}
         <span itemprop="birthDate">{{ article.lifespan.from.date.date }}</span> &mdash; <span itemprop="deathDate">{{ article.lifespan.to.date.date }}</span>
         
         <h3>{{ gettext("Keywords") }}</h3>

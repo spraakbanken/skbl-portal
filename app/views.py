@@ -1,3 +1,5 @@
+import os
+import os.path
 from app import app, redirect, render_template, request, get_locale, set_language_swith_link, g, serve_static_page, karp_query, karp_request
 from flask_babel import gettext
 from urllib2 import Request, urlopen 
@@ -56,7 +58,18 @@ def keyword_index():
 @app.route("/sv/nyckelord/<keyword>", endpoint="keyword_sv")
 def keyword(keyword=None):
     set_language_swith_link("keyword_index", keyword)
-    return render_template('page.html', content = keyword)
+    hits = karp_query("extended||and|nyckelord.search|equals|%s" % (keyword))
+    
+    if hits['query']['hits']['total'] > 0:
+    
+        picture = None
+        print app.config.root_path+'/static/images/keywords/'+keyword+'.jpg'
+        if os.path.exists(app.config.root_path+'/static/images/keywords/'+keyword+'.jpg'):
+            picture = keyword+'.jpg'
+        
+        return render_template('keyword.html', picture=picture, title=keyword, hits=hits["query"]["hits"])
+    else:
+        return render_template('page.html', content = 'not found')
 
 
 @app.route("/en/article", endpoint="article_index_en")
