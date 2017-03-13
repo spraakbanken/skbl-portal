@@ -13,11 +13,11 @@ from urllib2 import Request, urlopen
 
 app = Flask(__name__)
 
-if os.path.exists('config.cfg') == False:
-    print "copy config.default.cfg to config.cfg and add your config settings"
-    app.config.from_pyfile('../config.default.cfg')
+if os.path.exists(app.config.root_path+'/config.cfg') == False:
+    print "copy config.default.cfg to config.cfg and add your settings"
+    app.config.from_pyfile(app.config.root_path+'/config.default.cfg')
 else:
-    app.config.from_pyfile('../config.cfg')
+    app.config.from_pyfile(app.config.root_path+'/config.cfg')
     
     
 babel = Babel(app)
@@ -66,7 +66,6 @@ def karp_query(query):
 
 def karp_request(action):
     q = Request("%s/%s" % (app.config['KARP_BACKEND'], action))
-    print "%s/%s" % (app.config['KARP_BACKEND'], action)
     q.add_header('Authorization', "Basic %s" % (app.config['KARP_AUTH_HASH']))
     response = urlopen(q).read()
     data = json.loads(response)
