@@ -57,6 +57,7 @@ def keyword_index():
 @app.route("/en/keyword/<keyword>", endpoint="keyword_en")
 @app.route("/sv/nyckelord/<keyword>", endpoint="keyword_sv")
 def keyword(keyword=None):
+    keyword = keyword.encode('utf-8')
     set_language_swith_link("keyword_index", keyword)
     hits = karp_query("extended||and|nyckelord.search|equals|%s" % (keyword))
     
