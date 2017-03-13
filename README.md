@@ -30,10 +30,10 @@ https://ws.spraakbanken.gu.se/ws/swo/statlist?buckets=organisationstext.bucket
 https://ws.spraakbanken.gu.se/ws/swo/statlist?buckets=organisationstyp.bucket
 
 Platser:
-https://ws.spraakbanken.gu.se/ws/swo/statlist?bukets=plats.bucket
+https://ws.spraakbanken.gu.se/ws/swo/statlist?buckets=plats.bucket
 
 Nyckelord:
 https://ws.spraakbanken.gu.se/ws/swo/statlist?buckets=nyckelord.bucket
 
 Artikelförfattare (obs, ful):
-https://ws.spraakbanken.gu.se/ws/swo/statlist?bukets=artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn.bucket
+https://ws.spraakbanken.gu.se/ws/swo/statlist?buckets=artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn.bucket
