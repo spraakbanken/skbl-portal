@@ -40,14 +40,14 @@ def contact():
 @app.route("/sv/sok", endpoint="search_sv")
 def search():
     set_language_swith_link("search")
-    data = karp_query("extended||and|anything.search|equals|%s" % (request.args.get('q', '*')))
+    data = karp_query('querycount', {'q' : "extended||and|anything.search|equals|%s" % (request.args.get('q', '*'))})
     return render_template('search.html', hits = data["query"]["hits"])
     
 
 @app.route("/en/keyword", endpoint="keyword_index_en")
 @app.route("/sv/nyckelord", endpoint="keyword_index_sv")
 def keyword_index():
-    data = karp_request("statlist?buckets=nyckelord.bucket")
+    data = karp_query('statlist', {'buckets' : 'nyckelord.bucket'})
     set_language_swith_link("keyword_index")
     return render_template('keywords.html', 
                             keywords = data['stat_table'], 
@@ -59,7 +59,7 @@ def keyword_index():
 def keyword(keyword=None):
     keyword = keyword.encode('utf-8')
     set_language_swith_link("keyword_index", keyword)
-    hits = karp_query("extended||and|nyckelord.search|equals|%s" % (keyword))
+    hits = karp_query('querycount', {'q' : "extended||and|nyckelord.search|equals|%s" % (keyword)})
     
     if hits['query']['hits']['total'] > 0:
     
@@ -85,7 +85,7 @@ def article_index():
 @app.route("/en/article/<id>", endpoint="article_en")
 @app.route("/sv/artikel/<id>", endpoint="article_sv")
 def article(id=None):
-    data = karp_query("extended||and|id.search|equals|%s" % (id))
+    data = karp_query('querycount', {'q' : "extended||and|id.search|equals|%s" % (id)})
     set_language_swith_link("article_index", id)
     if data['query']['hits']['total'] == 1:
         return render_template('article.html', 

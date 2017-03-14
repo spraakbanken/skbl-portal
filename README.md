@@ -33,7 +33,7 @@ Platser:
 https://ws.spraakbanken.gu.se/ws/swo/statlist?buckets=plats.bucket
 
 Nyckelord:
-https://ws.spraakbanken.gu.se/ws/swo/statlist?buckets=nyckelord.bucket
+https://ws.spraakbanken.gu.se/ws/karp/v3/statlist?mode=skbl&resource=skbl&buckets=nyckelord.bucket
 
 Artikelförfattare (obs, ful):
 https://ws.spraakbanken.gu.se/ws/swo/statlist?buckets=artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn.bucket

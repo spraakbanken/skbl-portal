@@ -56,13 +56,12 @@ def set_language_swith_link(route, fragment=None):
         g.switch_language['url'] += '/'+fragment
 
 
-def karp_query(query):
-    params = urllib.urlencode({
-                                'mode':'skbl',
-                                'resource':'skbl',
-                                'q': query
-                              })
-    return karp_request("querycount?%s" % (params))
+def karp_query(action, query):
+    query['mode'] = 'skbl'
+    query['resource'] = 'skbl'
+    params = urllib.urlencode(query)
+    
+    return karp_request("%s?%s" % (action, params))
 
 
 def karp_request(action):
