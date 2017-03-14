@@ -21,19 +21,19 @@ pybabel compile -d app/translations
 Implement list calls for:
 
 Verksamhet:
-https://ws.spraakbanken.gu.se/ws/swo/statlist?buckets=verksamhetstext.bucket
-https://ws.spraakbanken.gu.se/ws/swo/statlist?buckets=verksamhetstyp.bucket
+https://ws.spraakbanken.gu.se/ws/karp/v3/statlist?mode=skbl&resource=skbl&buckets=verksamhetstext.bucket
+https://ws.spraakbanken.gu.se/ws/karp/v3/statlist?mode=skbl&resource=skbl&buckets=verksamhetstyp.bucket
 
 Organistion:
-https://ws.spraakbanken.gu.se/ws/swo/statlist?buckets=organisationsnamn.bucket
-https://ws.spraakbanken.gu.se/ws/swo/statlist?buckets=organisationstext.bucket
-https://ws.spraakbanken.gu.se/ws/swo/statlist?buckets=organisationstyp.bucket
+https://ws.spraakbanken.gu.se/ws/karp/v3/statlist?mode=skbl&resource=skbl&buckets=organisationsnamn.bucket
+https://ws.spraakbanken.gu.se/ws/karp/v3/statlist?mode=skbl&resource=skbl&buckets=organisationstext.bucket
+https://ws.spraakbanken.gu.se/ws/karp/v3/statlist?mode=skbl&resource=skbl&buckets=organisationstyp.bucket
 
 Platser:
-https://ws.spraakbanken.gu.se/ws/swo/statlist?buckets=plats.bucket
+https://ws.spraakbanken.gu.se/ws/karp/v3/statlist?mode=skbl&resource=skbl&buckets=plats.bucket
 
 Nyckelord:
 https://ws.spraakbanken.gu.se/ws/karp/v3/statlist?mode=skbl&resource=skbl&buckets=nyckelord.bucket
 
 Artikelförfattare (obs, ful):
-https://ws.spraakbanken.gu.se/ws/swo/statlist?buckets=artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn.bucket
+https://ws.spraakbanken.gu.se/ws/karp/v3/statlist?mode=skbl&resource=skbl&buckets=artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn.bucket
