@@ -4,6 +4,7 @@ import os.path
 import json
 import urllib
 import shutil
+import sys
 
 from flask import Flask, g, request, redirect, render_template, url_for
 from flask_babel import Babel
@@ -86,4 +87,7 @@ def inject_custom():
 from app import views
 
 if __name__ == '__main__':
+    if sys.version_info.major < 3:
+        reload(sys)
+    sys.setdefaultencoding('utf8')    
     app.run()
