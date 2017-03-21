@@ -75,6 +75,7 @@ def karp_request(action):
 def func():
     g.babel = Babel
     g.language = get_locale()
+    g.config = app.config
 
 
 @app.context_processor
