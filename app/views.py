@@ -42,16 +42,14 @@ def search():
     set_language_swith_link("search")
     data = karp_query('querycount', {'q' : "extended||and|anything.search|equals|%s" % (request.args.get('q', '*'))})
     return render_template('search.html', hits = data["query"]["hits"])
-    
+
 
 @app.route("/en/keyword", endpoint="keyword_index_en")
 @app.route("/sv/nyckelord", endpoint="keyword_index_sv")
 def keyword_index():
     data = karp_query('statlist', {'buckets' : 'nyckelord.bucket'})
     set_language_swith_link("keyword_index")
-    return render_template('keywords.html', 
-                            keywords = data['stat_table'], 
-                            title = gettext("Keywords"))
+    return render_template('keywords.html', keywords=data['stat_table'], title=gettext("Keywords"))
 
 
 @app.route("/en/keyword/<keyword>", endpoint="keyword_en")
@@ -60,14 +58,12 @@ def keyword(keyword=None):
     keyword = keyword.encode('utf-8')
     set_language_swith_link("keyword_index", keyword)
     hits = karp_query('querycount', {'q' : "extended||and|nyckelord.search|equals|%s" % (keyword)})
-    
+
     if hits['query']['hits']['total'] > 0:
-    
         picture = None
-        print app.config.root_path+'/static/images/keywords/'+keyword+'.jpg'
         if os.path.exists(app.config.root_path+'/static/images/keywords/'+keyword+'.jpg'):
             picture = keyword+'.jpg'
-        
+
         return render_template('keyword.html', picture=picture, title=keyword, hits=hits["query"]["hits"])
     else:
         return render_template('page.html', content = 'not found')
