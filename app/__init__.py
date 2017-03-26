@@ -26,14 +26,20 @@ babel = Babel(app)
 
 @babel.localeselector
 def get_locale():
-    lang = request.path[1:].split('/', 1)[0]
-    user = getattr(g, 'user', None)
-    if lang in ['sv', 'en']:
-        return lang
-    elif user is not None:
-        return user.locale
+    locale = request.path[1:].split('/', 1)[0]
+
+    if locale in ['sv', 'en']:
+        return locale
     else:
-        return request.accept_languages.best_match(['sv', 'en'])
+        locale = 'sv'
+    
+        for lang in request.accept_languages.values():
+            if lang[:2] in ['de', 'en']:
+                locale = lang[:2]
+                break
+    
+        g.locale = locale
+        return locale
 
 
 def serve_static_page(page, title=''):
