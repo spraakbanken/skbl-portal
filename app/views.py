@@ -1,7 +1,11 @@
+# -*- coding=utf-8 -*-
 import os
 import os.path
+import re
 from app import app, redirect, render_template, request, get_locale, set_language_swith_link, g, serve_static_page, karp_query, karp_request
 from flask_babel import gettext
+import helpers
+import logging
 from urllib2 import Request, urlopen 
 
 
@@ -84,7 +88,18 @@ def article(id=None):
     data = karp_query('querycount', {'q' : "extended||and|id.search|equals|%s" % (id)})
     set_language_swith_link("article_index", id)
     if data['query']['hits']['total'] == 1:
-        return render_template('article.html', 
-                                article = data['query']['hits']['hits'][0]['_source'])
+        # Malin: visa bara tilltalsnamnet (obs test, kanske inte är vad de vill ha på riktigt)
+        source = data['query']['hits']['hits'][0]['_source']
+        firstname, calling = helpers.get_first_name(source)
+        # Print given name + lastname
+        source['showname'] = "%s %s" % (calling, source['name'].get('lastname', ''))
+        # If there are additional names (mellannamn), print the full first name
+        # if calling != firstname:
+        #     source['fullfirstname'] = firstname
+        # Malin, test: transalte ** to emphasis
+        source['text'] = helpers.markdown_html(source['text'])
+        source['othernames'] = helpers.group_by_type(source.get('othernames', {}), 'name')
+        source['othernames'].append({'type': u'Förnamn', 'name': firstname})
+        return render_template('article.html', article = source)
     else:
         return render_template('page.html', content = 'not found')
