@@ -49,7 +49,6 @@ def search():
     data = karp_query('querycount', {'q' : "extended||and|anything.search|equals|%s" % (request.args.get('q', '*'))})
     return render_template('search.html', hits = data["query"]["hits"])
 
-
     advanced_search_text = ''
     with app.open_resource("static/pages/advanced-search/%s.html" % (g.language)) as f:
         advanced_search_text = f.read()
@@ -63,9 +62,10 @@ def search_advanced():
     return serve_static_page("advanced-search", gettext("Advanced search"))
 
 
-@app.route("/en/places", endpoint="places_index_en")
-@app.route("/sv/orter", endpoint="places_index_sv")
-def places_index():
+@app.route("/en/place", endpoint="place_index_en")
+@app.route("/sv/ort", endpoint="place_index_sv")
+def place_index():
+    set_language_swith_link("place_index")
     def parse(kw):
         place = kw.get('key')
         name, lat, lon = place.split('|')
@@ -80,7 +80,7 @@ def places_index():
     data = karp_query('getplaces', {})
     stat_table = [parse(kw) for kw in data['places'] if has_name(kw)]
     stat_table.sort(key=lambda x: x.get('name').strip())
-    set_language_swith_link("places_index")
+
     return render_template('places.html', places=stat_table, title=gettext("Places"))
 
 
@@ -88,11 +88,11 @@ def places_index():
 @app.route("/sv/ort/<place>", endpoint="place_sv")
 def place(place=None):
     place = place.encode('utf-8')
-    set_language_swith_link("places_index", place)
+    set_language_swith_link("place_index", place)
     hits = karp_query('querycount', {'q' : "extended||and|plats.search|equals|%s" % (place)})
 
     if hits['query']['hits']['total'] > 0:
-        return render_template('listresults.html', title=place, hits=hits["query"]["hits"], picture=None)
+        return render_template('place.html', title=place, hits=hits["query"]["hits"]["hits"])
     else:
         return render_template('page.html', content = 'not found')
 
