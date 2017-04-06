@@ -9,7 +9,7 @@ import sys
 from flask import Flask, g, request, redirect, render_template, url_for
 from flask_babel import Babel
 from setuptools import setup
-from urllib2 import Request, urlopen 
+from urllib2 import Request, urlopen
 
 
 app = Flask(__name__)
@@ -19,8 +19,8 @@ if os.path.exists(app.config.root_path+'/config.cfg') == False:
     app.config.from_pyfile(app.config.root_path+'/config.default.cfg')
 else:
     app.config.from_pyfile(app.config.root_path+'/config.cfg')
-    
-    
+
+
 babel = Babel(app)
 
 
@@ -32,24 +32,24 @@ def get_locale():
         return locale
     else:
         locale = 'sv'
-    
+
         for lang in request.accept_languages.values():
             if lang[:2] in ['de', 'en']:
                 locale = lang[:2]
                 break
-    
+
         g.locale = locale
         return locale
 
 
 def serve_static_page(page, title=''):
     set_language_swith_link(page)
-    
+
     with app.open_resource("static/pages/%s/%s.html" % (page, g.language)) as f:
         data = f.read()
-    
-    return render_template('page_static.html', 
-                            content = data.decode('utf-8'), 
+
+    return render_template('page_static.html',
+                            content = data.decode('utf-8'),
                             title = title)
 
 
@@ -66,7 +66,7 @@ def karp_query(action, query):
     query['mode'] = 'skbl'
     query['resource'] = 'skbl'
     params = urllib.urlencode(query)
-    
+
     return karp_request("%s?%s" % (action, params))
 
 
@@ -95,5 +95,5 @@ from app import views
 if __name__ == '__main__':
     if sys.version_info.major < 3:
         reload(sys)
-    sys.setdefaultencoding('utf8')    
+    sys.setdefaultencoding('utf8')
     app.run()

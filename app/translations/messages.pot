@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-03-29 10:14+0200\n"
+"POT-Creation-Date: 2017-04-06 10:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,23 +17,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
 
-#: app/templates/layout.html:51 app/views.py:28
+#: app/templates/layout.html:51 app/views.py:29
 msgid "About SKBL"
 msgstr ""
 
-#: app/templates/layout.html:52 app/views.py:34
+#: app/templates/layout.html:52 app/views.py:35
 msgid "About us"
 msgstr ""
 
-#: app/templates/layout.html:62 app/views.py:40
+#: app/templates/layout.html:62 app/views.py:41
 msgid "Contact"
 msgstr ""
 
-#: app/templates/article.html:25 app/templates/layout.html:93 app/views.py:56
+#: app/templates/article.html:20 app/templates/layout.html:93 app/views.py:59
 msgid "Keywords"
 msgstr ""
 
-#: app/templates/article.html:20
+#: app/templates/article.html:25
 msgid "Othernames"
 msgstr ""
 
@@ -47,5 +47,9 @@ msgstr ""
 
 #: app/templates/layout.html:55
 msgid "Article authors"
+msgstr ""
+
+#: app/templates/list.html:5
+msgid "Kvinnor A-Ö"
 msgstr ""
 

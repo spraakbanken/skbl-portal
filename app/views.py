@@ -6,8 +6,10 @@ from app import app, redirect, render_template, request, get_locale, set_languag
 from flask_babel import gettext
 import helpers
 import logging
-from urllib2 import Request, urlopen 
+from urllib2 import Request, urlopen
+from flask import Markup
 
+log = logging.getLogger(__name__)
 
 #redirect to specific language landing-page
 @app.route('/')
@@ -79,8 +81,12 @@ def keyword(keyword=None):
 @app.route("/sv/artikel", endpoint="article_index_sv")
 def article_index():
     set_language_swith_link("article_index")
-    return render_template('page.html', 
-                            content = 'article index', 
+    data = karp_query('query', {'q':"extended||and|namn.search|exists"})
+    # log.info(data)
+    namelist = [(helpers.get_first_name(name["_source"])[0], name["_source"]["name"]["lastname"],
+                name["_id"]) for name in data["hits"]["hits"]]
+    return render_template('list.html',
+                            content = namelist,
                             title = 'Articles')
 
 
