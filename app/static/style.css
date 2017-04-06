@@ -100,3 +100,7 @@ hr{
   margin: 0;
   padding: 0;
 }
+
+.carousel-caption h3 {
+  color: #fff;
+}
