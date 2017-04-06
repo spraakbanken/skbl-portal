@@ -5,7 +5,7 @@
     <h1>{{ title }}</h1>
     <ul>
         {% for keyword in keywords %}
-            <li><a href="{{ url_for('keyword_'+g.language, keyword=keyword[0]) }}"><span class="badge">{{ keyword[1] }}</span> {{ keyword[0] }}</a></li>
+            <li class="keyword_list_item"><a href="{{ url_for('keyword_'+g.language, keyword=keyword[0]) }}"><span class="badge">{{ keyword[1] }}</span> {{ keyword[0] }}</a></li>
         {% endfor %}        
     </ul>
 </div>
