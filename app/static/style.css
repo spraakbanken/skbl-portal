@@ -1,23 +1,23 @@
 
-body{
+body {
   background-image: url("images/skbl/dust-min.png");
-  background-color:#EFF4D1;
+  background-color: #EFF4D1;
 }
 
-h1, h2, h3, h4, h5, h6{
+h1, h2, h3, h4, h5, h6 {
   font-family: 'Avenir Book', 'Verdana';
 }
 
-#logo{  
+#logo {  
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
-#navbar{
+#navbar {
   border-top: 1px solid #ffc930;
 }
 
-#search .input-group{
+#search .input-group {
   
 }
 
@@ -26,73 +26,73 @@ h1, h2, h3, h4, h5, h6{
     padding-left: 0px;
   }
   
-  #navbar .container-fluid, #navbar-collapse{
+  #navbar .container-fluid, #navbar-collapse {
     padding-left: 0px;
   }
   
-  #search .input-group{
+  #search .input-group {
     margin-top: 10px;
     max-width: 300px;
-    float:right;
+    float: right;
   }  
 }
 
-a{
-  color:#000;
+a {
+  color: #000;
 }
 
-a:hover, a:focus{
-  color:#000;
+a:hover, a:focus {
+  color: #000;
 }
 
-hr{
+hr {
   border-top: 1px solid #ffc930;
 }
 
-#footer h3, #navbar{
+#footer h3, #navbar {
   text-transform: uppercase;
 }
 
-#footer h3{
+#footer h3 {
   font-size: 14px;
 }
 
 .image-overlay {
-    display:inline-block;
-    position: relative;
+  display: inline-block;
+  position: relative;
 }
 .image-overlay:after {
-    content:'';
-    top: 0;
-    left: 0;
-    z-index: 10;
-    width: 100%;
-    height: 100%;
-    display: block;
-    position: absolute;
-    background: #996633;
-    opacity: 0.15;
+  content: '';
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  background: #996633;
+  opacity: 0.15;
 }
 .image-overlay:hover:after {
-    opacity: 0;
+  opacity: 0;
 }
 
-.stylish-input-group .input-group-addon{
-    background: white !important; 
+.stylish-input-group .input-group-addon {
+  background: white !important; 
 }
-.stylish-input-group .form-control, #search .input-group-addon{
-	border-color:#ffc930;
+.stylish-input-group .form-control, #search .input-group-addon {
+	border-color: #ffc930;
 	border-radius: 0px;
 }
 
-.stylish-input-group .form-control{
-	border-right:0; 
-	box-shadow:0 0 0;
+.stylish-input-group .form-control {
+	border-right: 0; 
+	box-shadow: 0 0 0;
 }
 
-.stylish-input-group button{
-    border:0;
-    background:transparent;
+.stylish-input-group button {
+  border: 0;
+  background: transparent;
 }
 
 .keyword_list_item {
