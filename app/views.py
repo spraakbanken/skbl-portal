@@ -52,8 +52,10 @@ def search():
 @app.route("/sv/nyckelord", endpoint="keyword_index_sv")
 def keyword_index():
     data = karp_query('statlist', {'buckets' : 'nyckelord.bucket'})
+    stat_table = [kw for kw in data['stat_table'] if kw[0] != ""]
+    stat_table.sort()
     set_language_swith_link("keyword_index")
-    return render_template('keywords.html', keywords=data['stat_table'], title=gettext("Keywords"))
+    return render_template('keywords.html', keywords=stat_table, title=gettext("Keywords"))
 
 
 @app.route("/en/keyword/<keyword>", endpoint="keyword_en")
