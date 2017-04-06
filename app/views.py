@@ -47,6 +47,8 @@ def contact():
 def search():
     set_language_swith_link("search")
     data = karp_query('querycount', {'q' : "extended||and|anything.search|equals|%s" % (request.args.get('q', '*'))})
+    return render_template('search.html', hits = data["query"]["hits"])
+
 
     advanced_search_text = ''
     with app.open_resource("static/pages/advanced-search/%s.html" % (g.language)) as f:
@@ -124,11 +126,9 @@ def article_index():
     print('katt')
     set_language_swith_link("article_index")
     data = karp_query('query', {'q':"extended||and|namn.search|exists"})
-    # log.info(data)
-    namelist = [(helpers.get_first_name(name["_source"])[0], name["_source"]["name"]["lastname"],
-                name["_id"]) for name in data["hits"]["hits"]]
     return render_template('list.html',
-                            content = namelist,
+                            hits = data["hits"],
+                            headline="Women A-Ö",
                             title = 'Articles')
 
 

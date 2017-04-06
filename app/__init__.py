@@ -10,6 +10,8 @@ from flask import Flask, g, request, redirect, render_template, url_for
 from flask_babel import Babel
 from setuptools import setup
 from urllib2 import Request, urlopen
+import helpers
+import sys
 
 
 app = Flask(__name__)
@@ -66,6 +68,7 @@ def karp_query(action, query):
     query['mode'] = 'skbl'
     query['resource'] = 'skbl'
     params = urllib.urlencode(query)
+    sys.stderr.write("QUERY: " + str(params))
 
     return karp_request("%s?%s" % (action, params))
 
@@ -89,6 +92,7 @@ def inject_custom():
     d = {'lurl_for': lambda ep, **kwargs: url_for(ep+'_'+g.language, **kwargs)}
     return d
 
+app.jinja_env.globals.update(get_first_name=helpers.get_first_name)
 
 from app import views
 
