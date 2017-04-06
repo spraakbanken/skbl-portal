@@ -1,4 +1,8 @@
 {% extends "list.html" %}
+{% block content %}
+    {{ super() }}
+    <div id="mapid" style="height:250px;"> </div>
+{% endblock %}
 {% block foot %}
     {{ super() }}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
