@@ -85,7 +85,7 @@ def place(place=None):
     hits = karp_query('querycount', {'q' : "extended||and|plats.search|equals|%s" % (place)})
 
     if hits['query']['hits']['total'] > 0:
-        return render_template('place.html', title=place, hits=hits["query"]["hits"]["hits"])
+        return render_template('place.html', title=place, hits=hits["query"]["hits"])
     else:
         return render_template('page.html', content = 'not found')
 
