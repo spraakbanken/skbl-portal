@@ -5,7 +5,7 @@
     <h1>{{ title }}</h1>
     {% for hit in places %}
 
-       <li class="keyword_list_item"><a href="{{ url_for('place_'+g.language, place=hit.name, lat=hit.lat, lon=hit.lon) }}"><span class="badge">{{ hit.count }}</span> {{ hit.name }}</a></li>
+       <li class="keyword_list_item"><a href="{{ url_for('place_'+g.language, place=hit.name, lat=hit.lat, lon=hit.lon) }}">{{ hit.name }}</a></li>
     {% endfor %}
 </div>
 

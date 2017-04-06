@@ -19,7 +19,7 @@
 
         <h3>{{ gettext("Keywords") }}</h3>
         {% for keyword in article.keyword %}
-            <a href="{{ url_for('keyword_'+g.language, keyword=keyword) }}">{{ keyword }}</a></span>
+            <a href="{{ url_for('keyword_'+g.language, result=keyword) }}">{{ keyword }}</a></span>
         {% endfor %}
 
         <!--

@@ -61,6 +61,7 @@ def search():
 def search_advanced():
     return serve_static_page("advanced-search", gettext("Advanced search"))
 
+
 @app.route("/en/places", endpoint="places_index_en")
 @app.route("/sv/orter", endpoint="places_index_sv")
 def places_index():
@@ -72,10 +73,12 @@ def places_index():
         lon = place.split('|')[2]
         return {'name': placename, 'lat': lat, 'lon': lon,
                 'count': kw.get('doc_count')}
+    def has_name(kw):
+        return kw.get('key').split('|')[0]
 
     data = karp_query('getplaces', {})
-    stat_table = [parse(kw) for kw in data['places']]
-    stat_table.sort()
+    stat_table = [parse(kw) for kw in data['places'] if has_name(kw)]
+    stat_table.sort(key=lambda x: x.get('name').strip())
     set_language_swith_link("places_index")
     return render_template('places.html', places=stat_table, title=gettext("Places"))
 
@@ -88,7 +91,34 @@ def place(place=None):
     hits = karp_query('querycount', {'q' : "extended||and|plats.search|equals|%s" % (place)})
 
     if hits['query']['hits']['total'] > 0:
-        return render_template('place.html', title=place, hits=hits["query"]["hits"]["hits"], picture=None)
+        return render_template('listresults.html', title=place, hits=hits["query"]["hits"], picture=None)
+    else:
+        return render_template('page.html', content = 'not found')
+
+
+@app.route("/en/organisation", endpoint="organisation_index_en")
+@app.route("/sv/organisation", endpoint="organisation_index_sv")
+def organisation_index():
+    data = karp_query('statlist', {'buckets' : 'organisationsnamn.bucket'})
+    stat_table = [kw for kw in data['stat_table'] if kw[0] != ""]
+    stat_table.sort()
+    set_language_swith_link("organisation_index")
+    return render_template('bucketresults.html', results=stat_table, title=gettext("Organisations"), name='organisation')
+
+
+@app.route("/en/organisation/<result>", endpoint="organisation_en")
+@app.route("/sv/organisation/<result>", endpoint="organisation_sv")
+def organisation(result=None):
+    organisation = result.encode('utf-8')
+    set_language_swith_link("organisation_index", organisation)
+    hits = karp_query('querycount', {'q' : "extended||and|organisation.search|equals|%s" % (organisation)})
+
+    if hits['query']['hits']['total'] > 0:
+        picture = None
+        if os.path.exists(app.config.root_path+'/static/images/organisations/'+organisation+'.jpg'):
+            picture = organisation+'.jpg'
+
+        return render_template('listresults.html', picture=picture, title=organisation, hits=hits["query"]["hits"])
     else:
         return render_template('page.html', content = 'not found')
 
@@ -100,13 +130,13 @@ def keyword_index():
     stat_table = [kw for kw in data['stat_table'] if kw[0] != ""]
     stat_table.sort()
     set_language_swith_link("keyword_index")
-    return render_template('keywords.html', keywords=stat_table, title=gettext("Keywords"))
+    return render_template('bucketresults.html', results=stat_table, title=gettext("Keywords"), name='keyword')
 
 
-@app.route("/en/keyword/<keyword>", endpoint="keyword_en")
-@app.route("/sv/nyckelord/<keyword>", endpoint="keyword_sv")
-def keyword(keyword=None):
-    keyword = keyword.encode('utf-8')
+@app.route("/en/keyword/<result>", endpoint="keyword_en")
+@app.route("/sv/nyckelord/<result>", endpoint="keyword_sv")
+def keyword(result=None):
+    keyword = result.encode('utf-8')
     set_language_swith_link("keyword_index", keyword)
     hits = karp_query('querycount', {'q' : "extended||and|nyckelord.search|equals|%s" % (keyword)})
 
@@ -115,7 +145,7 @@ def keyword(keyword=None):
         if os.path.exists(app.config.root_path+'/static/images/keywords/'+keyword+'.jpg'):
             picture = keyword+'.jpg'
 
-        return render_template('keyword.html', picture=picture, title=keyword, hits=hits["query"]["hits"])
+        return render_template('listresults.html', picture=picture, title=keyword, hits=hits["query"]["hits"])
     else:
         return render_template('page.html', content = 'not found')
 
