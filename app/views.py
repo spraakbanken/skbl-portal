@@ -56,12 +56,6 @@ def search():
     return render_template('search.html', hits = data["query"]["hits"], advanced_search_text=advanced_search_text)
 
 
-@app.route("/en/advanced-search", endpoint="search_advanced_en")
-@app.route("/sv/avncerad-sok", endpoint="search_advanced_sv")
-def search_advanced():
-    return serve_static_page("advanced-search", gettext("Advanced search"))
-
-
 @app.route("/en/place", endpoint="place_index_en")
 @app.route("/sv/ort", endpoint="place_index_sv")
 def place_index():
