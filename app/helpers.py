@@ -1,6 +1,6 @@
 # -*- coding=utf-8 -*-
 import re
-
+import markdown
 
 def get_first_name(source):
     " Returns the given name (first name), and the callingname (tilltalsnamnet)"
@@ -10,7 +10,8 @@ def get_first_name(source):
 
 
 def markdown_html(text):
-    return re.sub('\*(.*?)\*', r'<i>\1</i>', text)
+    return markdown.markdown(text)
+    #return re.sub('\*(.*?)\*', r'<i>\1</i>', text)
 
 
 
