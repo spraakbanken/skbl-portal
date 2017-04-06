@@ -7,7 +7,7 @@
         <li><a href="{{ url_for('article_'+g.language, id=hit._id) }}">{{ hit._source.name.firstname }} {{ hit._source.name.lastname }}</a></li>
     {% endfor %}
 </div>
-{% if picture is not none %}   
+{% if picture is not none %}
 <div class="col-md-4">
     <div class="image-overlay">
         <img src="{{ url_for('static', filename='images/keywords/'+picture) }}" itemprop="image" alt="{{ title }}" width="360px">

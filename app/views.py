@@ -59,6 +59,38 @@ def search():
 def search_advanced():
     return serve_static_page("advanced-search", gettext("Advanced search"))
 
+@app.route("/en/places", endpoint="places_index_en")
+@app.route("/sv/orter", endpoint="places_index_sv")
+def places_index():
+    def parse(kw):
+        place = kw.get('key')
+        name, lat, lon = place.split('|')
+        placename = name if name else '%s, %s' % (lat,lon)
+        lat = place.split('|')[1]
+        lon = place.split('|')[2]
+        return {'name': placename, 'lat': lat, 'lon': lon,
+                'count': kw.get('doc_count')}
+
+    data = karp_query('getplaces', {})
+    stat_table = [parse(kw) for kw in data['places']]
+    stat_table.sort()
+    set_language_swith_link("places_index")
+    return render_template('places.html', places=stat_table, title=gettext("Places"))
+
+
+@app.route("/en/place/<place>", endpoint="place_en")
+@app.route("/sv/ort/<place>", endpoint="place_sv")
+def place(place=None):
+    place = place.encode('utf-8')
+    set_language_swith_link("places_index", place)
+    hits = karp_query('querycount', {'q' : "extended||and|plats.search|equals|%s" % (place)})
+
+    if hits['query']['hits']['total'] > 0:
+        return render_template('keyword.html', title=place, hits=hits["query"]["hits"], picture=None)
+    else:
+        return render_template('page.html', content = 'not found')
+
+
 @app.route("/en/keyword", endpoint="keyword_index_en")
 @app.route("/sv/nyckelord", endpoint="keyword_index_sv")
 def keyword_index():

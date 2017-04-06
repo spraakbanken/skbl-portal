@@ -22,10 +22,12 @@
             <a href="{{ url_for('keyword_'+g.language, keyword=keyword) }}">{{ keyword }}</a></span>
         {% endfor %}
 
+        <!--
         <h3>{{ gettext("Othernames") }}</h3>
         {% for name in article.othernames %}
             <p><b>{{name.type}}:</b> <span itemprop="additionalName">{{name.name}}</span></p>
         {% endfor %}
+        -->
 
         <h3>{{ gettext("Links") }}</h3>
         {% for link in article.externallink %}
