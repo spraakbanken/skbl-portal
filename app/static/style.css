@@ -4,6 +4,10 @@ body{
   background-color:#EFF4D1;
 }
 
+h1, h2, h3, h4, h5, h6{
+  font-family: 'Avenir Book', 'Verdana';
+}
+
 #logo{  
   margin-top: 5px;
   margin-bottom: 5px;
