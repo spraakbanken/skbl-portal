@@ -5,17 +5,17 @@
     <title>{% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Language" content="{{ g.language }}">
-    
+
     {% if g.config['ALLOW_INDEXING'] == False %}
     <meta name="robots" content="noindex">
-    {% endif %}    
-    
+    {% endif %}
+
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    
+
     <!-- theme -->
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.theme.min.css') }}">
-    
+
     <!-- modifications -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
@@ -36,12 +36,12 @@
               <span class="input-group-addon">
                 <button type="submit">
                   <span class="glyphicon glyphicon-search"></span>
-                </button>  
+                </button>
               </span>
             </div>
           </form>
         </div>
-      </div> 
+      </div>
       <nav id="navbar" class="navbar">
         <div class="container-fluid">
           <div class="navbar-header">
@@ -53,7 +53,7 @@
             <ul class="nav navbar-nav">
               <li><a class="first-menu-item" href="{{ url_for('about-skbl_'+g.language) }}">{{ gettext('About SKBL') }}</a></li>
               <li><a href="{{ url_for('about-us_'+g.language) }}">{{ gettext('About us') }}</a></li>
-              
+
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ gettext('Article authors') }} <span class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -61,10 +61,10 @@
                   <li><a href="#">two</a></li>
                 </ul>
               </li>
-      
+
               <li><a href="{{ url_for('contact_'+g.language) }}">{{ gettext('Contact') }}</a></li>
             </ul>
-            
+
             <ul class="nav navbar-nav navbar-right">
               <li class="language-switch"><a href="{{ g.switch_language.url }}"><span class="glyphicon glyphicon-flag"></span>&nbsp;{{ g.switch_language.label }}</a></li>
             </ul>
@@ -79,13 +79,15 @@
       <div id="footer" class="container-fluid">
         <div class="row">
           <div class="border col-md-3">
-            <div class="image-overlay"><img src="{{ url_for('static', filename='images/skbl/verksamhet.png') }}"></div>
-            <h3>Verksamhet</h3>
+            <a href="{{ url_for('occupation_index_'+g.language) }}">
+              <div class="image-overlay"><img src="{{ url_for('static', filename='images/skbl/verksamhet.png') }}"></div>
+              <h3>{{ gettext('Occupations') }}</h3>
+            </a>
           </div>
           <div class="border col-md-3">
             <a href="{{ url_for('organisation_index_'+g.language) }}">
               <div class="image-overlay"><img src="{{ url_for('static', filename='images/skbl/organisationer.png') }}"></div>
-              <h3>{{ gettext('Organisationer') }}</h3>
+              <h3>{{ gettext('Organisations') }}</h3>
             </a>
           </div>
           <div class="border col-md-3">
@@ -104,6 +106,6 @@
       </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>        
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   </body>
 </html>

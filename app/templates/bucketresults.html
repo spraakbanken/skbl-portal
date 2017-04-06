@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block title %}skbl.se - {{ title }}{% endblock %}
+{% block content %}
+<div class="col-md-8">
+    <h1>{{ title }}</h1>
+    <ul>
+        {% for result in results %}
+          <li class="keyword_list_item"><a href="{{ url_for(name+'_'+g.language, result=result[0]) }}">{{ result[0] }}&nbsp;<span class="badge">{{ result[1] }}</span></a></li>  
+        {% endfor %}
+    </ul>
+</div>
+<div class="col-md-4">
+
+</div>
+{% endblock %}

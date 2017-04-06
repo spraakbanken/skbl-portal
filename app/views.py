@@ -56,6 +56,7 @@ def search():
 
     return render_template('search.html', hits = data["query"]["hits"], advanced_search_text=advanced_search_text)
 
+
 @app.route("/en/advanced-search", endpoint="search_advanced_en")
 @app.route("/sv/avncerad-sok", endpoint="search_advanced_sv")
 def search_advanced():
@@ -105,20 +106,19 @@ def organisation_index():
 @app.route("/en/organisation/<result>", endpoint="organisation_en")
 @app.route("/sv/organisation/<result>", endpoint="organisation_sv")
 def organisation(result=None):
-    return searchresult(result, 'organisation', 'organsationsnamn', 'organisations')
-    #organisation = result.encode('utf-8')
-    #set_language_swith_link("organisation_index", organisation)
-    #hits = karp_query('querycount', {'q' : "extended||and|organisation.search|equals|%s" % (organisation)})
+    return searchresult(result, 'organisation', 'organisationsnamn', 'organisations')
 
-    #if hits['query']['hits']['total'] > 0:
-    #    picture = None
-    #    if os.path.exists(app.config.root_path+'/static/images/organisations/'+organisation+'.jpg'):
-    #        picture = organisation+'.jpg'
 
-    #    return render_template('listresults.html', picture=picture, title=organisation, hits=hits["query"]["hits"])
-    #else:
-    #    return render_template('page.html', content = 'not found')
+@app.route("/en/occupation", endpoint="occupation_index_en")
+@app.route("/sv/verksamhet", endpoint="occupation_index_sv")
+def organisation_index():
+    return bucketcall('verksamhetstext', 'occupation', 'Occupation')
 
+
+@app.route("/en/occupation/<result>", endpoint="occupation_en")
+@app.route("/sv/verksameht/<result>", endpoint="occupation_sv")
+def organisation(result=None):
+    return searchresult(result, 'occupation', 'verksamhetstext', 'occupations')
 
 @app.route("/en/keyword", endpoint="keyword_index_en")
 @app.route("/sv/nyckelord", endpoint="keyword_index_sv")
