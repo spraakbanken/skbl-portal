@@ -47,8 +47,17 @@ def contact():
 def search():
     set_language_swith_link("search")
     data = karp_query('querycount', {'q' : "extended||and|anything.search|equals|%s" % (request.args.get('q', '*'))})
-    return render_template('search.html', hits = data["query"]["hits"])
 
+    advanced_search_text = ''
+    with app.open_resource("static/pages/advanced-search/%s.html" % (g.language)) as f:
+        advanced_search_text = f.read()
+
+    return render_template('search.html', hits = data["query"]["hits"], advanced_search_text=advanced_search_text)
+
+@app.route("/en/advanced-search", endpoint="search_advanced_en")
+@app.route("/sv/avncerad-sok", endpoint="search_advanced_sv")
+def search_advanced():
+    return serve_static_page("advanced-search", gettext("Advanced search"))
 
 @app.route("/en/keyword", endpoint="keyword_index_en")
 @app.route("/sv/nyckelord", endpoint="keyword_index_sv")
@@ -80,6 +89,7 @@ def keyword(keyword=None):
 @app.route("/en/article", endpoint="article_index_en")
 @app.route("/sv/artikel", endpoint="article_index_sv")
 def article_index():
+    print('katt')
     set_language_swith_link("article_index")
     data = karp_query('query', {'q':"extended||and|namn.search|exists"})
     # log.info(data)

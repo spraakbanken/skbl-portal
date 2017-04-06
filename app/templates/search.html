@@ -5,11 +5,14 @@
     <h1>{{ gettext("Search") }}</h1>
     <ul>
         {% for hit in hits.hits %}
-            <li><a href="{{ url_for('article_'+g.language, id=hit._id) }}">{{ hit._source.name.firstname }} {{ hit._source.name.lastname }}</a></li>
+            <li>
+                <a href="{{ url_for('article_'+g.language, id=hit._id) }}">{{ hit._source.name.firstname }} {{ hit._source.name.lastname }}</a>
+            </li>
         {% endfor %}              
     </ul>
 </div>
 <div class="col-md-4">
-    
+    {{ advanced_search_text | safe}}
+
 </div>
 {% endblock %}
