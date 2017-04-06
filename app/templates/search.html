@@ -6,9 +6,9 @@
     <ul>
         {% for hit in hits.hits %}
             <li>
-                <a href="{{ url_for('article_'+g.language, id=hit._id) }}">{{ hit._source.name.firstname }} {{ hit._source.name.lastname }}</a>
+                <a href="{{ url_for('article_'+g.language, id=hit._id) }}">{{ hit._source.name.lastname }}, {{ get_first_name(hit._source)[0] }} </a>
             </li>
-        {% endfor %}              
+        {% endfor %}
     </ul>
 </div>
 <div class="col-md-4">
