@@ -13,6 +13,7 @@ pybabel extract -F babel.cfg -o app/translations/messages.pot .
 
 ### Update translations
 pybabel update -i app/translations/messages.pot -d app/translations
+(add translations by modifying messages.po)
 
 ### Compile translations
 pybabel compile -d app/translations

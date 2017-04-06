@@ -163,7 +163,7 @@ def bucketcall(queryfield, name, title):
 def article_index():
     print('katt')
     set_language_swith_link("article_index")
-    data = karp_query('query', {'q':"extended||and|namn.search|exists"})
+    data = karp_query('query', {'q':"extended||and|namn.search|exists", 'size':"5000"})
     return render_template('list.html',
                             hits = data["hits"],
                             headline="Women A-Ö",
