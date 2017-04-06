@@ -19,7 +19,7 @@ def index():
 @app.route('/sv', endpoint='index_sv')
 def start():
     set_language_swith_link("index")
-    return render_template('page.html', content='skbl.se')
+    return render_template('start.html')
 
 
 @app.route("/en/about-skbl", endpoint="about-skbl_en")
