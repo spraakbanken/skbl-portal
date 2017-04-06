@@ -1,7 +1,12 @@
 {% extends "list.html" %}
 {% block content %}
-    {{ super() }}
-    <div id="mapid" style="height:250px;"> </div>
+
+     <div class="col-md-6">
+        {{ super() }}
+     </div>
+     <div class="col-md-6">
+         <div id="mapid" style="height: 280px;"></div>
+     </div>
 {% endblock %}
 {% block foot %}
     {{ super() }}
