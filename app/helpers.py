@@ -2,11 +2,32 @@
 import re
 import markdown
 
+
 def get_first_name(source):
-    " Returns the given name (first name), and the callingname (tilltalsnamnet)"
+    "Return the given name (first name), and the callingname (tilltalsnamnet)"
     calling = re.sub('.*/(.*)/.*', r'\1', source['name'].get('firstname', ''))
     firstname = re.sub('/', '', source['name'].get('firstname', '')).strip()
     return firstname, calling
+
+
+def get_life_range(source):
+    "Return the birth and death year from _source (as a tuple)"
+    birth_date = source['lifespan']['from'].get('date', '')
+    if birth_date:
+        birth_date = birth_date.get('comment', '')
+    if "-" in birth_date:
+        birth_year = birth_date[:birth_date.find("-")]
+    else:
+        birth_year = birth_date
+
+    death_date = source['lifespan']['from'].get('date', '')
+    if death_date:
+        death_date = death_date.get('comment', '')
+    if "-" in birth_date:
+        death_year = death_date[:death_date.find("-")]
+    else:
+        death_year = death_date
+    return birth_year, death_year
 
 
 def markdown_html(text):

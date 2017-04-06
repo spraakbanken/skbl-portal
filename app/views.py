@@ -47,13 +47,12 @@ def contact():
 def search():
     set_language_swith_link("search")
     data = karp_query('querycount', {'q' : "extended||and|anything.search|equals|%s" % (request.args.get('q', '*'))})
-    return render_template('search.html', hits = data["query"]["hits"])
 
     advanced_search_text = ''
     with app.open_resource("static/pages/advanced-search/%s.html" % (g.language)) as f:
         advanced_search_text = f.read()
 
-    return render_template('search.html', hits = data["query"]["hits"], advanced_search_text=advanced_search_text)
+    return render_template('list.html', headline='Search', hits=data["query"]["hits"], advanced_search_text=advanced_search_text)
 
 
 @app.route("/en/place", endpoint="place_index_en")

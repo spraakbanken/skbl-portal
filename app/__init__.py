@@ -69,7 +69,6 @@ def karp_query(action, query):
     query['resource'] = 'skbl'
     params = urllib.urlencode(query)
     sys.stderr.write("QUERY: " + str(params))
-
     return karp_request("%s?%s" % (action, params))
 
 
@@ -93,6 +92,7 @@ def inject_custom():
     return d
 
 app.jinja_env.globals.update(get_first_name=helpers.get_first_name)
+app.jinja_env.globals.update(get_life_range=helpers.get_life_range)
 
 from app import views
 

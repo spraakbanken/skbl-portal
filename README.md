@@ -6,6 +6,11 @@
 
 Visit http://localhost:8080
 
+## Re-build container
+`docker-compose down`
+`docker-compose build`
+`docker-compose up`
+
 ## Update translations
 
 ### Extract translations

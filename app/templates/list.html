@@ -6,18 +6,19 @@
     <ul>
         {% for hit in hits.hits %}
             {% if hit._source.name.lastname is defined %}
-                <li>
-                    <a href="{{ url_for('article_'+g.language, id=hit._id) }}">{{ hit._source.name.lastname }}, {{ get_first_name(hit._source)[0] }}</a>
-                </li>
+                {% set name = hit._source.name.lastname + ", " + get_first_name(hit._source)[0] %}
             {% else %}
-                <li>
-                    <a href="{{ url_for('article_'+g.language, id=hit._id) }}">{{ get_first_name(hit._source)[0] }}</a>
-                </li>
+                {% set name = get_first_name(hit._source)[0] %}
             {% endif %}
+            <li>
+                <a href="{{ url_for('article_'+g.language, id=hit._id) }}"><strong>{{ name }}</strong><br />
+                    <span itemprop="birthDate">{{ get_life_range(hit._source)[0] }}</span> &mdash; <span itemprop="deathDate">{{ get_life_range(hit._source)[1] }}</span>
+                </a>
+            </li>
         {% endfor %}
     </ul>
 </div>
 <div class="col-md-4">
-
+    {{ advanced_search_text | safe}}
 </div>
 {% endblock %}
