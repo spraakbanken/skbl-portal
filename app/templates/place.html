@@ -3,7 +3,7 @@
 {% block content %}
 <div class="col-md-6">
     <h1>{{ title }}</h1>
-    
+
     {% for hit in hits %}
 
        <li><a href="{{ url_for('article_'+g.language, id=hit._id) }}">{{ hit._source.name.firstname }} {{ hit._source.name.lastname }}</a></li>
@@ -13,7 +13,7 @@
     <div id="mapid" style="height: 280px;"></div>
 </div>
 {% endblock %}
- 
+
 {% block foot %}
     {{ super() }}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />

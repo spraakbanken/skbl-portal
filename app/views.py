@@ -93,7 +93,8 @@ def place(place=None):
 @app.route("/en/organisation", endpoint="organisation_index_en")
 @app.route("/sv/organisation", endpoint="organisation_index_sv")
 def organisation_index():
-    return bucketcall('organisationsnamn', 'organisation', 'Organisations')
+    return bucketcall(queryfield='organisationsnamn', name='organisation',
+                      title='Organisations')
 
 
 @app.route("/en/organisation/<result>", endpoint="organisation_en")
@@ -102,21 +103,23 @@ def organisation(result=None):
     return searchresult(result, 'organisation', 'organisationsnamn', 'organisations')
 
 
-@app.route("/en/occupation", endpoint="occupation_index_en")
-@app.route("/sv/verksamhet", endpoint="occupation_index_sv")
-def organisation_index():
-    return bucketcall('verksamhetstext', 'occupation', 'Occupation')
+@app.route("/en/activity", endpoint="activity_index_en")
+@app.route("/sv/verksamhet", endpoint="activity_index_sv")
+def activity_index():
+    return bucketcall(queryfield='verksamhetstext', name='activity',
+                      title='Activity')
 
 
-@app.route("/en/occupation/<result>", endpoint="occupation_en")
-@app.route("/sv/verksameht/<result>", endpoint="occupation_sv")
+@app.route("/en/activity/<result>", endpoint="activity_en")
+@app.route("/sv/verksameht/<result>", endpoint="activity_sv")
 def organisation(result=None):
-    return searchresult(result, 'occupation', 'verksamhetstext', 'occupations')
+    return searchresult(result, 'activity', 'verksamhetstext', 'activities')
+
 
 @app.route("/en/keyword", endpoint="keyword_index_en")
 @app.route("/sv/nyckelord", endpoint="keyword_index_sv")
 def keyword_index():
-    return bucketcall('nyckelord', 'keyword', 'Keywords')
+    return bucketcall(queryfield='nyckelord', name='keyword', title='Keywords')
 
 
 @app.route("/en/keyword/<result>", endpoint="keyword_en")
@@ -125,7 +128,20 @@ def keyword(result=None):
     return searchresult(result, 'keyword', 'nyckelord', 'keywords')
 
 
-def searchresult(result, name, searchfield, image):
+@app.route("/en/articleauthor", endpoint="articleauthor_index_en")
+@app.route("/sv/artikelforfattare", endpoint="articleauthor_index_sv")
+def authors():
+    return bucketcall(queryfield='artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn',
+                      name='articleauthor', title='Authors', sortby=lambda x: x[1])
+
+
+@app.route("/en/articleauthor/<result>", endpoint="articleauthor_en")
+@app.route("/sv/artikelforfattare/<result>", endpoint="articleauthor_sv")
+def author(result=None):
+    return searchresult(result, 'articleauthor', 'artikel_forfattare_fulltnamn', 'authors')
+
+
+def searchresult(result, name='', searchfield='', imagefolder=''):
     try:
        result = result.encode('utf-8')
        set_language_swith_link("%s_index" % name, result)
@@ -133,20 +149,23 @@ def searchresult(result, name, searchfield, image):
 
        if hits['query']['hits']['total'] > 0:
            picture = None
-           if os.path.exists(app.config.root_path+'/static/images/%s/%s.jpg' % (name, result)):
+           if os.path.exists(app.config.root_path+'/static/images/%s/%s.jpg' % (imagefolder, result)):
                picture = result+'.jpg'
 
-           return render_template('listresults.html', picture=picture, title=result, hits=hits["query"]["hits"])
+           return render_template('list.html', picture=picture, title=result, headline=result, hits=hits["query"]["hits"])
        else:
            return render_template('page.html', content = 'not found')
     except Exception:
-        return render_template('page.html', content = "extended||and|%s.search|equals|%s" % (name, result))
+        return render_template('page.html', content = "extended||and|%s.search|equals|%s" % (searchfield, result))
 
 
-def bucketcall(queryfield, name, title):
+def bucketcall(queryfield='', name='', title='', sortby=''):
     data = karp_query('statlist', {'buckets': '%s.bucket' % queryfield})
     stat_table = [kw for kw in data['stat_table'] if kw[0] != ""]
-    stat_table.sort()
+    if sortby:
+        stat_table.sort(key=sortby)
+    else:
+        stat_table.sort()
     set_language_swith_link("%s_index" % name)
     return render_template('bucketresults.html', results=stat_table, title=gettext(title), name=name)
 

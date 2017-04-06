@@ -5,7 +5,7 @@
     <h1>{{ title }}</h1>
     <ul>
         {% for result in results %}
-          <li class="keyword_list_item"><a href="{{ url_for(name+'_'+g.language, result=result[0]) }}">{{ result[0] }}&nbsp;<span class="badge">{{ result[1] }}</span></a></li>  
+          <li class="keyword_list_item"><a href="{{ url_for(name+'_'+g.language, result=' '.join(result[0:-1])) }}">{{ ' '.join(result[0:-1]) }}&nbsp;<span class="badge">{{ result[-1] }}</span></a></li>
         {% endfor %}
     </ul>
 </div>
