@@ -99,55 +99,63 @@ def place(place=None):
 @app.route("/en/organisation", endpoint="organisation_index_en")
 @app.route("/sv/organisation", endpoint="organisation_index_sv")
 def organisation_index():
-    data = karp_query('statlist', {'buckets' : 'organisationsnamn.bucket'})
-    stat_table = [kw for kw in data['stat_table'] if kw[0] != ""]
-    stat_table.sort()
-    set_language_swith_link("organisation_index")
-    return render_template('bucketresults.html', results=stat_table, title=gettext("Organisations"), name='organisation')
+    return bucketcall('organisationsnamn', 'organisation', 'Organisations')
 
 
 @app.route("/en/organisation/<result>", endpoint="organisation_en")
 @app.route("/sv/organisation/<result>", endpoint="organisation_sv")
 def organisation(result=None):
-    organisation = result.encode('utf-8')
-    set_language_swith_link("organisation_index", organisation)
-    hits = karp_query('querycount', {'q' : "extended||and|organisation.search|equals|%s" % (organisation)})
+    return searchresult(result, 'organisation', 'organsationsnamn', 'organisations')
+    #organisation = result.encode('utf-8')
+    #set_language_swith_link("organisation_index", organisation)
+    #hits = karp_query('querycount', {'q' : "extended||and|organisation.search|equals|%s" % (organisation)})
 
-    if hits['query']['hits']['total'] > 0:
-        picture = None
-        if os.path.exists(app.config.root_path+'/static/images/organisations/'+organisation+'.jpg'):
-            picture = organisation+'.jpg'
+    #if hits['query']['hits']['total'] > 0:
+    #    picture = None
+    #    if os.path.exists(app.config.root_path+'/static/images/organisations/'+organisation+'.jpg'):
+    #        picture = organisation+'.jpg'
 
-        return render_template('listresults.html', picture=picture, title=organisation, hits=hits["query"]["hits"])
-    else:
-        return render_template('page.html', content = 'not found')
+    #    return render_template('listresults.html', picture=picture, title=organisation, hits=hits["query"]["hits"])
+    #else:
+    #    return render_template('page.html', content = 'not found')
 
 
 @app.route("/en/keyword", endpoint="keyword_index_en")
 @app.route("/sv/nyckelord", endpoint="keyword_index_sv")
 def keyword_index():
-    data = karp_query('statlist', {'buckets' : 'nyckelord.bucket'})
-    stat_table = [kw for kw in data['stat_table'] if kw[0] != ""]
-    stat_table.sort()
-    set_language_swith_link("keyword_index")
-    return render_template('bucketresults.html', results=stat_table, title=gettext("Keywords"), name='keyword')
+    return bucketcall('nyckelord', 'keyword', 'Keywords')
 
 
 @app.route("/en/keyword/<result>", endpoint="keyword_en")
 @app.route("/sv/nyckelord/<result>", endpoint="keyword_sv")
 def keyword(result=None):
-    keyword = result.encode('utf-8')
-    set_language_swith_link("keyword_index", keyword)
-    hits = karp_query('querycount', {'q' : "extended||and|nyckelord.search|equals|%s" % (keyword)})
+    return searchresult(result, 'keyword', 'nyckelord', 'keywords')
 
-    if hits['query']['hits']['total'] > 0:
-        picture = None
-        if os.path.exists(app.config.root_path+'/static/images/keywords/'+keyword+'.jpg'):
-            picture = keyword+'.jpg'
 
-        return render_template('listresults.html', picture=picture, title=keyword, hits=hits["query"]["hits"])
-    else:
-        return render_template('page.html', content = 'not found')
+def searchresult(result, name, searchfield, image):
+    try:
+       result = result.encode('utf-8')
+       set_language_swith_link("%s_index" % name, result)
+       hits = karp_query('querycount', {'q' : "extended||and|%s.search|equals|%s" % (searchfield, result)})
+
+       if hits['query']['hits']['total'] > 0:
+           picture = None
+           if os.path.exists(app.config.root_path+'/static/images/%s/%s.jpg' % (name, result)):
+               picture = result+'.jpg'
+
+           return render_template('listresults.html', picture=picture, title=result, hits=hits["query"]["hits"])
+       else:
+           return render_template('page.html', content = 'not found')
+    except Exception:
+        return render_template('page.html', content = "extended||and|%s.search|equals|%s" % (name, result))
+
+
+def bucketcall(queryfield, name, title):
+    data = karp_query('statlist', {'buckets': '%s.bucket' % queryfield})
+    stat_table = [kw for kw in data['stat_table'] if kw[0] != ""]
+    stat_table.sort()
+    set_language_swith_link("%s_index" % name)
+    return render_template('bucketresults.html', results=stat_table, title=gettext(title), name=name)
 
 
 @app.route("/en/article", endpoint="article_index_en")
