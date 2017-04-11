@@ -173,9 +173,9 @@ def bucketcall(queryfield='', name='', title='', sortby=''):
 @app.route("/en/article", endpoint="article_index_en")
 @app.route("/sv/artikel", endpoint="article_index_sv")
 def article_index():
-    print('katt')
     set_language_swith_link("article_index")
-    data = karp_query('query', {'q':"extended||and|namn.search|exists", 'size':"5000"})
+    data = karp_query('query', {'q':"extended||and|namn.search|exists",
+                                'size':"5000"}) #, 'show': 'name,othername,lifespan'})
     return render_template('list.html',
                             hits = data["hits"],
                             headline="Women A-Ö",

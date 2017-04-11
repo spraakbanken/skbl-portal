@@ -15,6 +15,16 @@
                     <span itemprop="birthDate">{{ get_life_range(hit._source)[0] }}</span> &mdash; <span itemprop="deathDate">{{ get_life_range(hit._source)[1] }}</span>
                 </a>
             </li>
+            <!-- render linked names  -->
+            {% for altname in hit._source.othernames %}
+                {% if altname.mk_link is defined %}
+                    <li>
+                        <a href="{{ url_for('article_'+g.language, id=hit._id) }}"><strong>{{ altname.name }}</strong><br />
+                            <span itemprop="birthDate">{{ get_life_range(hit._source)[0] }}</span> &mdash; <span itemprop="deathDate">{{ get_life_range(hit._source)[1] }}</span>
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
         {% endfor %}
     </ul>
 </div>
