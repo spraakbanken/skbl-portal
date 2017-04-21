@@ -8,6 +8,7 @@ import helpers
 import logging
 from urllib2 import Request, urlopen
 from flask import Markup
+import sys
 
 log = logging.getLogger(__name__)
 
@@ -52,7 +53,7 @@ def search():
     with app.open_resource("static/pages/advanced-search/%s.html" % (g.language)) as f:
         advanced_search_text = f.read()
 
-    return render_template('list.html', headline='Search', hits=data["query"]["hits"], advanced_search_text=advanced_search_text)
+    return render_template('list.html', headline=gettext('Search'), hits=data["query"]["hits"], advanced_search_text=advanced_search_text)
 
 
 @app.route("/en/place", endpoint="place_index_en")
@@ -94,7 +95,7 @@ def place(place=None):
 @app.route("/sv/organisation", endpoint="organisation_index_sv")
 def organisation_index():
     return bucketcall(queryfield='organisationsnamn', name='organisation',
-                      title='Organisations')
+                      title='Organizations')
 
 
 @app.route("/en/organisation/<result>", endpoint="organisation_en")
@@ -107,7 +108,7 @@ def organisation(result=None):
 @app.route("/sv/verksamhet", endpoint="activity_index_sv")
 def activity_index():
     return bucketcall(queryfield='verksamhetstext', name='activity',
-                      title='Activity')
+                      title='Activities')
 
 
 @app.route("/en/activity/<result>", endpoint="activity_en")
@@ -132,7 +133,7 @@ def keyword(result=None):
 @app.route("/sv/artikelforfattare", endpoint="articleauthor_index_sv")
 def authors():
     return bucketcall(queryfield='artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn',
-                      name='articleauthor', title='Authors', sortby=lambda x: x[1])
+                      name='articleauthor', title='Article authors', sortby=lambda x: x[1])
 
 
 @app.route("/en/articleauthor/<result>", endpoint="articleauthor_en")
@@ -152,7 +153,7 @@ def searchresult(result, name='', searchfield='', imagefolder=''):
            if os.path.exists(app.config.root_path+'/static/images/%s/%s.jpg' % (imagefolder, result)):
                picture = result+'.jpg'
 
-           return render_template('list.html', picture=picture, title=result, headline=result, hits=hits["query"]["hits"])
+           return render_template('list.html', picture=picture, title=result, headline=gettext(result), hits=hits["query"]["hits"])
        else:
            return render_template('page.html', content = 'not found')
     except Exception:
@@ -174,18 +175,18 @@ def bucketcall(queryfield='', name='', title='', sortby=''):
 @app.route("/sv/artikel", endpoint="article_index_sv")
 def article_index():
     set_language_swith_link("article_index")
-    data = karp_query('query', {'q':"extended||and|namn.search|exists",
-                                'size':"5000"}) #, 'show': 'name,othername,lifespan'})
+    data = karp_query('query', {'q': "extended||and|namn.search|exists",
+                                'size': "5000"})  # , 'show': 'name,othername,lifespan'})
     return render_template('list.html',
-                            hits = data["hits"],
-                            headline="Women A-Ö",
-                            title = 'Articles')
+                           hits=data["hits"],
+                           headline=gettext('Women A-Ö'),
+                           title='Articles')
 
 
 @app.route("/en/article/<id>", endpoint="article_en")
 @app.route("/sv/artikel/<id>", endpoint="article_sv")
 def article(id=None):
-    data = karp_query('querycount', {'q' : "extended||and|id.search|equals|%s" % (id)})
+    data = karp_query('querycount', {'q': "extended||and|id.search|equals|%s" % (id)})
     set_language_swith_link("article_index", id)
     if data['query']['hits']['total'] == 1:
         # Malin: visa bara tilltalsnamnet (obs test, kanske inte är vad de vill ha på riktigt)

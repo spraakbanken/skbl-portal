@@ -2,7 +2,7 @@
 {% block title %}skbl.se - {{ title }}{% endblock %}
 {% block content %}
 <div class="col-md-8">
-    <h1>{{ gettext(headline) }}</h1>
+    <h1>{{ headline }}</h1>
     <ul>
         {% for hit in hits.hits %}
             {% if hit._source.name.lastname is defined %}
