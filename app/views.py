@@ -1,21 +1,15 @@
 # -*- coding=utf-8 -*-
 import os
 import os.path
-import re
-from app import app, redirect, render_template, request, get_locale, set_language_swith_link, g, serve_static_page, karp_query, karp_request
+from app import app, redirect, render_template, request, get_locale, set_language_swith_link, g, serve_static_page, karp_query
 from flask_babel import gettext
 import helpers
-import logging
-from urllib2 import Request, urlopen
-from flask import Markup
 import sys
-
-log = logging.getLogger(__name__)
 
 #redirect to specific language landing-page
 @app.route('/')
 def index():
-    return redirect('/'+get_locale())
+    return redirect('/' + get_locale())
 
 
 @app.route('/en', endpoint='index_en')
@@ -47,7 +41,7 @@ def contact():
 @app.route("/sv/sok", endpoint="search_sv")
 def search():
     set_language_swith_link("search")
-    data = karp_query('querycount', {'q' : "extended||and|anything.search|equals|%s" % (request.args.get('q', '*'))})
+    data = karp_query('querycount', {'q': "extended||and|anything.search|equals|%s" % (request.args.get('q', '*'))})
 
     advanced_search_text = ''
     with app.open_resource("static/pages/advanced-search/%s.html" % (g.language)) as f:
@@ -60,14 +54,16 @@ def search():
 @app.route("/sv/ort", endpoint="place_index_sv")
 def place_index():
     set_language_swith_link("place_index")
+
     def parse(kw):
         place = kw.get('key')
         name, lat, lon = place.split('|')
-        placename = name if name else '%s, %s' % (lat,lon)
+        placename = name if name else '%s, %s' % (lat, lon)
         lat = place.split('|')[1]
         lon = place.split('|')[2]
         return {'name': placename, 'lat': lat, 'lon': lon,
                 'count': kw.get('doc_count')}
+
     def has_name(kw):
         return kw.get('key').split('|')[0]
 
@@ -83,12 +79,12 @@ def place_index():
 def place(place=None):
     place = place.encode('utf-8')
     set_language_swith_link("place_index", place)
-    hits = karp_query('querycount', {'q' : "extended||and|plats.search|equals|%s" % (place)})
+    hits = karp_query('querycount', {'q': "extended||and|plats.search|equals|%s" % (place)})
 
     if hits['query']['hits']['total'] > 0:
         return render_template('place.html', title=place, hits=hits["query"]["hits"])
     else:
-        return render_template('page.html', content = 'not found')
+        return render_template('page.html', content='not found')
 
 
 @app.route("/en/organisation", endpoint="organisation_index_en")
@@ -113,7 +109,7 @@ def activity_index():
 
 @app.route("/en/activity/<result>", endpoint="activity_en")
 @app.route("/sv/verksameht/<result>", endpoint="activity_sv")
-def organisation(result=None):
+def activity(result=None):
     return searchresult(result, 'activity', 'verksamhetstext', 'activities')
 
 
@@ -144,20 +140,20 @@ def author(result=None):
 
 def searchresult(result, name='', searchfield='', imagefolder=''):
     try:
-       result = result.encode('utf-8')
-       set_language_swith_link("%s_index" % name, result)
-       hits = karp_query('querycount', {'q' : "extended||and|%s.search|equals|%s" % (searchfield, result)})
+        result = result.encode('utf-8')
+        set_language_swith_link("%s_index" % name, result)
+        hits = karp_query('querycount', {'q': "extended||and|%s.search|equals|%s" % (searchfield, result)})
 
-       if hits['query']['hits']['total'] > 0:
-           picture = None
-           if os.path.exists(app.config.root_path+'/static/images/%s/%s.jpg' % (imagefolder, result)):
-               picture = result+'.jpg'
+        if hits['query']['hits']['total'] > 0:
+            picture = None
+            if os.path.exists(app.config.root_path + '/static/images/%s/%s.jpg' % (imagefolder, result)):
+                picture = result + '.jpg'
 
-           return render_template('list.html', picture=picture, title=result, headline=gettext(result), hits=hits["query"]["hits"])
-       else:
-           return render_template('page.html', content = 'not found')
+            return render_template('list.html', picture=picture, title=result, headline=gettext(result), hits=hits["query"]["hits"])
+        else:
+            return render_template('page.html', content='not found')
     except Exception:
-        return render_template('page.html', content = "extended||and|%s.search|equals|%s" % (searchfield, result))
+        return render_template('page.html', content="extended||and|%s.search|equals|%s" % (searchfield, result))
 
 
 def bucketcall(queryfield='', name='', title='', sortby=''):
@@ -201,6 +197,6 @@ def article(id=None):
         source['text'] = helpers.markdown_html(source['text'])
         source['othernames'] = helpers.group_by_type(source.get('othernames', {}), 'name')
         source['othernames'].append({'type': u'Förnamn', 'name': firstname})
-        return render_template('article.html', article = source)
+        return render_template('article.html', article=source)
     else:
-        return render_template('page.html', content = 'not found')
+        return render_template('page.html', content='not found')
