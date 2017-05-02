@@ -141,17 +141,15 @@ def author(result=None):
 
 def searchresult(result, name='', searchfield='', imagefolder=''):
     try:
-        result = result.encode('utf-8')
-        sys.stderr.write("\n\nresult: %s" % result)
-        set_language_switch_link("%s_index" % name, result.decode("UTF-8"))
-        hits = karp_query('querycount', {'q': "extended||and|%s.search|equals|%s" % (searchfield, result)})
+        set_language_switch_link("%s_index" % name, result)
+        hits = karp_query('querycount', {'q': "extended||and|%s.search|equals|%s" % (searchfield, result.encode('utf-8'))})
 
         if hits['query']['hits']['total'] > 0:
             picture = None
-            if os.path.exists(app.config.root_path + '/static/images/%s/%s.jpg' % (imagefolder, result)):
+            if os.path.exists(app.config.root_path + '/static/images/%s/%s.jpg' % (imagefolder, result.encode('utf-8'))):
                 picture = result + '.jpg'
 
-            return render_template('list.html', picture=picture, title=result, headline=gettext(result), hits=hits["query"]["hits"])
+            return render_template('list.html', picture=picture, title=gettext(result), headline=gettext(result), hits=hits["query"]["hits"])
         else:
             return render_template('page.html', content='not found')
     except Exception:
