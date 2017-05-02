@@ -141,7 +141,7 @@ def author(result=None):
 
 def searchresult(result, name='', searchfield='', imagefolder=''):
     try:
-        result = result.encode('utf-8')
+        result = result.decode('utf-8')
         set_language_swith_link("%s_index" % name, result)
         hits = karp_query('querycount', {'q': "extended||and|%s.search|equals|%s" % (searchfield, result)})
 
