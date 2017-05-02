@@ -56,11 +56,11 @@ def serve_static_page(page, title=''):
 
 def set_language_swith_link(route, fragment=None):
     fragment = fragment.decode("UTF-8")
-    if(get_locale() == 'en'):
+    if get_locale() == 'en':
         g.switch_language = {'url': url_for(route + '_sv'), 'label': 'Svenska'}
     else:
         g.switch_language = {'url': url_for(route + '_en'), 'label': 'English'}
-    if(fragment is not None):
+    if fragment is not None:
         g.switch_language['url'] += '/' + fragment
 
 
