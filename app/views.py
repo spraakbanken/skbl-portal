@@ -135,7 +135,8 @@ def authors():
 @app.route("/en/articleauthor/<result>", endpoint="articleauthor_en")
 @app.route("/sv/artikelforfattare/<result>", endpoint="articleauthor_sv")
 def author(result=None):
-    return searchresult(result, 'articleauthor', 'artikel_forfattare_fulltnamn', 'authors')
+    return searchresult(result, name='articleauthor', searchfield='artikel_forfattare_fulltnamn',
+                        imagefolder='authors')
 
 
 def searchresult(result, name='', searchfield='', imagefolder=''):
@@ -175,7 +176,7 @@ def article_index():
                                 'size': "5000"})  # , 'show': 'name,othername,lifespan'})
     return render_template('list.html',
                            hits=data["hits"],
-                           headline=gettext('Women A-Ö'),
+                           headline=gettext(u'Women A-Ö'),
                            title='Articles')
 
 
