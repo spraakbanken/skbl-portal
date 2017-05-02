@@ -1,7 +1,7 @@
 # -*- coding=utf-8 -*-
 import os
 import os.path
-from app import app, redirect, render_template, request, get_locale, set_language_swith_link, g, serve_static_page, karp_query
+from app import app, redirect, render_template, request, get_locale, set_language_switch_link, g, serve_static_page, karp_query
 from flask_babel import gettext
 import helpers
 import sys
@@ -15,7 +15,7 @@ def index():
 @app.route('/en', endpoint='index_en')
 @app.route('/sv', endpoint='index_sv')
 def start():
-    set_language_swith_link("index")
+    set_language_switch_link("index")
     return render_template('start.html')
 
 
@@ -40,7 +40,7 @@ def contact():
 @app.route("/en/search", endpoint="search_en")
 @app.route("/sv/sok", endpoint="search_sv")
 def search():
-    set_language_swith_link("search")
+    set_language_switch_link("search")
     data = karp_query('querycount', {'q': "extended||and|anything.search|equals|%s" % (request.args.get('q', '*'))})
 
     advanced_search_text = ''
@@ -53,7 +53,7 @@ def search():
 @app.route("/en/place", endpoint="place_index_en")
 @app.route("/sv/ort", endpoint="place_index_sv")
 def place_index():
-    set_language_swith_link("place_index")
+    set_language_switch_link("place_index")
 
     def parse(kw):
         place = kw.get('key')
@@ -78,7 +78,7 @@ def place_index():
 @app.route("/sv/ort/<place>", endpoint="place_sv")
 def place(place=None):
     place = place.encode('utf-8')
-    set_language_swith_link("place_index", place)
+    set_language_switch_link("place_index", place)
     hits = karp_query('querycount', {'q': "extended||and|plats.search|equals|%s" % (place)})
 
     if hits['query']['hits']['total'] > 0:
@@ -141,8 +141,9 @@ def author(result=None):
 
 def searchresult(result, name='', searchfield='', imagefolder=''):
     try:
-        result = result.decode('utf-8')
-        set_language_swith_link("%s_index" % name, result)
+        result = result.encode('utf-8')
+        sys.stderr.write("\n\nresult: %s" % result)
+        set_language_switch_link("%s_index" % name, result.decode("UTF-8"))
         hits = karp_query('querycount', {'q': "extended||and|%s.search|equals|%s" % (searchfield, result)})
 
         if hits['query']['hits']['total'] > 0:
@@ -164,14 +165,14 @@ def bucketcall(queryfield='', name='', title='', sortby=''):
         stat_table.sort(key=sortby)
     else:
         stat_table.sort()
-    set_language_swith_link("%s_index" % name)
+    set_language_switch_link("%s_index" % name)
     return render_template('bucketresults.html', results=stat_table, title=gettext(title), name=name)
 
 
 @app.route("/en/article", endpoint="article_index_en")
 @app.route("/sv/artikel", endpoint="article_index_sv")
 def article_index():
-    set_language_swith_link("article_index")
+    set_language_switch_link("article_index")
     data = karp_query('query', {'q': "extended||and|namn.search|exists",
                                 'size': "5000"})  # , 'show': 'name,othername,lifespan'})
     return render_template('list.html',
@@ -184,7 +185,7 @@ def article_index():
 @app.route("/sv/artikel/<id>", endpoint="article_sv")
 def article(id=None):
     data = karp_query('querycount', {'q': "extended||and|id.search|equals|%s" % (id)})
-    set_language_swith_link("article_index", id)
+    set_language_switch_link("article_index", id)
     if data['query']['hits']['total'] == 1:
         # Malin: visa bara tilltalsnamnet (obs test, kanske inte är vad de vill ha på riktigt)
         source = data['query']['hits']['hits'][0]['_source']

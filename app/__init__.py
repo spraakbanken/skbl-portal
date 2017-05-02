@@ -44,7 +44,7 @@ def get_locale():
 
 
 def serve_static_page(page, title=''):
-    set_language_swith_link(page)
+    set_language_switch_link(page)
 
     with app.open_resource("static/pages/%s/%s.html" % (page, g.language)) as f:
         data = f.read()
@@ -54,8 +54,7 @@ def serve_static_page(page, title=''):
                            title=title)
 
 
-def set_language_swith_link(route, fragment=None):
-    fragment = fragment.decode("UTF-8")
+def set_language_switch_link(route, fragment=None):
     if get_locale() == 'en':
         g.switch_language = {'url': url_for(route + '_sv'), 'label': 'Svenska'}
     else:
