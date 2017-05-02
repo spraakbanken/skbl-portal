@@ -11,16 +11,15 @@ from flask_babel import Babel
 from setuptools import setup
 from urllib2 import Request, urlopen
 import helpers
-import sys
 
 
 app = Flask(__name__)
 
-if os.path.exists(app.config.root_path+'/config.cfg') == False:
+if os.path.exists(app.config.root_path + '/config.cfg') is False:
     print "copy config.default.cfg to config.cfg and add your settings"
-    app.config.from_pyfile(app.config.root_path+'/config.default.cfg')
+    app.config.from_pyfile(app.config.root_path + '/config.default.cfg')
 else:
-    app.config.from_pyfile(app.config.root_path+'/config.cfg')
+    app.config.from_pyfile(app.config.root_path + '/config.cfg')
 
 
 babel = Babel(app)
@@ -51,24 +50,24 @@ def serve_static_page(page, title=''):
         data = f.read()
 
     return render_template('page_static.html',
-                            content = data.decode('utf-8'),
-                            title = title)
+                           content=data.decode('utf-8'),
+                           title=title)
 
 
 def set_language_swith_link(route, fragment=None):
+    fragment = fragment.decode("UTF-8")
     if(get_locale() == 'en'):
-        g.switch_language = {'url': url_for(route+'_sv'), 'label': 'Svenska'}
+        g.switch_language = {'url': url_for(route + '_sv'), 'label': 'Svenska'}
     else:
-        g.switch_language = {'url': url_for(route+'_en'), 'label': 'English'}
-    if(fragment != None):
-        g.switch_language['url'] += '/'+fragment
+        g.switch_language = {'url': url_for(route + '_en'), 'label': 'English'}
+    if(fragment is not None):
+        g.switch_language['url'] += '/' + fragment
 
 
 def karp_query(action, query):
     query['mode'] = 'skbl'
     query['resource'] = 'skbl'
     params = urllib.urlencode(query)
-    sys.stderr.write("QUERY: " + str(params))
     return karp_request("%s?%s" % (action, params))
 
 
@@ -79,6 +78,7 @@ def karp_request(action):
     data = json.loads(response)
     return data
 
+
 @app.before_request
 def func():
     g.babel = Babel
@@ -88,7 +88,7 @@ def func():
 
 @app.context_processor
 def inject_custom():
-    d = {'lurl_for': lambda ep, **kwargs: url_for(ep+'_'+g.language, **kwargs)}
+    d = {'lurl_for': lambda ep, **kwargs: url_for(ep + '_' + g.language, **kwargs)}
     return d
 
 app.jinja_env.globals.update(get_first_name=helpers.get_first_name)
