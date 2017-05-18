@@ -38,6 +38,9 @@ def check_password(environ, user, password):
     if not os.path.isdir(SESSIONDIR):
         os.makedirs(SESSIONDIR)
 
+    user = user.decode("raw_unicode_escape").encode("utf-8")
+    password = password.decode("raw_unicode_escape").encode("utf-8")
+
     sessionfile = os.path.join(SESSIONDIR, md5.new(user + password).hexdigest())
 
     if os.path.isfile(sessionfile) and (time.time() - os.path.getmtime(sessionfile)) < WSAUTH_INTERVAL:
