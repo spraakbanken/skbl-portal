@@ -136,24 +136,25 @@ def authors():
 @app.route("/sv/artikelforfattare/<result>", endpoint="articleauthor_sv")
 def author(result=None):
     return searchresult(result, name='articleauthor', searchfield='artikel_forfattare_fulltnamn',
-                        imagefolder='authors')
+                        imagefolder='authors', searchtype='contains')
 
 
-def searchresult(result, name='', searchfield='', imagefolder=''):
+def searchresult(result, name='', searchfield='', imagefolder='', searchtype='equals'):
     try:
         set_language_switch_link("%s_index" % name, result)
-        hits = karp_query('querycount', {'q': "extended||and|%s.search|equals|%s" % (searchfield, result.encode('utf-8'))})
+        qresult = result.encode('utf-8')
+        hits = karp_query('querycount', {'q': "extended||and|%s.search|%s|%s" % (searchfield, searchtype, qresult)})
 
         if hits['query']['hits']['total'] > 0:
             picture = None
-            if os.path.exists(app.config.root_path + '/static/images/%s/%s.jpg' % (imagefolder, result.encode('utf-8'))):
+            if os.path.exists(app.config.root_path + '/static/images/%s/%s.jpg' % (imagefolder, qresult)):
                 picture = result + '.jpg'
 
             return render_template('list.html', picture=picture, title=gettext(result), headline=gettext(result), hits=hits["query"]["hits"])
         else:
             return render_template('page.html', content='not found')
     except Exception:
-        return render_template('page.html', content="extended||and|%s.search|equals|%s" % (searchfield, result))
+        return render_template('page.html', content="%s: extended||and|%s.search|%s|%s" % (app.config['KARP_BACKEND'], searchfield, searchtype, qresult))
 
 
 def bucketcall(queryfield='', name='', title='', sortby=''):
