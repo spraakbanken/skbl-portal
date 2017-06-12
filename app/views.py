@@ -95,7 +95,7 @@ def place(place=None):
 @app.route("/en/organisation", endpoint="organisation_index_en")
 @app.route("/sv/organisation", endpoint="organisation_index_sv")
 def organisation_index():
-    return bucketcall(queryfield='organisationsnamn', name='organisation',
+    return bucketcall(queryfield='organisationstyp', name='organisation',
                       title='Organizations')
 
 
