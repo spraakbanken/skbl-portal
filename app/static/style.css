@@ -12,7 +12,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #header-title h1{
   font-size: 2.4em;
-  margin-top: 42px;  
+  margin-top: 42px;
 }
 
 #search{
@@ -23,7 +23,7 @@ h1{
   margin-top:0px;
 }
 
-#logo {  
+#logo {
   margin-top: 5px;
   margin-bottom: 5px;
 }
@@ -33,7 +33,7 @@ h1{
 }
 
 #search .input-group {
-  
+
 }
 @media (max-width: 800px) {
   #header-title h1{
@@ -45,16 +45,16 @@ h1{
   #navbar ul .first-menu-item{
     padding-left: 0px;
   }
-  
+
   #navbar .container-fluid, #navbar-collapse {
     padding-left: 0px;
   }
-  
+
   #search .input-group {
     margin-top: 10px;
     max-width: 300px;
     float: right;
-  }  
+  }
 }
 
 a {
@@ -98,7 +98,7 @@ hr {
 }
 
 .stylish-input-group .input-group-addon {
-  background: white !important; 
+  background: white !important;
 }
 .stylish-input-group .form-control, #search .input-group-addon {
 	border-color: #ffc930;
@@ -106,7 +106,7 @@ hr {
 }
 
 .stylish-input-group .form-control {
-	border-right: 0; 
+	border-right: 0;
 	box-shadow: 0 0 0;
 }
 
@@ -117,8 +117,12 @@ hr {
 
 .keyword_list_item {
   list-style-type: none;
-  margin: 0;
+  margin: 0 0 5px 0;
   padding: 0;
+}
+
+li {
+  margin: 0 0 5px 0;
 }
 
 .carousel-caption h3 {
