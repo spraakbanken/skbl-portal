@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-06-12 08:56+0000\n"
+"POT-Creation-Date: 2017-06-12 12:13+0000\n"
 "PO-Revision-Date: 2017-02-20 14:49+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sv\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
 
-#: app/templates/layout.html:62 app/views.py:25
+#: app/templates/layout.html:67 app/views.py:25
 msgid "About SKBL"
 msgstr "Om SKBL"
 
@@ -34,19 +34,19 @@ msgstr "Sök"
 msgid "Places"
 msgstr "Orter"
 
-#: app/templates/layout.html:61 app/views.py:173
+#: app/templates/layout.html:61 app/views.py:175
 msgid "Women A-Ö"
 msgstr "Kvinnor A-Ö"
 
-#: app/templates/article.html:20 app/templates/layout.html:105
+#: app/templates/article.html:21 app/templates/layout.html:105
 msgid "Keywords"
 msgstr "Nyckelord"
 
-#: app/templates/article.html:26
+#: app/templates/article.html:28
 msgid "Othernames"
 msgstr "Namn"
 
-#: app/templates/article.html:32
+#: app/templates/article.html:35
 msgid "Links"
 msgstr "Länkar"
 
@@ -54,7 +54,7 @@ msgstr "Länkar"
 msgid "Advanced search"
 msgstr "Avancerad sök"
 
-#: app/templates/layout.html:65
+#: app/templates/layout.html:64
 msgid "Article authors"
 msgstr "Artikelförfattare"
 
@@ -65,3 +65,8 @@ msgstr "Verksamhet"
 #: app/templates/layout.html:93
 msgid "Organizations"
 msgstr "Organisationer"
+
+#: app/templates/layout.html:112
+msgid "Share page"
+msgstr "Dela sidan"
+
