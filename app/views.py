@@ -25,12 +25,6 @@ def about_skbl():
     return serve_static_page("about-skbl", gettext("About SKBL"))
 
 
-@app.route("/en/about-us", endpoint="about-us_en")
-@app.route("/sv/om-oss", endpoint="about-us_sv")
-def about_us():
-    return serve_static_page("about-us", gettext("About us"))
-
-
 @app.route("/en/contact", endpoint="contact_en")
 @app.route("/sv/kontakt", endpoint="contact_sv")
 def contact():
