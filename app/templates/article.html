@@ -28,8 +28,9 @@
         </div>
         {{ article.portrait[0].description }}
         {% endif %}
-        <span itemprop="birthDate">{{ article.lifespan.from.date.date }}</span> &mdash; <span itemprop="deathDate">{{ article.lifespan.to.date.date }}</span>
-
+        {% if get_date(article) %}
+            <span itemprop="birthDate">{{ get_date(article)[0] }}</span> &mdash; <span itemprop="deathDate">{{ get_date(article)[1] }}</span>
+        {% endif %}
         {% if article.keyword %}
             <h3>{{ gettext("Keywords") }}</h3>
             {% for keyword in article.keyword %}

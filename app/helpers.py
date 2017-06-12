@@ -12,7 +12,10 @@ def get_first_name(source):
 
 
 def get_life_range(source):
-    "Return the birth and death year from _source (as a tuple)"
+    """
+    Return the birth and death year from _source (as a tuple).
+    If both are empty return False.
+    """
     birth_date = source['lifespan']['from'].get('date', '')
     if birth_date:
         birth_date = birth_date.get('comment', '')
@@ -28,7 +31,22 @@ def get_life_range(source):
         death_year = death_date[:death_date.find("-")]
     else:
         death_year = death_date
+    if not (birth_year or death_year):
+        return False
     return birth_year, death_year
+
+
+def get_date(source):
+    if not source['lifespan']['from'].get('date'):
+        return get_life_range(source)
+    elif not source['lifespan']['from']['date'].get('date'):
+        return False
+    if not source['lifespan']['to'].get('date'):
+        return get_life_range(source)
+    elif not source['lifespan']['to']['date'].get('date'):
+        return False
+    else:
+        return ['lifespan']['to']['date']['date'], ['lifespan']['to']['date']['date']
 
 
 def markdown_html(text):
