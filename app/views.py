@@ -63,6 +63,8 @@ def place_index():
 
     data = karp_query('getplaces', {})
     stat_table = [parse(kw) for kw in data['places'] if has_name(kw)]
+    # Sort and translate
+    # stat_table = helpers.sort_places(stat_table, request.url_rule)
     stat_table.sort(key=lambda x: x.get('name').strip())
 
     return render_template('places.html', places=stat_table, title=gettext("Places"))

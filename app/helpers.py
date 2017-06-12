@@ -64,4 +64,25 @@ def make_namelist(hits):
     return results
 
 
+def sort_places(stat_table, route):
+    """Tranlate place names and sort list."""
+    # Work in progress! Waiting for translation list.
+    # Or should this be part of the data instead??
+    place_translations = {
+        u"Göteborg": "Gothenburg"
+    }
 
+    if "place" in route.rule:
+        lang = "en"
+    else:
+        lang = "sv"
+
+    if lang == "en":
+        for d in stat_table:
+            d["display_name"] = place_translations.get(d["name"], d["name"])
+    else:
+        for d in stat_table:
+            d["display_name"] = d["name"]
+
+    stat_table.sort(key=lambda x: x.get('name').strip())
+    return stat_table
