@@ -329,3 +329,8 @@ background-color: #FF6600
   background-color: #FB6200;
   border-color: #FB6200;
 }
+
+/* Artikelsidan */
+#organisationer_lista {
+  margin-top: 42px;
+}

@@ -9,6 +9,17 @@
         <p>{{ article.text|safe }}</p>
         <br/>
         <p><em>{{ article.article_author.firstname }} {{ article.article_author.lastname }}</em></p>
+        <div id="organisationer_lista">
+            <h4>Organisationer</h4>
+            <ul>
+            {% for organisation in article.organisation %}
+                <li>
+                    <h5>{{ organisation.name }}</h5>
+                    <span>{{ organisation.description }}</span>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
     </div>
     <div class="col-md-4">
         {% if article.portrait %}
@@ -22,7 +33,7 @@
         {% if article.keyword %}
             <h3>{{ gettext("Keywords") }}</h3>
             {% for keyword in article.keyword %}
-                <a href="{{ url_for('keyword_'+g.language, result=keyword) }}">{{ keyword }}</a></span>
+                <a href="{{ url_for('keyword_'+g.language, result=keyword) }}"><span class="badge">{{ keyword }}</span></a></span>
             {% endfor %}
         {% endif %}
 
