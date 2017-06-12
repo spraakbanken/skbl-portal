@@ -102,7 +102,7 @@ def organisation_index():
 @app.route("/en/organisation/<result>", endpoint="organisation_en")
 @app.route("/sv/organisation/<result>", endpoint="organisation_sv")
 def organisation(result=None):
-    return searchresult(result, 'organisation', 'organisationsnamn', 'organisations')
+    return searchresult(result, 'organisation', 'organisationstyp', 'organisations')
 
 
 @app.route("/en/activity", endpoint="activity_index_en")
@@ -148,7 +148,8 @@ def searchresult(result, name='', searchfield='', imagefolder='', searchtype='eq
     try:
         set_language_switch_link("%s_index" % name, result)
         qresult = result.encode('utf-8')
-        hits = karp_query('querycount', {'q': "extended||and|%s.search|%s|%s" % (searchfield, searchtype, qresult)})
+        hits = karp_query('querycount', {'size': 100000,
+                                         'q': "extended||and|%s.search|%s|%s" % (searchfield, searchtype, qresult)})
 
         if hits['query']['hits']['total'] > 0:
             picture = None
