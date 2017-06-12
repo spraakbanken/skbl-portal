@@ -1,6 +1,7 @@
 # -*- coding=utf-8 -*-
-import re
+import icu # pip install PyICU
 import markdown
+import re
 
 
 def get_first_name(source):
@@ -52,15 +53,21 @@ def make_namelist(hits):
     results = []
     for hit in hits["hits"]:
         source = hit["_source"]
-        if source["name"].get("lastname", ""):
-            name = source["name"]["lastname"] + ", " + get_first_name(source)[0]
-        else:
-            name = get_first_name(source)[0]
-        results.append((name, hit))
+        name = []
+        lastname = source["name"].get("lastname", '')
+        match = re.search('(von |af |)(.*)', lastname)
+        vonaf = match.group(1)
+        lastname = match.group(2)
+        if lastname:
+            name.append(lastname+",")
+        name.append(get_first_name(source)[0])
+        name.append(vonaf)
+        results.append((' '.join(name), hit))
         for altname in source.get("othernames", []):
             if altname.get("mk_link"):
                 results.append((altname["name"], hit))
-    results.sort()
+    collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
+    results.sort(key=lambda x:collator.getSortKey(x[0]))
     return results
 
 

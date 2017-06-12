@@ -3,10 +3,12 @@ import os
 import os.path
 from app import app, redirect, render_template, request, get_locale, set_language_switch_link, g, serve_static_page, karp_query
 from flask_babel import gettext
+import icu # pip install PyICU
 import helpers
 import sys
 
-#redirect to specific language landing-page
+
+# redirect to specific language landing-page
 @app.route('/')
 def index():
     return redirect('/' + get_locale())
@@ -35,7 +37,10 @@ def contact():
 @app.route("/sv/sok", endpoint="search_sv")
 def search():
     set_language_switch_link("search")
-    data = karp_query('querycount', {'q': "extended||and|anything.search|equals|%s" % (request.args.get('q', '*'))})
+    data = karp_query('querycount',
+                      {'size': 10000,
+                       'q': "extended||and|anything.search|contains|%s" % (request.args.get('q', '*'))
+                       })
 
     advanced_search_text = ''
     with app.open_resource("static/pages/advanced-search/%s.html" % (g.language)) as f:
@@ -65,7 +70,8 @@ def place_index():
     stat_table = [parse(kw) for kw in data['places'] if has_name(kw)]
     # Sort and translate
     # stat_table = helpers.sort_places(stat_table, request.url_rule)
-    stat_table.sort(key=lambda x: x.get('name').strip())
+    collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
+    stat_table.sort(key=lambda x: collator.getSortKey(x.get('name').strip()))
 
     return render_template('places.html', places=stat_table, title=gettext("Places"))
 
