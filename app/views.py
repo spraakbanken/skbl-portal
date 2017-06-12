@@ -206,7 +206,7 @@ def article(id=None):
         source['text'] = helpers.markdown_html(source['text'])
         source['othernames'] = helpers.group_by_type(source.get('othernames', {}), 'name')
         source['othernames'].append({'type': u'Förnamn', 'name': firstname})
-        return render_template('article.html', article=source)
+        return render_template('article.html', article=source, article_id=id)
     else:
         return render_template('page.html', content='not found')
 

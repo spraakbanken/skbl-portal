@@ -1,5 +1,11 @@
 {% extends "layout.html" %}
 {% block title %}skbl.se - {{ title }}{% endblock %}
+
+{% block head %}
+{{super()}}
+<link rel="alternate" type="application/json" href="{{ url_for('article_json_'+g.language, id=article_id) }}" />
+{% endblock %}
+
 {% block content %}
 <div itemscope itemtype="http://schema.org/Person">
     <div class="col-md-8">
