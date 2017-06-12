@@ -32,8 +32,6 @@ def get_life_range(source):
 
 def markdown_html(text):
     return markdown.markdown(text)
-    #return re.sub('\*(.*?)\*', r'<i>\1</i>', text)
-
 
 
 def group_by_type(objlist, name):
@@ -48,3 +46,22 @@ def group_by_type(objlist, name):
     for key, val in newdict.items():
         result.append({'type': key, name: ', '.join(val)})
     return result
+
+
+def make_namelist(hits):
+    results = []
+    for hit in hits["hits"]:
+        source = hit["_source"]
+        if source["name"].get("lastname", ""):
+            name = source["name"]["lastname"] + ", " + get_first_name(source)[0]
+        else:
+            name = get_first_name(source)[0]
+        results.append((name, hit))
+        for altname in source.get("othernames", []):
+            if altname.get("mk_link"):
+                results.append((altname["name"], hit))
+    results.sort()
+    return results
+
+
+
