@@ -18,7 +18,9 @@
 <div class="col-md-4">
     {{ advanced_search_text | safe}}
     {% if picture %}
-    <img src="{{ picture }}" alt="{{ headline }}" width="350px" />
+    <div class="image-overlay">
+        <img src="{{ picture }}" alt="{{ headline }}" width="350px" />
+    </div>
     {% endif %}
 </div>
 {% endblock %}
