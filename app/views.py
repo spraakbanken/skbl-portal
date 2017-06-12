@@ -154,7 +154,7 @@ def searchresult(result, name='', searchfield='', imagefolder='', searchtype='eq
         if hits['query']['hits']['total'] > 0:
             picture = None
             if os.path.exists(app.config.root_path + '/static/images/%s/%s.jpg' % (imagefolder, qresult)):
-                picture = result + '.jpg'
+                picture = '/static/images/%s/%s.jpg' % (imagefolder, qresult)
 
             return render_template('list.html', picture=picture, title=gettext(result), headline=gettext(result), hits=hits["query"]["hits"])
         else:
