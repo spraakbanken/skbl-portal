@@ -49,7 +49,7 @@ def search():
 
     return render_template('list.html', headline=gettext('Search'),
                            hits=data["query"]["hits"],
-                           advanced_search_text=advanced_search_text,
+                           advanced_search_text=advanced_search_text.decode("UTF-8"),
                            alphabetic=False)
 
 
