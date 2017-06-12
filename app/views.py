@@ -123,7 +123,7 @@ def keyword(result=None):
 @app.route("/sv/artikelforfattare", endpoint="articleauthor_index_sv")
 def authors():
     return bucketcall(queryfield='artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn',
-                      name='articleauthor', title='Article authors', sortby=lambda x: x[1])
+                      name='articleauthor', title='Article authors', sortby=lambda x: x[1], lastnamefirst=True)
 
 
 @app.route("/en/articleauthor/<result>", endpoint="articleauthor_en")
@@ -151,13 +151,15 @@ def searchresult(result, name='', searchfield='', imagefolder='', searchtype='eq
         return render_template('page.html', content="%s: extended||and|%s.search|%s|%s" % (app.config['KARP_BACKEND'], searchfield, searchtype, qresult))
 
 
-def bucketcall(queryfield='', name='', title='', sortby=''):
+def bucketcall(queryfield='', name='', title='', sortby='', lastnamefirst=False):
     data = karp_query('statlist', {'buckets': '%s.bucket' % queryfield})
     stat_table = [kw for kw in data['stat_table'] if kw[0] != ""]
     if sortby:
         stat_table.sort(key=sortby)
     else:
         stat_table.sort()
+    if lastnamefirst:
+        stat_table = [[kw[1] + ',', kw[0], kw[2]] for kw in stat_table]
     set_language_switch_link("%s_index" % name)
     return render_template('bucketresults.html', results=stat_table, title=gettext(title), name=name)
 
