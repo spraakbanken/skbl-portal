@@ -6,6 +6,7 @@ from flask import jsonify
 from flask_babel import gettext
 import icu # pip install PyICU
 import helpers
+import re
 import sys
 
 # redirect to specific language landing-page
@@ -38,11 +39,15 @@ def contact():
 def search():
     set_language_switch_link("search")
     search = request.args.get('q', '*').encode('utf-8')
-    data = karp_query('querycount',
-                      {'size': 10000,
-                       'q': "simple||%s" % search
-                       })
+    karp_q = {'size': 10000}
+    if '*' in search:
+        search = re.sub('(?<!\.)\*', '.*', search)
+        karp_q['q'] = "extended||and|anything|regexp|%s" % search
+        karp_q['sort'] = '_score'
+    else:
+        karp_q['q'] = "simple||%s" % search
 
+    data = karp_query('querycount', karp_q)
     advanced_search_text = ''
     with app.open_resource("static/pages/advanced-search/%s.html" % (g.language)) as f:
         advanced_search_text = f.read()
@@ -209,6 +214,7 @@ def article(id=None):
         return render_template('article.html', article=source, article_id=id)
     else:
         return render_template('page.html', content='not found')
+
 
 @app.route("/en/article/<id>.json", endpoint="article_json_en")
 @app.route("/sv/artikel/<id>.json", endpoint="article_json_sv")
