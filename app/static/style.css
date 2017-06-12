@@ -128,3 +128,11 @@ li {
 .carousel-caption h3 {
   color: #fff;
 }
+
+.badge {
+  background-color: #ffc930;
+  color: #000;
+  font-family: 'Verdana', sans-serif;
+  font-weight: bold;
+  padding-top: 4px;
+}
