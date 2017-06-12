@@ -67,13 +67,11 @@ def karp_query(action, query):
     query['mode'] = 'skbl'
     query['resource'] = 'skbl'
     params = urllib.urlencode(query)
-    sys.stderr.write("\n\nQUERY: %s\n" % str(params))
     return karp_request("%s?%s" % (action, params))
 
 
 def karp_request(action):
     q = Request("%s/%s" % (app.config['KARP_BACKEND'], action))
-    sys.stderr.write("\n\nKARP REQUEST: %s/%s\n" % (app.config['KARP_BACKEND'], action))
     q.add_header('Authorization', "Basic %s" % (app.config['KARP_AUTH_HASH']))
     response = urlopen(q).read()
     data = json.loads(response)
