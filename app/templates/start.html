@@ -1,13 +1,13 @@
 {% extends "layout.html" %}
 {% block title %}skbl.se - {{ title }}{% endblock %}
 {% block content %}
-<div class="col-md-12">
-  <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+<div class="col-md-6">
+  <div id="carousel-skbl" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
-      <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-      <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-      <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+      <li data-target="#carousel-skbl" data-slide-to="0" class="active"></li>
+      <li data-target="#carousel-skbl" data-slide-to="1"></li>
+      <li data-target="#carousel-skbl" data-slide-to="2"></li>
     </ol>
 
     <!-- Wrapper for slides -->
@@ -39,12 +39,15 @@
     </div>
 
     <!-- Controls -->
-    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    <a class="left carousel-control" href="#carousel-skbl" role="button" data-slide="prev">
       <span class="glyphicon glyphicon-chevron-left"></span>
     </a>
-    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    <a class="right carousel-control" href="#carousel-skbl" role="button" data-slide="next">
       <span class="glyphicon glyphicon-chevron-right"></span>
     </a>
   </div>
+</div>
+<div class="col-md-6">
+  <i>Här ska det in en välkomsttext som Berith eller Maria ska skicka</i>
 </div>
 {% endblock %}
