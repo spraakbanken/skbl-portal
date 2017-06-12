@@ -9,9 +9,46 @@
         <p>{{ article.text|safe }}</p>
         <br/>
         <p><em>{{ article.article_author.firstname }} {{ article.article_author.lastname }}</em></p>
-        <div id="organisationer_lista">
-            <h4>Organisationer</h4>
-            <ul>
+        {% if article.relation %}
+        <div id="familjeforhallanden_lista" class="ellipsis">
+            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Familjeförhållanden ({{ article.relation|length }})</h4>
+            <ul class="ellipsis_contents">
+            {% for relation in article.relation %}
+                <li>
+                    <h5>{{ relation.type }}: {{ relation.firstname }} {{ relation.lastname }}</h5>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% if article.education %}
+        <div id="organisationer_lista" class="ellipsis">
+            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Utbildning ({{ article.education|length }})</h4>
+            <ul class="ellipsis_contents">
+            {% for education in article.education %}
+                <li>
+                    <h5>{{ education.type }}: {{ education.institution }}</h5>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% if article.occupation %}
+        <div id="organisationer_lista" class="ellipsis">
+            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Verksamhet ({{ article.occupation|length }})</h4>
+            <ul class="ellipsis_contents">
+            {% for occupation in article.occupation %}
+                <li>
+                    <h5>{{ occupation.type }}: {{ occupation.description }}</h5>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% if article.organisation %}
+        <div id="organisationer_lista" class="ellipsis">
+            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Organisationer ({{ article.organisation|length }})</h4>
+            <ul class="ellipsis_contents">
             {% for organisation in article.organisation %}
                 <li>
                     <h5>{{ organisation.name }}</h5>
@@ -20,6 +57,19 @@
             {% endfor %}
             </ul>
         </div>
+        {% endif %}
+        {% if article.awards %}
+        <div id="priser_lista" class="ellipsis">
+            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Priser/utmärkelser ({{ article.awards|length }})</h4>
+            <ul class="ellipsis_contents">
+            {% for award in article.awards %}
+                <li>
+                    <h5>{{ award.type }}: {{ award.description }}</h5>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
     </div>
     <div class="col-md-4">
         {% if article.portrait %}
@@ -55,4 +105,15 @@
         {% endif %}
     </div>
 </div>
+{% endblock %}
+{% block foot %}
+    {{ super() }}
+    <script>
+        jQuery(document).ready(function() {
+            jQuery(".ellipsis_header").click(function() {
+                jQuery(this).siblings(".ellipsis_contents").toggle("slow");
+                jQuery(this).find(".ellipsis_plus").toggle();
+            });
+        });
+    </script>
 {% endblock %}

@@ -331,6 +331,13 @@ background-color: #FF6600
 }
 
 /* Artikelsidan */
-#organisationer_lista {
+.ellipsis_header {
+  cursor: pointer;
+}
+.ellipsis_contents {
+  display: none;
+}
+
+#familjeforhallanden_lista {
   margin-top: 42px;
 }
