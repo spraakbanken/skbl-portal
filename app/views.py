@@ -2,11 +2,11 @@
 import os
 import os.path
 from app import app, redirect, render_template, request, get_locale, set_language_switch_link, g, serve_static_page, karp_query
+from flask import jsonify
 from flask_babel import gettext
 import icu # pip install PyICU
 import helpers
 import sys
-
 
 # redirect to specific language landing-page
 @app.route('/')
@@ -209,3 +209,10 @@ def article(id=None):
         return render_template('article.html', article=source)
     else:
         return render_template('page.html', content='not found')
+
+@app.route("/en/article/<id>.json", endpoint="article_json_en")
+@app.route("/sv/artikel/<id>.json", endpoint="article_json_sv")
+def article_json(id=None):
+    data = karp_query('querycount', {'q': "extended||and|id.search|equals|%s" % (id)})
+    if data['query']['hits']['total'] == 1:
+        return jsonify(data['query']['hits']['hits'][0]['_source'])
