@@ -7,6 +7,8 @@
         <h4 itemprop="additionalName">{{ article.fullfirstname }}</h4>
         <h4 itemprop="jobTitle">{{ article.subtitle }}</h4>
         <p>{{ article.text|safe }}</p>
+        <br/>
+        <p><em>{{ article.article_author.firstname }} {{ article.article_author.lastname }}</em></p>
     </div>
     <div class="col-md-4">
         {% if article.portrait %}
