@@ -27,7 +27,7 @@
             <ul class="ellipsis_contents">
             {% for education in article.education %}
                 <li>
-                    <h5>{{ education.type }}: {{ education.institution }}</h5>
+                    <h5>{{ education.type }}: {{ education.description }}</h5>
                 </li>
             {% endfor %}
             </ul>
@@ -45,6 +45,18 @@
             </ul>
         </div>
         {% endif %}
+        {% if article.contact %}
+        <div id="kontakter_lista" class="ellipsis">
+            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Kontakter ({{ article.contact|length }})</h4>
+            <ul class="ellipsis_contents">
+            {% for contact in article.contact %}
+                <li>
+                    <h5>{{ contact.type }}: {{ contact.firstname }} {{ contact.lastname }}</h5>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
         {% if article.organisation %}
         <div id="organisationer_lista" class="ellipsis">
             <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Organisationer ({{ article.organisation|length }})</h4>
@@ -53,6 +65,18 @@
                 <li>
                     <h5>{{ organisation.name }}</h5>
                     <span>{{ organisation.description }}</span>
+                </li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% if article.places %}
+        <div id="bostadsorter_lista" class="ellipsis">
+            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Bostadsorter ({{ article.places|length }})</h4>
+            <ul class="ellipsis_contents">
+            {% for place in article.places %}
+                <li>
+                    <h5>{{ place.place.place }}</h5>
                 </li>
             {% endfor %}
             </ul>
