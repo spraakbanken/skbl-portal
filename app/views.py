@@ -37,9 +37,10 @@ def contact():
 @app.route("/sv/sok", endpoint="search_sv")
 def search():
     set_language_switch_link("search")
+    search = request.args.get('q', '*').encode('utf-8')
     data = karp_query('querycount',
                       {'size': 10000,
-                       'q': "extended||and|anything.search|contains|%s" % (request.args.get('q', '*'))
+                       'q': "extended||and|anything.search|contains|%s" % (search)
                        })
 
     advanced_search_text = ''
