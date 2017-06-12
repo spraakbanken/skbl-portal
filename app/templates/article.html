@@ -17,10 +17,12 @@
         {% endif %}
         <span itemprop="birthDate">{{ article.lifespan.from.date.date }}</span> &mdash; <span itemprop="deathDate">{{ article.lifespan.to.date.date }}</span>
 
-        <h3>{{ gettext("Keywords") }}</h3>
-        {% for keyword in article.keyword %}
-            <a href="{{ url_for('keyword_'+g.language, result=keyword) }}">{{ keyword }}</a></span>
-        {% endfor %}
+        {% if article.keyword %}
+            <h3>{{ gettext("Keywords") }}</h3>
+            {% for keyword in article.keyword %}
+                <a href="{{ url_for('keyword_'+g.language, result=keyword) }}">{{ keyword }}</a></span>
+            {% endfor %}
+        {% endif %}
 
         <!--
         <h3>{{ gettext("Othernames") }}</h3>
@@ -29,10 +31,12 @@
         {% endfor %}
         -->
 
-        <h3>{{ gettext("Links") }}</h3>
-        {% for link in article.externallink %}
-            <a href="{{ link.url }}">{{ link.description }}</a></span>
-        {% endfor %}
+        {% if article.externallink %}
+            <h3>{{ gettext("Links") }}</h3>
+            {% for link in article.externallink %}
+                <a href="{{ link.url }}">{{ link.description }}</a></span>
+            {% endfor %}
+        {% endif %}
     </div>
 </div>
 {% endblock %}
