@@ -46,9 +46,11 @@
 
         {% if article.externallink %}
             <h3>{{ gettext("Links") }}</h3>
+            <ul>
             {% for link in article.externallink %}
-                <a href="{{ link.url }}">{{ link.description }}</a></span>
+                <li><a href="{{ link.url }}">{{ link.description }}</a></span></li>
             {% endfor %}
+            </ul>
         {% endif %}
     </div>
 </div>
