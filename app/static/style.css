@@ -2,10 +2,15 @@
 body {
   background-image: url("images/skbl/dust-min.png");
   background-color: #EFF4D1;
+  color:#000;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Avenir Book', 'Verdana';
+}
+
+h1{
+  margin-top:0px;
 }
 
 #logo {  
