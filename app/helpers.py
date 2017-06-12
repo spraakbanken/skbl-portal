@@ -46,7 +46,7 @@ def get_date(source):
     elif not source['lifespan']['to']['date'].get('date'):
         return False
     else:
-        return ['lifespan']['to']['date']['date'], ['lifespan']['to']['date']['date']
+        return source['lifespan']['to']['date']['date'], source['lifespan']['to']['date']['date']
 
 
 def markdown_html(text):
