@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-04-19 15:04+0000\n"
+"POT-Creation-Date: 2017-06-12 08:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,31 +17,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
 
-#: app/templates/layout.html:55 app/views.py:31
+#: app/templates/layout.html:62 app/views.py:25
 msgid "About SKBL"
 msgstr ""
 
-#: app/templates/layout.html:56 app/views.py:37
-msgid "About us"
-msgstr ""
-
-#: app/templates/layout.html:62 app/views.py:43
+#: app/templates/layout.html:68 app/views.py:31
 msgid "Contact"
 msgstr ""
 
-#: app/templates/layout.html:35 app/views.py:56
+#: app/templates/layout.html:41 app/views.py:44
 msgid "Search"
 msgstr ""
 
-#: app/templates/layout.html:93 app/views.py:78
+#: app/templates/layout.html:99 app/views.py:68
 msgid "Places"
 msgstr ""
 
-#: app/templates/layout.html:54 app/views.py:182
+#: app/templates/layout.html:61 app/views.py:173
 msgid "Women A-Ö"
 msgstr ""
 
-#: app/templates/article.html:20 app/templates/layout.html:99
+#: app/templates/article.html:20 app/templates/layout.html:105
 msgid "Keywords"
 msgstr ""
 
@@ -53,15 +49,19 @@ msgstr ""
 msgid "Links"
 msgstr ""
 
-#: app/templates/layout.html:59
+#: app/templates/layout.html:49
+msgid "Advanced search"
+msgstr ""
+
+#: app/templates/layout.html:65
 msgid "Article authors"
 msgstr ""
 
-#: app/templates/layout.html:81
+#: app/templates/layout.html:87
 msgid "Activities"
 msgstr ""
 
-#: app/templates/layout.html:87
+#: app/templates/layout.html:93
 msgid "Organizations"
 msgstr ""
 
