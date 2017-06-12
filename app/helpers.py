@@ -49,7 +49,7 @@ def group_by_type(objlist, name):
     return result
 
 
-def make_namelist(hits):
+def make_namelist(hits, alphabetic=True):
     results = []
     for hit in hits["hits"]:
         source = hit["_source"]
@@ -66,8 +66,9 @@ def make_namelist(hits):
         for altname in source.get("othernames", []):
             if altname.get("mk_link"):
                 results.append((altname["name"], hit))
-    collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
-    results.sort(key=lambda x:collator.getSortKey(x[0]))
+    if alphabetic:
+        collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
+        results.sort(key=lambda x:collator.getSortKey(x[0]))
     return results
 
 

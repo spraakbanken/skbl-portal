@@ -40,14 +40,17 @@ def search():
     search = request.args.get('q', '*').encode('utf-8')
     data = karp_query('querycount',
                       {'size': 10000,
-                       'q': "extended||and|anything.search|contains|%s" % (search)
+                       'q': "simple||%s" % search
                        })
 
     advanced_search_text = ''
     with app.open_resource("static/pages/advanced-search/%s.html" % (g.language)) as f:
         advanced_search_text = f.read()
 
-    return render_template('list.html', headline=gettext('Search'), hits=data["query"]["hits"], advanced_search_text=advanced_search_text)
+    return render_template('list.html', headline=gettext('Search'),
+                           hits=data["query"]["hits"],
+                           advanced_search_text=advanced_search_text,
+                           alphabetic=False)
 
 
 @app.route("/en/place", endpoint="place_index_en")
