@@ -2,11 +2,12 @@
 body {
   background-image: url("images/skbl/dust-min.png");
   background-color: #EFF4D1;
+  font-family: 'Muli', sans-serif;
   color:#000;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Avenir Book', 'Verdana';
+  font-family: 'Muli', sans-serif;
 }
 
 #header-title h1{
