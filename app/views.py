@@ -79,9 +79,8 @@ def place_index():
 @app.route("/en/place/<place>", endpoint="place_en")
 @app.route("/sv/ort/<place>", endpoint="place_sv")
 def place(place=None):
-    place = place.encode('utf-8')
     set_language_switch_link("place_index", place)
-    hits = karp_query('querycount', {'q': "extended||and|plats.search|equals|%s" % (place)})
+    hits = karp_query('querycount', {'q': "extended||and|plats.search|equals|%s" % (place.encode('utf-8'))})
 
     if hits['query']['hits']['total'] > 0:
         return render_template('place.html', title=place, headline=place, hits=hits["query"]["hits"])
