@@ -24,7 +24,7 @@ def get_life_range(source):
     else:
         birth_year = birth_date
 
-    death_date = source['lifespan']['from'].get('date', '')
+    death_date = source['lifespan']['to'].get('date', '')
     if death_date:
         death_date = death_date.get('comment', '')
     if "-" in birth_date:
@@ -46,7 +46,7 @@ def get_date(source):
     elif not source['lifespan']['to']['date'].get('date'):
         return False
     else:
-        return source['lifespan']['to']['date']['date'], source['lifespan']['to']['date']['date']
+        return source['lifespan']['from']['date']['date'], source['lifespan']['to']['date']['date']
 
 
 def markdown_html(text):
