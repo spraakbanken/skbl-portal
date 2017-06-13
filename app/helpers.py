@@ -27,7 +27,7 @@ def get_life_range(source):
     death_date = source['lifespan']['to'].get('date', '')
     if death_date:
         death_date = death_date.get('comment', '')
-    if "-" in birth_date:
+    if "-" in death_date:
         death_year = death_date[:death_date.find("-")]
     else:
         death_year = death_date
