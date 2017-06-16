@@ -100,8 +100,11 @@ def place(place=None):
 @app.route("/en/organisation", endpoint="organisation_index_en")
 @app.route("/sv/organisation", endpoint="organisation_index_sv")
 def organisation_index():
+    infotext = u"""De organisationer där kvinnor varit aktiva finns sorterade ämnesvis
+    (politik, religion, idrott, ideell m fl.). Välj ämne för att se organisationer
+    inom detta och vilka kvinnor som var aktiva i dem."""
     return bucketcall(queryfield='organisationstyp', name='organisation',
-                      title='Organizations')
+                      title='Organizations', infotext=infotext)
 
 
 @app.route("/en/organisation/<result>", endpoint="organisation_en")
@@ -113,8 +116,9 @@ def organisation(result=None):
 @app.route("/en/activity", endpoint="activity_index_en")
 @app.route("/sv/verksamhet", endpoint="activity_index_sv")
 def activity_index():
+    infotext = u"Här listas kvinnornas yrken och andra verksamheter."
     return bucketcall(queryfield='verksamhetstext', name='activity',
-                      title='Activities')
+                      title='Activities', infotext=infotext)
 
 
 @app.route("/en/activity/<result>", endpoint="activity_en")
@@ -126,7 +130,10 @@ def activity(result=None):
 @app.route("/en/keyword", endpoint="keyword_index_en")
 @app.route("/sv/nyckelord", endpoint="keyword_index_sv")
 def keyword_index():
-    return bucketcall(queryfield='nyckelord', name='keyword', title='Keywords')
+    infotext = u"""Nyckelorden (ämnesorden) sammanfattar kvinnornas verksamheter,
+    utan att specificera dem, t ex. Kvinnorörelsen, Fredsrörelsen, Konstnärer etc.
+    Klicka på ett nyckelord för att få en lista på biografier där det används."""
+    return bucketcall(queryfield='nyckelord', name='keyword', title='Keywords', infotext=infotext)
 
 
 @app.route("/en/keyword/<result>", endpoint="keyword_en")
@@ -138,8 +145,9 @@ def keyword(result=None):
 @app.route("/en/articleauthor", endpoint="articleauthor_index_en")
 @app.route("/sv/artikelforfattare", endpoint="articleauthor_index_sv")
 def authors():
+    infotext = u"Klicka på författarens namn för att komma till en kortfattad författarinformation."
     return bucketcall(queryfield='artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn',
-                      name='articleauthor', title='Article authors', sortby=lambda x: x[1], lastnamefirst=True)
+                      name='articleauthor', title='Article authors', sortby=lambda x: x[1], lastnamefirst=True, infotext=infotext)
 
 
 @app.route("/en/articleauthor/<result>", endpoint="articleauthor_en")
@@ -168,7 +176,7 @@ def searchresult(result, name='', searchfield='', imagefolder='', searchtype='eq
         return render_template('page.html', content="%s: extended||and|%s.search|%s|%s" % (app.config['KARP_BACKEND'], searchfield, searchtype, qresult))
 
 
-def bucketcall(queryfield='', name='', title='', sortby='', lastnamefirst=False):
+def bucketcall(queryfield='', name='', title='', sortby='', lastnamefirst=False, infotext=''):
     data = karp_query('statlist', {'buckets': '%s.bucket' % queryfield})
     stat_table = [kw for kw in data['stat_table'] if kw[0] != ""]
     if sortby:
@@ -178,7 +186,7 @@ def bucketcall(queryfield='', name='', title='', sortby='', lastnamefirst=False)
     if lastnamefirst:
         stat_table = [[kw[1] + ',', kw[0], kw[2]] for kw in stat_table]
     set_language_switch_link("%s_index" % name)
-    return render_template('bucketresults.html', results=stat_table, title=gettext(title), name=name)
+    return render_template('bucketresults.html', results=stat_table, title=gettext(title), name=name, infotext=infotext)
 
 
 @app.route("/en/article", endpoint="article_index_en")
@@ -187,9 +195,11 @@ def article_index():
     set_language_switch_link("article_index")
     data = karp_query('query', {'q': "extended||and|namn.search|exists",
                                 'size': "5000"})  # , 'show': 'name,othername,lifespan'})
+    infotext = u"""Klicka på namnet för att läsa biografin om den kvinna du vill veta mer om."""
     return render_template('list.html',
                            hits=data["hits"],
                            headline=gettext(u'Women A-Ö'),
+                           infotext=infotext,
                            title='Articles')
 
 
