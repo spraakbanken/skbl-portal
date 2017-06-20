@@ -12,7 +12,7 @@
        {% for maintype, val in sorted(results.items()) %}
           <li class="keyword_list_item"> <h4>{{ maintype }}</h4>
           <ul>
-            {% for subtype, subval in val.items() %}
+            {% for subtype, subval in sorted(val.items()) %}
               <li class="keyword_list_item">
                 <a href="{{ url_for(name+'_'+g.language, result='|'.join(subval), title=maintype+' - '+subtype) }}">{{ subtype }}&nbsp;
                   <span class="badge">{{ len(subval) }}</span>

@@ -106,7 +106,7 @@ def organisation_index():
     inom detta och vilka kvinnor som var aktiva i dem."""
     data = karp_query('minientry', {'size': app.config['RESULT_SIZE'],
                                     'q': 'extended||and|anything|regexp|.*',
-                                    'show': 'organisationstext,organisationstyp'})
+                                    'show': 'organisationsnamn,organisationstyp'})
     set_language_switch_link("organisation_index")
     nested_obj = {}
     for hit in data['hits']['hits']:
@@ -114,7 +114,7 @@ def organisation_index():
             orgtype = org.get('type', '-')
             if orgtype not in nested_obj:
                 nested_obj[orgtype] = defaultdict(set)
-            nested_obj[orgtype][org.get('description', '-')].add(hit['_id'])
+            nested_obj[orgtype][org.get('name', '-')].add(hit['_id'])
     return render_template('nestedbucketresults.html',
                            results=nested_obj, title='Organizations',
                            infotext=infotext, name='organisation')
