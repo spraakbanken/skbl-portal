@@ -2,29 +2,28 @@
 {% block title %}skbl.se - {{ title }}{% endblock %}
 {% block content %}
 <div class="col-md-8">
-    {% if infotext %}
-        <p>{{infotext}}</p>
-        <br/>
-    {% endif %}
     <h1>{{ headline }}</h1>
     <ul>
-      {% for name, hit in make_namelist(hits, alphabetic=alphabetic) %}
-            <li>
-                <a href="{{ url_for('article_'+g.language, id=hit._id) }}"><strong>{{ name }}</strong><br />
-                    {% if get_life_range(hit._source) %}
-                        <span itemprop="birthDate">{{ get_life_range(hit._source)[0] }}</span> &mdash; <span itemprop="deathDate">{{ get_life_range(hit._source)[1] }}</span>
-                    {% endif %}
-                </a>
-            </li>
+      {% for firstletter, namelist in make_namelist(hits, alphabetic=alphabetic) %}
+        {% if split_letters %}
+            <h2>{{ firstletter }}</h2>
+        {% endif %}
+        {% for name, hit in namelist %}
+        <li>
+            <a href="{{ url_for('article_'+g.language, id=hit._id) }}"><strong>{{ name }}</strong><br />
+                {% if get_life_range(hit._source) %}
+                    <span itemprop="birthDate">{{ get_life_range(hit._source)[0] }}</span> &mdash; <span itemprop="deathDate">{{ get_life_range(hit._source)[1] }}</span>
+                {% endif %}
+            </a>
+        </li>
         {% endfor %}
+      {% endfor %}
     </ul>
 </div>
 <div class="col-md-4">
     {{ advanced_search_text | safe}}
     {% if picture %}
-    <div class="image-overlay">
-        <img src="{{ picture }}" alt="{{ headline }}" width="350px" />
-    </div>
+    <img src="{{ picture }}" alt="{{ headline }}" width="350px" />
     {% endif %}
 </div>
 {% endblock %}

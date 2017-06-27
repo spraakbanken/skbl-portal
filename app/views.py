@@ -227,6 +227,8 @@ def article_index():
     return render_template('list.html',
                            hits=data["hits"],
                            headline=gettext(u'Women A-Ö'),
+                           alphabetic=True,
+                           split_letters=True,
                            infotext=infotext,
                            title='Articles')
 

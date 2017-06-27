@@ -59,7 +59,7 @@ def group_by_type(objlist, name):
         val = obj[name]
         key = obj.get('type', u'Övrigt')
         if key not in newdict:
-           newdict[key] = []
+            newdict[key] = []
         newdict[key].append(val)
     result = []
     for key, val in newdict.items():
@@ -77,17 +77,30 @@ def make_namelist(hits, alphabetic=True):
         vonaf = match.group(1)
         lastname = match.group(2)
         if lastname:
-            name.append(lastname+",")
+            name.append(lastname + ",")
         name.append(get_first_name(source)[0])
         name.append(vonaf)
-        results.append((' '.join(name), hit))
+        results.append((' '.join(name), name[0][0].upper(), hit))
         for altname in source.get("othernames", []):
             if altname.get("mk_link"):
-                results.append((altname["name"], hit))
+                results.append((altname["name"], altname["name"][0][0].upper(), hit))
+
+    letter_results = {}
+    # Split the result into start letters
+    for n, first_letter, hit in results:
+        if first_letter not in letter_results:
+            letter_results[first_letter] = [(n, hit)]
+        else:
+            letter_results[first_letter].append((n, hit))
+
+    # Sort result dictionary alphabetically into list
     if alphabetic:
         collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
-        results.sort(key=lambda x:collator.getSortKey(x[0]))
-    return results
+        letter_results = sorted(letter_results.items(), key=lambda x: collator.getSortKey(x[0]))
+    else:
+        letter_results = list(letter_results.items())
+
+    return letter_results
 
 
 def sort_places(stat_table, route):
