@@ -168,7 +168,7 @@ def aggregate_by_type(items, use_markdown=False):
             if t:
                 if not t in types:
                     types[t] = []
-                if use_markdown:
+                if use_markdown and "description" in item:
                     item["description"] = markdown_html(item["description"])
                 types[t].append(item)
     return types.items()

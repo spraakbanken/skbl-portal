@@ -35,7 +35,7 @@
             <ul class="ellipsis_contents">
             {% for education in article.education %}
                 <li>
-                    <h5>{{ education.type }}: {{ education.description }}</h5>
+                    <h5>{{ education.type }}{% if education.place and education.place.place %}, {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description }}{% endif %}</h5>
                 </li>
             {% endfor %}
             </ul>
