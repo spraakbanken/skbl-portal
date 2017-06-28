@@ -35,7 +35,7 @@ def get_locale():
         locale = 'sv'
 
         for lang in request.accept_languages.values():
-            if lang[:2] in ['de', 'en']:
+            if lang[:2] in ['sv', 'en']:
                 locale = lang[:2]
                 break
 
