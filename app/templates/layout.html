@@ -20,6 +20,7 @@
 
     <!-- font -->
     <link href="https://fonts.googleapis.com/css?family=Muli:600" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Spectral" rel="stylesheet">
 
     <!-- modifications -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -35,7 +36,7 @@
           <a href="/{{ g.language }}"><img src="{{ url_for('static', filename='images/skbl/logo.png') }}"></a>
         </div>
         <div id="header-title" class="col-md-8">
-          <h1>Svenskt Kvinnobiografiskt Lexikon</h1>
+          <h1>Svenskt kvinnobiografiskt lexikon</h1>
         </div>
         <div class="col-md-2">
           <form id="search" action="{{ url_for('search_'+g.language) }}">

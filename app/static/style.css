@@ -6,22 +6,22 @@ body {
   color:#000;
 }
 
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Muli', sans-serif;
 }
 
-#header-title h1{
+#header-title h1 {
   font-size: 2.4em;
   margin-top: 42px;
+  font-family: Spectral;
+  font-weight: normal;
 }
 
-#search{
+#search {
   margin-top: 29px;
 }
 
-h1{
-  margin-top:0px;
-}
 
 #logo {
   margin-top: 5px;
