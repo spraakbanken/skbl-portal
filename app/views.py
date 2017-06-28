@@ -5,10 +5,11 @@ from app import app, redirect, render_template, request, get_locale, set_languag
 from collections import defaultdict
 from flask import jsonify, url_for
 from flask_babel import gettext
-import icu # pip install PyICU
+import icu  # pip install PyICU
 import helpers
 import re
 import sys
+
 
 # redirect to specific language landing-page
 @app.route('/')
@@ -32,7 +33,10 @@ def about_skbl():
 @app.route("/en/contact", endpoint="contact_en")
 @app.route("/sv/kontakt", endpoint="contact_sv")
 def contact():
-    return serve_static_page("contact", gettext("Contact"))
+    set_language_switch_link("contact")
+    return render_template("contact.html",
+                           title=gettext("Contact"),
+                           headline=gettext("Contact SKBL"))
 
 
 @app.route("/en/search", endpoint="search_en")
@@ -186,7 +190,7 @@ def searchresult(result, name='', searchfield='', imagefolder='', searchtype='eq
             if os.path.exists(app.config.root_path + '/static/images/%s/%s.jpg' % (imagefolder, qresult)):
                 picture = '/static/images/%s/%s.jpg' % (imagefolder, qresult)
 
-            return render_template('list.html', picture=picture, title=gettext("title"), headline=gettext(title), hits=hits["query"]["hits"])
+            return render_template('list.html', picture=picture, title=title, headline=title, hits=hits["query"]["hits"])
         else:
             return render_template('page.html', content='not found')
     except Exception:

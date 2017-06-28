@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block title %}skbl.se - {{ title }}{% endblock %}
+{% block content %}
+<div class="col-md-4">
+    <h1>{{ headline }}</h1>
+    <form>
+        <div class="form-group">
+            <label for="name">{{ gettext("Name") }}</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="{{ gettext("Your name...") }}">
+        </div>
+        <div class="form-group">
+            <label for="email">{{ gettext("E-mail") }}</label>
+            <input type="text" class="form-control" id="email" name="email" placeholder="{{ gettext("Your e-mail adress...") }}">
+        </div>
+        <div class="form-group">
+            <label for="subject">{{ gettext("Subject") }}</label>
+            <textarea id="subject" class="form-control" name="subject" placeholder="{{ gettext("Write something...") }}" style="height:200px"></textarea>
+        </div>
+        <button type="submit" class="btn btn-default">{{ gettext("Submit") }}</button>
+    </form>
+</div>
+{% endblock %}
