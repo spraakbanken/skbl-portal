@@ -100,6 +100,52 @@
             </ul>
         </div>
         {% endif %}
+        {% if article.source %}
+        <br/><br/>
+        <div>
+            <h4>Källor</h4>
+            {% for typename, type in article.source %}
+                <div>
+                    <h5>{{typename}}</h5>
+                    <ul>
+                        {% for source in type %}
+                        <li>
+                            {% if source.url %}
+                                <a href="{{source.url}}" target="_blank">{{source.description | safe}}</a>
+                            {% else %}
+                                <span>{{source.description | safe}}</span>
+                            {% endif %}
+
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if article.furtherreference %}
+        <br/><br/>
+        <div>
+            <h4>Vidare referenser</h4>
+            {% for typename, type in article.furtherreference %}
+                <div>
+                    <h5>{{typename}}</h5>
+                    <ul>
+                        {% for ref in type %}
+                        <li>
+                            {% if ref.url %}
+                                <a href="{{ref.url}}" target="_blank">{{ref.description | safe}}</a>
+                            {% else %}
+                                <span>{{ref.description | safe}}</span>
+                            {% endif %}
+
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
     </div>
     <div class="col-md-4">
         {% if article.portrait %}

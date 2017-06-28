@@ -140,3 +140,18 @@ def sort_places(stat_table, route):
 
     stat_table.sort(key=lambda x: x.get('name').strip())
     return stat_table
+
+def aggregate_by_type(items, use_markdown=False):
+    if not isinstance(items, list):
+        items = [items]
+    types = {}
+    for item in items:
+        if "type" in item:
+            t = item["type"]
+            if t:
+                if not t in types:
+                    types[t] = []
+                if use_markdown:
+                    item["description"] = markdown_html(item["description"])
+                types[t].append(item)
+    return types.items()
