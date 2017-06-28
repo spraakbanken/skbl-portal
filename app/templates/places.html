@@ -1,9 +1,9 @@
 {% extends "layout.html" %}
 {% block title %}skbl.se - {{ title }}{% endblock %}
 {% block content %}
-<p>Platser där de biograferade kvinnorna fötts, dött och varit verksamma. Klicka på en ort för att få upp en karta och en lista över kvinnor med anknytning till platsen.</p><br/>
 <div class="col-md-8">
     <h1>{{ title }}</h1>
+    <p>Platser där de biograferade kvinnorna fötts, dött och varit verksamma. Klicka på en ort för att få upp en karta och en lista över kvinnor med anknytning till platsen.</p><br/>
     {% for hit in places %}
        <li class="keyword_list_item"><a href="{{ url_for('place_'+g.language, place=hit.name, lat=hit.lat, lon=hit.lon) }}">{{ hit.name }}</a></li>
     {% endfor %}

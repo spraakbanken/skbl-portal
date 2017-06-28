@@ -2,12 +2,12 @@
 {% block title %}skbl.se - {{ title }}{% endblock %}
 {% block content %}
 <div class="col-md-8">
+    {{ test}}
+    <h1>{{ title }}</h1>
     {% if infotext %}
     <p>{{ infotext}}</p>
     <br/>
     {% endif %}
-    {{ test}}
-    <h1>{{ title }}</h1>
     <ul>
        {% for maintype, val in sorted(results.items()) %}
           <li class="keyword_list_item"> <h4>{{ maintype }}</h4>
