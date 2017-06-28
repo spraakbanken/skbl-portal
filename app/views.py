@@ -120,7 +120,7 @@ def organisation_index():
                 nested_obj[orgtype] = defaultdict(set)
             nested_obj[orgtype][org.get('name', '-')].add(hit['_id'])
     return render_template('nestedbucketresults.html',
-                           results=nested_obj, title='Organizations',
+                           results=nested_obj, title=gettext("Organizations"),
                            infotext=infotext, name='organisation')
     # return bucketcall(queryfield='organisationstyp', name='organisation',
     #                   title='Organizations', infotext=infotext)
