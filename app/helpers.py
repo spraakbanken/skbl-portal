@@ -172,3 +172,12 @@ def aggregate_by_type(items, use_markdown=False):
                     item["description"] = markdown_html(item["description"])
                 types[t].append(item)
     return types.items()
+
+def collapse_kids(source):
+    unkown_kids =0
+    for relation in source.get('relation', []):
+        if relation.get('type') == 'Barn' and len(relation.keys())==1:
+            unkown_kids +=1
+            relation['hide'] = True
+    if unkown_kids:
+        source['collapsedrelation'] = [{"type": "Barn", "count": unkown_kids}]

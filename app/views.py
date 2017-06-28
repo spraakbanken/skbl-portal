@@ -220,16 +220,20 @@ def bucketcall(queryfield='', name='', title='', sortby='', lastnamefirst=False,
 @app.route("/en/article", endpoint="article_index_en")
 @app.route("/sv/artikel", endpoint="article_index_sv")
 def article_index(search=None):
+    # search is only used by links in article text
     set_language_switch_link("article_index")
 
     search = search or request.args.get('search')
     if search is not None:
-        data, id = find(search)
+        data, id = find_link(search)
         if id:
+           # only one hit is found, redirect to that page
            return redirect(url_for('article_'+g.language, id=id))
         elif data["query"]["hits"]["total"] > 1:
+           # more than one hit is found, redirect to a listing
            return redirect(url_for('search_'+g.language, q=search))
         else:
+           # no hits are found redirect to a 'not found' page
            return render_template('page.html', content='not found')
 
     data = karp_query('query', {'q': "extended||and|namn.search|exists",
@@ -252,16 +256,19 @@ def article(id=None):
     return show_article(data)
 
 
-def find(searchstring):
+def find_link(searchstring):
+    # Finds an article based on ISNI or name
     if re.search('^[0-9 ]*$', searchstring):
         data = karp_query('querycount',
                           {'q': "extended||and|swoid.search|equals|%s" % (searchstring)})
     else:
         data = karp_query('querycount',
                           {'q': "extended||and|namn.search|contains|%s" % (searchstring)})
+    # The expected case: only one hit is found
     if data['query']['hits']['total'] == 1:
         id = data['query']['hits']['hits'][0]['_id']
         return data, id
+    # Otherwise just return the data
     else:
         return data, ''
 
@@ -276,6 +283,7 @@ def show_article(data):
         source['text'] = helpers.markdown_html(helpers.mk_links(source['text']))
         source['othernames'] = helpers.group_by_type(source.get('othernames', {}), 'name')
         source['othernames'].append({'type': u'Förnamn', 'name': firstname})
+        helpers.collapse_kids(source)
         if "source" in source:
             source['source'] = helpers.aggregate_by_type(source['source'], use_markdown=True)
         if "furtherreference" in source:

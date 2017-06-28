@@ -22,9 +22,16 @@
             <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Familjeförhållanden ({{ article.relation|length }})</h4>
             <ul class="ellipsis_contents">
             {% for relation in article.relation %}
-                <li>
-                    <h5>{{ relation.type }}: {{ relation.firstname }} {{ relation.lastname }}</h5>
-                </li>
+                {% if not relation.hide %}
+                  <li>
+                      <h5>{{ relation.type }}: {{ relation.firstname }} {{ relation.lastname }}</h5>
+                  </li>
+               {% endif %}
+            {% endfor %}
+            {% for relation in article.collapsedrelation %}
+                  <li>
+                      <h5>{{ relation.type }}: {{ relation.count }}</h5>
+                  </li>
             {% endfor %}
             </ul>
         </div>
