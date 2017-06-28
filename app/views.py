@@ -49,11 +49,12 @@ def submit_contact_form():
     message = request.form['message']
 
     message = u"""
-    %s (%s) skickade följande meddelande:
+    %s (%s) skickade foljande meddelande:
     %s
     """ % (name, email, message)
 
-    msg = Message(message,
+    msg = Message(subject="Hej!",
+                  body=message,
                   sender=app.config['EMAIL_SENDER'],
                   recipients=[app.config['EMAIL_RECIPIENT']])
 
