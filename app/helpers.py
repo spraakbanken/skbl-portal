@@ -83,15 +83,17 @@ def make_namelist(hits, alphabetic=True):
         results.append((' '.join(name), name[0][0].upper(), hit))
         for altname in source.get("othernames", []):
             if altname.get("mk_link"):
-                results.append((altname["name"], altname["name"][0][0].upper(), hit))
+                results.append((altname["name"], altname["name"][0].upper(), hit))
 
     letter_results = {}
     # Split the result into start letters
-    for n, first_letter, hit in results:
+    for listed_name, first_letter, hit in results:
+        if first_letter == u'Ø':
+            first_letter = u'Ö'
         if first_letter not in letter_results:
-            letter_results[first_letter] = [(n, hit)]
+            letter_results[first_letter] = [(listed_name, hit)]
         else:
-            letter_results[first_letter].append((n, hit))
+            letter_results[first_letter].append((listed_name, hit))
 
     # Sort result dictionary alphabetically into list
     if alphabetic:
