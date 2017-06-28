@@ -8,7 +8,7 @@ import sys
 
 from flask import Flask, g, request, redirect, render_template, url_for
 from flask_babel import Babel
-from flask.ext.sendmail import Mail
+from flask_sendmail import Mail
 from setuptools import setup
 from urllib2 import Request, urlopen
 import helpers

@@ -5,7 +5,7 @@ from app import app, send_mail, redirect, render_template, request, get_locale, 
 from collections import defaultdict
 from flask import jsonify, url_for
 from flask_babel import gettext
-from flask.ext.sendmail import Message
+from flask_sendmail import Message
 import icu  # pip install PyICU
 import helpers
 import re
