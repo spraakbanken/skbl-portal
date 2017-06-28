@@ -62,7 +62,7 @@ def submit_contact_form():
 
     return render_template("form_submitted.html",
                            title=gettext("Thank you for your feedback") + "!",
-                           headline=gettext("Thank you for your feedback") + " ," + name + "!",
+                           headline=gettext("Thank you for your feedback") + ", " + name + "!",
                            text=gettext("We will get back to you as soon as we can."))
 
 
