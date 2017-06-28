@@ -10,7 +10,7 @@
     {% endif %}
     <ul>
        {% for maintype, val in sorted(results.items()) %}
-          <li class="keyword_list_item"> <h4>{{ maintype }}</h4>
+          <li class="keyword_list_item nested_part"> <h4>{{ maintype }}</h4>
             {% if len(val.items()) <= 5 %}
               {% for subtype, subval in sorted(val.items()) %}
               <ul>
@@ -22,7 +22,7 @@
               </ul>
               {% endfor %}
             {% else %}
-              <div style="position:relative:margin-bottom:40px;display:none" class="hidden_first">
+              <div style="display:none" class="nested_container hidden_first">
                 {% for subtype, subval in sorted(val.items()) %}
                 <ul>
                   <li class="keyword_list_item">
@@ -33,7 +33,7 @@
                 </ul>
                 {% endfor %}
               </div>
-              <div style="position:relative;margin-bottom:40px" class="shown_first">
+              <div style="" class="nested_container shown_first">
                 <ul>
                 {% for subtype, subval in sorted(val.items()) %}
                   {% if loop.index < 5 %}
@@ -65,8 +65,6 @@
             jQuery(".fadeout").click(function() {
                 jQuery(this).parent().siblings(".hidden_first").toggle();
                 jQuery(this).parent().toggle();
-                /*jQuery(this).siblings(".ellipsis_contents").toggle("slow");
-                jQuery(this).find(".ellipsis_plus").toggle();*/
             });
         });
     </script>
