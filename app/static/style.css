@@ -341,3 +341,7 @@ background-color: #FF6600
 #familjeforhallanden_lista {
   margin-top: 42px;
 }
+
+li .glyphicon-link {
+    color: #357ebd;
+}

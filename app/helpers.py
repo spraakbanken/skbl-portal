@@ -71,29 +71,25 @@ def make_namelist(hits, alphabetic=True):
     results = []
     for hit in hits["hits"]:
         source = hit["_source"]
-        name = []
-        lastname = source["name"].get("lastname", '')
-        match = re.search('(von |af |)(.*)', lastname)
-        vonaf = match.group(1)
-        lastname = match.group(2)
-        if lastname:
-            name.append(lastname + ",")
-        name.append(get_first_name(source)[0])
-        name.append(vonaf)
-        results.append((' '.join(name), name[0][0].upper(), hit))
+        name = get_name(source)
+        results.append((join_name(source), name[0][0].upper(), False, hit))
         for altname in source.get("othernames", []):
             if altname.get("mk_link"):
-                results.append((altname["name"], altname["name"][0].upper(), hit))
+                results.append((altname["name"], altname["name"][0].upper(), True, hit))
 
     letter_results = {}
     # Split the result into start letters
-    for listed_name, first_letter, hit in results:
+    for listed_name, first_letter, islink, hit in results:
         if first_letter == u'Ø':
             first_letter = u'Ö'
+        if first_letter == u'Æ':
+            first_letter = u'Ä'
+        if first_letter == u'Ü':
+            first_letter = u'Y'
         if first_letter not in letter_results:
-            letter_results[first_letter] = [(listed_name, hit)]
+            letter_results[first_letter] = [(listed_name, islink, hit)]
         else:
-            letter_results[first_letter].append((listed_name, hit))
+            letter_results[first_letter].append((listed_name, islink, hit))
 
     # Sort result dictionary alphabetically into list
     if alphabetic:
@@ -105,8 +101,25 @@ def make_namelist(hits, alphabetic=True):
     return letter_results
 
 
+def get_name(source):
+    name = []
+    lastname = source["name"].get("lastname", '')
+    match = re.search('(von |af |)(.*)', lastname)
+    vonaf = match.group(1)
+    lastname = match.group(2)
+    if lastname:
+        name.append(lastname + ",")
+    name.append(get_first_name(source)[0])
+    name.append(vonaf)
+    return name
+
+
+def join_name(source):
+    return " ".join(get_name(source))
+
+
 def sort_places(stat_table, route):
-    """Tranlate place names and sort list."""
+    """Translate place names and sort list."""
     # Work in progress! Waiting for translation list.
     # Or should this be part of the data instead??
     place_translations = {
