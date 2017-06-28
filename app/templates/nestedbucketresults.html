@@ -11,15 +11,45 @@
     <ul>
        {% for maintype, val in sorted(results.items()) %}
           <li class="keyword_list_item"> <h4>{{ maintype }}</h4>
-          <ul>
-            {% for subtype, subval in sorted(val.items()) %}
-              <li class="keyword_list_item">
-                <a href="{{ url_for(name+'_'+g.language, result='|'.join(subval), title=maintype+' - '+subtype) }}">{{ subtype }}&nbsp;
-                  <span class="badge">{{ len(subval) }}</span>
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
+            {% if len(val.items()) <= 5 %}
+              {% for subtype, subval in sorted(val.items()) %}
+              <ul>
+                <li class="keyword_list_item">
+                  <a href="{{ url_for(name+'_'+g.language, result='|'.join(subval), title=maintype+' - '+subtype) }}">{{ subtype }}&nbsp;
+                    <span class="badge">{{ len(subval) }}</span>
+                  </a>
+                </li>
+              </ul>
+              {% endfor %}
+            {% else %}
+              <div style="position:relative:margin-bottom:40px;display:none" class="hidden_first">
+                {% for subtype, subval in sorted(val.items()) %}
+                <ul>
+                  <li class="keyword_list_item">
+                    <a href="{{ url_for(name+'_'+g.language, result='|'.join(subval), title=maintype+' - '+subtype) }}">{{ subtype }}&nbsp;
+                      <span class="badge">{{ len(subval) }}</span>
+                    </a>
+                  </li>
+                </ul>
+                {% endfor %}
+              </div>
+              <div style="position:relative;margin-bottom:40px" class="shown_first">
+                <ul>
+                {% for subtype, subval in sorted(val.items()) %}
+                  {% if loop.index < 5 %}
+                  <li class="keyword_list_item">
+                    <a href="{{ url_for(name+'_'+g.language, result='|'.join(subval), title=maintype+' - '+subtype) }}">{{ subtype }}&nbsp;
+                      <span class="badge">{{ len(subval) }}</span>
+                    </a>
+                  </li>
+                  {% endif %}
+                {% endfor %}
+                </ul>
+                <div class="fadeout">
+                  <span class="label label-default">fler...</span>
+                </div>
+              </div>
+            {% endif %}
           </li>
        {% endfor %}
     </ul>
@@ -27,4 +57,17 @@
 <div class="col-md-4">
 
 </div>
+{% endblock %}
+{% block foot %}
+    {{ super() }}
+    <script>
+        jQuery(document).ready(function() {
+            jQuery(".fadeout").click(function() {
+                jQuery(this).parent().siblings(".hidden_first").toggle();
+                jQuery(this).parent().toggle();
+                /*jQuery(this).siblings(".ellipsis_contents").toggle("slow");
+                jQuery(this).find(".ellipsis_plus").toggle();*/
+            });
+        });
+    </script>
 {% endblock %}
