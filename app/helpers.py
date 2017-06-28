@@ -1,4 +1,6 @@
 # -*- coding=utf-8 -*-
+from app import g
+from flask import url_for
 import icu # pip install PyICU
 import markdown
 import re
@@ -92,8 +94,11 @@ def make_namelist(hits, alphabetic=True):
             letter_results[first_letter].append((listed_name, islink, hit))
 
     # Sort result dictionary alphabetically into list
+
     if alphabetic:
         collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
+        for n, items in letter_results.items():
+            items.sort(key=lambda x:collator.getSortKey(x[0]))
         letter_results = sorted(letter_results.items(), key=lambda x: collator.getSortKey(x[0]))
     else:
         letter_results = list(letter_results.items())
@@ -140,6 +145,18 @@ def sort_places(stat_table, route):
 
     stat_table.sort(key=lambda x: x.get('name').strip())
     return stat_table
+
+
+def mk_links(text):
+    # TODO markdown should fix this itself
+    try:
+       text = re.sub('\[\]\((.*?)\)', r'[\1](\1)', text)
+       for link in re.findall('\]\((.*?)\)', text):
+           text = re.sub('\(%s\)' % link, '(%s)' % url_for('article_index_'+g.language, search=link), text)
+    except:
+       # If there are parenthesis within the links, problems will occur.
+       text = text
+    return text
 
 def aggregate_by_type(items, use_markdown=False):
     if not isinstance(items, list):

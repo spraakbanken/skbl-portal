@@ -3,7 +3,7 @@ import os
 import os.path
 from app import app, redirect, render_template, request, get_locale, set_language_switch_link, g, serve_static_page, karp_query
 from collections import defaultdict
-from flask import jsonify
+from flask import jsonify, url_for
 from flask_babel import gettext
 import icu # pip install PyICU
 import helpers
@@ -219,8 +219,19 @@ def bucketcall(queryfield='', name='', title='', sortby='', lastnamefirst=False,
 
 @app.route("/en/article", endpoint="article_index_en")
 @app.route("/sv/artikel", endpoint="article_index_sv")
-def article_index():
+def article_index(search=None):
     set_language_switch_link("article_index")
+
+    search = search or request.args.get('search')
+    if search is not None:
+        data, id = find(search)
+        if id:
+           return redirect(url_for('article_'+g.language, id=id))
+        elif data["query"]["hits"]["total"] > 1:
+           return redirect(url_for('search_'+g.language, q=search))
+        else:
+           return render_template('page.html', content='not found')
+
     data = karp_query('query', {'q': "extended||and|namn.search|exists",
                                 'size': app.config['RESULT_SIZE']})
     infotext = u"""Klicka på namnet för att läsa biografin om den kvinna du vill veta mer om."""
@@ -238,17 +249,31 @@ def article_index():
 def article(id=None):
     data = karp_query('querycount', {'q': "extended||and|id.search|equals|%s" % (id)})
     set_language_switch_link("article_index", id)
+    return show_article(data)
+
+
+def find(searchstring):
+    if re.search('^[0-9 ]*$', searchstring):
+        data = karp_query('querycount',
+                          {'q': "extended||and|swoid.search|equals|%s" % (searchstring)})
+    else:
+        data = karp_query('querycount',
+                          {'q': "extended||and|namn.search|contains|%s" % (searchstring)})
+    if data['query']['hits']['total'] == 1:
+        id = data['query']['hits']['hits'][0]['_id']
+        return data, id
+    else:
+        return data, ''
+
+
+def show_article(data):
     if data['query']['hits']['total'] == 1:
         # Malin: visa bara tilltalsnamnet (obs test, kanske inte är vad de vill ha på riktigt)
         source = data['query']['hits']['hits'][0]['_source']
         firstname, calling = helpers.get_first_name(source)
         # Print given name + lastname
         source['showname'] = "%s %s" % (calling, source['name'].get('lastname', ''))
-        # If there are additional names (mellannamn), print the full first name
-        # if calling != firstname:
-        #     source['fullfirstname'] = firstname
-        # Malin, test: transalte ** to emphasis
-        source['text'] = helpers.markdown_html(source['text'])
+        source['text'] = helpers.markdown_html(helpers.mk_links(source['text']))
         source['othernames'] = helpers.group_by_type(source.get('othernames', {}), 'name')
         source['othernames'].append({'type': u'Förnamn', 'name': firstname})
         if "source" in source:
@@ -258,6 +283,16 @@ def article(id=None):
         return render_template('article.html', article=source, article_id=id)
     else:
         return render_template('page.html', content='not found')
+
+
+# @app.route("/en/article-find/<id>", endpoint="article_en")
+# @app.route("/sv/artikel-find/<id>", endpoint="article_sv")
+# def article(link=None):
+#     if re.match('[0-9 ]', link):
+#         data = karp_query('querycount', {'q': "extended||and|swoid.search|equals|%s" % (link)})
+#         set_language_switch_link("article_index", link)
+#         show_article(data)
+
 
 
 @app.route("/en/article/<id>.json", endpoint="article_json_en")
