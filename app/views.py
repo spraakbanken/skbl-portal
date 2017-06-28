@@ -1,10 +1,11 @@
 # -*- coding=utf-8 -*-
 import os
 import os.path
-from app import app, redirect, render_template, request, get_locale, set_language_switch_link, g, serve_static_page, karp_query
+from app import app, send_mail, redirect, render_template, request, get_locale, set_language_switch_link, g, serve_static_page, karp_query
 from collections import defaultdict
 from flask import jsonify, url_for
 from flask_babel import gettext
+from flask.ext.sendmail import Message
 import icu  # pip install PyICU
 import helpers
 import re
@@ -37,6 +38,31 @@ def contact():
     return render_template("contact.html",
                            title=gettext("Contact"),
                            headline=gettext("Contact SKBL"))
+
+
+@app.route('/en/submitted/', methods=['POST'])
+@app.route('/sv/submitted/', methods=['POST'])
+def submit_contact_form():
+    set_language_switch_link("index")
+    name = request.form['name']
+    email = request.form['email']
+    message = request.form['message']
+
+    message = u"""
+    %s (%s) skickade följande meddelande:
+    %s
+    """ % (name, email, message)
+
+    msg = Message(message,
+                  sender=app.config['EMAIL_SENDER'],
+                  recipients=[app.config['EMAIL_RECIPIENT']])
+
+    send_mail(msg)
+
+    return render_template("form_submitted.html",
+                           title=gettext("Thank you for your feedback") + "!",
+                           headline=gettext("Thank you for your feedback") + " ," + name + "!",
+                           text=gettext("We will get back to you as soon as we can."))
 
 
 @app.route("/en/search", endpoint="search_en")

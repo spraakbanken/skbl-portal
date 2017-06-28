@@ -71,8 +71,8 @@ msgid "Your e-mail adress..."
 msgstr "Din e-post..."
 
 #: app/templates/contact.html:16
-msgid "Subject"
-msgstr "Ärende"
+msgid "Message"
+msgstr "Meddelande"
 
 #: app/templates/contact.html:17
 msgid "Write something..."

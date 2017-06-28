@@ -14,6 +14,7 @@ import helpers
 
 
 app = Flask(__name__)
+mail = Mail(app)
 
 if os.path.exists(app.config.root_path + '/config.cfg') is False:
     print "copy config.default.cfg to config.cfg and add your settings"
@@ -76,6 +77,10 @@ def karp_request(action):
     response = urlopen(q).read()
     data = json.loads(response)
     return data
+
+
+def send_mail(message):
+    mail.send(message)
 
 
 @app.before_request
