@@ -12,7 +12,9 @@
         <h1 itemprop="name">{{ article.showname }}</h1>
         <h4 itemprop="additionalName">{{ article.fullfirstname }}</h4>
         <h4 itemprop="jobTitle">{{ article.subtitle }}</h4>
-        <p>{{ article.text|safe }}</p>
+        <div class="main_text">
+            {{ article.text | safe }}
+        </div>
         <br/>
         <p><em>{{ article.article_author.firstname }} {{ article.article_author.lastname }}</em></p>
         {% if article.relation %}

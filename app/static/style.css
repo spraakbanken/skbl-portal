@@ -343,5 +343,8 @@ background-color: #FF6600
 }
 
 li .glyphicon-link {
-    color: #357ebd;
+  color: #357ebd;
+}
+.main_text a {
+  color: #357ebd;
 }
