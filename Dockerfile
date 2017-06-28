@@ -1,5 +1,5 @@
 FROM python:2.7
-MAINTAINER Olof Olsson "olof.olsson@snd.gu.se"
+MAINTAINER Spraakbanken "sb-info@svenska.gu.se"
 COPY . /app
 WORKDIR /app
 RUN apt-get update
