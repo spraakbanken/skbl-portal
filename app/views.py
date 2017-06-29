@@ -272,6 +272,7 @@ def article_index(search=None):
 
     search = search or request.args.get('search')
     if search is not None:
+        search = search.encode("UTF-8")
         data, id = find_link(search)
         if id:
            # only one hit is found, redirect to that page
