@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block title %}skbl.se - {{ title }}{% endblock %}
 {% block content %}
-<div class="col-md-6">
+<div class="col-md-4">
     {% if infotext %}
     <p>{{ infotext}}</p>
     <br/>
@@ -22,7 +22,7 @@
       {% endfor %}
     </ul>
 </div>
-<div class="col-md-6">
+<div class="col-md-8">
     {{ advanced_search_text | safe}}
     {% if picture %}
     <img src="{{ picture }}" alt="{{ headline }}" width="350px" />
