@@ -40,16 +40,21 @@ def contact():
                            headline=gettext("Contact SKBL"))
 
 
-@app.route('/en/submitted/', methods=['POST', 'GET'])
-@app.route('/sv/submitted/', methods=['POST', 'GET'])
+@app.route('/en/submitted/', methods=['POST'])
+@app.route('/sv/submitted/', methods=['POST'])
 def submit_contact_form():
     set_language_switch_link("index")
-    name = request.form['name']
-    email = request.form['email']
+    name = request.form['name'].strip()
+    email = request.form['email'].strip()
     message = request.form['message']
 
+    errors = []
     if not name or not email or not message:
-        errors = gettext("Please enter all the fields!")
+        errors.append(gettext("Please enter all the fields!"))
+    if not helpers.is_email_address_valid(email):
+        errors.append(gettext("Please enter a valid email address!"))
+
+    if errors:
         name_error = False if name else True
         email_error = False if email else True
         message_error = False if message else True
@@ -64,20 +69,19 @@ def submit_contact_form():
                                email=email,
                                message=message)
 
-    body = name + u" har skickat följande meddelande:\n\n" + message
+    else:
+        body = name + u" har skickat följande meddelande:\n\n" + message
+        msg = Message(subject=u"Förfrågan från skbl.se",
+                      body=body.encode("UTF-8"),
+                      sender=email,
+                      recipients=[app.config['EMAIL_RECIPIENT']]
+                      )
+        send_mail(msg)
 
-    msg = Message(subject=u"Förfrågan från skbl.se",
-                  body=body.encode("UTF-8"),
-                  sender=email,
-                  recipients=[app.config['EMAIL_RECIPIENT']]
-                  )
-
-    send_mail(msg)
-
-    return render_template("form_submitted.html",
-                           title=gettext("Thank you for your feedback") + "!",
-                           headline=gettext("Thank you for your feedback") + ", " + name + "!",
-                           text=gettext("We will get back to you as soon as we can."))
+        return render_template("form_submitted.html",
+                               title=gettext("Thank you for your feedback") + "!",
+                               headline=gettext("Thank you for your feedback") + ", " + name + "!",
+                               text=gettext("We will get back to you as soon as we can."))
 
 
 @app.route("/en/search", endpoint="search_en")

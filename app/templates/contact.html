@@ -5,7 +5,11 @@
     <h1>{{ headline }}</h1>
     {% if errors %}
         <div class="alert alert-danger">
-        {{ errors }}
+            <ul>
+                {% for error in errors %}
+                    <li> {{ error }} </li>
+                {% endfor %}
+            </ul>
         </div>
     {% endif %}
     <form method="post" action="{{ url_for('submit_contact_form') }}">

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-06-29 08:43+0000\n"
+"POT-Creation-Date: 2017-06-29 14:20+0000\n"
 "PO-Revision-Date: 2017-02-20 14:49+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sv\n"
@@ -18,94 +18,102 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
 
-#: app/templates/layout.html:70 app/views.py:31
+#: app/templates/layout.html:84 app/views.py:31
 msgid "About SKBL"
 msgstr "Om SKBL"
 
-#: app/templates/layout.html:71 app/views.py:39
+#: app/templates/layout.html:85 app/views.py:39 app/views.py:62
 msgid "Contact"
 msgstr "Kontakt"
 
-#: app/views.py:40
+#: app/views.py:40 app/views.py:63
 msgid "Contact SKBL"
 msgstr "Kontakta SKBL"
 
-#: app/views.py:64 app/views.py:65
+#: app/views.py:53
+msgid "Please enter all the fields!"
+msgstr "Alla fält måste vara ifyllda!"
+
+#: app/views.py:55
+msgid "Please enter a valid email address!"
+msgstr "Du måste ange en giltig e-post-adress!"
+
+#: app/views.py:83 app/views.py:84
 msgid "Thank you for your feedback"
 msgstr "Tack för din återkoppling"
 
-#: app/views.py:66
+#: app/views.py:85
 msgid "We will get back to you as soon as we can."
 msgstr "Vi återkommer så fort vi kan."
 
-#: app/templates/layout.html:44 app/views.py:87
+#: app/templates/layout.html:58 app/views.py:106
 msgid "Search"
 msgstr "Sök"
 
-#: app/templates/layout.html:102 app/views.py:117
+#: app/templates/layout.html:116 app/views.py:136
 msgid "Places"
 msgstr "Orter"
 
-#: app/templates/layout.html:96 app/views.py:150
+#: app/templates/layout.html:110 app/views.py:169
 msgid "Organizations"
 msgstr "Organisationer"
 
-#: app/templates/layout.html:64 app/views.py:275
+#: app/templates/layout.html:78 app/views.py:291
 msgid "Women A-Ö"
 msgstr "Kvinnor A-Ö"
 
-#: app/templates/article.html:170 app/templates/layout.html:108
+#: app/templates/article.html:177 app/templates/layout.html:122
 msgid "Keywords"
 msgstr "Nyckelord"
 
-#: app/templates/article.html:177
+#: app/templates/article.html:184
 msgid "Othernames"
 msgstr "Namn"
 
-#: app/templates/article.html:184
+#: app/templates/article.html:191
 msgid "Links"
 msgstr "Länkar"
 
-#: app/templates/contact.html:8
+#: app/templates/contact.html:13
 msgid "Name"
 msgstr "Namn"
 
-#: app/templates/contact.html:9
+#: app/templates/contact.html:14
 msgid "Your name..."
 msgstr "Ditt namn..."
 
-#: app/templates/contact.html:12
+#: app/templates/contact.html:17
 msgid "E-mail"
 msgstr "E-post"
 
-#: app/templates/contact.html:13
+#: app/templates/contact.html:18
 msgid "Your e-mail adress..."
 msgstr "Din e-post..."
 
-#: app/templates/contact.html:16
+#: app/templates/contact.html:21
 msgid "Message"
 msgstr "Meddelande"
 
-#: app/templates/contact.html:17
+#: app/templates/contact.html:22
 msgid "Write something..."
 msgstr "Din text..."
 
-#: app/templates/contact.html:19
+#: app/templates/contact.html:24
 msgid "Submit"
 msgstr "Skicka"
 
-#: app/templates/layout.html:52
+#: app/templates/layout.html:66
 msgid "Advanced search"
 msgstr "Avancerad sök"
 
-#: app/templates/layout.html:67
+#: app/templates/layout.html:81
 msgid "Article authors"
 msgstr "Artikelförfattare"
 
-#: app/templates/layout.html:90
+#: app/templates/layout.html:104
 msgid "Activities"
 msgstr "Verksamhet"
 
-#: app/templates/layout.html:115
+#: app/templates/layout.html:129
 msgid "Share page"
 msgstr "Dela sidan"

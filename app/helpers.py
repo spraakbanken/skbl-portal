@@ -251,3 +251,10 @@ def make_placelist(hits, placename, lat, lon):
     # if not grouped_results:
     #     grouped_results = [('Fel', [(join_name(hit['_source']), hit) for hit in hits['hits']])]
     return grouped_results
+
+
+def is_email_address_valid(email):
+    """Validate the email address using a regex."""
+    if not re.match("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$", email):
+        return False
+    return True
