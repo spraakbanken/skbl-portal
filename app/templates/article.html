@@ -318,7 +318,7 @@
                                 icon = orangeIcon;
                                 break;
                         }
-                        markers.push(L.marker([pin[1], pin[2]], {icon: icon}));
+                        markers.push(L.marker([pin[1], pin[2]], {icon: icon}).bindPopup(pin[3]));
                     }
                     group = new L.featureGroup(markers).addTo(mymap);
                     mymap.fitBounds(group.getBounds(), {"maxZoom" : 4});
