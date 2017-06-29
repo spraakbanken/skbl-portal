@@ -348,6 +348,13 @@ li .glyphicon-link {
 .main_text a {
   color: #357ebd;
 }
+#article_map {
+  margin-bottom: 20px;
+}
+#article_map_button {
+  cursor: pointer;
+  color: #357ebd;
+}
 
 
 
