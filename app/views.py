@@ -40,13 +40,30 @@ def contact():
                            headline=gettext("Contact SKBL"))
 
 
-@app.route('/en/submitted/', methods=['POST'])
-@app.route('/sv/submitted/', methods=['POST'])
+@app.route('/en/submitted/', methods=['POST', 'GET'])
+@app.route('/sv/submitted/', methods=['POST', 'GET'])
 def submit_contact_form():
     set_language_switch_link("index")
     name = request.form['name']
     email = request.form['email']
     message = request.form['message']
+
+    if not name or not email or not message:
+        errors = gettext("Please enter all the fields!")
+        name_error = False if name else True
+        email_error = False if email else True
+        message_error = False if message else True
+        return render_template("contact.html",
+                               title=gettext("Contact"),
+                               headline=gettext("Contact SKBL"),
+                               errors=errors,
+                               name_error=name_error,
+                               email_error=email_error,
+                               message_error=message_error,
+                               name=name,
+                               email=email,
+                               message=message)
+
     body = name + u" har skickat följande meddelande:\n\n" + message
 
     msg = Message(subject=u"Förfrågan från skbl.se",
