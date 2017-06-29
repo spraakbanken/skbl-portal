@@ -27,6 +27,20 @@
 
     <link rel="icon" href="{{ url_for('static', filename='images/skbl/favicon.png') }}" sizes="64x64" type="image/png">
     <link rel="icon" href="{{ url_for('static', filename='images/skbl/favicon.ico') }}" sizes="64x64" type="image/vnd.microsoft.icon">
+
+
+
+
+    <meta name="description" content="Läs om 1000 svenska kvinnor, från medeltid till nutid."/>
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" value="summary">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content={{title}} />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="/{{ g.language }}" />
+    <meta property="og:image" content="{{ url_for('static', filename='images/skbl/logo.png') }}" />
+    <meta property="og:description" content="Läs om 1000 svenska kvinnor, från medeltid till nutid." />
     {% endblock %}
   </head>
   <body>
