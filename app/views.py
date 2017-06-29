@@ -47,16 +47,13 @@ def submit_contact_form():
     name = request.form['name']
     email = request.form['email']
     message = request.form['message']
+    body = name + u" har skickat följande meddelande:\n\n" + message
 
-    message = u"""
-    %s (%s) skickade foljande meddelande:
-    %s
-    """ % (name, email, message)
-
-    msg = Message(subject="Hej!",
-                  body=message,
-                  sender=app.config['EMAIL_SENDER'],
-                  recipients=[app.config['EMAIL_RECIPIENT']])
+    msg = Message(subject=u"Förfrågan från skbl.se",
+                  body=body.encode("UTF-8"),
+                  sender=email,
+                  recipients=[app.config['EMAIL_RECIPIENT']]
+                  )
 
     send_mail(msg)
 
