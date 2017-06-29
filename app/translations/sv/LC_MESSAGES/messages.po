@@ -95,8 +95,8 @@ msgid "Message"
 msgstr "Meddelande"
 
 #: app/templates/contact.html:22
-msgid "Write something..."
-msgstr "Din text..."
+msgid "Your message..."
+msgstr "Ditt meddelande..."
 
 #: app/templates/contact.html:24
 msgid "Submit"
