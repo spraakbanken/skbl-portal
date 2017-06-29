@@ -120,7 +120,7 @@
                         {% for source in type %}
                         <li>
                             {% if source.url %}
-                                <a href="{{source.url}}" target="_blank">{{source.description | safe}}</a>
+                                <a href="{{source.url | deescape}}" target="_blank">{{source.description | safe}}</a>
                             {% else %}
                                 <span>{{source.description | safe}}</span>
                             {% endif %}
@@ -143,7 +143,7 @@
                         {% for ref in type %}
                         <li>
                             {% if ref.url %}
-                                <a href="{{ref.url}}" target="_blank">{{ref.description | safe}}</a>
+                                <a href="{{ref.url | deescape}}" target="_blank">{{ref.description | safe}}</a>
                             {% else %}
                                 <span>{{ref.description | safe}}</span>
                             {% endif %}
@@ -191,7 +191,7 @@
             <h3>{{ gettext("Links") }}</h3>
             <ul>
             {% for link in article.externallink %}
-                <li><a href="{{ link.url }}">{{ link.description }}</a></span></li>
+                <li><a href="{{ link.url | deescape }}">{{ link.description }}</a></span></li>
             {% endfor %}
             </ul>
         {% endif %}
