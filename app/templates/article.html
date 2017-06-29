@@ -157,7 +157,12 @@
         {% endif %}
     </div>
     <div class="col-md-4">
-        <div id="article_map_button"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;Visa karta</div>
+        <div id="article_map_button">
+            <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;Visa karta
+        </div>
+        <div id="article_map_button_hide" style="display:none">
+            <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;Göm karta
+        </div>
         <div id="article_map" style="height: 320px;width: 320px;display:none"></div>
         {% if article.portrait %}
         <div class="image-overlay">
@@ -311,7 +316,15 @@
 
             jQuery("#article_map_button").click(function() {
                 jQuery("#article_map").show();
+                jQuery("#article_map_button").hide();
+                jQuery("#article_map_button_hide").show();
                 mymap.invalidateSize();
+            });
+
+            jQuery("#article_map_button_hide").click(function() {
+                jQuery("#article_map").hide();
+                jQuery("#article_map_button").show();
+                jQuery("#article_map_button_hide").hide();
             });
         });
     </script>

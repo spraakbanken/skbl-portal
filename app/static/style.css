@@ -354,6 +354,12 @@ li .glyphicon-link {
 #article_map_button {
   cursor: pointer;
   color: #357ebd;
+  margin-bottom: 10px;
+}
+#article_map_button_hide {
+  cursor: pointer;
+  color: #357ebd;
+  margin-bottom: 10px;
 }
 
 
