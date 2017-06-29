@@ -68,7 +68,7 @@ def submit_contact_form():
 def search():
     set_language_switch_link("search")
     search = request.args.get('q', '*').encode('utf-8')
-    karp_q = {'size': app.config['RESULT_SIZE']}
+    karp_q = {}
     if '*' in search:
         search = re.sub('(?<!\.)\*', '.*', search)
         karp_q['q'] = "extended||and|anything|regexp|%s" % search
@@ -117,11 +117,12 @@ def place_index():
 @app.route("/en/place/<place>", endpoint="place_en")
 @app.route("/sv/ort/<place>", endpoint="place_sv")
 def place(place=None):
+    lat = request.args.get('lat')
+    lon = request.args.get('lon')
     set_language_switch_link("place_index", place)
     hits = karp_query('querycount', {'q': "extended||and|plats.search|equals|%s" % (place.encode('utf-8'))})
-
     if hits['query']['hits']['total'] > 0:
-        return render_template('place.html', title=place, headline=place, hits=hits["query"]["hits"])
+        return render_template('placelist.html', title=place, lat=lat, lon=lon, headline=place, hits=hits["query"]["hits"])
     else:
         return render_template('page.html', content='not found')
 
@@ -132,8 +133,7 @@ def organisation_index():
     infotext = u"""De organisationer där kvinnor varit aktiva finns sorterade ämnesvis
     (politik, religion, idrott, ideell m fl.). Välj ämne för att se organisationer
     inom detta och vilka kvinnor som var aktiva i dem."""
-    data = karp_query('minientry', {'size': app.config['RESULT_SIZE'],
-                                    'q': 'extended||and|anything|regexp|.*',
+    data = karp_query('minientry', {'q': 'extended||and|anything|regexp|.*',
                                     'show': 'organisationsnamn,organisationstyp'})
     set_language_switch_link("organisation_index")
     nested_obj = {}
@@ -205,8 +205,7 @@ def searchresult(result, name='', searchfield='', imagefolder='', searchtype='eq
     try:
         set_language_switch_link("%s_index" % name, result)
         qresult = result.encode('utf-8')
-        hits = karp_query('querycount', {'size': app.config['RESULT_SIZE'],
-                                         'q': "extended||and|%s.search|%s|%s" % (searchfield, searchtype, qresult)})
+        hits = karp_query('querycount', {'q': "extended||and|%s.search|%s|%s" % (searchfield, searchtype, qresult)})
         title = title or result
 
         if hits['query']['hits']['total'] > 0:
@@ -214,7 +213,7 @@ def searchresult(result, name='', searchfield='', imagefolder='', searchtype='eq
             if os.path.exists(app.config.root_path + '/static/images/%s/%s.jpg' % (imagefolder, qresult)):
                 picture = '/static/images/%s/%s.jpg' % (imagefolder, qresult)
 
-            return render_template('list.html', picture=picture, title=title, headline=title, hits=hits["query"]["hits"])
+            return render_template('list.html', picture=picture, alphabetic=True, title=title, headline=title, hits=hits["query"]["hits"])
         else:
             return render_template('page.html', content='not found')
     except Exception:
@@ -222,8 +221,7 @@ def searchresult(result, name='', searchfield='', imagefolder='', searchtype='eq
 
 
 def bucketcall(queryfield='', name='', title='', sortby='', lastnamefirst=False, infotext=''):
-    data = karp_query('statlist', {'buckets': '%s.bucket' % queryfield,
-                                   'size': app.config['RESULT_SIZE']})
+    data = karp_query('statlist', {'buckets': '%s.bucket' % queryfield})
     stat_table = [kw for kw in data['stat_table'] if kw[0] != ""]
     if sortby:
         stat_table.sort(key=sortby)
@@ -264,8 +262,7 @@ def article_index(search=None):
            # no hits are found redirect to a 'not found' page
            return render_template('page.html', content='not found')
 
-    data = karp_query('query', {'q': "extended||and|namn.search|exists",
-                                'size': app.config['RESULT_SIZE']})
+    data = karp_query('query', {'q': "extended||and|namn.search|exists"})
     infotext = u"""Klicka på namnet för att läsa biografin om den kvinna du vill veta mer om."""
     return render_template('list.html',
                            hits=data["hits"],

@@ -181,3 +181,73 @@ def collapse_kids(source):
             relation['hide'] = True
     if unkown_kids:
         source['collapsedrelation'] = [{"type": "Barn", "count": unkown_kids}]
+
+
+# TODO copy-paste from make_namelist (but slightly modfied...), make some help function instead
+def make_placenames(places):
+    results = []
+    for hit in places:
+        name = hit['name'].strip()
+        results.append((name, name[0].upper(), hit))
+
+    letter_results = {}
+    # Split the result into start letters
+    for listed_name, first_letter, hit in results:
+        if first_letter == u'Ø':
+            first_letter = u'Ö'
+        if first_letter == u'Æ':
+            first_letter = u'Ä'
+        if first_letter == u'Ü':
+            first_letter = u'Y'
+        if first_letter not in letter_results:
+            letter_results[first_letter] = [(listed_name, hit)]
+        else:
+            letter_results[first_letter].append((listed_name, hit))
+
+    # Sort result dictionary alphabetically into list
+    collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
+    for n, items in letter_results.items():
+        items.sort(key=lambda x:collator.getSortKey(x[0]))
+    letter_results = sorted(letter_results.items(), key=lambda x: collator.getSortKey(x[0]))
+
+    return letter_results
+
+def make_placelist(hits, placename, lat, lon):
+    grouped_results = {}
+    for hit in hits["hits"]:
+        source = hit["_source"]
+        placelocations = {"Bostadsort": source.get('places', []),
+                          "Verksamhetsort": source.get('occupation', []),
+                          "Utbildningsort": source.get('education', []),
+                          "Kontakter": source.get('contact', []),
+                          u"Födelseort": [source.get('lifespan', {}).get("from", {})],
+                          u"Dödsort": [source.get('lifespan', {}).get("to", {})]
+                          }
+
+        for ptype, places in placelocations.items():
+            names = dict([(place.get('place', {}).get('place', '').strip(),
+                           place.get('place', {}).get('pin', {})) for place in places])
+            # check if the name and the lat,lon is correct
+            # (we can't ask karp of this, since it would be a nested query)
+            if placename in names:
+                if names[placename].get('lat') == float(lat)\
+                   and names[placename].get('lon') == float(lon):
+                    if ptype not in grouped_results:
+                        grouped_results[ptype] = []
+                    grouped_results[ptype].append((join_name(source), hit))
+                #else:
+                    # These two lines should be removed, but are kept for debugging
+                    # if 'Fel' not in grouped_results: grouped_results['Fel'] = []
+                    # grouped_results['Fel'].append((join_name(source), hit))
+
+    # Sort result dictionary alphabetically into list
+
+    collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
+    for n, items in grouped_results.items():
+        items.sort(key=lambda x: collator.getSortKey(x[0]))
+    grouped_results = sorted(grouped_results.items(), key=lambda x: collator.getSortKey(x[0]))
+
+    # These two lines should be removed, but are kept for debugging
+    # if not grouped_results:
+    #     grouped_results = [('Fel', [(join_name(hit['_source']), hit) for hit in hits['hits']])]
+    return grouped_results

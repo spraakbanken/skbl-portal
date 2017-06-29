@@ -13,7 +13,7 @@
         {% endfor %}
     {% endif %}
     <ul>
-      {% for firstletter, namelist in make_namelist(hits, alphabetic=True) %}
+      {% for firstletter, namelist in make_namelist(hits, alphabetic=alphabetic) %}
         {% if split_letters %}
             <h2><a name="{{firstletter}}">{{ firstletter }}</a></h2>
         {% endif %}

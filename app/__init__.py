@@ -2,6 +2,7 @@
 import os
 import os.path
 import json
+import logging
 import urllib
 import shutil
 import sys
@@ -68,6 +69,7 @@ def set_language_switch_link(route, fragment=None):
 def karp_query(action, query):
     query['mode'] = 'skbl'
     query['resource'] = 'skbl'
+    query['size'] = app.config['RESULT_SIZE']
     params = urllib.urlencode(query)
     return karp_request("%s?%s" % (action, params))
 
@@ -76,6 +78,7 @@ def karp_request(action):
     q = Request("%s/%s" % (app.config['KARP_BACKEND'], action))
     q.add_header('Authorization', "Basic %s" % (app.config['KARP_AUTH_HASH']))
     response = urlopen(q).read()
+    logging.debug(q)
     data = json.loads(response)
     return data
 
@@ -99,6 +102,8 @@ def inject_custom():
 app.jinja_env.globals.update(get_first_name=helpers.get_first_name)
 app.jinja_env.globals.update(get_life_range=helpers.get_life_range)
 app.jinja_env.globals.update(make_namelist=helpers.make_namelist)
+app.jinja_env.globals.update(make_placelist=helpers.make_placelist)
+app.jinja_env.globals.update(make_placenames=helpers.make_placenames)
 app.jinja_env.globals.update(get_date=helpers.get_date)
 app.jinja_env.globals.update(join_name=helpers.join_name)
 app.jinja_env.globals.update(sorted=sorted)
