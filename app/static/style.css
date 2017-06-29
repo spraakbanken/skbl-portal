@@ -391,3 +391,7 @@ li .glyphicon-link {
   color: #357ebd;
   margin-left: 40px;
 }
+.minimize_items {
+  cursor: pointer;
+  margin-left: 40px;
+}

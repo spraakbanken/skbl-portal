@@ -32,6 +32,9 @@
                   </li>
                 </ul>
                 {% endfor %}
+                <div class="minimize_items">
+                  <span class="label label-default"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></span>
+                </div>
               </div>
               <div style="" class="nested_container shown_first">
                 <ul>
@@ -64,6 +67,10 @@
         jQuery(document).ready(function() {
             jQuery(".fadeout").click(function() {
                 jQuery(this).parent().siblings(".hidden_first").toggle();
+                jQuery(this).parent().toggle();
+            });
+            jQuery(".minimize_items").click(function() {
+                jQuery(this).parent().siblings(".shown_first").toggle();
                 jQuery(this).parent().toggle();
             });
         });
