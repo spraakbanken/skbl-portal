@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block title %}skbl.se - {{ title }}{% endblock %}
+{% block content %}
+<div class="col-md-6">
+    {% if infotext %}
+    <p>{{ infotext}}</p>
+    <br/>
+    {% endif %}
+    <h1>{{ headline }}</h1>
+    <ul>
+      {% for category, namelist in make_placelist(hits, headline, lat, lon) %}
+        <h3><a name="{{category}}">{{ category }}</a></h3>
+        {% for name, hit in namelist %}
+        <li>
+            <a href="{{ url_for('article_'+g.language, id=hit._id) }}"><strong>{{ name }}</strong><br />
+            {% if get_life_range(hit._source) %}
+                <span itemprop="birthDate">{{ get_life_range(hit._source)[0] }}</span> &mdash; <span itemprop="deathDate">{{ get_life_range(hit._source)[1] }}</span>
+            {% endif %}
+            </a>
+        </li>
+        {% endfor %}
+      {% endfor %}
+    </ul>
+</div>
+<div class="col-md-6">
+    {{ advanced_search_text | safe}}
+    {% if picture %}
+    <img src="{{ picture }}" alt="{{ headline }}" width="350px" />
+    {% endif %}
+
+     <div class="col-md-6">
+        {{ super() }}
+     </div>
+     <div class="col-md-6">
+         <div id="mapid" style="height: 280px;"></div>
+     </div>
+</div>
+
+{% endblock %}
+{% block foot %}
+    {{ super() }}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <script>
+        jQuery(document).ready(function() {
+            var mymap = L.map('mapid').setView([{{ request.args.get('lat') }}, {{ request.args.get('lon') }}], 6);
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox.streets'
+            }).addTo(mymap);
+
+            L.marker([{{ request.args.get('lat') }}, {{ request.args.get('lon') }}]).addTo(mymap)
+        });
+    </script>
+{% endblock %}
