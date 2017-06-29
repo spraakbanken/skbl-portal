@@ -109,6 +109,10 @@ app.jinja_env.globals.update(join_name=helpers.join_name)
 app.jinja_env.globals.update(sorted=sorted)
 app.jinja_env.globals.update(len=len)
 
+@app.template_filter('deescape')
+def deescape_filter(s):
+    return s.replace("&amp;", "&")
+
 from app import views
 
 if __name__ == '__main__':
