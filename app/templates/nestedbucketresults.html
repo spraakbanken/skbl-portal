@@ -8,7 +8,10 @@
     <p>{{ infotext}}</p>
     <br/>
     {% endif %}
-    <ul>
+</div>
+<div class="col-md-4"></div>
+<div class="col-md-12">
+  <ul>
        {% for maintype, val in sorted(results.items()) %}
           <li class="keyword_list_item nested_part"> <h4>{{ maintype }}</h4>
             {% if len(val.items()) <= 8 %}
@@ -56,9 +59,6 @@
           </li>
        {% endfor %}
     </ul>
-</div>
-<div class="col-md-4">
-
 </div>
 {% endblock %}
 {% block foot %}

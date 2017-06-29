@@ -7,13 +7,14 @@
     <p>{{ infotext}}</p>
     <br/>
     {% endif %}
+</div>
+<div class="col-md-4">
+</div>
+<div class="col-md-12">
     <ul>
         {% for result in results %}
           <li class="keyword_list_item"><a href="{{ url_for(name+'_'+g.language, result=' '.join(result[0:-1])) }}">{{ ' '.join(result[0:-1]) }}&nbsp;<span class="badge">{{ result[-1] }}</span></a></li>
         {% endfor %}
     </ul>
-</div>
-<div class="col-md-4">
-
 </div>
 {% endblock %}
