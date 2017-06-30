@@ -40,10 +40,10 @@ def contact():
                            headline=gettext("Contact SKBL"))
 
 
-@app.route('/en/submitted/', methods=['POST'])
-@app.route('/sv/submitted/', methods=['POST'])
+@app.route('/en/contact/', methods=['POST'], endpoint="submitted_en")
+@app.route('/sv/kontakt/', methods=['POST'], endpoint="submitted_sv")
 def submit_contact_form():
-    set_language_switch_link("index")
+    set_language_switch_link("contact")
     name = request.form['name'].strip()
     email = request.form['email'].strip()
     message = request.form['message']
@@ -51,7 +51,7 @@ def submit_contact_form():
     errors = []
     if not name or not email or not message:
         errors.append(gettext("Please enter all the fields!"))
-    if not helpers.is_email_address_valid(email):
+    if email and not helpers.is_email_address_valid(email):
         errors.append(gettext("Please enter a valid email address!"))
 
     if errors:

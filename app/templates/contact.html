@@ -12,7 +12,7 @@
             </ul>
         </div>
     {% endif %}
-    <form method="post" action="{{ url_for('submit_contact_form') }}">
+    <form method="post" action="{{ url_for('submitted_'+g.language) }}">
         <div class="{% if name_error %}form-group has-error{% else %}form-group{% endif %}">
             <label class="control-label" for="name">{{ gettext("Name") }}</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="{{ gettext("Your name...") }}" value="{{ name }}">
@@ -23,7 +23,7 @@
         </div>
         <div class="{% if message_error %}form-group has-error{% else %}form-group{% endif %}">
             <label class="control-label" for="message">{{ gettext("Message") }}</label>
-            <textarea id="message" class="form-control" name="message" placeholder="{{ gettext("Your message...") }}"  value="{{ message }}" style="height:200px"></textarea>
+            <textarea id="message" class="form-control" name="message" placeholder="{{ gettext("Your message...") }}" style="height:200px">{{ message }}</textarea>
         </div>
         <button type="submit" class="btn btn-default">{{ gettext("Submit") }}</button>
     </form>
