@@ -11,11 +11,9 @@
       <ul>
       {% for firstletter, namelist in make_placenames(places) %}
         <h2><a name="{{firstletter}}">{{ firstletter }}</a></h2>
-        <ul>
         {% for name, hit in namelist %}
           <li class="keyword_list_item"><a href="{{ url_for('place_'+g.language, place=name, lat=hit.lat, lon=hit.lon) }}">{{name}}</a></li>
         {% endfor %}
-        </ul>
       {% endfor %}
       </ul>
 </div>
