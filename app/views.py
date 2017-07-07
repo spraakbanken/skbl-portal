@@ -1,11 +1,14 @@
 # -*- coding=utf-8 -*-
 import os
 import os.path
-from app import app, send_mail, redirect, render_template, request, get_locale, set_language_switch_link, g, serve_static_page, karp_query
+from app import app, redirect, render_template, request, get_locale, set_language_switch_link, g, serve_static_page, karp_query
 from collections import defaultdict
 from flask import jsonify, url_for
 from flask_babel import gettext
-from flask_sendmail import Message
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.header import Header
+import smtplib
 import icu  # pip install PyICU
 import helpers
 import re
@@ -54,6 +57,7 @@ def submit_contact_form():
     if email and not helpers.is_email_address_valid(email):
         errors.append(gettext("Please enter a valid email address!"))
 
+    # Render error messages and tell user what went wrong
     if errors:
         name_error = False if name else True
         email_error = False if email else True
@@ -69,15 +73,32 @@ def submit_contact_form():
                                email=email,
                                message=message)
 
+    # Compose and send email
     else:
-        body = name + u" har skickat följande meddelande:\n\n" + message
-        msg = Message(subject=u"Förfrågan från skbl.se",
-                      body=body.encode("UTF-8"),
-                      sender=email,
-                      recipients=[app.config['EMAIL_RECIPIENT']]
-                      )
-        send_mail(msg)
+        text = u"%s har skickat följande meddelande:\n\n%s" % (name, message)
+        html = text.replace("\n", "<br>")
+        part1 = MIMEText(text, "plain", "utf-8")
+        part2 = MIMEText(html, "html", "utf-8")
 
+        msg = MIMEMultipart("alternative")
+        msg.attach(part1)
+        msg.attach(part2)
+
+        msg["Subject"] = u"Förfrågan från skbl.se"
+        msg['To'] = app.config['EMAIL_RECIPIENT']
+
+        # Work-around: things won't be as pretty if email adress contains non-ascii chars
+        if helpers.is_ascii(email):
+            msg['From'] = "%s <%s>" % (Header(name, 'utf-8'), email)
+        else:
+            msg['From'] = u"%s <%s>" % (name, email)
+            email = ""
+
+        server = smtplib.SMTP("localhost")
+        server.sendmail(email, [app.config['EMAIL_RECIPIENT']], msg.as_string())
+        server.quit()
+
+        # Render user feedback
         return render_template("form_submitted.html",
                                title=gettext("Thank you for your feedback") + "!",
                                headline=gettext("Thank you for your feedback") + ", " + name + "!",

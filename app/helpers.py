@@ -254,7 +254,19 @@ def make_placelist(hits, placename, lat, lon):
 
 
 def is_email_address_valid(email):
-    """Validate the email address using a regex."""
-    if not re.match("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$", email):
+    """
+    Validate the email address using a regex.
+    It may not include any whitespaces, has exactly one "@" and at least one "." after the "@".
+    """
+    if " " in email:
+        return False
+    # if not re.match("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$", email):
+    # More permissive regex: does allow non-ascii chars
+    if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
         return False
     return True
+
+
+def is_ascii(s):
+    """Check if s contains of ASCII-characters only."""
+    return all(ord(c) < 128 for c in s)

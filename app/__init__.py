@@ -9,14 +9,12 @@ import sys
 
 from flask import Flask, g, request, redirect, render_template, url_for
 from flask_babel import Babel
-from flask_sendmail import Mail
 from setuptools import setup
 from urllib2 import Request, urlopen
 import helpers
 
 
 app = Flask(__name__)
-mail = Mail(app)
 
 if os.path.exists(app.config.root_path + '/config.cfg') is False:
     print "copy config.default.cfg to config.cfg and add your settings"
@@ -81,10 +79,6 @@ def karp_request(action):
     logging.debug(q)
     data = json.loads(response)
     return data
-
-
-def send_mail(message):
-    mail.send(message)
 
 
 @app.before_request
