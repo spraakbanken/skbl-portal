@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-06-29 14:20+0000\n"
+"POT-Creation-Date: 2017-08-29 11:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,103 +17,111 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
 
-#: app/templates/layout.html:84 app/views.py:31
+#: app/templates/layout.html:88 app/views.py:34
 msgid "About SKBL"
 msgstr ""
 
-#: app/templates/layout.html:85 app/views.py:39 app/views.py:62
+#: app/templates/layout.html:89 app/views.py:42 app/views.py:66
 msgid "Contact"
 msgstr ""
 
-#: app/views.py:40 app/views.py:63
+#: app/views.py:43 app/views.py:67
 msgid "Contact SKBL"
 msgstr ""
 
-#: app/views.py:53
+#: app/views.py:56
 msgid "Please enter all the fields!"
 msgstr ""
 
-#: app/views.py:55
+#: app/views.py:58
 msgid "Please enter a valid email address!"
 msgstr ""
 
-#: app/views.py:83 app/views.py:84
+#: app/views.py:103 app/views.py:104
 msgid "Thank you for your feedback"
 msgstr ""
 
-#: app/views.py:85
+#: app/views.py:105
 msgid "We will get back to you as soon as we can."
 msgstr ""
 
-#: app/templates/layout.html:58 app/views.py:106
-msgid "Search"
+#: app/views.py:126
+msgid "Hits"
 msgstr ""
 
-#: app/templates/layout.html:116 app/views.py:136
+#: app/templates/layout.html:120 app/views.py:157
 msgid "Places"
 msgstr ""
 
-#: app/templates/layout.html:110 app/views.py:169
+#: app/templates/layout.html:114 app/views.py:190
 msgid "Organizations"
 msgstr ""
 
-#: app/templates/layout.html:78 app/views.py:291
+#: app/templates/layout.html:82 app/views.py:313
 msgid "Women A-Ö"
 msgstr ""
 
-#: app/templates/article.html:177 app/templates/layout.html:122
+#: app/templates/article.html:181 app/templates/layout.html:126
 msgid "Keywords"
 msgstr ""
 
-#: app/templates/article.html:184
+#: app/templates/article.html:188
 msgid "Othernames"
 msgstr ""
 
-#: app/templates/article.html:191
+#: app/templates/article.html:195
 msgid "Links"
 msgstr ""
 
-#: app/templates/contact.html:13
+#: app/templates/contact.html:17
 msgid "Name"
 msgstr ""
 
-#: app/templates/contact.html:14
+#: app/templates/contact.html:18
 msgid "Your name..."
 msgstr ""
 
-#: app/templates/contact.html:17
+#: app/templates/contact.html:21
 msgid "E-mail"
 msgstr ""
 
-#: app/templates/contact.html:18
+#: app/templates/contact.html:22
 msgid "Your e-mail adress..."
 msgstr ""
 
-#: app/templates/contact.html:21
+#: app/templates/contact.html:25
 msgid "Message"
 msgstr ""
 
-#: app/templates/contact.html:22
-msgid "Write something..."
+#: app/templates/contact.html:26
+msgid "Your message..."
 msgstr ""
 
-#: app/templates/contact.html:24
+#: app/templates/contact.html:28
 msgid "Submit"
 msgstr ""
 
-#: app/templates/layout.html:66
+#: app/templates/layout.html:62
+msgid "Search"
+msgstr ""
+
+#: app/templates/layout.html:70
 msgid "Advanced search"
 msgstr ""
 
-#: app/templates/layout.html:81
+#: app/templates/layout.html:85
 msgid "Article authors"
 msgstr ""
 
-#: app/templates/layout.html:104
+#: app/templates/layout.html:108
 msgid "Activities"
 msgstr ""
 
-#: app/templates/layout.html:129
+#: app/templates/layout.html:133
 msgid "Share page"
+msgstr ""
+
+#: app/templates/list.html:11
+msgid "No results found for"
 msgstr ""
 
