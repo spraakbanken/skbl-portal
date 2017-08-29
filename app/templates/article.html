@@ -91,7 +91,11 @@
             <ul class="ellipsis_contents">
             {% for place in article.places %}
                 <li>
-                    <h5>{{ place.place.place }}</h5>
+                    {% if place.place %}
+                        <h5>{{place.place.place}}</h5>
+                    {% else %}
+                        <h5></h5>
+                    {% endif %}
                 </li>
             {% endfor %}
             </ul>
