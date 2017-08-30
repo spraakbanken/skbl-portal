@@ -349,7 +349,8 @@ def show_article(data):
         firstname, calling = helpers.get_first_name(source)
         # Print given name + lastname
         source['showname'] = "%s %s" % (calling, source['name'].get('lastname', ''))
-        source['text'] = helpers.markdown_html(helpers.mk_links(source['text']))
+        if source.get('text'):
+            source['text'] = helpers.markdown_html(helpers.mk_links(source['text']))
         source['othernames'] = helpers.group_by_type(source.get('othernames', {}), 'name')
         source['othernames'].append({'type': u'Förnamn', 'name': firstname})
         helpers.collapse_kids(source)

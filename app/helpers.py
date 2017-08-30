@@ -58,7 +58,7 @@ def markdown_html(text):
 def group_by_type(objlist, name):
     newdict = {}
     for obj in objlist:
-        val = obj[name]
+        val = obj.get(name, "")
         key = obj.get('type', u'Övrigt')
         if key not in newdict:
             newdict[key] = []
