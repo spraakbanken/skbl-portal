@@ -24,7 +24,7 @@
             {% for relation in article.relation %}
                 {% if not relation.hide %}
                   <li>
-                      <h5>{{ relation.type }}: {{ relation.firstname }} {{ relation.lastname }}</h5>
+                      <h5>{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}</h5>
                   </li>
                {% endif %}
             {% endfor %}
@@ -42,7 +42,7 @@
             <ul class="ellipsis_contents">
             {% for education in article.education %}
                 <li>
-                    <h5>{{ education.type }}{% if education.place and education.place.place %}, {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description }}{% endif %}</h5>
+                    <h5>{{ education.type }}{% if education.place and education.place.place %}, {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description | deescape }}{% endif %}</h5>
                 </li>
             {% endfor %}
             </ul>
@@ -54,7 +54,7 @@
             <ul class="ellipsis_contents">
             {% for occupation in article.occupation %}
                 <li>
-                    <h5>{{ occupation.type }}: {{ occupation.description }}</h5>
+                    <h5>{{ occupation.type }}{% if occupation.description %}: {{ occupation.description | deescape }}{% endif %}</h5>
                 </li>
             {% endfor %}
             </ul>
@@ -107,7 +107,7 @@
             <ul class="ellipsis_contents">
             {% for award in article.awards %}
                 <li>
-                    <h5>{{ award.type }}: {{ award.description }}</h5>
+                    <h5>{{ award.type }}{% if award.description %}: {{ award.description | deescape }}{% endif %}</h5>
                 </li>
             {% endfor %}
             </ul>

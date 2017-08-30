@@ -105,7 +105,7 @@ app.jinja_env.globals.update(len=len)
 
 @app.template_filter('deescape')
 def deescape_filter(s):
-    return s.replace("&amp;", "&")
+    return s.replace("&amp;", "&").replace("&apos;", "'").replace("&quot;", '"')
 
 from app import views
 
