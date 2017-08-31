@@ -54,7 +54,7 @@
             <ul class="ellipsis_contents">
             {% for occupation in article.occupation %}
                 <li>
-                    <h5>{{ occupation.type }}{% if occupation.description %}: {{ occupation.description | deescape }}{% endif %}</h5>
+                    <h5>{{ occupation.type }}{% if occupation.detail %}: {{ occupation.detail | deescape }}{% endif %}</h5>
                 </li>
             {% endfor %}
             </ul>

@@ -204,8 +204,19 @@ def organisation(result=None):
 @app.route("/sv/verksamhet", endpoint="activity_index_sv")
 def activity_index():
     infotext = u"Här listas kvinnornas yrken och andra verksamheter."
-    return bucketcall(queryfield='verksamhetstext', name='activity',
-                      title='Activities', infotext=infotext)
+    data = karp_query('minientry', {'q': 'extended||and|anything|regexp|.*',
+                                    'show': 'verksamhetstext,verksamhetsdetalj'})
+    set_language_switch_link("activity_index")
+    nested_obj = {}
+    for hit in data['hits']['hits']:
+        for org in hit['_source'].get('occupation', []):
+            orgtype = org.get('description', '-')
+            if orgtype not in nested_obj:
+                nested_obj[orgtype] = defaultdict(set)
+            nested_obj[orgtype][org.get('detail', '-')].add(hit['_id'])
+    return render_template('nestedbucketresults.html',
+                           results=nested_obj, title=gettext("Activities"),
+                           infotext=infotext, name='activity')
 
 
 @app.route("/en/activity/<result>", endpoint="activity_en")
