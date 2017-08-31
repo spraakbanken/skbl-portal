@@ -220,9 +220,10 @@ def activity_index():
 
 
 @app.route("/en/activity/<result>", endpoint="activity_en")
-@app.route("/sv/verksameht/<result>", endpoint="activity_sv")
+@app.route("/sv/verksamhet/<result>", endpoint="activity_sv")
 def activity(result=None):
-    return searchresult(result, 'activity', 'verksamhetstext', 'activities')
+    title = request.args.get('title')
+    return searchresult(result, 'activity', 'id', 'activities', title=title)
 
 
 @app.route("/en/keyword", endpoint="keyword_index_en")
