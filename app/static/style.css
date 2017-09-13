@@ -11,6 +11,10 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Muli', sans-serif;
 }
 
+h3 {
+    font-size: 23px;
+}
+
 #header-title h1 {
   font-size: 2.4em;
   margin-top: 42px;
