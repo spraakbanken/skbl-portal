@@ -24,7 +24,10 @@
         <div id="familjeforhallanden_lista" class="ellipsis">
             <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Familjeförhållanden ({{ article.relation|length }})</h4>
             <ul class="ellipsis_contents">
-            {% for relation in article.relation %}
+              {% if article.civil_status %}
+                <li>Civilstatus: {{ article.civil_status }} </li>
+              {% endif %}
+              {% for relation in article.relation %}
                 {% if not relation.hide %}
                   <li>
                       <h5>{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}</h5>
@@ -127,7 +130,7 @@
                         {% for source in type %}
                         <li>
                             {% if source.url %}
-                                <a href="{{source.url | deescape}}" target="_blank">{{source.description | safe}}</a>
+                                <a class="visible_link" href="{{source.url | deescape}}" target="_blank">{{source.description | safe}}</a>
                             {% else %}
                                 <span>{{source.description | safe}}</span>
                             {% endif %}
@@ -150,7 +153,7 @@
                         {% for ref in type %}
                         <li>
                             {% if ref.url %}
-                                <a href="{{ref.url | deescape}}" target="_blank">{{ref.description | safe}}</a>
+                                <a class="visible_link" href="{{ref.url | deescape}}" target="_blank">{{ref.description | safe}}</a>
                             {% else %}
                                 <span>{{ref.description | safe}}</span>
                             {% endif %}
@@ -195,7 +198,7 @@
             <h3>{{ gettext("Links") }}</h3>
             <ul>
             {% for link in article.externallink %}
-                <li><a target="_blank" href="{{ link.url | deescape }}">{{ link.description }}</a></span></li>
+                <li><a class="visible_link" target="_blank" href="{{ link.url | deescape }}">{{ link.description }}</a></span></li>
             {% endfor %}
             </ul>
         {% endif %}
