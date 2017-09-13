@@ -11,6 +11,9 @@
     <div class="col-md-8">
         <h1 itemprop="name">{{ article.showname }}</h1>
         <h4 itemprop="additionalName">{{ article.fullfirstname }}</h4>
+        {% if get_date(article) %}
+            <h4> <span itemprop="birthDate">{{ get_date(article)[0] }}</span> &mdash; <span itemprop="deathDate">{{ get_date(article)[1] }}</span></h4>
+        {% endif %}
         <h4 itemprop="jobTitle">{{ article.subtitle }}</h4>
         <div class="main_text">
             {{ article.text | safe }}
@@ -173,9 +176,6 @@
             <img src="{{ article.portrait[0].url }}" itemprop="image" alt="{{ article.portrait[0].description }}" width="360px">
         </div>
         {{ article.portrait[0].description }}
-        {% endif %}
-        {% if get_date(article) %}
-            <span itemprop="birthDate">{{ get_date(article)[0] }}</span> &mdash; <span itemprop="deathDate">{{ get_date(article)[1] }}</span>
         {% endif %}
         {% if article.keyword %}
             <h3>{{ gettext("Keywords") }}</h3>
