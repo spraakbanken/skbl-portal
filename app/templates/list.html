@@ -13,7 +13,7 @@
 
     {% if split_letters %}
         {% for firstletter, _ in make_namelist(hits, alphabetic=alphabetic) %}
-            <a href="#{{firstletter}}">{{firstletter}}</a>&nbsp;
+            <a class="alphabetlist" href="#{{firstletter}}">{{firstletter}}</a>&nbsp;
         {% endfor %}
     {% endif %}
     <ul>

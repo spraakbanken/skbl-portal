@@ -6,7 +6,7 @@
 <div class="col-md-8">
 
       {% for firstletter, _ in make_placenames(places) %}
-          <a href="#{{firstletter}}">{{firstletter}}</a>&nbsp;
+          <a class="alphabetlist" href="#{{firstletter}}">{{firstletter}}</a>&nbsp;
       {% endfor %}
       <ul>
       {% for firstletter, namelist in make_placenames(places) %}
