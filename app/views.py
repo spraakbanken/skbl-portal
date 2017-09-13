@@ -123,10 +123,10 @@ def search():
     with app.open_resource("static/pages/advanced-search/%s.html" % (g.language)) as f:
         advanced_search_text = f.read()
 
-    return render_template('list.html', headline=gettext('Hits'),
+    return render_template('list.html', headline=gettext('Hits for "%s"') % search.decode("UTF-8"),
                            hits=data["query"]["hits"],
                            advanced_search_text=advanced_search_text.decode("UTF-8"),
-                           search=search,
+                           search=search.decode("UTF-8"),
                            alphabetic=False)
 
 
