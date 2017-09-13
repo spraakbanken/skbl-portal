@@ -9,7 +9,7 @@
     <h1>{{ headline }}</h1>
     <ul>
       {% for category, namelist in make_placelist(hits, headline, lat, lon) %}
-        <h3><a name="{{category}}">{{ category }}</a></h3>
+        <h3 name="{{category}}">{{ category }}</h3>
         {% for name, hit in namelist %}
         <li>
             <a href="{{ url_for('article_'+g.language, id=hit._id) }}"><strong>{{ name }}</strong><br />
