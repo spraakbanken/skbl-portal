@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-08-29 11:55+0000\n"
+"POT-Creation-Date: 2017-09-13 09:29+0000\n"
 "PO-Revision-Date: 2017-02-20 14:49+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sv\n"
@@ -47,8 +47,9 @@ msgid "We will get back to you as soon as we can."
 msgstr "Vi återkommer så fort vi kan."
 
 #: app/views.py:126
-msgid "Hits"
-msgstr "Träffar"
+#, python-format
+msgid "Hits for \"%s\""
+msgstr "Träffar för \"%s\""
 
 #: app/templates/layout.html:120 app/views.py:157
 msgid "Places"
@@ -107,12 +108,16 @@ msgid "Search"
 msgstr "Sök"
 
 #: app/templates/layout.html:70
-msgid "Advanced search"
-msgstr "Avancerad sök"
+msgid "Go to advanced search"
+msgstr "Till avancerad sökning"
 
 #: app/templates/layout.html:85
 msgid "Article authors"
 msgstr "Artikelförfattare"
+
+#: app/templates/layout.html:93
+msgid "På "
+msgstr "In "
 
 #: app/templates/layout.html:108
 msgid "Activities"
@@ -125,3 +130,9 @@ msgstr "Dela sidan"
 #: app/templates/list.html:11
 msgid "No results found for"
 msgstr "Inga träffar för"
+
+#~ msgid "Hits"
+#~ msgstr "Träffar"
+
+#~ msgid "På"
+#~ msgstr "In"

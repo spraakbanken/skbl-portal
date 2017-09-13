@@ -67,7 +67,7 @@
               </span>
             </div>
           </form>
-          <a href="https://spraakbanken.gu.se/karp/#?mode=skbl&lang={{ 'swe' if g.language == 'sv' else 'eng' }}">{{ gettext('Advanced search') }}</a>
+          <a href="https://spraakbanken.gu.se/karp/#?mode=skbl&lang={{ 'swe' if g.language == 'sv' else 'eng' }}">{{ gettext('Go to advanced search') }}</a>
         </div>
       </div>
       <nav id="navbar" class="navbar">
@@ -90,7 +90,7 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-              <li class="language-switch"><a href="{{ g.switch_language.url }}"><span class="glyphicon glyphicon-flag"></span>&nbsp;{{ g.switch_language.label }}</a></li>
+              <li class="language-switch"><a href="{{ g.switch_language.url }}"><span class="glyphicon glyphicon-flag"></span>&nbsp;{{ gettext('På ') }}{{ g.switch_language.label }}</a></li>
             </ul>
           </div>
         </div>
