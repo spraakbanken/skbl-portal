@@ -104,11 +104,10 @@ def make_namelist(hits, alphabetic=True):
             letter_results[first_letter].append((listed_name, islink, hit))
 
     # Sort result dictionary alphabetically into list
-
     if alphabetic:
         collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
         for n, items in letter_results.items():
-            items.sort(key=lambda x:collator.getSortKey(x[0]))
+            items.sort(key=lambda x: collator.getSortKey(x[0]))
         letter_results = sorted(letter_results.items(), key=lambda x: collator.getSortKey(x[0]))
     else:
         letter_results = list(letter_results.items())
@@ -160,13 +159,14 @@ def sort_places(stat_table, route):
 def mk_links(text):
     # TODO markdown should fix this itself
     try:
-       text = re.sub('\[\]\((.*?)\)', r'[\1](\1)', text)
-       for link in re.findall('\]\((.*?)\)', text):
-           text = re.sub('\(%s\)' % link, '(%s)' % url_for('article_index_'+g.language, search=link), text)
+        text = re.sub('\[\]\((.*?)\)', r'[\1](\1)', text)
+        for link in re.findall('\]\((.*?)\)', text):
+            text = re.sub('\(%s\)' % link, '(%s)' % url_for('article_index_' + g.language, search=link), text)
     except:
-       # If there are parenthesis within the links, problems will occur.
-       text = text
+        # If there are parenthesis within the links, problems will occur.
+        text = text
     return text
+
 
 def aggregate_by_type(items, use_markdown=False):
     if not isinstance(items, list):
@@ -176,12 +176,13 @@ def aggregate_by_type(items, use_markdown=False):
         if "type" in item:
             t = item["type"]
             if t:
-                if not t in types:
+                if t not in types:
                     types[t] = []
                 if use_markdown and "description" in item:
                     item["description"] = markdown_html(item["description"])
                 types[t].append(item)
     return types.items()
+
 
 def collapse_kids(source):
     unkown_kids =0
@@ -217,7 +218,7 @@ def make_placenames(places):
     # Sort result dictionary alphabetically into list
     collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
     for n, items in letter_results.items():
-        items.sort(key=lambda x:collator.getSortKey(x[0]))
+        items.sort(key=lambda x: collator.getSortKey(x[0]))
     letter_results = sorted(letter_results.items(), key=lambda x: collator.getSortKey(x[0]))
 
     return letter_results
