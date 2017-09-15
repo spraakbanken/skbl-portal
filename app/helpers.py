@@ -39,16 +39,26 @@ def get_life_range(source):
 
 
 def get_date(source):
+    """Get exact birth date if possible. Get date comment otherwise."""
     if not source['lifespan']['from'].get('date'):
-        return get_life_range(source)
-    elif not source['lifespan']['from']['date'].get('date'):
-        return False
-    if not source['lifespan']['to'].get('date'):
-        return get_life_range(source)
-    elif not source['lifespan']['to']['date'].get('date'):
-        return False
+        birth_date = get_life_range(source)[0]
+    elif source['lifespan']['from']['date'].get('date'):
+        birth_date = source['lifespan']['from']['date']['date']
+    elif source['lifespan']['from']['date'].get('comment'):
+        birth_date = source['lifespan']['from']['date']['comment']
     else:
-        return source['lifespan']['from']['date']['date'], source['lifespan']['to']['date']['date']
+        birth_date = ''
+
+    if not source['lifespan']['to'].get('date'):
+        death_date = get_life_range(source)[1]
+    elif source['lifespan']['to']['date'].get('date'):
+        death_date = source['lifespan']['to']['date']['date']
+    elif source['lifespan']['to']['date'].get('comment'):
+        death_date = source['lifespan']['to']['date']['comment']
+    else:
+        death_date = ''
+
+    return birth_date, death_date
 
 
 def markdown_html(text):
