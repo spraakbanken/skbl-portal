@@ -145,7 +145,11 @@ def place_index():
                 'count': kw.get('doc_count')}
 
     def has_name(kw):
-        return kw.get('key').split('|')[0]
+        name = kw.get('key').split('|')[0]
+        if name and u"(osäker uppgift)" not in name:
+            return name
+        else:
+            return None
 
     data = karp_query('getplaces', {})
     stat_table = [parse(kw) for kw in data['places'] if has_name(kw)]
