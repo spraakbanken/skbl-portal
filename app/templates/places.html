@@ -1,9 +1,9 @@
 {% extends "layout.html" %}
 {% block title %}skbl.se - {{ title }}{% endblock %}
 {% block content %}
-    <h1>{{ title }}</h1>
-<p>Platser där de biograferade kvinnorna fötts, dött och varit verksamma. Klicka på en ort för att få upp en karta och en lista över kvinnor med anknytning till platsen.</p><br/>
 <div class="col-md-8">
+    <h1>{{ title }}</h1>
+    <p>Platser där de biograferade kvinnorna fötts, dött och varit verksamma. Klicka på en ort för att få upp en karta och en lista över kvinnor med anknytning till platsen.</p><br/>
 
       {% for firstletter, _ in make_placenames(places) %}
           <a class="alphabetlist" href="#{{firstletter}}">{{firstletter}}</a>&nbsp;
