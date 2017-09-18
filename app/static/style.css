@@ -97,6 +97,7 @@ hr {
 .image-overlay {
   display: inline-block;
   position: relative;
+  margin-bottom: 10px;
 }
 .image-overlay:after {
   content: '';
