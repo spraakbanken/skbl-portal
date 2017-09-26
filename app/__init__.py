@@ -11,6 +11,7 @@ from flask import Flask, g, request, redirect, render_template, url_for
 from flask_babel import Babel
 from setuptools import setup
 from urllib2 import Request, urlopen
+import HTMLParser
 import helpers
 
 
@@ -103,9 +104,13 @@ app.jinja_env.globals.update(join_name=helpers.join_name)
 app.jinja_env.globals.update(sorted=sorted)
 app.jinja_env.globals.update(len=len)
 
+
 @app.template_filter('deescape')
 def deescape_filter(s):
-    return s.replace("&amp;", "&").replace("&apos;", "'").replace("&quot;", '"')
+    # return s.replace("&amp;", "&").replace("&apos;", "'").replace("&quot;", '"')
+    html_parser = HTMLParser.HTMLParser()
+    return html_parser.unescape(s)
+
 
 from app import views
 

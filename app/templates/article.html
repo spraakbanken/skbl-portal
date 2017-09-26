@@ -198,7 +198,7 @@
             <h3>{{ gettext("Links") }}</h3>
             <ul>
             {% for link in article.externallink %}
-                <li><a class="visible_link" target="_blank" href="{{ link.url | deescape }}">{{ link.description }}</a></span></li>
+                <li><a class="visible_link" target="_blank" href="{{ link.url | deescape }}">{{ link.description | deescape }}</a></span></li>
             {% endfor %}
             </ul>
         {% endif %}
