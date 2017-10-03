@@ -39,6 +39,31 @@ h3 {
 #search .input-group {
 
 }
+
+#advanced_box {
+  display: none;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  width: 300px;
+  background-color: #ffc930;
+  padding: 12px;
+  z-index: 1000;
+  border-bottom-left-radius: 18px;
+  -webkit-border-bottom-left-radius: 18px;
+  -moz-border-bottom-left-radius: 18px;
+}
+#advanced_box_header_area {
+  text-align: right;
+  width: 100%;
+  height: 20px;
+}
+#advanced_box_close {
+  cursor: pointer;
+  right: 8px;
+  position: absolute;
+}
+
 @media (max-width: 800px) {
   #header-title h1{
     display: none;

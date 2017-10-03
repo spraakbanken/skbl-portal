@@ -67,7 +67,18 @@
               </span>
             </div>
           </form>
-          <a href="https://spraakbanken.gu.se/karp/#?mode=skbl&lang={{ 'swe' if g.language == 'sv' else 'eng' }}">{{ gettext('Go to advanced search') }}</a>
+          <!--<a href="https://spraakbanken.gu.se/karp/#?mode=skbl&lang={{ 'swe' if g.language == 'sv' else 'eng' }}">{{ gettext('Go to advanced search') }}</a>-->
+          <a id="open_advanced_box">Till avancerad sökning</a>
+          <div id="advanced_box">
+            <div id="advanced_box_header_area">
+              <div id="advanced_box_close">
+                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;
+              </div>
+            </div>
+            <p>För att göra mer avancerade sökningar och sammanställningar kan du använda Språkbankens verktyg Karp.
+Det rekommenderas i första hand för forskare som vill analysera de uppgifter som ligger till grund för SKBL.</p>
+            <a class="visible_link" href="https://spraakbanken.gu.se/karp/#?mode=skbl" target="_blank"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>&nbsp; Till Karp</a> (extern länk)
+          </div>
         </div>
       </div>
       <nav id="navbar" class="navbar">
@@ -170,6 +181,16 @@
     </div>
     {% block foot %}
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script>
+        jQuery(document).ready(function() {
+            $("#open_advanced_box").click(function() {
+              $("#advanced_box").show();
+            });
+            $("#advanced_box_close").click(function() {
+              $("#advanced_box").hide();
+            });
+        });
+    </script>
     {% endblock %}
   </body>
 </html>
