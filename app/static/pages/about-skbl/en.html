@@ -1,42 +1,45 @@
 <div class="col-md-8">
-    <h1>Swedish Women On-line (SWO)</h1>
+    <h1>Svenskt kvinnobiografiskt lexikon</h1>
     <p>
-        <strong>
-            Swedish Women On-line (SWO), from the Middle Ages to the Present.
-            <br> 
-            A Biographical Dictionary of Swedish Women, in Swedish and 
-            in English
-        </strong>
-    </p>
+        Why is there so little known of female artists, scientists, politicians, and so forth? This is one of the first questions which arises whenever any kind of history is about to be written. One of the reasons for this is that historiography relies on existing biographical dictionaries, most of which contain very few entries for women. The Swedish biographical dictionary of women  (SKBL) resolves this dilemma providing free access to 1000 biographies of Swedish (and some non-Swedish) women who actively contributed to Swedish society.
 
-    <p>
-        Why are there no women artists, philosophers, scientists, politicians, 
-        and authors? This question surfaces, every time the history of art, 
-        literature, medicine, and philosophy is to be written. One important 
-        reason is that the writing of history is based on existing biographical 
-        dictionaries, where the principle of selection is gender-biased. In the 
-        large Swedish biographical dictionaries, women account for only 
-        5-10 percent of those biographied. 
-        Therefore, if the writing of history is to become less misleading, 
-        the very point of departure – the source material – has to be revised.
     </p>
-    <p>
-        The aim of the present project is to create an on-line Biographical 
-        Dictionary of Swedish Women (SWO) to be linked to other internet 
-        archives and on-line works of reference dealing with Swedish women. 
-        This on-line Dictionary will itself instigate and contribute to further 
-        research and scholarly work. The SWO will be published in both a 
-        Swedish and an English version. 
-        It will be available on the internet as a continually developing 
-        and freely accessible database. In this way, information about Swedish 
-        women’s contributions to society, from the Middle Ages to the present, 
-        will be easily available to both Swedish and international scholars.
-    </p>
-    <p>
-        The project is funded by the Swedish Foundation for the Humanities and 
-        Social Sciences for 2016-2017. After the conclusion of the project, the 
-        database will be managed by SWE-CLARIN.
-    </p>
+    <div id="more_info" class="ellipsis">
+        <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-info-sign" aria-hidden="true"></span> Läs mer om innehåll och urval</h4>
+        <span class="ellipsis_contents">
+            <p>
+                SKBL is produced by Gothenburg University. The articles are written by experts and researchers, whilst the work has been financed by Riksbankens Jubileumsfond. The dictionary contains biographies of women who, across several centuries and in many different ways, have contributed to society’s development, both within Sweden and beyond. The entries, based on a mix of existing and brand-new research, were mainly selected with an emphasis on societal significance rather than personal fame. The selection includes female pioneers and women who fought for gender quality as well as historically significant women. Finnish women are also included for the pre-1809 era.
+            </p>
+        </span>
+    </div>
+    <div id="more_info" class="ellipsis">
+        <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-info-sign" aria-hidden="true"></span> Läs mer om arbetet med SKBL</h4>
+        <span class="ellipsis_contents">
+            <p>
+                The project leaders are Lisbeth Larsson and Maria Sjöberg. The editorial board comprises Berith Backlund, Linus Karlsson, Ulrika Lagerlöf Nilsson, Cecilia Pettersson, and Linnea Åshede. The dictionary entries were written by experts and researchers (listed under the entry for ʻArticle authors’) and translated into English by Alexia Grosjean. The database was developed by Språkbanken and is managed by SWE-CLARIN. The database and the dictionary form part of Kvinnsam – the national library for gender studies at Gothenburg University.
+            </p>
+
+            <p>
+                The article authors have compiled searchable biographical information for each dictionary entry. The editors have further supplemented these with material from Sveriges dödbok, Svensk arkivinformation’s (SVAR) collections of census and church records, as well as similar material from Arkiv Digital. The editors have also included reference and links.
+            </p>
+        </span>
+    </div>
+    <div id="more_info" class="ellipsis">
+        <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-info-sign" aria-hidden="true"></span> Contents</h4>
+        <span class="ellipsis_contents">
+            <p>
+                If you are looking for a particular woman you can select either <a href="/en/article" class="visible_link">Women A-Z</a> or the search box. Each article comprises a biography focusing on the subject’s activities and their wider significance, along with biographical information on the subject’s background, education, activities and occupations, club and organisational memberships, networks and awards. The articles also supply references and information on archival and public memorials.
+            </p>
+
+            <p>
+                Each subject’s portrait is preceded by a link to a map illustrating the subject’s birthplace, geographical area of activities, and place of death.
+            </p>
+
+            <p>
+                The free-text search box, which calls up the biographies, can be combined with searches in the fields labelled activities, organisations, placenames and keywords.
+            </p>
+        </span>
+    </div>
 </div>
 <div class="col-md-4">
     <div class="image-overlay">
@@ -60,3 +63,11 @@
     data-show-facepile="false" 
     data-show-posts="false"></div>    
 </div>
+<script>
+    jQuery(document).ready(function() {
+        jQuery(".ellipsis_header").click(function() {
+            jQuery(this).siblings(".ellipsis_contents").toggle();
+            jQuery(this).toggle();
+        });
+    });
+</script>

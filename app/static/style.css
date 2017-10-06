@@ -455,3 +455,7 @@ li .glyphicon-link {
     font-size: 1.3em;
     margin-right: 3px;
 }
+
+#open_advanced_box {
+  cursor: pointer;
+}

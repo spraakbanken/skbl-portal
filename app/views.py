@@ -24,8 +24,20 @@ def index():
 @app.route('/en', endpoint='index_en')
 @app.route('/sv', endpoint='index_sv')
 def start():
+    rule = request.url_rule
+    if 'sv' in rule.rule:
+        infotext = u"""<p>Läs om 1 000 svenska kvinnor från medeltid till nutid.</p>
+                       <p>Genom olika sökningar kan du se - vad de arbetade med,
+                       vilken utbildning de fick, vilka organisationer de var med i,
+                       hur de rörde sig i världen, vad de åstadkom och mycket mera.</p>
+                       <p>Alla har de bidragit till samhällets utveckling.</p>"""
+    else:
+        infotext = u"""<p>Read up on 1000 Swedish women – from the middle ages to the present day.</p>
+                       <p>Use the search function to reveal what these women got up to, how they were educated,
+                       which organisations they belonged to, whether they travelled, what they achieved, and much more.</p>
+                       <p>All of them contributed in a significant way to the development of Swedish society.</p>"""
     set_language_switch_link("index")
-    return render_template('start.html')
+    return render_template('start.html', infotext=infotext)
 
 
 @app.route("/en/about-skbl", endpoint="about-skbl_en")
@@ -133,6 +145,16 @@ def search():
 @app.route("/en/place", endpoint="place_index_en")
 @app.route("/sv/ort", endpoint="place_index_sv")
 def place_index():
+    rule = request.url_rule
+    if 'sv' in rule.rule:
+        infotext = u"""Här kan du se var de biograferade kvinnorna befunnit sig;
+        var de fötts, verkat och dött. Genom att klicka på en ord kan du se vilka som fötts,
+        verkat och/eller avlidit där."""
+    else:
+        infotext = u"""This displays the subjects’ locations: where they were born
+        where they were active, and where they died. Selecting a particular placename
+        generates a list of all subjects who were born, active and/or died at that place."""
+
     set_language_switch_link("place_index")
 
     def parse(kw):
@@ -158,7 +180,7 @@ def place_index():
     collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
     stat_table.sort(key=lambda x: collator.getSortKey(x.get('name').strip()))
 
-    return render_template('places.html', places=stat_table, title=gettext("Places"))
+    return render_template('places.html', places=stat_table, title=gettext("Placenames", infotext=infotext))
 
 
 @app.route("/en/place/<place>", endpoint="place_en")
@@ -177,9 +199,18 @@ def place(place=None):
 @app.route("/en/organisation", endpoint="organisation_index_en")
 @app.route("/sv/organisation", endpoint="organisation_index_sv")
 def organisation_index():
-    infotext = u"""De organisationer där kvinnor varit aktiva finns sorterade ämnesvis
-    (politik, religion, idrott, ideell m fl.). Välj ämne för att se organisationer
-    inom detta och vilka kvinnor som var aktiva i dem."""
+    rule = request.url_rule
+    if 'sv' in rule.rule:
+        infotext = u"""Här kan du se vilka organisationer de biograferade kvinnorna varit medlemmar
+        och verksamma i. Det ger en inblick i de nätverk som var de olika kvinnornas och visar
+        såväl det gemensamma engagemanget som mångfalden i det.
+        Om du klickar på organisationens namn visas vilka kvinnor som var aktiva i den."""
+    else:
+        infotext = u"""This displays the organisations which the subjects in the dictionary joined
+        and within which they were active. This not only provides an insight into each woman’s
+        networks but also highlights both shared activities and their diversity.
+        Selecting a particular organisation generates a list of all women who were members."""
+
     data = karp_query('minientry', {'q': 'extended||and|anything|regexp|.*',
                                     'show': 'organisationsnamn,organisationstyp'})
     set_language_switch_link("organisation_index")
@@ -191,7 +222,7 @@ def organisation_index():
                 nested_obj[orgtype] = defaultdict(set)
             nested_obj[orgtype][org.get('name', '-')].add(hit['_id'])
     return render_template('nestedbucketresults.html',
-                           results=nested_obj, title=gettext("Organizations"),
+                           results=nested_obj, title=gettext("Organisations"),
                            infotext=infotext, name='organisation')
     # return bucketcall(queryfield='organisationstyp', name='organisation',
     #                   title='Organizations', infotext=infotext)
@@ -207,7 +238,11 @@ def organisation(result=None):
 @app.route("/en/activity", endpoint="activity_index_en")
 @app.route("/sv/verksamhet", endpoint="activity_index_sv")
 def activity_index():
-    infotext = u"Här listas kvinnornas yrken och andra verksamheter."
+    rule = request.url_rule
+    if 'sv' in rule.rule:
+        infotext = u"Här kan du se inom vilka områden de biograferade kvinnorna varit verksamma och vilka yrken de hade."
+    else:
+        infotext = u"This displays the areas within which the biographical subject was active and which activities and occupation(s) they engaged in."
     data = karp_query('minientry', {'q': 'extended||and|anything|regexp|.*',
                                     'show': 'verksamhetstext,verksamhetsdetalj'})
     set_language_switch_link("activity_index")
@@ -233,9 +268,15 @@ def activity(result=None):
 @app.route("/en/keyword", endpoint="keyword_index_en")
 @app.route("/sv/nyckelord", endpoint="keyword_index_sv")
 def keyword_index():
-    infotext = u"""Nyckelorden (ämnesorden) sammanfattar kvinnornas verksamheter,
-    utan att specificera dem, t ex. Kvinnorörelsen, Fredsrörelsen, Konstnärer etc.
-    Klicka på ett nyckelord för att få en lista på biografier där det används."""
+    rule = request.url_rule
+    if 'sv' in rule.rule:
+        infotext = u"""Här finns en lista över de nyckelord som karakteriserar materialet.
+        De handlar om tid, yrken, ideologier och mycket mera.
+        Om du klickar på något av nyckelorden kan du se vilka kvinnor som kan karakteriseras med det."""
+    else:
+        infotext = u"""This generates a list of keywords which typically appear in the entries.
+        These include time periods, occupations, ideologies and much more.
+        Selecting a keyword generates a list of all the women who fall under the given category."""
     return bucketcall(queryfield='nyckelord', name='keyword', title='Keywords', infotext=infotext)
 
 
@@ -248,7 +289,11 @@ def keyword(result=None):
 @app.route("/en/articleauthor", endpoint="articleauthor_index_en")
 @app.route("/sv/artikelforfattare", endpoint="articleauthor_index_sv")
 def authors():
-    infotext = u"Klicka på författarens namn för att komma till en kortfattad författarinformation."
+    rule = request.url_rule
+    if 'sv' in rule.rule:
+        infotext = u"""Här förtecknas de personer som har bidragit med artiklar till Svenskt kvinnobiografiskt lexikon. """
+    else:
+        infotext = u"""This is a list of the authors who supplied articles to SKBL."""
     return bucketcall(queryfield='artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn',
                       name='articleauthor', title='Article authors', sortby=lambda x: x[1], lastnamefirst=True, infotext=infotext)
 
