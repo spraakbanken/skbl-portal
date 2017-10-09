@@ -18,23 +18,28 @@ def get_life_range(source):
     Return the birth and death year from _source (as a tuple).
     If both are empty return False.
     """
-    birth_date = source['lifespan']['from'].get('date', '')
-    if birth_date:
-        birth_date = birth_date.get('comment', '')
-    if "-" in birth_date:
-        birth_year = birth_date[:birth_date.find("-")]
+    if source['lifespan'].get('from'):
+        birth_date = source['lifespan']['from'].get('date', '')
+        if birth_date:
+            birth_date = birth_date.get('comment', '')
+        if "-" in birth_date:
+            birth_year = birth_date[:birth_date.find("-")]
+        else:
+            birth_year = birth_date
     else:
-        birth_year = birth_date
+        birth_year = ''
 
-    death_date = source['lifespan']['to'].get('date', '')
-    if death_date:
-        death_date = death_date.get('comment', '')
-    if "-" in death_date:
-        death_year = death_date[:death_date.find("-")]
+    if source['lifespan'].get('to'):
+        death_date = source['lifespan']['to'].get('date', '')
+        if death_date:
+            death_date = death_date.get('comment', '')
+        if "-" in death_date:
+            death_year = death_date[:death_date.find("-")]
+        else:
+            death_year = death_date
     else:
-        death_year = death_date
-    if not (birth_year or death_year):
-        return False
+        death_year = ''
+
     return birth_year, death_year
 
 
@@ -42,6 +47,8 @@ def get_date(source):
     """Get exact birth date if possible. Get date comment otherwise."""
     if not source['lifespan']['from'].get('date'):
         birth_date = get_life_range(source)[0]
+        if not birth_date:
+            birth_date = ''
     elif source['lifespan']['from']['date'].get('date'):
         birth_date = source['lifespan']['from']['date']['date']
     elif source['lifespan']['from']['date'].get('comment'):
@@ -51,6 +58,8 @@ def get_date(source):
 
     if not source['lifespan']['to'].get('date'):
         death_date = get_life_range(source)[1]
+        if not death_date:
+            death_date = ''
     elif source['lifespan']['to']['date'].get('date'):
         death_date = source['lifespan']['to']['date']['date']
     elif source['lifespan']['to']['date'].get('comment'):

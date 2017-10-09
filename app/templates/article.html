@@ -11,7 +11,7 @@
     <div class="col-md-8">
         <h1 itemprop="name">{{ article.showname }}</h1>
         <h4 itemprop="additionalName">{{ article.fullfirstname }}</h4>
-        {% if get_date(article) %}
+        {% if get_date(article)[0] or get_date[1] %}
             <h4> <span itemprop="birthDate">{{ get_date(article)[0] }}</span> &mdash; <span itemprop="deathDate">{{ get_date(article)[1] }}</span></h4>
         {% endif %}
         <h4 itemprop="jobTitle">{{ article.subtitle }}</h4>
