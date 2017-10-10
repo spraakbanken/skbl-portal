@@ -128,7 +128,7 @@ def search():
         karp_q['q'] = "extended||and|anything|regexp|%s" % search
         karp_q['sort'] = '_score'
     else:
-        karp_q['q'] = "simple||%s" % search
+        karp_q['q'] = "extended||and|anything|contains|%s" % search
 
     data = karp_query('querycount', karp_q)
     advanced_search_text = ''
@@ -139,7 +139,7 @@ def search():
                            hits=data["query"]["hits"],
                            advanced_search_text=advanced_search_text.decode("UTF-8"),
                            search=search.decode("UTF-8"),
-                           alphabetic=False)
+                           alphabetic=True)
 
 
 @app.route("/en/place", endpoint="place_index_en")
