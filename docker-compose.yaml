@@ -6,3 +6,9 @@ services:
     - "8080:8080"
     volumes:
     - .:/app
+    links:
+    - memcache
+  memcache:
+    ports:
+      - "11211:11211"
+    image: memcached

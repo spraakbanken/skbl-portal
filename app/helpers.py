@@ -1,7 +1,7 @@
 # -*- coding=utf-8 -*-
 from app import g
 from flask import url_for
-import icu # pip install PyICU
+import icu  # pip install PyICU
 import markdown
 import re
 
@@ -87,20 +87,36 @@ def group_by_type(objlist, name):
         result.append({'type': key, name: ', '.join(val)})
     return result
 
+def make_alphabetical_bucket(result):
+    def processname(bucket, results):
+        results.append((bucket[0][0].upper(), bucket))
+    return make_alphabetic(result, processname)
 
-def make_namelist(hits, alphabetic=True):
+
+def make_placenames(places):
+    def processname(hit, results):
+        name = hit['name'].strip()
+        results.append((name[0].upper(), (name, hit)))
+    return make_alphabetic(places, processname)
+
+
+def make_alphabetic(hits, processname):
+    """ Loops through hits, applies the function 'processname'
+        on each object and then sorts the result in alphabetical
+        order.
+        The function processname should append zero or more processed form of
+        the object to the result list.
+        This processed forms should be a pair (first_letter, result)
+        where first_letter is the first_letter of each object (to sort on), and the result
+        is what the html-template want e.g. a pair of (name, no_hits)
+    """
     results = []
-    for hit in hits["hits"]:
-        source = hit["_source"]
-        name = get_name(source)
-        results.append((join_name(source), name[0][0].upper(), False, hit))
-        for altname in source.get("othernames", []):
-            if altname.get("mk_link"):
-                results.append((altname["name"], altname["name"][0].upper(), True, hit))
+    for hit in hits:
+        processname(hit, results)
 
     letter_results = {}
     # Split the result into start letters
-    for listed_name, first_letter, islink, hit in results:
+    for first_letter, result in results:
         if first_letter == u'Ø':
             first_letter = u'Ö'
         if first_letter == u'Æ':
@@ -108,20 +124,33 @@ def make_namelist(hits, alphabetic=True):
         if first_letter == u'Ü':
             first_letter = u'Y'
         if first_letter not in letter_results:
-            letter_results[first_letter] = [(listed_name, islink, hit)]
+            letter_results[first_letter] = [result]
         else:
-            letter_results[first_letter].append((listed_name, islink, hit))
+            letter_results[first_letter].append(result)
 
     # Sort result dictionary alphabetically into list
-    if alphabetic:
-        collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
-        for n, items in letter_results.items():
-            items.sort(key=lambda x: collator.getSortKey(x[0]))
-        letter_results = sorted(letter_results.items(), key=lambda x: collator.getSortKey(x[0]))
-    else:
-        letter_results = list(letter_results.items())
-
+    collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
+    for n, items in letter_results.items():
+        items.sort(key=lambda x: collator.getSortKey(x[0]))
+    letter_results = sorted(letter_results.items(), key=lambda x: collator.getSortKey(x[0]))
     return letter_results
+
+
+def make_namelist(hits, alphabetic=True):
+    # TODO NB! If alphabetic is set to False, the order will be radom-ish.
+    # It will partly follow ES sorting order, but since the dictionary
+    # letter_results won't keep the order of the initial letters, the result
+    # will be mixed up. Nor will links be sorted accurately. Improve this!
+    def processname(hit, results):
+        source = hit["_source"]
+        name = get_name(source)
+        results.append((name[0][0].upper(), (join_name(source), False, hit)))
+        for altname in source.get("othernames", []):
+            if altname.get("mk_link"):
+                results.append((altname["name"][0].upper(),
+                                (altname["name"], True, hit)))
+    return make_alphabetic(hits["hits"], processname)
+
 
 
 def get_name(source):
@@ -194,43 +223,16 @@ def aggregate_by_type(items, use_markdown=False):
 
 
 def collapse_kids(source):
-    unkown_kids =0
+    unkown_kids = 0
     for relation in source.get('relation', []):
-        if relation.get('type') == 'Barn' and len(relation.keys())==1:
-            unkown_kids +=1
+        if relation.get('type') == 'Barn' and len(relation.keys()) == 1:
+            unkown_kids += 1
             relation['hide'] = True
     if unkown_kids:
         source['collapsedrelation'] = [{"type": "Barn", "count": unkown_kids}]
 
 
-# TODO copy-paste from make_namelist (but slightly modfied...), make some help function instead
-def make_placenames(places):
-    results = []
-    for hit in places:
-        name = hit['name'].strip()
-        results.append((name, name[0].upper(), hit))
 
-    letter_results = {}
-    # Split the result into start letters
-    for listed_name, first_letter, hit in results:
-        if first_letter == u'Ø':
-            first_letter = u'Ö'
-        if first_letter == u'Æ':
-            first_letter = u'Ä'
-        if first_letter == u'Ü':
-            first_letter = u'Y'
-        if first_letter not in letter_results:
-            letter_results[first_letter] = [(listed_name, hit)]
-        else:
-            letter_results[first_letter].append((listed_name, hit))
-
-    # Sort result dictionary alphabetically into list
-    collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
-    for n, items in letter_results.items():
-        items.sort(key=lambda x: collator.getSortKey(x[0]))
-    letter_results = sorted(letter_results.items(), key=lambda x: collator.getSortKey(x[0]))
-
-    return letter_results
 
 def make_placelist(hits, placename, lat, lon):
     grouped_results = {}
@@ -255,7 +257,7 @@ def make_placelist(hits, placename, lat, lon):
                     if ptype not in grouped_results:
                         grouped_results[ptype] = []
                     grouped_results[ptype].append((join_name(source), hit))
-                #else:
+                # else:
                     # These two lines should be removed, but are kept for debugging
                     # if 'Fel' not in grouped_results: grouped_results['Fel'] = []
                     # grouped_results['Fel'].append((join_name(source), hit))
@@ -276,7 +278,8 @@ def make_placelist(hits, placename, lat, lon):
 def is_email_address_valid(email):
     """
     Validate the email address using a regex.
-    It may not include any whitespaces, has exactly one "@" and at least one "." after the "@".
+    It may not include any whitespaces, has exactly one "@" and at least one
+    "." after the "@".
     """
     if " " in email:
         return False

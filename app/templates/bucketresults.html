@@ -11,10 +11,26 @@
 <div class="col-md-4">
 </div>
 <div class="col-md-12">
+    {% if alphabetical %}
+        {% for firstletter, _ in make_alphabetical_bucket(results) %}
+            <a class="alphabetlist" href="#{{firstletter}}">{{firstletter}}</a>&nbsp;
+        {% endfor %}
+        <ul>
+          {% for firstletter, namelist in make_alphabetical_bucket(results) %}
+                <h2><a name="{{firstletter}}">{{ firstletter }}</a></h2>
+            {% for result in namelist %}
+              <li class="keyword_list_item"><a href="{{ url_for(name+'_'+g.language, result=' '.join(result[0:-1])) }}">{{ ' '.join(result[0:-1]) | deescape }}&nbsp;<span class="badge">{{ result[-1] }}</span></a></li>
+            {% endfor %}
+          {% endfor %}
+        </ul>
+    {% else %}
     <ul>
         {% for result in results %}
-          <li class="keyword_list_item"><a href="{{ url_for(name+'_'+g.language, result=' '.join(result[0:-1])) }}">{{ ' '.join(result[0:-1]) }}&nbsp;<span class="badge">{{ result[-1] }}</span></a></li>
+          <li class="keyword_list_item"><a href="{{ url_for(name+'_'+g.language, result=' '.join(result[0:-1])) }}">{{ ' '.join(result[0:-1]) | deescape }}&nbsp;<span class="badge">{{ result[-1] }}</span></a></li>
         {% endfor %}
     </ul>
+    {% endif %}
 </div>
 {% endblock %}
+
+

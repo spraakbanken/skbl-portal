@@ -25,3 +25,19 @@ docker-compose exec web chmod -R 777 .
 
 ### Compile translations
 docker-compose exec web pybabel compile -d app/translations
+
+### Installing memcached & co on k2
+Download and install memcached, libmemcached and libevent.
+For example:
+`./configure --prefix=/var/www/sites/dev.skbl.se/data/libevent`
+`make`
+`make test`
+`make install`
+
+For memcached, run the config as below
+`./configure --prefix=/var/www/sites/dev.skbl.se/data/memcached --with-libevent=/var/www/sites/dev.skbl.se/data/libevent`
+
+To get pylibmc to work with the locally installed mc packages, run:
+pip install --global-option=build_ext --global-option="-I/home/fkskbl/dev.skbl.se/data/libmemcached/include/" --global-option="-L/home/fkskbl/dev.skbl.se/data/libmemcached/lib" --global-option="-R/home/fkskbl/dev.skbl.se/data/libmemcached/lib" pylibmc
+
+

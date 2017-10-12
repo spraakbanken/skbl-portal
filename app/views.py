@@ -8,11 +8,17 @@ from flask_babel import gettext
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.header import Header
-import smtplib
-import icu  # pip install PyICU
 import helpers
+import icu  # pip install PyICU
+import json
+import md5
+from pylibmc import Client
 import re
-import sys
+import smtplib
+import urllib
+from urllib2 import urlopen
+
+client = Client(app.config['MEMCACHED'])
 
 
 # redirect to specific language landing-page
@@ -130,13 +136,13 @@ def search():
     else:
         karp_q['q'] = "extended||and|anything|contains|%s" % search
 
-    data = karp_query('querycount', karp_q)
+    data = karp_query('query', karp_q)
     advanced_search_text = ''
     with app.open_resource("static/pages/advanced-search/%s.html" % (g.language)) as f:
         advanced_search_text = f.read()
 
     return render_template('list.html', headline=gettext('Hits for "%s"') % search.decode("UTF-8"),
-                           hits=data["query"]["hits"],
+                           hits=data["hits"],
                            advanced_search_text=advanced_search_text.decode("UTF-8"),
                            search=search.decode("UTF-8"),
                            alphabetic=True)
@@ -145,6 +151,12 @@ def search():
 @app.route("/en/place", endpoint="place_index_en")
 @app.route("/sv/ort", endpoint="place_index_sv")
 def place_index():
+
+    set_language_switch_link("place_index")
+    rv = client.get('place')
+    if rv is not None and not app.config['TEST']:
+        return rv
+
     rule = request.url_rule
     if 'sv' in rule.rule:
         infotext = u"""Här kan du se var de biograferade kvinnorna befunnit sig;
@@ -154,8 +166,6 @@ def place_index():
         infotext = u"""This displays the subjects’ locations: where they were born
         where they were active, and where they died. Selecting a particular placename
         generates a list of all subjects who were born, active and/or died at that place."""
-
-    set_language_switch_link("place_index")
 
     def parse(kw):
         place = kw.get('key')
@@ -179,8 +189,9 @@ def place_index():
     # stat_table = helpers.sort_places(stat_table, request.url_rule)
     collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
     stat_table.sort(key=lambda x: collator.getSortKey(x.get('name').strip()))
-
-    return render_template('places.html', places=stat_table, title=gettext("Placenames", infotext=infotext))
+    art = render_template('places.html', places=stat_table, title=gettext("Placenames", infotext=infotext))
+    client.set('place', art, time=app.config['CACHE_TIME'])
+    return art
 
 
 @app.route("/en/place/<place>", endpoint="place_en")
@@ -191,7 +202,8 @@ def place(place=None):
     set_language_switch_link("place_index", place)
     hits = karp_query('querycount', {'q': "extended||and|plats.search|equals|%s" % (place.encode('utf-8'))})
     if hits['query']['hits']['total'] > 0:
-        return render_template('placelist.html', title=place, lat=lat, lon=lon, headline=place, hits=hits["query"]["hits"])
+        return render_template('placelist.html', title=place, lat=lat, lon=lon,
+                               headline=place, hits=hits["query"]["hits"])
     else:
         return render_template('page.html', content='not found')
 
@@ -199,6 +211,10 @@ def place(place=None):
 @app.route("/en/organisation", endpoint="organisation_index_en")
 @app.route("/sv/organisation", endpoint="organisation_index_sv")
 def organisation_index():
+    set_language_switch_link("organisation_index")
+    if client.get('organisation') is not None and not app.config['TEST']:
+        return client['organisation']
+
     rule = request.url_rule
     if 'sv' in rule.rule:
         infotext = u"""Här kan du se vilka organisationer de biograferade kvinnorna varit medlemmar
@@ -213,7 +229,6 @@ def organisation_index():
 
     data = karp_query('minientry', {'q': 'extended||and|anything|regexp|.*',
                                     'show': 'organisationsnamn,organisationstyp'})
-    set_language_switch_link("organisation_index")
     nested_obj = {}
     for hit in data['hits']['hits']:
         for org in hit['_source'].get('organisation', []):
@@ -221,9 +236,11 @@ def organisation_index():
             if orgtype not in nested_obj:
                 nested_obj[orgtype] = defaultdict(set)
             nested_obj[orgtype][org.get('name', '-')].add(hit['_id'])
-    return render_template('nestedbucketresults.html',
-                           results=nested_obj, title=gettext("Organisations"),
-                           infotext=infotext, name='organisation')
+    art = render_template('nestedbucketresults.html',
+                          results=nested_obj, title=gettext("Organisations"),
+                          infotext=infotext, name='organisation')
+    client.set('organisation', art, time=app.config['CACHE_TIME'])
+    return art
     # return bucketcall(queryfield='organisationstyp', name='organisation',
     #                   title='Organizations', infotext=infotext)
 
@@ -238,31 +255,26 @@ def organisation(result=None):
 @app.route("/en/activity", endpoint="activity_index_en")
 @app.route("/sv/verksamhet", endpoint="activity_index_sv")
 def activity_index():
+    set_language_switch_link("activity_index")
+    if client.get('activity') is not None and not app.config['TEST']:
+        return client['activity']
     rule = request.url_rule
     if 'sv' in rule.rule:
         infotext = u"Här kan du se inom vilka områden de biograferade kvinnorna varit verksamma och vilka yrken de hade."
     else:
         infotext = u"This displays the areas within which the biographical subject was active and which activities and occupation(s) they engaged in."
-    data = karp_query('minientry', {'q': 'extended||and|anything|regexp|.*',
-                                    'show': 'verksamhetstext,verksamhetsdetalj'})
-    set_language_switch_link("activity_index")
-    nested_obj = {}
-    for hit in data['hits']['hits']:
-        for org in hit['_source'].get('occupation', []):
-            orgtype = org.get('description', '-')
-            if orgtype not in nested_obj:
-                nested_obj[orgtype] = defaultdict(set)
-            nested_obj[orgtype][org.get('detail', '-')].add(hit['_id'])
-    return render_template('nestedbucketresults.html',
-                           results=nested_obj, title=gettext("Activities"),
-                           infotext=infotext, name='activity')
+    art = bucketcall(queryfield='verksamhetstext', name='activity',
+                     title=gettext("Activities"), infotext=infotext,
+                     alphabetical=True)
+    client.set('activity', art, time=app.config['CACHE_TIME'])
+    return art
 
 
 @app.route("/en/activity/<result>", endpoint="activity_en")
 @app.route("/sv/verksamhet/<result>", endpoint="activity_sv")
 def activity(result=None):
-    title = request.args.get('title')
-    return searchresult(result, 'activity', 'id', 'activities', title=title)
+    return searchresult(result, name='activity', searchfield='verksamhetstext',
+                        imagefolder='activities', title=result)
 
 
 @app.route("/en/keyword", endpoint="keyword_index_en")
@@ -295,17 +307,20 @@ def authors():
     else:
         infotext = u"""This is a list of the authors who supplied articles to SKBL."""
     return bucketcall(queryfield='artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn',
-                      name='articleauthor', title='Article authors', sortby=lambda x: x[1], lastnamefirst=True, infotext=infotext)
+                      name='articleauthor', title='Article authors', sortby=lambda x: x[1],
+                      lastnamefirst=True, infotext=infotext)
 
 
 @app.route("/en/articleauthor/<result>", endpoint="articleauthor_en")
 @app.route("/sv/artikelforfattare/<result>", endpoint="articleauthor_sv")
 def author(result=None):
-    return searchresult(result, name='articleauthor', searchfield='artikel_forfattare_fulltnamn',
+    return searchresult(result, name='articleauthor',
+                        searchfield='artikel_forfattare_fulltnamn',
                         imagefolder='authors', searchtype='contains')
 
 
 def searchresult(result, name='', searchfield='', imagefolder='', searchtype='equals', title=''):
+    qresult = result
     try:
         set_language_switch_link("%s_index" % name, result)
         qresult = result.encode('utf-8')
@@ -317,16 +332,22 @@ def searchresult(result, name='', searchfield='', imagefolder='', searchtype='eq
             if os.path.exists(app.config.root_path + '/static/images/%s/%s.jpg' % (imagefolder, qresult)):
                 picture = '/static/images/%s/%s.jpg' % (imagefolder, qresult)
 
-            return render_template('list.html', picture=picture, alphabetic=True, title=title, headline=title, hits=hits["query"]["hits"])
+            return render_template('list.html', picture=picture, alphabetic=True,
+                                   title=title, headline=title, hits=hits["query"]["hits"])
         else:
             return render_template('page.html', content='not found')
     except Exception:
         return render_template('page.html', content="%s: extended||and|%s.search|%s|%s" % (app.config['KARP_BACKEND'], searchfield, searchtype, qresult))
 
 
-def bucketcall(queryfield='', name='', title='', sortby='', lastnamefirst=False, infotext=''):
-    data = karp_query('statlist', {'buckets': '%s.bucket' % queryfield})
-    stat_table = [kw for kw in data['stat_table'] if kw[0] != ""]
+def bucketcall(queryfield='', name='', title='', sortby='', lastnamefirst=False,
+               infotext='', query='', alphabetical=False):
+    q_data = {'buckets': '%s.bucket' % queryfield}
+    if query:
+        q_data['q'] = query
+    data = karp_query('statlist', q_data)
+    # strip kw0 to get correct sorting
+    stat_table = [[kw[0].strip()]+kw[1:] for kw in data['stat_table'] if kw[0] != ""]
     if sortby:
         stat_table.sort(key=sortby)
     else:
@@ -334,7 +355,9 @@ def bucketcall(queryfield='', name='', title='', sortby='', lastnamefirst=False,
     if lastnamefirst:
         stat_table = [[kw[1] + ',', kw[0], kw[2]] for kw in stat_table]
     set_language_switch_link("%s_index" % name)
-    return render_template('bucketresults.html', results=stat_table, title=gettext(title), name=name, infotext=infotext)
+    return render_template('bucketresults.html', results=stat_table,
+                           alphabetical=alphabetical, title=gettext(title),
+                           name=name, infotext=infotext)
 
 
 # def nestedbucketcall(queryfield=[], paths=[], name='', title='', sortby='', lastnamefirst=False):
@@ -351,31 +374,35 @@ def bucketcall(queryfield='', name='', title='', sortby='', lastnamefirst=False,
 @app.route("/sv/artikel", endpoint="article_index_sv")
 def article_index(search=None):
     # search is only used by links in article text
-    set_language_switch_link("article_index")
 
+    set_language_switch_link("article_index")
     search = search or request.args.get('search')
     if search is not None:
         search = search.encode("UTF-8")
         data, id = find_link(search)
         if id:
-           # only one hit is found, redirect to that page
-           return redirect(url_for('article_'+g.language, id=id))
+            # only one hit is found, redirect to that page
+            return redirect(url_for('article_'+g.language, id=id))
         elif data["query"]["hits"]["total"] > 1:
-           # more than one hit is found, redirect to a listing
-           return redirect(url_for('search_'+g.language, q=search))
+            # more than one hit is found, redirect to a listing
+            return redirect(url_for('search_'+g.language, q=search))
         else:
-           # no hits are found redirect to a 'not found' page
-           return render_template('page.html', content='not found')
+            # no hits are found redirect to a 'not found' page
+            return render_template('page.html', content='not found')
 
+    if client.get('article') is not None and not app.config['TEST']:
+        return client['article']
     data = karp_query('query', {'q': "extended||and|namn.search|exists"})
     infotext = u"""Klicka på namnet för att läsa biografin om den kvinna du vill veta mer om."""
-    return render_template('list.html',
+    art = render_template('list.html',
                            hits=data["hits"],
                            headline=gettext(u'Women A-Ö'),
                            alphabetic=True,
                            split_letters=True,
                            infotext=infotext,
                            title='Articles')
+    client.set('article', art, time=app.config['CACHE_TIME'])
+    return art
 
 
 @app.route("/en/article/<id>", endpoint="article_en")
@@ -423,7 +450,6 @@ def show_article(data):
     else:
         return render_template('page.html', content='not found')
 
-
 # @app.route("/en/article-find/<id>", endpoint="article_en")
 # @app.route("/sv/artikel-find/<id>", endpoint="article_sv")
 # def article(link=None):
@@ -432,6 +458,20 @@ def show_article(data):
 #         set_language_switch_link("article_index", link)
 #         show_article(data)
 
+@app.route("/en/award", endpoint="award_index_en")
+@app.route("/sv/pris", endpoint="award_index_sv")
+def award_index():
+    # There are no links to this page, but might be wanted later on
+    # Exists only to support award/<result> below
+    return bucketcall(queryfield='prisbeskrivning', name='award', title='Award', infotext='')
+
+
+@app.route("/en/award/<result>", endpoint="award_en")
+@app.route("/sv/pris/<result>", endpoint="award_sv")
+def award(result=None):
+    return searchresult(result, name='award',
+                        searchfield='prisbeskrivning',
+                        imagefolder='award', searchtype='equals')
 
 
 @app.route("/en/article/<id>.json", endpoint="article_json_en")
@@ -440,3 +480,32 @@ def article_json(id=None):
     data = karp_query('querycount', {'q': "extended||and|id.search|equals|%s" % (id)})
     if data['query']['hits']['total'] == 1:
         return jsonify(data['query']['hits']['hits'][0]['_source'])
+
+
+@app.route('/emptycache')
+def emptycache():
+    # Users with write premissions to skbl may empty the cache
+    emptied = False
+    try:
+        auth = request.authorization
+        postdata = {}
+        user, pw = auth.username, auth.password
+        postdata["username"] = user
+        postdata["password"] = pw
+        postdata["checksum"] = md5.new(user + pw + app.config['SECRET_KEY']).hexdigest()
+        server = app.config['WSAUTH_URL']
+        contents = urlopen(server, urllib.urlencode(postdata)).read()
+        auth_response = json.loads(contents)
+        lexitems = auth_response.get("permitted_resources", {})
+        rights = lexitems.get("lexica", {}).get(app.config['SKBL'], {})
+        if rights.get('write'):
+             client.flush_all()
+             emptied = True
+    except Exception as e:
+        emptied = False
+    return jsonify({"cached_emptied": emptied})
+
+
+@app.route('/cachestats')
+def cachestats():
+    return jsonify({"cached_stats": client.get_stats()})

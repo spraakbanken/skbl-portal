@@ -113,7 +113,7 @@
             <ul class="ellipsis_contents">
             {% for award in article.awards %}
                 <li>
-                    <h5>{{ award.type }}{% if award.description %}: {{ award.description | deescape }}{% endif %}</h5>
+                    <h5>{{ award.type }}{% if award.description %}: <a class="visible_link" href="{{url_for('award_'+g.language, result=award.description)}}">{{award.description | deescape}}</a>{% endif %}</h5>
                 </li>
             {% endfor %}
             </ul>
