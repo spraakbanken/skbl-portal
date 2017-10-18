@@ -87,6 +87,7 @@ def group_by_type(objlist, name):
         result.append({'type': key, name: ', '.join(val)})
     return result
 
+
 def make_alphabetical_bucket(result):
     def processname(bucket, results):
         results.append((bucket[0][0].upper(), bucket))
@@ -150,7 +151,6 @@ def make_namelist(hits, alphabetic=True):
                 results.append((altname["name"][0].upper(),
                                 (altname["name"], True, hit)))
     return make_alphabetic(hits["hits"], processname)
-
 
 
 def get_name(source):
@@ -230,8 +230,6 @@ def collapse_kids(source):
             relation['hide'] = True
     if unkown_kids:
         source['collapsedrelation'] = [{"type": "Barn", "count": unkown_kids}]
-
-
 
 
 def make_placelist(hits, placename, lat, lon):
