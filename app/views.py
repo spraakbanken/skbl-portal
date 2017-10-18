@@ -377,7 +377,7 @@ def emptycache():
         emptied = computeviews.compute_emptycache(client)
     except Exception as e:
         emptied = False
-        return jsonify({"error": "%s" % e})
+        # return jsonify({"error": "%s" %e})
     return jsonify({"cached_emptied": emptied})
 
 
