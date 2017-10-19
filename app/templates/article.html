@@ -178,7 +178,7 @@
         <div class="image-overlay">
             <img src="{{ article.portrait[0].url }}" itemprop="image" alt="{{ article.portrait[0].description }}" width="360px">
         </div>
-        {{ article.portrait[0].description }}
+        {{ article.portrait[0].description | deescape}}
         {% endif %}
         {% if article.keyword %}
             <h3>{{ gettext("Keywords") }}</h3>
