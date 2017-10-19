@@ -386,8 +386,8 @@ def cachestats():
     return jsonify({"cached_stats": client.get_stats()})
 
 
-@app.route('/refillcache')
-def refillcache():
+@app.route('/fillcache')
+def fillcache():
     # Refill the cache (~ touch all pages)
     # This request will take some seconds, users may want to make an
     # asynchronous call
@@ -395,4 +395,13 @@ def refillcache():
     computeviews.compute_activity(client)
     computeviews.compute_organisation(client)
     computeviews.compute_place(client)
-    return jsonify({"cache_refilled": True})
+    return jsonify({"cache_filled": True})
+
+
+#     from threading import Thread
+#     cachedpages = [computeviews.compute_article, computeviews.compute_activity,
+#                    computeviews.compute_organisation, computeviews.compute_place]
+#     for page in cachedpages:
+#         t = Thread(target=page, args=[client])
+#         t.daemon = True
+#         t.start()

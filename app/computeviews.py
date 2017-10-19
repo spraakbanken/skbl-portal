@@ -143,6 +143,7 @@ def compute_emptycache(client):
     # Empty the cache.
     # Only users with write permission may do this
     # May raise error, eg if the authorization does not work
+    emptied = False
     auth = request.authorization
     postdata = {}
     user, pw = auth.username, auth.password
