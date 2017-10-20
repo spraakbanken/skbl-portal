@@ -2,13 +2,14 @@
 body {
   background-image: url("images/skbl/dust-min.png");
   background-color: #EFF4D1;
-  font-family: 'Muli', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   color:#000;
 }
 
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Muli', sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: normal;
 }
 
 h3 {
@@ -34,6 +35,7 @@ h3 {
 
 #navbar {
   border-top: 1px solid #ffc930;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 #search .input-group {
@@ -123,6 +125,7 @@ hr {
   display: inline-block;
   position: relative;
   margin-bottom: 10px;
+  font-weight: bold;
 }
 .image-overlay:after {
   content: '';
@@ -458,4 +461,10 @@ li .glyphicon-link {
 
 #open_advanced_box {
   cursor: pointer;
+}
+
+#right-panel {
+  border: 1px solid #ffc930;
+  background-color: rgba(255, 201, 48, 0.1);
+  padding: 31px;
 }
