@@ -9,7 +9,7 @@
 {% block content %}
 <div itemscope itemtype="http://schema.org/Person">
     <div class="col-md-8">
-        <h1 itemprop="name">{{ article.showname }}</h1>
+        <h1 itemprop="name">{{ article.showname | safe }}</h1>
         <h4 itemprop="additionalName">{{ article.fullfirstname }}</h4>
         {% if get_date(article)[0] or get_date[1] %}
             <h4> <span itemprop="birthDate">{{ get_date(article)[0] }}</span> &mdash; <span itemprop="deathDate">{{ get_date(article)[1] }}</span></h4>
@@ -19,7 +19,17 @@
             {{ article.text | safe }}
         </div>
         <br/>
-        <p><em>{{ article.article_author.firstname }} {{ article.article_author.lastname }}</em></p>
+        <p>
+            <em>
+                {% for author in article.article_author %}
+                    {{ author.firstname }} {{author.lastname}}<br/>
+                {% endfor %}
+                {% if g.language == 'en' %}
+                    (Translated by {{article.translator.firstname}} {{article.translator.lastname}})
+                {% endif %}
+            </em>
+        </p>
+
         {% if article.relation %}
         <div id="familjeforhallanden_lista" class="ellipsis">
             <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Familjeförhållanden ({{ article.relation|length }})</h4>

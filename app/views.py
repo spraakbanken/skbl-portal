@@ -318,8 +318,9 @@ def show_article(data):
         # Malin: visa bara tilltalsnamnet (obs test, kanske inte är vad de vill ha på riktigt)
         source = data['query']['hits']['hits'][0]['_source']
         firstname, calling = helpers.get_first_name(source)
-        # Print given name + lastname
-        source['showname'] = "%s %s" % (calling, source['name'].get('lastname', ''))
+        # Print html for the names with the calling name and last name in bold
+        formatted_names = [name if name != calling else "<b>" + name + "</b>" for name in firstname.split(" ")]
+        source['showname'] = "%s <b>%s</b>" % (" ".join(formatted_names), source['name'].get('lastname', ''))
         if source.get('text'):
             source['text'] = helpers.markdown_html(helpers.mk_links(source['text']))
         source['othernames'] = helpers.group_by_type(source.get('othernames', {}), 'name')
@@ -329,6 +330,10 @@ def show_article(data):
             source['source'] = helpers.aggregate_by_type(source['source'], use_markdown=True)
         if "furtherreference" in source:
             source['furtherreference'] = helpers.aggregate_by_type(source['furtherreference'], use_markdown=True)
+        if type(source["article_author"]) != list:
+            source["article_author"] = [source["article_author"]]
+        #if "article_author" in source and type(source["article_author"] != list):
+        #    source["article_author"] = [str(type(source["article_author"]))]#[source["article_author"]]
         return render_template('article.html', article=source, article_id=id)
     else:
         return render_template('page.html', content='not found')
