@@ -95,10 +95,14 @@ def compute_place(client):
 
     def parse(kw):
         place = kw.get('key')
-        name, lat, lon = place.split('|')
+        # May be used to parse names with or without coordinates:
+        # "Lysekil" or "Lysekil|58.275573|11.435558"
+        if '|' in place:
+            name, lat, lon = place.split('|')
+        else:
+            name = place.strip()
+            lat, lon = 0,0
         placename = name if name else '%s, %s' % (lat, lon)
-        lat = place.split('|')[1]
-        lon = place.split('|')[2]
         return {'name': placename, 'lat': lat, 'lon': lon,
                 'count': kw.get('doc_count')}
 
@@ -109,7 +113,8 @@ def compute_place(client):
         else:
             return None
 
-    data = karp_query('getplaces', {})
+    # To use the coordinates, use 'getplaces' instead of 'getplacenames'
+    data = karp_query('getplacenames', {})
     stat_table = [parse(kw) for kw in data['places'] if has_name(kw)]
     # Sort and translate
     # stat_table = helpers.sort_places(stat_table, request.url_rule)

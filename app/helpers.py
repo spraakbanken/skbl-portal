@@ -250,8 +250,9 @@ def make_placelist(hits, placename, lat, lon):
             # check if the name and the lat,lon is correct
             # (we can't ask karp of this, since it would be a nested query)
             if placename in names:
-                if names[placename].get('lat') == float(lat)\
-                   and names[placename].get('lon') == float(lon):
+                # Coordinates! If coordinates are used, uncomment the two lines below
+                # if names[placename].get('lat') == float(lat)\
+                #    and names[placename].get('lon') == float(lon):
                     if ptype not in grouped_results:
                         grouped_results[ptype] = []
                     grouped_results[ptype].append((join_name(source), hit))

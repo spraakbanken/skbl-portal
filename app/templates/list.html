@@ -28,6 +28,9 @@
             {% else %}
                 <a href="{{ url_for('article_'+g.language, id=hit._id) }}"><strong>{{ name }}</strong><br />
             {% endif %}
+            {% if hit._source.subtitle %}
+              {{ hit._source.subtitle | safe }}<br>
+            {% endif %}
             {% if get_life_range(hit._source)[0] or  get_life_range(hit._source)[1] %}
                 <span itemprop="birthDate">{{ get_life_range(hit._source)[0] }}</span> &mdash; <span itemprop="deathDate">{{ get_life_range(hit._source)[1] }}</span>
             {% endif %}
