@@ -32,10 +32,10 @@
 
         {% if article.relation %}
         <div id="familjeforhallanden_lista" class="ellipsis">
-            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Familjeförhållanden ({{ article.relation|length }})</h4>
+            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> {{gettext('Family Relationships')}} ({{ article.relation|length }})</h4>
             <ul class="ellipsis_contents">
               {% if article.civil_status %}
-                <li>Civilstatus: {{ article.civil_status }} </li>
+                <li>{{gettext('Civil Status:')}} {{ article.civil_status }} </li>
               {% endif %}
               {% for relation in article.relation %}
                 {% if not relation.hide %}
@@ -54,7 +54,7 @@
         {% endif %}
         {% if article.education %}
         <div id="organisationer_lista" class="ellipsis">
-            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Utbildning ({{ article.education|length }})</h4>
+            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> {{gettext('Education')}} ({{ article.education|length }})</h4>
             <ul class="ellipsis_contents">
             {% for education in article.education %}
                 <li>
@@ -66,7 +66,7 @@
         {% endif %}
         {% if article.occupation %}
         <div id="organisationer_lista" class="ellipsis">
-            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Verksamhet ({{ article.occupation|length }})</h4>
+            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> {{gettext('Activities')}} ({{ article.occupation|length }})</h4>
             <ul class="ellipsis_contents">
             {% for occupation in article.occupation %}
                 <li>
@@ -78,7 +78,7 @@
         {% endif %}
         {% if article.contact %}
         <div id="kontakter_lista" class="ellipsis">
-            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Kontakter ({{ article.contact|length }})</h4>
+            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> {{gettext('Contacts')}} ({{ article.contact|length }})</h4>
             <ul class="ellipsis_contents">
             {% for contact in article.contact %}
                 <li>
@@ -90,7 +90,7 @@
         {% endif %}
         {% if article.organisation %}
         <div id="organisationer_lista" class="ellipsis">
-            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Organisationer ({{ article.organisation|length }})</h4>
+            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> {{gettext('Organisations')}} ({{ article.organisation|length }})</h4>
             <ul class="ellipsis_contents">
             {% for organisation in article.organisation %}
                 <li>
@@ -103,7 +103,7 @@
         {% endif %}
         {% if article.places %}
         <div id="bostadsorter_lista" class="ellipsis">
-            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Bostadsorter ({{ article.places|length }})</h4>
+            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> {{gettext('Residences')}} ({{ article.places|length }})</h4>
             <ul class="ellipsis_contents">
             {% for place in article.places %}
                 <li>
@@ -119,7 +119,7 @@
         {% endif %}
         {% if article.awards %}
         <div id="priser_lista" class="ellipsis">
-            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Priser/utmärkelser ({{ article.awards|length }})</h4>
+            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> {{gettext('Prices/awards')}} ({{ article.awards|length }})</h4>
             <ul class="ellipsis_contents">
             {% for award in article.awards %}
                 <li>
@@ -132,7 +132,7 @@
         {% if article.source %}
         <br/><br/>
         <div>
-            <h4>Källor</h4>
+            <h4>{{gettext('Sources')}}</h4>
             {% for typename, type in article.source %}
                 <div>
                     <h5>{{typename}}</h5>
@@ -155,7 +155,7 @@
         {% if article.furtherreference %}
         <br/><br/>
         <div>
-            <h4>Vidare referenser</h4>
+            <h4>{{gettext('Further References')}}</h4>
             {% for typename, type in article.furtherreference %}
                 <div>
                     <h5>{{typename}}</h5>
@@ -178,10 +178,10 @@
     </div>
     <div class="col-md-4">
         <div id="article_map_button">
-            <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;Visa karta
+            <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;{{gettext('Show map')}}
         </div>
         <div id="article_map_button_hide" style="display:none">
-            <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;Göm karta
+            <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;{{gettext('Hide map')}}
         </div>
         <div id="article_map" style="height: 320px;width: 320px;display:none"></div>
         {% if article.portrait %}

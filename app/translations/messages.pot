@@ -8,73 +8,115 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-10-06 14:32+0000\n"
+"POT-Creation-Date: 2017-11-13 11:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.5.0\n"
+"Generated-By: Babel 2.4.0\n"
 
-#: app/templates/layout.html:99 app/views.py:46
+#: app/computeviews.py:39 app/templates/article.html:93
+#: app/templates/layout.html:127
+msgid "Organisations"
+msgstr ""
+
+#: app/computeviews.py:57 app/templates/article.html:69
+#: app/templates/layout.html:120
+msgid "Activities"
+msgstr ""
+
+#: app/computeviews.py:71 app/templates/layout.html:94
+msgid "Women A-Ö"
+msgstr ""
+
+#: app/computeviews.py:123
+msgid "Placenames"
+msgstr ""
+
+#: app/templates/layout.html:100 app/views.py:47
 msgid "About SKBL"
 msgstr ""
 
-#: app/templates/layout.html:100 app/views.py:54 app/views.py:78
+#: app/templates/layout.html:101 app/views.py:55 app/views.py:79
 msgid "Contact"
 msgstr ""
 
-#: app/views.py:55 app/views.py:79
+#: app/views.py:56 app/views.py:80
 msgid "Contact SKBL"
 msgstr ""
 
-#: app/views.py:68
+#: app/views.py:69
 msgid "Please enter all the fields!"
 msgstr ""
 
-#: app/views.py:70
+#: app/views.py:71
 msgid "Please enter a valid email address!"
 msgstr ""
 
-#: app/views.py:115 app/views.py:116
+#: app/views.py:116 app/views.py:117
 msgid "Thank you for your feedback"
 msgstr ""
 
-#: app/views.py:117
+#: app/views.py:118
 msgid "We will get back to you as soon as we can."
 msgstr ""
 
-#: app/views.py:138
+#: app/views.py:139
 #, python-format
 msgid "Hits for \"%s\""
 msgstr ""
 
-#: app/views.py:183
-msgid "Placenames"
+#: app/templates/article.html:35
+msgid "Family Relationships"
 msgstr ""
 
-#: app/views.py:225
-msgid "Organisations"
+#: app/templates/article.html:38
+msgid "Civil Status:"
 msgstr ""
 
-#: app/templates/layout.html:119 app/views.py:257
-msgid "Activities"
+#: app/templates/article.html:57
+msgid "Education"
 msgstr ""
 
-#: app/templates/layout.html:93 app/views.py:374
-msgid "Women A-Ö"
+#: app/templates/article.html:81
+msgid "Contacts"
 msgstr ""
 
-#: app/templates/article.html:184 app/templates/layout.html:140
+#: app/templates/article.html:106
+msgid "Residences"
+msgstr ""
+
+#: app/templates/article.html:122
+msgid "Prices/awards"
+msgstr ""
+
+#: app/templates/article.html:135
+msgid "Sources"
+msgstr ""
+
+#: app/templates/article.html:158
+msgid "Further References"
+msgstr ""
+
+#: app/templates/article.html:181
+msgid "Show map"
+msgstr ""
+
+#: app/templates/article.html:184
+msgid "Hide map"
+msgstr ""
+
+#: app/templates/article.html:194 app/templates/layout.html:141
 msgid "Keywords"
 msgstr ""
 
-#: app/templates/article.html:191
+#: app/templates/article.html:203
 msgid "Othernames"
 msgstr ""
 
-#: app/templates/article.html:198
+#: app/templates/article.html:210
 msgid "Links"
 msgstr ""
 
@@ -106,35 +148,39 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: app/templates/layout.html:62
+#: app/templates/layout.html:63
 msgid "Search"
 msgstr ""
 
-#: app/templates/layout.html:70
+#: app/templates/layout.html:71
 msgid "Go to advanced search"
 msgstr ""
 
-#: app/templates/layout.html:71
+#: app/templates/layout.html:72
 msgid "To advanced search"
 msgstr ""
 
-#: app/templates/layout.html:96
+#: app/templates/layout.html:81
+msgid "To Karp"
+msgstr ""
+
+#: app/templates/layout.html:81
+msgid "External link"
+msgstr ""
+
+#: app/templates/layout.html:97
 msgid "Article authors"
 msgstr ""
 
-#: app/templates/layout.html:104
+#: app/templates/layout.html:105
 msgid "På "
 msgstr ""
 
-#: app/templates/layout.html:126
-msgid "Organizations"
-msgstr ""
-
-#: app/templates/layout.html:133
+#: app/templates/layout.html:134
 msgid "Places"
 msgstr ""
 
-#: app/templates/layout.html:148
+#: app/templates/layout.html:149
 msgid "Share page"
 msgstr ""
 
