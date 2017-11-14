@@ -16,58 +16,36 @@ def get_first_name(source):
 def get_life_range(source):
     """
     Return the birth and death year from _source (as a tuple).
-    If both are empty return False.
+    Return empty strings if not available.
     """
-    if source['lifespan'].get('from'):
-        birth_date = source['lifespan']['from'].get('date', '')
-        if birth_date:
-            birth_date = birth_date.get('comment', '')
-        if "-" in birth_date:
-            birth_year = birth_date[:birth_date.find("-")]
+    years = []
+    for event in ['from', 'to']:
+        if source['lifespan'].get(event):
+            date = source['lifespan'][event].get('date', '')
+            if date:
+                date = date.get('comment', '')
+            if "-" in date:
+                year = date[:date.find("-")]
+            else:
+                year = date
         else:
-            birth_year = birth_date
-    else:
-        birth_year = ''
+            year = ''
+        years.append(year)
 
-    if source['lifespan'].get('to'):
-        death_date = source['lifespan']['to'].get('date', '')
-        if death_date:
-            death_date = death_date.get('comment', '')
-        if "-" in death_date:
-            death_year = death_date[:death_date.find("-")]
-        else:
-            death_year = death_date
-    else:
-        death_year = ''
-
-    return birth_year, death_year
+    return years[0], years[1]
 
 
 def get_date(source):
-    """Get exact birth date if possible. Get date comment otherwise."""
-    if not source['lifespan']['from'].get('date'):
-        birth_date = get_life_range(source)[0]
-        if not birth_date:
-            birth_date = ''
-    elif source['lifespan']['from']['date'].get('date'):
-        birth_date = source['lifespan']['from']['date']['date']
-    elif source['lifespan']['from']['date'].get('comment'):
-        birth_date = source['lifespan']['from']['date']['comment']
-    else:
-        birth_date = ''
+    """Get birth and death date if available. Return empty strings otherwise."""
+    dates = []
+    for event in ['from', 'to']:
+        if source['lifespan'][event].get('date'):
+            date = source['lifespan'][event]['date'].get('comment', '')
+        else:
+            date = ''
+        dates.append(date)
 
-    if not source['lifespan']['to'].get('date'):
-        death_date = get_life_range(source)[1]
-        if not death_date:
-            death_date = ''
-    elif source['lifespan']['to']['date'].get('date'):
-        death_date = source['lifespan']['to']['date']['date']
-    elif source['lifespan']['to']['date'].get('comment'):
-        death_date = source['lifespan']['to']['date']['comment']
-    else:
-        death_date = ''
-
-    return birth_date, death_date
+    return dates[0], dates[1]
 
 
 def markdown_html(text):
