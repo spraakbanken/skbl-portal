@@ -34,7 +34,7 @@
 
         {% if article.relation %}
         <div id="familjeforhallanden_lista" class="ellipsis">
-            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> {{gettext('Family Relationships')}} ({{ article.relation|length }})</h4>
+            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> {{gettext('Family Relationships')}} ({% if article.civil_status %}{{ article.relation|length + 1}}{% else %}{{ article.relation|length }}{% endif %})</h4>
             <ul class="ellipsis_contents">
               {% if article.civil_status %}
                 <li>{{gettext('Civil Status:')}} {{ article.civil_status }} </li>
