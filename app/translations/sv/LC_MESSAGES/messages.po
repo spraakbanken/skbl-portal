@@ -188,15 +188,3 @@ msgstr "Dela sidan"
 #: app/templates/list.html:11
 msgid "No results found for"
 msgstr "Inga träffar för"
-
-#~ msgid "Hits"
-#~ msgstr "Träffar"
-
-#~ msgid "På"
-#~ msgstr "In"
-
-#~ msgid "Organizations"
-#~ msgstr ""
-
-#~ msgid "Occupation"
-#~ msgstr ""

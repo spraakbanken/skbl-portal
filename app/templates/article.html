@@ -27,7 +27,9 @@
                     {{ author.firstname }} {{author.lastname}}<br/>
                 {% endfor %}
                 {% if g.language == 'en' %}
-                    (Translated by {{article.translator.firstname}} {{article.translator.lastname}})
+                    {% if article.text_eng %}
+                        (Translated by {{article.translator.firstname}} {{article.translator.lastname}})
+                    {% endif %}
                 {% endif %}
             </em>
         </p>
