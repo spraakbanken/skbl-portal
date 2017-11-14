@@ -292,3 +292,14 @@ def is_email_address_valid(email):
 def is_ascii(s):
     """Check if s contains of ASCII-characters only."""
     return all(ord(c) < 128 for c in s)
+
+
+def get_lang_text(json_swe, json_eng, ui_lang):
+    """Get text in correct language if available."""
+    if ui_lang == "en":
+        if json_eng:
+            return json_eng
+        else:
+            return json_swe
+    else:
+        return json_swe

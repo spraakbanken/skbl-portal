@@ -14,9 +14,11 @@
         {% if get_date(article)[0] or get_date[1] %}
             <h4> <span itemprop="birthDate">{{ get_date(article)[0] }}</span> &mdash; <span itemprop="deathDate">{{ get_date(article)[1] }}</span></h4>
         {% endif %}
-        <h4 itemprop="jobTitle">{{ article.subtitle | safe}}</h4>
+        {% set article_subtitle = get_lang_text(article.subtitle, article.subtitle_eng, g.language) %}
+        {% if article_subtitle %}<h4 itemprop="jobTitle">{{ article_subtitle | safe}}</h4>{% endif %}
         <div class="main_text">
-            {{ article.text | safe }}
+            {% set article_text = get_lang_text(article.text, article.text_eng, g.language) %}
+            {% if article_text %}{{ article_text | safe }}{% endif %}
         </div>
         <br/>
         <p>
@@ -70,7 +72,8 @@
             <ul class="ellipsis_contents">
             {% for occupation in article.occupation %}
                 <li>
-                    <h5>{{ occupation.type }}{% if occupation.detail %}: {{ occupation.detail | deescape }}{% endif %}</h5>
+                    {% set occupation_detail = get_lang_text(occupation.detail, occupation.detail_eng, g.language) %}
+                    <h5>{{ occupation.type }}{% if occupation_detail %}: {{ occupation_detail | deescape }}{% endif %}</h5>
                 </li>
             {% endfor %}
             </ul>
@@ -139,8 +142,9 @@
                     <ul>
                         {% for source in type %}
                         <li>
+                            {% set source_description = get_lang_text(source.description, source.description_eng, g.language) %}
                             {% if source.url %}
-                                <a class="visible_link" href="{{source.url | deescape}}" target="_blank">{{source.description | safe}}</a>
+                                <a class="visible_link" href="{{source.url | deescape}}" target="_blank">{{source_description | safe}}</a>
                             {% else %}
                                 <span>{{source.description | safe}}</span>
                             {% endif %}
@@ -162,10 +166,11 @@
                     <ul>
                         {% for ref in type %}
                         <li>
+                            {% set ref_description = get_lang_text(ref.description, ref.description_eng, g.language) %}
                             {% if ref.url %}
-                                <a class="visible_link" href="{{ref.url | deescape}}" target="_blank">{{ref.description | safe}}</a>
+                                <a class="visible_link" href="{{ref.url | deescape}}" target="_blank">{{ref_description | safe}}</a>
                             {% else %}
-                                <span>{{ref.description | safe}}</span>
+                                <span>{{ref_description | safe}}</span>
                             {% endif %}
 
                         </li>
@@ -185,10 +190,11 @@
         </div>
         <div id="article_map" style="height: 320px;width: 320px;display:none"></div>
         {% if article.portrait %}
-        <div class="image-overlay">
-            <img src="{{ article.portrait[0].url }}" itemprop="image" alt="{{ article.portrait[0].description }}" width="360px">
-        </div>
-        {{ article.portrait[0].description | deescape}}
+            {% set article_portrait_description = get_lang_text(article.portrait[0].description, article.portrait[0].description_eng, g.language) %}
+            <div class="image-overlay">
+                <img src="{{ article.portrait[0].url }}" itemprop="image" alt="{{ article_portrait_description }}" width="360px">
+            </div>
+            {{ article_portrait_description | deescape}}
         {% endif %}
         {% if article.keyword %}
             <h3>{{ gettext("Keywords") }}</h3>

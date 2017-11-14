@@ -104,6 +104,7 @@ app.jinja_env.globals.update(get_date=helpers.get_date)
 app.jinja_env.globals.update(join_name=helpers.join_name)
 app.jinja_env.globals.update(sorted=sorted)
 app.jinja_env.globals.update(len=len)
+app.jinja_env.globals.update(get_lang_text=helpers.get_lang_text)
 
 
 @app.template_filter('deescape')
