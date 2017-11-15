@@ -11,8 +11,9 @@ from urllib2 import urlopen
 
 def compute_organisation(client):
     set_language_switch_link("organisation_index")
-    if client.get('organisation') is not None and not app.config['TEST']:
-        return client['organisation']
+    art = client.get('organisation')
+    if art is not None and not app.config['TEST']:
+        return art
 
     rule = request.url_rule
     if 'sv' in rule.rule:
@@ -46,8 +47,9 @@ def compute_organisation(client):
 
 def compute_activity(client):
     set_language_switch_link("activity_index")
-    if client.get('activity') is not None and not app.config['TEST']:
-        return client['activity']
+    art = client.get('activity')
+    if art is not None and not app.config['TEST']:
+        return art
     rule = request.url_rule
     if 'sv' in rule.rule:
         infotext = u"Här kan du se inom vilka områden de biograferade kvinnorna varit verksamma och vilka yrken de hade."
@@ -62,18 +64,20 @@ def compute_activity(client):
 
 def compute_article(client):
     set_language_switch_link("article_index")
-    if client.get('article') is not None and not app.config['TEST']:
-        return client['article']
-    data = karp_query('query', {'q': "extended||and|namn.search|exists"})
-    infotext = u"""Klicka på namnet för att läsa biografin om den kvinna du vill veta mer om."""
-    art = render_template('list.html',
-                           hits=data["hits"],
-                           headline=gettext(u'Women A-Ö'),
-                           alphabetic=True,
-                           split_letters=True,
-                           infotext=infotext,
-                           title='Articles')
-    client.set('article', art, time=app.config['CACHE_TIME'])
+    art = client.get('article')
+    if art is not None and not app.config['TEST']:
+        return art
+    else:
+        data = karp_query('query', {'q': "extended||and|namn.search|exists"})
+        infotext = u"""Klicka på namnet för att läsa biografin om den kvinna du vill veta mer om."""
+        art = render_template('list.html',
+                               hits=data["hits"],
+                               headline=gettext(u'Women A-Ö'),
+                               alphabetic=True,
+                               split_letters=True,
+                               infotext=infotext,
+                               title='Articles')
+        client.set('article', art, time=app.config['CACHE_TIME'])
     return art
 
 
