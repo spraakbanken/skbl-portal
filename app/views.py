@@ -131,7 +131,7 @@ def search():
     else:
         karp_q['q'] = "extended||and|anything|contains|%s" % search
 
-    data = karp_query('query', karp_q)
+    data = karp_query('query', karp_q, mode='skbllinks')
     advanced_search_text = ''
     with app.open_resource("static/pages/advanced-search/%s.html" % (g.language)) as f:
         advanced_search_text = f.read()
@@ -276,10 +276,10 @@ def article_index(search=None):
         data, id = find_link(search)
         if id:
             # only one hit is found, redirect to that page
-            return redirect(url_for('article_'+g.language, id=id))
+            return redirect(url_for('article_' + g.language, id=id))
         elif data["query"]["hits"]["total"] > 1:
             # more than one hit is found, redirect to a listing
-            return redirect(url_for('search_'+g.language, q=search))
+            return redirect(url_for('search_' + g.language, q=search))
         else:
             # no hits are found redirect to a 'not found' page
             return render_template('page.html', content='not found')

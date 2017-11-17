@@ -11,28 +11,28 @@
         <span>{{ gettext("No results found for") }} "{{search}}".</span>
     {% endif %}
 
+    {% set firstletters, results = make_namelist(hits)%}
     {% if split_letters %}
-        {% for firstletter, _ in make_namelist(hits, alphabetic=alphabetic) %}
+        {% for firstletter in firstletters%}
             <a class="alphabetlist" href="#{{firstletter}}">{{firstletter}}</a>&nbsp;
         {% endfor %}
     {% endif %}
     <ul>
-      {% for firstletter, namelist in make_namelist(hits, alphabetic=alphabetic) %}
+    {% for oneletterlist in results %}
         {% if split_letters %}
-            <h2><a name="{{firstletter}}">{{ firstletter }}</a></h2>
+            <h2><a name="{{ oneletterlist[0][0] }}">{{ oneletterlist[0][0] }}</a></h2>
         {% endif %}
-        {% for name, islink, hit in namelist %}
+        {% for _firstletter, is_link, name, linked_name, liferange, subtitle, subtitle_eng, subject_id in oneletterlist %}
         <li>
-            {% if islink %}
-                <a href="{{ url_for('article_'+g.language, id=hit._id) }}" title="{{ join_name(hit._source) }}"><strong><em>{{ name }}</em></strong>&ensp;<span class="glyphicon glyphicon-link"></span><br />
+            {% if is_link %}
+                <a href="{{ url_for('article_'+g.language, id=subject_id) }}" title="{{ linked_name }}"><strong><em>{{ name }}</em></strong>&ensp;<span class="glyphicon glyphicon-link"></span><br />
             {% else %}
-                <a href="{{ url_for('article_'+g.language, id=hit._id) }}"><strong>{{ name }}</strong><br />
+                <a href="{{ url_for('article_'+g.language, id=subject_id) }}"><strong>{{ name }}</strong><br />
             {% endif %}
-            {% if hit._source.subtitle %}
-              {{ hit._source.subtitle | safe }}<br>
-            {% endif %}
-            {% if get_life_range(hit._source)[0] or  get_life_range(hit._source)[1] %}
-                <span itemprop="birthDate">{{ get_life_range(hit._source)[0] }}</span> &mdash; <span itemprop="deathDate">{{ get_life_range(hit._source)[1] }}</span>
+            {% set article_subtitle = get_lang_text(subtitle, subtitle_eng, g.language) %}
+            {% if article_subtitle %} {{ article_subtitle | safe}}<br> {% endif %}
+            {% if liferange[0] or  liferange[1] %}
+                <span itemprop="birthDate">{{ liferange[0] }}</span> &mdash; <span itemprop="deathDate">{{ liferange[1] }}</span>
             {% endif %}
             </a>
         </li>

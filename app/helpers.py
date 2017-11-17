@@ -24,7 +24,7 @@ def get_life_range(source):
             date = source['lifespan'][event].get('date', '')
             if date:
                 date = date.get('comment', '')
-            if "-" in date:
+            if "-" in date and not re.search('[a-zA-Z]', date):
                 year = date[:date.find("-")]
             else:
                 year = date
@@ -115,23 +115,46 @@ def make_alphabetic(hits, processname):
     return letter_results
 
 
-def make_namelist(hits, alphabetic=True):
-    # TODO NB! If alphabetic is set to False, the order will be radom-ish.
-    # It will partly follow ES sorting order, but since the dictionary
-    # letter_results won't keep the order of the initial letters, the result
-    # will be mixed up. Nor will links be sorted accurately. Improve this!
-    def processname(hit, results):
-        source = hit["_source"]
-        name = get_name(source)
-        results.append((name[0][0].upper(), (join_name(source), False, hit)))
-        for altname in source.get("othernames", []):
-            if altname.get("mk_link"):
-                results.append((altname["name"][0].upper(),
-                                (altname["name"], True, hit)))
-    return make_alphabetic(hits["hits"], processname)
+def make_namelist(hits):
+    """
+    Split hits into one list per first letter.
+    Return only info necessary for listing of names.
+    """
+    results = []
+    first_letters = []  # list only containing letters in alphabetical order
+    current_letterlist = []  # list containing entries starting with the same letter
+    for hit in hits["hits"]:
+        # Seperate names from linked names
+        is_link = hit["_index"].startswith("link")
+        if is_link:
+            name = hit["_source"]["name"].get("sortname", "")
+            linked_name = join_name(hit["_source"])
+        else:
+            name = join_name(hit["_source"])
+            linked_name = False
+
+        liferange = get_life_range(hit["_source"])
+        subtitle = hit["_source"].get("subtitle", "")
+        subtitle_eng = hit["_source"].get("subtitle_eng", "")
+        subject_id = hit["_id"]
+
+        # Get first letter from sort[0]
+        firstletter = hit["sort"][0].upper()
+        if firstletter not in first_letters:
+            if current_letterlist:
+                results.append(current_letterlist)
+                current_letterlist = []
+            first_letters.append(firstletter)
+        current_letterlist.append((firstletter, is_link, name, linked_name, liferange, subtitle, subtitle_eng, subject_id))
+
+    # Append last letterlist
+    results.append(current_letterlist)
+
+    return (first_letters, results)
 
 
-def get_name(source):
+def join_name(source):
+    """Retrieve and format name from source."""
     name = []
     lastname = source["name"].get("lastname", '')
     match = re.search('(von |af |)(.*)', lastname)
@@ -141,11 +164,7 @@ def get_name(source):
         name.append(lastname + ",")
     name.append(get_first_name(source)[0])
     name.append(vonaf)
-    return name
-
-
-def join_name(source):
-    return " ".join(get_name(source))
+    return " ".join(name)
 
 
 def sort_places(stat_table, route):

@@ -68,15 +68,21 @@ def compute_article(client):
     if art is not None and not app.config['TEST']:
         return art
     else:
-        data = karp_query('query', {'q': "extended||and|namn.search|exists"})
-        infotext = u"""Klicka på namnet för att läsa biografin om den kvinna du vill veta mer om."""
+        data = karp_query('query', {'q': "extended||and|namn|exists"}, mode="skbllinks")
+
+        rule = request.url_rule
+        if 'sv' in rule.rule:
+            infotext = u"""Klicka på namnet för att läsa biografin om den kvinna du vill veta mer om."""
+        else:
+            infotext = u"""Klicka på namnet för att läsa biografin om den kvinna du vill veta mer om."""
+
         art = render_template('list.html',
-                               hits=data["hits"],
-                               headline=gettext(u'Women A-Ö'),
-                               alphabetic=True,
-                               split_letters=True,
-                               infotext=infotext,
-                               title='Articles')
+                              hits=data["hits"],
+                              headline=gettext(u'Women A-Ö'),
+                              alphabetic=True,
+                              split_letters=True,
+                              infotext=infotext,
+                              title='Articles')
         client.set('article', art, time=app.config['CACHE_TIME'])
     return art
 
@@ -105,7 +111,7 @@ def compute_place(client):
             name, lat, lon = place.split('|')
         else:
             name = place.strip()
-            lat, lon = 0,0
+            lat, lon = 0, 0
         placename = name if name else '%s, %s' % (lat, lon)
         return {'name': placename, 'lat': lat, 'lon': lon,
                 'count': kw.get('doc_count')}
@@ -136,7 +142,7 @@ def bucketcall(queryfield='', name='', title='', sortby='',
         q_data['q'] = query
     data = karp_query('statlist', q_data)
     # strip kw0 to get correct sorting
-    stat_table = [[kw[0].strip()]+kw[1:] for kw in data['stat_table'] if kw[0] != ""]
+    stat_table = [[kw[0].strip()] + kw[1:] for kw in data['stat_table'] if kw[0] != ""]
     if sortby:
         stat_table.sort(key=sortby)
     else:
