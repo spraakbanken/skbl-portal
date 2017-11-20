@@ -32,14 +32,14 @@
         {{ super() }}
      </div>
      <div class="col-md-12">
-         <div id="mapid" style="height: 280px;"></div>
+         <!--<div id="mapid" style="height: 280px;"></div>-->
      </div>
 </div>
 
 {% endblock %}
 {% block foot %}
     {{ super() }}
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <!--<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
     <script>
         jQuery(document).ready(function() {
@@ -52,5 +52,5 @@
 
             L.marker([{{ request.args.get('lat') }}, {{ request.args.get('lon') }}]).addTo(mymap)
         });
-    </script>
+    </script>-->
 {% endblock %}

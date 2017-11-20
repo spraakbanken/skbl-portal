@@ -5,13 +5,13 @@
         {{ super() }}
      </div>
      <div class="col-md-6">
-         <div id="mapid" style="height: 280px;"></div>
+        <!--<div id="mapid" style="height: 280px;"></div>-->
      </div>
 {% endblock %}
 {% block foot %}
     {{ super() }}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <!--<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
     <script>
         jQuery(document).ready(function() {
             var mymap = L.map('mapid').setView([{{ request.args.get('lat') }}, {{ request.args.get('lon') }}], 6);
@@ -23,5 +23,5 @@
 
             L.marker([{{ request.args.get('lat') }}, {{ request.args.get('lon') }}]).addTo(mymap)
         });
-    </script>
+    </script>-->
 {% endblock %}
