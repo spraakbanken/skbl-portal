@@ -68,8 +68,8 @@ def compute_article(client):
     if art is not None and not app.config['TEST']:
         return art
     else:
-        data = karp_query('query', {'q': "extended||and|namn|exists"}, mode="skbllinks")
-
+        data = karp_query('query', {'q': "extended||and|namn|exists", 'sort': 'sorteringsnamn.eng_init,sorteringsnamn.eng_sort,sorteringsnamn,tilltalsnamn.sort,tilltalsnamn'},
+                          mode="skbllinks")
         rule = request.url_rule
         if 'sv' in rule.rule:
             infotext = u"""Klicka på namnet för att läsa biografin om den kvinna du vill veta mer om."""

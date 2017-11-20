@@ -315,7 +315,6 @@ def find_link(searchstring):
 
 def show_article(data):
     if data['query']['hits']['total'] == 1:
-        # Malin: visa bara tilltalsnamnet (obs test, kanske inte är vad de vill ha på riktigt)
         source = data['query']['hits']['hits'][0]['_source']
         firstname, calling = helpers.get_first_name(source)
         # Print html for the names with the calling name and last name in bold
