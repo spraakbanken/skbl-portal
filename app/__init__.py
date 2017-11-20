@@ -75,6 +75,7 @@ def karp_query(action, query, mode='skbl'):
 
 def karp_request(action):
     q = Request("%s/%s" % (app.config['KARP_BACKEND'], action))
+    # sys.stderr.write("\nREQUEST: %s/%s\n\n" % (app.config['KARP_BACKEND'], action))
     q.add_header('Authorization', "Basic %s" % (app.config['KARP_AUTH_HASH']))
     response = urlopen(q).read()
     logging.debug(q)

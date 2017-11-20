@@ -9,8 +9,8 @@
 {% block content %}
 <div itemscope itemtype="http://schema.org/Person">
     <div class="col-md-8">
-        <h1 itemprop="name">{{ article.showname | safe }}</h1>
-        <h4 itemprop="additionalName">{{ article.fullfirstname }}</h4>
+        <h1 itemprop="name">{{ article.showname | safe }}{% if article.linked_names %} <em itemprop="additionalName">({{article.linked_names | safe }})</em> {% endif %}</h1>
+        {# <h4 itemprop="additionalName">{{ article.fullfirstname }}</h4> #}
         {% if get_date(article)[0] or get_date[1] %}
             <h4> <span itemprop="birthDate">{{ get_date(article)[0] }}</span> &mdash; <span itemprop="deathDate">{{ get_date(article)[1] }}</span></h4>
         {% endif %}
@@ -207,12 +207,10 @@
             {% endfor %}
         {% endif %}
 
-        <!--
-        <h3>{{ gettext("Othernames") }}</h3>
+        {# <h3>{{ gettext("Othernames") }}</h3>
         {% for name in article.othernames %}
             <p><b>{{name.type}}:</b> <span itemprop="additionalName">{{name.name}}</span></p>
-        {% endfor %}
-        -->
+        {% endfor %} #}
 
         {% if article.externallink %}
             <h3>{{ gettext("Links") }}</h3>

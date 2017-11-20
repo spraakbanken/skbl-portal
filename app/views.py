@@ -323,6 +323,8 @@ def show_article(data):
         source['showname'] = "%s <b>%s</b>" % (" ".join(formatted_names), source['name'].get('lastname', ''))
         if source.get('text'):
             source['text'] = helpers.markdown_html(helpers.mk_links(source['text']))
+        # Extract linked names from source
+        source['linked_names'] = find_linked_names(source.get("othernames"), source.get("showname"))
         source['othernames'] = helpers.group_by_type(source.get('othernames', {}), 'name')
         source['othernames'].append({'type': u'Förnamn', 'name': firstname})
         helpers.collapse_kids(source)
@@ -332,11 +334,34 @@ def show_article(data):
             source['furtherreference'] = helpers.aggregate_by_type(source['furtherreference'], use_markdown=True)
         if type(source["article_author"]) != list:
             source["article_author"] = [source["article_author"]]
-        #if "article_author" in source and type(source["article_author"] != list):
-        #    source["article_author"] = [str(type(source["article_author"]))]#[source["article_author"]]
+        # if "article_author" in source and type(source["article_author"] != list):
+        #     source["article_author"] = [str(type(source["article_author"]))]#[source["article_author"]]
         return render_template('article.html', article=source, article_id=id)
     else:
         return render_template('page.html', content='not found')
+
+
+def find_linked_names(othernames, showname):
+    """Find and format linked names."""
+    linked_names = []
+    for item in othernames:
+        if item.get("mk_link") is True:
+            name = fix_name_order(item.get("name"))
+            # Do not add linked name if all of its parts occur in showname
+            if any(i for i in name.split() if i not in showname):
+                linked_names.append(name)
+    return ", ".join(linked_names)
+
+
+def fix_name_order(name):
+    """Lastname, Firstname --> Firstname Lastname"""
+    nameparts = name.split(", ")
+    if len(nameparts) == 1:
+        return nameparts[0]
+    elif len(nameparts) == 2:
+        return nameparts[1] + " " + nameparts[0]
+    elif len(nameparts) == 3:
+        return nameparts[2] + " " + nameparts[1] + " " + nameparts[0]
 
 # @app.route("/en/article-find/<id>", endpoint="article_en")
 # @app.route("/sv/artikel-find/<id>", endpoint="article_sv")
