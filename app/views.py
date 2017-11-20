@@ -127,7 +127,7 @@ def search():
     if '*' in search:
         search = re.sub('(?<!\.)\*', '.*', search)
         karp_q['q'] = "extended||and|anything|regexp|%s" % search
-        karp_q['sort'] = '_score'
+        # karp_q['sort'] = '_score'
     else:
         karp_q['q'] = "extended||and|anything|contains|%s" % search
 
