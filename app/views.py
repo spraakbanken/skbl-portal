@@ -406,7 +406,7 @@ def emptycache():
         emptied = computeviews.compute_emptycache(client)
     except Exception as e:
         emptied = False
-        # return jsonify({"error": "%s" %e})
+        # return jsonify({"error": "%s" % e})
     return jsonify({"cached_emptied": emptied})
 
 
@@ -415,17 +415,19 @@ def cachestats():
     return jsonify({"cached_stats": client.get_stats()})
 
 
-@app.route('/fillcache')
+@app.route("/en/fillcache", endpoint="fillcache_en")
+@app.route("/sv/fillcache", endpoint="fillcache_sv")
 def fillcache():
     # Refill the cache (~ touch all pages)
     # This request will take some seconds, users may want to make an
     # asynchronous call
-    for lang in ["sv", "en"]:
-        computeviews.compute_article(client, lang=lang)
-        computeviews.compute_activity(client, lang=lang)
-        computeviews.compute_organisation(client, lang=lang)
-        computeviews.compute_place(client, lang=lang)
-    return jsonify({"cache_filled": True})
+    # for lang in ["sv", "en"]:
+    computeviews.compute_article(client)
+    computeviews.compute_activity(client)
+    computeviews.compute_organisation(client)
+    computeviews.compute_place(client)
+    lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
+    return jsonify({"cache_filled": True, "cached_language": lang})
 
 
 #     from threading import Thread
