@@ -56,8 +56,10 @@ def serve_static_page(page, title=''):
                            title=title)
 
 
-def set_language_switch_link(route, fragment=None):
-    if get_locale() == 'en':
+def set_language_switch_link(route, fragment=None, lang=''):
+    if not lang:
+        lang = get_locale()
+    if lang == 'en':
         g.switch_language = {'url': url_for(route + '_sv'), 'label': 'Svenska'}
     else:
         g.switch_language = {'url': url_for(route + '_en'), 'label': 'English'}

@@ -10,7 +10,7 @@ from urllib2 import urlopen
 
 
 def compute_organisation(client, lang=""):
-    set_language_switch_link("organisation_index")
+    set_language_switch_link("organisation_index", lang=lang)
     if not lang:
         lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
     art = client.get('organisation' + lang)
@@ -47,7 +47,7 @@ def compute_organisation(client, lang=""):
 
 
 def compute_activity(client, lang=""):
-    set_language_switch_link("activity_index")
+    set_language_switch_link("activity_index", lang=lang)
     if not lang:
         lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
     art = client.get('activity' + lang)
@@ -65,7 +65,7 @@ def compute_activity(client, lang=""):
 
 
 def compute_article(client, lang=""):
-    set_language_switch_link("article_index")
+    set_language_switch_link("article_index", lang=lang)
     if not lang:
         lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
     art = client.get('article' + lang)
@@ -92,7 +92,7 @@ def compute_article(client, lang=""):
 
 
 def compute_place(client, lang=""):
-    set_language_switch_link("place_index")
+    set_language_switch_link("place_index", lang=lang)
     if not lang:
         lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
     rv = client.get('place' + lang)
