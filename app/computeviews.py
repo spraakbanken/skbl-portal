@@ -11,11 +11,12 @@ from urllib2 import urlopen
 
 def compute_organisation(client):
     set_language_switch_link("organisation_index")
-    art = client.get('organisation')
+    rule = request.url_rule
+    lang = 'sv' if 'sv' in rule.rule else 'en'
+    art = client.get('organisation'+lang)
     if art is not None and not app.config['TEST']:
         return art
 
-    rule = request.url_rule
     if 'sv' in rule.rule:
         infotext = u"""Här kan du se vilka organisationer de biograferade kvinnorna varit medlemmar
         och verksamma i. Det ger en inblick i de nätverk som var de olika kvinnornas och visar
@@ -39,7 +40,7 @@ def compute_organisation(client):
     art = render_template('nestedbucketresults.html',
                           results=nested_obj, title=gettext("Organisations"),
                           infotext=infotext, name='organisation')
-    client.set('organisation', art, time=app.config['CACHE_TIME'])
+    client.set('organisation'+lang, art, time=app.config['CACHE_TIME'])
     return art
     # return bucketcall(queryfield='organisationstyp', name='organisation',
     #                   title='Organizations', infotext=infotext)
@@ -47,10 +48,11 @@ def compute_organisation(client):
 
 def compute_activity(client):
     set_language_switch_link("activity_index")
-    art = client.get('activity')
+    rule = request.url_rule
+    lang = 'sv' if 'sv' in rule.rule else 'en'
+    art = client.get('activity'+lang)
     if art is not None and not app.config['TEST']:
         return art
-    rule = request.url_rule
     if 'sv' in rule.rule:
         infotext = u"Här kan du se inom vilka områden de biograferade kvinnorna varit verksamma och vilka yrken de hade."
     else:
@@ -58,13 +60,15 @@ def compute_activity(client):
     art = bucketcall(queryfield='verksamhetstext', name='activity',
                      title=gettext("Activities"), infotext=infotext,
                      alphabetical=True)
-    client.set('activity', art, time=app.config['CACHE_TIME'])
+    client.set('activity'+lang, art, time=app.config['CACHE_TIME'])
     return art
 
 
 def compute_article(client):
     set_language_switch_link("article_index")
-    art = client.get('article')
+    rule = request.url_rule
+    lang = 'sv' if 'sv' in rule.rule else 'en'
+    art = client.get('article'+lang)
     if art is not None and not app.config['TEST']:
         return art
     else:
@@ -84,17 +88,18 @@ def compute_article(client):
                               split_letters=True,
                               infotext=infotext,
                               title='Articles')
-        client.set('article', art, time=app.config['CACHE_TIME'])
+        client.set('article'+lang, art, time=app.config['CACHE_TIME'])
     return art
 
 
 def compute_place(client):
     set_language_switch_link("place_index")
-    rv = client.get('place')
+    rule = request.url_rule
+    lang = 'sv' if 'sv' in rule.rule else 'en'
+    rv = client.get('place'+lang)
     if rv is not None and not app.config['TEST']:
         return rv
 
-    rule = request.url_rule
     if 'sv' in rule.rule:
         infotext = u"""Här kan du se var de biograferade kvinnorna befunnit sig;
         var de fötts, verkat och dött. Genom att klicka på en ord kan du se vilka som fötts,
@@ -132,7 +137,7 @@ def compute_place(client):
     collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
     stat_table.sort(key=lambda x: collator.getSortKey(x.get('name').strip()))
     art = render_template('places.html', places=stat_table, title=gettext("Placenames", infotext=infotext))
-    client.set('place', art, time=app.config['CACHE_TIME'])
+    client.set('place'+lang, art, time=app.config['CACHE_TIME'])
     return art
 
 
