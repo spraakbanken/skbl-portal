@@ -1,7 +1,8 @@
 
 body {
   background-image: url("images/skbl/dust-min.png");
-  background-color: #EFF4D1;
+  /* background-color: #EFF4D1; */
+  background-color: #f4f0d1;
   font-family: 'Source Sans Pro', sans-serif;
   color:#000;
 }
