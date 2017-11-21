@@ -9,15 +9,15 @@ import urllib
 from urllib2 import urlopen
 
 
-def compute_organisation(client):
+def compute_organisation(client, lang=""):
     set_language_switch_link("organisation_index")
-    rule = request.url_rule
-    lang = 'sv' if 'sv' in rule.rule else 'en'
-    art = client.get('organisation'+lang)
+    if not lang:
+        lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
+    art = client.get('organisation' + lang)
     if art is not None and not app.config['TEST']:
         return art
 
-    if 'sv' in rule.rule:
+    if lang == 'sv':
         infotext = u"""Här kan du se vilka organisationer de biograferade kvinnorna varit medlemmar
         och verksamma i. Det ger en inblick i de nätverk som var de olika kvinnornas och visar
         såväl det gemensamma engagemanget som mångfalden i det.
@@ -40,40 +40,39 @@ def compute_organisation(client):
     art = render_template('nestedbucketresults.html',
                           results=nested_obj, title=gettext("Organisations"),
                           infotext=infotext, name='organisation')
-    client.set('organisation'+lang, art, time=app.config['CACHE_TIME'])
+    client.set('organisation' + lang, art, time=app.config['CACHE_TIME'])
     return art
     # return bucketcall(queryfield='organisationstyp', name='organisation',
     #                   title='Organizations', infotext=infotext)
 
 
-def compute_activity(client):
+def compute_activity(client, lang=""):
     set_language_switch_link("activity_index")
-    rule = request.url_rule
-    lang = 'sv' if 'sv' in rule.rule else 'en'
-    art = client.get('activity'+lang)
+    if not lang:
+        lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
+    art = client.get('activity' + lang)
     if art is not None and not app.config['TEST']:
         return art
-    if 'sv' in rule.rule:
+    if lang == 'sv':
         infotext = u"Här kan du se inom vilka områden de biograferade kvinnorna varit verksamma och vilka yrken de hade."
     else:
         infotext = u"This displays the areas within which the biographical subject was active and which activities and occupation(s) they engaged in."
     art = bucketcall(queryfield='verksamhetstext', name='activity',
                      title=gettext("Activities"), infotext=infotext,
                      alphabetical=True)
-    client.set('activity'+lang, art, time=app.config['CACHE_TIME'])
+    client.set('activity' + lang, art, time=app.config['CACHE_TIME'])
     return art
 
 
-def compute_article(client):
+def compute_article(client, lang=""):
     set_language_switch_link("article_index")
-    rule = request.url_rule
-    lang = 'sv' if 'sv' in rule.rule else 'en'
-    art = client.get('article'+lang)
+    if not lang:
+        lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
+    art = client.get('article' + lang)
     if art is not None and not app.config['TEST']:
         return art
     else:
-        rule = request.url_rule
-        if 'sv' in rule.rule:
+        if lang == 'sv':
             infotext = u"""Klicka på namnet för att läsa biografin om den kvinna du vill veta mer om."""
             data = karp_query('query', {'q': "extended||and|namn|exists"}, mode="skbllinks")
         else:
@@ -88,19 +87,19 @@ def compute_article(client):
                               split_letters=True,
                               infotext=infotext,
                               title='Articles')
-        client.set('article'+lang, art, time=app.config['CACHE_TIME'])
+        client.set('article' + lang, art, time=app.config['CACHE_TIME'])
     return art
 
 
-def compute_place(client):
+def compute_place(client, lang=""):
     set_language_switch_link("place_index")
-    rule = request.url_rule
-    lang = 'sv' if 'sv' in rule.rule else 'en'
-    rv = client.get('place'+lang)
+    if not lang:
+        lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
+    rv = client.get('place' + lang)
     if rv is not None and not app.config['TEST']:
         return rv
 
-    if 'sv' in rule.rule:
+    if lang == 'sv':
         infotext = u"""Här kan du se var de biograferade kvinnorna befunnit sig;
         var de fötts, verkat och dött. Genom att klicka på en ord kan du se vilka som fötts,
         verkat och/eller avlidit där."""
@@ -137,7 +136,7 @@ def compute_place(client):
     collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
     stat_table.sort(key=lambda x: collator.getSortKey(x.get('name').strip()))
     art = render_template('places.html', places=stat_table, title=gettext("Placenames", infotext=infotext))
-    client.set('place'+lang, art, time=app.config['CACHE_TIME'])
+    client.set('place' + lang, art, time=app.config['CACHE_TIME'])
     return art
 
 

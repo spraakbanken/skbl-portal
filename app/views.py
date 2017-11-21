@@ -420,10 +420,11 @@ def fillcache():
     # Refill the cache (~ touch all pages)
     # This request will take some seconds, users may want to make an
     # asynchronous call
-    computeviews.compute_article(client)
-    computeviews.compute_activity(client)
-    computeviews.compute_organisation(client)
-    computeviews.compute_place(client)
+    for lang in ["sv", "en"]:
+        computeviews.compute_article(client, lang=lang)
+        computeviews.compute_activity(client, lang=lang)
+        computeviews.compute_organisation(client, lang=lang)
+        computeviews.compute_place(client, lang=lang)
     return jsonify({"cache_filled": True})
 
 
