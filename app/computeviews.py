@@ -82,7 +82,7 @@ def compute_article(client, lang=""):
 
         art = render_template('list.html',
                               hits=data["hits"],
-                              headline=gettext(u'Women A-Ö'),
+                              headline=gettext(u'Women A-Z'),
                               alphabetic=True,
                               split_letters=True,
                               infotext=infotext,

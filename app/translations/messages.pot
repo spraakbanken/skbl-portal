@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-11-13 11:57+0000\n"
+"POT-Creation-Date: 2017-11-22 10:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,21 +17,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
 
-#: app/computeviews.py:39 app/templates/article.html:93
+#: app/computeviews.py:41 app/templates/article.html:98
 #: app/templates/layout.html:127
 msgid "Organisations"
 msgstr ""
 
-#: app/computeviews.py:57 app/templates/article.html:69
+#: app/computeviews.py:61 app/templates/article.html:73
 #: app/templates/layout.html:120
 msgid "Activities"
 msgstr ""
 
-#: app/computeviews.py:71 app/templates/layout.html:94
-msgid "Women A-Ö"
+#: app/computeviews.py:85 app/templates/layout.html:94
+msgid "Women A-Z"
 msgstr ""
 
-#: app/computeviews.py:123
+#: app/computeviews.py:138
 msgid "Placenames"
 msgstr ""
 
@@ -68,55 +68,51 @@ msgstr ""
 msgid "Hits for \"%s\""
 msgstr ""
 
-#: app/templates/article.html:35
+#: app/templates/article.html:39
 msgid "Family Relationships"
 msgstr ""
 
-#: app/templates/article.html:38
+#: app/templates/article.html:42
 msgid "Civil Status:"
 msgstr ""
 
-#: app/templates/article.html:57
+#: app/templates/article.html:61
 msgid "Education"
 msgstr ""
 
-#: app/templates/article.html:81
+#: app/templates/article.html:86
 msgid "Contacts"
 msgstr ""
 
-#: app/templates/article.html:106
+#: app/templates/article.html:111
 msgid "Residences"
 msgstr ""
 
-#: app/templates/article.html:122
+#: app/templates/article.html:127
 msgid "Prices/awards"
 msgstr ""
 
-#: app/templates/article.html:135
+#: app/templates/article.html:140
 msgid "Sources"
 msgstr ""
 
-#: app/templates/article.html:158
+#: app/templates/article.html:164
 msgid "Further References"
 msgstr ""
 
-#: app/templates/article.html:181
+#: app/templates/article.html:188
 msgid "Show map"
 msgstr ""
 
-#: app/templates/article.html:184
+#: app/templates/article.html:191
 msgid "Hide map"
 msgstr ""
 
-#: app/templates/article.html:194 app/templates/layout.html:141
+#: app/templates/article.html:202 app/templates/layout.html:141
 msgid "Keywords"
 msgstr ""
 
-#: app/templates/article.html:203
-msgid "Othernames"
-msgstr ""
-
-#: app/templates/article.html:210
+#: app/templates/article.html:216
 msgid "Links"
 msgstr ""
 
