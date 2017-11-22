@@ -3,7 +3,10 @@
 {% block content %}
 <div class="col-md-8">
     <h1>{{ title }}</h1>
-    <p>Platser där de biograferade kvinnorna fötts, dött och varit verksamma. Klicka på en ort för att få upp en karta och en lista över kvinnor med anknytning till platsen.</p><br/>
+    {% if infotext %}
+        <p>{{ infotext}}</p>
+        <br/>
+    {% endif %}
 
       {% for firstletter, _ in make_placenames(places) %}
           <a class="alphabetlist" href="#{{firstletter}}">{{firstletter}}</a>&nbsp;

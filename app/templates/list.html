@@ -4,7 +4,7 @@
 <div class="col-md-8">
     <h1>{{ headline | deescape }}</h1>
     {% if subheadline %}
-       <h2>{{ subheadline | deescape }}</h2>
+       <h2>{{ subheadline | deescape }} {% if search and hits.hits%}({{ hits.hits|length }}){% endif %}</h2>
        <br/>
     {% endif %}
     {% if infotext %}

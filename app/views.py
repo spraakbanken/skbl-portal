@@ -28,9 +28,8 @@ def start():
     rule = request.url_rule
     if 'sv' in rule.rule:
         infotext = u"""<p>Läs om 1 000 svenska kvinnor från medeltid till nutid.</p>
-                       <p>Genom olika sökningar kan du se vad de arbetade med,
-                       vilken utbildning de fick, vilka organisationer de var med i,
-                       hur de rörde sig i världen, vad de åstadkom och mycket mera.</p>
+                       <p>Genom olika sökningar kan du se vad de arbetade med, vilken utbildning de fick,
+                       vilka organisationer de var med i, hur de rörde sig i världen, vad de åstadkom och mycket mera.</p>
                        <p>Alla har de bidragit till samhällets utveckling.</p>"""
     else:
         infotext = u"""<p>Read up on 1000 Swedish women – from the middle ages to the present day.</p>
@@ -194,9 +193,9 @@ def activity(result=None):
 def keyword_index():
     rule = request.url_rule
     if 'sv' in rule.rule:
-        infotext = u"""Här finns en lista över de nyckelord som karakteriserar materialet.
-        De handlar om tid, yrken, ideologier och mycket mera.
-        Om du klickar på något av nyckelorden kan du se vilka kvinnor som kan karakteriseras med det."""
+        infotext = u"""Här finns en lista över de nyckelord som karaktäriserar materialet.
+        De handlar om tid, yrken, orter, religion och mycket mera.
+        Om du går in på något av nyckelorden kan du se vilka kvinnor som kan karaktäriseras med det."""
     else:
         infotext = u"""This generates a list of keywords which typically appear in the entries.
         These include time periods, occupations, ideologies and much more.
@@ -217,7 +216,7 @@ def keyword(result=None):
 def authors():
     rule = request.url_rule
     if 'sv' in rule.rule:
-        infotext = u"""Här förtecknas de personer som har bidragit med artiklar till Svenskt kvinnobiografiskt lexikon. """
+        infotext = u"""Här är de personerna som har bidragit med artiklar till svenskt Kvinnobiografiskt Lexikon förtecknade."""
     else:
         infotext = u"""This is a list of the authors who supplied articles to SKBL."""
     set_language_switch_link("articleauthor_index")

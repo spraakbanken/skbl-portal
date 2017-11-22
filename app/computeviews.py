@@ -9,7 +9,7 @@ import urllib
 from urllib2 import urlopen
 
 
-def compute_organisation(client, lang=""):
+def compute_organisation(client, lang="", infotext=""):
     set_language_switch_link("organisation_index", lang=lang)
     if not lang:
         lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
@@ -19,9 +19,9 @@ def compute_organisation(client, lang=""):
 
     if lang == 'sv':
         infotext = u"""Här kan du se vilka organisationer de biograferade kvinnorna varit medlemmar
-        och verksamma i. Det ger en inblick i de nätverk som var de olika kvinnornas och visar
-        såväl det gemensamma engagemanget som mångfalden i det.
-        Om du klickar på organisationens namn visas vilka kvinnor som var aktiva i den."""
+        och verksamma i. Det ger en inblick i de nätverks som var de olika kvinnornas och visar såväl
+        det gemensamma engagemanget som mångfalden i det. Om du klickar på organisationens namn visas
+        vilka kvinnor som var aktiva i den."""
     else:
         infotext = u"""This displays the organisations which the subjects in the dictionary joined
         and within which they were active. This not only provides an insight into each woman’s
@@ -100,9 +100,8 @@ def compute_place(client, lang=""):
         return rv
 
     if lang == 'sv':
-        infotext = u"""Här kan du se var de biograferade kvinnorna befunnit sig;
-        var de fötts, verkat och dött. Genom att klicka på en ord kan du se vilka som fötts,
-        verkat och/eller avlidit där."""
+        infotext = u"""Platser där de biograferade kvinnorna fötts, dött och varit verksamma.
+        Klicka på en ort för att få upp en karta och en lista över kvinnor med anknytning till platsen."""
     else:
         infotext = u"""This displays the subjects’ locations: where they were born
         where they were active, and where they died. Selecting a particular placename
@@ -135,7 +134,7 @@ def compute_place(client, lang=""):
     # stat_table = helpers.sort_places(stat_table, request.url_rule)
     collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
     stat_table.sort(key=lambda x: collator.getSortKey(x.get('name').strip()))
-    art = render_template('places.html', places=stat_table, title=gettext("Placenames", infotext=infotext))
+    art = render_template('places.html', places=stat_table, title=gettext("Placenames"), infotext=infotext)
     client.set('place' + lang, art, time=app.config['CACHE_TIME'])
     return art
 
