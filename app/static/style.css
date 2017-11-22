@@ -469,3 +469,6 @@ li .glyphicon-link {
   background-color: rgba(255, 201, 48, 0.1);
   padding: 31px;
 }
+.civ-status-text {
+  margin-left: 40px;
+}

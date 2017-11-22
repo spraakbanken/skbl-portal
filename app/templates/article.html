@@ -34,8 +34,14 @@
             </em>
         </p>
 
-
-
+        <br/><br/>
+        <button type="button" class="btn btn-default toggle-dates">
+            <span class="ellipsis_plus glyphicon glyphicon-calendar" aria-hidden="true"></span>
+            <span class="toggled-by-button">&nbsp;&nbsp;Visa datum och årtal
+        </span>
+        <span class="toggled-by-button" style="display:none">
+            &nbsp;&nbsp;Göm datum och årtal
+        </span></button>
 
         {% if article.relation %}
         <div>
@@ -62,11 +68,17 @@
         <br/>
         <br/>
         <h4>{{gettext('Family Relationships')}}</h4>
+            {% if article.civil_status %}
+                <span class="civ-status-text">{{gettext('Civil Status:')}} {{ article.civil_status }}</span>
+            {% endif %}
             {% if len(article.relation) <= 4 %}
                 {% for relation in article.relation %}
                 <ul>
                     <li class="keyword_list_item">
-                        <h5>{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}</h5>
+                        <h5 class="toggled-by-button">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}</h5>
+                        <h5 class="toggled-by-button" style="display:none">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}
+                        {% if relation.born or relation.death %} ({{relation.born.comment}} – {{relation.death.comment}}){% endif %}
+                        {% if relation.from and relation.to %}<br/>Relation mellan {{relation.from.comment}} och {{relation.to.comment}}{% endif %}</h5>
                     </li>
                 </ul>
                 {% endfor %}
@@ -75,7 +87,10 @@
                     {% for relation in article.relation %}
                         <ul>
                           <li class="keyword_list_item">
-                            <h5>{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}</h5>
+                            <h5 class="toggled-by-button">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}</h5>
+                        <h5 class="toggled-by-button" style="display:none">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}
+                        {% if relation.born or relation.death %} ({{relation.born.comment}} – {{relation.death.comment}}){% endif %}
+                        {% if relation.from and relation.to %}<br/>Relation mellan {{relation.from.comment}} och {{relation.to.comment}}{% endif %}</h5>
                           </li>
                         </ul>
                     {% endfor %}
@@ -88,7 +103,10 @@
                     {% for relation in article.relation %}
                       {% if loop.index < 4 %}
                       <li class="keyword_list_item">
-                        <h5>{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}</h5>
+                        <h5 class="toggled-by-button">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}</h5>
+                        <h5 class="toggled-by-button" style="display:none">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}
+                        {% if relation.born or relation.death %} ({{relation.born.comment}} – {{relation.death.comment}}){% endif %}
+                        {% if relation.from and relation.to %}<br/>Relation mellan {{relation.from.comment}} och {{relation.to.comment}}{% endif %}</h5>
                       </li>
                       {% endif %}
                     {% endfor %}
@@ -701,6 +719,10 @@
             jQuery(".minimize_items").click(function() {
                 jQuery(this).parent().siblings(".shown_first").toggle();
                 jQuery(this).parent().toggle();
+            });
+            jQuery(".toggle-dates").click(function() {
+                jQuery(".toggled-by-button").each(function() { $(this).toggle(); });
+
             });
         });
     </script>
