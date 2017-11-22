@@ -291,9 +291,14 @@ def article_index(search=None):
 @app.route("/en/article/<id>", endpoint="article_en")
 @app.route("/sv/artikel/<id>", endpoint="article_sv")
 def article(id=None):
-    data = karp_query('querycount', {'q': "extended||and|id.search|equals|%s" % (id)})
-    set_language_switch_link("article_index", id)
-    return show_article(data)
+    try:
+        data = karp_query('querycount', {'q': "extended||and|id.search|equals|%s" % (id)})
+        set_language_switch_link("article_index", id)
+        return show_article(data)
+    except Exception as e:
+        import sys
+        print >> sys.stderr, e
+        raise
 
 
 def find_link(searchstring):
