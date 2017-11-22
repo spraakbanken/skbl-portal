@@ -54,13 +54,13 @@
         <div id="logo" class="col-md-2">
           <a href="/{{ g.language }}"><img src="{{ url_for('static', filename='images/skbl/logo.png') }}"></a>
         </div>
-        <div id="header-title" class="col-md-8">
+        <div id="header-title" class="col-md-7">
           <h1>Svenskt kvinnobiografiskt lexikon</h1>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
           <form id="search" action="{{ url_for('search_'+g.language) }}">
             <div class="input-group stylish-input-group">
-              <input name="q" type="search" class="form-control"  placeholder="{{ gettext('Search') }}" value="{{ request.args.get('q', '') }}" >
+              <input name="q" type="search" class="form-control"  placeholder="{{ gettext('Free text search') }}" value="{{ request.args.get('q', '') }}" >
               <span class="input-group-addon">
                 <button type="submit">
                   <span class="glyphicon glyphicon-search"></span>

@@ -146,8 +146,8 @@ msgid "Submit"
 msgstr "Skicka"
 
 #: app/templates/layout.html:63
-msgid "Search"
-msgstr "Sök"
+msgid "Free text search"
+msgstr "Fri sökning"
 
 #: app/templates/layout.html:71
 msgid "Go to advanced search"
