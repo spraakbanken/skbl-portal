@@ -202,7 +202,8 @@ def keyword_index():
         These include time periods, occupations, ideologies and much more.
         Selecting a keyword generates a list of all the women who fall under the given category."""
     set_language_switch_link("keyword_index")
-    return computeviews.bucketcall(queryfield='nyckelord', name='keyword', title='Keywords', infotext=infotext)
+    return computeviews.bucketcall(queryfield='nyckelord', name='keyword', title='Keywords',
+                                   infotext=infotext, alphabetical=True)
 
 
 @app.route("/en/keyword/<result>", endpoint="keyword_en")
@@ -222,7 +223,7 @@ def authors():
     set_language_switch_link("articleauthor_index")
     return computeviews.bucketcall(queryfield='artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn',
                                    name='articleauthor', title='Article authors', sortby=lambda x: x[1],
-                                   lastnamefirst=True, infotext=infotext)
+                                   lastnamefirst=True, infotext=infotext, alphabetical=True)
 
 
 @app.route("/en/articleauthor/<result>", endpoint="articleauthor_en")
