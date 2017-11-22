@@ -34,8 +34,12 @@
             </em>
         </p>
 
+
+
+
         {% if article.relation %}
-        <div id="familjeforhallanden_lista" class="ellipsis">
+        <div>
+        <!--<div id="familjeforhallanden_lista" class="ellipsis">
             <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> {{gettext('Family Relationships')}} ({% if article.civil_status %}{{ article.relation|length + 1}}{% else %}{{ article.relation|length }}{% endif %})</h4>
             <ul class="ellipsis_contents">
               {% if article.civil_status %}
@@ -54,10 +58,55 @@
                   </li>
             {% endfor %}
             </ul>
+        </div>-->
+        <br/>
+        <br/>
+        <h4>{{gettext('Family Relationships')}}</h4>
+            {% if len(article.relation) <= 4 %}
+                {% for relation in article.relation %}
+                <ul>
+                    <li class="keyword_list_item">
+                        <h5>{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}</h5>
+                    </li>
+                </ul>
+                {% endfor %}
+            {% else %}
+                <div style="display:none" class="nested_container hidden_first">
+                    {% for relation in article.relation %}
+                        <ul>
+                          <li class="keyword_list_item">
+                            <h5>{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}</h5>
+                          </li>
+                        </ul>
+                    {% endfor %}
+                    <div class="minimize_items">
+                      <span class="label label-default"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></span>
+                    </div>
+                </div>
+                <div style="" class="nested_container shown_first">
+                    <ul>
+                    {% for relation in article.relation %}
+                      {% if loop.index < 4 %}
+                      <li class="keyword_list_item">
+                        <h5>{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}</h5>
+                      </li>
+                      {% endif %}
+                    {% endfor %}
+                    </ul>
+                    <div class="fadeout">
+                      <span class="label label-default">fler...</span>
+                    </div>
+                </div>
+            {% endif %}
         </div>
         {% endif %}
+
+
+
+
         {% if article.education %}
-        <div id="organisationer_lista" class="ellipsis">
+        <div>
+        <!--<div id="organisationer_lista" class="ellipsis">
             <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> {{gettext('Education')}} ({{ article.education|length }})</h4>
             <ul class="ellipsis_contents">
             {% for education in article.education %}
@@ -66,10 +115,56 @@
                 </li>
             {% endfor %}
             </ul>
+        </div>-->
+        <br/>
+        <br/>
+        <h4>{{gettext('Education')}}</h4>
+            {% if len(article.education) <= 4 %}
+                {% for education in article.education %}
+                <ul>
+                    <li class="keyword_list_item">
+                        <h5>{{ education.type }}{% if education.place and education.place.place %}, {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description | deescape }}{% endif %}</h5>
+                    </li>
+                </ul>
+                {% endfor %}
+            {% else %}
+                <div style="display:none" class="nested_container hidden_first">
+                    {% for education in article.education %}
+                        <ul>
+                          <li class="keyword_list_item">
+                            <h5>{{ education.type }}{% if education.place and education.place.place %}, {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description | deescape }}{% endif %}</h5>
+                          </li>
+                        </ul>
+                    {% endfor %}
+                    <div class="minimize_items">
+                      <span class="label label-default"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></span>
+                    </div>
+                </div>
+                <div style="" class="nested_container shown_first">
+                    <ul>
+                    {% for education in article.education %}
+                      {% if loop.index < 4 %}
+                      <li class="keyword_list_item">
+                        <h5>{{ education.type }}{% if education.place and education.place.place %}, {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description | deescape }}{% endif %}</h5>
+                      </li>
+                      {% endif %}
+                    {% endfor %}
+                    </ul>
+                    <div class="fadeout">
+                      <span class="label label-default">fler...</span>
+                    </div>
+                </div>
+            {% endif %}
         </div>
         {% endif %}
+
+
+
+
+
         {% if article.occupation %}
-        <div id="organisationer_lista" class="ellipsis">
+        <div>
+        <!--<div id="organisationer_lista" class="ellipsis">
             <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> {{gettext('Activities')}} ({{ article.occupation|length }})</h4>
             <ul class="ellipsis_contents">
             {% for occupation in article.occupation %}
@@ -79,10 +174,56 @@
                 </li>
             {% endfor %}
             </ul>
+        </div>-->
+        <br/>
+        <br/>
+        <h4>{{gettext('Activities')}}</h4>
+            {% if len(article.occupation) <= 4 %}
+                {% for occupation in article.occupation %}
+                <ul>
+                    <li class="keyword_list_item">
+                        <h5>{{ occupation.type }}{% if occupation.detail %}: {{ occupation.detail | deescape }} {% elif occupation.description %} {{ occupation.description | deescape}} {% endif %}</h5>
+                    </li>
+                </ul>
+                {% endfor %}
+            {% else %}
+                <div style="display:none" class="nested_container hidden_first">
+                    {% for occupation in article.occupation %}
+                        <ul>
+                          <li class="keyword_list_item">
+                            <h5>{{ occupation.type }}{% if occupation.detail %}: {{ occupation.detail | deescape }} {% elif occupation.description %} {{ occupation.description | deescape}} {% endif %}</h5>
+                          </li>
+                        </ul>
+                    {% endfor %}
+                    <div class="minimize_items">
+                      <span class="label label-default"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></span>
+                    </div>
+                </div>
+                <div style="" class="nested_container shown_first">
+                    <ul>
+                    {% for occupation in article.occupation %}
+                      {% if loop.index < 4 %}
+                      <li class="keyword_list_item">
+                        <h5>{{ occupation.type }}{% if occupation.detail %}: {{ occupation.detail | deescape }} {% elif occupation.description %} {{ occupation.description | deescape}} {% endif %}</h5>
+                      </li>
+                      {% endif %}
+                    {% endfor %}
+                    </ul>
+                    <div class="fadeout">
+                      <span class="label label-default">fler...</span>
+                    </div>
+                </div>
+            {% endif %}
         </div>
         {% endif %}
+
+
+
+
+
         {% if article.contact %}
-        <div id="kontakter_lista" class="ellipsis">
+        <div>
+        <!--<div id="kontakter_lista" class="ellipsis">
             <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> {{gettext('Contacts')}} ({{ article.contact|length }})</h4>
             <ul class="ellipsis_contents">
             {% for contact in article.contact %}
@@ -91,10 +232,56 @@
                 </li>
             {% endfor %}
             </ul>
+        </div>-->
+        <br/>
+        <br/>
+        <h4>{{gettext('Contacts')}}</h4>
+            {% if len(article.contact) <= 4 %}
+                {% for contact in article.contact %}
+                <ul>
+                    <li class="keyword_list_item">
+                        <h5>{{ contact.type }}: {{ contact.firstname }} {{ contact.lastname }}</h5>
+                    </li>
+                </ul>
+                {% endfor %}
+            {% else %}
+                <div style="display:none" class="nested_container hidden_first">
+                    {% for contact in article.contact %}
+                        <ul>
+                          <li class="keyword_list_item">
+                            <h5>{{ contact.type }}: {{ contact.firstname }} {{ contact.lastname }}</h5>
+                          </li>
+                        </ul>
+                    {% endfor %}
+                    <div class="minimize_items">
+                      <span class="label label-default"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></span>
+                    </div>
+                </div>
+                <div style="" class="nested_container shown_first">
+                    <ul>
+                    {% for contact in article.contact %}
+                      {% if loop.index < 4 %}
+                      <li class="keyword_list_item">
+                        <h5>{{ contact.type }}: {{ contact.firstname }} {{ contact.lastname }}</h5>
+                      </li>
+                      {% endif %}
+                    {% endfor %}
+                    </ul>
+                    <div class="fadeout">
+                      <span class="label label-default">fler...</span>
+                    </div>
+                </div>
+            {% endif %}
         </div>
         {% endif %}
+
+
+
+
+
         {% if article.organisation %}
-        <div id="organisationer_lista" class="ellipsis">
+        <div>
+        <!--<div id="organisationer_lista" class="ellipsis">
             <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> {{gettext('Organisations')}} ({{ article.organisation|length }})</h4>
             <ul class="ellipsis_contents">
             {% for organisation in article.organisation %}
@@ -104,10 +291,59 @@
                 </li>
             {% endfor %}
             </ul>
+        </div>-->
+        <br/>
+        <br/>
+        <h4>{{gettext('Organisations')}}</h4>
+            {% if len(article.organisation) <= 4 %}
+                {% for organisation in article.organisation %}
+                <ul>
+                    <li class="keyword_list_item">
+                        <h5>{{ organisation.name }}</h5>
+                        <span>{{ organisation.description }}</span>
+                    </li>
+                </ul>
+                {% endfor %}
+            {% else %}
+                <div style="display:none" class="nested_container hidden_first">
+                    {% for organisation in article.organisation %}
+                        <ul>
+                          <li class="keyword_list_item">
+                            <h5>{{ organisation.name }}</h5>
+                            <span>{{ organisation.description }}</span>
+                          </li>
+                        </ul>
+                    {% endfor %}
+                    <div class="minimize_items">
+                      <span class="label label-default"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></span>
+                    </div>
+                </div>
+                <div style="" class="nested_container shown_first">
+                    <ul>
+                    {% for organisation in article.organisation %}
+                      {% if loop.index < 4 %}
+                      <li class="keyword_list_item">
+                        <h5>{{ organisation.name }}</h5>
+                        <span>{{ organisation.description }}</span>
+                      </li>
+                      {% endif %}
+                    {% endfor %}
+                    </ul>
+                    <div class="fadeout">
+                      <span class="label label-default">fler...</span>
+                    </div>
+                </div>
+            {% endif %}
         </div>
         {% endif %}
+
+
+
+
+
         {% if article.places %}
-        <div id="bostadsorter_lista" class="ellipsis">
+        <div>
+        <!--<div id="bostadsorter_lista" class="ellipsis">
             <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> {{gettext('Residences')}} ({{ article.places|length }})</h4>
             <ul class="ellipsis_contents">
             {% for place in article.places %}
@@ -120,10 +356,62 @@
                 </li>
             {% endfor %}
             </ul>
+        </div>-->
+        <br/>
+        <br/>
+        <h4>{{gettext('Residences')}}</h4>
+            {% if len(article.places) <= 4 %}
+                {% for place in article.places %}
+                <ul>
+                    <li class="keyword_list_item">
+                        {% if place.place %}
+                            <h5>{{place.place.place}}</h5>
+                        {% endif %}
+                    </li>
+                </ul>
+                {% endfor %}
+            {% else %}
+                <div style="display:none" class="nested_container hidden_first">
+                    {% for place in article.places %}
+                        <ul>
+                          <li class="keyword_list_item">
+                            {% if place.place %}
+                                <h5>{{place.place.place}}</h5>
+                            {% endif %}
+                          </li>
+                        </ul>
+                    {% endfor %}
+                    <div class="minimize_items">
+                      <span class="label label-default"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></span>
+                    </div>
+                </div>
+                <div style="" class="nested_container shown_first">
+                    <ul>
+                    {% for place in article.places %}
+                      {% if loop.index < 4 %}
+                      <li class="keyword_list_item">
+                        {% if place.place %}
+                            <h5>{{place.place.place}}</h5>
+                        {% endif %}
+                      </li>
+                      {% endif %}
+                    {% endfor %}
+                    </ul>
+                    <div class="fadeout">
+                      <span class="label label-default">fler...</span>
+                    </div>
+                </div>
+            {% endif %}
         </div>
         {% endif %}
+
+
+
+
+
         {% if article.awards %}
-        <div id="priser_lista" class="ellipsis">
+        <div>
+        <!--<div id="priser_lista" class="ellipsis">
             <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> {{gettext('Prices/awards')}} ({{ article.awards|length }})</h4>
             <ul class="ellipsis_contents">
             {% for award in article.awards %}
@@ -132,8 +420,53 @@
                 </li>
             {% endfor %}
             </ul>
+        </div>-->
+        <br/>
+        <br/>
+        <h4>{{gettext('Prices/awards')}}</h4>
+            {% if len(article.awards) <= 8 %}
+                {% for award in article.awards %}
+                <ul>
+                    <li class="keyword_list_item">
+                        <h5>{{ award.type }}{% if award.description %}: <a class="visible_link" href="{{url_for('award_'+g.language, result=award.description)}}">{{award.description | deescape}}</a>{% endif %}</h5>
+                    </li>
+                </ul>
+                {% endfor %}
+            {% else %}
+                <div style="display:none" class="nested_container hidden_first">
+                    {% for award in article.awards %}
+                    <ul>
+                      <li class="keyword_list_item">
+                        <h5>{{ award.type }}{% if award.description %}: <a class="visible_link" href="{{url_for('award_'+g.language, result=award.description)}}">{{award.description | deescape}}</a>{% endif %}</h5>
+                      </li>
+                    </ul>
+                    {% endfor %}
+                    <div class="minimize_items">
+                      <span class="label label-default"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></span>
+                    </div>
+                    </div>
+                    <div style="" class="nested_container shown_first">
+                    <ul>
+                    {% for award in article.awards %}
+                      {% if loop.index < 8 %}
+                      <li class="keyword_list_item">
+                        <h5>{{ award.type }}{% if award.description %}: <a class="visible_link" href="{{url_for('award_'+g.language, result=award.description)}}">{{award.description | deescape}}</a>{% endif %}</h5>
+                      </li>
+                      {% endif %}
+                    {% endfor %}
+                    </ul>
+                    <div class="fadeout">
+                      <span class="label label-default">fler...</span>
+                    </div>
+                </div>
+            {% endif %}
         </div>
         {% endif %}
+
+
+
+
+
         {% if article.source %}
         <br/><br/>
         <div>
@@ -206,6 +539,7 @@
                 {% endif %}
             {% endfor %}
         {% endif %}
+        <a href="https://spraakbanken.gu.se/karp/#?mode=skbl&search=extended||and|id|equals|{{article.es_id}}" target="_blank"><img src="https://spraakbanken.gu.se/sites/spraakbanken.gu.se/files/karp.png"></a>
 
         {# <h3>{{ gettext("Othernames") }}</h3>
         {% for name in article.othernames %}
@@ -233,7 +567,7 @@
             });
         });
     </script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <!--<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
     <script>
         jQuery(document).ready(function() {
@@ -355,6 +689,18 @@
                 jQuery("#article_map").hide();
                 jQuery("#article_map_button").show();
                 jQuery("#article_map_button_hide").hide();
+            });
+        });
+    </script>-->
+    <script>
+        jQuery(document).ready(function() {
+            jQuery(".fadeout").click(function() {
+                jQuery(this).parent().siblings(".hidden_first").toggle();
+                jQuery(this).parent().toggle();
+            });
+            jQuery(".minimize_items").click(function() {
+                jQuery(this).parent().siblings(".shown_first").toggle();
+                jQuery(this).parent().toggle();
             });
         });
     </script>

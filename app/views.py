@@ -322,6 +322,7 @@ def find_link(searchstring):
 def show_article(data):
     if data['query']['hits']['total'] == 1:
         source = data['query']['hits']['hits'][0]['_source']
+        source['es_id'] = data['query']['hits']['hits'][0]['_id']
         firstname, calling = helpers.get_first_name(source)
         # Print html for the names with the calling name and last name in bold
         formatted_names = [name if name != calling else "<b>" + name + "</b>" for name in firstname.split(" ")]
