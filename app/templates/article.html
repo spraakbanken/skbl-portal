@@ -424,7 +424,7 @@
         <br/>
         <br/>
         <h4>{{gettext('Prices/awards')}}</h4>
-            {% if len(article.awards) <= 8 %}
+            {% if len(article.awards) <= 4 %}
                 {% for award in article.awards %}
                 <ul>
                     <li class="keyword_list_item">
@@ -448,7 +448,7 @@
                     <div style="" class="nested_container shown_first">
                     <ul>
                     {% for award in article.awards %}
-                      {% if loop.index < 8 %}
+                      {% if loop.index < 4 %}
                       <li class="keyword_list_item">
                         <h5>{{ award.type }}{% if award.description %}: <a class="visible_link" href="{{url_for('award_'+g.language, result=award.description)}}">{{award.description | deescape}}</a>{% endif %}</h5>
                       </li>
