@@ -194,7 +194,7 @@
         {% if article.portrait %}
             {% set article_portrait_description = get_lang_text(article.portrait[0].description, article.portrait[0].description_eng, g.language) %}
             <div class="image-overlay">
-                <img src="{{ article.portrait[0].url }}" itemprop="image" alt="{{ article_portrait_description }}" width="360px">
+                <img class="img-responsive" src="{{ article.portrait[0].url }}" itemprop="image" alt="{{ article_portrait_description }}" width="360px">
             </div>
             {{ article_portrait_description | deescape}}
         {% endif %}
