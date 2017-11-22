@@ -36,12 +36,14 @@
 
         <br/><br/>
         <button type="button" class="btn btn-default toggle-dates">
-            <span class="ellipsis_plus glyphicon glyphicon-calendar" aria-hidden="true"></span>
-            <span class="toggled-by-button">&nbsp;&nbsp;Visa full information
-        </span>
-        <span class="toggled-by-button" style="display:none">
-            &nbsp;&nbsp;Visa förkortad information
-        </span></button>
+            <span class="toggled-by-button">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                &nbsp;&nbsp;Visa full information
+            </span>
+            <span class="toggled-by-button" style="display:none">
+                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                &nbsp;&nbsp;Visa förkortad information
+            </span></button>
 
         {% if article.relation %}
         <div>
