@@ -28,7 +28,7 @@ def start():
     rule = request.url_rule
     if 'sv' in rule.rule:
         infotext = u"""<p>Läs om 1 000 svenska kvinnor från medeltid till nutid.</p>
-                       <p>Genom olika sökningar kan du se - vad de arbetade med,
+                       <p>Genom olika sökningar kan du se vad de arbetade med,
                        vilken utbildning de fick, vilka organisationer de var med i,
                        hur de rörde sig i världen, vad de åstadkom och mycket mera.</p>
                        <p>Alla har de bidragit till samhällets utveckling.</p>"""
