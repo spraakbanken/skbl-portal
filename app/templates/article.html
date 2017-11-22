@@ -37,10 +37,10 @@
         <br/><br/>
         <button type="button" class="btn btn-default toggle-dates">
             <span class="ellipsis_plus glyphicon glyphicon-calendar" aria-hidden="true"></span>
-            <span class="toggled-by-button">&nbsp;&nbsp;Visa datum och årtal
+            <span class="toggled-by-button">&nbsp;&nbsp;Visa full information
         </span>
         <span class="toggled-by-button" style="display:none">
-            &nbsp;&nbsp;Göm datum och årtal
+            &nbsp;&nbsp;Visa förkortad information
         </span></button>
 
         {% if article.relation %}
@@ -78,6 +78,7 @@
                         <h5 class="toggled-by-button">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}</h5>
                         <h5 class="toggled-by-button" style="display:none">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}
                         {% if relation.born or relation.death %} ({{relation.born.comment}} – {{relation.death.comment}}){% endif %}
+                        {% if relation.occupation %}<br/>{{relation.occupation}}{% endif %}
                         {% if relation.from and relation.to %}<br/>Relation mellan {{relation.from.comment}} och {{relation.to.comment}}{% endif %}</h5>
                     </li>
                 </ul>
@@ -90,6 +91,7 @@
                             <h5 class="toggled-by-button">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}</h5>
                         <h5 class="toggled-by-button" style="display:none">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}
                         {% if relation.born or relation.death %} ({{relation.born.comment}} – {{relation.death.comment}}){% endif %}
+                        {% if relation.occupation %}<br/>{{relation.occupation}}{% endif %}
                         {% if relation.from and relation.to %}<br/>Relation mellan {{relation.from.comment}} och {{relation.to.comment}}{% endif %}</h5>
                           </li>
                         </ul>
@@ -106,6 +108,7 @@
                         <h5 class="toggled-by-button">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}</h5>
                         <h5 class="toggled-by-button" style="display:none">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}
                         {% if relation.born or relation.death %} ({{relation.born.comment}} – {{relation.death.comment}}){% endif %}
+                        {% if relation.occupation %}<br/>{{relation.occupation}}{% endif %}
                         {% if relation.from and relation.to %}<br/>Relation mellan {{relation.from.comment}} och {{relation.to.comment}}{% endif %}</h5>
                       </li>
                       {% endif %}
