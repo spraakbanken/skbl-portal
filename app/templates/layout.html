@@ -116,28 +116,28 @@ Det rekommenderas i första hand för forskare som vill analysera de uppgifter s
         <div class="row">
           <div class="border col-md-3">
             <a href="{{ url_for('activity_index_'+g.language) }}">
-              <div class="image-overlay"><img src="{{ url_for('static', filename='images/skbl/verksamhet.png') }}">
+              <div class="image-overlay"><img class="img-responsive" src="{{ url_for('static', filename='images/skbl/verksamhet.png') }}">
                   <h3>{{ gettext('Activities') }}</h3>
               </div>
             </a>
           </div>
           <div class="border col-md-3">
             <a href="{{ url_for('organisation_index_'+g.language) }}">
-              <div class="image-overlay"><img src="{{ url_for('static', filename='images/skbl/organisationer.png') }}">
+              <div class="image-overlay"><img class="img-responsive" src="{{ url_for('static', filename='images/skbl/organisationer.png') }}">
               <h3>{{ gettext('Organisations') }}</h3>
               </div>
             </a>
           </div>
           <div class="border col-md-3">
             <a href="{{ url_for('place_index_'+g.language) }}">
-              <div class="image-overlay"><img src="{{ url_for('static', filename='images/skbl/orter.png') }}">
+              <div class="image-overlay"><img class="img-responsive" src="{{ url_for('static', filename='images/skbl/orter.png') }}">
                   <h3>{{ gettext('Places') }}</h3>
               </div>
             </a>
           </div>
           <div class="border col-md-3">
             <a href="{{ url_for('keyword_index_'+g.language) }}">
-              <div class="image-overlay"><img src="{{ url_for('static', filename='images/skbl/nyckelord.png') }}">
+              <div class="image-overlay"><img class="img-responsive" src="{{ url_for('static', filename='images/skbl/nyckelord.png') }}">
                   <h3>{{ gettext('Keywords') }}</h3>
               </div>
             </a>
