@@ -32,7 +32,7 @@ def start():
                        vilka organisationer de var med i, hur de rörde sig i världen, vad de åstadkom och mycket mera.</p>
                        <p>Alla har de bidragit till samhällets utveckling.</p>"""
     else:
-        infotext = u"""<p>Read up on 1000 Swedish women – from the middle ages to the present day.</p>
+        infotext = u"""<p>Read up on 1000 Swedish women from the middle ages to the present day.</p>
                        <p>Use the search function to reveal what these women got up to, how they were educated,
                        which organisations they belonged to, whether they travelled, what they achieved, and much more.</p>
                        <p>All of them contributed in a significant way to the development of Swedish society.</p>"""
