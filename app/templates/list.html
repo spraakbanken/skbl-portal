@@ -31,7 +31,7 @@
             {% if is_link %}
                 <a href="{{ url_for('article_'+g.language, id=subject_id) }}" title="{{ linked_name }}"><strong><em>{{ name }}</em></strong>&ensp;<span class="glyphicon glyphicon-link"></span><br />
             {% else %}
-                <a href="{{ url_for('article_'+g.language, id=subject_id) }}"><strong>{{ name }}</strong><br />
+                <a href="{{ url_for('article_'+g.language, id=subject_id) }}">{{ name | safe }}<br />
             {% endif %}
             {% set article_subtitle = get_lang_text(subtitle, subtitle_eng, g.language) %}
             {% if article_subtitle %} {{ article_subtitle | safe}}<br> {% endif %}

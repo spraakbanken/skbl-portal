@@ -130,7 +130,7 @@ def make_namelist(hits):
             name = hit["_source"]["name"].get("sortname", "")
             linked_name = join_name(hit["_source"])
         else:
-            name = join_name(hit["_source"])
+            name = join_name(hit["_source"], mk_bold=True)
             linked_name = False
 
         liferange = get_life_range(hit["_source"])
@@ -153,7 +153,7 @@ def make_namelist(hits):
     return (first_letters, results)
 
 
-def join_name(source):
+def join_name(source, mk_bold=False):
     """Retrieve and format name from source."""
     name = []
     lastname = source["name"].get("lastname", '')
@@ -161,8 +161,16 @@ def join_name(source):
     vonaf = match.group(1)
     lastname = match.group(2)
     if lastname:
-        name.append(lastname + ",")
-    name.append(get_first_name(source)[0])
+        if mk_bold:
+            name.append("<strong>%s</strong>," % lastname)
+        else:
+            name.append(lastname + ",")
+    firstname, calling = get_first_name(source)
+    if mk_bold:
+        name.extend([n if n != calling else "<strong>" + n + "</strong>" for n in firstname.split(" ")])
+    else:
+        name.append(firstname)
+    # name.append(get_first_name(source)[0])
     name.append(vonaf)
     return " ".join(name)
 
