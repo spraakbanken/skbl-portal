@@ -216,7 +216,7 @@ def keyword(result=None):
 def authors():
     rule = request.url_rule
     if 'sv' in rule.rule:
-        infotext = u"""Här är de personerna som har bidragit med artiklar till svenskt Kvinnobiografiskt Lexikon förtecknade."""
+        infotext = u"""Här är de personerna som har bidragit med artiklar till Svenskt kvinnobiografiskt lexikon förtecknade."""
     else:
         infotext = u"""This is a list of the authors who supplied articles to SKBL."""
     set_language_switch_link("articleauthor_index")
