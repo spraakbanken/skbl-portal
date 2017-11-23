@@ -500,7 +500,7 @@
             {% for typename, type in article.source %}
                 <div>
                     <h5>{{typename}}</h5>
-                    <ul>
+                    <ul class="no_bullets">
                         {% for source in type %}
                         <li>
                             {% set source_description = get_lang_text(source.description, source.description_eng, g.language) %}

@@ -172,6 +172,10 @@ li {
   margin: 0 0 5px 0;
 }
 
+.no_bullets li {
+    list-style-type: none;
+}
+
 .carousel-caption h3 {
   color: #fff;
 }
