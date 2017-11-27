@@ -301,6 +301,18 @@ def article(id=None):
         raise
 
 
+@app.route("/en/article/EmptyArticle", endpoint="article_empty_en")
+@app.route("/sv/artikel/TomArtikel", endpoint="article_empty_sv")
+def empty_article():
+    set_language_switch_link("article_empty")
+    rule = request.url_rule
+    if 'sv' in rule.rule:
+        content = u"""Den här kvinnan saknas än så länge."""
+    else:
+        content = u"""This entry does not exist yet."""
+    return render_template('page.html', content=content)
+
+
 def find_link(searchstring):
     # Finds an article based on ISNI or name
     if re.search('^[0-9 ]*$', searchstring):
