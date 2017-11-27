@@ -322,10 +322,9 @@ def show_article(data):
     if data['query']['hits']['total'] == 1:
         source = data['query']['hits']['hits'][0]['_source']
         source['es_id'] = data['query']['hits']['hits'][0]['_id']
-        firstname, calling = helpers.get_first_name(source)
         # Print html for the names with the calling name and last name in bold
-        formatted_names = [name if name != calling else "<b>" + name + "</b>" for name in firstname.split(" ")]
-        source['showname'] = "%s <b>%s</b>" % (" ".join(formatted_names), source['name'].get('lastname', ''))
+        formatted_names = helpers.format_names(source, "b")
+        source['showname'] = "%s <b>%s</b>" % (formatted_names, source['name'].get('lastname', ''))
         if source.get('text'):
             source['text'] = helpers.markdown_html(helpers.mk_links(source['text']))
         if source.get('text_eng'):
@@ -333,6 +332,7 @@ def show_article(data):
         # Extract linked names from source
         source['linked_names'] = find_linked_names(source.get("othernames", {}), source.get("showname"))
         source['othernames'] = helpers.group_by_type(source.get('othernames', {}), 'name')
+        firstname = helpers.get_first_name(source)
         source['othernames'].append({'type': u'Förnamn', 'name': firstname})
         helpers.collapse_kids(source)
         if "source" in source:

@@ -7,10 +7,13 @@ import re
 
 
 def get_first_name(source):
-    "Return the given name (first name), and the callingname (tilltalsnamnet)"
-    calling = re.sub('.*/(.*)/.*', r'\1', source['name'].get('firstname', ''))
-    firstname = re.sub('/', '', source['name'].get('firstname', '')).strip()
-    return firstname, calling
+    """Return the given name (first name)."""
+    return re.sub('/', '', source['name'].get('firstname', '')).strip()
+
+
+def format_names(source, fmt="strong"):
+    """Return the given name (first name), and the formatted callingname (tilltalsnamnet)."""
+    return re.sub('(.*)/(.+)/(.*)', r'\1<%s>\2</%s>\3' % (fmt, fmt), source['name'].get('firstname', ''))
 
 
 def get_life_range(source):
@@ -165,12 +168,10 @@ def join_name(source, mk_bold=False):
             name.append("<strong>%s</strong>," % lastname)
         else:
             name.append(lastname + ",")
-    firstname, calling = get_first_name(source)
     if mk_bold:
-        name.extend([n if calling not in n else "<strong>" + n + "</strong>" for n in firstname.split(" ")])
+        name.append(format_names(source, fmt="strong"))
     else:
-        name.append(firstname)
-    # name.append(get_first_name(source)[0])
+        name.append(source['name'].get('firstname', ''))
     name.append(vonaf)
     return " ".join(name)
 

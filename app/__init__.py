@@ -97,7 +97,6 @@ def inject_custom():
     d = {'lurl_for': lambda ep, **kwargs: url_for(ep + '_' + g.language, **kwargs)}
     return d
 
-app.jinja_env.globals.update(get_first_name=helpers.get_first_name)
 app.jinja_env.globals.update(get_life_range=helpers.get_life_range)
 app.jinja_env.globals.update(make_namelist=helpers.make_namelist)
 app.jinja_env.globals.update(make_placelist=helpers.make_placelist)
