@@ -167,7 +167,7 @@ def join_name(source, mk_bold=False):
             name.append(lastname + ",")
     firstname, calling = get_first_name(source)
     if mk_bold:
-        name.extend([n if n != calling else "<strong>" + n + "</strong>" for n in firstname.split(" ")])
+        name.extend([n if calling not in n else "<strong>" + n + "</strong>" for n in firstname.split(" ")])
     else:
         name.append(firstname)
     # name.append(get_first_name(source)[0])
