@@ -328,6 +328,8 @@ def show_article(data):
         source['showname'] = "%s <b>%s</b>" % (" ".join(formatted_names), source['name'].get('lastname', ''))
         if source.get('text'):
             source['text'] = helpers.markdown_html(helpers.mk_links(source['text']))
+        if source.get('text_eng'):
+            source['text_eng'] = helpers.markdown_html(helpers.mk_links(source['text_eng']))
         # Extract linked names from source
         source['linked_names'] = find_linked_names(source.get("othernames", {}), source.get("showname"))
         source['othernames'] = helpers.group_by_type(source.get('othernames', {}), 'name')
