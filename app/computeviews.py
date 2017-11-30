@@ -265,9 +265,9 @@ def make_email(form_data, suggestion=False):
         msg['From'] = u"%s <%s>" % (form_data["name"], form_data["email"])
         email = ""
 
-    # server = smtplib.SMTP("localhost")
-    # server.sendmail(email, [app.config['EMAIL_RECIPIENT']], msg.as_string())
-    # server.quit()
+    server = smtplib.SMTP("localhost")
+    server.sendmail(email, [app.config['EMAIL_RECIPIENT']], msg.as_string())
+    server.quit()
 
     # Render user feedback
     return render_template("form_submitted.html",
