@@ -227,7 +227,7 @@ def compute_contact_form():
                                suggestion=suggestion)
 
     else:
-        return make_email(request.form)
+        return make_email(request.form, suggestion)
 
 
 def make_email(form_data, suggestion=False):
