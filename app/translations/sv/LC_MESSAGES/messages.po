@@ -175,7 +175,7 @@ msgstr "Varför borde kvinnan läggas in i databasen?"
 
 #: app/templates/contact.html:47
 msgid "Your motivation..."
-msgstr "Din motivation..."
+msgstr "Din motivering..."
 
 #: app/templates/contact.html:49
 msgid "Submit"

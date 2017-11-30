@@ -240,12 +240,12 @@ def make_email(form_data, suggestion=False):
         text = u"%s har skickat följande meddelande:\n\n%s" % (form_data["name"], form_data["message"])
         subject = u"Förfrågan från skbl.se"
     else:
-        text = [u"%s har skickat in ett förslag för en ny SKBL-ingång.\n\n"] % form_data["name"]
-        text = [u"Förslag på kvinna: %s\n"] % form_data["subject_name"]
-        text = [u"Kvinnas levnadstid: %s\n"] % form_data["subject_lifetime"]
-        text = [u"Kvinnas verksamhet: %s\n"] % form_data["subject_activity"]
-        text = [u"Motivation: %s\n"] % form_data["motivation"]
-        text = "".join(text)
+        text = [u"%s har skickat in ett förslag för en ny SKBL-ingång.\n\n" % form_data["name"]]
+        text.append(u"Förslag på kvinna: %s\n" % form_data["subject_name"])
+        text.append(u"Kvinnas levnadstid: %s\n" % form_data["subject_lifetime"])
+        text.append(u"Kvinnas verksamhet: %s\n" % form_data["subject_activity"])
+        text.append(u"Motivation: %s\n" % form_data["motivation"])
+        text = u"".join(text)
         subject = u"Förslag för ny ingång i skbl.se"
 
     html = text.replace("\n", "<br>")
