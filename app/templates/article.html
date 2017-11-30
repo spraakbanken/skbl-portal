@@ -206,7 +206,7 @@
                 <ul>
                     <li class="keyword_list_item">
                         {% set occupation_detail = get_lang_text(occupation.detail, occupation.detail_eng, g.language) %}
-                        <h5>{{ occupation.type }}{% if occupation_detail %}: {{ occupation_detail | deescape }} {% elif occupation.description %} {{ occupation.description | deescape}} {% endif %}</h5>
+                        <h5>{{ occupation.type }}{% if occupation_detail %}: {{ occupation_detail | deescape }} {% elif occupation.description %}: {{ occupation.description | deescape}} {% endif %}</h5>
                     </li>
                 </ul>
                 {% endfor %}
@@ -216,7 +216,7 @@
                         <ul>
                           <li class="keyword_list_item">
                             {% set occupation_detail = get_lang_text(occupation.detail, occupation.detail_eng, g.language) %}
-                            <h5>{{ occupation.type }}{% if occupation.detail %}: {{ occupation.detail | deescape }} {% elif occupation.description %} {{ occupation.description | deescape}} {% endif %}</h5>
+                            <h5>{{ occupation.type }}{% if occupation.detail %}: {{ occupation.detail | deescape }} {% elif occupation.description %}: {{ occupation.description | deescape}} {% endif %}</h5>
                           </li>
                         </ul>
                     {% endfor %}
@@ -230,7 +230,7 @@
                       {% if loop.index < 4 %}
                       <li class="keyword_list_item">
                         {% set occupation_detail = get_lang_text(occupation.detail, occupation.detail_eng, g.language) %}
-                        <h5>{{ occupation.type }}{% if occupation_detail %}: {{ occupation_detail | deescape }} {% elif occupation.description %} {{ occupation.description | deescape}} {% endif %}</h5>
+                        <h5>{{ occupation.type }}{% if occupation_detail %}: {{ occupation_detail | deescape }} {% elif occupation.description %}: {{ occupation.description | deescape}} {% endif %}</h5>
                       </li>
                       {% endif %}
                     {% endfor %}
