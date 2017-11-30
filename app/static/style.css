@@ -484,3 +484,7 @@ li .glyphicon-link {
 .extra_field {
     display: none;
 }
+
+.form-control {
+    color: black;
+}
