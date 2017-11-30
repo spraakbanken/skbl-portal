@@ -244,7 +244,7 @@ def make_email(form_data, suggestion=False):
         text.append(u"Förslag på kvinna: %s\n" % form_data["subject_name"])
         text.append(u"Kvinnas levnadstid: %s\n" % form_data["subject_lifetime"])
         text.append(u"Kvinnas verksamhet: %s\n" % form_data["subject_activity"])
-        text.append(u"Motivation: %s\n" % form_data["motivation"])
+        text.append(u"Motivering: %s\n" % form_data["motivation"])
         text = u"".join(text)
         subject = u"Förslag för ny ingång i skbl.se"
 
