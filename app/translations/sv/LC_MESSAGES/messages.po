@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-11-22 10:09+0000\n"
+"POT-Creation-Date: 2017-11-30 12:19+0000\n"
 "PO-Revision-Date: 2017-02-20 14:49+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sv\n"
@@ -18,130 +18,166 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
 
-#: app/computeviews.py:41 app/templates/article.html:98
-#: app/templates/layout.html:127
+#: app/computeviews.py:46 app/templates/article.html:311
+#: app/templates/article.html:323 app/templates/layout.html:127
 msgid "Organisations"
 msgstr "Organisationer"
 
-#: app/computeviews.py:61 app/templates/article.html:73
-#: app/templates/layout.html:120
+#: app/computeviews.py:66 app/templates/article.html:191
+#: app/templates/article.html:203 app/templates/layout.html:120
 msgid "Activities"
 msgstr "Verksamhet"
 
-#: app/computeviews.py:85 app/templates/layout.html:94
+#: app/computeviews.py:90 app/templates/layout.html:94
 msgid "Women A-Z"
 msgstr "Kvinnor A-Ö"
 
-#: app/computeviews.py:138
+#: app/computeviews.py:142
 msgid "Placenames"
 msgstr "Orter"
 
-#: app/templates/layout.html:100 app/views.py:47
-msgid "About SKBL"
-msgstr "Om SKBL"
-
-#: app/templates/layout.html:101 app/views.py:55 app/views.py:79
-msgid "Contact"
-msgstr "Kontakt"
-
-#: app/views.py:56 app/views.py:80
-msgid "Contact SKBL"
-msgstr "Kontakta SKBL"
-
-#: app/views.py:69
+#: app/computeviews.py:206
 msgid "Please enter all the fields!"
 msgstr "Alla fält måste vara ifyllda!"
 
-#: app/views.py:71
+#: app/computeviews.py:210
 msgid "Please enter a valid email address!"
 msgstr "Du måste ange en giltig e-post-adress!"
 
-#: app/views.py:116 app/views.py:117
+#: app/computeviews.py:216 app/templates/layout.html:101 app/views.py:50
+msgid "Contact"
+msgstr "Kontakt"
+
+#: app/computeviews.py:217 app/views.py:51
+msgid "Contact SKBL"
+msgstr "Kontakta SKBL"
+
+#: app/computeviews.py:273 app/computeviews.py:274
 msgid "Thank you for your feedback"
 msgstr "Tack för din återkoppling"
 
-#: app/views.py:118
+#: app/computeviews.py:275
 msgid "We will get back to you as soon as we can."
 msgstr "Vi återkommer så fort vi kan."
 
-#: app/views.py:139
+#: app/templates/layout.html:100 app/views.py:42
+msgid "About SKBL"
+msgstr "Om SKBL"
+
+#: app/views.py:79
 #, python-format
 msgid "Hits for \"%s\""
 msgstr "Träffar för \"%s\""
 
-#: app/templates/article.html:39
+#: app/templates/article.html:51 app/templates/article.html:72
 msgid "Family Relationships"
 msgstr "Familjeförhållanden"
 
-#: app/templates/article.html:42
+#: app/templates/article.html:54 app/templates/article.html:74
 msgid "Civil Status:"
 msgstr "Civilstatus:"
 
-#: app/templates/article.html:61
+#: app/templates/article.html:133 app/templates/article.html:144
 msgid "Education"
 msgstr "Utbildning"
 
-#: app/templates/article.html:86
+#: app/templates/article.html:253 app/templates/article.html:264
 msgid "Contacts"
 msgstr "Kontakter"
 
-#: app/templates/article.html:111
+#: app/templates/article.html:373 app/templates/article.html:388
 msgid "Residences"
 msgstr "Bostadsorter"
 
-#: app/templates/article.html:127
+#: app/templates/article.html:441 app/templates/article.html:452
 msgid "Prices/awards"
 msgstr "Priser/utmärkelser"
 
-#: app/templates/article.html:140
+#: app/templates/article.html:499
 msgid "Sources"
 msgstr "Källor"
 
-#: app/templates/article.html:164
+#: app/templates/article.html:523
 msgid "Further References"
 msgstr "Vidare referenser"
 
-#: app/templates/article.html:188
+#: app/templates/article.html:547
 msgid "Show map"
 msgstr "Visa karta"
 
-#: app/templates/article.html:191
+#: app/templates/article.html:550
 msgid "Hide map"
 msgstr "Göm karta"
 
-#: app/templates/article.html:202 app/templates/layout.html:141
+#: app/templates/article.html:561 app/templates/layout.html:141
 msgid "Keywords"
 msgstr "Nyckelord"
 
-#: app/templates/article.html:216
+#: app/templates/article.html:576
 msgid "Links"
 msgstr "Länkar"
 
-#: app/templates/contact.html:17
+#: app/templates/contact.html:19
+msgid "Suggest new entry"
+msgstr "Föreslå ny ingång"
+
+#: app/templates/contact.html:22
 msgid "Name"
 msgstr "Namn"
 
-#: app/templates/contact.html:18
+#: app/templates/contact.html:23
 msgid "Your name..."
 msgstr "Ditt namn..."
 
-#: app/templates/contact.html:21
+#: app/templates/contact.html:26
 msgid "E-mail"
 msgstr "E-post"
 
-#: app/templates/contact.html:22
+#: app/templates/contact.html:27
 msgid "Your e-mail adress..."
 msgstr "Din e-post..."
 
-#: app/templates/contact.html:25
+#: app/templates/contact.html:30
+msgid "Name of subject"
+msgstr "Kvinnans namn"
+
+#: app/templates/contact.html:31
+msgid "Name of subject..."
+msgstr "Kvinnans namn..."
+
+#: app/templates/contact.html:34
+msgid "Lifetime of subject"
+msgstr "Kvinnans levnadstid"
+
+#: app/templates/contact.html:35
+msgid "Date of birth and death..."
+msgstr "Födelse- och dödsdatum..."
+
+#: app/templates/contact.html:38
+msgid "Subject's activities"
+msgstr "Kvinnans verksamhet"
+
+#: app/templates/contact.html:39
+msgid "The subject's activities and occupation(s)..."
+msgstr "Kvinnans verksamhet och yrke(n)..."
+
+#: app/templates/contact.html:42
 msgid "Message"
 msgstr "Meddelande"
 
-#: app/templates/contact.html:26
+#: app/templates/contact.html:43
 msgid "Your message..."
 msgstr "Ditt meddelande..."
 
-#: app/templates/contact.html:28
+#: app/templates/contact.html:46
+msgid "Why do you want this subject to appear in SKBL?"
+msgstr "Varför borde kvinnan läggas in i databasen?"
+
+#: app/templates/contact.html:47
+msgid "Your motivation..."
+msgstr "Din motivation..."
+
+#: app/templates/contact.html:49
 msgid "Submit"
 msgstr "Skicka"
 
@@ -181,6 +217,6 @@ msgstr "Orter"
 msgid "Share page"
 msgstr "Dela sidan"
 
-#: app/templates/list.html:11
+#: app/templates/list.html:15
 msgid "No results found for"
 msgstr "Inga träffar för"

@@ -5,13 +5,9 @@ from app import app, redirect, render_template, request, get_locale, set_languag
 import computeviews
 from flask import jsonify, url_for
 from flask_babel import gettext
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.header import Header
 import helpers
 from pylibmc import Client
 import re
-import smtplib
 
 client = Client(app.config['MEMCACHED'])
 
@@ -52,69 +48,14 @@ def contact():
     set_language_switch_link("contact")
     return render_template("contact.html",
                            title=gettext("Contact"),
-                           headline=gettext("Contact SKBL"))
+                           headline=gettext("Contact SKBL"),
+                           form_data={})
 
 
 @app.route('/en/contact/', methods=['POST'], endpoint="submitted_en")
 @app.route('/sv/kontakt/', methods=['POST'], endpoint="submitted_sv")
 def submit_contact_form():
-    set_language_switch_link("contact")
-    name = request.form['name'].strip()
-    email = request.form['email'].strip()
-    message = request.form['message']
-
-    errors = []
-    if not name or not email or not message:
-        errors.append(gettext("Please enter all the fields!"))
-    if email and not helpers.is_email_address_valid(email):
-        errors.append(gettext("Please enter a valid email address!"))
-
-    # Render error messages and tell user what went wrong
-    if errors:
-        name_error = False if name else True
-        email_error = False if email else True
-        message_error = False if message else True
-        return render_template("contact.html",
-                               title=gettext("Contact"),
-                               headline=gettext("Contact SKBL"),
-                               errors=errors,
-                               name_error=name_error,
-                               email_error=email_error,
-                               message_error=message_error,
-                               name=name,
-                               email=email,
-                               message=message)
-
-    # Compose and send email
-    else:
-        text = u"%s har skickat följande meddelande:\n\n%s" % (name, message)
-        html = text.replace("\n", "<br>")
-        part1 = MIMEText(text, "plain", "utf-8")
-        part2 = MIMEText(html, "html", "utf-8")
-
-        msg = MIMEMultipart("alternative")
-        msg.attach(part1)
-        msg.attach(part2)
-
-        msg["Subject"] = u"Förfrågan från skbl.se"
-        msg['To'] = app.config['EMAIL_RECIPIENT']
-
-        # Work-around: things won't be as pretty if email adress contains non-ascii chars
-        if helpers.is_ascii(email):
-            msg['From'] = "%s <%s>" % (Header(name, 'utf-8'), email)
-        else:
-            msg['From'] = u"%s <%s>" % (name, email)
-            email = ""
-
-        server = smtplib.SMTP("localhost")
-        server.sendmail(email, [app.config['EMAIL_RECIPIENT']], msg.as_string())
-        server.quit()
-
-        # Render user feedback
-        return render_template("form_submitted.html",
-                               title=gettext("Thank you for your feedback") + "!",
-                               headline=gettext("Thank you for your feedback") + ", " + name + "!",
-                               text=gettext("We will get back to you as soon as we can."))
+    return computeviews.compute_contact_form()
 
 
 @app.route("/en/search", endpoint="search_en")

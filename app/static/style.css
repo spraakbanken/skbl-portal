@@ -476,3 +476,11 @@ li .glyphicon-link {
 .civ-status-text {
   margin-left: 40px;
 }
+
+.indent {
+    margin-left: 20px;
+}
+
+.extra_field {
+    display: none;
+}

@@ -7,6 +7,11 @@ import json
 import md5
 import urllib
 from urllib2 import urlopen
+import helpers
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.header import Header
+import smtplib
 
 
 def compute_organisation(client, lang="", infotext=""):
@@ -178,3 +183,93 @@ def compute_emptycache(client):
         client.flush_all()
         emptied = True
     return emptied
+
+
+def compute_contact_form():
+    set_language_switch_link("contact")
+
+    email = request.form['email'].strip()
+    required_fields = ["name", "email"]
+
+    if request.form.getlist('suggest_new'):
+        suggestion = True
+        required_fields.extend(["subject_name", "subject_lifetime",
+                               "subject_activity", "motivation"])
+    else:
+        suggestion = False
+        required_fields.append("message")
+
+    error_msgs = []
+    errors = []
+    for field in required_fields:
+        if not request.form[field]:
+            error_msgs.append(gettext("Please enter all the fields!"))
+            errors.append(field)
+
+    if email and not helpers.is_email_address_valid(email):
+        error_msgs.append(gettext("Please enter a valid email address!"))
+
+    # Render error messages and tell user what went wrong
+    error_msgs = list(set(error_msgs))
+    if error_msgs:
+        return render_template("contact.html",
+                               title=gettext("Contact"),
+                               headline=gettext("Contact SKBL"),
+                               errors=error_msgs,
+                               name_error=True if "name" in errors else False,
+                               email_error=True if "email" in errors else False,
+                               message_error=True if "message" in errors else False,
+                               subject_name_error=True if "subject_name" in errors else False,
+                               subject_lifetime_error=True if "subject_lifetime" in errors else False,
+                               subject_activity_error=True if "subject_activity" in errors else False,
+                               motivation_error=True if "motivation" in errors else False,
+                               form_data=request.form,
+                               suggestion=suggestion)
+
+    else:
+        make_email(request.form)
+
+
+def make_email(form_data, suggestion=False):
+    """Compose and send email from contact form."""
+
+    msg = MIMEMultipart("alternative")
+
+    if not suggestion:
+        text = u"%s har skickat följande meddelande:\n\n%s" % (form_data["name"], form_data["message"])
+        subject = u"Förfrågan från skbl.se"
+    else:
+        text = [u"%s har skickat in ett förslag för en ny SKBL-ingång.\n\n"] % form_data["name"]
+        text = [u"Förslag på kvinna: %s\n"] % form_data["subject_name"]
+        text = [u"Kvinnas levnadstid: %s\n"] % form_data["subject_lifetime"]
+        text = [u"Kvinnas verksamhet: %s\n"] % form_data["subject_activity"]
+        text = [u"Motivation: %s\n"] % form_data["motivation"]
+        text = "".join(text)
+        subject = u"Förslag för ny ingång i skbl.se"
+
+    html = text.replace("\n", "<br>")
+    part1 = MIMEText(text, "plain", "utf-8")
+    part2 = MIMEText(html, "html", "utf-8")
+
+    msg.attach(part1)
+    msg.attach(part2)
+
+    msg["Subject"] = subject
+    msg['To'] = app.config['EMAIL_RECIPIENT']
+
+    # Work-around: things won't be as pretty if email adress contains non-ascii chars
+    if helpers.is_ascii(form_data["email"]):
+        msg['From'] = "%s <%s>" % (Header(form_data["name"], 'utf-8'), form_data["email"])
+    else:
+        msg['From'] = u"%s <%s>" % (form_data["name"], form_data["email"])
+        email = ""
+
+    server = smtplib.SMTP("localhost")
+    server.sendmail(email, [app.config['EMAIL_RECIPIENT']], msg.as_string())
+    server.quit()
+
+    # Render user feedback
+    return render_template("form_submitted.html",
+                           title=gettext("Thank you for your feedback") + "!",
+                           headline=gettext("Thank you for your feedback") + ", " + form_data["name"].strip() + "!",
+                           text=gettext("We will get back to you as soon as we can."))
