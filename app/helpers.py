@@ -261,7 +261,7 @@ def make_placelist(hits, placename, lat, lon):
                 #    and names[placename].get('lon') == float(lon):
                     if ptype not in grouped_results:
                         grouped_results[ptype] = []
-                    grouped_results[ptype].append((join_name(source), hit))
+                    grouped_results[ptype].append((join_name(hit["_source"], mk_bold=True), hit))
                 # else:
                     # These two lines should be removed, but are kept for debugging
                     # if 'Fel' not in grouped_results: grouped_results['Fel'] = []

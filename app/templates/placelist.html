@@ -12,7 +12,7 @@
         <h3 name="{{category}}">{{ category }}</h3>
         {% for name, hit in namelist %}
         <li>
-            <a href="{{ url_for('article_'+g.language, id=hit._id) }}"><strong>{{ name }}</strong><br />
+            <a href="{{ url_for('article_'+g.language, id=hit._id) }}">{{ name | safe }}<br />
             {% if get_life_range(hit._source) %}
                 <span itemprop="birthDate">{{ get_life_range(hit._source)[0] }}</span> &mdash; <span itemprop="deathDate">{{ get_life_range(hit._source)[1] }}</span>
             {% endif %}
