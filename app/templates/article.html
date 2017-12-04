@@ -79,7 +79,9 @@
                     <li class="keyword_list_item">
                         <h5 class="toggled-by-button">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}</h5>
                         <h5 class="toggled-by-button" style="display:none">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}
-                        {% if relation.born or relation.death %} ({{relation.born.comment}} – {{relation.death.comment}}){% endif %}
+                        {% if relation.get("born")%} {% set born = relation.get("born").get("comment") %} {% else %} {% set born = "" %} {% endif %}
+                        {% if relation.get("death")%} {% set death = relation.get("death").get("comment") %} {% else %} {% set death = "" %} {% endif %}
+                        {% if born or death %} ({{born}} – {{death}}){% endif %}
                         {% if relation.occupation %}<br/>{{relation.occupation}}{% endif %}
                         {% if relation.from and relation.to %}<br/>Relation mellan {{relation.from.comment}} och {{relation.to.comment}}{% endif %}</h5>
                     </li>
@@ -92,7 +94,9 @@
                           <li class="keyword_list_item">
                             <h5 class="toggled-by-button">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}</h5>
                         <h5 class="toggled-by-button" style="display:none">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}
-                        {% if relation.born or relation.death %} ({{relation.born.comment}} – {{relation.death.comment}}){% endif %}
+                        {% if relation.get("born")%} {% set born = relation.get("born").get("comment") %} {% else %} {% set born = "" %} {% endif %}
+                        {% if relation.get("death")%} {% set death = relation.get("death").get("comment") %} {% else %} {% set death = "" %} {% endif %}
+                        {% if born or death %} ({{born}} – {{death}}){% endif %}
                         {% if relation.occupation %}<br/>{{relation.occupation}}{% endif %}
                         {% if relation.from and relation.to %}<br/>Relation mellan {{relation.from.comment}} och {{relation.to.comment}}{% endif %}</h5>
                           </li>
