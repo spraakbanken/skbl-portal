@@ -209,23 +209,27 @@ def searchresult(result, name='', searchfield='', imagefolder='', searchtype='eq
 def article_index(search=None):
     # search is only used by links in article text
 
-    set_language_switch_link("article_index")
-    search = search or request.args.get('search')
-    if search is not None:
-        search = search.encode("UTF-8")
-        data, id = find_link(search)
-        if id:
-            # only one hit is found, redirect to that page
-            return redirect(url_for('article_' + g.language, id=id))
-        elif data["query"]["hits"]["total"] > 1:
-            # more than one hit is found, redirect to a listing
-            return redirect(url_for('search_' + g.language, q=search))
-        else:
-            # no hits are found redirect to a 'not found' page
-            return render_template('page.html', content='not found')
+    try:
+        set_language_switch_link("article_index")
+        search = search or request.args.get('search')
+        if search is not None:
+            search = search.encode("UTF-8")
+            data, id = find_link(search)
+            if id:
+                # only one hit is found, redirect to that page
+                return redirect(url_for('article_' + g.language, id=id))
+            elif data["query"]["hits"]["total"] > 1:
+                # more than one hit is found, redirect to a listing
+                return redirect(url_for('search_' + g.language, q=search))
+            else:
+                # no hits are found redirect to a 'not found' page
+                return render_template('page.html', content='not found')
 
-    art = computeviews.compute_article()
-    return art
+        art = computeviews.compute_article()
+        return art
+    except Exception as e:
+        import sys
+        print >> sys.stderr, e
 
 
 @app.route("/en/article/<id>", endpoint="article_en")
