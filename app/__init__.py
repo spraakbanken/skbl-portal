@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*
-import os
-import os.path
 import json
 import logging
-import urllib
+import os
+import os.path
+from pylibmc import Client, ClientPool
 import shutil
 import sys
+import urllib
 
 from flask import Flask, g, request, redirect, render_template, url_for
 from flask_babel import Babel
@@ -25,6 +26,10 @@ else:
 
 
 babel = Babel(app)
+
+
+client = Client(app.config['MEMCACHED'])
+mc_pool = ClientPool(client, app.config['POOL_SIZE'])
 
 
 @babel.localeselector

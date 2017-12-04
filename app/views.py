@@ -1,15 +1,12 @@
 # -*- coding=utf-8 -*-
 import os
 import os.path
-from app import app, redirect, render_template, request, get_locale, set_language_switch_link, g, serve_static_page, karp_query
+from app import app, redirect, render_template, request, get_locale, set_language_switch_link, g, serve_static_page, karp_query, mc_pool
 import computeviews
 from flask import jsonify, url_for
 from flask_babel import gettext
 import helpers
-from pylibmc import Client
 import re
-
-client = Client(app.config['MEMCACHED'])
 
 
 # redirect to specific language landing-page
@@ -86,7 +83,7 @@ def search():
 @app.route("/en/place", endpoint="place_index_en")
 @app.route("/sv/ort", endpoint="place_index_sv")
 def place_index():
-    return computeviews.compute_place(client)
+    return computeviews.compute_place()
 
 
 @app.route("/en/place/<place>", endpoint="place_en")
@@ -106,7 +103,7 @@ def place(place=None):
 @app.route("/en/organisation", endpoint="organisation_index_en")
 @app.route("/sv/organisation", endpoint="organisation_index_sv")
 def organisation_index():
-    return computeviews.compute_organisation(client)
+    return computeviews.compute_organisation()
 
 
 @app.route("/en/organisation/<result>", endpoint="organisation_en")
@@ -119,7 +116,7 @@ def organisation(result=None):
 @app.route("/en/activity", endpoint="activity_index_en")
 @app.route("/sv/verksamhet", endpoint="activity_index_sv")
 def activity_index():
-    return computeviews.compute_activity(client)
+    return computeviews.compute_activity()
 
 
 @app.route("/en/activity/<result>", endpoint="activity_en")
@@ -156,11 +153,13 @@ def keyword(result=None):
 @app.route("/sv/artikelforfattare", endpoint="articleauthor_index_sv")
 def authors():
     rule = request.url_rule
-    if 'sv' in rule.rule:
+    lang = 'sv' if 'sv' in rule.rule else 'en'
+    if lang == 'sv':
         infotext = u"""Här är de personerna som har bidragit med artiklar till Svenskt kvinnobiografiskt lexikon förtecknade."""
     else:
         infotext = u"""This is a list of the authors who supplied articles to SKBL."""
     set_language_switch_link("articleauthor_index")
+    #return computeviews.bucketcall(queryfield='artikel_forfattare.sort,artikel_forfattare.bucket',
     return computeviews.bucketcall(queryfield='artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn',
                                    name='articleauthor', title='Article authors', sortby=lambda x: x[1],
                                    lastnamefirst=True, infotext=infotext, alphabetical=True)
@@ -225,7 +224,7 @@ def article_index(search=None):
             # no hits are found redirect to a 'not found' page
             return render_template('page.html', content='not found')
 
-    art = computeviews.compute_article(client)
+    art = computeviews.compute_article()
     return art
 
 
@@ -364,7 +363,7 @@ def emptycache():
     # Users with write premissions to skbl may empty the cache
     emptied = False
     try:
-        emptied = computeviews.compute_emptycache(client)
+        emptied = computeviews.compute_emptycache()
     except Exception as e:
         emptied = False
         # return jsonify({"error": "%s" % e})
@@ -373,7 +372,8 @@ def emptycache():
 
 @app.route('/cachestats')
 def cachestats():
-    return jsonify({"cached_stats": client.get_stats()})
+    with mc_pool.reserve() as client:
+        return jsonify({"cached_stats": client.get_stats()})
 
 
 @app.route("/en/fillcache", endpoint="fillcache_en")
@@ -383,18 +383,15 @@ def fillcache():
     # This request will take some seconds, users may want to make an
     # asynchronous call
     # for lang in ["sv", "en"]:
-    computeviews.compute_article(client)
-    computeviews.compute_activity(client)
-    computeviews.compute_organisation(client)
-    computeviews.compute_place(client)
+    computeviews.compute_article()
+    computeviews.compute_activity()
+    computeviews.compute_organisation()
+    computeviews.compute_place()
     lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
     return jsonify({"cache_filled": True, "cached_language": lang})
 
 
-#     from threading import Thread
-#     cachedpages = [computeviews.compute_article, computeviews.compute_activity,
-#                    computeviews.compute_organisation, computeviews.compute_place]
-#     for page in cachedpages:
-#         t = Thread(target=page, args=[client])
-#         t.daemon = True
-#         t.start()
+
+@app.route('/mcpoolid')
+def mcpoolid():
+    return jsonify({"id": id(mc_pool)})

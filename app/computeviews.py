@@ -1,5 +1,5 @@
 # -*- coding=utf-8 -*-
-from app import app, karp_query, render_template, request, set_language_switch_link
+from app import app, karp_query, render_template, request, set_language_switch_link, mc_pool
 from collections import defaultdict
 from flask_babel import gettext
 import icu  # pip install PyICU
@@ -14,13 +14,14 @@ from email.header import Header
 import smtplib
 
 
-def compute_organisation(client, lang="", infotext=""):
+def compute_organisation(lang="", infotext=""):
     set_language_switch_link("organisation_index", lang=lang)
     if not lang:
         lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
-    art = client.get('organisation' + lang)
-    if art is not None and not app.config['TEST']:
-        return art
+    with mc_pool.reserve() as client:
+        art = client.get('organisation' + lang)
+        if art is not None and not app.config['TEST']:
+            return art
 
     if lang == 'sv':
         infotext = u"""Här kan du se vilka organisationer de biograferade kvinnorna varit medlemmar
@@ -45,19 +46,21 @@ def compute_organisation(client, lang="", infotext=""):
     art = render_template('nestedbucketresults.html',
                           results=nested_obj, title=gettext("Organisations"),
                           infotext=infotext, name='organisation')
-    client.set('organisation' + lang, art, time=app.config['CACHE_TIME'])
+    with mc_pool.reserve() as client:
+         client.set('organisation' + lang, art, time=app.config['CACHE_TIME'])
     return art
     # return bucketcall(queryfield='organisationstyp', name='organisation',
     #                   title='Organizations', infotext=infotext)
 
 
-def compute_activity(client, lang=""):
+def compute_activity(lang=""):
     set_language_switch_link("activity_index", lang=lang)
     if not lang:
         lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
-    art = client.get('activity' + lang)
-    if art is not None and not app.config['TEST']:
-        return art
+    with mc_pool.reserve() as client:
+        art = client.get('activity' + lang)
+        if art is not None and not app.config['TEST']:
+            return art
     if lang == 'sv':
         infotext = u"Här kan du se inom vilka områden de biograferade kvinnorna varit verksamma och vilka yrken de hade."
     else:
@@ -65,44 +68,48 @@ def compute_activity(client, lang=""):
     art = bucketcall(queryfield='verksamhetstext', name='activity',
                      title=gettext("Activities"), infotext=infotext,
                      alphabetical=True)
-    client.set('activity' + lang, art, time=app.config['CACHE_TIME'])
+    with mc_pool.reserve() as client:
+        client.set('activity' + lang, art, time=app.config['CACHE_TIME'])
     return art
 
 
-def compute_article(client, lang=""):
+def compute_article(lang=""):
     set_language_switch_link("article_index", lang=lang)
     if not lang:
         lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
-    art = client.get('article' + lang)
-    if art is not None and not app.config['TEST']:
-        return art
-    else:
-        if lang == 'sv':
-            infotext = u"""Klicka på namnet för att läsa biografin om den kvinna du vill veta mer om."""
-            data = karp_query('query', {'q': "extended||and|namn|exists"}, mode="skbllinks")
-        else:
-            infotext = u"""Klicka på namnet för att läsa biografin om den kvinna du vill veta mer om."""
-            data = karp_query('query', {'q': "extended||and|namn|exists", 'sort': 'sorteringsnamn.eng_init,sorteringsnamn.eng_sort,sorteringsnamn,tilltalsnamn.sort,tilltalsnamn'},
-                              mode="skbllinks")
+    with mc_pool.reserve() as client:
+        art = client.get('article' + lang)
+        if art is not None and not app.config['TEST']:
+            return art
 
-        art = render_template('list.html',
-                              hits=data["hits"],
-                              headline=gettext(u'Women A-Z'),
-                              alphabetic=True,
-                              split_letters=True,
-                              infotext=infotext,
-                              title='Articles')
+    if lang == 'sv':
+        infotext = u"""Klicka på namnet för att läsa biografin om den kvinna du vill veta mer om."""
+        data = karp_query('query', {'q': "extended||and|namn|exists"}, mode="skbllinks")
+    else:
+        infotext = u"""Klicka på namnet för att läsa biografin om den kvinna du vill veta mer om."""
+        data = karp_query('query', {'q': "extended||and|namn|exists", 'sort': 'sorteringsnamn.eng_init,sorteringsnamn.eng_sort,sorteringsnamn,tilltalsnamn.sort,tilltalsnamn'},
+                          mode="skbllinks")
+
+    art = render_template('list.html',
+                          hits=data["hits"],
+                          headline=gettext(u'Women A-Z'),
+                          alphabetic=True,
+                          split_letters=True,
+                          infotext=infotext,
+                          title='Articles')
+    with mc_pool.reserve() as client:
         client.set('article' + lang, art, time=app.config['CACHE_TIME'])
     return art
 
 
-def compute_place(client, lang=""):
+def compute_place(lang=""):
     set_language_switch_link("place_index", lang=lang)
     if not lang:
         lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
-    rv = client.get('place' + lang)
-    if rv is not None and not app.config['TEST']:
-        return rv
+    with mc_pool.reserve() as client:
+        rv = client.get('place' + lang)
+        if rv is not None and not app.config['TEST']:
+            return rv
 
     if lang == 'sv':
         infotext = u"""Platser där de biograferade kvinnorna fötts, dött och varit verksamma.
@@ -140,7 +147,8 @@ def compute_place(client, lang=""):
     collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
     stat_table.sort(key=lambda x: collator.getSortKey(x.get('name').strip()))
     art = render_template('places.html', places=stat_table, title=gettext("Placenames"), infotext=infotext)
-    client.set('place' + lang, art, time=app.config['CACHE_TIME'])
+    with mc_pool.reserve() as client:
+        client.set('place' + lang, art, time=app.config['CACHE_TIME'])
     return art
 
 
@@ -158,12 +166,14 @@ def bucketcall(queryfield='', name='', title='', sortby='',
         stat_table.sort()
     if lastnamefirst:
         stat_table = [[kw[1] + ',', kw[0], kw[2]] for kw in stat_table]
+    # if showfield:
+    #     stat_table = [[showfield(kw), kw[2]] for kw in stat_table]
     return render_template('bucketresults.html', results=stat_table,
                            alphabetical=alphabetical, title=gettext(title),
                            name=name, infotext=infotext)
 
 
-def compute_emptycache(client):
+def compute_emptycache():
     # Empty the cache.
     # Only users with write permission may do this
     # May raise error, eg if the authorization does not work
@@ -180,7 +190,8 @@ def compute_emptycache(client):
     lexitems = auth_response.get("permitted_resources", {})
     rights = lexitems.get("lexica", {}).get(app.config['SKBL'], {})
     if rights.get('write'):
-        client.flush_all()
+        with mc_pool.reserve() as client:
+            client.flush_all()
         emptied = True
     return emptied
 
