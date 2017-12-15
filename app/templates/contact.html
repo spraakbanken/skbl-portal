@@ -16,8 +16,26 @@
     <form method="post" action="{{ url_for('submitted_'+g.language) }}">
         <label for="suggest_new">
             <input type="checkbox" id="suggest_new" name="suggest_new" {% if suggestion %}{{ "checked=checked" }}{% endif %}>
-            <span class="title">{{ gettext("Suggest new entry") }}</span>
+            <span class="title">{{ gettext("Suggest biography about...") }}</span>
         </label>
+        <div class="extra_field">
+            <div style="float:left; padding-right:16px; width:50%" class="extra_field {% if subject_name_error %}form-group has-error{% else %}form-group{% endif %}">
+                <label class="control-label" for="subject_name">{{ gettext("Name") }}</label>
+                <input type="text" class="form-control" id="subject_name" name="subject_name" placeholder="{{ gettext("Name of subject...") }}" value="{{ form_data.get("subject_name", "") }}">
+            </div>
+            <div style="float:left; width:50%" class="extra_field {% if subject_lifetime_error %}form-group has-error{% else %}form-group{% endif %}">
+                <label class="control-label" for="subject_lifetime">{{ gettext("Lifetime") }}</label>
+                <input type="text" class="form-control" id="subject_lifetime" name="subject_lifetime" placeholder="{{ gettext("Date of birth and death...") }}" value="{{ form_data.get("subject_lifetime", "") }}">
+            </div>
+        </div>
+        <div style="clear:both;" class="extra_field {% if subject_activity_error %}form-group has-error{% else %}form-group{% endif %}">
+            <label class="control-label" for="subject_activity">{{ gettext("Activities") }}</label>
+            <input type="text" class="form-control" id="subject_activity" name="subject_activity" placeholder="{{ gettext("The subject's activities and occupation(s)...") }}" value="{{ form_data.get("subject_activity", "") }}">
+        </div>
+        <div class="extra_field {% if motivation_error %}form-group has-error{% else %}form-group{% endif %}">
+            <label class="control-label" for="motivation">{{ gettext("Why do you want this subject to appear in SKBL?") }}</label>
+            <textarea id="motivation" class="form-control" name="motivation" placeholder="{{ gettext("Your motivation...") }}" style="height:200px">{{ form_data.get("motivation", "") }}</textarea>
+        </div>
         <div class="{% if name_error %}form-group has-error{% else %}form-group{% endif %}">
             <label class="control-label" for="name">{{ gettext("Name") }}</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="{{ gettext("Your name...") }}" value="{{ form_data.get("name", "") }}">
@@ -26,25 +44,9 @@
             <label class="control-label" for="email">{{ gettext("E-mail") }}</label>
             <input type="text" class="form-control" id="email" name="email" placeholder="{{ gettext("Your e-mail adress...") }}" value="{{ form_data.get("email", "") }}">
         </div>
-        <div class="extra_field indent {% if subject_name_error %}form-group has-error{% else %}form-group{% endif %}">
-            <label class="control-label" for="subject_name">{{ gettext("Name of subject") }}</label>
-            <input type="text" class="form-control" id="subject_name" name="subject_name" placeholder="{{ gettext("Name of subject...") }}" value="{{ form_data.get("subject_name", "") }}">
-        </div>
-        <div class="extra_field indent {% if subject_lifetime_error %}form-group has-error{% else %}form-group{% endif %}">
-            <label class="control-label" for="subject_lifetime">{{ gettext("Lifetime of subject") }}</label>
-            <input type="text" class="form-control" id="subject_lifetime" name="subject_lifetime" placeholder="{{ gettext("Date of birth and death...") }}" value="{{ form_data.get("subject_lifetime", "") }}">
-        </div>
-        <div class="extra_field indent {% if subject_activity_error %}form-group has-error{% else %}form-group{% endif %}">
-            <label class="control-label" for="subject_activity">{{ gettext("Subject's activities") }}</label>
-            <input type="text" class="form-control" id="subject_activity" name="subject_activity" placeholder="{{ gettext("The subject's activities and occupation(s)...") }}" value="{{ form_data.get("subject_activity", "") }}">
-        </div>
         <div class="{% if message_error %}form-group has-error{% else %}form-group{% endif %}" id="message-div">
             <label class="control-label" for="message">{{ gettext("Message") }}</label>
             <textarea id="message" class="form-control" name="message" placeholder="{{ gettext("Your message...") }}" style="height:200px">{{ form_data.get("message", "") }}</textarea>
-        </div>
-        <div class="extra_field {% if motivation_error %}form-group has-error{% else %}form-group{% endif %}">
-            <label class="control-label" for="motivation">{{ gettext("Why do you want this subject to appear in SKBL?") }}</label>
-            <textarea id="motivation" class="form-control" name="motivation" placeholder="{{ gettext("Your motivation...") }}" style="height:200px">{{ form_data.get("motivation", "") }}</textarea>
         </div>
         <button type="submit" class="btn btn-default">{{ gettext("Submit") }}</button>
     </form>

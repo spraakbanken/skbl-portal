@@ -39,14 +39,33 @@ def about_skbl():
     return serve_static_page("about-skbl", gettext("About SKBL"))
 
 
+@app.route("/en/more-women", endpoint="more-women_en")
+@app.route("/sv/fler-kvinnor", endpoint="more-women_sv")
+def more_women():
+    return serve_static_page("more-women", gettext("More women"))
+
+
+@app.route("/en/biographies", endpoint="biographies_en")
+@app.route("/sv/biografiska-verk", endpoint="biographies_sv")
+def biographies():
+    return serve_static_page("biographies", gettext("Older biographies"))
+
+
 @app.route("/en/contact", endpoint="contact_en")
 @app.route("/sv/kontakt", endpoint="contact_sv")
 def contact():
     set_language_switch_link("contact")
+
+    # Set suggestion checkbox
+    if request.args.get('suggest') == 'true':
+        suggestion = True
+    else:
+        suggestion = False
     return render_template("contact.html",
                            title=gettext("Contact"),
                            headline=gettext("Contact SKBL"),
-                           form_data={})
+                           form_data={},
+                           suggestion=suggestion)
 
 
 @app.route('/en/contact/', methods=['POST'], endpoint="submitted_en")

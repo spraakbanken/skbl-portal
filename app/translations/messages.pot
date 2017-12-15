@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-11-30 12:19+0000\n"
+"POT-Creation-Date: 2017-12-15 13:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,53 +17,62 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
 
-#: app/computeviews.py:46 app/templates/article.html:311
-#: app/templates/article.html:323 app/templates/layout.html:127
+#: app/computeviews.py:47 app/templates/article.html:315
+#: app/templates/article.html:327 app/templates/layout.html:128
 msgid "Organisations"
 msgstr ""
 
-#: app/computeviews.py:66 app/templates/article.html:191
-#: app/templates/article.html:203 app/templates/layout.html:120
+#: app/computeviews.py:69 app/templates/article.html:195
+#: app/templates/article.html:207 app/templates/contact.html:32
+#: app/templates/layout.html:121
 msgid "Activities"
 msgstr ""
 
-#: app/computeviews.py:90 app/templates/layout.html:94
+#: app/computeviews.py:95 app/templates/layout.html:94
 msgid "Women A-Z"
 msgstr ""
 
-#: app/computeviews.py:142
+#: app/computeviews.py:149
 msgid "Placenames"
 msgstr ""
 
-#: app/computeviews.py:206
+#: app/computeviews.py:217
 msgid "Please enter all the fields!"
 msgstr ""
 
-#: app/computeviews.py:210
+#: app/computeviews.py:221
 msgid "Please enter a valid email address!"
 msgstr ""
 
-#: app/computeviews.py:216 app/templates/layout.html:101 app/views.py:50
+#: app/computeviews.py:227 app/templates/layout.html:102 app/views.py:65
 msgid "Contact"
 msgstr ""
 
-#: app/computeviews.py:217 app/views.py:51
+#: app/computeviews.py:228 app/views.py:66
 msgid "Contact SKBL"
 msgstr ""
 
-#: app/computeviews.py:273 app/computeviews.py:274
+#: app/computeviews.py:285 app/computeviews.py:286
 msgid "Thank you for your feedback"
 msgstr ""
 
-#: app/computeviews.py:275
+#: app/computeviews.py:287
 msgid "We will get back to you as soon as we can."
 msgstr ""
 
-#: app/templates/layout.html:100 app/views.py:42
+#: app/templates/layout.html:100 app/views.py:39
 msgid "About SKBL"
 msgstr ""
 
-#: app/views.py:79
+#: app/templates/layout.html:101 app/views.py:45
+msgid "More women"
+msgstr ""
+
+#: app/views.py:51
+msgid "Older biographies"
+msgstr ""
+
+#: app/views.py:95
 #, python-format
 msgid "Hits for \"%s\""
 msgstr ""
@@ -76,107 +85,99 @@ msgstr ""
 msgid "Civil Status:"
 msgstr ""
 
-#: app/templates/article.html:133 app/templates/article.html:144
+#: app/templates/article.html:137 app/templates/article.html:148
 msgid "Education"
 msgstr ""
 
-#: app/templates/article.html:253 app/templates/article.html:264
+#: app/templates/article.html:257 app/templates/article.html:268
 msgid "Contacts"
 msgstr ""
 
-#: app/templates/article.html:373 app/templates/article.html:388
+#: app/templates/article.html:377 app/templates/article.html:392
 msgid "Residences"
 msgstr ""
 
-#: app/templates/article.html:441 app/templates/article.html:452
+#: app/templates/article.html:445 app/templates/article.html:456
 msgid "Prices/awards"
 msgstr ""
 
-#: app/templates/article.html:499
+#: app/templates/article.html:503
 msgid "Sources"
 msgstr ""
 
-#: app/templates/article.html:523
+#: app/templates/article.html:527
 msgid "Further References"
 msgstr ""
 
-#: app/templates/article.html:547
+#: app/templates/article.html:551
 msgid "Show map"
 msgstr ""
 
-#: app/templates/article.html:550
+#: app/templates/article.html:554
 msgid "Hide map"
 msgstr ""
 
-#: app/templates/article.html:561 app/templates/layout.html:141
+#: app/templates/article.html:565 app/templates/layout.html:142
 msgid "Keywords"
 msgstr ""
 
-#: app/templates/article.html:576
+#: app/templates/article.html:580
 msgid "Links"
 msgstr ""
 
 #: app/templates/contact.html:19
-msgid "Suggest new entry"
+msgid "Suggest biography about..."
 msgstr ""
 
-#: app/templates/contact.html:22
+#: app/templates/contact.html:23 app/templates/contact.html:40
 msgid "Name"
 msgstr ""
 
-#: app/templates/contact.html:23
-msgid "Your name..."
-msgstr ""
-
-#: app/templates/contact.html:26
-msgid "E-mail"
-msgstr ""
-
-#: app/templates/contact.html:27
-msgid "Your e-mail adress..."
-msgstr ""
-
-#: app/templates/contact.html:30
-msgid "Name of subject"
-msgstr ""
-
-#: app/templates/contact.html:31
+#: app/templates/contact.html:24
 msgid "Name of subject..."
 msgstr ""
 
-#: app/templates/contact.html:34
-msgid "Lifetime of subject"
+#: app/templates/contact.html:27
+msgid "Lifetime"
 msgstr ""
 
-#: app/templates/contact.html:35
+#: app/templates/contact.html:28
 msgid "Date of birth and death..."
 msgstr ""
 
-#: app/templates/contact.html:38
-msgid "Subject's activities"
-msgstr ""
-
-#: app/templates/contact.html:39
+#: app/templates/contact.html:33
 msgid "The subject's activities and occupation(s)..."
 msgstr ""
 
-#: app/templates/contact.html:42
-msgid "Message"
-msgstr ""
-
-#: app/templates/contact.html:43
-msgid "Your message..."
-msgstr ""
-
-#: app/templates/contact.html:46
+#: app/templates/contact.html:36
 msgid "Why do you want this subject to appear in SKBL?"
 msgstr ""
 
-#: app/templates/contact.html:47
+#: app/templates/contact.html:37
 msgid "Your motivation..."
 msgstr ""
 
+#: app/templates/contact.html:41
+msgid "Your name..."
+msgstr ""
+
+#: app/templates/contact.html:44
+msgid "E-mail"
+msgstr ""
+
+#: app/templates/contact.html:45
+msgid "Your e-mail adress..."
+msgstr ""
+
+#: app/templates/contact.html:48
+msgid "Message"
+msgstr ""
+
 #: app/templates/contact.html:49
+msgid "Your message..."
+msgstr ""
+
+#: app/templates/contact.html:51
 msgid "Submit"
 msgstr ""
 
@@ -204,15 +205,15 @@ msgstr ""
 msgid "Article authors"
 msgstr ""
 
-#: app/templates/layout.html:105
+#: app/templates/layout.html:106
 msgid "På "
 msgstr ""
 
-#: app/templates/layout.html:134
+#: app/templates/layout.html:135
 msgid "Places"
 msgstr ""
 
-#: app/templates/layout.html:149
+#: app/templates/layout.html:150
 msgid "Share page"
 msgstr ""
 
