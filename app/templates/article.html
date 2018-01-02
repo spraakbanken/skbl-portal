@@ -1,3 +1,81 @@
+{% macro relationMacro(relation) %}
+    <li class="keyword_list_item">
+        <h5 class="toggled-by-button">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}</h5>
+        <h5 class="toggled-by-button" style="display:none">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}
+    {% if relation.get("born")%} {% set born = relation.get("born").get("comment") %} {% else %} {% set born = "" %} {% endif %}
+    {% if relation.get("death")%} {% set death = relation.get("death").get("comment") %} {% else %} {% set death = "" %} {% endif %}
+    {% if born or death %} ({{born}} – {{death}}){% endif %}
+    {% if relation.occupation %}<br/>{{relation.occupation}}{% endif %}
+    {% if relation.from and relation.to %}<br/>Relation mellan {{relation.from.comment}} och {{relation.to.comment}}{% endif %}</h5>
+    </li>
+{% endmacro %}
+
+{% macro educationMacro(education) %}
+    <li class="keyword_list_item">
+        <h5 class="toggled-by-button">{{ education.type }}{% if education.place and education.place.place %}, {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description | deescape }}{% endif %}</h5>
+        <h5 class="toggled-by-button" style="display:none">{{ education.type }}{% if education.place and education.place.place %}, {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description | deescape }}{% endif %} 
+        {% if education.get("from")%} {% set from = education.get("from").get("comment") %} {% else %} {% set from = "" %} {% endif %}
+        {% if education.get("to")%} {% set to = education.get("to").get("comment") %} {% else %} {% set to = "" %} {% endif %}
+        {% if from or to %} ({{from}} – {{to}}){% endif %}</h5>
+    </li>
+{% endmacro %}
+
+{% macro occupationMacro(occupation) %}
+    <li class="keyword_list_item">
+        {% set occupation_detail = get_lang_text(occupation.detail, occupation.detail_eng, g.language) %}
+        <h5 class="toggled-by-button">{{ occupation.type }}{% if occupation_detail %}: {{ occupation_detail | deescape }} {% elif occupation.description %}: {{ occupation.description | deescape}} {% endif %}</h5>
+        <h5 class="toggled-by-button" style="display:none">{{ occupation.type }}{% if occupation_detail %}: {{ occupation_detail | deescape }} {% elif occupation.description %}: {{ occupation.description | deescape}} {% endif %} 
+        {% if occupation.place and occupation.place.place %}, {{ occupation.place.place }}{% endif %} 
+        {% if occupation.get("from")%} {% set from = occupation.get("from").get("comment") %} {% else %} {% set from = "" %} {% endif %}
+        {% if occupation.get("to")%} {% set to = occupation.get("to").get("comment") %} {% else %} {% set to = "" %} {% endif %}
+        {% if from or to %} ({{from}} – {{to}}){% endif %}</h5>
+    </li>
+{% endmacro %}
+
+{% macro contactMacro(contact) %}
+    <li class="keyword_list_item">
+        <h5 class="toggled-by-button">{{ contact.type }}: {{ contact.firstname }} {{ contact.lastname }}</h5>
+        <h5 class="toggled-by-button" style="display:none">{{ contact.type }}: {{ contact.firstname }} {{ contact.lastname }}
+        {% if contact.place and contact.place.place %}, {{ contact.place.place }}{% endif %} 
+        {% if contact.get("from")%} {% set from = contact.get("from").get("comment") %} {% else %} {% set from = "" %} {% endif %}
+        {% if contact.get("to")%} {% set to = contact.get("to").get("comment") %} {% else %} {% set to = "" %} {% endif %}
+        {% if from or to %} ({{from}} – {{to}}){% endif %}</h5>
+    </li>
+{% endmacro %}
+
+{% macro placeMacro(place) %}
+    <li class="keyword_list_item">
+        {% if place.place %}
+            <h5 class="toggled-by-button">{{place.place.place}}</h5>
+            <h5 class="toggled-by-button" style="display:none">{{place.place.place}} 
+            {% if place.get("from")%} {% set from = place.get("from").get("comment") %} {% else %} {% set from = "" %} {% endif %}
+            {% if place.get("to")%} {% set to = place.get("to").get("comment") %} {% else %} {% set to = "" %} {% endif %}
+            {% if from or to %} ({{from}} – {{to}}){% endif %}</h5>
+        {% endif %}
+    </li>
+{% endmacro %}
+
+{% macro awardMacro(award) %}
+    <li class="keyword_list_item">
+        <h5 class="toggled-by-button">{{ award.type }}{% if award.description %}: <a class="visible_link" href="{{url_for('award_'+g.language, result=award.description)}}">{{award.description | deescape}}</a>{% endif %}</h5>
+        <h5 class="toggled-by-button" style="display:none">{{ award.type }}{% if award.description %}: <a class="visible_link" href="{{url_for('award_'+g.language, result=award.description)}}">{{award.description | deescape}}</a>{% endif %}
+        {% if award.get("date")%} {% set date = award.get("date").get("comment") %} {% else %} {% set date = "" %} {% endif %}
+        {% if date %} ({{date}}){% endif %}</h5>
+    </li>
+{% endmacro %}
+
+{% macro organisationMacro(organisation) %}
+    <li class="keyword_list_item">
+        <h5 class="toggled-by-button">{{ organisation.name }}<br/>
+        <span>{{ organisation.description }}</span></h5>
+        <h5 class="toggled-by-button" style="display:none">{{ organisation.name }}<br/>
+        <span>{{ organisation.description }}</span>
+        {% if organisation.get("from")%} {% set from = organisation.get("from").get("comment") %} {% else %} {% set from = "" %} {% endif %}
+        {% if organisation.get("to")%} {% set to = organisation.get("to").get("comment") %} {% else %} {% set to = "" %} {% endif %}
+        {% if from or to %} ({{from}} – {{to}}){% endif %}</h5>
+    </li>
+{% endmacro %}
+
 {% extends "layout.html" %}
 {% block title %}skbl.se - {{ title }}{% endblock %}
 
@@ -45,28 +123,10 @@
                 &nbsp;&nbsp;Visa förkortad information
             </span></button>
 
+
+
         {% if article.relation %}
         <div>
-        <!--<div id="familjeforhallanden_lista" class="ellipsis">
-            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> {{gettext('Family Relationships')}} ({% if article.civil_status %}{{ article.relation|length + 1}}{% else %}{{ article.relation|length }}{% endif %})</h4>
-            <ul class="ellipsis_contents">
-              {% if article.civil_status %}
-                <li>{{gettext('Civil Status:')}} {{ article.civil_status }} </li>
-              {% endif %}
-              {% for relation in article.relation %}
-                {% if not relation.hide %}
-                  <li>
-                      <h5>{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}</h5>
-                  </li>
-               {% endif %}
-            {% endfor %}
-            {% for relation in article.collapsedrelation %}
-                  <li>
-                      <h5>{{ relation.type }}: {{ relation.count }}</h5>
-                  </li>
-            {% endfor %}
-            </ul>
-        </div>-->
         <br/>
         <br/>
         <h4>{{gettext('Family Relationships')}}</h4>
@@ -76,30 +136,14 @@
             {% if len(article.relation) <= 4 %}
                 {% for relation in article.relation %}
                 <ul>
-                    <li class="keyword_list_item">
-                        <h5 class="toggled-by-button">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}</h5>
-                        <h5 class="toggled-by-button" style="display:none">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}
-                        {% if relation.get("born")%} {% set born = relation.get("born").get("comment") %} {% else %} {% set born = "" %} {% endif %}
-                        {% if relation.get("death")%} {% set death = relation.get("death").get("comment") %} {% else %} {% set death = "" %} {% endif %}
-                        {% if born or death %} ({{born}} – {{death}}){% endif %}
-                        {% if relation.occupation %}<br/>{{relation.occupation}}{% endif %}
-                        {% if relation.from and relation.to %}<br/>Relation mellan {{relation.from.comment}} och {{relation.to.comment}}{% endif %}</h5>
-                    </li>
+                    {{ relationMacro(relation) }}
                 </ul>
                 {% endfor %}
             {% else %}
                 <div style="display:none" class="nested_container hidden_first">
                     {% for relation in article.relation %}
                         <ul>
-                          <li class="keyword_list_item">
-                            <h5 class="toggled-by-button">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}</h5>
-                        <h5 class="toggled-by-button" style="display:none">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}
-                        {% if relation.get("born")%} {% set born = relation.get("born").get("comment") %} {% else %} {% set born = "" %} {% endif %}
-                        {% if relation.get("death")%} {% set death = relation.get("death").get("comment") %} {% else %} {% set death = "" %} {% endif %}
-                        {% if born or death %} ({{born}} – {{death}}){% endif %}
-                        {% if relation.occupation %}<br/>{{relation.occupation}}{% endif %}
-                        {% if relation.from and relation.to %}<br/>Relation mellan {{relation.from.comment}} och {{relation.to.comment}}{% endif %}</h5>
-                          </li>
+                          {{ relationMacro(relation) }}
                         </ul>
                     {% endfor %}
                     <div class="minimize_items">
@@ -110,13 +154,7 @@
                     <ul>
                     {% for relation in article.relation %}
                       {% if loop.index < 4 %}
-                      <li class="keyword_list_item">
-                        <h5 class="toggled-by-button">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}</h5>
-                        <h5 class="toggled-by-button" style="display:none">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}
-                        {% if relation.born or relation.death %} ({{relation.born.comment}} – {{relation.death.comment}}){% endif %}
-                        {% if relation.occupation %}<br/>{{relation.occupation}}{% endif %}
-                        {% if relation.from and relation.to %}<br/>Relation mellan {{relation.from.comment}} och {{relation.to.comment}}{% endif %}</h5>
-                      </li>
+                        {{ relationMacro(relation) }}
                       {% endif %}
                     {% endfor %}
                     </ul>
@@ -133,34 +171,20 @@
 
         {% if article.education %}
         <div>
-        <!--<div id="organisationer_lista" class="ellipsis">
-            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> {{gettext('Education')}} ({{ article.education|length }})</h4>
-            <ul class="ellipsis_contents">
-            {% for education in article.education %}
-                <li>
-                    <h5>{{ education.type }}{% if education.place and education.place.place %}, {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description | deescape }}{% endif %}</h5>
-                </li>
-            {% endfor %}
-            </ul>
-        </div>-->
         <br/>
         <br/>
         <h4>{{gettext('Education')}}</h4>
             {% if len(article.education) <= 4 %}
                 {% for education in article.education %}
                 <ul>
-                    <li class="keyword_list_item">
-                        <h5>{{ education.type }}{% if education.place and education.place.place %}, {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description | deescape }}{% endif %}</h5>
-                    </li>
+                    {{ educationMacro(education) }}
                 </ul>
                 {% endfor %}
             {% else %}
                 <div style="display:none" class="nested_container hidden_first">
                     {% for education in article.education %}
                         <ul>
-                          <li class="keyword_list_item">
-                            <h5>{{ education.type }}{% if education.place and education.place.place %}, {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description | deescape }}{% endif %}</h5>
-                          </li>
+                          {{ educationMacro(education) }}
                         </ul>
                     {% endfor %}
                     <div class="minimize_items">
@@ -171,9 +195,7 @@
                     <ul>
                     {% for education in article.education %}
                       {% if loop.index < 4 %}
-                      <li class="keyword_list_item">
-                        <h5>{{ education.type }}{% if education.place and education.place.place %}, {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description | deescape }}{% endif %}</h5>
-                      </li>
+                        {{ educationMacro(education) }}
                       {% endif %}
                     {% endfor %}
                     </ul>
@@ -191,37 +213,20 @@
 
         {% if article.occupation %}
         <div>
-        <!--<div id="organisationer_lista" class="ellipsis">
-            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> {{gettext('Activities')}} ({{ article.occupation|length }})</h4>
-            <ul class="ellipsis_contents">
-            {% for occupation in article.occupation %}
-                <li>
-                    {% set occupation_detail = get_lang_text(occupation.detail, occupation.detail_eng, g.language) %}
-                    <h5>{{ occupation.type }}{% if occupation_detail %}: {{ occupation_detail | deescape }}{% endif %}</h5>
-                </li>
-            {% endfor %}
-            </ul>
-        </div>-->
         <br/>
         <br/>
         <h4>{{gettext('Activities')}}</h4>
             {% if len(article.occupation) <= 4 %}
                 {% for occupation in article.occupation %}
                 <ul>
-                    <li class="keyword_list_item">
-                        {% set occupation_detail = get_lang_text(occupation.detail, occupation.detail_eng, g.language) %}
-                        <h5>{{ occupation.type }}{% if occupation_detail %}: {{ occupation_detail | deescape }} {% elif occupation.description %}: {{ occupation.description | deescape}} {% endif %}</h5>
-                    </li>
+                    {{ occupationMacro(occupation) }}
                 </ul>
                 {% endfor %}
             {% else %}
                 <div style="display:none" class="nested_container hidden_first">
                     {% for occupation in article.occupation %}
                         <ul>
-                          <li class="keyword_list_item">
-                            {% set occupation_detail = get_lang_text(occupation.detail, occupation.detail_eng, g.language) %}
-                            <h5>{{ occupation.type }}{% if occupation.detail %}: {{ occupation.detail | deescape }} {% elif occupation.description %}: {{ occupation.description | deescape}} {% endif %}</h5>
-                          </li>
+                          { occupationMacro(occupation) }}
                         </ul>
                     {% endfor %}
                     <div class="minimize_items">
@@ -232,10 +237,7 @@
                     <ul>
                     {% for occupation in article.occupation %}
                       {% if loop.index < 4 %}
-                      <li class="keyword_list_item">
-                        {% set occupation_detail = get_lang_text(occupation.detail, occupation.detail_eng, g.language) %}
-                        <h5>{{ occupation.type }}{% if occupation_detail %}: {{ occupation_detail | deescape }} {% elif occupation.description %}: {{ occupation.description | deescape}} {% endif %}</h5>
-                      </li>
+                        { occupationMacro(occupation) }}
                       {% endif %}
                     {% endfor %}
                     </ul>
@@ -253,34 +255,20 @@
 
         {% if article.contact %}
         <div>
-        <!--<div id="kontakter_lista" class="ellipsis">
-            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> {{gettext('Contacts')}} ({{ article.contact|length }})</h4>
-            <ul class="ellipsis_contents">
-            {% for contact in article.contact %}
-                <li>
-                    <h5>{{ contact.type }}: {{ contact.firstname }} {{ contact.lastname }}</h5>
-                </li>
-            {% endfor %}
-            </ul>
-        </div>-->
         <br/>
         <br/>
         <h4>{{gettext('Contacts')}}</h4>
             {% if len(article.contact) <= 4 %}
                 {% for contact in article.contact %}
                 <ul>
-                    <li class="keyword_list_item">
-                        <h5>{{ contact.type }}: {{ contact.firstname }} {{ contact.lastname }}</h5>
-                    </li>
+                    {{ contactMacro(contact) }}
                 </ul>
                 {% endfor %}
             {% else %}
                 <div style="display:none" class="nested_container hidden_first">
                     {% for contact in article.contact %}
                         <ul>
-                          <li class="keyword_list_item">
-                            <h5>{{ contact.type }}: {{ contact.firstname }} {{ contact.lastname }}</h5>
-                          </li>
+                          {{ contactMacro(contact) }}
                         </ul>
                     {% endfor %}
                     <div class="minimize_items">
@@ -291,9 +279,7 @@
                     <ul>
                     {% for contact in article.contact %}
                       {% if loop.index < 4 %}
-                      <li class="keyword_list_item">
-                        <h5>{{ contact.type }}: {{ contact.firstname }} {{ contact.lastname }}</h5>
-                      </li>
+                        {{ contactMacro(contact) }}
                       {% endif %}
                     {% endfor %}
                     </ul>
@@ -311,37 +297,28 @@
 
         {% if article.organisation %}
         <div>
-        <!--<div id="organisationer_lista" class="ellipsis">
-            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> {{gettext('Organisations')}} ({{ article.organisation|length }})</h4>
-            <ul class="ellipsis_contents">
-            {% for organisation in article.organisation %}
-                <li>
-                    <h5>{{ organisation.name }}</h5>
-                    <span>{{ organisation.description }}</span>
-                </li>
-            {% endfor %}
-            </ul>
-        </div>-->
         <br/>
         <br/>
         <h4>{{gettext('Organisations')}}</h4>
             {% if len(article.organisation) <= 4 %}
                 {% for organisation in article.organisation %}
                 <ul>
-                    <li class="keyword_list_item">
+                    <!--<li class="keyword_list_item">
                         <h5>{{ organisation.name }}</h5>
                         <span>{{ organisation.description }}</span>
-                    </li>
+                    </li>-->
+                    {{ organisationMacro(organisation) }}
                 </ul>
                 {% endfor %}
             {% else %}
                 <div style="display:none" class="nested_container hidden_first">
                     {% for organisation in article.organisation %}
                         <ul>
-                          <li class="keyword_list_item">
+                          <!--<li class="keyword_list_item">
                             <h5>{{ organisation.name }}</h5>
                             <span>{{ organisation.description }}</span>
-                          </li>
+                          </li>-->
+                          {{ organisationMacro(organisation) }}
                         </ul>
                     {% endfor %}
                     <div class="minimize_items">
@@ -352,10 +329,11 @@
                     <ul>
                     {% for organisation in article.organisation %}
                       {% if loop.index < 4 %}
-                      <li class="keyword_list_item">
+                      <!--<li class="keyword_list_item">
                         <h5>{{ organisation.name }}</h5>
                         <span>{{ organisation.description }}</span>
-                      </li>
+                      </li>-->
+                        {{ organisationMacro(organisation) }}
                       {% endif %}
                     {% endfor %}
                     </ul>
@@ -373,42 +351,20 @@
 
         {% if article.places %}
         <div>
-        <!--<div id="bostadsorter_lista" class="ellipsis">
-            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> {{gettext('Residences')}} ({{ article.places|length }})</h4>
-            <ul class="ellipsis_contents">
-            {% for place in article.places %}
-                <li>
-                    {% if place.place %}
-                        <h5>{{place.place.place}}</h5>
-                    {% else %}
-                        <h5></h5>
-                    {% endif %}
-                </li>
-            {% endfor %}
-            </ul>
-        </div>-->
         <br/>
         <br/>
         <h4>{{gettext('Residences')}}</h4>
             {% if len(article.places) <= 4 %}
                 {% for place in article.places %}
                 <ul>
-                    <li class="keyword_list_item">
-                        {% if place.place %}
-                            <h5>{{place.place.place}}</h5>
-                        {% endif %}
-                    </li>
+                    {{ placeMacro(place) }}
                 </ul>
                 {% endfor %}
             {% else %}
                 <div style="display:none" class="nested_container hidden_first">
                     {% for place in article.places %}
                         <ul>
-                          <li class="keyword_list_item">
-                            {% if place.place %}
-                                <h5>{{place.place.place}}</h5>
-                            {% endif %}
-                          </li>
+                          {{ placeMacro(place) }}
                         </ul>
                     {% endfor %}
                     <div class="minimize_items">
@@ -419,11 +375,7 @@
                     <ul>
                     {% for place in article.places %}
                       {% if loop.index < 4 %}
-                      <li class="keyword_list_item">
-                        {% if place.place %}
-                            <h5>{{place.place.place}}</h5>
-                        {% endif %}
-                      </li>
+                        {{ placeMacro(place) }}
                       {% endif %}
                     {% endfor %}
                     </ul>
@@ -441,34 +393,20 @@
 
         {% if article.awards %}
         <div>
-        <!--<div id="priser_lista" class="ellipsis">
-            <h4 class="ellipsis_header"><span class="ellipsis_plus glyphicon glyphicon-plus-sign" aria-hidden="true"></span> {{gettext('Prices/awards')}} ({{ article.awards|length }})</h4>
-            <ul class="ellipsis_contents">
-            {% for award in article.awards %}
-                <li>
-                    <h5>{{ award.type }}{% if award.description %}: <a class="visible_link" href="{{url_for('award_'+g.language, result=award.description)}}">{{award.description | deescape}}</a>{% endif %}</h5>
-                </li>
-            {% endfor %}
-            </ul>
-        </div>-->
         <br/>
         <br/>
         <h4>{{gettext('Prices/awards')}}</h4>
             {% if len(article.awards) <= 4 %}
                 {% for award in article.awards %}
                 <ul>
-                    <li class="keyword_list_item">
-                        <h5>{{ award.type }}{% if award.description %}: <a class="visible_link" href="{{url_for('award_'+g.language, result=award.description)}}">{{award.description | deescape}}</a>{% endif %}</h5>
-                    </li>
+                    {{ awardMacro(award) }}
                 </ul>
                 {% endfor %}
             {% else %}
                 <div style="display:none" class="nested_container hidden_first">
                     {% for award in article.awards %}
                     <ul>
-                      <li class="keyword_list_item">
-                        <h5>{{ award.type }}{% if award.description %}: <a class="visible_link" href="{{url_for('award_'+g.language, result=award.description)}}">{{award.description | deescape}}</a>{% endif %}</h5>
-                      </li>
+                      {{ awardMacro(award) }}
                     </ul>
                     {% endfor %}
                     <div class="minimize_items">
@@ -479,9 +417,7 @@
                     <ul>
                     {% for award in article.awards %}
                       {% if loop.index < 4 %}
-                      <li class="keyword_list_item">
-                        <h5>{{ award.type }}{% if award.description %}: <a class="visible_link" href="{{url_for('award_'+g.language, result=award.description)}}">{{award.description | deescape}}</a>{% endif %}</h5>
-                      </li>
+                        {{ awardMacro(award) }}
                       {% endif %}
                     {% endfor %}
                     </ul>
