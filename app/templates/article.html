@@ -226,7 +226,7 @@
                 <div style="display:none" class="nested_container hidden_first">
                     {% for occupation in article.occupation %}
                         <ul>
-                          { occupationMacro(occupation) }}
+                          {{ occupationMacro(occupation) }}
                         </ul>
                     {% endfor %}
                     <div class="minimize_items">
@@ -237,7 +237,7 @@
                     <ul>
                     {% for occupation in article.occupation %}
                       {% if loop.index < 4 %}
-                        { occupationMacro(occupation) }}
+                        {{ occupationMacro(occupation) }}
                       {% endif %}
                     {% endfor %}
                     </ul>
