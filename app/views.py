@@ -286,8 +286,8 @@ def find_link(searchstring):
                           {'q': "extended||and|namn.search|contains|%s" % (searchstring)})
     # The expected case: only one hit is found
     if data['query']['hits']['total'] == 1:
-        id = data['query']['hits']['hits'][0]['_id']
-        return data, id
+        es_id = data['query']['hits']['hits'][0]['_id']
+        return data, es_id
     # Otherwise just return the data
     else:
         return data, ''
@@ -318,7 +318,7 @@ def show_article(data):
             source["article_author"] = [source["article_author"]]
         # if "article_author" in source and type(source["article_author"] != list):
         #     source["article_author"] = [str(type(source["article_author"]))]#[source["article_author"]]
-        return render_template('article.html', article=source, article_id=id)
+        return render_template('article.html', article=source, article_id=source['es_id'])
     else:
         return render_template('page.html', content='not found')
 
