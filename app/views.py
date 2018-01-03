@@ -279,16 +279,23 @@ def empty_article():
 def find_link(searchstring):
     # Finds an article based on ISNI or name
     if re.search('^[0-9 ]*$', searchstring):
-        data = karp_query('querycount',
-                          {'q': "extended||and|swoid.search|equals|%s" % (searchstring)})
+        searchstring = searchstring.replace(" ", "")
+        data = karp_query('querycount', {'q': "extended||and|swoid.search|equals|%s" % (searchstring)})
     else:
-        data = karp_query('querycount',
-                          {'q': "extended||and|namn.search|contains|%s" % (searchstring)})
+        parts = searchstring.split(" ")
+        fornamn = " ".join(parts[0:-1])
+        prefix = ""
+        last_fornamn = fornamn.split(" ")[-1]
+        if last_fornamn == "von" or last_fornamn == "af":
+            fornamn = " ".join(fornamn.split(" ")[0:-1])
+            prefix = last_fornamn + " "
+        efternamn = prefix + parts[-1]
+        data = karp_query('querycount', {'q': "extended||and|fornamn.search|contains|%s||and|efternamn.search|contains|%s" % (fornamn, efternamn)})
     # The expected case: only one hit is found
     if data['query']['hits']['total'] == 1:
         es_id = data['query']['hits']['hits'][0]['_id']
         return data, es_id
-    # Otherwise just return the data
+        # Otherwise just return the data
     else:
         return data, ''
 
