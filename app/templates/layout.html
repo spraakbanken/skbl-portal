@@ -34,18 +34,18 @@
 
     <meta name="description" content="Läs om 1000 svenska kvinnor, från medeltid till nutid."/>
     <!-- Schema.org markup for Google+ -->
-    <meta itemprop="name" content={{title}}>
-    <meta itemprop="description" content="Läs om 1000 svenska kvinnor, från medeltid till nutid.">
+    <meta itemprop="name" content="{{title}}"/>
+    <meta itemprop="description" content="Läs om 1000 svenska kvinnor, från medeltid till nutid."/>
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" value="summary">
 
     <!-- Open Graph data -->
-    <meta property="og:title" content={{title}} />
+    <meta property="og:title" content="{{title}}" />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="/{{ g.language }}" />
+    <meta property="og:url" content="{{request.base_url}}" />
     <meta property="og:image" content="{{ url_for('static', filename='images/skbl/logo.png') }}" />
-    <meta property="og:description" content="Läs om 1000 svenska kvinnor, från medeltid till nutid." />
+    <meta property="og:description" content="Läs om 1000 svenska kvinnor från medeltid till nutid." />
     {% endblock %}
   </head>
   <body>

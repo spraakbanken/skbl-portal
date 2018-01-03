@@ -13,7 +13,10 @@ def get_first_name(source):
 
 def format_names(source, fmt="strong"):
     """Return the given name (first name), and the formatted callingname (tilltalsnamnet)."""
-    return re.sub('(.*)/(.+)/(.*)', r'\1<%s>\2</%s>\3' % (fmt, fmt), source['name'].get('firstname', ''))
+    if fmt:
+        return re.sub('(.*)/(.+)/(.*)', r'\1<%s>\2</%s>\3' % (fmt, fmt), source['name'].get('firstname', ''))
+    else:
+        return re.sub('(.*)/(.+)/(.*)', r'\1\2\3', source['name'].get('firstname', ''))
 
 
 def get_life_range(source):

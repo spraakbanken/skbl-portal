@@ -307,6 +307,7 @@ def show_article(data):
         # Print html for the names with the calling name and last name in bold
         formatted_names = helpers.format_names(source, "b")
         source['showname'] = "%s <b>%s</b>" % (formatted_names, source['name'].get('lastname', ''))
+        title = "%s %s" % (helpers.format_names(source, ""), source['name'].get('lastname', ''))
         if source.get('text'):
             source['text'] = helpers.markdown_html(helpers.mk_links(source['text']))
         if source.get('text_eng'):
@@ -325,7 +326,7 @@ def show_article(data):
             source["article_author"] = [source["article_author"]]
         # if "article_author" in source and type(source["article_author"] != list):
         #     source["article_author"] = [str(type(source["article_author"]))]#[source["article_author"]]
-        return render_template('article.html', article=source, article_id=source['es_id'])
+        return render_template('article.html', article=source, article_id=source['es_id'], title=title)
     else:
         return render_template('page.html', content='not found')
 
