@@ -30,7 +30,7 @@ def start():
                        which organisations they belonged to, whether they travelled, what they achieved, and much more.</p>
                        <p>All of them contributed in a significant way to the development of Swedish society.</p>"""
     set_language_switch_link("index")
-    return render_template('start.html', infotext=infotext)
+    return render_template('start.html', infotext=infotext, title="skbl.se")
 
 
 @app.route("/en/about-skbl", endpoint="about-skbl_en")
