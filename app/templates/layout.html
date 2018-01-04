@@ -32,20 +32,22 @@
 
 
 
-    <meta name="description" content="Läs om 1000 svenska kvinnor, från medeltid till nutid."/>
+    <meta name="description" content="{% if description %}{{description}}{% else %}Läs om 1000 svenska kvinnor, från medeltid till nutid.{% endif %}"/>
     <!-- Schema.org markup for Google+ -->
-    <meta itemprop="name" content="{{title}}"/>
-    <meta itemprop="description" content="Läs om 1000 svenska kvinnor, från medeltid till nutid."/>
+    <meta itemprop="name" content="skbl.se - {{title}}"/>
+    <meta itemprop="description" content="{% if description %}{{description}}{% else %}Läs om 1000 svenska kvinnor, från medeltid till nutid.{% endif %}"/>
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" value="summary">
 
     <!-- Open Graph data -->
-    <meta property="og:title" content="{{title}}" />
+    <meta property="og:title" content="skbl.se - {{title}}" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="{{request.base_url}}" />
-    <meta property="og:image" content="{{ url_for('static', filename='images/skbl/logo.png') }}" />
-    <meta property="og:description" content="Läs om 1000 svenska kvinnor från medeltid till nutid." />
+    <meta property="og:image" content="{% if image %}{{image}}{% else %}{{ url_for('static', filename='images/skbl/logo.png', _external=True)}}{% endif %}" />
+    <meta property="og:image:height" content= "1200" />
+    <meta property="og:image:width" content= "630" />
+    <meta property="og:description" content="{% if description %}{{description}}{% else %}Läs om 1000 svenska kvinnor, från medeltid till nutid.{% endif %}" />
     {% endblock %}
   </head>
   <body>

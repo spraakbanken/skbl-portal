@@ -67,7 +67,7 @@ def compute_activity(lang=""):
         infotext = u"This displays the areas within which the biographical subject was active and which activities and occupation(s) they engaged in."
     art = bucketcall(queryfield='verksamhetstext', name='activity',
                      title=gettext("Activities"), infotext=infotext,
-                     alphabetical=True)
+                     alphabetical=True, description=helpers.get_shorttext(infotext))
     with mc_pool.reserve() as client:
         client.set('activity' + lang, art, time=app.config['CACHE_TIME'])
     return art
@@ -146,14 +146,15 @@ def compute_place(lang=""):
     # stat_table = helpers.sort_places(stat_table, request.url_rule)
     collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
     stat_table.sort(key=lambda x: collator.getSortKey(x.get('name').strip()))
-    art = render_template('places.html', places=stat_table, title=gettext("Placenames"), infotext=infotext)
+    art = render_template('places.html', places=stat_table, title=gettext("Placenames"),
+                          infotext=infotext, description=helpers.get_shorttext(infotext))
     with mc_pool.reserve() as client:
         client.set('place' + lang, art, time=app.config['CACHE_TIME'])
     return art
 
 
 def bucketcall(queryfield='', name='', title='', sortby='',
-               lastnamefirst=False, infotext='', query='', alphabetical=False):
+               lastnamefirst=False, infotext='', description='', query='', alphabetical=False):
     q_data = {'buckets': '%s.bucket' % queryfield}
     if query:
         q_data['q'] = query
@@ -170,7 +171,7 @@ def bucketcall(queryfield='', name='', title='', sortby='',
     #     stat_table = [[showfield(kw), kw[2]] for kw in stat_table]
     return render_template('bucketresults.html', results=stat_table,
                            alphabetical=alphabetical, title=gettext(title),
-                           name=name, infotext=infotext)
+                           name=name, infotext=infotext, description=description)
 
 
 def compute_emptycache():

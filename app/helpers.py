@@ -312,3 +312,14 @@ def get_lang_text(json_swe, json_eng, ui_lang):
             return json_swe
     else:
         return json_swe
+
+
+def get_shorttext(text):
+    """
+    Get the initial 200 characters of text.
+    Remove HTML and line breaks.
+    """
+    shorttext = re.sub(r'<.*?>|\n|\t', ' ', text)
+    shorttext = shorttext.strip()
+    shorttext = re.sub(r'  ', ' ', shorttext)
+    return shorttext[:200]

@@ -20,17 +20,17 @@ def index():
 def start():
     rule = request.url_rule
     if 'sv' in rule.rule:
-        infotext = u"""<p>Läs om 1 000 svenska kvinnor från medeltid till nutid.</p>
-                       <p>Genom olika sökningar kan du se vad de arbetade med, vilken utbildning de fick,
-                       vilka organisationer de var med i, hur de rörde sig i världen, vad de åstadkom och mycket mera.</p>
-                       <p>Alla har de bidragit till samhällets utveckling.</p>"""
+        infotext = u"<p>Läs om 1 000 svenska kvinnor från medeltid till nutid.</p>"\
+                   u"<p>Genom olika sökningar kan du se vad de arbetade med, vilken utbildning de fick, "\
+                   u"vilka organisationer de var med i, hur de rörde sig i världen, vad de åstadkom och mycket mera.</p>"\
+                   u"<p>Alla har de bidragit till samhällets utveckling.</p>"
     else:
-        infotext = u"""<p>Read up on 1000 Swedish women from the middle ages to the present day.</p>
-                       <p>Use the search function to reveal what these women got up to, how they were educated,
-                       which organisations they belonged to, whether they travelled, what they achieved, and much more.</p>
-                       <p>All of them contributed in a significant way to the development of Swedish society.</p>"""
+        infotext = u"<p>Read up on 1000 Swedish women from the middle ages to the present day.</p>"\
+                   u"<p>Use the search function to reveal what these women got up to, how they were educated, "\
+                   u"which organisations they belonged to, whether they travelled, what they achieved, and much more.</p>"\
+                   u"<p>All of them contributed in a significant way to the development of Swedish society.</p>"
     set_language_switch_link("index")
-    return render_template('start.html', infotext=infotext, title="skbl.se")
+    return render_template('start.html', title="Svenskt kvinnobiografiskt lexikon", infotext=infotext, description=helpers.get_shorttext(infotext))
 
 
 @app.route("/en/about-skbl", endpoint="about-skbl_en")
@@ -159,7 +159,7 @@ def keyword_index():
         Selecting a keyword generates a list of all the women who fall under the given category."""
     set_language_switch_link("keyword_index")
     return computeviews.bucketcall(queryfield='nyckelord', name='keyword', title='Keywords',
-                                   infotext=infotext, alphabetical=True)
+                                   infotext=infotext, alphabetical=True, description=helpers.get_shorttext(infotext))
 
 
 @app.route("/en/keyword/<result>", endpoint="keyword_en")
@@ -181,7 +181,7 @@ def authors():
     #return computeviews.bucketcall(queryfield='artikel_forfattare.sort,artikel_forfattare.bucket',
     return computeviews.bucketcall(queryfield='artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn',
                                    name='articleauthor', title='Article authors', sortby=lambda x: x[1],
-                                   lastnamefirst=True, infotext=infotext, alphabetical=True)
+                                   lastnamefirst=True, infotext=infotext, alphabetical=True, description=helpers.get_shorttext(infotext))
 
 
 @app.route("/en/articleauthor/<result>", endpoint="articleauthor_en")
@@ -254,10 +254,15 @@ def article_index(search=None):
 @app.route("/en/article/<id>", endpoint="article_en")
 @app.route("/sv/artikel/<id>", endpoint="article_sv")
 def article(id=None):
+    rule = request.url_rule
+    if 'sv' in rule.rule:
+        lang = "sv"
+    else:
+        lang = "en"
     try:
         data = karp_query('querycount', {'q': "extended||and|id.search|equals|%s" % (id)})
         set_language_switch_link("article_index", id)
-        return show_article(data)
+        return show_article(data, lang)
     except Exception as e:
         import sys
         print >> sys.stderr, e
@@ -300,7 +305,7 @@ def find_link(searchstring):
         return data, ''
 
 
-def show_article(data):
+def show_article(data, lang="sv"):
     if data['query']['hits']['total'] == 1:
         source = data['query']['hits']['hits'][0]['_source']
         source['es_id'] = data['query']['hits']['hits'][0]['_id']
@@ -326,7 +331,19 @@ def show_article(data):
             source["article_author"] = [source["article_author"]]
         # if "article_author" in source and type(source["article_author"] != list):
         #     source["article_author"] = [str(type(source["article_author"]))]#[source["article_author"]]
-        return render_template('article.html', article=source, article_id=source['es_id'], title=title)
+        # Set description for meta data
+        if lang == "sv":
+            description = helpers.get_shorttext(source['text'])
+        else:
+            description = helpers.get_shorttext(source.get('text_eng', source['text']))
+
+        if source.get("portrait"):
+            image = source["portrait"][0]["url"]
+        else:
+            image = ""
+
+        return render_template('article.html', article=source, article_id=source['es_id'],
+                               title=title, description=description, image=image)
     else:
         return render_template('page.html', content='not found')
 
