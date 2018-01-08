@@ -113,6 +113,7 @@ app.jinja_env.globals.update(sorted=sorted)
 app.jinja_env.globals.update(len=len)
 app.jinja_env.globals.update(get_lang_text=helpers.get_lang_text)
 app.jinja_env.globals.update(get_shorttext=helpers.get_shorttext)
+app.jinja_env.globals.update(get_org_name=helpers.get_org_name)
 
 
 @app.template_filter('deescape')

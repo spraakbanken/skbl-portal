@@ -461,7 +461,8 @@ li .glyphicon-link {
 }
 .alphabetlist {
     font-size: 1.3em;
-    margin-right: 3px;
+    margin-right: 5px;
+    white-space: nowrap;
 }
 
 #open_advanced_box {

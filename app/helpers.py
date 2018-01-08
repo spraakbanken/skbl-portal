@@ -323,3 +323,12 @@ def get_shorttext(text):
     shorttext = shorttext.strip()
     shorttext = re.sub(r'  ', ' ', shorttext)
     return shorttext[:200]
+
+
+def get_org_name(organisation):
+    """
+    """
+    if organisation.endswith("organisation") or organisation.endswith("organization"):
+        return organisation[:-9] + "."
+    else:
+        return organisation

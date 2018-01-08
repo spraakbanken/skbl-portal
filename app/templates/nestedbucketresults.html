@@ -10,10 +10,13 @@
     {% endif %}
 </div>
 <div class="col-md-4"></div>
-<div class="col-md-12">
+<div class="col-md-8">
+    {% for maintype, val in sorted(results.items()) %}
+        <a class="alphabetlist" href="#{{maintype}}">{{get_org_name(maintype)}}&nbsp;</a>
+    {% endfor %}
   <ul>
        {% for maintype, val in sorted(results.items()) %}
-          <li class="keyword_list_item nested_part"> <h4>{{ maintype }}</h4>
+          <li class="keyword_list_item nested_part"> <h3><a name="{{maintype}}">{{ maintype }}</a></h3>
             {% if len(val.items()) <= 8 %}
               {% for subtype, subval in sorted(val.items()) %}
               <ul>
