@@ -77,6 +77,12 @@ def make_alphabetical_bucket(result):
         results.append((bucket[0].replace(u"von ", "")[0].upper(), bucket))
     return make_alphabetic(result, processname)
 
+def rewrite_von(input):
+    if "von " in input:
+        return input.replace("von ", "") + " von"
+    else:
+        return input
+
 
 def make_placenames(places):
     def processname(hit, results):
@@ -116,7 +122,7 @@ def make_alphabetic(hits, processname):
     # Sort result dictionary alphabetically into list
     collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
     for n, items in letter_results.items():
-        items.sort(key=lambda x: collator.getSortKey(x[0]))
+        items.sort(key=lambda x: collator.getSortKey(x[0].replace("von ", "")))
     letter_results = sorted(letter_results.items(), key=lambda x: collator.getSortKey(x[0]))
     return letter_results
 

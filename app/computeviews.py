@@ -163,7 +163,7 @@ def compute_artikelforfattare(infotext='', description=''):
     stat_table = [[kw[1] + ',', kw[0], kw[2]] for kw in stat_table]
 
     collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
-    stat_table.sort(key=lambda x: collator.getSortKey(x[0].replace("von ", "") + x[1]))
+    stat_table.sort(key=lambda x: collator.getSortKey(x[0] + x[1]))
 
     # remove duplicates and some wrong ones (because of backend limitation):
     stoplist = {
