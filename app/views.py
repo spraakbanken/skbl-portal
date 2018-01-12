@@ -179,6 +179,7 @@ def authors():
         infotext = u"""This is a list of the authors who supplied articles to SKBL."""
     set_language_switch_link("articleauthor_index")
     #return computeviews.bucketcall(queryfield='artikel_forfattare.sort,artikel_forfattare.bucket',
+    return computeviews.compute_artikelforfattare(infotext=infotext, description=helpers.get_shorttext(infotext))
     return computeviews.bucketcall(queryfield='artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn',
                                    name='articleauthor', title='Article authors', sortby=lambda x: x[1],
                                    lastnamefirst=True, infotext=infotext, alphabetical=True, description=helpers.get_shorttext(infotext))

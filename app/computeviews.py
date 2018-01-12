@@ -153,6 +153,37 @@ def compute_place(lang=""):
     return art
 
 
+
+def compute_artikelforfattare(infotext='', description=''):
+    q_data = {'buckets': 'artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn.bucket'}
+    data = karp_query('statlist', q_data)
+    # strip kw0 to get correct sorting
+    stat_table = [[kw[0].strip()] + kw[1:] for kw in data['stat_table'] if kw[0] != ""]
+
+    stat_table = [[kw[1] + ',', kw[0], kw[2]] for kw in stat_table]
+
+    collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
+    stat_table.sort(key=lambda x: collator.getSortKey(x[0].replace("von ", "") + x[1]))
+
+    # remove duplicates and some wrong ones (because of backend limitation):
+    stoplist = {
+        u"Grevesmühl,Kajsa" : True, # needs to be ¨h!
+        u"Ohrlander,Anders" : True,
+        u"Myrberg Burström,Mats" : True,
+        u"Burström,Nanouschka" : True
+    }
+    added = {}
+    new_stat_table = []
+    for item in stat_table:
+        fullname = item[0] + item[1]
+        if not fullname in added and not fullname in stoplist:
+            new_stat_table.append(item)
+            added[fullname] = True
+    return render_template('bucketresults.html', results=new_stat_table,
+                           alphabetical=True, title=gettext('Article authors'),
+                           name='articleauthor', infotext=infotext, description=description)
+
+
 def bucketcall(queryfield='', name='', title='', sortby='',
                lastnamefirst=False, infotext='', description='', query='', alphabetical=False):
     q_data = {'buckets': '%s.bucket' % queryfield}

@@ -74,7 +74,7 @@ def group_by_type(objlist, name):
 
 def make_alphabetical_bucket(result):
     def processname(bucket, results):
-        results.append((bucket[0][0].upper(), bucket))
+        results.append((bucket[0].replace(u"von ", "")[0].upper(), bucket))
     return make_alphabetic(result, processname)
 
 
