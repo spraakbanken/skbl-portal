@@ -111,9 +111,16 @@ def compute_place(lang=""):
         if rv is not None and not app.config['TEST']:
             return rv
 
+    # if lang == 'sv':
+    #     infotext = u"""Platser där de biograferade kvinnorna fötts, dött och varit verksamma.
+    #     Klicka på en ort för att få upp en karta och en lista över kvinnor med anknytning till platsen."""
+    # else:
+    #     infotext = u"""This displays the subjects’ locations: where they were born
+    #     where they were active, and where they died. Selecting a particular placename
+    #     generates a list of all subjects who were born, active and/or died at that place."""
     if lang == 'sv':
         infotext = u"""Platser där de biograferade kvinnorna fötts, dött och varit verksamma.
-        Klicka på en ort för att få upp en karta och en lista över kvinnor med anknytning till platsen."""
+        Klicka på en ort för att få upp en lista över kvinnor med anknytning till platsen."""
     else:
         infotext = u"""This displays the subjects’ locations: where they were born
         where they were active, and where they died. Selecting a particular placename
