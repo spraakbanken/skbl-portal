@@ -1,14 +1,14 @@
 # Translations template for PROJECT.
-# Copyright (C) 2017 ORGANIZATION
+# Copyright (C) 2018 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-12-15 13:42+0000\n"
+"POT-Creation-Date: 2018-01-15 16:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,111 +17,114 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
 
-#: app/computeviews.py:47 app/templates/article.html:315
-#: app/templates/article.html:327 app/templates/layout.html:128
+#: app/computeviews.py:47 app/templates/article.html:302
+#: app/templates/layout.html:130
 msgid "Organisations"
 msgstr ""
 
-#: app/computeviews.py:69 app/templates/article.html:195
-#: app/templates/article.html:207 app/templates/contact.html:32
-#: app/templates/layout.html:121
+#: app/computeviews.py:69 app/templates/article.html:218
+#: app/templates/contact.html:32 app/templates/layout.html:123
 msgid "Activities"
 msgstr ""
 
-#: app/computeviews.py:95 app/templates/layout.html:94
+#: app/computeviews.py:95 app/templates/layout.html:96
 msgid "Women A-Z"
 msgstr ""
 
-#: app/computeviews.py:149
+#: app/computeviews.py:156
 msgid "Placenames"
 msgstr ""
 
-#: app/computeviews.py:217
+#: app/computeviews.py:190 app/templates/layout.html:99
+msgid "Article authors"
+msgstr ""
+
+#: app/computeviews.py:256
 msgid "Please enter all the fields!"
 msgstr ""
 
-#: app/computeviews.py:221
+#: app/computeviews.py:260
 msgid "Please enter a valid email address!"
 msgstr ""
 
-#: app/computeviews.py:227 app/templates/layout.html:102 app/views.py:65
+#: app/computeviews.py:266 app/templates/layout.html:104 app/views.py:66
 msgid "Contact"
 msgstr ""
 
-#: app/computeviews.py:228 app/views.py:66
+#: app/computeviews.py:267 app/views.py:67
 msgid "Contact SKBL"
 msgstr ""
 
-#: app/computeviews.py:285 app/computeviews.py:286
+#: app/computeviews.py:324 app/computeviews.py:325
 msgid "Thank you for your feedback"
 msgstr ""
 
-#: app/computeviews.py:287
+#: app/computeviews.py:326
 msgid "We will get back to you as soon as we can."
 msgstr ""
 
-#: app/templates/layout.html:100 app/views.py:39
+#: app/templates/layout.html:102 app/views.py:40
 msgid "About SKBL"
 msgstr ""
 
-#: app/templates/layout.html:101 app/views.py:45
+#: app/templates/layout.html:103 app/views.py:46
 msgid "More women"
 msgstr ""
 
-#: app/views.py:51
+#: app/views.py:52
 msgid "Older biographies"
 msgstr ""
 
-#: app/views.py:95
+#: app/views.py:96
 #, python-format
 msgid "Hits for \"%s\""
 msgstr ""
 
-#: app/templates/article.html:51 app/templates/article.html:72
+#: app/templates/article.html:132
 msgid "Family Relationships"
 msgstr ""
 
-#: app/templates/article.html:54 app/templates/article.html:74
+#: app/templates/article.html:134
 msgid "Civil Status:"
 msgstr ""
 
-#: app/templates/article.html:137 app/templates/article.html:148
+#: app/templates/article.html:176
 msgid "Education"
 msgstr ""
 
-#: app/templates/article.html:257 app/templates/article.html:268
+#: app/templates/article.html:260
 msgid "Contacts"
 msgstr ""
 
-#: app/templates/article.html:377 app/templates/article.html:392
+#: app/templates/article.html:356
 msgid "Residences"
 msgstr ""
 
-#: app/templates/article.html:445 app/templates/article.html:456
+#: app/templates/article.html:398
 msgid "Prices/awards"
 msgstr ""
 
-#: app/templates/article.html:503
+#: app/templates/article.html:439
 msgid "Sources"
 msgstr ""
 
-#: app/templates/article.html:527
+#: app/templates/article.html:463
 msgid "Further References"
 msgstr ""
 
-#: app/templates/article.html:551
+#: app/templates/article.html:487
 msgid "Show map"
 msgstr ""
 
-#: app/templates/article.html:554
+#: app/templates/article.html:490
 msgid "Hide map"
 msgstr ""
 
-#: app/templates/article.html:565 app/templates/layout.html:142
+#: app/templates/article.html:501 app/templates/layout.html:144
 msgid "Keywords"
 msgstr ""
 
-#: app/templates/article.html:580
+#: app/templates/article.html:516
 msgid "Links"
 msgstr ""
 
@@ -181,43 +184,39 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: app/templates/layout.html:63
+#: app/templates/layout.html:65
 msgid "Free text search"
 msgstr ""
 
-#: app/templates/layout.html:71
+#: app/templates/layout.html:73
 msgid "Go to advanced search"
 msgstr ""
 
-#: app/templates/layout.html:72
+#: app/templates/layout.html:74
 msgid "To advanced search"
 msgstr ""
 
-#: app/templates/layout.html:81
+#: app/templates/layout.html:83
 msgid "To Karp"
 msgstr ""
 
-#: app/templates/layout.html:81
+#: app/templates/layout.html:83
 msgid "External link"
 msgstr ""
 
-#: app/templates/layout.html:97
-msgid "Article authors"
-msgstr ""
-
-#: app/templates/layout.html:106
+#: app/templates/layout.html:108
 msgid "På "
 msgstr ""
 
-#: app/templates/layout.html:135
+#: app/templates/layout.html:137
 msgid "Places"
 msgstr ""
 
-#: app/templates/layout.html:150
+#: app/templates/layout.html:152
 msgid "Share page"
 msgstr ""
 
-#: app/templates/list.html:15
+#: app/templates/list.html:19
 msgid "No results found for"
 msgstr ""
 
