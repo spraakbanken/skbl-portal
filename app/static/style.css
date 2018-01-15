@@ -462,7 +462,12 @@ li .glyphicon-link {
 .alphabetlist {
     font-size: 1.3em;
     margin-right: 5px;
+    padding-right: 5px;
     white-space: nowrap;
+}
+
+.vertical_bar {
+    border-right: thin solid #000000;
 }
 
 #open_advanced_box {

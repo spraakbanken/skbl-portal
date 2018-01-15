@@ -9,7 +9,11 @@
     {% endif %}
 
       {% for firstletter, _ in make_placenames(places) %}
-          <a class="alphabetlist" href="#{{firstletter}}">{{firstletter}}</a>&nbsp;
+          {% if firstletter == make_placenames(places)[-1][0] %}
+              <a class="alphabetlist" href="#{{firstletter}}">{{firstletter}}</a>
+          {% else %}
+              <a class="alphabetlist vertical_bar" href="#{{firstletter}}">{{firstletter}}</a>
+          {% endif %}
       {% endfor %}
       <ul>
       {% for firstletter, namelist in make_placenames(places) %}

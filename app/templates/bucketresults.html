@@ -13,7 +13,11 @@
 <div class="col-md-12">
     {% if alphabetical %}
         {% for firstletter, _ in make_alphabetical_bucket(results) %}
-            <a class="alphabetlist" href="#{{firstletter}}">{{firstletter}}</a>&nbsp;
+            {% if firstletter == make_alphabetical_bucket(results)[-1][0] %}
+                <a class="alphabetlist" href="#{{firstletter}}">{{firstletter}}</a>
+            {% else %}
+                <a class="alphabetlist vertical_bar" href="#{{firstletter}}">{{firstletter}}</a>
+            {% endif %}
         {% endfor %}
         <ul>
           {% for firstletter, namelist in make_alphabetical_bucket(results) %}
@@ -32,5 +36,3 @@
     {% endif %}
 </div>
 {% endblock %}
-
-

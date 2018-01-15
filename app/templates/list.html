@@ -18,7 +18,11 @@
     {% set firstletters, results = make_namelist(hits)%}
     {% if split_letters %}
         {% for firstletter in firstletters%}
-            <a class="alphabetlist" href="#{{firstletter}}">{{firstletter}}</a>&nbsp;
+            {% if firstletter == firstletters[-1] %}
+                <a class="alphabetlist" href="#{{firstletter}}">{{firstletter}}</a>
+            {% else %}
+                <a class="alphabetlist vertical_bar" href="#{{firstletter}}">{{firstletter}}</a>
+            {% endif %}
         {% endfor %}
     {% endif %}
     <ul>

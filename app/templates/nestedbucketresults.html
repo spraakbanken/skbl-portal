@@ -12,7 +12,11 @@
 <div class="col-md-4"></div>
 <div class="col-md-8">
     {% for maintype, val in sorted(results.items()) %}
-        <a class="alphabetlist" href="#{{maintype}}">{{get_org_name(maintype)}}&nbsp;</a>
+        {% if maintype == sorted(results.items())[-1][0] %}
+            <a class="alphabetlist" href="#{{maintype}}">{{get_org_name(maintype)}}&nbsp;</a>
+        {% else %}
+            <a class="alphabetlist vertical_bar" href="#{{maintype}}">{{get_org_name(maintype)}}&nbsp;</a>
+        {% endif %}
     {% endfor %}
   <ul>
        {% for maintype, val in sorted(results.items()) %}
