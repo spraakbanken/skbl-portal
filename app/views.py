@@ -351,8 +351,10 @@ def show_article(data, lang="sv"):
         else:
             image = ""
 
+        under_development = True if source.get("skbl_status") == "Under utveckling" else False
+
         return render_template('article.html', article=source, article_id=source['es_id'],
-                               title=title, description=description, image=image)
+                               title=title, description=description, image=image, under_development=under_development)
     else:
         return render_template('page.html', content='not found')
 

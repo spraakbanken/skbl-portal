@@ -13,7 +13,7 @@
 {% macro educationMacro(education) %}
     <li class="keyword_list_item">
         <h5 class="toggled-by-button">{{ education.type }}{% if education.place and education.place.place %}, {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description | deescape }}{% endif %}</h5>
-        <h5 class="toggled-by-button" style="display:none">{{ education.type }}{% if education.place and education.place.place %}, {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description | deescape }}{% endif %} 
+        <h5 class="toggled-by-button" style="display:none">{{ education.type }}{% if education.place and education.place.place %}, {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description | deescape }}{% endif %}
         {% if education.get("from")%} {% set from = education.get("from").get("comment") %} {% else %} {% set from = "" %} {% endif %}
         {% if education.get("to")%} {% set to = education.get("to").get("comment") %} {% else %} {% set to = "" %} {% endif %}
         {% if from or to %} ({{from}} – {{to}}){% endif %}</h5>
@@ -24,8 +24,8 @@
     <li class="keyword_list_item">
         {% set occupation_detail = get_lang_text(occupation.detail, occupation.detail_eng, g.language) %}
         <h5 class="toggled-by-button">{{ occupation.type }}{% if occupation_detail %}: {{ occupation_detail | deescape }} {% elif occupation.description %}: {{ occupation.description | deescape}} {% endif %}</h5>
-        <h5 class="toggled-by-button" style="display:none">{{ occupation.type }}{% if occupation_detail %}: {{ occupation_detail | deescape }} {% elif occupation.description %}: {{ occupation.description | deescape}} {% endif %} 
-        {% if occupation.place and occupation.place.place %}, {{ occupation.place.place }}{% endif %} 
+        <h5 class="toggled-by-button" style="display:none">{{ occupation.type }}{% if occupation_detail %}: {{ occupation_detail | deescape }} {% elif occupation.description %}: {{ occupation.description | deescape}} {% endif %}
+        {% if occupation.place and occupation.place.place %}, {{ occupation.place.place }}{% endif %}
         {% if occupation.get("from")%} {% set from = occupation.get("from").get("comment") %} {% else %} {% set from = "" %} {% endif %}
         {% if occupation.get("to")%} {% set to = occupation.get("to").get("comment") %} {% else %} {% set to = "" %} {% endif %}
         {% if from or to %} ({{from}} – {{to}}){% endif %}</h5>
@@ -36,7 +36,7 @@
     <li class="keyword_list_item">
         <h5 class="toggled-by-button">{{ contact.type }}: {{ contact.firstname }} {{ contact.lastname }}</h5>
         <h5 class="toggled-by-button" style="display:none">{{ contact.type }}: {{ contact.firstname }} {{ contact.lastname }}
-        {% if contact.place and contact.place.place %}, {{ contact.place.place }}{% endif %} 
+        {% if contact.place and contact.place.place %}, {{ contact.place.place }}{% endif %}
         {% if contact.get("from")%} {% set from = contact.get("from").get("comment") %} {% else %} {% set from = "" %} {% endif %}
         {% if contact.get("to")%} {% set to = contact.get("to").get("comment") %} {% else %} {% set to = "" %} {% endif %}
         {% if from or to %} ({{from}} – {{to}}){% endif %}</h5>
@@ -47,7 +47,7 @@
     <li class="keyword_list_item">
         {% if place.place %}
             <h5 class="toggled-by-button">{{place.place.place}}</h5>
-            <h5 class="toggled-by-button" style="display:none">{{place.place.place}} 
+            <h5 class="toggled-by-button" style="display:none">{{place.place.place}}
             {% if place.get("from")%} {% set from = place.get("from").get("comment") %} {% else %} {% set from = "" %} {% endif %}
             {% if place.get("to")%} {% set to = place.get("to").get("comment") %} {% else %} {% set to = "" %} {% endif %}
             {% if from or to %} ({{from}} – {{to}}){% endif %}</h5>
@@ -87,6 +87,7 @@
 {% block content %}
 <div itemscope itemtype="http://schema.org/Person">
     <div class="col-md-8">
+        {% if under_development %}{{gettext("Work in progress.")}}{% endif %}
         <h1 itemprop="name">{{ article.showname | safe }}{% if article.linked_names %} <em itemprop="additionalName">({{article.linked_names | safe }})</em> {% endif %}</h1>
         {# <h4 itemprop="additionalName">{{ article.fullfirstname }}</h4> #}
         {% if get_date(article)[0] or get_date[1] %}
