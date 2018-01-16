@@ -16,15 +16,15 @@
     <form method="post" action="{{ url_for('submitted_'+g.language) }}">
         <div id="mode_switch">
             <label for="suggest_new">
-                <input type="radio" id="suggest_new" name="mode_switch" {% if mode == "suggestion" %}{{ "checked=checked" }}{% endif %}>
+                <input type="radio" id="suggest_new" value="suggest_new" name="mode_switch" {% if mode == "suggestion" %}{{ "checked=checked" }}{% endif %}>
                 <span class="title">{{ gettext("Suggest biography about...") }}&nbsp;&nbsp;</span>
             </label>
             <label for="correction">
-                <input type="radio" id="correction" name="mode_switch" {% if mode == "correction" %}{{ "checked=checked" }}{% endif %}>
+                <input type="radio" id="correction" value="correction" name="mode_switch" {% if mode == "correction" %}{{ "checked=checked" }}{% endif %}>
                 <span class="title">{{ gettext("Suggest correction") }}&nbsp;&nbsp;</span>
             </label>
             <label for="other">
-                <input type="radio" id="other" name="mode_switch" {% if mode == "other" %}{{ "checked=checked" }}{% endif %}>
+                <input type="radio" id="other" value="other" name="mode_switch" {% if mode == "other" %}{{ "checked=checked" }}{% endif %}>
                 <span class="title">{{ gettext("Other") }}</span>
             </label>
         </div>

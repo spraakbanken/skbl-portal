@@ -261,11 +261,11 @@ def compute_contact_form():
     email = request.form['email'].strip()
     required_fields = ["name", "email"]
 
-    if request.form.getlist('suggest_new'):
+    if request.form['mode_switch'] == 'suggest_new':
         mode = "suggestion"
         required_fields.extend(["subject_name", "subject_lifetime",
                                "subject_activity", "motivation"])
-    elif request.form.getlist('correction'):
+    elif request.form['mode_switch'] == 'correction':
         mode = "correction"
         required_fields.append("message")
     else:
