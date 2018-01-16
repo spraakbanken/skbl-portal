@@ -43,6 +43,10 @@ h3 {
 
 }
 
+.maximize_all {
+  cursor: pointer;
+}
+
 .reference-to-skbl b {
   font-weight: normal !important;
 }

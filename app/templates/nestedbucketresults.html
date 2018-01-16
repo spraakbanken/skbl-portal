@@ -18,6 +18,7 @@
             <a class="alphabetlist vertical_bar" href="#{{maintype}}">{{get_org_name(maintype)}}&nbsp;</a>
         {% endif %}
     {% endfor %}
+  <div><span class="label label-default maximize_all">Expandera alla</span></div>
   <ul>
        {% for maintype, val in sorted(results.items()) %}
           <li class="keyword_list_item nested_part"> <h3><a name="{{maintype}}">{{ maintype }}</a></h3>
@@ -80,6 +81,10 @@
             jQuery(".minimize_items").click(function() {
                 jQuery(this).parent().siblings(".shown_first").toggle();
                 jQuery(this).parent().toggle();
+            });
+            jQuery(".maximize_all").click(function() {
+                jQuery(".shown_first").hide();
+                jQuery(".hidden_first").show();
             });
         });
     </script>
