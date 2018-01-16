@@ -100,6 +100,15 @@
             {% if article_text %}{{ article_text | safe }}{% endif %}
         </div>
         <br/>
+        {% if article.note %}
+            <div class="footnote">
+            {% for note in article.note %}
+                {{gettext("Remark")}} {{ note.number }}: {{ note.text }}
+            {% endfor %}
+            </div>
+        {% endif %}
+        <br/>
+
         <p>
             <em>
                 {% for author in article.article_author %}
@@ -395,9 +404,6 @@
             {% endif %}
         </div>
         {% endif %}
-
-
-
 
 
         {% if article.awards %}

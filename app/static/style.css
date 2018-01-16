@@ -507,3 +507,7 @@ li .glyphicon-link {
 .form-control {
     color: black;
 }
+
+.footnote {
+    font-size: 0.9em;
+}

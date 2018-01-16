@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-01-16 14:39+0000\n"
+"POT-Creation-Date: 2018-01-16 17:06+0000\n"
 "PO-Revision-Date: 2017-02-20 14:49+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sv\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
 
-#: app/computeviews.py:74 app/templates/article.html:311
+#: app/computeviews.py:74 app/templates/article.html:321
 #: app/templates/layout.html:130
 msgid "Organisations"
 msgstr "Organisationer"
 
-#: app/computeviews.py:93 app/templates/article.html:227
+#: app/computeviews.py:93 app/templates/article.html:237
 #: app/templates/contact.html:42 app/templates/layout.html:123
 msgid "Activities"
 msgstr "Verksamhet"
@@ -85,51 +85,55 @@ msgstr "Träffar för \"%s\""
 msgid "Work in progress."
 msgstr "Under arbete."
 
-#: app/templates/article.html:141
+#: app/templates/article.html:106
+msgid "Remark"
+msgstr "Anmärkning"
+
+#: app/templates/article.html:151
 msgid "Family Relationships"
 msgstr "Familjeförhållanden"
 
-#: app/templates/article.html:143
+#: app/templates/article.html:153
 msgid "Civil Status:"
 msgstr "Civilstatus:"
 
-#: app/templates/article.html:185
+#: app/templates/article.html:195
 msgid "Education"
 msgstr "Utbildning"
 
-#: app/templates/article.html:269
+#: app/templates/article.html:279
 msgid "Contacts"
 msgstr "Kontakter"
 
-#: app/templates/article.html:365
+#: app/templates/article.html:375
 msgid "Residences"
 msgstr "Bostadsorter"
 
-#: app/templates/article.html:407
+#: app/templates/article.html:414
 msgid "Prices/awards"
 msgstr "Priser/utmärkelser"
 
-#: app/templates/article.html:448
+#: app/templates/article.html:455
 msgid "Sources"
 msgstr "Källor"
 
-#: app/templates/article.html:472
+#: app/templates/article.html:479
 msgid "Further References"
 msgstr "Vidare referenser"
 
-#: app/templates/article.html:500
+#: app/templates/article.html:507
 msgid "Show map"
 msgstr "Visa karta"
 
-#: app/templates/article.html:503
+#: app/templates/article.html:510
 msgid "Hide map"
 msgstr "Göm karta"
 
-#: app/templates/article.html:514 app/templates/layout.html:144
+#: app/templates/article.html:521 app/templates/layout.html:144
 msgid "Keywords"
 msgstr "Nyckelord"
 
-#: app/templates/article.html:529
+#: app/templates/article.html:536
 msgid "Links"
 msgstr "Länkar"
 
