@@ -7,6 +7,7 @@ from flask import jsonify, url_for
 from flask_babel import gettext
 import helpers
 import re
+# from authorinfo import authorsdict
 
 
 # redirect to specific language landing-page
@@ -58,14 +59,14 @@ def contact():
 
     # Set suggestion checkbox
     if request.args.get('suggest') == 'true':
-        suggestion = True
+        mode = "suggestion"
     else:
-        suggestion = False
+        mode = "other"
     return render_template("contact.html",
                            title=gettext("Contact"),
                            headline=gettext("Contact SKBL"),
                            form_data={},
-                           suggestion=suggestion)
+                           mode=mode)
 
 
 @app.route('/en/contact/', methods=['POST'], endpoint="submitted_en")
@@ -151,7 +152,7 @@ def keyword_index():
     rule = request.url_rule
     if 'sv' in rule.rule:
         infotext = u"""Här finns en lista över de nyckelord som karaktäriserar materialet.
-        De handlar om tid, yrken, orter, religion och mycket mera.
+        De utgörs av tid, yrken, religion och mycket mera.
         Om du går in på något av nyckelorden kan du se vilka kvinnor som kan karaktäriseras med det."""
     else:
         infotext = u"""This generates a list of keywords which typically appear in the entries.
@@ -188,12 +189,19 @@ def authors():
 @app.route("/en/articleauthor/<result>", endpoint="articleauthor_en")
 @app.route("/sv/artikelforfattare/<result>", endpoint="articleauthor_sv")
 def author(result=None):
+    # rule = request.url_rule
+    # lang = 'sv' if 'sv' in rule.rule else 'en'
+    # Try to get authorinfo in correct language (with Swedish as fallback)
+    # authorinfo = authorsdict.get(result)
+    # if authorinfo:
+    #     authorinfo = authorinfo.get(lang, authorinfo.get("sv"))
+    authorinfo = False
     return searchresult(result, name='articleauthor',
                         searchfield='artikel_forfattare_fulltnamn',
-                        imagefolder='authors', searchtype='contains')
+                        imagefolder='authors', searchtype='contains', authorinfo=authorinfo)
 
 
-def searchresult(result, name='', searchfield='', imagefolder='', searchtype='equals', title=''):
+def searchresult(result, name='', searchfield='', imagefolder='', searchtype='equals', title='', authorinfo=False):
     qresult = result
     try:
         set_language_switch_link("%s_index" % name, result)
@@ -207,7 +215,7 @@ def searchresult(result, name='', searchfield='', imagefolder='', searchtype='eq
                 picture = '/static/images/%s/%s.jpg' % (imagefolder, qresult)
 
             return render_template('list.html', picture=picture, alphabetic=True,
-                                   title=title, headline=title, hits=hits["query"]["hits"])
+                                   title=title, headline=title, hits=hits["query"]["hits"], authorinfo=authorinfo)
         else:
             return render_template('page.html', content='not found')
     except Exception:

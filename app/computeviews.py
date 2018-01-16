@@ -262,11 +262,14 @@ def compute_contact_form():
     required_fields = ["name", "email"]
 
     if request.form.getlist('suggest_new'):
-        suggestion = True
+        mode = "suggestion"
         required_fields.extend(["subject_name", "subject_lifetime",
                                "subject_activity", "motivation"])
+    elif request.form.getlist('correction'):
+        mode = "correction"
+        required_fields.append("message")
     else:
-        suggestion = False
+        mode = "other"
         required_fields.append("message")
 
     error_msgs = []
@@ -294,22 +297,19 @@ def compute_contact_form():
                                subject_activity_error=True if "subject_activity" in errors else False,
                                motivation_error=True if "motivation" in errors else False,
                                form_data=request.form,
-                               suggestion=suggestion)
+                               mode=mode)
 
     else:
-        return make_email(request.form, suggestion)
+        return make_email(request.form, mode)
 
 
-def make_email(form_data, suggestion=False):
+def make_email(form_data, mode="other"):
     """Compose and send email from contact form."""
 
     email = form_data["email"]
     msg = MIMEMultipart("alternative")
 
-    if not suggestion:
-        text = u"%s har skickat följande meddelande:\n\n%s" % (form_data["name"], form_data["message"])
-        subject = u"Förfrågan från skbl.se"
-    else:
+    if mode == "suggestion":
         text = [u"%s har skickat in ett förslag för en ny SKBL-ingång.\n\n" % form_data["name"]]
         text.append(u"Förslag på kvinna: %s\n" % form_data["subject_name"])
         text.append(u"Kvinnas levnadstid: %s\n" % form_data["subject_lifetime"])
@@ -317,6 +317,12 @@ def make_email(form_data, suggestion=False):
         text.append(u"Motivering: %s\n" % form_data["motivation"])
         text = u"".join(text)
         subject = u"Förslag för ny ingång i skbl.se"
+    elif mode == "correction":
+        text = u"%s har skickat följande meddelande:\n\n%s" % (form_data["name"], form_data["message"])
+        subject = u"Förslag till rättelse (skbl.se)"
+    else:
+        text = u"%s har skickat följande meddelande:\n\n%s" % (form_data["name"], form_data["message"])
+        subject = u"Förfrågan från skbl.se"
 
     html = text.replace("\n", "<br>")
     part1 = MIMEText(text, "plain", "utf-8")

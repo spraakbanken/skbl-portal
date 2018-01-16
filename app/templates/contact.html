@@ -14,10 +14,20 @@
     {% endif %}
 
     <form method="post" action="{{ url_for('submitted_'+g.language) }}">
-        <label for="suggest_new">
-            <input type="checkbox" id="suggest_new" name="suggest_new" {% if suggestion %}{{ "checked=checked" }}{% endif %}>
-            <span class="title">{{ gettext("Suggest biography about...") }}</span>
-        </label>
+        <div id="mode_switch">
+            <label for="suggest_new">
+                <input type="radio" id="suggest_new" name="mode_switch" {% if mode == "suggestion" %}{{ "checked=checked" }}{% endif %}>
+                <span class="title">{{ gettext("Suggest biography about...") }}&nbsp;&nbsp;</span>
+            </label>
+            <label for="correction">
+                <input type="radio" id="correction" name="mode_switch" {% if mode == "correction" %}{{ "checked=checked" }}{% endif %}>
+                <span class="title">{{ gettext("Suggest correction") }}&nbsp;&nbsp;</span>
+            </label>
+            <label for="other">
+                <input type="radio" id="other" name="mode_switch" {% if mode == "other" %}{{ "checked=checked" }}{% endif %}>
+                <span class="title">{{ gettext("Other") }}</span>
+            </label>
+        </div>
         <div class="extra_field">
             <div style="float:left; padding-right:16px; width:50%" class="extra_field {% if subject_name_error %}form-group has-error{% else %}form-group{% endif %}">
                 <label class="control-label" for="subject_name">{{ gettext("Name") }}</label>
@@ -60,9 +70,9 @@
                 jQuery(".extra_field").show();
                 jQuery("#message-div").hide();
             }
-            jQuery('#suggest_new').click(function() {
-                jQuery(".extra_field").toggle(this.checked);
-                jQuery("#message-div").toggle(this.checked == false);
+            jQuery('#mode_switch').on("change", function() {
+                jQuery(".extra_field").toggle(jQuery('#suggest_new')[0].checked);
+                jQuery("#message-div").toggle(jQuery('#suggest_new')[0].checked == false);
             });
         });
     </script>
