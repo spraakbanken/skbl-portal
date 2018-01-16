@@ -116,6 +116,7 @@ app.jinja_env.globals.update(get_shorttext=helpers.get_shorttext)
 app.jinja_env.globals.update(get_org_name=helpers.get_org_name)
 app.jinja_env.globals.update(rewrite_von=helpers.rewrite_von)
 app.jinja_env.globals.update(lowersorted=helpers.lowersorted)
+app.jinja_env.globals.update(get_current_date=helpers.get_current_date)
 
 
 @app.template_filter('deescape')

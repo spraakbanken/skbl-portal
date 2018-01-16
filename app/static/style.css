@@ -43,6 +43,10 @@ h3 {
 
 }
 
+.reference-to-skbl b {
+  font-weight: normal !important;
+}
+
 .top-link {
   font-size: small;
   margin-top: 30px;

@@ -4,7 +4,7 @@ from flask import url_for
 import icu  # pip install PyICU
 import markdown
 import re
-
+import datetime
 
 def get_first_name(source):
     """Return the given name (first name)."""
@@ -52,6 +52,9 @@ def get_date(source):
         dates.append(date)
 
     return dates[0], dates[1]
+
+def get_current_date():
+    return datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d")
 
 
 def markdown_html(text):
