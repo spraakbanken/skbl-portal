@@ -412,7 +412,7 @@ def emptycache():
     # Users with write premissions to skbl may empty the cache
     emptied = False
     try:
-        emptied = computeviews.compute_emptycache()
+        emptied = computeviews.compute_emptycache(['article', 'activity', 'organisation', 'place'])
     except Exception as e:
         emptied = False
         # return jsonify({"error": "%s" % e})
@@ -421,6 +421,7 @@ def emptycache():
 
 @app.route('/cachestats')
 def cachestats():
+    # Show stats of the cache
     with mc_pool.reserve() as client:
         return jsonify({"cached_stats": client.get_stats()})
 
@@ -431,12 +432,14 @@ def fillcache():
     # Refill the cache (~ touch all pages)
     # This request will take some seconds, users may want to make an
     # asynchronous call
-    # for lang in ["sv", "en"]:
-    computeviews.compute_article()
-    computeviews.compute_activity()
-    computeviews.compute_organisation()
-    computeviews.compute_place()
+    # Compute new pages
+    computeviews.compute_article(cache=False)
+    computeviews.compute_activity(cache=False)
+    computeviews.compute_organisation(cache=False)
+    computeviews.compute_place(cache=False)
     lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
+    # Copy the pages to the backup fields
+    computeviews.copytobackup(['article', 'activity', 'organisation', 'place'], lang)
     return jsonify({"cache_filled": True, "cached_language": lang})
 
 

@@ -14,13 +14,40 @@ from email.header import Header
 import smtplib
 
 
-def compute_organisation(lang="", infotext=""):
-    set_language_switch_link("organisation_index", lang=lang)
+def getcache(page, lang, usecache):
+    # Check if the requested page, in language 'lang', is in the cache
+    # If not, use the backup cache.
+    # First, compute the language
     if not lang:
         lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
+    # If the cache should not be used, return None
+    if not usecache or app.config['TEST']:
+        return None, lang
     with mc_pool.reserve() as client:
-        art = client.get('organisation' + lang)
-        if art is not None and not app.config['TEST']:
+        # Look for the page, return if found
+        art = client.get(page + lang)
+        if art is not None:
+            return art, lang
+        # if not, look for the backup of the page and return
+        art = client.get(page + lang + '_backup')
+        if art is not None:
+            return art, lang
+    # If nothing is found, return None
+    return None, lang
+
+
+def copytobackup(fields, lang):
+    # Make backups of  all requested fields to their corresponding backup field
+    for field in fields:
+        with mc_pool.reserve() as client:
+            art = client.get(field + lang)
+            client.set(field + lang + '_backup', art, time=app.config['CACHE_TIME'])
+
+
+def compute_organisation(lang="", infotext="", cache=True):
+    set_language_switch_link("organisation_index", lang=lang)
+    art, lang = getcache('organisation', lang, cache)
+    if art is not None:
             return art
 
     if lang == 'sv':
@@ -47,19 +74,16 @@ def compute_organisation(lang="", infotext=""):
                           results=nested_obj, title=gettext("Organisations"),
                           infotext=infotext, name='organisation')
     with mc_pool.reserve() as client:
-         client.set('organisation' + lang, art, time=app.config['CACHE_TIME'])
+        client.set('organisation' + lang, art, time=app.config['CACHE_TIME'])
     return art
     # return bucketcall(queryfield='organisationstyp', name='organisation',
     #                   title='Organizations', infotext=infotext)
 
 
-def compute_activity(lang=""):
+def compute_activity(lang="", cache=True):
     set_language_switch_link("activity_index", lang=lang)
-    if not lang:
-        lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
-    with mc_pool.reserve() as client:
-        art = client.get('activity' + lang)
-        if art is not None and not app.config['TEST']:
+    art, lang = getcache('activity', lang, cache)
+    if art is not None:
             return art
     if lang == 'sv':
         infotext = u"Här kan du se inom vilka områden de biograferade kvinnorna varit verksamma och vilka yrken de hade."
@@ -73,13 +97,10 @@ def compute_activity(lang=""):
     return art
 
 
-def compute_article(lang=""):
+def compute_article(lang="", cache=True):
     set_language_switch_link("article_index", lang=lang)
-    if not lang:
-        lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
-    with mc_pool.reserve() as client:
-        art = client.get('article' + lang)
-        if art is not None and not app.config['TEST']:
+    art, lang = getcache('article', lang, cache)
+    if art is not None:
             return art
 
     if lang == 'sv':
@@ -102,14 +123,11 @@ def compute_article(lang=""):
     return art
 
 
-def compute_place(lang=""):
+def compute_place(lang="", cache=True):
     set_language_switch_link("place_index", lang=lang)
-    if not lang:
-        lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
-    with mc_pool.reserve() as client:
-        rv = client.get('place' + lang)
-        if rv is not None and not app.config['TEST']:
-            return rv
+    art, lang = getcache('place', lang, cache)
+    if art is not None:
+            return art
 
     # if lang == 'sv':
     #     infotext = u"""Platser där de biograferade kvinnorna fötts, dött och varit verksamma.
@@ -160,7 +178,6 @@ def compute_place(lang=""):
     return art
 
 
-
 def compute_artikelforfattare(infotext='', description=''):
     q_data = {'buckets': 'artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn.bucket'}
     data = karp_query('statlist', q_data)
@@ -192,7 +209,8 @@ def compute_artikelforfattare(infotext='', description=''):
 
 
 def bucketcall(queryfield='', name='', title='', sortby='',
-               lastnamefirst=False, infotext='', description='', query='', alphabetical=False):
+               lastnamefirst=False, infotext='', description='', query='',
+               alphabetical=False):
     q_data = {'buckets': '%s.bucket' % queryfield}
     if query:
         q_data['q'] = query
@@ -212,8 +230,8 @@ def bucketcall(queryfield='', name='', title='', sortby='',
                            name=name, infotext=infotext, description=description)
 
 
-def compute_emptycache():
-    # Empty the cache.
+def compute_emptycache(fields):
+    # Empty the cache (but leave the backupfields).
     # Only users with write permission may do this
     # May raise error, eg if the authorization does not work
     emptied = False
@@ -230,7 +248,9 @@ def compute_emptycache():
     rights = lexitems.get("lexica", {}).get(app.config['SKBL'], {})
     if rights.get('write'):
         with mc_pool.reserve() as client:
-            client.flush_all()
+            for field in fields:
+                client.delete(field+'sv')
+                client.delete(field+'en')
         emptied = True
     return emptied
 
