@@ -338,3 +338,7 @@ def get_org_name(organisation):
         return organisation[:-9] + "."
     else:
         return organisation
+
+
+def lowersorted(xs):
+    return sorted(xs, key=lambda x: x[0].lower())

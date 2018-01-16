@@ -22,7 +22,7 @@
        {% for maintype, val in sorted(results.items()) %}
           <li class="keyword_list_item nested_part"> <h3><a name="{{maintype}}">{{ maintype }}</a></h3>
             {% if len(val.items()) <= 8 %}
-              {% for subtype, subval in sorted(val.items()) %}
+              {% for subtype, subval in lowersorted(val.items()) %}
               <ul>
                 <li class="keyword_list_item">
                   <a href="{{ url_for(name+'_'+g.language, result='|'.join(subval), title=maintype+' - '+subtype) }}">{{ subtype }}&nbsp;
@@ -33,7 +33,7 @@
               {% endfor %}
             {% else %}
               <div style="display:none" class="nested_container hidden_first">
-                {% for subtype, subval in sorted(val.items()) %}
+                {% for subtype, subval in lowersorted(val.items()) %}
                 <ul>
                   <li class="keyword_list_item">
                     <a href="{{ url_for(name+'_'+g.language, result='|'.join(subval), title=maintype+' - '+subtype) }}">{{ subtype }}&nbsp;
@@ -48,7 +48,7 @@
               </div>
               <div style="" class="nested_container shown_first">
                 <ul>
-                {% for subtype, subval in sorted(val.items()) %}
+                {% for subtype, subval in lowersorted(val.items()) %}
                   {% if loop.index < 8 %}
                   <li class="keyword_list_item">
                     <a href="{{ url_for(name+'_'+g.language, result='|'.join(subval), title=maintype+' - '+subtype) }}">{{ subtype }}&nbsp;
