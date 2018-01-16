@@ -43,6 +43,11 @@ h3 {
 
 }
 
+.top-link {
+  font-size: small;
+  margin-top: 30px;
+}
+
 #advanced_box {
   display: none;
   position: fixed;

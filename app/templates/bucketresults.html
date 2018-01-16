@@ -25,6 +25,7 @@
             {% for result in namelist %}
               <li class="keyword_list_item"><a href="{{ url_for(name+'_'+g.language, result=' '.join(result[0:-1])) }}">{{ rewrite_von(' '.join(result[0:-1]) | deescape ) }}&nbsp;<span class="badge">{{ result[-1] }}</span></a></li>
             {% endfor %}
+            <div class="top-link"><a href="#top">[ TILL TOPPEN ]</a></div>
           {% endfor %}
         </ul>
     {% else %}
