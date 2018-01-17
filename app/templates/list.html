@@ -45,9 +45,14 @@
             </a>
         </li>
         {% endfor %}
+        {% if split_letters %}
         <div class="top-link"><a href="#top">[ TILL TOPPEN ]</a></div>
+        {% endif %}
     {% endfor %}
     </ul>
+    {% if not split_letters %}
+    <div class="top-link"><a href="#top">[ TILL TOPPEN ]</a></div>
+    {% endif %}
 </div>
 <div class="col-md-4">
     {{ advanced_search_text | safe}}
