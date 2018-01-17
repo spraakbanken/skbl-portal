@@ -159,8 +159,18 @@ def keyword_index():
         These include time periods, occupations, ideologies and much more.
         Selecting a keyword generates a list of all the women who fall under the given category."""
     set_language_switch_link("keyword_index")
+
+    # Fix list with references to be inserted in results
+    reference_list = [[u"Advokater", u"Jurister"],
+                      [u"Ambassadörer", u"Diplomater"],
+                      [u"Flygare", u"Piloter"],
+                      [u"Idrott", u"Sport"],
+                      [u"Tonsättare", u"Kompositörer"]]
+    [ref.append("reference") for ref in reference_list]
+
     return computeviews.bucketcall(queryfield='nyckelord', name='keyword', title='Keywords',
-                                   infotext=infotext, alphabetical=True, description=helpers.get_shorttext(infotext))
+                                   infotext=infotext, alphabetical=True, insert_entries=reference_list,
+                                   description=helpers.get_shorttext(infotext))
 
 
 @app.route("/en/keyword/<result>", endpoint="keyword_en")

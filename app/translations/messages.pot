@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-01-17 09:52+0000\n"
+"POT-Creation-Date: 2018-01-17 13:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,44 +22,44 @@ msgstr ""
 msgid "Organisations"
 msgstr ""
 
-#: app/computeviews.py:93 app/templates/article.html:237
+#: app/computeviews.py:105 app/templates/article.html:237
 #: app/templates/contact.html:42 app/templates/layout.html:123
 msgid "Activities"
 msgstr ""
 
-#: app/computeviews.py:116 app/templates/layout.html:96
+#: app/computeviews.py:128 app/templates/layout.html:96
 msgid "Women A-Z"
 msgstr ""
 
-#: app/computeviews.py:174
+#: app/computeviews.py:186
 msgid "Placenames"
 msgstr ""
 
-#: app/computeviews.py:207 app/templates/layout.html:99
+#: app/computeviews.py:219 app/templates/layout.html:99
 msgid "Article authors"
 msgstr ""
 
-#: app/computeviews.py:279
+#: app/computeviews.py:295
 msgid "Please enter all the fields!"
 msgstr ""
 
-#: app/computeviews.py:283
+#: app/computeviews.py:299
 msgid "Please enter a valid email address!"
 msgstr ""
 
-#: app/computeviews.py:289 app/templates/layout.html:104 app/views.py:66
+#: app/computeviews.py:305 app/templates/layout.html:104 app/views.py:66
 msgid "Contact"
 msgstr ""
 
-#: app/computeviews.py:290 app/views.py:67
+#: app/computeviews.py:306 app/views.py:67
 msgid "Contact SKBL"
 msgstr ""
 
-#: app/computeviews.py:350 app/computeviews.py:351
+#: app/computeviews.py:366 app/computeviews.py:367
 msgid "Thank you for your feedback"
 msgstr ""
 
-#: app/computeviews.py:352
+#: app/computeviews.py:368
 msgid "We will get back to you as soon as we can."
 msgstr ""
 
@@ -138,6 +138,10 @@ msgstr ""
 
 #: app/templates/article.html:551
 msgid "Links"
+msgstr ""
+
+#: app/templates/bucketresults.html:27 app/templates/bucketresults.html:39
+msgid "see"
 msgstr ""
 
 #: app/templates/contact.html:20

@@ -23,7 +23,11 @@
           {% for firstletter, namelist in make_alphabetical_bucket(results) %}
                 <h2><a name="{{firstletter}}">{{ firstletter }}</a></h2>
             {% for result in namelist %}
-              <li class="keyword_list_item"><a href="{{ url_for(name+'_'+g.language, result=' '.join(result[0:-1])) }}">{{ rewrite_von(' '.join(result[0:-1]) | deescape ) }}&nbsp;<span class="badge">{{ result[-1] }}</span></a></li>
+                {% if result[-1] == "reference" %}
+                    <li class="keyword_list_item"><a href="{{ url_for(name+'_'+g.language, result=result[1]) }}">{{ result[0] | deescape }} {{ gettext("see") }} {{ result[1] }}</span></a></li>
+                {% else %}
+                    <li class="keyword_list_item"><a href="{{ url_for(name+'_'+g.language, result=' '.join(result[0:-1])) }}">{{ rewrite_von(' '.join(result[0:-1]) | deescape ) }}&nbsp;<span class="badge">{{ result[-1] }}</span></a></li>
+                {% endif %}
             {% endfor %}
             <div class="top-link"><a href="#top">[ TILL TOPPEN ]</a></div>
           {% endfor %}
@@ -31,7 +35,11 @@
     {% else %}
     <ul>
         {% for result in results %}
-          <li class="keyword_list_item"><a href="{{ url_for(name+'_'+g.language, result=' '.join(result[0:-1])) }}">{{ ' '.join(result[0:-1]) | deescape }}&nbsp;<span class="badge">{{ result[-1] }}</span></a></li>
+            {% if result[-1] == "reference" %}
+                <li class="keyword_list_item"><a href="{{ url_for(name+'_'+g.language, result=result[1]) }}">{{ result[0] | deescape }} {{ gettext("see") }} {{ result[1] }}</span></a></li>
+            {% else %}
+                <li class="keyword_list_item"><a href="{{ url_for(name+'_'+g.language, result=' '.join(result[0:-1])) }}">{{ rewrite_von(' '.join(result[0:-1]) | deescape ) }}&nbsp;<span class="badge">{{ result[-1] }}</span></a></li>
+            {% endif %}
         {% endfor %}
     </ul>
     {% endif %}

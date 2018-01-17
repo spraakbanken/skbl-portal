@@ -89,9 +89,21 @@ def compute_activity(lang="", cache=True):
         infotext = u"Här kan du se inom vilka områden de biograferade kvinnorna varit verksamma och vilka yrken de hade."
     else:
         infotext = u"This displays the areas within which the biographical subject was active and which activities and occupation(s) they engaged in."
+
+    # Fix list with references to be inserted in results
+    reference_list = [[u"Advokat", u"Jurist"],
+                      [u"Ambassadör", u"Diplomat"],
+                      [u"Flygare", u"Pilot"],
+                      [u"Hembiträde", u"Husligt arbete"],
+                      [u"Konsthantverk", u"Formgivning"],
+                      [u"Piga", u"Husligt arbete"],
+                      [u"Politiker", u"Kommun- och landstingspolitiker"],
+                      [u"Tonsättare", u"Kompositör"]]
+    [ref.append("reference") for ref in reference_list]
+
     art = bucketcall(queryfield='verksamhetstext', name='activity',
                      title=gettext("Activities"), infotext=infotext,
-                     alphabetical=True, description=helpers.get_shorttext(infotext))
+                     alphabetical=True, description=helpers.get_shorttext(infotext), insert_entries=reference_list)
     with mc_pool.reserve() as client:
         client.set('activity' + lang, art, time=app.config['CACHE_TIME'])
     return art
@@ -210,13 +222,17 @@ def compute_artikelforfattare(infotext='', description=''):
 
 def bucketcall(queryfield='', name='', title='', sortby='',
                lastnamefirst=False, infotext='', description='', query='',
-               alphabetical=False):
+               alphabetical=False, insert_entries=None):
     q_data = {'buckets': '%s.bucket' % queryfield}
     if query:
         q_data['q'] = query
     data = karp_query('statlist', q_data)
     # strip kw0 to get correct sorting
     stat_table = [[kw[0].strip()] + kw[1:] for kw in data['stat_table'] if kw[0] != ""]
+
+    # Insert entries that function as references
+    if insert_entries:
+        stat_table.extend(insert_entries)
     if sortby:
         stat_table.sort(key=sortby)
     else:
