@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-01-16 17:06+0000\n"
+"POT-Creation-Date: 2018-01-17 09:52+0000\n"
 "PO-Revision-Date: 2017-02-20 14:49+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sv\n"
@@ -85,7 +85,7 @@ msgstr "Träffar för \"%s\""
 msgid "Work in progress."
 msgstr "Under arbete."
 
-#: app/templates/article.html:106
+#: app/templates/article.html:107
 msgid "Remark"
 msgstr "Anmärkning"
 
@@ -121,19 +121,23 @@ msgstr "Källor"
 msgid "Further References"
 msgstr "Vidare referenser"
 
-#: app/templates/article.html:507
+#: app/templates/article.html:504
+msgid "Pictures"
+msgstr "Bilder"
+
+#: app/templates/article.html:522
 msgid "Show map"
 msgstr "Visa karta"
 
-#: app/templates/article.html:510
+#: app/templates/article.html:525
 msgid "Hide map"
 msgstr "Göm karta"
 
-#: app/templates/article.html:521 app/templates/layout.html:144
+#: app/templates/article.html:536 app/templates/layout.html:144
 msgid "Keywords"
 msgstr "Nyckelord"
 
-#: app/templates/article.html:536
+#: app/templates/article.html:551
 msgid "Links"
 msgstr "Länkar"
 

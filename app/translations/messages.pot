@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-01-16 17:06+0000\n"
+"POT-Creation-Date: 2018-01-17 09:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,7 +84,7 @@ msgstr ""
 msgid "Work in progress."
 msgstr ""
 
-#: app/templates/article.html:106
+#: app/templates/article.html:107
 msgid "Remark"
 msgstr ""
 
@@ -120,19 +120,23 @@ msgstr ""
 msgid "Further References"
 msgstr ""
 
-#: app/templates/article.html:507
+#: app/templates/article.html:504
+msgid "Pictures"
+msgstr ""
+
+#: app/templates/article.html:522
 msgid "Show map"
 msgstr ""
 
-#: app/templates/article.html:510
+#: app/templates/article.html:525
 msgid "Hide map"
 msgstr ""
 
-#: app/templates/article.html:521 app/templates/layout.html:144
+#: app/templates/article.html:536 app/templates/layout.html:144
 msgid "Keywords"
 msgstr ""
 
-#: app/templates/article.html:536
+#: app/templates/article.html:551
 msgid "Links"
 msgstr ""
 
