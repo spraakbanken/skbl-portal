@@ -103,7 +103,8 @@
         {% if article.note %}
             <div class="footnote">
             {% for note in article.note %}
-                {{gettext("Remark")}} {{ note.number }}: {{ note.text }}
+                {% set note_text = get_lang_text(note.text, note.text_eng, g.language) %}
+                {% if note_text %}{{gettext("Remark")}} {{ note.number }}: {{ note_text | safe }}{% endif %}
             {% endfor %}
             </div>
         {% endif %}
