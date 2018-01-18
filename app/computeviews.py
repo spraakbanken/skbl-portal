@@ -95,7 +95,7 @@ def compute_activity(lang="", cache=True):
                       [u"Ambassadör", u"Diplomat"],
                       [u"Flygare", u"Pilot"],
                       [u"Hembiträde", u"Husligt arbete"],
-                      [u"Konsthantverk", u"Formgivning"],
+                      [u"Konsthantverk", u"Formgivare"],
                       [u"Piga", u"Husligt arbete"],
                       [u"Politiker", u"Kommun- och landstingspolitiker"],
                       [u"Tonsättare", u"Kompositör"]]
