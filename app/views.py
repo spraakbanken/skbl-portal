@@ -88,7 +88,7 @@ def search():
     else:
         karp_q['q'] = "extended||and|anything|contains|%s" % search
 
-    data = karp_query('query', karp_q, mode='skbllinks')
+    data = karp_query('query', karp_q, mode='skbl')
     advanced_search_text = ''
     with app.open_resource("static/pages/advanced-search/%s.html" % (g.language)) as f:
         advanced_search_text = f.read()
@@ -228,8 +228,8 @@ def searchresult(result, name='', searchfield='', imagefolder='', searchtype='eq
                                    title=title, headline=title, hits=hits["query"]["hits"], authorinfo=authorinfo)
         else:
             return render_template('page.html', content='not found')
-    except Exception:
-        return render_template('page.html', content="%s: extended||and|%s.search|%s|%s" % (app.config['KARP_BACKEND'], searchfield, searchtype, qresult))
+    except Exception as e:
+        return render_template('page.html', content="%s\n%s: extended||and|%s.search|%s|%s" % (e, app.config['KARP_BACKEND'], searchfield, searchtype, qresult))
 
 
 # def nestedbucketcall(queryfield=[], paths=[], name='', title='', sortby='', lastnamefirst=False):
@@ -279,7 +279,9 @@ def article(id=None):
     else:
         lang = "en"
     try:
-        data = karp_query('querycount', {'q': "extended||and|id.search|equals|%s" % (id)})
+        data = karp_query('querycount', {'q': "extended||and|url|equals|%s" % (id)})
+        if data['query']['hits']['total'] == 0:
+            data = karp_query('querycount', {'q': "extended||and|id.search|equals|%s" % (id)})
         set_language_switch_link("article_index", id)
         return show_article(data, lang)
     except Exception as e:
@@ -327,7 +329,7 @@ def find_link(searchstring):
 def show_article(data, lang="sv"):
     if data['query']['hits']['total'] == 1:
         source = data['query']['hits']['hits'][0]['_source']
-        source['es_id'] = data['query']['hits']['hits'][0]['_id']
+        source['es_id'] = source.get('url') or data['query']['hits']['hits'][0]['_id']
         # Print html for the names with the calling name and last name in bold
         formatted_names = helpers.format_names(source, "b")
         source['showname'] = "%s <b>%s</b>" % (formatted_names, source['name'].get('lastname', ''))
@@ -352,9 +354,9 @@ def show_article(data, lang="sv"):
         #     source["article_author"] = [str(type(source["article_author"]))]#[source["article_author"]]
         # Set description for meta data
         if lang == "sv":
-            description = helpers.get_shorttext(source['text'])
+            description = helpers.get_shorttext(source.get('text', ''))
         else:
-            description = helpers.get_shorttext(source.get('text_eng', source['text']))
+            description = helpers.get_shorttext(source.get('text_eng', source.get('text', '')))
 
         if source.get("portrait"):
             image = source["portrait"][0]["url"]
@@ -421,6 +423,9 @@ def award(result=None):
 @app.route("/en/article/<id>.json", endpoint="article_json_en")
 @app.route("/sv/artikel/<id>.json", endpoint="article_json_sv")
 def article_json(id=None):
+    data = karp_query('querycount', {'q': "extended||and|url|equals|%s" % (id)})
+    if data['query']['hits']['total'] == 1:
+        return jsonify(data['query']['hits']['hits'][0]['_source'])
     data = karp_query('querycount', {'q': "extended||and|id.search|equals|%s" % (id)})
     if data['query']['hits']['total'] == 1:
         return jsonify(data['query']['hits']['hits'][0]['_source'])

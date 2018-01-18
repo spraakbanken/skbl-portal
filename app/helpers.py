@@ -151,7 +151,7 @@ def make_namelist(hits):
         liferange = get_life_range(hit["_source"])
         subtitle = hit["_source"].get("subtitle", "")
         subtitle_eng = hit["_source"].get("subtitle_eng", "")
-        subject_id = hit["_id"]
+        subject_id = hit["_source"].get('url') or hit["_id"]
 
         # Get first letter from sort[0]
         firstletter = hit["sort"][0].upper()
@@ -254,6 +254,7 @@ def make_placelist(hits, placename, lat, lon):
     grouped_results = {}
     for hit in hits["hits"]:
         source = hit["_source"]
+        hit['url'] = source.get('url') or hit['_id']
         placelocations = {"Bostadsort": source.get('places', []),
                           "Verksamhetsort": source.get('occupation', []),
                           "Utbildningsort": source.get('education', []),
