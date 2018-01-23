@@ -511,3 +511,8 @@ li .glyphicon-link {
 .footnote {
     font-size: 0.9em;
 }
+
+blockquote {
+    font-size: unset;
+    border-left: unset;
+}
