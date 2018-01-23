@@ -224,6 +224,10 @@ def mk_links(text):
     return text
 
 
+def unescape(text):
+    return re.sub('&gt;', r'>', text)
+
+
 def aggregate_by_type(items, use_markdown=False):
     if not isinstance(items, list):
         items = [items]
