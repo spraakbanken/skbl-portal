@@ -246,7 +246,6 @@ def searchresult(result, name='', searchfield='', imagefolder='', searchtype='eq
 @app.route("/sv/artikel", endpoint="article_index_sv")
 def article_index(search=None):
     # search is only used by links in article text
-
     try:
         set_language_switch_link("article_index")
         search = search or request.args.get('search')
@@ -268,6 +267,7 @@ def article_index(search=None):
     except Exception as e:
         import sys
         print >> sys.stderr, e
+        return render_template('page.html', content='not found')
 
 
 @app.route("/en/article/<id>", endpoint="article_en")
@@ -319,8 +319,9 @@ def find_link(searchstring):
         data = karp_query('querycount', {'q': "extended||and|fornamn.search|contains|%s||and|efternamn.search|contains|%s" % (fornamn, efternamn)})
     # The expected case: only one hit is found
     if data['query']['hits']['total'] == 1:
+        url = data['query']['hits']['hits'][0]['_source'].get('url')
         es_id = data['query']['hits']['hits'][0]['_id']
-        return data, es_id
+        return data, (url or es_id)
         # Otherwise just return the data
     else:
         return data, ''
