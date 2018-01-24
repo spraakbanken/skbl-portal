@@ -227,7 +227,7 @@ msgstr "Till Karp"
 
 #: app/templates/layout.html:83
 msgid "External link"
-msgstr "Externa länkar"
+msgstr "Extern länk"
 
 #: app/templates/layout.html:108
 msgid "På "
