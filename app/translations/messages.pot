@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-01-17 13:21+0000\n"
+"POT-Creation-Date: 2018-01-24 14:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
 
-#: app/computeviews.py:74 app/templates/article.html:321
+#: app/computeviews.py:74 app/templates/article.html:323
 #: app/templates/layout.html:130
 msgid "Organisations"
 msgstr ""
 
-#: app/computeviews.py:105 app/templates/article.html:237
+#: app/computeviews.py:105 app/templates/article.html:239
 #: app/templates/contact.html:42 app/templates/layout.html:123
 msgid "Activities"
 msgstr ""
@@ -47,11 +47,11 @@ msgstr ""
 msgid "Please enter a valid email address!"
 msgstr ""
 
-#: app/computeviews.py:305 app/templates/layout.html:104 app/views.py:66
+#: app/computeviews.py:305 app/templates/layout.html:104 app/views.py:81
 msgid "Contact"
 msgstr ""
 
-#: app/computeviews.py:306 app/views.py:67
+#: app/computeviews.py:306 app/views.py:82
 msgid "Contact SKBL"
 msgstr ""
 
@@ -67,15 +67,15 @@ msgstr ""
 msgid "About SKBL"
 msgstr ""
 
-#: app/templates/layout.html:103 app/views.py:46
+#: app/templates/layout.html:103 app/views.py:59
 msgid "More women"
 msgstr ""
 
-#: app/views.py:52
+#: app/views.py:67
 msgid "Older biographies"
 msgstr ""
 
-#: app/views.py:96
+#: app/views.py:111
 #, python-format
 msgid "Hits for \"%s\""
 msgstr ""
@@ -88,55 +88,55 @@ msgstr ""
 msgid "Remark"
 msgstr ""
 
-#: app/templates/article.html:151
+#: app/templates/article.html:153
 msgid "Family Relationships"
 msgstr ""
 
-#: app/templates/article.html:153
+#: app/templates/article.html:155
 msgid "Civil Status:"
 msgstr ""
 
-#: app/templates/article.html:195
+#: app/templates/article.html:197
 msgid "Education"
 msgstr ""
 
-#: app/templates/article.html:279
+#: app/templates/article.html:281
 msgid "Contacts"
 msgstr ""
 
-#: app/templates/article.html:375
+#: app/templates/article.html:377
 msgid "Residences"
 msgstr ""
 
-#: app/templates/article.html:414
+#: app/templates/article.html:416
 msgid "Prices/awards"
 msgstr ""
 
-#: app/templates/article.html:455
+#: app/templates/article.html:457
 msgid "Sources"
 msgstr ""
 
-#: app/templates/article.html:479
+#: app/templates/article.html:481
 msgid "Further References"
 msgstr ""
 
-#: app/templates/article.html:504
+#: app/templates/article.html:506
 msgid "Pictures"
 msgstr ""
 
-#: app/templates/article.html:522
+#: app/templates/article.html:524
 msgid "Show map"
 msgstr ""
 
-#: app/templates/article.html:525
+#: app/templates/article.html:527
 msgid "Hide map"
 msgstr ""
 
-#: app/templates/article.html:536 app/templates/layout.html:144
+#: app/templates/article.html:538 app/templates/layout.html:144
 msgid "Keywords"
 msgstr ""
 
-#: app/templates/article.html:551
+#: app/templates/article.html:553
 msgid "Links"
 msgstr ""
 
@@ -242,5 +242,9 @@ msgstr ""
 
 #: app/templates/list.html:19
 msgid "No results found for"
+msgstr ""
+
+#: app/templates/more_women.html:8
+msgid "is not part of this resource yet."
 msgstr ""
 

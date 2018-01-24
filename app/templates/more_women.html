@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block title %}skbl.se - {{ title }}{% endblock %}
+{% block content %}
+<div class="col-md-8">
+    <h2>{{ title }}</h2>
+    {% if linked_from %}
+        <p>
+            {{ linked_from }} {{ gettext("is not part of this resource yet.") }}
+        </p>
+    {% endif %}
+    <p>
+        {{ infotext | safe }}
+    </p>
+    <ul>
+        {% for w in women %}
+            <li>{{ w }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

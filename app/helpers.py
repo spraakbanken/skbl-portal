@@ -5,6 +5,8 @@ import icu  # pip install PyICU
 import markdown
 import re
 import datetime
+import static_info
+
 
 def get_first_name(source):
     """Return the given name (first name)."""
@@ -53,6 +55,7 @@ def get_date(source):
 
     return dates[0], dates[1]
 
+
 def get_current_date():
     return datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d")
 
@@ -79,6 +82,7 @@ def make_alphabetical_bucket(result):
     def processname(bucket, results):
         results.append((bucket[0].replace(u"von ", "")[0].upper(), bucket))
     return make_alphabetic(result, processname)
+
 
 def rewrite_von(input):
     if "von " in input:
@@ -217,7 +221,10 @@ def mk_links(text):
     try:
         text = re.sub('\[\]\((.*?)\)', r'[\1](\1)', text)
         for link in re.findall('\]\((.*?)\)', text):
-            text = re.sub('\(%s\)' % link, '(%s)' % url_for('article_index_' + g.language, search=link), text)
+            if link in static_info.more_women:
+                text = re.sub('\(%s\)' % link, '(%s)' % url_for('more-women_' + g.language, linked_from=link), text)
+            else:
+                text = re.sub('\(%s\)' % link, '(%s)' % url_for('article_index_' + g.language, search=link), text)
     except:
         # If there are parenthesis within the links, problems will occur.
         text = text

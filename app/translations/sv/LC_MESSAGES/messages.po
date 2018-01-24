@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-01-17 13:21+0000\n"
+"POT-Creation-Date: 2018-01-24 14:21+0000\n"
 "PO-Revision-Date: 2017-02-20 14:49+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sv\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
 
-#: app/computeviews.py:74 app/templates/article.html:321
+#: app/computeviews.py:74 app/templates/article.html:323
 #: app/templates/layout.html:130
 msgid "Organisations"
 msgstr "Organisationer"
 
-#: app/computeviews.py:105 app/templates/article.html:237
+#: app/computeviews.py:105 app/templates/article.html:239
 #: app/templates/contact.html:42 app/templates/layout.html:123
 msgid "Activities"
 msgstr "Verksamhet"
@@ -48,11 +48,11 @@ msgstr "Alla fält måste vara ifyllda!"
 msgid "Please enter a valid email address!"
 msgstr "Du måste ange en giltig e-post-adress!"
 
-#: app/computeviews.py:305 app/templates/layout.html:104 app/views.py:66
+#: app/computeviews.py:305 app/templates/layout.html:104 app/views.py:81
 msgid "Contact"
 msgstr "Kontakt"
 
-#: app/computeviews.py:306 app/views.py:67
+#: app/computeviews.py:306 app/views.py:82
 msgid "Contact SKBL"
 msgstr "Kontakta SKBL"
 
@@ -68,15 +68,15 @@ msgstr "Vi återkommer så fort vi kan."
 msgid "About SKBL"
 msgstr "Om SKBL"
 
-#: app/templates/layout.html:103 app/views.py:46
+#: app/templates/layout.html:103 app/views.py:59
 msgid "More women"
 msgstr "Fler kvinnor"
 
-#: app/views.py:52
+#: app/views.py:67
 msgid "Older biographies"
 msgstr "Äldre biografiska verk"
 
-#: app/views.py:96
+#: app/views.py:111
 #, python-format
 msgid "Hits for \"%s\""
 msgstr "Träffar för \"%s\""
@@ -89,55 +89,55 @@ msgstr "Under arbete."
 msgid "Remark"
 msgstr "Anmärkning"
 
-#: app/templates/article.html:151
+#: app/templates/article.html:153
 msgid "Family Relationships"
 msgstr "Familjeförhållanden"
 
-#: app/templates/article.html:153
+#: app/templates/article.html:155
 msgid "Civil Status:"
 msgstr "Civilstatus:"
 
-#: app/templates/article.html:195
+#: app/templates/article.html:197
 msgid "Education"
 msgstr "Utbildning"
 
-#: app/templates/article.html:279
+#: app/templates/article.html:281
 msgid "Contacts"
 msgstr "Kontakter"
 
-#: app/templates/article.html:375
+#: app/templates/article.html:377
 msgid "Residences"
 msgstr "Bostadsorter"
 
-#: app/templates/article.html:414
+#: app/templates/article.html:416
 msgid "Prices/awards"
 msgstr "Priser/utmärkelser"
 
-#: app/templates/article.html:455
+#: app/templates/article.html:457
 msgid "Sources"
 msgstr "Källor"
 
-#: app/templates/article.html:479
+#: app/templates/article.html:481
 msgid "Further References"
 msgstr "Vidare referenser"
 
-#: app/templates/article.html:504
+#: app/templates/article.html:506
 msgid "Pictures"
 msgstr "Bilder"
 
-#: app/templates/article.html:522
+#: app/templates/article.html:524
 msgid "Show map"
 msgstr "Visa karta"
 
-#: app/templates/article.html:525
+#: app/templates/article.html:527
 msgid "Hide map"
 msgstr "Göm karta"
 
-#: app/templates/article.html:536 app/templates/layout.html:144
+#: app/templates/article.html:538 app/templates/layout.html:144
 msgid "Keywords"
 msgstr "Nyckelord"
 
-#: app/templates/article.html:551
+#: app/templates/article.html:553
 msgid "Links"
 msgstr "Länkar"
 
@@ -244,3 +244,7 @@ msgstr "Dela sidan"
 #: app/templates/list.html:19
 msgid "No results found for"
 msgstr "Inga träffar för"
+
+#: app/templates/more_women.html:8
+msgid "is not part of this resource yet."
+msgstr "saknas än så länge i den här resursen."

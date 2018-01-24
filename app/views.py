@@ -7,7 +7,7 @@ from flask import jsonify, url_for
 from flask_babel import gettext
 import helpers
 import re
-# from authorinfo import authorsdict
+import static_info
 
 
 # redirect to specific language landing-page
@@ -43,7 +43,22 @@ def about_skbl():
 @app.route("/en/more-women", endpoint="more-women_en")
 @app.route("/sv/fler-kvinnor", endpoint="more-women_sv")
 def more_women():
-    return serve_static_page("more-women", gettext("More women"))
+    rule = request.url_rule
+    if 'sv' in rule.rule:
+        infotext = u"Det finns många kvinnor som borde finnas med i Svenskt kvinnobiografiskt lexikon. "\
+                   u"Ett urval har gjorts och här förtecknas de kvinnor vars biografier ännu inte finns med. "\
+                   u"Den listan kan fyllas på med <a href='/sv/kontakt?suggest=true' class='visible_link'>ytterligare förslag</a>."
+    else:
+        infotext = u""
+
+    set_language_switch_link("more-women")
+    return render_template('more_women.html',
+                           women=static_info.more_women,
+                           infotext=infotext,
+                           linked_from=request.args.get('linked_from'),
+                           title=gettext("More women"))
+
+    # return serve_static_page("more-women", gettext("More women"))
 
 
 @app.route("/en/biographies", endpoint="biographies_en")
@@ -202,7 +217,7 @@ def author(result=None):
     # rule = request.url_rule
     # lang = 'sv' if 'sv' in rule.rule else 'en'
     # Try to get authorinfo in correct language (with Swedish as fallback)
-    # authorinfo = authorsdict.get(result)
+    # authorinfo = static_info.authorsdict.get(result)
     # if authorinfo:
     #     authorinfo = authorinfo.get(lang, authorinfo.get("sv"))
     authorinfo = False
