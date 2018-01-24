@@ -145,6 +145,18 @@
             </span></button>
 
 
+        {% if article.othernames %}
+        <div>
+        <br/>
+        <br/>
+        <h4>{{ gettext("Othernames") }}</h4>
+            {% for othername in article.othernames %}
+            <ul>
+                {% if othername.type %}{{othername.type}}:{% endif %} {{othername.name}}
+            </ul>
+            {% endfor %}
+        </div>
+        {% endif %}
 
         {% if article.relation %}
         <div>

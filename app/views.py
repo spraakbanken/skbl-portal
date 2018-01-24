@@ -358,7 +358,7 @@ def show_article(data, lang="sv"):
         source['linked_names'] = find_linked_names(source.get("othernames", {}), source.get("showname"))
         source['othernames'] = helpers.group_by_type(source.get('othernames', {}), 'name')
         firstname = helpers.get_first_name(source)
-        source['othernames'].append({'type': u'Förnamn', 'name': firstname})
+        #source['othernames'].append({'type': u'Förnamn', 'name': firstname})
         helpers.collapse_kids(source)
         if "source" in source:
             source['source'] = helpers.aggregate_by_type(source['source'], use_markdown=True)
