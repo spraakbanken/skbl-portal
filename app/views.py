@@ -58,8 +58,6 @@ def more_women():
                            linked_from=request.args.get('linked_from'),
                            title=gettext("More women"))
 
-    # return serve_static_page("more-women", gettext("More women"))
-
 
 @app.route("/en/biographies", endpoint="biographies_en")
 @app.route("/sv/biografiska-verk", endpoint="biographies_sv")
