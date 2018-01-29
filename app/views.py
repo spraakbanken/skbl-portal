@@ -93,7 +93,9 @@ def submit_contact_form():
 def search():
     set_language_switch_link("search")
     search = request.args.get('q', '*').encode('utf-8')
-    karp_q = {}
+    show = ','.join(['name', 'url', 'undertitel', 'lifespan'])
+    karp_q = {'highlight': True, 'size': app.config['SEARCH_RESULT_SIZE'],
+              'show': show}
     if '*' in search:
         search = re.sub('(?<!\.)\*', '.*', search)
         karp_q['q'] = "extended||and|anything|regexp|%s" % search
@@ -101,16 +103,19 @@ def search():
     else:
         karp_q['q'] = "extended||and|anything|contains|%s" % search
 
-    data = karp_query('query', karp_q, mode='skbl')
+    data = karp_query('minientry', karp_q, mode='skbl')
     advanced_search_text = ''
     with app.open_resource("static/pages/advanced-search/%s.html" % (g.language)) as f:
         advanced_search_text = f.read()
+    # TODO make a url to the same query in karp
 
     return render_template('list.html', headline="", subheadline=gettext('Hits for "%s"') % search.decode("UTF-8"),
+                           hits_name=data["hits"],
                            hits=data["hits"],
                            advanced_search_text=advanced_search_text.decode("UTF-8"),
                            search=search.decode("UTF-8"),
-                           alphabetic=True)
+                           alphabetic=True,
+                           more=data["hits"]["total"] > app.config["SEARCH_RESULT_SIZE"])
 
 
 @app.route("/en/place", endpoint="place_index_en")
@@ -272,6 +277,7 @@ def article_index(search=None):
                 # more than one hit is found, redirect to a listing
                 return redirect(url_for('search_' + g.language, q=search))
             else:
+                return str(data)
                 # no hits are found redirect to a 'not found' page
                 return render_template('page.html', content='not found')
 

@@ -134,7 +134,29 @@ def make_alphabetic(hits, processname):
     return letter_results
 
 
-def make_namelist(hits):
+
+def make_simplenamelist(hits):
+    """
+    Creates a list with links to the entries url or _id
+    Sorts entries with names matching the query higher
+    """
+    results = []
+    used = set()
+    for order, hit in enumerate(hits["hits"]):
+        hitfields = hit["highlight"]
+        score = sum(1 for field in hitfields if field.startswith('name.'))
+        if score:
+            name = join_name(hit["_source"], mk_bold=True)
+            liferange = get_life_range(hit["_source"])
+            subtitle = hit["_source"].get("subtitle", "")
+            subtitle_eng = hit["_source"].get("subtitle_eng", "")
+            subject_id = hit["_source"].get('url') or hit["_id"]
+            results.append((-score, name, liferange, subtitle, subtitle_eng, subject_id))
+            used.add(hit["_id"])
+    return sorted(results), used
+
+
+def make_namelist(hits, exclude=set()):
     """
     Split hits into one list per first letter.
     Return only info necessary for listing of names.
@@ -143,6 +165,8 @@ def make_namelist(hits):
     first_letters = []  # list only containing letters in alphabetical order
     current_letterlist = []  # list containing entries starting with the same letter
     for hit in hits["hits"]:
+        if hit['_id'] in exclude:
+            continue
         # Seperate names from linked names
         is_link = hit["_index"].startswith("link")
         if is_link:
@@ -166,8 +190,9 @@ def make_namelist(hits):
             first_letters.append(firstletter)
         current_letterlist.append((firstletter, is_link, name, linked_name, liferange, subtitle, subtitle_eng, subject_id))
 
-    # Append last letterlist
-    results.append(current_letterlist)
+    if current_letterlist:
+        # Append last letterlist
+        results.append(current_letterlist)
 
     return (first_letters, results)
 

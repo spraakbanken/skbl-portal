@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-01-24 14:21+0000\n"
+"POT-Creation-Date: 2018-01-29 09:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,65 +17,79 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
 
-#: app/computeviews.py:74 app/templates/article.html:323
+#: app/templates/layout.html:102 app/views.py:40 app/views_hitnames.py:40
+#: viewsbak.py:28
+msgid "About SKBL"
+msgstr ""
+
+#: app/computeviews.py:309 app/templates/layout.html:104 app/views.py:79
+#: app/views_hitnames.py:66 viewsbak.py:34
+msgid "Contact"
+msgstr ""
+
+#: viewsbak.py:55
+msgid "Search"
+msgstr ""
+
+#: app/templates/layout.html:137 viewsbak.py:85
+msgid "Places"
+msgstr ""
+
+#: viewsbak.py:192
+msgid "Women A-Ö"
+msgstr ""
+
+#: app/computeviews.py:74 app/templates/article.html:335
 #: app/templates/layout.html:130
 msgid "Organisations"
 msgstr ""
 
-#: app/computeviews.py:105 app/templates/article.html:239
+#: app/computeviews.py:105 app/templates/article.html:251
 #: app/templates/contact.html:42 app/templates/layout.html:123
 msgid "Activities"
 msgstr ""
 
-#: app/computeviews.py:128 app/templates/layout.html:96
+#: app/computeviews.py:132 app/templates/layout.html:96
 msgid "Women A-Z"
 msgstr ""
 
-#: app/computeviews.py:186
+#: app/computeviews.py:190
 msgid "Placenames"
 msgstr ""
 
-#: app/computeviews.py:219 app/templates/layout.html:99
+#: app/computeviews.py:223 app/templates/layout.html:99
 msgid "Article authors"
 msgstr ""
 
-#: app/computeviews.py:295
+#: app/computeviews.py:299
 msgid "Please enter all the fields!"
 msgstr ""
 
-#: app/computeviews.py:299
+#: app/computeviews.py:303
 msgid "Please enter a valid email address!"
 msgstr ""
 
-#: app/computeviews.py:305 app/templates/layout.html:104 app/views.py:81
-msgid "Contact"
-msgstr ""
-
-#: app/computeviews.py:306 app/views.py:82
+#: app/computeviews.py:310 app/views.py:80 app/views_hitnames.py:67
 msgid "Contact SKBL"
 msgstr ""
 
-#: app/computeviews.py:366 app/computeviews.py:367
+#: app/computeviews.py:370 app/computeviews.py:371
 msgid "Thank you for your feedback"
 msgstr ""
 
-#: app/computeviews.py:368
+#: app/computeviews.py:372
 msgid "We will get back to you as soon as we can."
 msgstr ""
 
-#: app/templates/layout.html:102 app/views.py:40
-msgid "About SKBL"
-msgstr ""
-
-#: app/templates/layout.html:103 app/views.py:59
+#: app/templates/layout.html:103 app/views.py:59 app/views_hitnames.py:46
 msgid "More women"
 msgstr ""
 
-#: app/views.py:67
+#: app/views.py:65 app/views_hitnames.py:52
 msgid "Older biographies"
 msgstr ""
 
-#: app/views.py:111
+#: app/views.py:112 app/views_hitnames.py:100
 #, python-format
 msgid "Hits for \"%s\""
 msgstr ""
@@ -88,55 +102,67 @@ msgstr ""
 msgid "Remark"
 msgstr ""
 
-#: app/templates/article.html:153
+#: app/templates/article.html:152
+msgid "Othernames"
+msgstr ""
+
+#: app/templates/article.html:165
 msgid "Family Relationships"
 msgstr ""
 
-#: app/templates/article.html:155
+#: app/templates/article.html:167
 msgid "Civil Status:"
 msgstr ""
 
-#: app/templates/article.html:197
+#: app/templates/article.html:209
 msgid "Education"
 msgstr ""
 
-#: app/templates/article.html:281
+#: app/templates/article.html:293
 msgid "Contacts"
 msgstr ""
 
-#: app/templates/article.html:377
+#: app/templates/article.html:389
 msgid "Residences"
 msgstr ""
 
-#: app/templates/article.html:416
+#: app/templates/article.html:428
 msgid "Prices/awards"
 msgstr ""
 
-#: app/templates/article.html:457
+#: app/templates/article.html:469
 msgid "Sources"
 msgstr ""
 
-#: app/templates/article.html:481
+#: app/templates/article.html:493
 msgid "Further References"
 msgstr ""
 
-#: app/templates/article.html:506
+#: app/templates/article.html:518
 msgid "Pictures"
 msgstr ""
 
-#: app/templates/article.html:524
+#: app/templates/article.html:531 app/templates/bucketresults.html:32
+#: app/templates/list.html:41 app/templates/list.html:73
+#: app/templates/list.html:78 app/templates/list_hitnames.html:36
+#: app/templates/list_hitnames.html:72 app/templates/list_hitnames.html:77
+#: app/templates/nestedbucketresults.html:68
+msgid "TO THE TOP"
+msgstr ""
+
+#: app/templates/article.html:536
 msgid "Show map"
 msgstr ""
 
-#: app/templates/article.html:527
+#: app/templates/article.html:539
 msgid "Hide map"
 msgstr ""
 
-#: app/templates/article.html:538 app/templates/layout.html:144
+#: app/templates/article.html:550 app/templates/layout.html:144
 msgid "Keywords"
 msgstr ""
 
-#: app/templates/article.html:553
+#: app/templates/article.html:565
 msgid "Links"
 msgstr ""
 
@@ -224,7 +250,7 @@ msgstr ""
 msgid "To Karp"
 msgstr ""
 
-#: app/templates/layout.html:83
+#: app/templates/layout.html:83 app/templates/list.html:82
 msgid "External link"
 msgstr ""
 
@@ -232,16 +258,24 @@ msgstr ""
 msgid "På "
 msgstr ""
 
-#: app/templates/layout.html:137
-msgid "Places"
-msgstr ""
-
 #: app/templates/layout.html:152
 msgid "Share page"
 msgstr ""
 
-#: app/templates/list.html:19
+#: app/templates/list.html:7
+msgid "of"
+msgstr ""
+
+#: app/templates/list.html:15 app/templates/list_hitnames.html:15
 msgid "No results found for"
+msgstr ""
+
+#: app/templates/list.html:81
+msgid "All hits are not shown."
+msgstr ""
+
+#: app/templates/list.html:81
+msgid "To see more hits, use Språkbanken's tool"
 msgstr ""
 
 #: app/templates/more_women.html:8

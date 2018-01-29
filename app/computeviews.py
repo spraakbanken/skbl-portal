@@ -115,12 +115,14 @@ def compute_article(lang="", cache=True):
     if art is not None:
             return art
 
+    show = ','.join(['name', 'url', 'undertitel', 'lifespan'])
     if lang == 'sv':
         infotext = u"""Klicka på namnet för att läsa biografin om den kvinna du vill veta mer om."""
-        data = karp_query('query', {'q': "extended||and|namn|exists"}, mode="skbllinks")
+        data = karp_query('minientry', {'q': "extended||and|namn|exists", 'show': show}, mode="skbllinks")
     else:
         infotext = u"""Klicka på namnet för att läsa biografin om den kvinna du vill veta mer om."""
-        data = karp_query('query', {'q': "extended||and|namn|exists", 'sort': 'sorteringsnamn.eng_init,sorteringsnamn.eng_sort,sorteringsnamn,tilltalsnamn.sort,tilltalsnamn'},
+        data = karp_query('minientry', {'q': "extended||and|namn|exists", 'show': show,
+                                        'sort': 'sorteringsnamn.eng_init,sorteringsnamn.eng_sort,sorteringsnamn,tilltalsnamn.sort,tilltalsnamn'},
                           mode="skbllinks")
 
     art = render_template('list.html',

@@ -75,7 +75,8 @@ def set_language_switch_link(route, fragment=None, lang=''):
 def karp_query(action, query, mode='skbl'):
     query['mode'] = mode
     query['resource'] = 'skbl'
-    query['size'] = app.config['RESULT_SIZE']
+    if not 'size' in query:
+        query['size'] = app.config['RESULT_SIZE']
     params = urllib.urlencode(query)
     return karp_request("%s?%s" % (action, params))
 
@@ -104,6 +105,7 @@ def inject_custom():
 
 app.jinja_env.globals.update(get_life_range=helpers.get_life_range)
 app.jinja_env.globals.update(make_namelist=helpers.make_namelist)
+app.jinja_env.globals.update(make_simplenamelist=helpers.make_simplenamelist)
 app.jinja_env.globals.update(make_placelist=helpers.make_placelist)
 app.jinja_env.globals.update(make_placenames=helpers.make_placenames)
 app.jinja_env.globals.update(make_alphabetical_bucket=helpers.make_alphabetical_bucket)

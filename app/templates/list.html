@@ -4,7 +4,7 @@
 <div class="col-md-8">
     <h1>{{ headline | deescape }}</h1>
     {% if subheadline %}
-       <h2>{{ subheadline | deescape }} {% if search and hits.hits%}({{ hits.hits|length }}){% endif %}</h2>
+    <h2>{{ subheadline | deescape }} {% if search and hits.hits%}({% if more %} {{hits.hits|length}} {{ gettext('of') }} {% endif %}{{ hits.total }}){% endif %}</h2>
        <br/>
     {% endif %}
     {% if infotext %}
@@ -15,7 +15,31 @@
         <span>{{ gettext("No results found for") }} "{{search}}".</span>
     {% endif %}
 
-    {% set firstletters, results = make_namelist(hits)%}
+
+    {% set firsthits = {}%}
+    {% if hits_name %}
+    <p>
+    {% set namelist, firsthits = make_simplenamelist(hits_name)%}
+        <ul>
+        {% for score, name, liferange, subtitle, subtitle_eng, subject_id in namelist %}
+            <li>
+                <a href="{{ url_for('article_'+g.language, id=subject_id) }}">{{ name | safe }}<br />
+                {% set article_subtitle = get_lang_text(subtitle, subtitle_eng, g.language) %}
+                {% if article_subtitle %} {{ article_subtitle | safe}}<br> {% endif %}
+                {% if liferange[0] or  liferange[1] %}
+                    <span itemprop="birthDate">{{ liferange[0] }}</span> &mdash; <span itemprop="deathDate">{{ liferange[1] }}</span>
+                {% endif %}
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+    <p>
+    {% endif %}
+
+    {% set firstletters, results = make_namelist(hits, firsthits)%}
+    {% if namelist and results %}
+    <div class="top-link"><a href="#top">[ {{gettext("TO THE TOP")}} ]</a></div>
+    {% endif %}
     {% if split_letters %}
         {% for firstletter in firstletters%}
             {% if firstletter == firstletters[-1] %}
@@ -45,13 +69,17 @@
             </a>
         </li>
         {% endfor %}
-        {% if split_letters %}
-        <div class="top-link"><a href="#top">[ TILL TOPPEN ]</a></div>
+        {% if split_letters and oneletterlist %}
+        <div class="top-link"><a href="#top">[ {{gettext("TO THE TOP")}} ]</a></div>
         {% endif %}
     {% endfor %}
     </ul>
     {% if not split_letters %}
-    <div class="top-link"><a href="#top">[ TILL TOPPEN ]</a></div>
+    <div class="top-link"><a href="#top">[ {{gettext("TO THE TOP")}} ]</a></div>
+    {% endif %}
+    {% if more %}
+    {{gettext("All hits are not shown.")}} {{gettext("To see more hits, use Språkbanken's tool")}}
+            <a class="visible_link" href="https://spraakbanken.gu.se/karp/#?mode=skbl" target="_blank">Karp</a> ({{ gettext('External link') }})
     {% endif %}
 </div>
 <div class="col-md-4">
