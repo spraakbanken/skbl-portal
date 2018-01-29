@@ -107,7 +107,7 @@ def search():
     advanced_search_text = ''
     with app.open_resource("static/pages/advanced-search/%s.html" % (g.language)) as f:
         advanced_search_text = f.read()
-    # TODO make a url to the same query in karp
+    karp_url = "https://spraakbanken.gu.se/karp/#?mode=skbl&advanced=false&hpp=25&extended=and%7Cnamn%7Cequals%7C&searchTab=simple&page=1&search=simple%7C%7C" + search
 
     return render_template('list.html', headline="", subheadline=gettext('Hits for "%s"') % search.decode("UTF-8"),
                            hits_name=data["hits"],
@@ -115,6 +115,7 @@ def search():
                            advanced_search_text=advanced_search_text.decode("UTF-8"),
                            search=search.decode("UTF-8"),
                            alphabetic=True,
+                           karp_url=karp_url,
                            more=data["hits"]["total"] > app.config["SEARCH_RESULT_SIZE"])
 
 
