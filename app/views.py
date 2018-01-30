@@ -8,6 +8,7 @@ from flask_babel import gettext
 import helpers
 import re
 import static_info
+import icu  # pip install PyICU
 
 
 # redirect to specific language landing-page
@@ -347,6 +348,11 @@ def show_article(data, lang="sv"):
             image = source["portrait"][0]["url"]
         else:
             image = ""
+
+        # Sort keywords alphabetically
+        kw = source.get("keyword")
+        collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
+        kw.sort(key=lambda x: collator.getSortKey(x))
 
         under_development = True if source.get("skbl_status") == "Under utveckling" else False
 
