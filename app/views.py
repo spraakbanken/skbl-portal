@@ -313,7 +313,8 @@ def find_link(searchstring):
 def show_article(data, lang="sv"):
     if data['query']['hits']['total'] == 1:
         source = data['query']['hits']['hits'][0]['_source']
-        source['es_id'] = source.get('url') or data['query']['hits']['hits'][0]['_id']
+        source['url'] = source.get('url') or data['query']['hits']['hits'][0]['_id']
+        source['es_id'] = data['query']['hits']['hits'][0]['_id']
 
         # Print html for the names with the calling name and last name in bold
         formatted_names = helpers.format_names(source, "b")
@@ -350,6 +351,7 @@ def show_article(data, lang="sv"):
         under_development = True if source.get("skbl_status") == "Under utveckling" else False
 
         return render_template('article.html', article=source, article_id=source['es_id'],
+                               article_url=source['url'],
                                title=title, description=description, image=image, under_development=under_development)
     else:
         return render_template('page.html', content='not found')

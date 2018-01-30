@@ -82,11 +82,11 @@
     <div class="top-link"><a href="#top">[ {{gettext("TO THE TOP")}} ]</a></div>
     {% endif %}
     {% if more %}
-    <div class="karp-link">
-      {{gettext("All hits are not shown.")}} {{gettext("To see more hits, use Språkbanken's tool")}}
-              <a class="visible_link" href="{{karp_url}}" target="_blank">Karp</a> ({{ gettext('External link') }})
-      {% endif %}
-    </div>
+       <div class="karp-link">
+        {{gettext("All hits are not shown.")}} {{gettext("To see more hits, use Språkbanken's tool")}}
+                <a class="visible_link" href="{{karp_url}}" target="_blank">Karp</a> ({{ gettext('External link') }})
+        </div>
+     {% endif %}
 </div>
 <div class="col-md-4">
     {{ advanced_search_text | safe}}
