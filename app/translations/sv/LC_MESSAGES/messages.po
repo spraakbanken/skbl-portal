@@ -91,7 +91,7 @@ msgstr "Anmärkning"
 
 #: app/templates/article.html:152
 msgid "Othernames"
-msgstr ""
+msgstr "Övriga namn"
 
 #: app/templates/article.html:165
 msgid "Family Relationships"
