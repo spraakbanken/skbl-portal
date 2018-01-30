@@ -4,15 +4,33 @@ authorsdict = {
 
     u"Adolfsson, Eva": {
         "sv": [u"Historiker", u"Eva Adolfsson är en mycket duktig historiker som jobbar på Institutionen för historiska studier"],
-
+        "en": []
     },
-
 }
-
 
 more_women = [
     u"Sigrid Leijonhufvud",
 ]
+
+keywords_reference_list = [
+    # [ non_existing_keyword, existing_keyword]
+    [u"Advokater", u"Jurister"],
+    [u"Ambassadörer", u"Diplomater"],
+    [u"Flygare", u"Piloter"],
+    [u"Idrott", u"Sport"],
+    [u"Frågespalter", u"Rådgivningsspalter"],
+    [u"Tonsättare", u"Kompositörer"]]
+
+activities_reference_list = [
+    # [ non_existing_keyword, existing_keyword]
+    [u"Advokat", u"Jurist"],
+    [u"Ambassadör", u"Diplomat"],
+    [u"Flygare", u"Pilot"],
+    [u"Hembiträde", u"Husligt arbete"],
+    [u"Konsthantverk", u"Formgivare"],
+    [u"Piga", u"Husligt arbete"],
+    [u"Politiker", u"Kommun- och landstingspolitiker"],
+    [u"Tonsättare", u"Kompositör"]]
 
 
 infotexter = {
@@ -37,7 +55,11 @@ Det finns många kvinnor som borde finnas med i Svenskt kvinnobiografiskt lexiko
 Ett urval har gjorts och här förtecknas de kvinnor vars biografier ännu inte finns med.
 Den listan kan fyllas på med <a href='/sv/kontakt?suggest=true' class='visible_link'>ytterligare förslag</a>.
         """,
-        "en": u""""""
+        "en": u"""
+Det finns många kvinnor som borde finnas med i Svenskt kvinnobiografiskt lexikon.
+Ett urval har gjorts och här förtecknas de kvinnor vars biografier ännu inte finns med.
+Den listan kan fyllas på med <a href='/sv/kontakt?suggest=true' class='visible_link'>ytterligare förslag</a>.
+        """
     },
 
     "keyword": {
@@ -61,26 +83,49 @@ Här är de personerna som har bidragit med artiklar till Svenskt kvinnobiografi
 This is a list of the authors who supplied articles to SKBL.
         """
     },
+
+    "organisation": {
+        "sv": u"""
+Här kan du se vilka organisationer de biograferade kvinnorna varit medlemmar
+och verksamma i. Det ger en inblick i de nätverks som var de olika kvinnornas och visar såväl
+det gemensamma engagemanget som mångfalden i det. Om du klickar på organisationens namn visas
+vilka kvinnor som var aktiva i den.
+        """,
+        "en": u"""
+This displays the organisations which the subjects in the dictionary joined
+and within which they were active. This not only provides an insight into each woman’s
+networks but also highlights both shared activities and their diversity.
+Selecting a particular organisation generates a list of all women who were members.
+        """
+    },
+
+    "activity": {
+        "sv": u"""
+Här kan du se inom vilka områden de biograferade kvinnorna varit verksamma och vilka yrken de hade.
+        """,
+        "en": u"""
+This displays the areas within which the biographical subject was active and which activities and occupation(s) they engaged in.
+        """
+    },
+
+    "article": {
+        "sv": u"""
+Klicka på namnet för att läsa biografin om den kvinna du vill veta mer om.
+        """,
+        "en": u"""
+Klicka på namnet för att läsa biografin om den kvinna du vill veta mer om.
+        """
+    },
+
+    "place": {
+        "sv": u"""
+Platser där de biograferade kvinnorna fötts, dött och varit verksamma.
+Klicka på en ort för att få upp en lista över kvinnor med anknytning till platsen.
+        """,
+        "en": u"""
+This displays the subjects’ locations: where they were born
+where they were active, and where they died. Selecting a particular placename
+generates a list of all subjects who were born, active and/or died at that place.
+        """
+    },
 }
-
-
-
-keywords_reference_list = [
-    # [ non_existing_keyword, existing_keyword]
-    [u"Advokater", u"Jurister"],
-    [u"Ambassadörer", u"Diplomater"],
-    [u"Flygare", u"Piloter"],
-    [u"Idrott", u"Sport"],
-    [u"Frågespalter", u"Rådgivningsspalter"],
-    [u"Tonsättare", u"Kompositörer"]]
-
-activities_reference_list = [
-    # [ non_existing_keyword, existing_keyword]
-    [u"Advokat", u"Jurist"],
-    [u"Ambassadör", u"Diplomat"],
-    [u"Flygare", u"Pilot"],
-    [u"Hembiträde", u"Husligt arbete"],
-    [u"Konsthantverk", u"Formgivare"],
-    [u"Piga", u"Husligt arbete"],
-    [u"Politiker", u"Kommun- och landstingspolitiker"],
-    [u"Tonsättare", u"Kompositör"]]

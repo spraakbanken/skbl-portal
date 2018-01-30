@@ -51,17 +51,7 @@ def compute_organisation(lang="", infotext="", cache=True):
     if art is not None:
             return art
 
-    if lang == 'sv':
-        infotext = u"""Här kan du se vilka organisationer de biograferade kvinnorna varit medlemmar
-        och verksamma i. Det ger en inblick i de nätverks som var de olika kvinnornas och visar såväl
-        det gemensamma engagemanget som mångfalden i det. Om du klickar på organisationens namn visas
-        vilka kvinnor som var aktiva i den."""
-    else:
-        infotext = u"""This displays the organisations which the subjects in the dictionary joined
-        and within which they were active. This not only provides an insight into each woman’s
-        networks but also highlights both shared activities and their diversity.
-        Selecting a particular organisation generates a list of all women who were members."""
-
+    infotext = helpers.get_infotext("organisation", request.url_rule.rule)
     data = karp_query('minientry', {'q': 'extended||and|anything|regexp|.*',
                                     'show': 'organisationsnamn,organisationstyp'})
     nested_obj = {}
@@ -77,19 +67,16 @@ def compute_organisation(lang="", infotext="", cache=True):
     with mc_pool.reserve() as client:
         client.set('organisation' + lang, art, time=app.config['CACHE_TIME'])
     return art
-    # return bucketcall(queryfield='organisationstyp', name='organisation',
-    #                   title='Organizations', infotext=infotext)
 
 
 def compute_activity(lang="", cache=True):
     set_language_switch_link("activity_index", lang=lang)
     art, lang = getcache('activity', lang, cache)
+
     if art is not None:
-            return art
-    if lang == 'sv':
-        infotext = u"Här kan du se inom vilka områden de biograferade kvinnorna varit verksamma och vilka yrken de hade."
-    else:
-        infotext = u"This displays the areas within which the biographical subject was active and which activities and occupation(s) they engaged in."
+        return art
+
+    infotext = helpers.get_infotext("activity", request.url_rule.rule)
 
     # Fix list with references to be inserted in results
     reference_list = static_info.activities_reference_list
@@ -110,11 +97,10 @@ def compute_article(lang="", cache=True):
             return art
 
     show = ','.join(['name', 'url', 'undertitel', 'lifespan'])
+    infotext = helpers.get_infotext("article", request.url_rule.rule)
     if lang == 'sv':
-        infotext = u"""Klicka på namnet för att läsa biografin om den kvinna du vill veta mer om."""
         data = karp_query('minientry', {'q': "extended||and|namn|exists", 'show': show}, mode="skbllinks")
     else:
-        infotext = u"""Klicka på namnet för att läsa biografin om den kvinna du vill veta mer om."""
         data = karp_query('minientry', {'q': "extended||and|namn|exists", 'show': show,
                                         'sort': 'sorteringsnamn.eng_init,sorteringsnamn.eng_sort,sorteringsnamn,tilltalsnamn.sort,tilltalsnamn'},
                           mode="skbllinks")
@@ -136,21 +122,7 @@ def compute_place(lang="", cache=True):
     art, lang = getcache('place', lang, cache)
     if art is not None:
             return art
-
-    # if lang == 'sv':
-    #     infotext = u"""Platser där de biograferade kvinnorna fötts, dött och varit verksamma.
-    #     Klicka på en ort för att få upp en karta och en lista över kvinnor med anknytning till platsen."""
-    # else:
-    #     infotext = u"""This displays the subjects’ locations: where they were born
-    #     where they were active, and where they died. Selecting a particular placename
-    #     generates a list of all subjects who were born, active and/or died at that place."""
-    if lang == 'sv':
-        infotext = u"""Platser där de biograferade kvinnorna fötts, dött och varit verksamma.
-        Klicka på en ort för att få upp en lista över kvinnor med anknytning till platsen."""
-    else:
-        infotext = u"""This displays the subjects’ locations: where they were born
-        where they were active, and where they died. Selecting a particular placename
-        generates a list of all subjects who were born, active and/or died at that place."""
+    infotext = helpers.get_infotext("place", request.url_rule.rule)
 
     def parse(kw):
         place = kw.get('key')
@@ -197,18 +169,18 @@ def compute_artikelforfattare(infotext='', description=''):
     collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
     stat_table.sort(key=lambda x: collator.getSortKey(x[0] + x[1]))
 
-    # remove duplicates and some wrong ones (because of backend limitation):
+    # Remove duplicates and some wrong ones (because of backend limitation):
     stoplist = {
-        u"Grevesmühl,Kajsa" : True, # needs to be ¨h!
-        u"Ohrlander,Anders" : True,
-        u"Myrberg Burström,Mats" : True,
-        u"Burström,Nanouschka" : True
+        u"Grevesmühl,Kajsa": True,  # needs to be ¨h!
+        u"Ohrlander,Anders": True,
+        u"Myrberg Burström,Mats": True,
+        u"Burström,Nanouschka": True
     }
     added = {}
     new_stat_table = []
     for item in stat_table:
         fullname = item[0] + item[1]
-        if not fullname in added and not fullname in stoplist:
+        if fullname not in added and fullname not in stoplist:
             new_stat_table.append(item)
             added[fullname] = True
     return render_template('bucketresults.html', results=new_stat_table,
@@ -223,7 +195,7 @@ def bucketcall(queryfield='', name='', title='', sortby='',
     if query:
         q_data['q'] = query
     data = karp_query('statlist', q_data)
-    # strip kw0 to get correct sorting
+    # Strip kw0 to get correct sorting
     stat_table = [[kw[0].strip()] + kw[1:] for kw in data['stat_table'] if kw[0] != ""]
 
     # Insert entries that function as references
@@ -261,8 +233,8 @@ def compute_emptycache(fields):
     if rights.get('write'):
         with mc_pool.reserve() as client:
             for field in fields:
-                client.delete(field+'sv')
-                client.delete(field+'en')
+                client.delete(field + 'sv')
+                client.delete(field + 'en')
         emptied = True
     return emptied
 
