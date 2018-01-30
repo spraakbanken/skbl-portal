@@ -7,6 +7,10 @@
     <h2>{{ subheadline | deescape }} {% if search and hits.hits%}({% if more %}{{hits.hits|length}} {{ gettext('of') }} {% endif %}{{ hits.total }}){% endif %}</h2>
        <br/>
     {% endif %}
+    {# {% if authorinfo %}
+        <h4 itemprop="jobTitle">{{ authorinfo[0] | safe}}</h4>
+        <div>{{authorinfo[1]}}</div>
+    {% endif %} #}
     {% if infotext %}
         <p>{{ infotext}}</p>
         <br/>
@@ -80,7 +84,7 @@
     {% if more %}
     <div class="karp-link">
       {{gettext("All hits are not shown.")}} {{gettext("To see more hits, use Språkbanken's tool")}}
-              <a class="visible_link" href="https://spraakbanken.gu.se/karp/#?mode=skbl" target="_blank">Karp</a> ({{ gettext('External link') }})
+              <a class="visible_link" href="{{karp_url}}" target="_blank">Karp</a> ({{ gettext('External link') }})
       {% endif %}
     </div>
 </div>
