@@ -19,19 +19,10 @@ def index():
 @app.route('/en', endpoint='index_en')
 @app.route('/sv', endpoint='index_sv')
 def start():
-    rule = request.url_rule
-    if 'sv' in rule.rule:
-        infotext = u"<p>Läs om 1 000 svenska kvinnor från medeltid till nutid.</p>"\
-                   u"<p>Genom olika sökningar kan du se vad de arbetade med, vilken utbildning de fick, "\
-                   u"vilka organisationer de var med i, hur de rörde sig i världen, vad de åstadkom och mycket mera.</p>"\
-                   u"<p>Alla har de bidragit till samhällets utveckling.</p>"
-    else:
-        infotext = u"<p>Read up on 1000 Swedish women from the middle ages to the present day.</p>"\
-                   u"<p>Use the search function to reveal what these women got up to, how they were educated, "\
-                   u"which organisations they belonged to, whether they travelled, what they achieved, and much more.</p>"\
-                   u"<p>All of them contributed in a significant way to the development of Swedish society.</p>"
+    infotext = helpers.get_infotext("start", request.url_rule.rule)
     set_language_switch_link("index")
-    return render_template('start.html', title="Svenskt kvinnobiografiskt lexikon", infotext=infotext, description=helpers.get_shorttext(infotext))
+    return render_template('start.html', title="Svenskt kvinnobiografiskt lexikon",
+                           infotext=infotext, description=helpers.get_shorttext(infotext))
 
 
 @app.route("/en/about-skbl", endpoint="about-skbl_en")
@@ -43,14 +34,7 @@ def about_skbl():
 @app.route("/en/more-women", endpoint="more-women_en")
 @app.route("/sv/fler-kvinnor", endpoint="more-women_sv")
 def more_women():
-    rule = request.url_rule
-    if 'sv' in rule.rule:
-        infotext = u"Det finns många kvinnor som borde finnas med i Svenskt kvinnobiografiskt lexikon. "\
-                   u"Ett urval har gjorts och här förtecknas de kvinnor vars biografier ännu inte finns med. "\
-                   u"Den listan kan fyllas på med <a href='/sv/kontakt?suggest=true' class='visible_link'>ytterligare förslag</a>."
-    else:
-        infotext = u""
-
+    infotext = helpers.get_infotext("more-women", request.url_rule.rule)
     set_language_switch_link("more-women")
     return render_template('more_women.html',
                            women=static_info.more_women,
@@ -168,23 +152,11 @@ def activity(result=None):
 @app.route("/en/keyword", endpoint="keyword_index_en")
 @app.route("/sv/nyckelord", endpoint="keyword_index_sv")
 def keyword_index():
-    rule = request.url_rule
-    if 'sv' in rule.rule:
-        infotext = u"""Här finns en lista över de nyckelord som karaktäriserar materialet.
-        De utgörs av tid, yrken, religion och mycket mera.
-        Om du går in på något av nyckelorden kan du se vilka kvinnor som kan karaktäriseras med det."""
-    else:
-        infotext = u"""This generates a list of keywords which typically appear in the entries.
-        These include time periods, occupations, ideologies and much more.
-        Selecting a keyword generates a list of all the women who fall under the given category."""
+    infotext = helpers.get_infotext("keyword", request.url_rule.rule)
     set_language_switch_link("keyword_index")
 
     # Fix list with references to be inserted in results
-    reference_list = [[u"Advokater", u"Jurister"],
-                      [u"Ambassadörer", u"Diplomater"],
-                      [u"Flygare", u"Piloter"],
-                      [u"Idrott", u"Sport"],
-                      [u"Tonsättare", u"Kompositörer"]]
+    reference_list = static_info.keywords_reference_list
     [ref.append("reference") for ref in reference_list]
 
     return computeviews.bucketcall(queryfield='nyckelord', name='keyword', title='Keywords',
@@ -201,18 +173,9 @@ def keyword(result=None):
 @app.route("/en/articleauthor", endpoint="articleauthor_index_en")
 @app.route("/sv/artikelforfattare", endpoint="articleauthor_index_sv")
 def authors():
-    rule = request.url_rule
-    lang = 'sv' if 'sv' in rule.rule else 'en'
-    if lang == 'sv':
-        infotext = u"""Här är de personerna som har bidragit med artiklar till Svenskt kvinnobiografiskt lexikon förtecknade."""
-    else:
-        infotext = u"""This is a list of the authors who supplied articles to SKBL."""
+    infotext = helpers.get_infotext("articleauthor", request.url_rule.rule)
     set_language_switch_link("articleauthor_index")
-    #return computeviews.bucketcall(queryfield='artikel_forfattare.sort,artikel_forfattare.bucket',
     return computeviews.compute_artikelforfattare(infotext=infotext, description=helpers.get_shorttext(infotext))
-    return computeviews.bucketcall(queryfield='artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn',
-                                   name='articleauthor', title='Article authors', sortby=lambda x: x[1],
-                                   lastnamefirst=True, infotext=infotext, alphabetical=True, description=helpers.get_shorttext(infotext))
 
 
 @app.route("/en/articleauthor/<result>", endpoint="articleauthor_en")
@@ -351,6 +314,7 @@ def show_article(data, lang="sv"):
     if data['query']['hits']['total'] == 1:
         source = data['query']['hits']['hits'][0]['_source']
         source['es_id'] = source.get('url') or data['query']['hits']['hits'][0]['_id']
+
         # Print html for the names with the calling name and last name in bold
         formatted_names = helpers.format_names(source, "b")
         source['showname'] = "%s <b>%s</b>" % (formatted_names, source['name'].get('lastname', ''))
@@ -359,11 +323,11 @@ def show_article(data, lang="sv"):
             source['text'] = helpers.markdown_html(helpers.unescape(helpers.mk_links(source['text'])))
         if source.get('text_eng'):
             source['text_eng'] = helpers.markdown_html(helpers.unescape(helpers.mk_links(source['text_eng'])))
+
         # Extract linked names from source
         source['linked_names'] = find_linked_names(source.get("othernames", {}), source.get("showname"))
         source['othernames'] = helpers.group_by_type(source.get('othernames', {}), 'name')
-        firstname = helpers.get_first_name(source)
-        #source['othernames'].append({'type': u'Förnamn', 'name': firstname})
+
         helpers.collapse_kids(source)
         if "source" in source:
             source['source'] = helpers.aggregate_by_type(source['source'], use_markdown=True)
@@ -371,8 +335,7 @@ def show_article(data, lang="sv"):
             source['furtherreference'] = helpers.aggregate_by_type(source['furtherreference'], use_markdown=True)
         if type(source["article_author"]) != list:
             source["article_author"] = [source["article_author"]]
-        # if "article_author" in source and type(source["article_author"] != list):
-        #     source["article_author"] = [str(type(source["article_author"]))]#[source["article_author"]]
+
         # Set description for meta data
         if lang == "sv":
             description = helpers.get_shorttext(source.get('text', ''))

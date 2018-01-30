@@ -372,8 +372,7 @@ def get_shorttext(text):
 
 
 def get_org_name(organisation):
-    """
-    """
+    """Get short name for organisation (--> org.)"""
     if organisation.endswith("organisation") or organisation.endswith("organization"):
         return organisation[:-9] + "."
     else:
@@ -382,3 +381,16 @@ def get_org_name(organisation):
 
 def lowersorted(xs):
     return sorted(xs, key=lambda x: x[0].lower())
+
+
+def get_infotext(text, rule):
+    """
+    Get infotext in correct language with Swedish as fallback.
+    text = key in the infotext dict
+    rule = request.url_rule.rule
+    """
+    textobj = static_info.infotexter.get(text)
+    if "sv" in rule:
+        return textobj.get("sv")
+    else:
+        return textobj.get("en", textobj.get("sv"))

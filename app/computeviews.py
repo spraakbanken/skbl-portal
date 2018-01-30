@@ -12,6 +12,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.header import Header
 import smtplib
+import static_info
 
 
 def getcache(page, lang, usecache):
@@ -91,14 +92,7 @@ def compute_activity(lang="", cache=True):
         infotext = u"This displays the areas within which the biographical subject was active and which activities and occupation(s) they engaged in."
 
     # Fix list with references to be inserted in results
-    reference_list = [[u"Advokat", u"Jurist"],
-                      [u"Ambassadör", u"Diplomat"],
-                      [u"Flygare", u"Pilot"],
-                      [u"Hembiträde", u"Husligt arbete"],
-                      [u"Konsthantverk", u"Formgivare"],
-                      [u"Piga", u"Husligt arbete"],
-                      [u"Politiker", u"Kommun- och landstingspolitiker"],
-                      [u"Tonsättare", u"Kompositör"]]
+    reference_list = static_info.activities_reference_list
     [ref.append("reference") for ref in reference_list]
 
     art = bucketcall(queryfield='verksamhetstext', name='activity',
