@@ -350,7 +350,7 @@ def show_article(data, lang="sv"):
             image = ""
 
         # Sort keywords alphabetically
-        kw = source.get("keyword")
+        kw = source.get("keyword", [])
         collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
         kw.sort(key=lambda x: collator.getSortKey(x))
 
