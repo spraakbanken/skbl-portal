@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*
 import json
-import logging
 import os
 import os.path
 from pylibmc import Client, ClientPool
@@ -75,7 +74,7 @@ def set_language_switch_link(route, fragment=None, lang=''):
 def karp_query(action, query, mode='skbl'):
     query['mode'] = mode
     query['resource'] = 'skbl'
-    if not 'size' in query:
+    if 'size' not in query:
         query['size'] = app.config['RESULT_SIZE']
     params = urllib.urlencode(query)
     return karp_request("%s?%s" % (action, params))
@@ -86,7 +85,6 @@ def karp_request(action):
     # sys.stderr.write("\nREQUEST: %s/%s\n\n" % (app.config['KARP_BACKEND'], action))
     q.add_header('Authorization', "Basic %s" % (app.config['KARP_AUTH_HASH']))
     response = urlopen(q).read()
-    logging.debug(q)
     data = json.loads(response)
     return data
 

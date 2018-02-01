@@ -248,10 +248,10 @@ def article_index(search=None):
 
         art = computeviews.compute_article()
         return art
-    except Exception as e:
-        import sys
-        print >> sys.stderr, e
-        return render_template('page.html', content='not found')
+    # except Exception as e:
+    #     import sys
+    #     print >> sys.stderr, e
+    #     return render_template('page.html', content='not found')
 
 
 @app.route("/en/article/<id>", endpoint="article_en")
@@ -268,10 +268,10 @@ def article(id=None):
             data = karp_query('querycount', {'q': "extended||and|id.search|equals|%s" % (id)})
         set_language_switch_link("article_index", id)
         return show_article(data, lang)
-    except Exception as e:
-        import sys
-        print >> sys.stderr, e
-        raise
+    # except Exception as e:
+    #     import sys
+    #     print >> sys.stderr, e
+    #     raise
 
 
 @app.route("/en/article/EmptyArticle", endpoint="article_empty_en")
