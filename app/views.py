@@ -229,25 +229,25 @@ def searchresult(result, name='', searchfield='', imagefolder='', searchtype='eq
 @app.route("/sv/artikel", endpoint="article_index_sv")
 def article_index(search=None):
     # search is only used by links in article text
-    try:
-        set_language_switch_link("article_index")
-        search = search or request.args.get('search')
-        if search is not None:
-            search = search.encode("UTF-8")
-            data, id = find_link(search)
-            if id:
-                # only one hit is found, redirect to that page
-                return redirect(url_for('article_' + g.language, id=id))
-            elif data["query"]["hits"]["total"] > 1:
-                # more than one hit is found, redirect to a listing
-                return redirect(url_for('search_' + g.language, q=search))
-            else:
-                return str(data)
-                # no hits are found redirect to a 'not found' page
-                return render_template('page.html', content='not found')
+    # try:
+    set_language_switch_link("article_index")
+    search = search or request.args.get('search')
+    if search is not None:
+        search = search.encode("UTF-8")
+        data, id = find_link(search)
+        if id:
+            # only one hit is found, redirect to that page
+            return redirect(url_for('article_' + g.language, id=id))
+        elif data["query"]["hits"]["total"] > 1:
+            # more than one hit is found, redirect to a listing
+            return redirect(url_for('search_' + g.language, q=search))
+        else:
+            return str(data)
+            # no hits are found redirect to a 'not found' page
+            return render_template('page.html', content='not found')
 
-        art = computeviews.compute_article()
-        return art
+    art = computeviews.compute_article()
+    return art
     # except Exception as e:
     #     import sys
     #     print >> sys.stderr, e
@@ -262,12 +262,12 @@ def article(id=None):
         lang = "sv"
     else:
         lang = "en"
-    try:
-        data = karp_query('querycount', {'q': "extended||and|url|equals|%s" % (id)})
-        if data['query']['hits']['total'] == 0:
-            data = karp_query('querycount', {'q': "extended||and|id.search|equals|%s" % (id)})
-        set_language_switch_link("article_index", id)
-        return show_article(data, lang)
+    # try:
+    data = karp_query('querycount', {'q': "extended||and|url|equals|%s" % (id)})
+    if data['query']['hits']['total'] == 0:
+        data = karp_query('querycount', {'q': "extended||and|id.search|equals|%s" % (id)})
+    set_language_switch_link("article_index", id)
+    return show_article(data, lang)
     # except Exception as e:
     #     import sys
     #     print >> sys.stderr, e
