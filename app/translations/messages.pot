@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-01-30 10:25+0000\n"
+"POT-Creation-Date: 2018-02-01 09:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,11 +47,11 @@ msgstr ""
 msgid "Please enter a valid email address!"
 msgstr ""
 
-#: app/computeviews.py:273 app/templates/layout.html:104 app/views.py:63
+#: app/computeviews.py:273 app/templates/layout.html:104 app/views.py:64
 msgid "Contact"
 msgstr ""
 
-#: app/computeviews.py:274 app/views.py:64
+#: app/computeviews.py:274 app/views.py:65
 msgid "Contact SKBL"
 msgstr ""
 
@@ -63,19 +63,19 @@ msgstr ""
 msgid "We will get back to you as soon as we can."
 msgstr ""
 
-#: app/templates/layout.html:102 app/views.py:31
+#: app/templates/layout.html:102 app/views.py:32
 msgid "About SKBL"
 msgstr ""
 
-#: app/templates/layout.html:103 app/views.py:43
+#: app/templates/layout.html:103 app/views.py:44
 msgid "More women"
 msgstr ""
 
-#: app/views.py:49
+#: app/views.py:50
 msgid "Older biographies"
 msgstr ""
 
-#: app/views.py:96
+#: app/views.py:97
 #, python-format
 msgid "Hits for \"%s\""
 msgstr ""
@@ -89,7 +89,7 @@ msgid "Remark"
 msgstr ""
 
 #: app/templates/article.html:152
-msgid "Othernames"
+msgid "Other names"
 msgstr ""
 
 #: app/templates/article.html:165

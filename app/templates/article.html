@@ -126,7 +126,7 @@
         <br/><br/>
         <div class="reference-to-skbl">
             Hänvisa gärna till denna artikel, men uppge alltid författarnamnet enligt följande:<br/><br/>
-            <em>{{ article.showname | safe }}, www.skbl.se/sv/artikel/{{article.url}}, Svenskt kvinnobiografiskt lexikon (artikel av 
+            <em>{{ article.showname | safe }}, www.skbl.se/sv/artikel/{{article.url}}, Svenskt kvinnobiografiskt lexikon (artikel av
                  {% for author in article.article_author %}
               <!-- endfor must be on same line as author.lastname to prevent whitespace between the name and the parenthesis,
                    especially since the whitespace often results in the parenthesis ending up on its own line -->
@@ -149,7 +149,7 @@
         <div>
         <br/>
         <br/>
-        <h4>{{ gettext("Othernames") }}</h4>
+        <h4>{{ gettext("Other names") }}</h4>
             {% for othername in article.othernames %}
             <ul>
                 {% if othername.type %}{{othername.type}}:{% endif %} {{othername.name}}
@@ -556,7 +556,7 @@
         {% endif %}
         <a href="https://spraakbanken.gu.se/karp/#?mode=skbl&search=extended||and|id|equals|{{article.es_id}}" target="_blank"><img src="https://spraakbanken.gu.se/sites/spraakbanken.gu.se/files/karp.png"></a>
 
-        {# <h3>{{ gettext("Othernames") }}</h3>
+        {# <h3>{{ gettext("Other names") }}</h3>
         {% for name in article.othernames %}
             <p><b>{{name.type}}:</b> <span itemprop="additionalName">{{name.name}}</span></p>
         {% endfor %} #}
