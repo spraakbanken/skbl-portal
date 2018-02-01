@@ -7,7 +7,7 @@ import shutil
 import sys
 import urllib
 
-from flask import Flask, g, request, redirect, render_template, url_for
+from flask import Flask, g, make_response, request, redirect, render_template, url_for
 from flask_babel import Babel
 from setuptools import setup
 from urllib2 import Request, urlopen
@@ -29,6 +29,14 @@ babel = Babel(app)
 
 client = Client(app.config['MEMCACHED'])
 mc_pool = ClientPool(client, app.config['POOL_SIZE'])
+
+""" Browser cache handling
+    Adds header to the response
+"""
+def set_cache(page):
+    r = make_response(page)
+    r.headers.set('Cache-Control', "public, max-age=%s" % app.config['BROWSER_CACHE_TIME'])
+    return r
 
 
 @babel.localeselector
