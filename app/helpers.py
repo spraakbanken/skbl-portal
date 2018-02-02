@@ -182,7 +182,7 @@ def make_namelist(hits, exclude=set()):
         subject_id = hit["_source"].get('url') or hit["_id"]
 
         # Get first letter from sort[0]
-        firstletter = hit["sort"][0].upper()
+        firstletter = hit["sort"][1].upper()
         if firstletter not in first_letters:
             if current_letterlist:
                 results.append(current_letterlist)

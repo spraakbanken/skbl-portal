@@ -94,15 +94,17 @@ def compute_article(lang="", cache=True):
     set_language_switch_link("article_index", lang=lang)
     art, lang = getcache('article', lang, cache)
     if art is not None:
-            return art
+        return art
 
     show = ','.join(['name', 'url', 'undertitel', 'lifespan'])
     infotext = helpers.get_infotext("article", request.url_rule.rule)
     if lang == 'sv':
-        data = karp_query('minientry', {'q': "extended||and|namn|exists", 'show': show}, mode="skbllinks")
+        data = karp_query('minientry', {'q': "extended||and|namn|exists", 'show': show,
+                                        'sort': 'sorteringsnamn.sort,sorteringsnamn.init,sorteringsnamn,tilltalsnamn.sort,tilltalsnamn'},
+                          mode="skbllinks")
     else:
         data = karp_query('minientry', {'q': "extended||and|namn|exists", 'show': show,
-                                        'sort': 'sorteringsnamn.eng_init,sorteringsnamn.eng_sort,sorteringsnamn,tilltalsnamn.sort,tilltalsnamn'},
+                                        'sort': 'sorteringsnamn.eng_sort,sorteringsnamn.eng_init,sorteringsnamn,tilltalsnamn.sort,tilltalsnamn'},
                           mode="skbllinks")
 
     art = render_template('list.html',
