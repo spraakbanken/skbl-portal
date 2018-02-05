@@ -12,8 +12,8 @@
 
 {% macro educationMacro(education) %}
     <li class="keyword_list_item">
-        <h5 class="toggled-by-button">{{ education.type }}{% if education.place and education.place.place %}, {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description | deescape }}{% endif %}</h5>
-        <h5 class="toggled-by-button" style="display:none">{{ education.type }}{% if education.place and education.place.place %}, {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description | deescape }}{% endif %}
+        <h5 class="toggled-by-button">{{ education.type }}{% if education.place and education.place.place %}, {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description | deescape }}{% endif %}{% if education.institution %}, <a href="{{ url_for('institution_'+g.language, result=education.institution) }}" class="visible_link">{{education.institution | deescape}}</a>{% endif %}</h5>
+        <h5 class="toggled-by-button" style="display:none">{{ education.type }}{% if education.place and education.place.place %}, {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description | deescape }}{% endif %}{% if education.institution %}, {{ education.institution | deescape }}{% endif %}
         {% if education.get("from")%} {% set from = education.get("from").get("comment") %} {% else %} {% set from = "" %} {% endif %}
         {% if education.get("to")%} {% set to = education.get("to").get("comment") %} {% else %} {% set to = "" %} {% endif %}
         {% if from or to %} ({{from}} – {{to}}){% endif %}</h5>
@@ -113,7 +113,7 @@
         <p>
             <em>
                 {% for author in article.article_author %}
-                    {{ author.firstname }} {{author.lastname}}<br/>
+                    <a href="{{ url_for('articleauthor_'+g.language, result=author.firstname+" "+author.lastname) }}">{{author.firstname}} {{author.lastname}}</a><br/>
                 {% endfor %}
                 {% if g.language == 'en' %}
                     {% if article.text_eng %}

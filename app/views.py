@@ -424,6 +424,23 @@ def award(result=None):
     return set_cache(page)
 
 
+@app.route("/en/education_institution", endpoint="institution_index_en")
+@app.route("/sv/utbildningsinstitution", endpoint="institution_index_sv")
+def institution_index():
+    # There are no links to this page, but might be wanted later on
+    # Exists only to support institution/<result> below
+    set_language_switch_link("institution_index")
+    return computeviews.bucketcall(queryfield='prisbeskrivning', name='award',
+                                   title='Institution', infotext='')
+
+
+@app.route("/en/education_institution/<result>", endpoint="institution_en")
+@app.route("/sv/utbildningsinstitution/<result>", endpoint="institution_sv")
+def institution(result=None):
+    page = searchresult(result, name='institution', searchfield='utbildningsinstitution', title=result)
+    return set_cache(page)
+
+
 @app.route("/en/article/<id>.json", endpoint="article_json_en")
 @app.route("/sv/artikel/<id>.json", endpoint="article_json_sv")
 def article_json(id=None):
