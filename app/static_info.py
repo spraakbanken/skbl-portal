@@ -56,9 +56,9 @@ Ett urval har gjorts och här förtecknas de kvinnor vars biografier ännu inte 
 Den listan kan fyllas på med <a href='/sv/kontakt?suggest=true' class='visible_link'>ytterligare förslag</a>.
         """,
         "en": u"""
-Det finns många kvinnor som borde finnas med i Svenskt kvinnobiografiskt lexikon.
-Ett urval har gjorts och här förtecknas de kvinnor vars biografier ännu inte finns med.
-Den listan kan fyllas på med <a href='/sv/kontakt?suggest=true' class='visible_link'>ytterligare förslag</a>.
+Many more women deserve entries in SKBL (Biographical Dictionary of Swedish Women) and a selection of these
+can be found on this list. <a href='/en/contact?suggest=true' class='visible_link'>Further suggestions</a>
+are welcome for inclusion on this list.
         """
     },
 
@@ -69,9 +69,8 @@ De utgörs av tid, yrken, religion och mycket mera.
 Om du går in på något av nyckelorden kan du se vilka kvinnor som kan karaktäriseras med det.
         """,
         "en": u"""
-This generates a list of keywords which typically appear in the entries.
-These include time periods, occupations, ideologies and much more.
-Selecting a keyword generates a list of all the women who fall under the given category.
+This lists the keywords used to describe the material. They include dates, jobs, placenames,
+religion, and much more. Selecting a keyword reveals all the women who fit into that descriptor.
         """
     },
 
@@ -80,7 +79,7 @@ Selecting a keyword generates a list of all the women who fall under the given c
 Här är de personerna som har bidragit med artiklar till Svenskt kvinnobiografiskt lexikon förtecknade.
         """,
         "en": u"""
-This is a list of the authors who supplied articles to SKBL.
+This lists all those who have contributed an article to SKBL (Biographical Dictionary of Swedish Women).
         """
     },
 
@@ -92,10 +91,9 @@ det gemensamma engagemanget som mångfalden i det. Om du klickar på organisatio
 vilka kvinnor som var aktiva i den.
         """,
         "en": u"""
-This displays the organisations which the subjects in the dictionary joined
-and within which they were active. This not only provides an insight into each woman’s
-networks but also highlights both shared activities and their diversity.
-Selecting a particular organisation generates a list of all women who were members.
+See which organisations the women were members of and active in. Get an insight into their networks
+and shared activities as well as their extent. Selecting a particular organisation name will reveal
+which women were involved in it.
         """
     },
 
@@ -104,7 +102,7 @@ Selecting a particular organisation generates a list of all women who were membe
 Här kan du se inom vilka områden de biograferade kvinnorna varit verksamma och vilka yrken de hade.
         """,
         "en": u"""
-This displays the areas within which the biographical subject was active and which activities and occupation(s) they engaged in.
+See which activities the women engaged in and which professions they entered.
         """
     },
 
@@ -113,19 +111,19 @@ This displays the areas within which the biographical subject was active and whi
 Klicka på namnet för att läsa biografin om den kvinna du vill veta mer om.
         """,
         "en": u"""
-Klicka på namnet för att läsa biografin om den kvinna du vill veta mer om.
+Select the name of your chosen individual to access the accompanying biography.
         """
     },
 
     "place": {
         "sv": u"""
-Platser där de biograferade kvinnorna fötts, dött och varit verksamma.
-Klicka på en ort för att få upp en lista över kvinnor med anknytning till platsen.
+Här kan du se var de biograferade kvinnorna befunnit sig; var de fötts, verkat och dött.
+Genom att klicka på en ort kan du se vilka som fötts, verkat och/eller avlidit där.
         """,
         "en": u"""
-This displays the subjects’ locations: where they were born
-where they were active, and where they died. Selecting a particular placename
-generates a list of all subjects who were born, active and/or died at that place.
+See where the women were active: their birth places, employment locations, and places of death.
+Selecting a placename reveals which women were born, worked, or died there.
+
         """
     },
 }
