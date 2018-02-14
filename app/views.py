@@ -461,7 +461,8 @@ def emptycache():
     emptied = False
     try:
         emptied = computeviews.compute_emptycache(['article', 'activity',
-                                                   'organisation', 'place'])
+                                                   'organisation', 'place',
+                                                   'artikelforfattare'])
     except Exception:
         emptied = False
         # return jsonify({"error": "%s" % e})
@@ -486,6 +487,7 @@ def fillcache():
     computeviews.compute_activity(cache=False)
     computeviews.compute_organisation(cache=False)
     computeviews.compute_place(cache=False)
+    computeviews.compute_artikelforfattare(cache=False)
     lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
     # Copy the pages to the backup fields
     computeviews.copytobackup(['article', 'activity', 'organisation', 'place'], lang)

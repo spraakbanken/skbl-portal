@@ -160,7 +160,10 @@ def compute_place(lang="", cache=True):
     return art
 
 
-def compute_artikelforfattare(infotext='', description=''):
+def compute_artikelforfattare(infotext='', description='', lang="", cache=True):
+    art, lang = getcache('author', lang, cache)
+    if art is not None:
+        return art
     q_data = {'buckets': 'artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn.bucket'}
     data = karp_query('statlist', q_data)
     # strip kw0 to get correct sorting
@@ -185,9 +188,12 @@ def compute_artikelforfattare(infotext='', description=''):
         if fullname not in added and fullname not in stoplist:
             new_stat_table.append(item)
             added[fullname] = True
-    return render_template('bucketresults.html', results=new_stat_table,
+    art = render_template('bucketresults.html', results=new_stat_table,
                            alphabetical=True, title=gettext('Article authors'),
                            name='articleauthor', infotext=infotext, description=description)
+    with mc_pool.reserve() as client:
+        client.set('author' + lang, art, time=app.config['CACHE_TIME'])
+    return art
 
 
 def bucketcall(queryfield='', name='', title='', sortby='',
