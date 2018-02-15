@@ -176,7 +176,7 @@ def compute_artikelforfattare(infotext='', description='', lang="", cache=True):
 
     # Remove duplicates and some wrong ones (because of backend limitation):
     stoplist = {
-        u"Grevesmühl,Kajsa": True,  # needs to be ¨h!
+        u"Grevesmühl,Kajsa": True,
         u"Ohrlander,Anders": True,
         u"Myrberg Burström,Mats": True,
         u"Burström,Nanouschka": True
