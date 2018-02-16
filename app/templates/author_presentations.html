@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}skbl.se - {{ title }}{% endblock %}
+{% block content %}
+<div class="col-md-8">
+    <h2>{{ title }}</h2>
+    {% for author, author_info in authorinfo %}
+        <br/>
+        <h3>{{author}}</h3>
+        <h4 itemprop="jobTitle">{{ author_info["sv"] | safe}}</h4>
+        {% if author_info["publications"] %}
+            <div class="authorinfo">
+                {{ gettext("Has published (amongst others)") }}:
+                <ul>
+                {% for pub in author_info["publications"] %}
+                    <li>{{pub | safe}}</li>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endfor %}
+    <br/>
+    <br/>
+
+
+</div>
+{% endblock %}

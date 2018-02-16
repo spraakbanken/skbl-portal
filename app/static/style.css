@@ -536,3 +536,7 @@ blockquote {
 .logos img:last-child{ display:none;}
 .logos a:hover img:first-child{ display:none;}
 .logos a:hover img:last-child{ display:block;}
+
+.authorinfo{
+    margin-top: 16px;
+}
