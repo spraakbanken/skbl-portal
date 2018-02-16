@@ -7,10 +7,20 @@
     <h2>{{ subheadline | deescape }} {% if search and hits.hits%}({% if more %}{{hits.hits|length}} {{ gettext('of') }} {% endif %}{{ hits.total }}){% endif %}</h2>
        <br/>
     {% endif %}
-    {# {% if authorinfo %}
+    {% if authorinfo %}
         <h4 itemprop="jobTitle">{{ authorinfo[0] | safe}}</h4>
-        <div>{{authorinfo[1]}}</div>
-    {% endif %} #}
+        {% if authorinfo[1] %}
+            <div class="authorinfo">
+                {{ gettext("Has published (amongst others)") }}:
+                <ul>
+                {% for pub in authorinfo[1] %}
+                    <li>{{pub | safe}}</li>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <br/>
+        <h4>{{ gettext("Articles in SKBL") }}:</h4>
+    {% endif %}
     {% if infotext %}
         <p>{{ infotext}}</p>
         <br/>

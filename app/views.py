@@ -8,6 +8,7 @@ from flask_babel import gettext
 import helpers
 import re
 import static_info
+from authors import authors_dict
 import icu  # pip install PyICU
 
 
@@ -197,13 +198,13 @@ def authors():
 @app.route("/en/articleauthor/<result>", endpoint="articleauthor_en")
 @app.route("/sv/artikelforfattare/<result>", endpoint="articleauthor_sv")
 def author(result=None):
-    # rule = request.url_rule
-    # lang = 'sv' if 'sv' in rule.rule else 'en'
+    rule = request.url_rule
+    lang = 'sv' if 'sv' in rule.rule else 'en'
     # Try to get authorinfo in correct language (with Swedish as fallback)
-    # authorinfo = static_info.authorsdict.get(result)
-    # if authorinfo:
-    #     authorinfo = authorinfo.get(lang, authorinfo.get("sv"))
-    authorinfo = False
+    author = result.split(", ")[-1] + " " + result.split(", ")[0]
+    authorinfo = authors_dict.get(author)
+    if authorinfo:
+        authorinfo = [authorinfo.get(lang, authorinfo.get("sv")), authorinfo.get("publications")]
     page = searchresult(result, name='articleauthor',
                         searchfield='artikel_forfattare_fulltnamn',
                         imagefolder='authors', searchtype='contains',
@@ -224,7 +225,6 @@ def searchresult(result, name='', searchfield='', imagefolder='',
             picture = None
             if os.path.exists(app.config.root_path + '/static/images/%s/%s.jpg' % (imagefolder, qresult)):
                 picture = '/static/images/%s/%s.jpg' % (imagefolder, qresult)
-
             return render_template('list.html', picture=picture, alphabetic=True,
                                    title=title, headline=title, hits=hits["query"]["hits"], authorinfo=authorinfo)
         else:

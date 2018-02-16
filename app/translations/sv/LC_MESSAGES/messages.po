@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-02-13 14:49+0000\n"
+"POT-Creation-Date: 2018-02-16 13:06+0000\n"
 "PO-Revision-Date: 2017-02-20 14:49+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sv\n"
@@ -36,47 +36,47 @@ msgstr "Kvinnor A-Ö"
 msgid "Placenames"
 msgstr "Orter"
 
-#: app/computeviews.py:189 app/templates/layout.html:100
+#: app/computeviews.py:192 app/templates/layout.html:100
 msgid "Article authors"
 msgstr "Artikelförfattare"
 
-#: app/computeviews.py:265
+#: app/computeviews.py:271
 msgid "Please enter all the fields!"
 msgstr "Alla fält måste vara ifyllda!"
 
-#: app/computeviews.py:269
+#: app/computeviews.py:275
 msgid "Please enter a valid email address!"
 msgstr "Du måste ange en giltig e-post-adress!"
 
-#: app/computeviews.py:275 app/templates/layout.html:105 app/views.py:70
+#: app/computeviews.py:281 app/templates/layout.html:105 app/views.py:71
 msgid "Contact"
 msgstr "Kontakt"
 
-#: app/computeviews.py:276 app/views.py:71
+#: app/computeviews.py:282 app/views.py:72
 msgid "Contact SKBL"
 msgstr "Kontakta SKBL"
 
-#: app/computeviews.py:336 app/computeviews.py:337
+#: app/computeviews.py:342 app/computeviews.py:343
 msgid "Thank you for your feedback"
 msgstr "Tack för din återkoppling"
 
-#: app/computeviews.py:338
+#: app/computeviews.py:344
 msgid "We will get back to you as soon as we can."
 msgstr "Vi återkommer så fort vi kan."
 
-#: app/templates/layout.html:103 app/views.py:35
+#: app/templates/layout.html:103 app/views.py:36
 msgid "About SKBL"
 msgstr "Om SKBL"
 
-#: app/templates/layout.html:104 app/views.py:48
+#: app/templates/layout.html:104 app/views.py:49
 msgid "More women"
 msgstr "Fler kvinnor"
 
-#: app/views.py:55
+#: app/views.py:56
 msgid "Older biographies"
 msgstr "Äldre biografiska verk"
 
-#: app/views.py:104
+#: app/views.py:105
 #, python-format
 msgid "Hits for \"%s\""
 msgstr "Träffar för \"%s\""
@@ -142,8 +142,8 @@ msgid "Pictures"
 msgstr "Bilder"
 
 #: app/templates/article.html:531 app/templates/bucketresults.html:32
-#: app/templates/list.html:45 app/templates/list.html:77
-#: app/templates/list.html:82 app/templates/nestedbucketresults.html:68
+#: app/templates/list.html:52 app/templates/list.html:84
+#: app/templates/list.html:89 app/templates/nestedbucketresults.html:68
 msgid "TO THE TOP"
 msgstr "TILL TOPPEN"
 
@@ -247,19 +247,23 @@ msgstr "Till avancerad sökning"
 msgid ""
 "For more advanced searches and combinations please use the Språkbanken "
 "tool Karp."
-msgstr "För att göra mer avancerade sökningar och sammanställningar kan du använda Språkbankens verktyg Karp."
+msgstr ""
+"För att göra mer avancerade sökningar och sammanställningar kan du "
+"använda Språkbankens verktyg Karp."
 
 #: app/templates/layout.html:82
 msgid ""
 "This is particularly relevant for researchers seeking to analyse the "
 "information contained in SKBL (Biographical Dictionary of Swedish Women)."
-msgstr "Det rekommenderas i första hand för forskare som vill analysera de uppgifter som ligger till grund för SKBL."
+msgstr ""
+"Det rekommenderas i första hand för forskare som vill analysera de "
+"uppgifter som ligger till grund för SKBL."
 
 #: app/templates/layout.html:84
 msgid "To Karp"
 msgstr "Till Karp"
 
-#: app/templates/layout.html:84 app/templates/list.html:87
+#: app/templates/layout.html:84 app/templates/list.html:94
 msgid "External link"
 msgstr "Extern länk"
 
@@ -279,15 +283,23 @@ msgstr "Dela sidan"
 msgid "of"
 msgstr "av"
 
+#: app/templates/list.html:14
+msgid "Has published (amongst others)"
+msgstr "Har bland annat publicerat"
+
 #: app/templates/list.html:19
+msgid "Articles in SKBL"
+msgstr "Artiklar i SKBL"
+
+#: app/templates/list.html:26
 msgid "No results found for"
 msgstr "Inga träffar för"
 
-#: app/templates/list.html:86
+#: app/templates/list.html:93
 msgid "Not all hits are shown."
 msgstr "Alla träffar visas inte."
 
-#: app/templates/list.html:86
+#: app/templates/list.html:93
 msgid "To see more hits, use Språkbanken's tool"
 msgstr "Vill du se fler, använd Språkbankens verktyg"
 
