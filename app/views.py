@@ -201,7 +201,7 @@ def author(result=None):
     rule = request.url_rule
     lang = 'sv' if 'sv' in rule.rule else 'en'
     # Try to get authorinfo in correct language (with Swedish as fallback)
-    author = result.split(", ")[-1] + " " + result.split(", ")[0]
+    author = result.split(", ")[-1].strip() + " " + result.split(", ")[0].strip()
     authorinfo = authors_dict.get(author)
     if authorinfo:
         authorinfo = [authorinfo.get(lang, authorinfo.get("sv")), authorinfo.get("publications")]
