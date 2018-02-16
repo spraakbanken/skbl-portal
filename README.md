@@ -13,19 +13,18 @@ Visit http://localhost:8080
 
 ## Update translations
 
-### Extract translations
-`docker-compose exec web pybabel extract -F babel.cfg -o app/translations/messages.pot .`
-
-### Update translations
-`docker-compose exec web pybabel update -i app/translations/messages.pot -d app/translations`
+### Extract, update and compile translations
+    docker-compose exec web pybabel extract -F babel.cfg -o app/translations/messages.pot .
+    docker-compose exec web pybabel update -i app/translations/messages.pot -d app/translations
 
 Add translations by modifying messages.po
 If you don't have permission to modify messages.po run the following command:
 
-`docker-compose exec web chmod -R 777 .`
+    docker-compose exec web chmod -R 777 app/translations/sv/LC_MESSAGES/messages.po
 
-### Compile translations
-`docker-compose exec web pybabel compile -d app/translations`
+Finally compile:
+
+    docker-compose exec web pybabel compile -d app/translations
 
 ## Installing memcached & co on server
 Download and install libevent, memcached, libmemcached.
