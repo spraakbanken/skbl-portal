@@ -43,3 +43,27 @@ For memcached, run the config as below
 To get pylibmc to work with the locally installed mc packages, run:
 
 `pip install --global-option=build_ext --global-option="-I/home/fkskbl/dev.skbl.se/data/libmemcached/include/" --global-option="-L/home/fkskbl/dev.skbl.se/data/libmemcached/lib" --global-option="-R/home/fkskbl/dev.skbl.se/data/libmemcached/lib" pylibmc`
+
+
+### Running memcached
+
+Unless you're using Docker, you need to start memcached on the server. If you're using [supervisor](http://supervisord.org/running.html),
+add the following lines to your config (`/etc/supervisor.d/fkskbl.conf`):
+
+```
+[program:memcached]
+command=/path/to/installedmemcached/memcached/bin/memcached
+        -s /path/to/socketfile/memcached.sock
+        -v
+        -a 770
+```
+
+Then run
+
+`supervisorctl -c /etc/supervisord.d/fkskbl.conf update`
+
+and
+
+`supervisorctl -c /etc/supervisord.d/fkskbl.conf status`
+
+to see that the process has started successfully.
