@@ -1,11 +1,15 @@
 {% macro relationMacro(relation) %}
+    {% set relation_type = get_lang_text(relation.type, relation.type_eng, g.language) %}
     <li class="keyword_list_item">
-        <h5 class="toggled-by-button">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}</h5>
-        <h5 class="toggled-by-button" style="display:none">{{ relation.type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}
+        <h5 class="toggled-by-button">{{ relation_type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}</h5>
+        <h5 class="toggled-by-button" style="display:none">{{ relation_type }}{% if relation.firstname or relation.lastname %}: {{ relation.firstname }} {{ relation.lastname }}{% endif %}
     {% if relation.get("born")%} {% set born = relation.get("born").get("comment") %} {% else %} {% set born = "" %} {% endif %}
     {% if relation.get("death")%} {% set death = relation.get("death").get("comment") %} {% else %} {% set death = "" %} {% endif %}
     {% if born or death %} ({{born}} – {{death}}){% endif %}
-    {% if relation.occupation %}<br/>{{relation.occupation}}{% endif %}
+    {% if relation.occupation %}
+        {% set relation_occupation = get_lang_text(relation.occupation, relation.occupation_eng, g.language) %}
+        <br/>{{relation_occupation}}
+    {% endif %}
     {% if relation.from and relation.to %}<br/>Relation mellan {{relation.from.comment}} och {{relation.to.comment}}{% endif %}</h5>
     </li>
 {% endmacro %}
@@ -23,8 +27,9 @@
 {% macro occupationMacro(occupation) %}
     <li class="keyword_list_item">
         {% set occupation_detail = get_lang_text(occupation.detail, occupation.detail_eng, g.language) %}
-        <h5 class="toggled-by-button">{{ occupation.type }}{% if occupation_detail %}: {{ occupation_detail | deescape }} {% elif occupation.description %}: {{ occupation.description | deescape}} {% endif %}</h5>
-        <h5 class="toggled-by-button" style="display:none">{{ occupation.type }}{% if occupation_detail %}: {{ occupation_detail | deescape }} {% elif occupation.description %}: {{ occupation.description | deescape}} {% endif %}
+        {% set occupation_type = get_lang_text(occupation.type, occupation.type_eng, g.language) %}
+        <h5 class="toggled-by-button">{{ occupation_type }}{% if occupation_detail %}: {{ occupation_detail | deescape }} {% elif occupation.description %}: {{ occupation.description | deescape}} {% endif %}</h5>
+        <h5 class="toggled-by-button" style="display:none">{{ occupation_type }}{% if occupation_detail %}: {{ occupation_detail | deescape }} {% elif occupation.description %}: {{ occupation.description | deescape}} {% endif %}
         {% if occupation.place and occupation.place.place %}, {{ occupation.place.place }}{% endif %}
         {% if occupation.get("from")%} {% set from = occupation.get("from").get("comment") %} {% else %} {% set from = "" %} {% endif %}
         {% if occupation.get("to")%} {% set to = occupation.get("to").get("comment") %} {% else %} {% set to = "" %} {% endif %}
@@ -164,7 +169,8 @@
         <br/>
         <h4>{{gettext('Family Relationships')}}</h4>
             {% if article.civil_status %}
-                <span class="civ-status-text">{{gettext('Civil Status:')}} {{ article.civil_status }}</span>
+                {% set civil_status = get_lang_text(article.civil_status, article.civil_status_eng, g.language) %}
+                <span class="civ-status-text">{{gettext('Civil Status:')}} {{ civil_status }}</span>
             {% endif %}
             {% if len(article.relation) <= 4 %}
                 {% for relation in article.relation %}
@@ -566,8 +572,9 @@
             {{ article_portrait_description | deescape}}
         {% endif %}
         {% if article.keyword %}
+            {% set article_keyword = get_lang_text(article.keyword, article.keyword_eng, g.language) %}
             <h3>{{ gettext("Keywords") }}</h3>
-            {% for keyword in article.keyword %}
+            {% for keyword in article_keyword %}
                 {% if keyword %}
                     <a href="{{ url_for('keyword_'+g.language, result=keyword) }}"><span class="badge">{{ keyword }}</span></a></span>
                 {% endif %}
