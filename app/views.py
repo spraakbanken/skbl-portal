@@ -490,7 +490,7 @@ def fillcache():
     computeviews.compute_artikelforfattare(cache=False)
     lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
     # Copy the pages to the backup fields
-    computeviews.copytobackup(['article', 'activity', 'organisation', 'place'], lang)
+    computeviews.copytobackup(['article', 'activity', 'organisation', 'place', 'artikelforfattare'], lang)
     return jsonify({"cache_filled": True, "cached_language": lang})
 
 
