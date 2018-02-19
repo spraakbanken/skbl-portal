@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-02-16 13:06+0000\n"
+"POT-Creation-Date: 2018-02-19 12:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -122,42 +122,55 @@ msgstr ""
 msgid "Residences"
 msgstr ""
 
-#: app/templates/article.html:428
+#: app/templates/article.html:395 app/templates/article.html:408
+#: app/templates/article.html:424
+msgid "Birthplace"
+msgstr ""
+
+#: app/templates/article.html:401 app/templates/article.html:414
+msgid "Place of death"
+msgstr ""
+
+#: app/templates/article.html:445
 msgid "Prices/awards"
 msgstr ""
 
-#: app/templates/article.html:469
+#: app/templates/article.html:486
 msgid "Sources"
 msgstr ""
 
-#: app/templates/article.html:493
+#: app/templates/article.html:510
 msgid "Further References"
 msgstr ""
 
-#: app/templates/article.html:518
+#: app/templates/article.html:535
 msgid "Pictures"
 msgstr ""
 
-#: app/templates/article.html:531 app/templates/bucketresults.html:32
-#: app/templates/list.html:52 app/templates/list.html:84
-#: app/templates/list.html:89 app/templates/nestedbucketresults.html:68
+#: app/templates/article.html:548 app/templates/bucketresults.html:32
+#: app/templates/list.html:55 app/templates/list.html:87
+#: app/templates/list.html:92 app/templates/nestedbucketresults.html:68
 msgid "TO THE TOP"
 msgstr ""
 
-#: app/templates/article.html:536
+#: app/templates/article.html:553
 msgid "Show map"
 msgstr ""
 
-#: app/templates/article.html:539
+#: app/templates/article.html:556
 msgid "Hide map"
 msgstr ""
 
-#: app/templates/article.html:550 app/templates/layout.html:145
+#: app/templates/article.html:567 app/templates/layout.html:145
 msgid "Keywords"
 msgstr ""
 
-#: app/templates/article.html:565
+#: app/templates/article.html:582
 msgid "Links"
+msgstr ""
+
+#: app/templates/author_presentations.html:12 app/templates/list.html:14
+msgid "Has published (amongst others)"
 msgstr ""
 
 #: app/templates/bucketresults.html:27 app/templates/bucketresults.html:39
@@ -256,7 +269,7 @@ msgstr ""
 msgid "To Karp"
 msgstr ""
 
-#: app/templates/layout.html:84 app/templates/list.html:94
+#: app/templates/layout.html:84 app/templates/list.html:97
 msgid "External link"
 msgstr ""
 
@@ -276,23 +289,19 @@ msgstr ""
 msgid "of"
 msgstr ""
 
-#: app/templates/list.html:14
-msgid "Har bland annat publicerat"
-msgstr ""
-
-#: app/templates/list.html:19
+#: app/templates/list.html:22
 msgid "Articles in SKBL"
 msgstr ""
 
-#: app/templates/list.html:26
+#: app/templates/list.html:29
 msgid "No results found for"
 msgstr ""
 
-#: app/templates/list.html:93
+#: app/templates/list.html:96
 msgid "Not all hits are shown."
 msgstr ""
 
-#: app/templates/list.html:93
+#: app/templates/list.html:96
 msgid "To see more hits, use Språkbanken's tool"
 msgstr ""
 

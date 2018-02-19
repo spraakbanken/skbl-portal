@@ -11,9 +11,7 @@ Visit http://localhost:8080
     docker-compose build
     docker-compose up
 
-## Update translations
-
-### Extract, update and compile translations
+## Extract, update and compile translations
     docker-compose exec web pybabel extract -F babel.cfg -o app/translations/messages.pot .
     docker-compose exec web pybabel update -i app/translations/messages.pot -d app/translations
 
@@ -37,12 +35,15 @@ For example:
 
 For memcached, run the config as below
 
-`./configure --prefix=/var/www/sites/dev.skbl.se/data/memcached
---with-libevent=/var/www/sites/dev.skbl.se/data/libevent`
+```
+./configure --prefix=/var/www/sites/dev.skbl.se/data/memcached --with-libevent=/var/www/sites/dev.skbl.se/data/libevent
+```
 
 To get pylibmc to work with the locally installed mc packages, run:
 
-`pip install --global-option=build_ext --global-option="-I/home/fkskbl/dev.skbl.se/data/libmemcached/include/" --global-option="-L/home/fkskbl/dev.skbl.se/data/libmemcached/lib" --global-option="-R/home/fkskbl/dev.skbl.se/data/libmemcached/lib" pylibmc`
+```
+pip install --global-option=build_ext --global-option="-I/home/fkskbl/dev.skbl.se/data/libmemcached/include/" --global-option="-L/home/fkskbl/dev.skbl.se/data/libmemcached/lib" --global-option="-R/home/fkskbl/dev.skbl.se/data/libmemcached/lib" pylibmc
+```
 
 
 ### Running memcached

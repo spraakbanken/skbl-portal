@@ -387,30 +387,49 @@
         <br/>
         <br/>
         <h4>{{gettext('Residences')}}</h4>
-            {% if len(article.places) <= 4 %}
-                {% for place in article.places %}
+            {% set birthplace = article.lifespan.from.place.place %}
+            {% set deathplace = article.lifespan.to.place.place %}
+            {% set len_places = len(article.places) + 1 if birthplace %}
+            {% set len_places = len_places + 1 if deathplace %}
+            {% if len_places <= 4 %}
                 <ul>
-                    {{ placeMacro(place) }}
+                    {% if birthplace %}
+                        <li class="keyword_list_item"> {{gettext('Birthplace')}}: {{birthplace}}</li>
+                    {% endif %}
+                        {% for place in article.places %}
+                            {{ placeMacro(place) }}
+                        {% endfor %}
+                    {% if deathplace %}
+                        <li class="keyword_list_item"> {{gettext('Place of death')}}: {{deathplace}}</li>
+                    {% endif %}
                 </ul>
-                {% endfor %}
             {% else %}
                 <div style="display:none" class="nested_container hidden_first">
-                    {% for place in article.places %}
-                        <ul>
-                          {{ placeMacro(place) }}
-                        </ul>
-                    {% endfor %}
+                    <ul>
+                        {% if birthplace %}
+                            <li class="keyword_list_item"> {{gettext('Birthplace')}}: {{birthplace}}</li>
+                        {% endif %}
+                            {% for place in article.places %}
+                                {{ placeMacro(place) }}
+                            {% endfor %}
+                        {% if deathplace %}
+                            <li class="keyword_list_item"> {{gettext('Place of death')}}: {{deathplace}}</li>
+                        {% endif %}
+                    </ul>
                     <div class="minimize_items">
                       <span class="label label-default"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></span>
                     </div>
                 </div>
                 <div style="" class="nested_container shown_first">
                     <ul>
-                    {% for place in article.places %}
-                      {% if loop.index < 4 %}
-                        {{ placeMacro(place) }}
-                      {% endif %}
-                    {% endfor %}
+                        {% if birthplace %}
+                            <li class="keyword_list_item"> {{gettext('Birthplace')}}: {{birthplace}}</li>
+                        {% endif %}
+                        {% for place in article.places %}
+                          {% if loop.index < 3 %}
+                            {{ placeMacro(place) }}
+                          {% endif %}
+                        {% endfor %}
                     </ul>
                     <div class="fadeout">
                       <span class="label label-default">fler...</span>

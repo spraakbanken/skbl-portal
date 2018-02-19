@@ -24,7 +24,7 @@ authors_dict = {
         "sv": u"forskare vid Centrum för genusvetenskap och Likavillkorsspecialist vid HR-avdelningen, Uppsala universitet",
         "publications": [
             u"""<em>Kvinnorörelsen och efterkrigsplaneringen</em>""",
-            u"""<em>Statsfeminism i svensk arbetsmarknadspolitik under och kort efter andra världskriget<em> (2006) "Agda Rössel. Ambassadör med rättvisepatos", i <em>Från Myrdal till Lindh: Svenska diplomatprofiler</em> (2010).""",
+            u"""<em>Statsfeminism i svensk arbetsmarknadspolitik under och kort efter andra världskriget</em> (2006) "Agda Rössel. Ambassadör med rättvisepatos", i <em>Från Myrdal till Lindh: Svenska diplomatprofiler</em> (2010).""",
         ]
     },
 
@@ -1652,7 +1652,7 @@ authors_dict = {
     u"Eva-Maria Svensson": {
         "sv": u"professor i rättsvetenskap vid Juridiska institutionen vid Göteborgs universitet.",
         "publications": [
-            u""""Gender Equality in the Governance of the Arctic Region" i <em>Nordic Journal on Law and Society<em> 1-2/2017""",
+            u""""Gender Equality in the Governance of the Arctic Region" i <em>Nordic Journal on Law and Society</em> 1-2/2017""",
             u""""En nordisk kvinderetsperformer " I <em>Ketsch me if you can - Sociale rettigheder og ligestilling. Hyldest til Kirsten Ketscher</em> (2017)""",
         ]
     },
