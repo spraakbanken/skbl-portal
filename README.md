@@ -11,9 +11,7 @@ Visit http://localhost:8080
     docker-compose build
     docker-compose up
 
-## Update translations
-
-### Extract, update and compile translations
+## Extract, update and compile translations
     docker-compose exec web pybabel extract -F babel.cfg -o app/translations/messages.pot .
     docker-compose exec web pybabel update -i app/translations/messages.pot -d app/translations
 
