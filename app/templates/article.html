@@ -156,8 +156,9 @@
         <br/>
         <h4>{{ gettext("Other names") }}</h4>
             {% for othername in article.othernames %}
+            {% set othername_type = get_lang_text(othername.type, othername.type_eng, g.language) %}
             <ul>
-                {% if othername.type %}{{othername.type}}:{% endif %} {{othername.name}}
+                {% if othername_type %}{{othername_type}}:{% endif %} {{othername.name}}
             </ul>
             {% endfor %}
         </div>
@@ -591,7 +592,8 @@
             <h3>{{ gettext("Links") }}</h3>
             <ul>
             {% for link in article.externallink %}
-                <li><a class="visible_link" target="_blank" href="{{ link.url | deescape }}">{{ link.description | deescape }}</a></span></li>
+                {% set link_description = get_lang_text(link.description, link.description_eng, g.language) %}
+                <li><a class="visible_link" target="_blank" href="{{ link.url | deescape }}">{{ link_description | deescape }}</a></span></li>
             {% endfor %}
             </ul>
         {% endif %}
