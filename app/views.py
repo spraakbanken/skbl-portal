@@ -197,6 +197,8 @@ def author_presentations():
     keylist = authors_dict.keys()
     keylist.sort(key=lambda k: k.split()[-1])
     for key in keylist:
+        if authors_dict[key].get("publications"):
+            authors_dict[key]["publications"] = [helpers.markdown_html(i) for i in authors_dict[key].get("publications")]
         authorinfo.append((key, authors_dict[key]))
     return render_template('author_presentations.html', authorinfo=authorinfo, title="Authors")
 
@@ -218,7 +220,8 @@ def author(result=None):
     author = result.split(", ")[-1].strip() + " " + result.split(", ")[0].strip()
     authorinfo = authors_dict.get(author)
     if authorinfo:
-        authorinfo = [authorinfo.get(lang, authorinfo.get("sv")), authorinfo.get("publications")]
+        authorinfo = [authorinfo.get(lang, authorinfo.get("sv")),
+                      [helpers.markdown_html(i) for i in authorinfo.get("publications", [])]]
     page = searchresult(result, name='articleauthor',
                         searchfield='artikel_forfattare_fulltnamn',
                         imagefolder='authors', searchtype='contains',
@@ -476,7 +479,7 @@ def emptycache():
     try:
         emptied = computeviews.compute_emptycache(['article', 'activity',
                                                    'organisation', 'place',
-                                                   'author'])
+                                                   'artikelforfattare'])
     except Exception:
         emptied = False
         # return jsonify({"error": "%s" % e})
@@ -504,8 +507,7 @@ def fillcache():
     computeviews.compute_artikelforfattare(cache=False)
     lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
     # Copy the pages to the backup fields
-    computeviews.copytobackup(['article', 'activity', 'organisation', 'place',
-                               'author'], lang)
+    computeviews.copytobackup(['article', 'activity', 'organisation', 'place'], lang)
     return jsonify({"cache_filled": True, "cached_language": lang})
 
 
