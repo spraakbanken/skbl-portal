@@ -373,7 +373,7 @@ def show_article(data, lang="sv"):
             description = helpers.get_shorttext(source.get('text_eng', source.get('text', '')))
 
         if source.get("portrait"):
-            image = source["portrait"][0]["url"]
+            image = source["portrait"][0].get("url", "")
         else:
             image = ""
 
