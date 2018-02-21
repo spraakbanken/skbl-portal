@@ -92,7 +92,7 @@
 {% block content %}
 <div itemscope itemtype="http://schema.org/Person">
     <div class="col-md-8">
-        {% if under_development %}{{gettext("Work in progress.")}}{% endif %}
+        {% if under_development %}{{gettext("Work in progress")}}{% endif %}
         <h1 itemprop="name">{{ article.showname | safe }}{% if article.linked_names %} <em itemprop="additionalName">({{article.linked_names | safe }})</em> {% endif %}</h1>
         {# <h4 itemprop="additionalName">{{ article.fullfirstname }}</h4> #}
         {% if get_date(article)[0] or get_date[1] %}
@@ -171,7 +171,7 @@
         <h4>{{gettext('Family Relationships')}}</h4>
             {% if article.civil_status %}
                 {% set civil_status = get_lang_text(article.civil_status, article.civil_status_eng, g.language) %}
-                <span class="civ-status-text">{{gettext('Civil Status:')}} {{ civil_status }}</span>
+                <span class="civ-status-text">{{gettext('Civil Status')}}: {{ civil_status }}</span>
             {% endif %}
             {% if len(article.relation) <= 4 %}
                 {% for relation in article.relation %}
@@ -394,10 +394,10 @@
         <br/>
         <br/>
         <h4>{{gettext('Residences')}}</h4>
-            {% set birthplace = article.lifespan.from.place.place %}
-            {% set deathplace = article.lifespan.to.place.place %}
-            {% set len_places = len(article.places) + 1 if birthplace %}
-            {% set len_places = len_places + 1 if deathplace %}
+            {% set birthplace = article.get("lifespan", {}).get("from", {}).get("place", {}).get("place") %}
+            {% set deathplace = article.get("lifespan", {}).get("to", {}).get("place", {}).get("place") %}
+            {% set len_places = len(article.places) + 1 if birthplace else len(article.places)%}
+            {% set len_places = len_places + 1 if deathplace else len_places %}
             {% if len_places <= 4 %}
                 <ul>
                     {% if birthplace %}

@@ -82,8 +82,8 @@ msgid "Hits for \"%s\""
 msgstr "Träffar för \"%s\""
 
 #: app/templates/article.html:90
-msgid "Work in progress."
-msgstr "Under arbete."
+msgid "Work in progress"
+msgstr "Under utveckling"
 
 #: app/templates/article.html:107
 msgid "Remark"
@@ -110,8 +110,8 @@ msgid "Family Relationships"
 msgstr "Familjeförhållanden"
 
 #: app/templates/article.html:167
-msgid "Civil Status:"
-msgstr "Civilstatus:"
+msgid "Civil Status"
+msgstr "Civilstånd"
 
 #: app/templates/article.html:209
 msgid "Education"
