@@ -321,14 +321,20 @@ def find_link(searchstring):
         data = karp_query('querycount', {'q': "extended||and|swoid.search|equals|%s" % (searchstring)})
     else:
         parts = searchstring.split(" ")
-        fornamn = " ".join(parts[0:-1])
-        prefix = ""
-        last_fornamn = fornamn.split(" ")[-1]
-        if last_fornamn == "von" or last_fornamn == "af":
-            fornamn = " ".join(fornamn.split(" ")[0:-1])
-            prefix = last_fornamn + " "
-        efternamn = prefix + parts[-1]
-        data = karp_query('querycount', {'q': "extended||and|fornamn.search|contains|%s||and|efternamn.search|contains|%s" % (fornamn, efternamn)})
+        if "," in searchstring or len(parts) == 1: # When there is only a first name (a queen or so)
+            # case 1: "Margareta"
+            # case 2: "Margareta, drottning"
+            firstname = parts[0] if len(parts) == 1 else searchstring
+            data = karp_query('querycount', {'q': "extended||and|fornamn.search|contains|%s" % (firstname)})
+        else:
+            fornamn = " ".join(parts[0:-1])
+            prefix = ""
+            last_fornamn = fornamn.split(" ")[-1]
+            if last_fornamn == "von" or last_fornamn == "af":
+                fornamn = " ".join(fornamn.split(" ")[0:-1])
+                prefix = last_fornamn + " "
+            efternamn = prefix + parts[-1]
+            data = karp_query('querycount', {'q': "extended||and|fornamn.search|contains|%s||and|efternamn.search|contains|%s" % (fornamn, efternamn)})
     # The expected case: only one hit is found
     if data['query']['hits']['total'] == 1:
         url = data['query']['hits']['hits'][0]['_source'].get('url')
