@@ -97,11 +97,11 @@ authors_dict = {
         ]
     },
 
-    u"Eva Haettner Aurelius": {
+    u"Eva Hættner Aurelius": {
         "sv": u"professor emeritus i litteraturvetenskap vid Lunds universitet",
         "publications": [
             u"\"Genre\" i *Literature. An Introduction to Theory and Analysis* (2017)",
-            u"\"Drottning Kristinas brev till Ebba Sparre - galanta brev eller kärleksbrev?\" i *Liv, lust & litteratur. Festskrift till Lisbeth Larsson*, (2013)",
+            u"\"Drottning Kristinas brev till Ebba Sparre - galanta brev eller kärleksbrev?\" i *Liv, lust & litteratur. Festskrift till Lisbeth Larsson* (2013)",
         ]
     },
 
@@ -187,8 +187,8 @@ authors_dict = {
         ]
     },
 
-    u"Ingegerd Björklund är filosofie doktor": {
-        "sv": u"musikdirektör, operasångerska och konsertorganist med världsomfattande verksamhet."
+    u"Ingegerd Björklund": {
+        "sv": u"filosofie doktor musikdirektör, operasångerska och konsertorganist med världsomfattande verksamhet"
     },
 
     u"Margareta Björkman": {
@@ -284,7 +284,7 @@ authors_dict = {
         "sv": u"biskop emeritus",
         "publications": [
             u"*\"Frukta icke allenast tro\" Ebba Boström och Samariterhemmet 1882-1902* (1994)",
-            u"*\"Kärleken fördriver rädslan\" Herdabrev till Härnösands stift* (2011)",
+            u"*\"Kärleken fördriver rädslan.\" Herdabrev till Härnösands stift* (2011)",
         ]
     },
 
@@ -576,7 +576,7 @@ authors_dict = {
     },
 
     u"Gunilla Halldén": {
-        "sv": u"professor emeritus vid tema Barn, Linköpings universitet",
+        "sv": u"professor emeritus vid tema Barn vid Linköpings universitet",
         "publications": [
             u"*Ett hem av solsken. Disa Beijer och barnträdgården som arena för socialt arbete* (2016)",
             u"*Barndomens skogar. Om barn i natur och barns natur* (2011) ",
@@ -584,21 +584,21 @@ authors_dict = {
     },
 
     u"Hanna Hallgren": {
-        "sv": u"poet och professor i litterär gestaltning, Akademi Valand, Göteborgs universitet",
+        "sv": u"poet och professor i litterär gestaltning vid Akademi Valand vid Göteborgs universitet",
         "publications": [
             u"*Det som övar annorlunda likt ett hjärta* (2016)",
         ]
     },
 
     u"Lena Hammergren": {
-        "sv": u"professor i teatervetenskap vid Stockholms universitet och professor i dansvetenskap vid Stockholms konstnärliga högskola.",
+        "sv": u"professor i teatervetenskap vid Stockholms universitet och professor i dansvetenskap vid Stockholms konstnärliga högskola",
         "publications": [
             u"\"Att tala – att dansa: om metaforens betydelse inom danspedagogik\" i *Nordic Journal of Dance* 1/2016.",
         ]
     },
 
     u"Dick Harrison": {
-        "sv": u"professor i historia vid Lunds universitet.",
+        "sv": u"professor i historia vid Lunds universitet",
         "publications": [
             u"*Jag har ingen vilja till makt: Biografi över Tage Erlander* (2017)",
             u"*Kalmars historia* (2017)",
@@ -606,11 +606,11 @@ authors_dict = {
     },
 
     u"Bodil Hasselgren": {
-        "sv": u"filosofie magister och skribent och redaktör på Centrum för Näringslivshistoria"
+        "sv": u"filosofie magister, skribent och redaktör på Centrum för Näringslivshistoria"
     },
 
     u"Ann-Katrin Hatje": {
-        "sv": u"professor emeritus i historia, Umeå universitet",
+        "sv": u"professor emeritus i historia vid Umeå universitet",
         "publications": [
             u"\"The Struggle over Christianity as a School Subject. The Democratic Role of the Press in a Church Campaign in 1963\" i *Reconsideing Religion, Law, and Democracy. New Challenges for Society and Research* (2016)",
             u"\"Barnomsorgshistoria och den svenska daghemsmodellen\" i *Vägar till välfärd. Idéer, inspiratörer, kontroverser, perspektiv* (2013)",
@@ -618,7 +618,7 @@ authors_dict = {
     },
 
     u"Anne Hedén": {
-        "sv": u"filosofie doktor i historia, Södertörns högskola och Stockholms universitet",
+        "sv": u"filosofie doktor i historia vid Södertörns högskola och Stockholms universitet",
         "publications": [
             u"Blicken mot öster. Svenska drömmar om Finland under världskrigets sista år\" i *Sverige och första världskriget. Maritima perspektiv Historiska Media* (2017)",
             u"*Röd stjärna över Sverige. Kina som resurs i den svenska vänsterradikaliseringen under 1960- och 1970-talen* (2008)",
@@ -626,7 +626,7 @@ authors_dict = {
     },
 
     u"Birger Hedén": {
-        "sv": u"filosofie doktor, kritiker, översättare"
+        "sv": u"filosofie doktor, kritiker och översättare"
     },
 
     u"Dag Hedman": {
@@ -669,7 +669,7 @@ authors_dict = {
     },
 
     u"Kristina Hermansson": {
-        "sv": u"lektor och forskare i litteraturvetenskap med inriktning mot barn- och ungdomslitteratur vid Göteborgs universitet."
+        "sv": u"lektor och forskare i litteraturvetenskap med inriktning mot barn- och ungdomslitteratur vid Göteborgs universitet"
     },
 
     u"Elisabet Stavenow-Hidemark": {
@@ -688,7 +688,7 @@ authors_dict = {
         "sv": u"docent i historia vid Lunds universitet",
         "publications": [
             u"*Hembiträdet och spelfilmen. Stjärnor i det svenska folkhemmets 1930- och 40-tal* (2017)",
-            u"*Class. Feminist and cultural perspectives* (2016).",
+            u"*Class. Feminist and cultural perspectives* (2016)",
         ]
     },
 
@@ -725,7 +725,7 @@ authors_dict = {
     },
 
     u"Björn Horgby": {
-        "sv": u"professor emeritus i historia vid Örebro universitet.",
+        "sv": u"professor emeritus i historia vid Örebro universitet",
         "publications": [
             u"*Kampen om facket. Den socialdemokratiska hegemonins förändringar* (2012)",
             u"*Faderliga företagare i Sverige och Japan* (2016)",
@@ -749,7 +749,7 @@ authors_dict = {
     },
 
     u"Evelina Ivarsson": {
-        "sv": u"kulturskribent och masterstudent i litteraturvetenskap vid Göteborgs universitet."
+        "sv": u"kulturskribent och masterstudent i litteraturvetenskap vid Göteborgs universitet"
     },
 
     u"A. Johannes Johansson": {
@@ -761,7 +761,7 @@ authors_dict = {
     },
 
     u"Anders Johnson": {
-        "sv": u"skriftställare med inriktning på svensk politisk och ekonomisk historia",
+        "sv": u"skriftställare med inriktning mot svensk politisk och ekonomisk historia",
         "publications": [
             u"*De gjorde skillnad. Liberala kvinnor från Anna Maria Lenngren till Marit Paulsen* (2009)"
         ]
@@ -772,7 +772,7 @@ authors_dict = {
     },
 
     u"Barbro Johnsson": {
-        "sv": u"filosofie doktor i etnologi, förste antikvarie vid Jenny Nyströms och Curt Stoopendaals stiftelse, Kalmar läns museum",
+        "sv": u"filosofie doktor i etnologi, förste antikvarie vid Jenny Nyströms och Curt Stoopendaals stiftelse vid Kalmar läns museum",
         "publications": [
             u"*Jenny Nyström. Vandra i Jenny Nyströms Kalmar* (2012)",
             u"\"Jenny Nyström - barnens konstnärinna i tre århundraden\" i *Opsis barnkultur* 4/2013",
@@ -814,7 +814,7 @@ authors_dict = {
     },
 
     u"Martin Karlsson": {
-        "sv": u"filosofie doktor i Historia, lektor i de samhällsvetenskapliga ämnenas didaktik/inriktning historiedidaktik vid Stockholms universitet",
+        "sv": u"filosofie doktor i historia, lektor i de samhällsvetenskapliga ämnenas didaktik/inriktning historiedidaktik vid Stockholms universitet",
         "publications": [
             u"*Att projicera det förflutna. Historiebruk och historieförmedling i svensk skolfilm 1970–2000 utifrån de regionala AV-centralernas utbud* (2011)",
         ]
@@ -828,7 +828,7 @@ authors_dict = {
     },
 
     u"Madeleine Kleberg": {
-        "sv": u"docent emeritus i medie- och kommunikationsvetenskap vid Stockholms universitet.",
+        "sv": u"docent emeritus i medie- och kommunikationsvetenskap vid Stockholms universitet",
         "publications": [
             u"*Skötsam kvinnosyn. Hem- och familjereportage i svensk TV under åren 1956-1968* (1999)",
             u"*Genusperspektiv på medie- och kommunikationsvetenskap* (2006)",
@@ -877,14 +877,14 @@ authors_dict = {
     },
 
     u"Birgitta Larsson": {
-        "sv": u"filosofie doktor i historia, pensionerad lärare och tidigare direktor för Svenska kyrkans mission.",
+        "sv": u"filosofie doktor i historia, pensionerad lärare och tidigare direktor för Svenska kyrkans mission",
         "publications": [
             u"*Conversion to Greater Freedom? Women, Church and Social Change in North-Western Tanzania under Colonial Rule* (1991)",
         ]
     },
 
     u"Camilla Larsson": {
-        "sv": u"arkivpedagog på Arkiv Gävleborg."
+        "sv": u"arkivpedagog på Arkiv Gävleborg"
     },
 
     u"Esbjörn Larsson": {
@@ -896,14 +896,14 @@ authors_dict = {
     },
 
     u"Gabriela Bjarne Larsson": {
-        "sv": u"docent i historia vid Stockholms universitet."
+        "sv": u"docent i historia vid Stockholms universitet"
     },
 
     u"Lisbeth Larsson": {
         "sv": u"senior professor vid Göteborgs universitet",
         "publications": [
             u"*Sanning och konsekvens. Om Marika Stiernstedt, Ludvig Nordström och de biografiska berättelserna* (2001)",
-            u"*Om hennes döda kropp. Victoria Benedictssons arkiv och författarskap* (2008)",
+            u"*Hennes döda kropp. Victoria Benedictssons arkiv och författarskap* (2008)",
         ]
     },
 
@@ -911,12 +911,12 @@ authors_dict = {
         "sv": u"professor i filmvetenskap vid Linnéuniversitetet",
         "publications": [
             u"*The Swedish Porn Scene: Exhibition Contexts, 8mm Pornography and the Sex Film* (2017)",
-            u"*Skenet som bedrog: Mai Zetterling och det svenska sextiotalet* (2006).",
+            u"*Skenet som bedrog: Mai Zetterling och det svenska sextiotalet* (2006)",
         ]
     },
 
     u"Monica Lauritzen": {
-        "sv": u"docent i engelsk litteratur vid Göteborgs universitet och kulturproducent vid Sveriges Radio.",
+        "sv": u"docent i engelsk litteratur vid Göteborgs universitet och kulturproducent vid Sveriges Radio",
         "publications": [
             u"*En kvinnas röst. Emilie Flygare-Carléns liv och dikt* (2007)",
             u"*Sanningens vägar. Anne Charlotte Lefflers liv och dikt* (2012)",
@@ -939,7 +939,7 @@ authors_dict = {
         "sv": u"professor i litteraturvetenskap vid Göteborgs universitet",
         "publications": [
             u"*Sigge Stark. Sveriges mest produktiva, utskällda och lästa författare* (2015)",
-            u"*\"Jag har fått ett bref…\". Den tidiga svenska brevromanen 1770–1870* (2007).",
+            u"*\"Jag har fått ett bref…\". Den tidiga svenska brevromanen 1770–1870* (2007)",
         ]
     },
 
@@ -956,14 +956,14 @@ authors_dict = {
     },
 
     u"Lena Lennerhed": {
-        "sv": u"professor i idéhistoria vid Södertörns högskola. ",
+        "sv": u"professor i idéhistoria vid Södertörns högskola",
         "publications": [
             u"*Kvinnotrubbel. Abort i Sverige 1938-1974* (2017)",
         ]
     },
 
     u"Katarina Leppänen": {
-        "sv": u"docent i idé- och lärdomshistoria vid Göteborgs universitet.",
+        "sv": u"docent i idé- och lärdomshistoria vid Göteborgs universitet",
         "publications": [
             u"*Elin Wägner's Alarm Clock: Ecofeminist theory in the interwar era* (2007)",
             u"\"The Socialist New Woman Redux: Hella Wuolijoki's Life Writing in the 1940s\" i *European Journal of Life Writing* (2016)",
@@ -993,8 +993,8 @@ authors_dict = {
         ]
     },
 
-    u"Katarina Lindahl före detta generalsekreterare på RFSU": {
-        "sv": u"filosofie kandidat och socionom"
+    u"Katarina Lindahl": {
+        "sv": u"före detta generalsekreterare på RFSU filosofie kandidat och socionom"
     },
 
     u"Anna Lena Lindberg": {
@@ -1215,7 +1215,7 @@ authors_dict = {
     },
 
     u"Ulrika Lagerlöf Nilsson": {
-        "sv": u"filosofie doktor i historia och teologie doktor i kyrkohistoria, forskare vid Göteborgs universitet.",
+        "sv": u"filosofie doktor i historia, teologie doktor i kyrkohistoria och forskare vid Göteborgs universitet",
         "publications": [
             u"*Med lust och bävan. Vägen till biskopsstolen inom Svenska kyrkan under 1900-talet* (2010)",
             u"*Tradition, modernitet och förnyelse. Elisabeth Beskow och hennes författarskap decennierna kring sekelskiftet 1900* (2017)",
@@ -1514,7 +1514,8 @@ authors_dict = {
     u"Annika Sandén": {
         "sv": u"docent i historia vid Stockholms universitet",
         "publications": [
-            u"*Bödlar. Liv, död och skam i svenskt 1600-tal* (2016) *Missdådare. Brott och människoöden i Sverige omkring 1600* (2014)",
+            u"*Bödlar. Liv, död och skam i svenskt 1600-tal* (2016)",
+            u"*Missdådare. Brott och människoöden i Sverige omkring 1600* (2014)",
         ]
     },
 
@@ -1697,7 +1698,8 @@ authors_dict = {
     u"Anna Tellgren": {
         "sv": u"filosofie doktor, intendent för fotografi och forskningsledare vid Moderna museet i Stockholm",
         "publications": [
-            u"*Francesca Woodman. On Being an Angel* (2015) *Historieboken. Om Moderna museet 1958–2008* (2008)",
+            u"*Francesca Woodman. On Being an Angel* (2015)",
+            u"*Historieboken. Om Moderna museet 1958–2008* (2008)",
         ]
     },
 
@@ -1893,6 +1895,14 @@ authors_dict = {
         "sv": u"dominikansyster och teologie doktor i missionsvetenskap vid Uppsala universitet",
         "publications": [
             u"*Tro – liv – enhet. Om kyrkans identitet och uppgift i Sverige* (2010)",
+            u"*\"kärlek! och någonting att skratta åt! dessutom\". Sara Lidman och den kärleksfulla blicken* (2008)",
+        ]
+    },
+
+    u"Annelie Bränström-Öhman":{
+        "sv": u"är professor i litteraturvetenskap och genusvetenskap med inriktning mot humaniora vid Umeå universitet.",
+        "publications": [
+            u"*Stilens munterhet. Sara Lidmans författardagböcker från Missenträsk 1975-1985* (2014)",
             u"*\"kärlek! och någonting att skratta åt! dessutom\". Sara Lidman och den kärleksfulla blicken* (2008)",
         ]
     },
