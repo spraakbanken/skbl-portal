@@ -494,8 +494,9 @@
         <div>
             <h4>{{gettext('Sources')}}</h4>
             {% for typename, type in article.source %}
+                {% set source_typename = get_lang_text(typename, type.type_eng, g.language) %}
                 <div>
-                    <h5>{{typename}}</h5>
+                    <h5>{{source_typename}}</h5>
                     <ul class="no_bullets">
                         {% for source in type %}
                         <li>

@@ -1895,7 +1895,6 @@ authors_dict = {
         "sv": u"dominikansyster och teologie doktor i missionsvetenskap vid Uppsala universitet",
         "publications": [
             u"*Tro – liv – enhet. Om kyrkans identitet och uppgift i Sverige* (2010)",
-            u"*\"kärlek! och någonting att skratta åt! dessutom\". Sara Lidman och den kärleksfulla blicken* (2008)",
         ]
     },
 
