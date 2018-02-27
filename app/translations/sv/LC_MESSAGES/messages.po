@@ -181,8 +181,8 @@ msgid "see"
 msgstr "se"
 
 #: app/templates/contact.html:20
-msgid "Suggest biography about..."
-msgstr "Föreslå biografi om..."
+msgid "Suggest biography about"
+msgstr "Föreslå biografi om"
 
 #: app/templates/contact.html:24
 msgid "Suggest correction"
