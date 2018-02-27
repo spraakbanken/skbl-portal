@@ -24,7 +24,7 @@ authors_dict = {
     u"Nina Almgren": {
         "sv": u"forskare vid Centrum för genusvetenskap och Likavillkorsspecialist vid HR-avdelningen, Uppsala universitet",
         "publications": [
-            u"*Kvinnorörelsen och efterkrigsplaneringen: Statsfeminism i svensk arbetsmarknadspolitik under och kort efter andra världskriget* (2006)"
+            u"*Kvinnorörelsen och efterkrigsplaneringen: Statsfeminism i svensk arbetsmarknadspolitik under och kort efter andra världskriget* (2006)",
             u"\"Agda Rössel. Ambassadör med rättvisepatos\", i *Från Myrdal till Lindh: Svenska diplomatprofiler* (2010)",
         ]
     },
