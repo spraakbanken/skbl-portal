@@ -1,6 +1,8 @@
 # -*- coding=utf-8 -*-
 
-more_women = []
+more_women = [
+    u"Sigrid Leijonhufvud",
+]
 
 keywords_reference_list = [
     # [ non_existing_keyword, existing_keyword]

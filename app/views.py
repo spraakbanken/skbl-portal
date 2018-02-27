@@ -187,6 +187,22 @@ def keyword(result=None):
     return set_cache(page)
 
 
+@app.route("/en/author_presentations", endpoint="author_presentations_en")
+@app.route("/sv/forfattar_presentationer", endpoint="author_presentations_sv")
+def author_presentations():
+    # JUST FOR TESTING
+    set_language_switch_link("author_presentations")
+
+    authorinfo = []
+    keylist = authors_dict.keys()
+    keylist.sort(key=lambda k: k.split()[-1])
+    for key in keylist:
+        if authors_dict[key].get("publications"):
+            authors_dict[key]["publications"] = [helpers.markdown_html(i) for i in authors_dict[key].get("publications")]
+        authorinfo.append((key, authors_dict[key]))
+    return render_template('author_presentations.html', authorinfo=authorinfo, title="Authors")
+
+
 @app.route("/en/articleauthor", endpoint="articleauthor_index_en")
 @app.route("/sv/artikelforfattare", endpoint="articleauthor_index_sv")
 def authors():
