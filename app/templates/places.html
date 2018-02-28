@@ -21,6 +21,7 @@
         {% for name, hit in namelist %}
           <li class="keyword_list_item"><a href="{{ url_for('place_'+g.language, place=name, lat=hit.lat, lon=hit.lon) }}">{{name}} <span class="badge">{{ hit.count }}</span></a></li>
         {% endfor %}
+        <div class="top-link"><a href="#top">[ {{gettext("TO THE TOP")}} ]</a></div>
       {% endfor %}
       </ul>
 </div>
