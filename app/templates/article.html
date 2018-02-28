@@ -118,7 +118,7 @@
         <p>
             <em>
                 {% for author in article.article_author %}
-                    <a href="{{ url_for('articleauthor_'+g.language, result=author.firstname+" "+author.lastname) }}">{{author.firstname}} {{author.lastname}}</a><br/>
+                    <a href="{{ url_for('articleauthor_'+g.language, result=author.lastname+", "+author.firstname) }}">{{author.firstname}} {{author.lastname}}</a><br/>
                 {% endfor %}
                 {% if g.language == 'en' %}
                     {% if article.text_eng %}
