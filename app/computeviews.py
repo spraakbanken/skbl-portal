@@ -96,7 +96,7 @@ def compute_article(lang="", cache=True):
     if art is not None:
         return art
 
-    show = ','.join(['name', 'url', 'undertitel', 'lifespan'])
+    show = ','.join(['name', 'url', 'undertitel', 'lifespan', 'undertitel_eng'])
     infotext = helpers.get_infotext("article", request.url_rule.rule)
     if lang == 'sv':
         data = karp_query('minientry', {'q': "extended||and|namn|exists", 'show': show,
