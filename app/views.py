@@ -86,7 +86,7 @@ def submit_contact_form():
 def search():
     set_language_switch_link("search")
     search = request.args.get('q', '*').encode('utf-8')
-    show = ','.join(['name', 'url', 'undertitel', 'lifespan'])
+    show = ','.join(['name', 'url', 'undertitel', 'undertitel_eng', 'lifespan'])
     karp_q = {'highlight': True, 'size': app.config['SEARCH_RESULT_SIZE'],
               'show': show}
     if '*' in search:
@@ -469,7 +469,7 @@ def emptycache():
     try:
         emptied = computeviews.compute_emptycache(['article', 'activity',
                                                    'organisation', 'place',
-                                                   'artikelforfattare'])
+                                                   'author'])
     except Exception:
         emptied = False
         # return jsonify({"error": "%s" % e})
@@ -497,7 +497,7 @@ def fillcache():
     computeviews.compute_artikelforfattare(cache=False)
     lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
     # Copy the pages to the backup fields
-    computeviews.copytobackup(['article', 'activity', 'organisation', 'place', 'artikelforfattare'], lang)
+    computeviews.copytobackup(['article', 'activity', 'organisation', 'place', 'author'], lang)
     return jsonify({"cache_filled": True, "cached_language": lang})
 
 
