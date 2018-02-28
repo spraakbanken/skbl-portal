@@ -206,7 +206,7 @@ def author(result=None):
     if authorinfo:
         authorinfo = [authorinfo.get(lang, authorinfo.get("sv")),
                       [helpers.markdown_html(i) for i in authorinfo.get("publications", [])]]
-    page = searchresult(result, name='articleauthor',
+    page = searchresult(author, name='articleauthor',
                         searchfield='artikel_forfattare_fulltnamn',
                         imagefolder='authors', searchtype='contains',
                         authorinfo=authorinfo)
