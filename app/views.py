@@ -109,7 +109,8 @@ def search():
                         search=search.decode("UTF-8"),
                         alphabetic=True,
                         karp_url=karp_url,
-                        more=data["hits"]["total"] > app.config["SEARCH_RESULT_SIZE"])
+                        more=data["hits"]["total"] > app.config["SEARCH_RESULT_SIZE"],
+                        show_lang_switch=False)
 
     return set_cache(t)
 
@@ -147,9 +148,9 @@ def organisation(result=None):
     title = request.args.get('title')
     lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
     if lang == "en":
-        page = searchresult(result, 'organisation', 'id', 'organisations', title=title)
+        page = searchresult(result, 'organisation', 'id', 'organisations', title=title, show_lang_switch=False)
     else:
-        page = searchresult(result, 'organisation', 'id', 'organisations', title=title)
+        page = searchresult(result, 'organisation', 'id', 'organisations', title=title, show_lang_switch=False)
     return set_cache(page)
 
 
@@ -195,9 +196,9 @@ def keyword_index():
 def keyword(result=None):
     lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
     if lang == "en":
-        page = searchresult(result, 'keyword', 'nyckelord_eng', 'keywords')
+        page = searchresult(result, 'keyword', 'nyckelord_eng', 'keywords', show_lang_switch=False)
     else:
-        page = searchresult(result, 'keyword', 'nyckelord', 'keywords')
+        page = searchresult(result, 'keyword', 'nyckelord', 'keywords', show_lang_switch=False)
     return set_cache(page)
 
 
@@ -239,12 +240,12 @@ def author(result=None):
     page = searchresult(author, name='articleauthor',
                         searchfield='artikel_forfattare_fulltnamn',
                         imagefolder='authors', searchtype='contains',
-                        authorinfo=authorinfo)
+                        authorinfo=authorinfo, show_lang_switch=False)
     return set_cache(page)
 
 
 def searchresult(result, name='', searchfield='', imagefolder='',
-                 searchtype='equals', title='', authorinfo=False):
+                 searchtype='equals', title='', authorinfo=False, show_lang_switch=True):
     qresult = result
     try:
         set_language_switch_link("%s_index" % name, result)
@@ -257,7 +258,8 @@ def searchresult(result, name='', searchfield='', imagefolder='',
             if os.path.exists(app.config.root_path + '/static/images/%s/%s.jpg' % (imagefolder, qresult)):
                 picture = '/static/images/%s/%s.jpg' % (imagefolder, qresult)
             return render_template('list.html', picture=picture, alphabetic=True,
-                                   title=title, headline=title, hits=hits["query"]["hits"], authorinfo=authorinfo)
+                                   title=title, headline=title, hits=hits["query"]["hits"],
+                                   authorinfo=authorinfo, show_lang_switch=show_lang_switch)
         else:
             return render_template('page.html', content='not found')
     except Exception as e:
