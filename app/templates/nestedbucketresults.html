@@ -21,7 +21,7 @@
   <div><span class="label label-default maximize_all">Expandera alla</span></div>
   <ul>
        {% for maintype, val in sorted(results.items()) %}
-          <li class="keyword_list_item nested_part"> <h3><a name="{{maintype}}">{{ maintype }}</a></h3>
+          <li class="keyword_list_item nested_part"> <h3><a class="no_anchor_decor" name="{{maintype}}">{{ maintype }}</a></h3>
             {% if len(val.items()) <= 8 %}
               {% for subtype, subval in lowersorted(val.items()) %}
               <ul>

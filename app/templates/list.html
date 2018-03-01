@@ -67,7 +67,7 @@
     <ul>
     {% for oneletterlist in results %}
         {% if split_letters %}
-            <h2><a name="{{ oneletterlist[0][0] }}">{{ oneletterlist[0][0] }}</a></h2>
+            <h2><a class="no_anchor_decor" name="{{ oneletterlist[0][0] }}">{{ oneletterlist[0][0] }}</a></h2>
         {% endif %}
         {% for _firstletter, is_link, name, linked_name, liferange, subtitle, subtitle_eng, subject_id in oneletterlist %}
         <li>

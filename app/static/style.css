@@ -540,3 +540,6 @@ blockquote {
 .authorinfo{
     margin-top: 16px;
 }
+.no_anchor_decor:hover {
+    text-decoration: none;
+}
