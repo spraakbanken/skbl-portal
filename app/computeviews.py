@@ -163,6 +163,7 @@ def compute_place(lang="", cache=True):
 
 
 def compute_artikelforfattare(infotext='', description='', lang="", cache=True):
+    set_language_switch_link("articleauthor_index", lang=lang)
     art, lang = getcache('author', lang, cache)
     if art is not None:
         return art
