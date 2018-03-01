@@ -18,6 +18,12 @@ def index():
     return redirect('/' + get_locale())
 
 
+@app.errorhandler(404)
+def page_not_found(e):
+    set_language_switch_link("index")
+    return render_template('page.html', content=gettext('Contents could not be found!')), 404
+
+
 @app.route('/en', endpoint='index_en')
 @app.route('/sv', endpoint='index_sv')
 def start():
@@ -132,7 +138,7 @@ def place(place=None):
         page = render_template('placelist.html', title=place, lat=lat, lon=lon,
                                headline=place, hits=hits["query"]["hits"])
     else:
-        page = render_template('page.html', content='not found')
+        page = render_template('page.html', content=gettext('Contents could not be found!'))
     return set_cache(page)
 
 
