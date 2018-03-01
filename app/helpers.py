@@ -78,10 +78,10 @@ def group_by_type(objlist, name):
     return result
 
 
-def make_alphabetical_bucket(result):
+def make_alphabetical_bucket(result, sortnames=False, lang="sv"):
     def processname(bucket, results):
         results.append((bucket[0].replace(u"von ", "")[0].upper(), bucket))
-    return make_alphabetic(result, processname)
+    return make_alphabetic(result, processname, sortnames=sortnames, lang=lang)
 
 
 def rewrite_von(input):
@@ -91,14 +91,14 @@ def rewrite_von(input):
         return input
 
 
-def make_placenames(places):
+def make_placenames(places, lang="sv"):
     def processname(hit, results):
         name = hit['name'].strip()
         results.append((name[0].upper(), (name, hit)))
-    return make_alphabetic(places, processname)
+    return make_alphabetic(places, processname, lang=lang)
 
 
-def make_alphabetic(hits, processname):
+def make_alphabetic(hits, processname, sortnames=False, lang="sv"):
     """ Loops through hits, applies the function 'processname'
         on each object and then sorts the result in alphabetical
         order.
@@ -121,15 +121,26 @@ def make_alphabetic(hits, processname):
             first_letter = u'Ä'
         if first_letter == u'Ü':
             first_letter = u'Y'
+        if lang == "en" and first_letter == u"Ö":
+            first_letter = u"O"
+        if lang == "en" and first_letter in u"ÄÅ":
+            first_letter = u"A"
         if first_letter not in letter_results:
             letter_results[first_letter] = [result]
         else:
             letter_results[first_letter].append(result)
 
     # Sort result dictionary alphabetically into list
-    collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
+    if lang == "en":
+        collator = icu.Collator.createInstance(icu.Locale('en_EN.UTF-8'))
+    else:
+        collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
     for n, items in letter_results.items():
-        items.sort(key=lambda x: collator.getSortKey(x[0].replace("von ", "")))
+        if sortnames:
+            items.sort(key=lambda x: collator.getSortKey(x[0].replace(" ", "z").replace("von ", "") + x[1]))
+        else:
+            items.sort(key=lambda x: collator.getSortKey(x[0]))
+
     letter_results = sorted(letter_results.items(), key=lambda x: collator.getSortKey(x[0]))
     return letter_results
 

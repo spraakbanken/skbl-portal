@@ -149,10 +149,6 @@ def compute_place(lang="", cache=True):
     # To use the coordinates, use 'getplaces' instead of 'getplacenames'
     data = karp_query('getplacenames', {})
     stat_table = [parse(kw) for kw in data['places'] if has_name(kw)]
-    # Sort and translate
-    # stat_table = helpers.sort_places(stat_table, request.url_rule)
-    collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
-    stat_table.sort(key=lambda x: collator.getSortKey(x.get('name').strip()))
     art = render_template('places.html', places=stat_table, title=gettext("Placenames"),
                           infotext=infotext, description=helpers.get_shorttext(infotext))
     with mc_pool.reserve() as client:
@@ -168,11 +164,7 @@ def compute_artikelforfattare(infotext='', description='', lang="", cache=True):
     data = karp_query('statlist', q_data)
     # strip kw0 to get correct sorting
     stat_table = [[kw[0].strip()] + kw[1:] for kw in data['stat_table'] if kw[0] != ""]
-
     stat_table = [[kw[1] + ',', kw[0], kw[2]] for kw in stat_table]
-
-    collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
-    stat_table.sort(key=lambda x: collator.getSortKey(x[0] + x[1]))
 
     # Remove duplicates and some wrong ones (because of backend limitation):
     stoplist = {
@@ -189,8 +181,9 @@ def compute_artikelforfattare(infotext='', description='', lang="", cache=True):
             new_stat_table.append(item)
             added[fullname] = True
     art = render_template('bucketresults.html', results=new_stat_table,
-                           alphabetical=True, title=gettext('Article authors'),
-                           name='articleauthor', infotext=infotext, description=description)
+                          alphabetical=True, title=gettext('Article authors'),
+                          name='articleauthor', infotext=infotext, description=description,
+                          sortnames=True)
     with mc_pool.reserve() as client:
         client.set('author' + lang, art, time=app.config['CACHE_TIME'])
     return art

@@ -11,16 +11,18 @@
 <div class="col-md-4">
 </div>
 <div class="col-md-12">
+    {% set lang = g.language %}
+    {% set sortnames = True if sortnames else False %}
     {% if alphabetical %}
-        {% for firstletter, _ in make_alphabetical_bucket(results) %}
-            {% if firstletter == make_alphabetical_bucket(results)[-1][0] %}
+        {% for firstletter, _ in make_alphabetical_bucket(results, sortnames=sortnames, lang=lang) %}
+            {% if firstletter == make_alphabetical_bucket(results, lang=lang)[-1][0] %}
                 <a class="alphabetlist" href="#{{firstletter}}">{{firstletter}}</a>
             {% else %}
                 <a class="alphabetlist vertical_bar" href="#{{firstletter}}">{{firstletter}}</a>
             {% endif %}
         {% endfor %}
         <ul>
-          {% for firstletter, namelist in make_alphabetical_bucket(results) %}
+          {% for firstletter, namelist in make_alphabetical_bucket(results, lang=lang) %}
                 <h2><a name="{{firstletter}}">{{ firstletter }}</a></h2>
             {% for result in namelist %}
                 {% if result[-1] == "reference" %}
