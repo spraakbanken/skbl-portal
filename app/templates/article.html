@@ -16,8 +16,9 @@
 
 {% macro educationMacro(education) %}
     <li class="keyword_list_item">
-        <h5 class="toggled-by-button">{% if education.type %}{{ education.type }}, {%endif%}{% if education.place and education.place.place %} {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description | deescape }}{% endif %}{% if education.institution %}, <a href="{{ url_for('institution_'+g.language, result=education.institution) }}" class="visible_link">{{education.institution | deescape}}</a>{% endif %}</h5>
-        <h5 class="toggled-by-button" style="display:none">{% if education.type %}{{ education.type }}, {%endif%}{% if education.place and education.place.place %} {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description | deescape }}{% endif %}{% if education.institution %}, {{ education.institution | deescape }}{% endif %}
+        {% set education_type = get_lang_text(education.type, education.type_eng, g.language) %}
+        <h5 class="toggled-by-button">{% if education_type %}{{ education_type }}, {%endif%}{% if education.place and education.place.place %} {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description | deescape }}{% endif %}{% if education.institution %}, <a href="{{ url_for('institution_'+g.language, result=education.institution) }}" class="visible_link">{{education.institution | deescape}}</a>{% endif %}</h5>
+        <h5 class="toggled-by-button" style="display:none">{% if education_type %}{{ education_type }}, {%endif%}{% if education.place and education.place.place %} {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description | deescape }}{% endif %}{% if education.institution %}, {{ education.institution | deescape }}{% endif %}
         {% if education.get("from")%} {% set from = education.get("from").get("comment") %} {% else %} {% set from = "" %} {% endif %}
         {% if education.get("to")%} {% set to = education.get("to").get("comment") %} {% else %} {% set to = "" %} {% endif %}
         {% if from or to %} ({{from}} – {{to}}){% endif %}</h5>
@@ -39,8 +40,9 @@
 
 {% macro contactMacro(contact) %}
     <li class="keyword_list_item">
-        <h5 class="toggled-by-button">{{ contact.type }}: {{ contact.firstname }} {{ contact.lastname }}</h5>
-        <h5 class="toggled-by-button" style="display:none">{{ contact.type }}: {{ contact.firstname }} {{ contact.lastname }}
+        {% set contact_type = get_lang_text(contact.type, contact.type_eng, g.language) %}
+        <h5 class="toggled-by-button">{{ contact_type }}: {{ contact.firstname }} {{ contact.lastname }}</h5>
+        <h5 class="toggled-by-button" style="display:none">{{ contact_type }}: {{ contact.firstname }} {{ contact.lastname }}
         {% if contact.place and contact.place.place %}, {{ contact.place.place }}{% endif %}
         {% if contact.get("from")%} {% set from = contact.get("from").get("comment") %} {% else %} {% set from = "" %} {% endif %}
         {% if contact.get("to")%} {% set to = contact.get("to").get("comment") %} {% else %} {% set to = "" %} {% endif %}
@@ -62,8 +64,9 @@
 
 {% macro awardMacro(award) %}
     <li class="keyword_list_item">
-        <h5 class="toggled-by-button">{{ award.type }}{% if award.description %}: <a class="visible_link" href="{{url_for('award_'+g.language, result=award.description)}}">{{award.description | deescape}}</a>{% endif %}</h5>
-        <h5 class="toggled-by-button" style="display:none">{{ award.type }}{% if award.description %}: <a class="visible_link" href="{{url_for('award_'+g.language, result=award.description)}}">{{award.description | deescape}}</a>{% endif %}
+        {% set award_type = get_lang_text(award.type, award.type_eng, g.language) %}
+        <h5 class="toggled-by-button">{{ award_type }}{% if award.description %}: <a class="visible_link" href="{{url_for('award_'+g.language, result=award.description)}}">{{award.description | deescape}}</a>{% endif %}</h5>
+        <h5 class="toggled-by-button" style="display:none">{{ award_type }}{% if award.description %}: <a class="visible_link" href="{{url_for('award_'+g.language, result=award.description)}}">{{award.description | deescape}}</a>{% endif %}
         {% if award.get("date")%} {% set date = award.get("date").get("comment") %} {% else %} {% set date = "" %} {% endif %}
         {% if date %} ({{date}}){% endif %}</h5>
     </li>
@@ -494,7 +497,7 @@
         <div>
             <h4>{{gettext('Sources')}}</h4>
             {% for typename, type in article.source %}
-                {% set source_typename = get_lang_text(typename, type.type_eng, g.language) %}
+                {% set source_typename = get_lang_text(typename, type[0].type_eng, g.language) %}
                 <div>
                     <h5>{{source_typename}}</h5>
                     <ul class="no_bullets">
