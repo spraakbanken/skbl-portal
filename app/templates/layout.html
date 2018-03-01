@@ -107,7 +107,6 @@
 
             {% set show_lang_switch = show_lang_switch|default(True) %}
             {% if show_lang_switch %}
-                {{show_lang_switch}}
                 <ul class="nav navbar-nav navbar-right">
                   <li class="language-switch"><a href="{{ g.switch_language.url }}"><span class="glyphicon glyphicon-flag"></span>&nbsp;{{ gettext('På ') }}{{ g.switch_language.label }}</a></li>
                 </ul>
