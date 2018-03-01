@@ -6,6 +6,7 @@ import markdown
 import re
 import datetime
 import static_info
+from flask_babel import gettext
 
 
 def get_first_name(source):
@@ -303,12 +304,12 @@ def make_placelist(hits, placename, lat, lon):
     for hit in hits["hits"]:
         source = hit["_source"]
         hit['url'] = source.get('url') or hit['_id']
-        placelocations = {"Bostadsort": source.get('places', []),
-                          "Verksamhetsort": source.get('occupation', []),
-                          "Utbildningsort": source.get('education', []),
-                          "Kontakter": source.get('contact', []),
-                          u"Födelseort": [source.get('lifespan', {}).get("from", {})],
-                          u"Dödsort": [source.get('lifespan', {}).get("to", {})]
+        placelocations = {gettext("Residence"): source.get('places', []),
+                          gettext("Place of activity"): source.get('occupation', []),
+                          gettext("Place of education"): source.get('education', []),
+                          gettext("Contacts"): source.get('contact', []),
+                          gettext("Birthplace"): [source.get('lifespan', {}).get("from", {})],
+                          gettext("Place of death"): [source.get('lifespan', {}).get("to", {})]
                           }
 
         for ptype, places in placelocations.items():
