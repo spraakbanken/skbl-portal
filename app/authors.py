@@ -18,11 +18,11 @@ authors_dict = {
     },
 
     u"Camilla Alexandersson": {
-        "sv": u"enhetschef, Forsviks bruk"
+        "sv": u"enhetschef vid Forsviks bruk"
     },
 
     u"Nina Almgren": {
-        "sv": u"forskare vid Centrum för genusvetenskap och Likavillkorsspecialist vid HR-avdelningen, Uppsala universitet",
+        "sv": u"forskare vid Centrum för genusvetenskap och Likavillkorsspecialist vid HR-avdelningen vid Uppsala universitet",
         "publications": [
             u"*Kvinnorörelsen och efterkrigsplaneringen: Statsfeminism i svensk arbetsmarknadspolitik under och kort efter andra världskriget* (2006)",
             u"\"Agda Rössel. Ambassadör med rättvisepatos\", i *Från Myrdal till Lindh: Svenska diplomatprofiler* (2010)",
@@ -32,8 +32,8 @@ authors_dict = {
     u"Stefan Eklöf Amirell": {
         "sv": u"docent och forskare i historia vid Linnéuniversitetet",
         "publications": [
-            u"'Female Rule in the Indian Ocean World (1300–1900)', *Journal of world history*, 3/2016",
-            u"\"The blessings and perils of female rule: New perspectives on the reigning queens of Patani, c. 1584–1718\", *Journal of Southeast Asian Studies*, 2/2011",
+            u"'Female Rule in the Indian Ocean World (1300–1900)', i *Journal of world history*, 3/2016",
+            u"\"The blessings and perils of female rule: New perspectives on the reigning queens of Patani, c. 1584–1718\", i *Journal of Southeast Asian Studies*, 2/2011",
         ]
     },
 
@@ -44,12 +44,12 @@ authors_dict = {
     u"Irene Andersson": {
         "sv": u"docent i historia vid Malmö universitet",
         "publications": [
-            u"\"Valborg Svensson – a communist. Telling stories of space and place in political agency\" i *\"Biography, gender and history. Nordic Perspectives* (2016)",
+            u"\"Valborg Svensson – a communist. Telling stories of space and place in political agency\", i *\"Biography, gender and history. Nordic Perspectives* (2016)",
         ]
     },
 
     u"Maria Andersson": {
-        "sv": u"lektor i litteraturvetenskap, Stockholms universitet",
+        "sv": u"lektor i litteraturvetenskap vid Stockholms universitet",
         "publications": [
             u"*Mångkulturell barn- och ungdomslitteratur. Analyser* (2017)",
         ]
@@ -58,7 +58,7 @@ authors_dict = {
     u"Marie Andersson": {
         "sv": u"konstvetare och skribent",
         "publications": [
-            u"*Trådar ur ett liv. Ttextilkonstnären Maja Andersson Wirde* (2016)",
+            u"*Trådar ur ett liv. Textilkonstnären Maja Andersson Wirde* (2016)",
             u"*En guide till konsten i tunnelbanan och i den övriga SL-trafiken* (2016)",
         ]
     },
@@ -67,7 +67,7 @@ authors_dict = {
         "sv": u"docent i straffrätt vid Lunds universitet",
         "publications": [
             u"\"Vulnerable subjects in criminal legal proceedings\", i *\Privatization, Vulnerability, and Social Responsibility.  A Comparative Perspective* (2017)",
-            u"\"Gendering the legal subject. Historical Perspectives on the Nordic Field of Law and Gender\", *Festskrift till Ann Numhauser-Henning* (2017)",
+            u"\"Gendering the legal subject. Historical Perspectives on the Nordic Field of Law and Gender\", i *Festskrift till Ann Numhauser-Henning* (2017)",
         ]
     },
 
@@ -91,7 +91,7 @@ authors_dict = {
     },
 
     u"Ingrid Atlestam": {
-        "sv": u"bibliotekarie, skribent",
+        "sv": u"bibliotekarie och skribent",
         "publications": [
             u"*Vidgade vyer, djupare kunskap. Om bildning här och nu* (2015)",
         ]
@@ -100,8 +100,8 @@ authors_dict = {
     u"Eva Hættner Aurelius": {
         "sv": u"professor emeritus i litteraturvetenskap vid Lunds universitet",
         "publications": [
-            u"\"Genre\" i *Literature. An Introduction to Theory and Analysis* (2017)",
-            u"\"Drottning Kristinas brev till Ebba Sparre - galanta brev eller kärleksbrev?\" i *Liv, lust & litteratur. Festskrift till Lisbeth Larsson* (2013)",
+            u"\"Genre\", i *Literature. An Introduction to Theory and Analysis* (2017)",
+            u"\"Drottning Kristinas brev till Ebba Sparre - galanta brev eller kärleksbrev?\", i *Liv, lust & litteratur. Festskrift till Lisbeth Larsson* (2013)",
         ]
     },
 
@@ -121,7 +121,7 @@ authors_dict = {
     },
 
     u"Wanda Bendjelloul": {
-        "sv": u"filmkritiker, film och tv-producent",
+        "sv": u"filmkritiker, film- och tv-producent",
         "publications": [
             u"Dokumentärfilm: *Upphovsmannen var en kvinna* (2017)",
         ]
@@ -135,7 +135,7 @@ authors_dict = {
     },
 
     u"Inga Berggren": {
-        "sv": u"hushållslärare, filosofie kandidat i pedagogik, psykologi, sociologi, riksdagsledamot 1991-2002",
+        "sv": u"hushållslärare, filosofie kandidat i pedagogik, psykologi och sociologi och riksdagsledamot 1991-2002",
     },
 
     u"Magnus Bergh": {
@@ -150,7 +150,7 @@ authors_dict = {
         "sv": u"docent i historia och lektor vid Uppsala universitet",
         "publications": [
             u"*Guds stat och maktens villkor. Politiska ideal i Vadstena kloster, ca 1370-1470* (2003)",
-            u"\"En lysande fru: Filippa av England och den mångfacetterade drottningrollen under medeltiden\", *Personhistorisk tidskrift* 2015",
+            u"\"En lysande fru: Filippa av England och den mångfacetterade drottningrollen under medeltiden\", i *Personhistorisk tidskrift* 2015",
         ]
     },
 
@@ -176,7 +176,7 @@ authors_dict = {
     u"Barbro Björk": {
         "sv": u"filosofie kandidat i konsthistoria och pensionerad 1:e intendent på Sundsvalls museum",
         "publications": [
-            u"*Stadsplanering, bebyggelse och arkitektur, Sundsvalls historia* (1997)",
+            u"*Stadsplanering, bebyggelse och arkitektur. Sundsvalls historia* (1997)",
         ]
     },
 
@@ -188,22 +188,22 @@ authors_dict = {
     },
 
     u"Ingegerd Björklund": {
-        "sv": u"filosofie doktor musikdirektör, operasångerska och konsertorganist med världsomfattande verksamhet"
+        "sv": u"filosofie doktor, musikdirektör, operasångerska och konsertorganist med världsomfattande verksamhet"
     },
 
     u"Margareta Björkman": {
         "sv": u"professor emeritus i litteratursociologi",
         "publications": [
-            u"Magnus Swederus i *Svenskt Biografiskt Lexikon*, sok.riksarkivet.se",
-            u"Catharina Ahlgren i *Svenskt översättarlexikon *, oversattarlexikon.se",
+            u"\"Magnus Swederus\", i *Svenskt Biografiskt Lexikon*, sok.riksarkivet.se",
+            u"\"Catharina Ahlgren\", i *Svenskt översättarlexikon *, oversattarlexikon.se",
         ]
     },
 
     u"Barbro Blehr": {
         "sv": u"professor i etnologi vid Stockholms universitet",
         "publications": [
-            u"\"Eftertankar: Om kulturhistoriska museer, samtid, historia och identifikation\", *Rig* 1/2017",
-            u"\"Nationen i exil: Norskt nationaldagsfirande i Stockholm och på Skansen\", *Skansen 125: Nordiska museets och Skansens årsbok 2016* (2016)",
+            u"\"Eftertankar: Om kulturhistoriska museer, samtid, historia och identifikation\", i *Rig* 1/2017",
+            u"\"Nationen i exil: Norskt nationaldagsfirande i Stockholm och på Skansen\", i *Skansen 125: Nordiska museets och Skansens årsbok 2016* (2016)",
         ]
     },
 
@@ -222,13 +222,13 @@ authors_dict = {
     u"Hans Bolling": {
         "sv": u"filosofie doktor i historia",
         "publications": [
-            u"\"Kvinnor, karriär och familj: En studie av svenska kvinnliga gymnastikdirektörer yrkeskarriärer och livsöden kring sekelskiftet 1900\", *Historisk tidskrift* (2016)",
-            u"\"Kvinnorna i Stockholm-OS 1912. Gymnastikkvinnornas kamp för plats i det offentliga fysiska rummet\", *Idrott, historia och samhälle* (2016)",
+            u"\"Kvinnor, karriär och familj: En studie av svenska kvinnliga gymnastikdirektörers yrkeskarriärer och livsöden kring sekelskiftet 1900\", i *Historisk tidskrift* (2016)",
+            u"\"Kvinnorna i Stockholm-OS 1912. Gymnastikkvinnornas kamp för plats i det offentliga fysiska rummet\", i *Idrott, historia och samhälle* (2016)",
         ]
     },
 
     u"Anna Smedberg Bondesson": {
-        "sv": u"lektor i litteraturvetenskap vid Högskolan Kristianstad",
+        "sv": u"lektor i litteraturvetenskap vid Högskolan i Kristianstad",
         "publications": [
             u"*Ditt språk i min mun. Grannspråkets glädje och gagn* (2014)",
         ]
@@ -237,30 +237,23 @@ authors_dict = {
     u"Eva Borgström": {
         "sv": u"professor i litteraturvetenskap vid Göteborgs universitet",
         "publications": [
-            u"*Berättelser om kärlek. Begär mellan kvinnor i svensk litteratur 1900-1935* (2016)",
-            u"*Kärlekshistoria. Begär mellan kvinnor i 1800-talets litteratur* (2008)",
+            u"*Berättelser om kärlek. Begär mellan kvinnor i svensk litteratur 1900-1935* (2016)",
+            u"*Kärlekshistoria. Begär mellan kvinnor i 1800-talets litteratur* (2008)",
         ]
     },
 
     u"Kajsa Brilkman": {
         "sv": u"forskare i historia vid Lunds universitet",
         "publications": [
-            u"*Undersåten som förstod. Den svenska reformatoriska samtalsodningen och den tidigmoderna integrationsprocessen* (2013)",
+            u"*Undersåten som förstod. Den svenska reformatoriska samtalsordningen och den tidigmoderna integrationsprocessen* (2013)",
         ]
     },
 
     u"Anne Brügge": {
         "sv": u"filosofie kandidat, författare och kritiker",
         "publications": [
-            u"*Karin Ek, Med kinden mot gråberget* (2016)",
-            u"*Hjärtesorger och vedervärdigheter* (nybearbetning av Agneta Horns dagbok) (2012)",
-        ]
-    },
-
-    u"Tomas Brundin": {
-        "sv": u"medicine doktor, före detta universitetslektor vid Karolinska Institutet",
-        "publications": [
-            u"*Alice Tegnér. Biografi, dagböcker, brev* (2014)",
+            u"*Karin Ek. Med kinden mot gråberget* (2016)",
+            u"*Hjärtesorger och vedervärdigheter* (2012)",
         ]
     },
 
@@ -276,7 +269,7 @@ authors_dict = {
         "sv": u"docent i arkeologi vid Stockholms universitet",
         "publications": [
             u"*Divina Moneta* (2018)",
-            u"\"Things in the Eye of the Beholder\", *Norwegian Archaeological Review* 1/2014",
+            u"\"Things in the Eye of the Beholder\", i *Norwegian Archaeological Review* 1/2014",
         ]
     },
 
@@ -303,10 +296,10 @@ authors_dict = {
     },
 
     u"Maria Carlgren": {
-        "sv": u"filosofie doktor, vikarierande lektor i konst- och bildvetenskap, Linnéuniversitetet",
+        "sv": u"filosofie doktor och vikarierande lektor i konst- och bildvetenskap vid Linnéuniversitetet",
         "publications": [
-            u"*Birgittaskolorna. Modeateljéer och sömnadsskolor mellan tradition och förnyelse* (2016)",
-            u"\"Från Derkert och duttografen till delaktighet. Konstfrämjandets konstpedagogik under 70 år\" i *Konstfrämjandet 70 år* (2017)",
+            u"*Birgittaskolorna. Modeateljéer och sömnadsskolor mellan tradition och förnyelse* (2016)",
+            u"\"Från Derkert och duttografen till delaktighet. Konstfrämjandets konstpedagogik under 70 år\", i *Konstfrämjandet 70 år* (2017)",
         ]
     },
 
@@ -315,7 +308,7 @@ authors_dict = {
     },
 
     u"Eva Helena Cassel-Pihl": {
-        "sv": u"före detta chef Hallwylska museet, Stockholm"
+        "sv": u"före detta chef vid Hallwylska museet i Stockholm"
     },
 
     u"Martin Dackling": {
@@ -342,9 +335,9 @@ authors_dict = {
     },
 
     u"Marie Demker": {
-        "sv": u"professor i statsvetenskap och dekan vid humanistiska fakulteten vid Göteborgs universitet",
+        "sv": u"professor i statsvetenskap och dekan vid Humanistiska fakulteten vid Göteborgs universitet",
         "publications": [
-            u"\"Media and the power of naming: An experimental study of racist, xenophobic and nationalist party labels\" i *Ethnicities* 5/2017",
+            u"\"Media and the power of naming: An experimental study of racist, xenophobic and nationalist party labels\", i *Ethnicities* 5/2017",
         ]
     },
 
@@ -352,7 +345,7 @@ authors_dict = {
         "sv": u"docent i litteraturvetenskap vid Umeå universitet",
         "publications": [
             u"*I oss är en mångfald levande. Karin Boye som kritiker och prosamodernist* (1986)",
-            u"\"Karin Boyes roman Kallocain\" i *Könsmaktens förvandlingar. En vänbok till Anita Göransson* (2003)",
+            u"\"Karin Boyes roman *Kallocain*\", i *Könsmaktens förvandlingar. En vänbok till Anita Göransson* (2003)",
         ]
     },
 
@@ -365,10 +358,10 @@ authors_dict = {
     },
 
     u"Maria Edström": {
-        "sv": u"filosofie doktor, lektor i journalistik, medier  och kommunikation vid Göteborgs universitet",
+        "sv": u"filosofie doktor och lektor i journalistik, medier och kommunikation vid Göteborgs universitet",
         "publications": [
             u"*TV-rummets eliter* (2006)",
-            u"\"Visibility patterns of gendered ageism in the media buzz. A study of the representation of gender and age over three decade\"i *Feminist Media Studies* (2018)",
+            u"\"Visibility patterns of gendered ageism in the media buzz. A study of the representation of gender and age over three decade\", i *Feminist Media Studies* (2018)",
         ]
     },
 
@@ -396,8 +389,8 @@ authors_dict = {
     u"Elisabeth Elgán": {
         "sv": u"professor i historia vid Stockholms universitet",
         "publications": [
-            u"\"The Myth and the Archives: Some Reflections on Swedish Feminism in the 1970s\", i *The women's liberation movement: impacts and outcomes* (2017)",
-            u"*Att ge sig själv makt: Grupp 8 och 1970-talets feminism* (2015)",
+            u"\"The Myth and the Archives: Some Reflections on Swedish Feminism in the 1970s\", i *The women's liberation movement. Impacts and outcomes* (2017)",
+            u"*Att ge sig själv makt. Grupp 8 och 1970-talets feminism* (2015)",
         ]
     },
 
@@ -411,7 +404,7 @@ authors_dict = {
     u"Sabrina Norlander Eliasson": {
         "sv": u"docent i konstvetenskap vid Stockholms universitet",
         "publications": [
-            u"*Portraiture and Social identity in Eighteenth-Century Rome* (2009)",
+            u"*Portraiture and Social identity in Eighteenth-Century Rome* (2009)",
             u"*Italian Paintings in the Nationalmuseum. Three centuries of collecting. Vol. I* (2015)",
         ]
     },
@@ -432,7 +425,7 @@ authors_dict = {
     },
 
     u"Sune Fahlgren": {
-        "sv": u"docent i kyrkovetenskap, lektor i Praktisk teologi vid Teologiska högskolan i Stockholm",
+        "sv": u"docent i kyrkovetenskap och lektor i praktisk teologi vid Teologiska högskolan i Stockholm",
         "publications": [
             u"*Vatten är tjockare än blod. En baptistisk kulturhistoria* (2015)",
             u"*Ecclesiology in the Trenches. Theory and Method under Construction* (2015)",
@@ -442,7 +435,7 @@ authors_dict = {
     u"Karin Tegenborg Falkdalen": {
         "sv": u"filosofie doktor i idéhistoria och författare",
         "publications": [
-            u"*Vasadöttrarna* (2010)",
+            u"*Vasadöttrarna* (2010)",
             u"*Vasadrottningen* (2015)",
         ]
     },
@@ -458,16 +451,16 @@ authors_dict = {
     u"Christina Florin": {
         "sv": u"professor emeritus i kvinnohistoria vid Stockholms universitet",
         "publications": [
-            u"*Kvinnor får röst. Kön, känslor och politisk kultur i kvinnornas rösträttsrörelse* (2006)",
-            u"*Skambefrielsen, Nya känsloregler för kärlek och sexualitet under 1970-talet* (2017)",
+            u"*Kvinnor får röst. Kön, känslor och politisk kultur i kvinnornas rösträttsrörelse* (2006)",
+            u"*Skambefrielsen. Nya känsloregler för kärlek och sexualitet under 1970-talet* (2017)",
         ]
     },
 
     u"Gunnel Forsberg": {
         "sv": u"professor i kulturgeografi vid Stockholms universitet",
         "publications": [
-            u"\"How to improve regional and local planning by applying a gender-sensitive analysis: examples from Sweden\" i *Regional Studies* (2017)",
-            u"\"Regional Policy, Social Networks and Informal Structures\" i *European Urban and Regional Studies* 4/2015",
+            u"\"How to improve regional and local planning by applying a gender-sensitive analysis. Examples from Sweden\", i *Regional Studies* (2017)",
+            u"\"Regional Policy, Social Networks and Informal Structures\", i *European Urban and Regional Studies* 4/2015",
         ]
     },
 
@@ -511,27 +504,27 @@ authors_dict = {
     u"Caroline Graeske": {
         "sv": u"biträdande professor i svenska med didaktisk inriktning vid Luleå tekniska universitet",
         "publications": [
-            u"*Bortom ödelandet. En studie i Stina Aronsons författarskap* (2003)",
+            u"*Bortom ödelandet. En studie i Stina Aronsons författarskap* (2003)",
             u"*Fiktionens mångfald. Om läromedel, läsarter och didaktisk design* (2015)",
         ]
     },
 
     u"Pia Schmidt de Graaf": {
-        "sv": u"författare, bibliotekarie",
+        "sv": u"författare och bibliotekarie",
         "publications": [
-            u"*Evert Taube - brev från Bohuslän* (2015)",
-            u"*Astri Bergman Taube - ett konstnärsliv* (2008)",
+            u"*Evert Taube. Brev från Bohuslän* (2015)",
+            u"*Astri Bergman Taube. Ett konstnärsliv* (2008)",
         ]
     },
 
     u"Sara Granath": {
-        "sv": u"teatervetare, teaterkritiker i *Svenska Dagbladet* "
+        "sv": u"teatervetare och teaterkritiker i *Svenska Dagbladet*"
     },
 
     u"Malin Gregersen": {
         "sv": u"filosofie doktor i historia vid Linnéuniversitetet",
         "publications": [
-            u"\"Weaving Relationships: The Personal and Transnational Encounters of a YWCA Secretary in China\"i *Social Sciences and Missions* 1–2/2017",
+            u"\"Weaving Relationships. The Personal and Transnational Encounters of a YWCA Secretary in China\", i *Social Sciences and Missions* 1–2/2017",
             u"*Møter med Kina: Norsk diplomati, handel og misjon, 1890–1937* (2017)",
         ]
     },
@@ -539,7 +532,7 @@ authors_dict = {
     u"Anders Grevesmühl": {
         "sv": u"före detta lärare i gymnasium och grundskola i Stockholm",
         "publications": [
-            u"*Fientliga övertaganden i skolvärlden. Fallet Grevesmühlska samskolan* (2005)",
+            u"*Fientliga övertaganden i skolvärlden. Fallet Grevesmühlska samskolan* (2005)",
         ]
     },
 
@@ -552,13 +545,13 @@ authors_dict = {
     },
 
     u"Gunilla Gunner": {
-        "sv": u"lektor i religionsvetenskap vid Södertörns högskola och docent i kyrkohistoria vid Åbo Akademi"
+        "sv": u"lektor i religionsvetenskap vid Södertörns högskola och docent i kyrkohistoria vid Åbo Akademi"
     },
 
     u"Karin Gustavsson": {
-        "sv": u"filosofie doktor i etnologi vid Lunds universitet, antikvarie vid Kulturmagasinet i Helsingborg",
+        "sv": u"filosofie doktor i etnologi vid Lunds universitet och antikvarie vid Kulturmagasinet i Helsingborg",
         "publications": [
-            u"*Expeditioner i det förflutna. Etnologiska fältarbeten och försvinnande allmogekultur under 1900-talets början* (2014)",
+            u"*Expeditioner i det förflutna. Etnologiska fältarbeten och försvinnande allmogekultur under 1900-talets början* (2014)",
             u"*En ärans och lärdomens man. Bror Emil Hildebrand och Krapperup* (2009)",
         ]
     },
@@ -572,11 +565,11 @@ authors_dict = {
     },
 
     u"Ann-Cathrine Haglund": {
-        "sv": u"landshövding och ordförande i Sällskapet för Moderata Kvinnors Historia"
+        "sv": u"landshövding och ordförande i Sällskapet för Moderata Kvinnors Historia"
     },
 
     u"Gunilla Halldén": {
-        "sv": u"professor emeritus vid tema Barn vid Linköpings universitet",
+        "sv": u"professor emeritus vid Tema Barn vid Linköpings universitet",
         "publications": [
             u"*Ett hem av solsken. Disa Beijer och barnträdgården som arena för socialt arbete* (2016)",
             u"*Barndomens skogar. Om barn i natur och barns natur* (2011)",
@@ -593,14 +586,14 @@ authors_dict = {
     u"Lena Hammergren": {
         "sv": u"professor i teatervetenskap vid Stockholms universitet och professor i dansvetenskap vid Stockholms konstnärliga högskola",
         "publications": [
-            u"\"Att tala – att dansa: om metaforens betydelse inom danspedagogik\" i *Nordic Journal of Dance* 1/2016",
+            u"\"Att tala – att dansa. Om metaforens betydelse inom danspedagogik\", i *Nordic Journal of Dance* 1/2016",
         ]
     },
 
     u"Dick Harrison": {
         "sv": u"professor i historia vid Lunds universitet",
         "publications": [
-            u"*Jag har ingen vilja till makt: Biografi över Tage Erlander* (2017)",
+            u"*Jag har ingen vilja till makt. Biografi över Tage Erlander* (2017)",
             u"*Kalmars historia* (2017)",
         ]
     },
@@ -612,16 +605,16 @@ authors_dict = {
     u"Ann-Katrin Hatje": {
         "sv": u"professor emeritus i historia vid Umeå universitet",
         "publications": [
-            u"\"The Struggle over Christianity as a School Subject. The Democratic Role of the Press in a Church Campaign in 1963\" i *Reconsideing Religion, Law, and Democracy. New Challenges for Society and Research* (2016)",
-            u"\"Barnomsorgshistoria och den svenska daghemsmodellen\" i *Vägar till välfärd. Idéer, inspiratörer, kontroverser, perspektiv* (2013)",
+            u"\"The Struggle over Christianity as a School Subject. The Democratic Role of the Press in a Church Campaign in 1963\", I *Reconsideing Religion, Law, and Democracy. New Challenges for Society and Research* (2016)",
+            u"\"Barnomsorgshistoria och den svenska daghemsmodellen\", i *Vägar till välfärd. Idéer, inspiratörer, kontroverser, perspektiv* (2013)",
         ]
     },
 
     u"Anne Hedén": {
         "sv": u"filosofie doktor i historia vid Södertörns högskola och Stockholms universitet",
         "publications": [
-            u"Blicken mot öster. Svenska drömmar om Finland under världskrigets sista år\" i *Sverige och första världskriget. Maritima perspektiv Historiska Media* (2017)",
-            u"*Röd stjärna över Sverige. Kina som resurs i den svenska vänsterradikaliseringen under 1960- och 1970-talen* (2008)",
+            u"Blicken mot öster. Svenska drömmar om Finland under världskrigets sista år\", i *Sverige och första världskriget. Maritima perspektiv Historiska Media* (2017)",
+            u"*Röd stjärna över Sverige. Kina som resurs i den svenska vänsterradikaliseringen under 1960- och 1970-talen* (2008)",
         ]
     },
 
@@ -632,8 +625,8 @@ authors_dict = {
     u"Dag Hedman": {
         "sv": u"professor i litteraturvetenskap vid Göteborgs universitet",
         "publications": [
-            u"\"Skrev Aurora von Königsmarck verkligen Die drey Töchter Cecrops?\" i *Samlaren* (2015)",
-            u"\"From the Sublime to City Crime\" i *Samlaren* (2017)",
+            u"\"Skrev Aurora von Königsmarck verkligen Die drey Töchter Cecrops?\", i *Samlaren* (2015)",
+            u"\"From the Sublime to City Crime\", i *Samlaren* (2017)",
         ]
     },
 
@@ -641,14 +634,14 @@ authors_dict = {
         "sv": u"professor emeritus i litteraturvetenskap vid Uppsala universitet",
         "publications": [
             u"*Alice Lyttkens i och om 1930-talet* (2009)",
-            u"*Min hand är icke begåfvad att föra en skikliger penna. Fågelsjöbonden Jonas Olssons dagbok 1851-1892 med kompletterande uppsatser*",
+            u"*Min hand är icke begåfvad att föra en skikliger penna. Fågelsjöbonden Jonas Olssons dagbok 1851-1892 med kompletterande uppsatser* (2009)",
         ]
     },
 
     u"Anne Heith": {
         "sv": u"docent i litteraturvetenskap vid Umeå universitet",
         "publications": [
-            u"*Lars Levi Laestadius in the Contested Field of Cultural Heritage: A Study of Contemporary Sámi and Tornedalian Texts* (2018)",
+            u"*Lars Levi Laestadius in the Contested Field of Cultural Heritage. A Study of Contemporary Sámi and Tornedalian Texts* (2018)",
         ]
     },
 
@@ -656,7 +649,7 @@ authors_dict = {
         "sv": u"professor i teatervetenskap vid Stockholms universitet",
         "publications": [
             u"\"The Child´s Right to Culture and the Arts\", i *Nordic Ways* (2016)",
-            u"\"Klassiker i nya tolkningar. Om samtida scenkonst för ung publik\" i *Tillbaka till framtiden – barnkultur i dialog med vårt förflutna* (2017)",
+            u"\"Klassiker i nya tolkningar. Om samtida scenkonst för ung publik\", i *Tillbaka till framtiden. Barnkultur i dialog med vårt förflutna* (2017)",
         ]
     },
 
@@ -688,7 +681,7 @@ authors_dict = {
         "sv": u"docent i historia vid Lunds universitet",
         "publications": [
             u"*Hembiträdet och spelfilmen. Stjärnor i det svenska folkhemmets 1930- och 40-tal* (2017)",
-            u"*Class. Feminist and cultural perspectives* (2016)",
+            u"*Class. Feminist and cultural perspectives* (2016)",
         ]
     },
 
@@ -712,7 +705,7 @@ authors_dict = {
         "sv": u"lektor i textilvetenskap vid Uppsala universitet",
         "publications": [
             u"*Händer som lyder. Hantverkarna vid Handarbetets Vänner* (2015)",
-            u"\"Master and Apprentices of Textile Craft\" i *Making, Materiality and Knowledge* 3/2013",
+            u"\"Master and Apprentices of Textile Craft\", i *Making, Materiality and Knowledge* 3/2013",
         ]
     },
 
@@ -755,8 +748,8 @@ authors_dict = {
     u"A. Johannes Johansson": {
         "sv": u"filosofie doktor i kemisk fysik",
         "publications": [
-            u"\"Early contributions to theoretical chemistry: Inga Fischer-Hjalmars, a founder of the Swedish school\" i  *Molecular Physics* 17-18/2017",
-            u"\"Inga Fischer-Hjalmars (1918–2008): Swedish Pharmacist, Humanist, and Pioneer Quantum Chemist\" i *Journal of Chemical Education* 10/2012",
+            u"\"Early contributions to theoretical chemistry. Inga Fischer-Hjalmars, a founder of the Swedish school\", i *Molecular Physics* 17-18/2017",
+            u"\"Inga Fischer-Hjalmars (1918–2008). Swedish Pharmacist, Humanist, and Pioneer Quantum Chemist\", i *Journal of Chemical Education* 10/2012",
         ]
     },
 
@@ -772,7 +765,7 @@ authors_dict = {
     },
 
     u"Barbro Johnsson": {
-        "sv": u"filosofie doktor i etnologi, förste antikvarie vid Jenny Nyströms och Curt Stoopendaals stiftelse vid Kalmar läns museum",
+        "sv": u"filosofie doktor i etnologi och förste antikvarie vid Jenny Nyströms och Curt Stoopendaals stiftelse vid Kalmar läns museum",
         "publications": [
             u"*Jenny Nyström. Vandra i Jenny Nyströms Kalmar* (2012)",
             u"\"Jenny Nyström - barnens konstnärinna i tre århundraden\" i *Opsis barnkultur* 4/2013",
@@ -801,15 +794,15 @@ authors_dict = {
     u"Mischa van Kan": {
         "sv": u"musikvetare",
         "publications": [
-            u"\"Cooling down jazz: Making authentic Swedish jazz possible\" i *Jazz Research Journal* 1-2/2016",
+            u"\"Cooling down jazz. Making authentic Swedish jazz possible\", i *Jazz Research Journal* 1-2/2016",
         ]
     },
 
     u"Gunnel Karlsson": {
         "sv": u"lektor i genusvetenskap vid Örebro universitet",
         "publications": [
-            u"\"Gender Clashes and Faux Pas: The Political Diaries of Ulla Lindström, Swedish Minister 1954-66\" i *European Journal of Life Writing* (2016)",
-            u"\"Krönikan\" i *Historiskan* (2017)",
+            u"\"Gender Clashes and Faux Pas. The Political Diaries of Ulla Lindström, Swedish Minister 1954-66\", i *European Journal of Life Writing* (2016)",
+            u"\"Krönikan\", i *Historiskan* (2017)",
         ]
     },
 
@@ -823,7 +816,7 @@ authors_dict = {
     u"Tobias Karlsson": {
         "sv": u"docent i ekonomisk historia vid Lunds universitet",
         "publications": [
-            u"\"Risk Preferences and Gender Differences in Union Membership in Late Nineteenth-Century Swedish Manufacturing\" i *Feminist Economics*",
+            u"\"Risk Preferences and Gender Differences in Union Membership in Late Nineteenth-Century Swedish Manufacturing\", i *Feminist Economics*",
         ]
     },
 
@@ -835,17 +828,17 @@ authors_dict = {
         ]
     },
 
-    u"Sara Kristoffersson": {
-        "sv": u"professor i designhistoria vid Konstfack",
-        "publications": [
-            u"*IKEA. En kulturhistoria* (2015)",
-        ]
-    },
-
     u"Hjördis Kristenson": {
         "sv": u"docent och lektor emeritus vid Lunds universitet",
         "publications": [
             u"*Skolhuset. Idé och form* (2005)",
+        ]
+    },
+
+    u"Sara Kristoffersson": {
+        "sv": u"professor i designhistoria vid Konstfack",
+        "publications": [
+            u"*IKEA. En kulturhistoria* (2015)",
         ]
     },
 
@@ -864,15 +857,15 @@ authors_dict = {
     u"Merit Laine": {
         "sv": u"docent i konstvetenskap vid Uppsala universitet",
         "publications": [
-            u"\"A Moveable Gallery. The Battles of Charles XI in Paris and Stockholm\" i *The Gallery of Charles XI at the Royal Palace of Stockholm – In Perspective* (2016)",
-            u"\"The Most Important Events of the Caroline era. A Series of Allegories for Queen Hedvig Eleonora's Drottningholm\" i  *Art Bulletin of Nationalmuseum* (2016)",
+            u"\"A Moveable Gallery. The Battles of Charles XI in Paris and Stockholm\", i *The Gallery of Charles XI at the Royal Palace of Stockholm. In Perspective* (2016)",
+            u"\"The Most Important Events of the Caroline era. A Series of Allegories for Queen Hedvig Eleonora's Drottningholm\", i *Art Bulletin of Nationalmuseum* (2016)",
         ]
     },
 
     u"Ulrich Lange": {
         "sv": u"professor i kulturvård vid Göteborgs universitet",
         "publications": [
-            u"\"Till minnet av det goda Sverige – lantmätaren och arkitekten Jonas Sundahl i den svenska stormaktstidens yttersta utmark\" i *I utkanter och marginaler: 31 texter om kulturhistoria. En vänbok till Birgitta Svensson* (2015)",
+            u"\"Till minnet av det goda Sverige. Lantmätaren och arkitekten Jonas Sundahl i den svenska stormaktstidens yttersta utmark\", i *I utkanter och marginaler. 31 texter om kulturhistoria. En vänbok till Birgitta Svensson* (2015)",
         ]
     },
 
@@ -890,8 +883,8 @@ authors_dict = {
     u"Esbjörn Larsson": {
         "sv": u"docent i historia vid Uppsala universitet",
         "publications": [
-            u"*Från adlig uppfostran till borgerlig utbildning: Kungl. Krigsakademien mellan åren 1792 och 1866* (2005)",
-            u"*En lycklig Mechanism: Olika aspekter av växelundervisningen som en del av 1800-talets utbildningsrevolution* (2014)",
+            u"*Från adlig uppfostran till borgerlig utbildning. Kungl. Krigsakademien mellan åren 1792 och 1866* (2005)",
+            u"*En lycklig Mechanism. Olika aspekter av växelundervisningen som en del av 1800-talets utbildningsrevolution* (2014)",
         ]
     },
 
@@ -910,8 +903,8 @@ authors_dict = {
     u"Mariah Larsson": {
         "sv": u"professor i filmvetenskap vid Linnéuniversitetet",
         "publications": [
-            u"*The Swedish Porn Scene: Exhibition Contexts, 8mm Pornography and the Sex Film* (2017)",
-            u"*Skenet som bedrog: Mai Zetterling och det svenska sextiotalet* (2006)",
+            u"*The Swedish Porn Scene. Exhibition Contexts, 8mm Pornography and the Sex Film* (2017)",
+            u"*Skenet som bedrog. Mai Zetterling och det svenska sextiotalet* (2006)",
         ]
     },
 
@@ -924,14 +917,14 @@ authors_dict = {
     },
 
     u"Helena Andreeff Laurin": {
-        "sv": u"medlem i bland annat Skulptörförbundet, KRO/KIF och Svenska Konstnärernas Förening"
+        "sv": u"medlem i bland annat Skulptörförbundet, KRO/KIF och Svenska Konstnärernas Förening",
     },
 
     u"Karin Ström Lehander": {
         "sv": u"universitetsadjunkt vid Institutionen för kultur och kommunikation vid Linköpings universitet",
         "publications": [
             u"*Föreställningar om döden. Forskares aspekter på vår existens och dess begränsning* (2017)",
-            u"\"Tyra Kleen. Konstnär och kvinna vid förra sekelskiftet\" i *Tyra Kleen* (2016)",
+            u"\"Tyra Kleen. Konstnär och kvinna vid förra sekelskiftet\", i *Tyra Kleen* (2016)",
         ]
     },
 
@@ -947,7 +940,7 @@ authors_dict = {
         "sv": u"filosofie doktor i litteraturvetenskap och lektor i litteraturvetenskap med inriktning mot medier och redaktionell praktik vid Göteborgs universitet",
         "publications": [
             u"*Litterära värdepraktiker. Aktörer, rum, platser* (2017)",
-            u"\"'Det lutar åt cancer'. Agneta Klingspors *Stängt pga hälsosjäl* och kvinnliga bröstcancerberättelser\" i *Allvarligt talat* (2018)",
+            u"\"'Det lutar åt cancer'. Agneta Klingspors *Stängt pga hälsosjäl* och kvinnliga bröstcancerberättelser\", i *Allvarligt talat* (2018)",
         ]
     },
 
@@ -965,23 +958,23 @@ authors_dict = {
     u"Katarina Leppänen": {
         "sv": u"docent i idé- och lärdomshistoria vid Göteborgs universitet",
         "publications": [
-            u"*Elin Wägner's Alarm Clock: Ecofeminist theory in the interwar era* (2007)",
-            u"\"The Socialist New Woman Redux: Hella Wuolijoki's Life Writing in the 1940s\" i *European Journal of Life Writing* (2016)",
+            u"*Elin Wägner's Alarm Clock. Ecofeminist theory in the interwar era* (2007)",
+            u"\"The Socialist New Woman Redux. Hella Wuolijoki's Life Writing in the 1940s\", i *European Journal of Life Writing* (2016)",
         ]
     },
 
     u"Carina Lidström": {
         "sv": u"docent i litteraturvetenskap vid Örebro universitet",
         "publications": [
-            u"*Berättare på resa: Svenska resenärers reseberättelser 1667-1829* (2015)",
+            u"*Berättare på resa. Svenska resenärers reseberättelser 1667-1829* (2015)",
         ]
     },
 
     u"Jonas Liliequist": {
         "sv": u"professor i historia vid Umeå universitet",
         "publications": [
-            u"\"Kvinnor i manskläder och åtrå mellan kvinnor. Kulturella förväntningar och kvinnliga strategier i det tidigmoderna Sverige och Finland\" i *Makalösa kvinnor. Könsöverskridare i myt och verklighet* (2002)",
-            u"\"Kärlek, kön och sexualitet\" i *Signums svenska kulturhistoria Gustavianska tiden* (2007)",
+            u"\"Kvinnor i manskläder och åtrå mellan kvinnor. Kulturella förväntningar och kvinnliga strategier i det tidigmoderna Sverige och Finland\", i *Makalösa kvinnor. Könsöverskridare i myt och verklighet* (2002)",
+            u"\"Kärlek, kön och sexualitet\", i *Signums svenska kulturhistoria. Gustavianska tiden* (2007)",
         ]
     },
 
@@ -989,12 +982,12 @@ authors_dict = {
         "sv": u"professor emeritus i litteraturvetenskap vid Göteborgs universitet",
         "publications": [
             u"*Poesiens rytmik. En essä om form och betydelse* (2014)",
-            u"\"Embodied Rhythm in Space & Time\" i *Style* 4/2017",
+            u"\"Embodied Rhythm in Space & Time\", i *Style* 4/2017",
         ]
     },
 
     u"Katarina Lindahl": {
-        "sv": u"före detta generalsekreterare på RFSU filosofie kandidat och socionom"
+        "sv": u"före detta generalsekreterare på RFSU, filosofie kandidat och socionom"
     },
 
     u"Anna Lena Lindberg": {
@@ -1020,22 +1013,19 @@ authors_dict = {
     },
 
     u"Nina Linder": {
-        "sv": u"filosofie kandidat i konstvetenskap, litteraturvetenskap och antikens kultur och samhälle, tidigare arkivarie på Riksarkivet",
+        "sv": u"filosofie kandidat i konstvetenskap, litteraturvetenskap och antikens kultur och samhälle och tidigare arkivarie på Riksarkivet",
         "publications": [
-            u"Journalisten Synnöve Bellander. Arbete och privatliv – i breev och klipp\" i *Presshistorisk Årsbok* (2007)",
-            u"\"Breven till Carl Ferdinand Lundin\"  i *Presshistorisk Årsbok* (2009)",
+            u"\"Journalisten Synnöve Bellander. Arbete och privatliv – i brev och klipp\", i *Presshistorisk Årsbok* (2007)",
+            u"\"Breven till Carl Ferdinand Lundin\", i *Presshistorisk Årsbok* (2009)",
         ]
     },
 
-    u"Katarina Lindahl": {
-        "sv": u"f.d. generalsekr RFSU. Tidigare arbete social och politiska frågor. Fil kand socionom"
-    },
 
     u"Valborg Lindgärde": {
-        "sv": u"Brennerforskare i Lund, på uppdrag av Svenska Vitterhetssamfundet",
+        "sv": u"Brennerforskare i Lund på uppdrag av Svenska Vitterhetssamfundet",
         "publications": [
-            u"\"På en nålstol i Moskva. Om ägaranteckningar i gamla böcker, i synnerhet i ett exemplar av Olof Ekmans *Sjönödz-Löffte*\" i *Humanitas. Festskrift till Arne Jönsson* (2017)",
-            u"\"Skrifter för tillfället och evigheten 1520–1720\" i *Nordens litteratur* (2017)",
+            u"\"På en nålstol i Moskva. Om ägaranteckningar i gamla böcker, i synnerhet i ett exemplar av Olof Ekmans *Sjönödz-Löffte*\", i *Humanitas. Festskrift till Arne Jönsson* (2017)",
+            u"\"Skrifter för tillfället och evigheten 1520–1720\", i *Nordens litteratur* (2017)",
         ]
     },
 
@@ -1066,13 +1056,13 @@ authors_dict = {
     u"Agneta Linné": {
         "sv": u"professor emeritus i pedagogik vid Örebro universitet",
         "publications": [
-            u"\"Curriculum theory and didactics – towards a theoretical rethinking\" i *Nordic Journal of Studies in Educational Policy* 2015",
-            u"\"Lutheranism and democracy: Scandinavia\" i *Girls' Secondary Education in the Western World* (2010)",
+            u"\"Curriculum theory and didactics. Towards a theoretical rethinking\", i *Nordic Journal of Studies in Educational Policy* (2015)",
+            u"\"Lutheranism and democracy. Scandinavia\", i *Girls' Secondary Education in the Western World* (2010)",
         ]
     },
 
     u"Barbro Ljung": {
-        "sv": u"legitimerad sjuksköterska och tidigare enhetschef vid Drottning Silvias barn-och ungdomssjukhus, Göteborg"
+        "sv": u"legitimerad sjuksköterska och tidigare enhetschef vid Drottning Silvias barn-och ungdomssjukhus i Göteborg"
     },
 
     u"Rikard Loman": {
@@ -1097,23 +1087,23 @@ authors_dict = {
     u"Lena Lundgren": {
         "sv": u"bibliotekarie och tidigare utvecklingsledare vid Regionbibliotek Stockholm",
         "publications": [
-            u"*Böcker bibliotek bildning. Valfrid Palmgren Munch-Petersens liv och verk* (2015)",
+            u"*Böcker, bibliotek, bildning. Valfrid Palmgren Munch-Petersens liv och verk* (2015)",
         ]
     },
 
     u"Robert Lyons": {
         "sv": u"lektor emeritus i teaterstudier vid Göteborgs universitet",
         "publications": [
-            u"\"Brecht och politik på Frihetsteatern i Palestina\" i *Svenskläraren* 2/2015",
-            u"\"An Arabian Night with Swedish Direction: Shakespeare's *A Midsummer Night's Dream* in Egypt and Sweden, 2003\" i *Critical Survey* 3/2016",
+            u"\"Brecht och politik på Frihetsteatern i Palestina\", i *Svenskläraren* 2/2015",
+            u"\"An Arabian Night with Swedish Direction. Shakespeare's *A Midsummer Night's Dream* in Egypt and Sweden, 2003\", i *Critical Survey* 3/2016",
         ]
     },
 
     u"Katarina Wadstein MacLeod": {
         "sv": u"docent i konstvetenskap vid Södertörns högskola",
         "publications": [
-            u"*Bakom gardinerna: Hemmet i svensk konst under nittonhundratalet* (2018)",
-            u"*Kulturarv – att skapa historia för framtiden* Charlotte Bydler (2015)",
+            u"*Bakom gardinerna. Hemmet i svensk konst under nittonhundratalet* (2018)",
+            u"*Kulturarv. Att skapa historia för framtiden* (2015)",
         ]
     },
 
@@ -1125,7 +1115,7 @@ authors_dict = {
     },
 
     u"Christina Mattsson": {
-        "sv": u"folklorist och författare, tidigare styresman för Nordiska museet ",
+        "sv": u"folklorist, författare och tidigare styresman för Nordiska museet ",
         "publications": [
             u"*Konsten att styra en kulturinstitution* (2015)",
             u"*Juvelarian. Historien om Christina Nilssons smaragder* (2017)",
@@ -1135,16 +1125,16 @@ authors_dict = {
     u"Ellinor Melander": {
         "sv": u"filosofie doktor i idéhistoria",
         "publications": [
-            u"\"Framtiden: Ett nedlagt kvinnotidningsprojekt\"i *Presshistorisk årsbok* (2015)",
-            u"*\"Frisinnad och omutligt modig\": En biografi om Hilda Sachs* (under utgivning)",
+            u"\"Framtiden. Ett nedlagt kvinnotidningsprojekt\", i *Presshistorisk årsbok* (2015)",
+            u"*\"Frisinnad och omutligt modig\". En biografi om Hilda Sachs* (under utgivning)",
         ]
     },
 
     u"Birgitta Meurling": {
         "sv": u"professor i etnologi vid Uppsala universitet",
         "publications": [
-            u"\"Med sportbil genom Europa. En förälskad kvinnas resebrev från 1950-talet.\" i *RIG* 3/2016",
-            u"\"När livet blir text, när texten blir liv. Reflexioner utifrån två kvinnors dagböcker och brev.\" i *Laboratorium för folk och kultur* 3/2017",
+            u"\"Med sportbil genom Europa. En förälskad kvinnas resebrev från 1950-talet.\", i *RIG* 3/2016",
+            u"\"När livet blir text, när texten blir liv. Reflexioner utifrån två kvinnors dagböcker och brev.\", i *Laboratorium för folk och kultur* 3/2017",
         ]
     },
 
@@ -1153,9 +1143,9 @@ authors_dict = {
     },
 
     u"Lena Milton": {
-        "sv": u"filosofie doktor och redaktör vid Svenskt biografiskt lexikon",
+        "sv": u"filosofie doktor och redaktör för Svenskt biografiskt lexikon",
         "publications": [
-            u"*Sällskapet Vänner till pauvres honteux 150 år: en god historia* (2012)",
+            u"*Sällskapet Vänner till pauvres honteux 150 år. En god historia* (2012)",
         ]
     },
 
@@ -1182,7 +1172,7 @@ authors_dict = {
         "sv": u"filosofie doktor i historia vid Göteborgs universitet",
         "publications": [
             u"*Ordens kraft. Politiska eder i Sverige 1520-1718* (2017)",
-            u"\"Winning a war with words. Oaths as military means in Early Modern Scandinavia\" i *Scandinavian Journal of History* 2/2014",
+            u"\"Winning a war with words. Oaths as military means in Early Modern Scandinavia\", i *Scandinavian Journal of History* 2/2014",
         ]
     },
 
@@ -1194,7 +1184,7 @@ authors_dict = {
         "sv": u"filosofie doktor litteraturvetenskap och docent genusvetenskap vid Stockholms universitet",
         "publications": [
             u"*Reporter i rörelse* (1999)",
-            u"\"När journalister minns\" i *Presshistorisk årsbok* (2015)",
+            u"\"När journalister minns\", i *Presshistorisk årsbok* (2015)",
         ]
     },
 
@@ -1209,8 +1199,8 @@ authors_dict = {
     u"Sara E. Ellis Nilsson": {
         "sv": u"filosofie doktor och universitetslektor vid Malmö universitet",
         "publications": [
-            u"\"Writing the Viking Age into Existence\" i *Historisk tidskrift* 4/2016",
-            u"\"Tidiga spår av lokala helgonkulter i det medeltida lundastiftet\" i *Lunds stift i världen* (2016)",
+            u"\"Writing the Viking Age into Existence\", i *Historisk tidskrift* 4/2016",
+            u"\"Tidiga spår av lokala helgonkulter i det medeltida lundastiftet\", i *Lunds stift i världen* (2016)",
         ]
     },
 
@@ -1225,23 +1215,23 @@ authors_dict = {
     u"Ulrika Nilsson": {
         "sv": u"filosofie doktor i idé- och lärdomshistoria",
         "publications": [
-            u"*Det heta könet: Gynekologin i Sverige kring förra sekelskiftet* (2005)",
+            u"*Det heta könet. Gynekologin i Sverige kring förra sekelskiftet* (2005)",
         ]
     },
 
     u"Kirsti Niskanen": {
         "sv": u"professor i historia vid Stockholms universitet",
         "publications": [
-            u"*Karriär i männens värld - nationalekonomen och feministen Karin Kock* (2007)",
-            u"\"Scientific Persona\" i *Persona Studies* 1/2018",
+            u"*Karriär i männens värld. Nationalekonomen och feministen Karin Kock* (2007)",
+            u"\"Scientific Persona\", i *Persona Studies* 1/2018",
         ]
     },
 
     u"Catharina Nolin": {
         "sv": u"docent i konstvetenskap vid Stockholms universitet",
         "publications": [
-            u"\"Sylvia Gibson and Sweden's post-World War II welfare landscapes\" i *OEI* (2016)",
-            u"\"Women planners and green space: Sweden 1930–1970\" i *Green Landscapes in the European City, 1750–2000* (2017)",
+            u"\"Sylvia Gibson and Sweden's post-World War II welfare landscapes\", i *OEI* (2016)",
+            u"\"Women planners and green space. Sweden 1930–1970\", i *Green Landscapes in the European City, 1750–2000* (2017)",
         ]
     },
 
@@ -1257,14 +1247,14 @@ authors_dict = {
         "sv": u"lektor i litteraturvetenskap vid Mittuniversitetet",
         "publications": [
             u"*Sekelskiftets svenska konstsaga och sagodiktaren Helena Nyblom* (1991)",
-            u"\"Konsten att välja\" i *I litteraturens underland. Festskrift till Boel Westin* (2011)",
+            u"\"Konsten att välja\", i *I litteraturens underland. Festskrift till Boel Westin* (2011)",
         ]
     },
 
     u"Kerstin Norlander": {
-        "sv": u"filosofie doktor i ekonomisk historia och universitetslektor i genusvetenskap, Umeå universitet",
+        "sv": u"filosofie doktor i ekonomisk historia och universitetslektor i genusvetenskap vid Umeå universitet",
         "publications": [
-            u"\"Inledning och kommentarer\" i *Kvinnohus nu! Dagbok från Kvinnohusockupationen i Umeå 1983* (2017)",
+            u"\"Inledning och kommentarer\", i *Kvinnohus nu! Dagbok från Kvinnohusockupationen i Umeå 1983* (2017)",
         ]
     },
 
@@ -1317,7 +1307,7 @@ authors_dict = {
     },
 
     u"Cecilia Malmström Olsson": {
-        "sv": u"filosofie doktor, dansvetare"
+        "sv": u"filosofie doktor och dansvetare"
     },
 
     u"Irene Opira": {
@@ -1328,12 +1318,12 @@ authors_dict = {
         "sv": u"lektor i historia vid Göteborgs universitet",
         "publications": [
             u"*Sjukgymnasten – vart tog han vägen? En undersökning av sjukgymnastyrkets maskulinisering och avmaskulinisering 1813-1934* (2005)",
-            u"*Gymnastik som medicin. Berättelsen om en svenska exportsuccé* (2013)",
+            u"*Gymnastik som medicin. Berättelsen om en svensk exportsuccé* (2013)",
         ]
     },
 
     u"Viveka Overland": {
-        "sv": u"filosofie kandidat i kulturvetenskapliga ämnen, anställd vid Bohusläns museum",
+        "sv": u"filosofie kandidat i kulturvetenskapliga ämnen och anställd vid Bohusläns museum",
         "publications": [
             u"*Bohus stickning på nytt. The Revival* (2015)",
         ]
@@ -1342,13 +1332,20 @@ authors_dict = {
     u"Anneli Palmsköld": {
         "sv": u"professor i kulturvård med inriktning mot hantverksvetenskap vid Göteborgs universitet",
         "publications": [
-            u"\"Den omoraliska virkningen\" i *Politiska projekt, osäkra kulturarv* (2017)",
-            u"*Jag vill ju vara fri, en bok om Lena Nyman* (2013)",
+            u"\"Den omoraliska virkningen\", i *Politiska projekt, osäkra kulturarv* (2017)",
+            u"*Begreppet hemslöjd* (2012)",
+        ]
+    },
+
+    u"Annika Persson": {
+        "sv": u"journalist och författare",
+        "publications": [
+            u"*Jag vill ju vara fri. En bok om Lena Nyman* (2013)",
         ]
     },
 
     u"Gudrun Persson": {
-        "sv": u"lärare, diakonissa och studierektor vid Ersta diakonisällskaps diakonutbildning"
+        "sv": u"lärare, diakon och studierektor vid Ersta diakonisällskaps diakonutbildning"
     },
 
     u"Helena Persson": {
@@ -1385,7 +1382,7 @@ authors_dict = {
     u"Cecilia Pettersson": {
         "sv": u"filosofie doktor i litteraturvetenskap vid Göteborgs universitet",
         "publications": [
-            u"\"Womens Experience of Reading Fiction while on Sick Leave\" *LIR Journal* 6/2016",
+            u"\"Womens Experience of Reading Fiction while on Sick Leave\", i *LIR Journal* 6/2016",
             u"*Märkt av det förflutna? Minnesproblematik och minnesestetik i den svenska 1990-talsromanen* (2009)",
         ]
     },
@@ -1417,20 +1414,20 @@ authors_dict = {
     u"Elisabeth Punzi": {
         "sv": u"legitimerad psykolog och lektor i psykologi vid Göteborgs universitet",
         "publications": [
-            u"\"These are the things I may never learn from books. Clinical psychology students' experiences of their development of practical wisdom\" i *Reflective Practice* 16/2015",
-            u"\"A discursive analysis concerning information on \"ADHD\" presented to parents by the National Institute of Mental Health (USA)\" i *International Journal of Qualitative Studies on Health and Well-being* 11/2016",
+            u"\"These are the things I may never learn from books. Clinical psychology students' experiences of their development of practical wisdom\", i *Reflective Practice* 16/2015",
+            u"\"A discursive analysis concerning information on \"ADHD\" presented to parents by the National Institute of Mental Health (USA)\", i *International Journal of Qualitative Studies on Health and Well-being* 11/2016",
         ]
     },
 
     u"Roger Qvarsell": {
-        "sv": u"idéhistoriker och professor emeritus vid Linköpings universitet."
+        "sv": u"idéhistoriker och professor emeritus vid Linköpings universitet"
     },
 
     u"Marie Rehnberg": {
         "sv": u"filosofie magister i konstvetenskap vid Lunds universitet",
         "publications": [
             u"*Höganäs Keramik* (2003)",
-            u"*Anna Petrus, Skulptör och industrikonstnär* (2009)",
+            u"*Anna Petrus. Skulptör och industrikonstnär* (2009)",
         ]
     },
 
@@ -1457,7 +1454,7 @@ authors_dict = {
         "sv": u"professor i historia vid Högskolan i Kristianstad",
         "publications": [
             u"*Drottning Christina. En biografi* (2008)",
-            u"*Mästersångaren från Västerås. Set Svanholm. En biografi* (2015)",
+            u"*Mästersångaren från Västerås. Set Svanholm.* (2015)",
         ]
     },
 
@@ -1468,8 +1465,8 @@ authors_dict = {
     u"Marta Ronne": {
         "sv": u"filosofie doktor i litteraturvetenskap och litteraturkritiker",
         "publications": [
-            u"\"Margit Abenius – en läsandets ambassadör\" i *Läsning. RJ:s årsbok 2013/2014*",
-            u"\"Gendering Cultural Transfer and Transmission History\" i *Rethinking Cultural Transfer and Transmission. Reflections and New Perspectives* (2012)",
+            u"\"Margit Abenius. En läsandets ambassadör\", i *Läsning. RJ:s årsbok 2013/2014*",
+            u"\"Gendering Cultural Transfer and Transmission History\", i *Rethinking Cultural Transfer and Transmission. Reflections and New Perspectives* (2012)",
         ]
     },
 
@@ -1492,7 +1489,7 @@ authors_dict = {
     u"Avigail Rotbain": {
         "sv": u"doktorand i historia vid Göteborgs universitet",
         "publications": [
-            u"\"'Tvenne hjältars knutna ätter. Oscar I och Josefina\" i *Politik och Passion. Svenska kungliga äktenskap under 600 år* (2015)",
+            u"\"Tvenne hjältars knutna ätter. Oscar I och Josefina\", i *Politik och Passion. Svenska kungliga äktenskap under 600 år* (2015)",
         ]
     },
 
@@ -1504,7 +1501,7 @@ authors_dict = {
     },
 
     u"Owe Røren": {
-        "sv": u"pedagog/författare, Stockholm"
+        "sv": u"pedagog och författare i Stockholm"
     },
 
     u"Kerstin Sandell": {
@@ -1534,8 +1531,8 @@ authors_dict = {
     u"Emma Severinsson": {
         "sv": u"doktorand i historia vid Lunds universitet",
         "publications": [
-            u"\"Korta kjolar och exponerade ben. Om 1920-talets uppstyckade kvinnokropp\" i *Gränsløs. Tidskrift för studier av Öresundsregionens historia, kultur och samhällsliv* 6/2016",
-            u"\"Frihet eller kärlek? Äktenskap, singelliv och vägen till lycka i 1920- talets veckopress\" i *LIR Journal* 7/2016",
+            u"\"Korta kjolar och exponerade ben. Om 1920-talets uppstyckade kvinnokropp\", i *Gränsløs. Tidskrift för studier av Öresundsregionens historia, kultur och samhällsliv* 6/2016",
+            u"\"Frihet eller kärlek? Äktenskap, singelliv och vägen till lycka i 1920- talets veckopress\", i *LIR Journal* 7/2016",
         ]
     },
 
@@ -1569,7 +1566,7 @@ authors_dict = {
     u"Jessica Sjöholm Skrubbe": {
         "sv": u"docent i konstvetenskap vid Stockholms universitet",
         "publications": [
-            u"*Curating Differently: Feminisms, Exhibitions, and Curatorial Spaces* (2017)",
+            u"*Curating Differently. Feminisms, Exhibitions, and Curatorial Spaces* (2017)",
             u"*Nell Walden & Der Sturm* (2015)",
         ]
     },
@@ -1583,7 +1580,7 @@ authors_dict = {
     },
 
     u"Beatrice Christensen Sköld": {
-        "sv": u"filosofie doktor, Stockholm",
+        "sv": u"filosofie doktor i Stockholm",
         "publications": [
             u"*Vetenskap och pedagogik* (2014)",
             u"*KMA hundra år. Kronprinsessan Margretas Arbetsnämnd* (2017)",
@@ -1597,15 +1594,15 @@ authors_dict = {
     u"Tytti Soila": {
         "sv": u"professor emeritus i filmvetenskap vid Stockholms universitet",
         "publications": [
-            u"\"The Stolen death/Varastettu kuolema \" i *The Routledge Encyclopaedia of Films* (2015)",
-            u"\"Two stories of the Arts and Humanities –and a Third Version Emerging\" i *Akademisk Kvarter* 10/2016",
+            u"\"The Stolen death/Varastettu kuolema\", i *The Routledge Encyclopaedia of Films* (2015)",
+            u"\"Two stories of the Arts and Humanities –and a Third Version Emerging\", i *Akademisk Kvarter* 10/2016",
         ]
     },
 
     u"Marie Steinrud": {
         "sv": u"forskare och lärare i etnologi vid Stockholms universitet",
         "publications": [
-            u"\"Performing Women: The Life and Work of Actresses in Stockholm, c. 1780–1850\" i *Early Professional Women in Northen Europe, c. 1650–1850* (2017)",
+            u"\"Performing Women. The Life and Work of Actresses in Stockholm, c. 1780–1850\", i *Early Professional Women in Northen Europe, c. 1650–1850* (2017)",
         ]
     },
 
@@ -1622,7 +1619,7 @@ authors_dict = {
     },
 
     u"Patrik Steorn": {
-        "sv": u"museichef Thielska Galleriet och docent i konstvetenskap vid Stockholms universitet"
+        "sv": u"museichef på Thielska Galleriet och docent i konstvetenskap vid Stockholms universitet"
     },
 
     u"Lina Sturfelt": {
@@ -1655,8 +1652,8 @@ authors_dict = {
     u"Eva-Maria Svensson": {
         "sv": u"professor i rättsvetenskap vid Juridiska institutionen vid Göteborgs universitet",
         "publications": [
-            u"\"Gender Equality in the Governance of the Arctic Region\" i *Nordic Journal on Law and Society* 1-2/2017",
-            u"\"En nordisk kvinderetsperformer \" I *Ketsch me if you can - Sociale rettigheder og ligestilling. Hyldest til Kirsten Ketscher* (2017)",
+            u"\"Gender Equality in the Governance of the Arctic Region\", i *Nordic Journal on Law and Society* 1-2/2017",
+            u"\"En nordisk kvinderetsperformer\", i *Ketsch me if you can. Sociale rettigheder og ligestilling. Hyldest til Kirsten Ketscher* (2017)",
         ]
     },
 
@@ -1673,7 +1670,7 @@ authors_dict = {
     },
 
     u"Lisa Svensson": {
-        "sv": u"doktorand i Idé- och lärdomshistoria vid Göteborgs Universitet"
+        "sv": u"doktorand i idé- och lärdomshistoria vid Göteborgs universitet"
     },
 
     u"Ingegerd Särlvik": {
@@ -1706,8 +1703,8 @@ authors_dict = {
     u"Richard Tellström": {
         "sv": u"docent i måltidskunskap, etnolog vid Stockholms universitet och historisk redaktör för TV",
         "publications": [
-            u"\"Matintervjuns metoder: Att fråga om livsmedel, maträtter och måltider\" i *Mat är mer än mat. Samhällsvetenskapliga perspektiv på mat och måltider* (2015)",
-            u"*Hunger och törst; Svensk måltidshistoria från näring till statusmarkör* (2017)",
+            u"\"Matintervjuns metoder. Att fråga om livsmedel, maträtter och måltider\", i *Mat är mer än mat. Samhällsvetenskapliga perspektiv på mat och måltider* (2015)",
+            u"*Hunger och törst. Svensk måltidshistoria från näring till statusmarkör* (2017)",
         ]
     },
 
@@ -1720,7 +1717,7 @@ authors_dict = {
     },
 
     u"Andreas Tjerneld": {
-        "sv": u"filosofie doktor i historia, före detta redaktör vid Svenskt biografiskt lexikon."
+        "sv": u"filosofie doktor i historia och före detta redaktör för Svenskt biografiskt lexikon."
     },
 
     u"Karin Tjernström": {
@@ -1741,7 +1738,7 @@ authors_dict = {
     u"Charlotte Tornbjer": {
         "sv": u"filosofie doktor i historia vid Lunds universitet",
         "publications": [
-            u"\"Att resa till framtiden? Svenska resenärers föreställningar om kvinnan och familjen i Sovjetunionen\" i *Rysk spegel. Svenska berättelser om Sovjetunionen – och om Sverige* (2008)",
+            u"\"Att resa till framtiden? Svenska resenärers föreställningar om kvinnan och familjen i Sovjetunionen\", i *Rysk spegel. Svenska berättelser om Sovjetunionen – och om Sverige* (2008)",
             u"*Den nationella modern. Moderskap i konstruktioner av svensk nationell gemenskap under 1900-talets första hälft* (2002)",
         ]
     },
@@ -1749,7 +1746,7 @@ authors_dict = {
     u"Emma Tornborg": {
         "sv": u"filosofie doktor i litteraturvetenskap vid Linnéuniversitetet",
         "publications": [
-            u"\"Fakta och fiktion i ekfrastiska representationer av bilder\" i *Tidskrift för litteraturvetenskap* 1/2016",
+            u"\"Fakta och fiktion i ekfrastiska representationer av bilder\", i *Tidskrift för litteraturvetenskap* 1/2016",
         ]
     },
 
@@ -1769,15 +1766,15 @@ authors_dict = {
         "sv": u"docent i litteraturvetenskap och lektor vid Litteraturvetenskapliga institutionen vid Uppsala universitet",
         "publications": [
             u"*Lära lärare läsa. Om utbildning till svensklärare och litteraturundervisning i skolan* (2015)",
-            u"\"'Måtte Dr. Lagerlöfs hälsa och krafter bestå …!'. Barn skriver till Selma Lagerlöf\" i *Konstellationer. Festskrift till Anna Williams* (2017)",
+            u"\"'Måtte Dr. Lagerlöfs hälsa och krafter bestå …!'. Barn skriver till Selma Lagerlöf\", i *Konstellationer. Festskrift till Anna Williams* (2017)",
         ]
     },
 
     u"Kersti Ullenhag": {
         "sv": u"professor emeritus i ekonomisk historia vid Uppsala universitet",
         "publications": [
-            u"Kristin Lundell, Busskunge\" i *Historisk tidskrift* 4/2016",
-            u"\"The part and the whole\" i *Business History*1/2014",
+            u"Kristin Lundell, Busskungen\", i *Historisk tidskrift* 4/2016",
+            u"\"The part and the whole\", i *Business History* 1/2014",
         ]
     },
 
@@ -1785,7 +1782,7 @@ authors_dict = {
         "sv": u"professor i pedagogik vid Stockholms universitet",
         "publications": [
             u"*\"Icke ett teoretiskt luftslott\". C.J.L. Almqvist som rektor och pedagogisk utopist* (2016)",
-            u"\"Rektor Almqvist och personlighetsprincipen\" i *Nordic Journal of Educational History* 2/2014",
+            u"\"Rektor Almqvist och personlighetsprincipen\", i *Nordic Journal of Educational History* 2/2014",
         ]
     },
 
@@ -1793,34 +1790,34 @@ authors_dict = {
         "sv": u"professor i historia vid Lunds universitet",
         "publications": [
             u"*Kvinnors röster. Livsöden från det moderna Sveriges framväxt* (2016)",
-            u"\"Släkten Berlin och Charlotte Berlin\" i *Den högst originella fröken Charlotte Berlin* (2016)",
+            u"\"Släkten Berlin och Charlotte Berlin\", i *Den högst originella fröken Charlotte Berlin* (2016)",
         ]
     },
 
     u"Anna Maria Ursing": {
-        "sv": u"filosofie doktor i litteraturvetenskap och Svenska med didaktisk inriktning vid Malmö högskola och Lunds universitet",
+        "sv": u"filosofie doktor i litteraturvetenskap och svenska med didaktisk inriktning vid Malmö universitet och Lunds universitet",
         "publications": [
             u"*Fantastiska fröknar. Studier av lärarinnegestalter i svensk skönlitteratur* (2004)",
-            u"\"Läraren\" i *Tjänstemannen i litteraturen. Bilder av goda och mindre goda byråkrater* (2017)",
+            u"\"Läraren\", i *Tjänstemannen i litteraturen. Bilder av goda och mindre goda byråkrater* (2017)",
         ]
     },
 
     u"Jennifer Vintkvist": {
-        "sv": u"arkivassistent vid Krigsarkivet, Riksarkivet samt nöjeshistorisk skribent"
+        "sv": u"arkivassistent vid Krigsarkivet, Riksarkivet och nöjeshistorisk skribent"
     },
 
     u"Kerstin E Wallin": {
         "sv": u"filosofie doktor i pedagogik",
         "publications": [
-            u"*Som en syster till hemmet, Uppsala hemsysterskola* (2012)",
-            u"*Böcker Bibliotek Bildning, Valfrid Munch-Petersens liv och verk* (2015)",
+            u"*Som en syster till hemmet. Uppsala hemsysterskola* (2012)",
+            u"*Böcker, bibliotek, bildning. Valfrid Munch-Petersens liv och verk* (2015)",
         ]
     },
 
     u"Ulla-Karin Warberg": {
-        "sv": u"filosofie magister och intendent vid Nordiska museet, Stockholm",
+        "sv": u"filosofie magister och intendent vid Nordiska museet i Stockholm",
         "publications": [
-            u"\"Lagtexten: Kungl. Maj:ts proposition Nr 249 maj 1927\" i *Kulturarv. Att skapa historia för framtiden* (2014)",
+            u"\"Lagtexten: Kungl. Maj:ts proposition Nr 249 maj 1927\", i *Kulturarv. Att skapa historia för framtiden* (2014)",
             u"*När färgen kom till byn. En exposé över svenska målade allmogemöbler 1750-1850* (2014)",
         ]
     },
@@ -1833,7 +1830,7 @@ authors_dict = {
         "sv": u"professor i pedagogik vid Örebro universitet",
         "publications": [
             u"*Funding the Rise of Mass Schooling. The Social, Economic and Cultural History of School Finance in Sweden, 1840-1900* (2017)",
-            u"*Att bygga ett skolväsende: Folkskolans förutsättningar och framväxt 1840-1900* (2014)",
+            u"*Att bygga ett skolväsende. Folkskolans förutsättningar och framväxt 1840-1900* (2014)",
         ]
     },
 
@@ -1874,13 +1871,13 @@ authors_dict = {
     },
 
     u"Ewonne Winblad": {
-        "sv": u"journalist Stockholm"
+        "sv": u"journalist i Stockholm"
     },
 
     u"Hanna Markusson Winkvist": {
         "sv": u"universitetslektor i historia vid Göteborgs universitet",
         "publications": [
-            u"\"Persisting patterns. Graduate degrees and gender ratio in Sweden 1960–1990\" i *Creative Education*11/ 2016",
+            u"\"Persisting patterns. Graduate degrees and gender ratio in Sweden 1960–1990\", i *Creative Education* 11/2016",
         ]
     },
 
@@ -1899,7 +1896,7 @@ authors_dict = {
     },
 
     u"Annelie Bränström-Öhman":{
-        "sv": u"är professor i litteraturvetenskap och genusvetenskap med inriktning mot humaniora vid Umeå universitet",
+        "sv": u"professor i litteraturvetenskap och genusvetenskap med inriktning mot humaniora vid Umeå universitet",
         "publications": [
             u"*Stilens munterhet. Sara Lidmans författardagböcker från Missenträsk 1975-1985* (2014)",
             u"*\"kärlek! och någonting att skratta åt! dessutom\". Sara Lidman och den kärleksfulla blicken* (2008)",
@@ -1910,7 +1907,7 @@ authors_dict = {
         "sv": u"professor i litteraturvetenskap vid Uppsala universitet",
         "publications": [
             u"*Samtalets retorik. Belevade kulturer, offentliga samtal och kön i svenskt 1700-tal* (2014)",
-            u"\"'Gif spenabarnen hulda mor; En droppa af din källa stor'. Manlig och kvinnlig moderlighet i 1700-talets Sverige\" i *Konstellationer. Festskrift till Anna Williams* (2017)",
+            u"\"'Gif spenabarnen hulda mor; En droppa af din källa stor'. Manlig och kvinnlig moderlighet i 1700-talets Sverige\", i *Konstellationer. Festskrift till Anna Williams* (2017)",
         ]
     },
 
@@ -1922,15 +1919,15 @@ authors_dict = {
     },
 
     u"Eva Öhrström": {
-        "sv": u"professor emeritus i musik och samhälle vid Kungl Musikhögskolan i Stockholm",
+        "sv": u"professor emeritus i musik och samhälle vid Kungliga Musikhögskolan i Stockholm",
         "publications": [
             u"*Elfrida Andrée. Ett levnadsöde* (1999)",
-            u"*Jenny Lind, The swedish Nightingale* (2000)",
+            u"*Jenny Lind. The Swedish nightingale* (2000)",
         ]
     },
 
     u"Hans Öjmyr": {
-        "sv": u"filosofie doktor i konstvetenskap vid Stockholms universitet och enhetschef vid Stadsmuseet i Stockholm",
+        "sv": u"filosofie doktor i konstvetenskap vid Stockholms universitet och enhetschef på Stadsmuseet i Stockholm",
         "publications": [
             u"*Josabeth Sjöbergs Stockholm* (2016)",
         ]
