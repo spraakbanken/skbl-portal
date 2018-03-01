@@ -145,7 +145,11 @@ def organisation_index():
 @app.route("/sv/organisation/<result>", endpoint="organisation_sv")
 def organisation(result=None):
     title = request.args.get('title')
-    page = searchresult(result, 'organisation', 'id', 'organisations', title=title)
+    lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
+    if lang == "en":
+        page = searchresult(result, 'organisation', 'id', 'organisations', title=title)
+    else:
+        page = searchresult(result, 'organisation', 'id', 'organisations', title=title)
     return set_cache(page)
 
 

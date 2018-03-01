@@ -52,12 +52,18 @@ def compute_organisation(lang="", infotext="", cache=True):
             return art
 
     infotext = helpers.get_infotext("organisation", request.url_rule.rule)
-    data = karp_query('minientry', {'q': 'extended||and|anything|regexp|.*',
-                                    'show': 'organisationsnamn,organisationstyp'})
+    if lang == "en":
+        data = karp_query('minientry', {'q': 'extended||and|anything|regexp|.*',
+                                        'show': 'organisationsnamn,organisationstyp_eng'})
+        typefield = "type_eng"
+    else:
+        data = karp_query('minientry', {'q': 'extended||and|anything|regexp|.*',
+                                        'show': 'organisationsnamn,organisationstyp'})
+        typefield = "type"
     nested_obj = {}
     for hit in data['hits']['hits']:
         for org in hit['_source'].get('organisation', []):
-            orgtype = org.get('type', '-')
+            orgtype = org.get(typefield, '-')
             if orgtype not in nested_obj:
                 nested_obj[orgtype] = defaultdict(set)
             nested_obj[orgtype][org.get('name', '-')].add(hit['_id'])
