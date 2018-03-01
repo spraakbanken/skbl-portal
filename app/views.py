@@ -168,12 +168,18 @@ def activity(result=None):
 def keyword_index():
     infotext = helpers.get_infotext("keyword", request.url_rule.rule)
     set_language_switch_link("keyword_index")
+    lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
 
-    # Fix list with references to be inserted in results
-    reference_list = static_info.keywords_reference_list
-    [ref.append("reference") for ref in reference_list]
+    if lang == "en":
+        reference_list = []
+        queryfield = "nyckelord_eng"
+    else:
+        # Fix list with references to be inserted in results
+        reference_list = static_info.keywords_reference_list
+        [ref.append("reference") for ref in reference_list]
+        queryfield = "nyckelord"
 
-    return computeviews.bucketcall(queryfield='nyckelord', name='keyword',
+    return computeviews.bucketcall(queryfield=queryfield, name='keyword',
                                    title='Keywords', infotext=infotext,
                                    alphabetical=True,
                                    insert_entries=reference_list,
@@ -183,7 +189,11 @@ def keyword_index():
 @app.route("/en/keyword/<result>", endpoint="keyword_en")
 @app.route("/sv/nyckelord/<result>", endpoint="keyword_sv")
 def keyword(result=None):
-    page = searchresult(result, 'keyword', 'nyckelord', 'keywords')
+    lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
+    if lang == "en":
+        page = searchresult(result, 'keyword', 'nyckelord_eng', 'keywords')
+    else:
+        page = searchresult(result, 'keyword', 'nyckelord', 'keywords')
     return set_cache(page)
 
 
