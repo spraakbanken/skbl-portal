@@ -146,7 +146,6 @@ def make_alphabetic(hits, processname, sortnames=False, lang="sv"):
     return letter_results
 
 
-
 def make_simplenamelist(hits):
     """
     Creates a list with links to the entries url or _id
