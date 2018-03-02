@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-03-01 15:01+0000\n"
+"POT-Creation-Date: 2018-03-02 10:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Generated-By: Babel 2.4.0\n"
 
 #: app/computeviews.py:71 app/templates/article.html:345
-#: app/templates/layout.html:135
+#: app/templates/layout.html:134
 msgid "Organisations"
 msgstr ""
 
 #: app/computeviews.py:92 app/templates/article.html:261
-#: app/templates/contact.html:42 app/templates/layout.html:128
+#: app/templates/contact.html:42 app/templates/layout.html:127
 msgid "Activities"
 msgstr ""
 
@@ -35,31 +35,31 @@ msgstr ""
 msgid "Placenames"
 msgstr ""
 
-#: app/computeviews.py:190 app/templates/layout.html:100
+#: app/computeviews.py:191 app/templates/layout.html:100
 msgid "Article authors"
 msgstr ""
 
-#: app/computeviews.py:270
+#: app/computeviews.py:271
 msgid "Please enter all the fields!"
 msgstr ""
 
-#: app/computeviews.py:274
+#: app/computeviews.py:275
 msgid "Please enter a valid email address!"
 msgstr ""
 
-#: app/computeviews.py:280 app/templates/layout.html:105 app/views.py:71
+#: app/computeviews.py:281 app/templates/layout.html:105 app/views.py:77
 msgid "Contact"
 msgstr ""
 
-#: app/computeviews.py:281 app/views.py:72
+#: app/computeviews.py:282 app/views.py:78
 msgid "Contact SKBL"
 msgstr ""
 
-#: app/computeviews.py:341 app/computeviews.py:342
+#: app/computeviews.py:342 app/computeviews.py:343
 msgid "Thank you for your feedback"
 msgstr ""
 
-#: app/computeviews.py:343
+#: app/computeviews.py:344
 msgid "We will get back to you as soon as we can."
 msgstr ""
 
@@ -89,25 +89,25 @@ msgstr ""
 msgid "Place of death"
 msgstr ""
 
-#: app/templates/layout.html:103 app/views.py:36
+#: app/views.py:24 app/views.py:141
+msgid "Contents could not be found!"
+msgstr ""
+
+#: app/templates/layout.html:103 app/views.py:42
 msgid "About SKBL"
 msgstr ""
 
-#: app/templates/layout.html:104 app/views.py:49
+#: app/templates/layout.html:104 app/views.py:55
 msgid "More women"
 msgstr ""
 
-#: app/views.py:56
+#: app/views.py:62
 msgid "Older biographies"
 msgstr ""
 
-#: app/views.py:105
+#: app/views.py:111
 #, python-format
 msgid "Hits for \"%s\""
-msgstr ""
-
-#: app/views.py:135
-msgid "not found"
 msgstr ""
 
 #: app/templates/article.html:98
@@ -179,11 +179,15 @@ msgstr ""
 msgid "Hide map"
 msgstr ""
 
-#: app/templates/article.html:581 app/templates/layout.html:149
+#: app/templates/article.html:581 app/templates/layout.html:148
 msgid "Keywords"
 msgstr ""
 
-#: app/templates/article.html:596
+#: app/templates/article.html:589
+msgid "Go to this article in Karp"
+msgstr ""
+
+#: app/templates/article.html:597
 msgid "Links"
 msgstr ""
 
@@ -291,15 +295,15 @@ msgstr ""
 msgid "External link"
 msgstr ""
 
-#: app/templates/layout.html:112
+#: app/templates/layout.html:111
 msgid "På "
 msgstr ""
 
-#: app/templates/layout.html:142
+#: app/templates/layout.html:141
 msgid "Places"
 msgstr ""
 
-#: app/templates/layout.html:157
+#: app/templates/layout.html:156
 msgid "Share page"
 msgstr ""
 

@@ -22,8 +22,8 @@
             {% endif %}
         {% endfor %}
         <ul>
-          {% for firstletter, namelist in make_alphabetical_bucket(results, lang=lang) %}
-                <h2><a name="{{firstletter}}">{{ firstletter }}</a></h2>
+          {% for firstletter, namelist in make_alphabetical_bucket(results, sortnames=sortnames, lang=lang) %}
+                <h2><a class="no_anchor_decor" name="{{firstletter}}">{{ firstletter }}</a></h2>
             {% for result in namelist %}
                 {% if result[-1] == "reference" %}
                     <li class="keyword_list_item">{{ result[0] | deescape }} {{ gettext("see") }} <a href="{{ url_for(name+'_'+g.language, result=result[1]) }}">{{ result[1] }}</span></a></li>
