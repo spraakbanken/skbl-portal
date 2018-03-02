@@ -490,6 +490,7 @@ li .glyphicon-link {
 
 #open_advanced_box {
   cursor: pointer;
+  margin-left: 5px;
 }
 
 #right-panel {

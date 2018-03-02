@@ -71,7 +71,9 @@
             </div>
           </form>
           <!--<a href="https://spraakbanken.gu.se/karp/#?mode=skbl&lang={{ 'swe' if g.language == 'sv' else 'eng' }}">{{ gettext('Go to advanced search') }}</a>-->
-          <a id="open_advanced_box">{{ gettext('To advanced search') }}</a>
+          <a id="open_advanced_box">{{ gettext('To advanced search') }}
+              <img src="{{ url_for('static', filename='images/logos/karp-mini-transparent.png') }}" style="max-height:10px; margin-left: 2px;">
+          </a>
           <div id="advanced_box">
             <div id="advanced_box_header_area">
               <div id="advanced_box_close">
@@ -81,7 +83,9 @@
             <p> {{ gettext('For more advanced searches and combinations please use the Språkbanken tool Karp.') }}
                 {{ gettext('This is particularly relevant for researchers seeking to analyse the information contained in SKBL (Biographical Dictionary of Swedish Women).') }}
             </p>
-            <a class="visible_link" href="https://spraakbanken.gu.se/karp/#?mode=skbl" target="_blank"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>&nbsp; {{ gettext('To Karp') }}</a> ({{ gettext('External link') }})
+            <a class="visible_link" href="https://spraakbanken.gu.se/karp/#?mode=skbl" target="_blank"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>&nbsp; {{ gettext('To Karp') }}</a>
+            <img src="{{ url_for('static', filename='images/logos/karp-mini-transparent.png') }}" style="max-height:10px;">
+             ({{ gettext('External link') }})
           </div>
         </div>
       </div>
