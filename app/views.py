@@ -299,7 +299,7 @@ def article_index(search=None):
             return set_cache(page)
         else:
             # no hits are found redirect to a 'not found' page
-            return render_template('page.html', content='not found')
+            return render_template('page.html', content=gettext('Contents could not be found!')), 404
 
     art = computeviews.compute_article()
     return art
@@ -419,7 +419,7 @@ def show_article(data, lang="sv"):
                                image=image,
                                under_development=under_development)
     else:
-        return render_template('page.html', content='not found')
+        return render_template('page.html', content=gettext('Contents could not be found!')), 404
 
 
 def find_linked_names(othernames, showname):
