@@ -85,11 +85,15 @@ def make_alphabetical_bucket(result, sortnames=False, lang="sv"):
     return make_alphabetic(result, processname, sortnames=sortnames, lang=lang)
 
 
-def rewrite_von(input):
-    if "von " in input:
-        return input.replace("von ", "") + " von"
-    else:
-        return input
+def rewrite_von(name):
+    """Move 'von' and 'av' to end of name"""
+    name = re.sub(r"^von (.+)$", r"\1 von", name)
+    name = re.sub(r"^af (.+)$", r"\1 af", name)
+    return name
+    # if "von " in name:
+    #     return name.replace("von ", "") + " von"
+    # else:
+    #     return name
 
 
 def make_placenames(places, lang="sv"):
@@ -97,6 +101,14 @@ def make_placenames(places, lang="sv"):
         name = hit['name'].strip()
         results.append((name[0].upper(), (name, hit)))
     return make_alphabetic(places, processname, lang=lang)
+
+
+def make_alpha_more_women(women, sortnames=True, lang="sv"):
+    """Sort more-women list alphabetically and divide into first letters."""
+    def processname(item, results):
+        firstletter = rewrite_von(item[0])[0].upper()
+        results.append((firstletter, item))
+    return make_alphabetic(women, processname, sortnames=sortnames, lang=lang)
 
 
 def make_alphabetic(hits, processname, sortnames=False, lang="sv"):
@@ -109,6 +121,10 @@ def make_alphabetic(hits, processname, sortnames=False, lang="sv"):
         where first_letter is the first_letter of each object (to sort on), and the result
         is what the html-template want e.g. a pair of (name, no_hits)
     """
+    def fix_lastname(name):
+        name = re.sub(r"(^von )|(^af )", r"", name)
+        return name.replace(" ", "z")
+
     results = []
     for hit in hits:
         processname(hit, results)
@@ -138,7 +154,7 @@ def make_alphabetic(hits, processname, sortnames=False, lang="sv"):
         collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
     for n, items in letter_results.items():
         if sortnames:
-            items.sort(key=lambda x: collator.getSortKey(x[0].replace(" ", "z").replace("von ", "") + x[1]))
+            items.sort(key=lambda x: collator.getSortKey(fix_lastname(x[0]) + " " + x[1]))
         else:
             items.sort(key=lambda x: collator.getSortKey(x[0]))
 
