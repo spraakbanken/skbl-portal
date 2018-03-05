@@ -86,14 +86,10 @@ def make_alphabetical_bucket(result, sortnames=False, lang="sv"):
 
 
 def rewrite_von(name):
-    """Move 'von' and 'av' to end of name"""
+    """Move 'von' and 'av' to end of name."""
     name = re.sub(r"^von (.+)$", r"\1 von", name)
     name = re.sub(r"^af (.+)$", r"\1 af", name)
     return name
-    # if "von " in name:
-    #     return name.replace("von ", "") + " von"
-    # else:
-    #     return name
 
 
 def make_placenames(places, lang="sv"):
@@ -284,7 +280,9 @@ def mk_links(text):
 
 
 def unescape(text):
-    return re.sub('&gt;', r'>', text)
+    text = re.sub('&gt;', r'>', text)
+    text = re.sub('&apos;', r"'", text)
+    return text
 
 
 def aggregate_by_type(items, use_markdown=False):

@@ -6,7 +6,7 @@ from pylibmc import Client, ClientPool
 import sys
 import urllib
 
-from flask import Flask, g, make_response, request, render_template, url_for
+from flask import Flask, g, make_response, request, render_template, url_for, redirect
 from flask_babel import Babel
 from setuptools import setup
 from urllib2 import Request, urlopen
