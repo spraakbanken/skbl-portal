@@ -55,7 +55,6 @@ def searchresult(result, name='', searchfield='', imagefolder='',
         art, lang = getcache(pagename, lang, cache)
         if art is not None:
             return art
-        return 'ok'
         qresult = result.encode('utf-8')
         hits = karp_query('querycount', {'q': "extended||and|%s.search|%s|%s" % (searchfield, searchtype, qresult)})
         title = title or result
