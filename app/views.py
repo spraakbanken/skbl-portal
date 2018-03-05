@@ -134,7 +134,7 @@ def place_index():
 @app.route("/en/place/<place>", endpoint="place_en")
 @app.route("/sv/ort/<place>", endpoint="place_sv")
 def place(place=None):
-    pagename = urllib.quote('place_'+place)
+    pagename = urllib.quote('place_'+place.encode('utf8'))
     art, lang = computeviews.getcache(pagename, '', True)
     if art is not None:
             return art

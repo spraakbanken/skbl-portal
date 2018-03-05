@@ -50,11 +50,12 @@ def searchresult(result, name='', searchfield='', imagefolder='',
                  show_lang_switch=True, cache=True):
     qresult = result
     try:
-        pagename = "%s_%s" % (name, urllib.quote(result))
+        pagename = "%s_%s" % (name, urllib.quote(result.encode('utf8')))
         set_language_switch_link("%s_index" % name, result)
         art, lang = getcache(pagename, lang, cache)
         if art is not None:
             return art
+        return 'ok'
         qresult = result.encode('utf-8')
         hits = karp_query('querycount', {'q': "extended||and|%s.search|%s|%s" % (searchfield, searchtype, qresult)})
         title = title or result
