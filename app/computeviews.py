@@ -2,7 +2,6 @@
 from app import app, karp_query, render_template, request, set_language_switch_link, mc_pool
 from collections import defaultdict
 from flask_babel import gettext
-import icu  # pip install PyICU
 import json
 import md5
 import urllib
@@ -11,6 +10,7 @@ import helpers
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.header import Header
+import os.path
 import smtplib
 import static_info
 
@@ -43,6 +43,43 @@ def copytobackup(fields, lang):
         with mc_pool.reserve() as client:
             art = client.get(field + lang)
             client.set(field + lang + '_backup', art, time=app.config['CACHE_TIME'])
+
+
+def searchresult(result, name='', searchfield='', imagefolder='',
+                 searchtype='equals', title='', authorinfo=False, lang='',
+                 show_lang_switch=True, cache=True):
+    qresult = result
+    try:
+        pagename = "%s_%s" % (name, urllib.quote(result))
+        set_language_switch_link("%s_index" % name, result)
+        art, lang = getcache(pagename, lang, cache)
+        if art is not None:
+            return art
+        qresult = result.encode('utf-8')
+        hits = karp_query('querycount', {'q': "extended||and|%s.search|%s|%s" % (searchfield, searchtype, qresult)})
+        title = title or result
+
+        no_hits = hits['query']['hits']['total']
+        if no_hits > 0:
+            picture = None
+            if os.path.exists(app.config.root_path + '/static/images/%s/%s.jpg' % (imagefolder, qresult)):
+                picture = '/static/images/%s/%s.jpg' % (imagefolder, qresult)
+            page = render_template('list.html', picture=picture,
+                                   alphabetic=True, title=title,
+                                   headline=title, hits=hits["query"]["hits"],
+                                   authorinfo=authorinfo,
+                                   show_lang_switch=show_lang_switch)
+            if no_hits > app.config['CACHE_HIT_LIMIT']:
+                with mc_pool.reserve() as client:
+                    client.set(pagename+lang, page, time=app.config['CACHE_TIME'])
+            return page
+
+        else:
+            return render_template('page.html', content='not found')
+
+    except Exception as e:
+        return render_template('page.html',
+                               content="%s\n%s: extended||and|%s.search|%s|%s" % (e, app.config['KARP_BACKEND'], searchfield, searchtype, qresult))
 
 
 def compute_organisation(lang="", infotext="", cache=True):
@@ -90,7 +127,9 @@ def compute_activity(lang="", cache=True):
 
     art = bucketcall(queryfield='verksamhetstext', name='activity',
                      title=gettext("Activities"), infotext=infotext,
-                     alphabetical=True, description=helpers.get_shorttext(infotext), insert_entries=reference_list)
+                     alphabetical=True,
+                     description=helpers.get_shorttext(infotext),
+                     insert_entries=reference_list)
     with mc_pool.reserve() as client:
         client.set('activity' + lang, art, time=app.config['CACHE_TIME'])
     return art
@@ -155,8 +194,11 @@ def compute_place(lang="", cache=True):
     # To use the coordinates, use 'getplaces' instead of 'getplacenames'
     data = karp_query('getplacenames', {})
     stat_table = [parse(kw) for kw in data['places'] if has_name(kw)]
-    art = render_template('places.html', places=stat_table, title=gettext("Placenames"),
-                          infotext=infotext, description=helpers.get_shorttext(infotext))
+    art = render_template('places.html',
+                          places=stat_table,
+                          title=gettext("Placenames"),
+                          infotext=infotext,
+                          description=helpers.get_shorttext(infotext))
     with mc_pool.reserve() as client:
         client.set('place' + lang, art, time=app.config['CACHE_TIME'])
     return art
@@ -189,16 +231,16 @@ def compute_artikelforfattare(infotext='', description='', lang="", cache=True):
             added[fullname] = True
     art = render_template('bucketresults.html', results=new_stat_table,
                           alphabetical=True, title=gettext('Article authors'),
-                          name='articleauthor', infotext=infotext, description=description,
-                          sortnames=True)
+                          name='articleauthor', infotext=infotext,
+                          description=description, sortnames=True)
     with mc_pool.reserve() as client:
         client.set('author' + lang, art, time=app.config['CACHE_TIME'])
     return art
 
 
-def bucketcall(queryfield='', name='', title='', sortby='',
-               lastnamefirst=False, infotext='', description='', query='',
-               alphabetical=False, insert_entries=None):
+def bucketcall(queryfield='', name='', title='', sortby='', lastnamefirst=False,
+               infotext='', description='', query='', alphabetical=False,
+               insert_entries=None):
     q_data = {'buckets': '%s.bucket' % queryfield}
     if query:
         q_data['q'] = query
@@ -219,7 +261,8 @@ def bucketcall(queryfield='', name='', title='', sortby='',
     #     stat_table = [[showfield(kw), kw[2]] for kw in stat_table]
     return render_template('bucketresults.html', results=stat_table,
                            alphabetical=alphabetical, title=gettext(title),
-                           name=name, infotext=infotext, description=description)
+                           name=name, infotext=infotext,
+                           description=description)
 
 
 def compute_emptycache(fields):
