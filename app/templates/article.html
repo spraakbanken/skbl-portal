@@ -157,7 +157,7 @@
         <div>
         <br/>
         <br/>
-        <h4>{{ gettext("Other names") }}</h4>
+        <h4>{{ gettext("Other Names") }}</h4>
             {% for othername in article.othernames %}
             {% set othername_type = get_lang_text(othername.type, othername.type_eng, g.language) %}
             <ul>

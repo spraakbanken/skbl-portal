@@ -140,7 +140,7 @@ msgid "Show complete information"
 msgstr "Visa full information"
 
 #: app/templates/article.html:160
-msgid "Other names"
+msgid "Other Names"
 msgstr "Övriga namn"
 
 #: app/templates/article.html:174
