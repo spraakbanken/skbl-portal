@@ -262,6 +262,7 @@ def authors():
 @app.route("/en/articleauthor/<result>", endpoint="articleauthor_en")
 @app.route("/sv/artikelforfattare/<result>", endpoint="articleauthor_sv")
 def author(result=None):
+    set_language_switch_link("articleauthor_index")
     rule = request.url_rule
     lang = 'sv' if 'sv' in rule.rule else 'en'
     # Try to get authorinfo in correct language (with Swedish as fallback)
@@ -270,7 +271,7 @@ def author(result=None):
     if authorinfo:
         authorinfo = [authorinfo.get(lang, authorinfo.get("sv")),
                       [helpers.markdown_html(i) for i in authorinfo.get("publications", [])]]
-    page = computeviews.searchresult(author,
+    page = computeviews.searchresult(author.encode("UTF-8"),
                                      name='articleauthor',
                                      searchfield='artikel_forfattare_fulltnamn',
                                      imagefolder='authors',
