@@ -48,22 +48,21 @@ def copytobackup(fields, lang):
 def searchresult(result, name='', searchfield='', imagefolder='',
                  searchtype='equals', title='', authorinfo=False, lang='',
                  show_lang_switch=True, cache=True):
-    qresult = result
+    result = result.encode("UTF-8")
     try:
         pagename = "%s_%s" % (name, urllib.quote(result))
         set_language_switch_link("%s_index" % name, result)
         art, lang = getcache(pagename, lang, cache)
         if art is not None:
             return art
-        qresult = result.encode('utf-8')
-        hits = karp_query('querycount', {'q': "extended||and|%s.search|%s|%s" % (searchfield, searchtype, qresult)})
-        title = title or result
+        hits = karp_query('querycount', {'q': "extended||and|%s.search|%s|%s" % (searchfield, searchtype, result)})
+        title = title or result.decode("UTF-8")
 
         no_hits = hits['query']['hits']['total']
         if no_hits > 0:
             picture = None
-            if os.path.exists(app.config.root_path + '/static/images/%s/%s.jpg' % (imagefolder, qresult)):
-                picture = '/static/images/%s/%s.jpg' % (imagefolder, qresult)
+            if os.path.exists(app.config.root_path + '/static/images/%s/%s.jpg' % (imagefolder, result)):
+                picture = '/static/images/%s/%s.jpg' % (imagefolder, result)
             page = render_template('list.html', picture=picture,
                                    alphabetic=True, title=title,
                                    headline=title, hits=hits["query"]["hits"],
@@ -75,11 +74,11 @@ def searchresult(result, name='', searchfield='', imagefolder='',
             return page
 
         else:
-            return render_template('page.html', content='not found')
+            return render_template('page.html', content=gettext('Contents could not be found!'))
 
     except Exception as e:
         return render_template('page.html',
-                               content="%s\n%s: extended||and|%s.search|%s|%s" % (e, app.config['KARP_BACKEND'], searchfield, searchtype, qresult))
+                               content="%s\n%s: extended||and|%s.search|%s|%s" % (e, app.config['KARP_BACKEND'], searchfield, searchtype, result))
 
 
 def compute_organisation(lang="", infotext="", cache=True):

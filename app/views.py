@@ -91,7 +91,7 @@ def submit_contact_form():
 def search():
     set_language_switch_link("search")
     search = request.args.get('q', '*').encode('utf-8')
-    pagename = 'search'+urllib.quote(search)
+    pagename = 'search' + urllib.quote(search)
     art, lang = computeviews.getcache(pagename, '', True)
     if art is not None:
         return art
@@ -271,7 +271,7 @@ def author(result=None):
     if authorinfo:
         authorinfo = [authorinfo.get(lang, authorinfo.get("sv")),
                       [helpers.markdown_html(i) for i in authorinfo.get("publications", [])]]
-    page = computeviews.searchresult(author.encode("UTF-8"),
+    page = computeviews.searchresult(author,
                                      name='articleauthor',
                                      searchfield='artikel_forfattare_fulltnamn',
                                      imagefolder='authors',
