@@ -71,7 +71,7 @@ def searchresult(result, name='', searchfield='', imagefolder='',
                                    show_lang_switch=show_lang_switch)
             if no_hits > app.config['CACHE_HIT_LIMIT']:
                 with mc_pool.reserve() as client:
-                    client.set(pagename+lang, page, time=app.config['CACHE_TIME'])
+                    client.set(pagename + lang, page, time=app.config['CACHE_TIME'])
             return page
 
         else:
@@ -100,7 +100,7 @@ def compute_organisation(lang="", infotext="", cache=True):
     nested_obj = {}
     for hit in data['hits']['hits']:
         for org in hit['_source'].get('organisation', []):
-            orgtype = org.get(typefield, '-')
+            orgtype = helpers.unescape(org.get(typefield, '-'))
             if orgtype not in nested_obj:
                 nested_obj[orgtype] = defaultdict(set)
             nested_obj[orgtype][org.get('name', '-')].add(hit['_id'])
