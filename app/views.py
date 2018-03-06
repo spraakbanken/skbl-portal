@@ -90,26 +90,31 @@ def submit_contact_form():
 @app.route("/sv/sok", endpoint="search_sv")
 def search():
     set_language_switch_link("search")
-    search = request.args.get('q', '*').encode('utf-8')
+    search = request.args.get('q', '').encode('utf-8')
     pagename = 'search'+urllib.quote(search)
     art, lang = computeviews.getcache(pagename, '', True)
     if art is not None:
         return art
-    show = ','.join(['name', 'url', 'undertitel', 'undertitel_eng', 'lifespan'])
-    karp_q = {'highlight': True, 'size': app.config['SEARCH_RESULT_SIZE'],
-              'show': show}
-    if '*' in search:
-        search = re.sub('(?<!\.)\*', '.*', search)
-        karp_q['q'] = "extended||and|anything|regexp|%s" % search
-        # karp_q['sort'] = '_score'
-    else:
-        karp_q['q'] = "extended||and|anything|contains|%s" % search
-
-    data = karp_query('minientry', karp_q, mode='skbl')
     advanced_search_text = ''
-    with app.open_resource("static/pages/advanced-search/%s.html" % (g.language)) as f:
-        advanced_search_text = f.read()
-    karp_url = "https://spraakbanken.gu.se/karp/#?mode=skbl&advanced=false&hpp=25&extended=and%7Cnamn%7Cequals%7C&searchTab=simple&page=1&search=simple%7C%7C" + search.decode("utf-8")
+    if search:
+        show = ','.join(['name', 'url', 'undertitel', 'undertitel_eng', 'lifespan'])
+        karp_q = {'highlight': True, 'size': app.config['SEARCH_RESULT_SIZE'],
+                  'show': show}
+        if '*' in search:
+            search = re.sub('(?<!\.)\*', '.*', search)
+            karp_q['q'] = "extended||and|anything|regexp|%s" % search
+            # karp_q['sort'] = '_score'
+        else:
+            karp_q['q'] = "extended||and|anything|contains|%s" % search
+
+        data = karp_query('minientry', karp_q, mode='skbl')
+        with app.open_resource("static/pages/advanced-search/%s.html" % (g.language)) as f:
+            advanced_search_text = f.read()
+        karp_url = "https://spraakbanken.gu.se/karp/#?mode=skbl&advanced=false&hpp=25&extended=and%7Cnamn%7Cequals%7C&searchTab=simple&page=1&search=simple%7C%7C" + search.decode("utf-8")
+    else:
+        data = {"hits": {"total": 0, "hits": []}}
+        karp_url = ""
+        search = u'\u200b'
 
     t = render_template('list.html', headline="",
                         subheadline=gettext('Hits for "%s"') % search.decode("UTF-8"),
