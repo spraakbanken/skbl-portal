@@ -44,7 +44,7 @@ Ett urval har gjorts och här förtecknas de kvinnor vars biografier ännu inte 
 Den listan kan fyllas på med <a href='/sv/kontakt?suggest=true' class='visible_link'>ytterligare förslag</a>.
         """,
         "en": u"""
-Many more women deserve entries in SKBL (Biographical Dictionary of Swedish Women) and a selection of these
+Many more women deserve entries in SKBL and a selection of these
 can be found on this list. <a href='/en/contact?suggest=true' class='visible_link'>Further suggestions</a>
 are welcome for inclusion on this list.
         """
@@ -67,7 +67,7 @@ religion, and much more. Selecting a keyword reveals all the women who fit into 
 Här är de personerna som har bidragit med artiklar till Svenskt kvinnobiografiskt lexikon förtecknade.
         """,
         "en": u"""
-This lists all those who have contributed an article to SKBL (Biographical Dictionary of Swedish Women).
+This lists all those who have contributed an article to SKBL.
         """
     },
 

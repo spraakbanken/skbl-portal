@@ -134,11 +134,11 @@
         <br/><br/>
         <div class="reference-to-skbl">
             {{ gettext("You are welcome to cite this article but always provide the author’s name as follows") }}:<br/><br/>
-            <em>{{ article.showname | safe }}, www.skbl.se/sv/artikel/{{article.url}}, Svenskt kvinnobiografiskt lexikon (artikel av
+            <em>{{ article.showname | safe }}, www.skbl.se/sv/artikel/{{article.url}}, Svenskt kvinnobiografiskt lexikon ({{gettext("article by")}}
                  {% for author in article.article_author %}
               <!-- endfor must be on same line as author.lastname to prevent whitespace between the name and the parenthesis,
                    especially since the whitespace often results in the parenthesis ending up on its own line -->
-                    {{ author.firstname }} {{author.lastname}}{% if not loop.last %}, {% endif %}{% endfor %}), hämtad {{get_current_date()}}.</em>
+                    {{ author.firstname }} {{author.lastname}}{% if not loop.last %}, {% endif %}{% endfor %}), {{gettext("retrieved")}} {{get_current_date()}}.</em>
         </div>
 
         <br/><br/>
