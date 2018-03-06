@@ -52,7 +52,7 @@ def more_women():
                            infotext=infotext,
                            linked_from=request.args.get('linked_from'),
                            title=gettext("More women"))
-    return set_cache(page)
+    return set_cache(page, no_hits=len(static_info.more_women))
 
 
 @app.route("/en/biographies", endpoint="biographies_en")
@@ -114,7 +114,7 @@ def search():
     else:
         data = {"hits": {"total": 0, "hits": []}}
         karp_url = ""
-        search = u'\u200b'
+        search = u'\u200b'.encode('utf8')
 
     t = render_template('list.html', headline="",
                         subheadline=gettext('Hits for "%s"') % search.decode("UTF-8"),
