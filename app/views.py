@@ -153,11 +153,11 @@ def place(place=None):
     lat = request.args.get('lat')
     lon = request.args.get('lon')
     set_language_switch_link("place_index", place)
-    hits = karp_query('querycount', {'q': "extended||and|plats.search|equals|%s" % (place.encode('utf-8'))})
-    no_hits = hits['query']['hits']['total']
+    hits = karp_query('query', {'q': "extended||and|plats.search|equals|%s" % (place.encode('utf-8'))})
+    no_hits = hits['hits']['total']
     if no_hits > 0:
         page = render_template('placelist.html', title=place, lat=lat, lon=lon,
-                               headline=place, hits=hits["query"]["hits"])
+                               headline=place, hits=hits["hits"])
     else:
         page = render_template('page.html', content=gettext('Contents could not be found!'))
     return set_cache(page, name=pagename, no_hits=no_hits)
@@ -295,6 +295,7 @@ def author(result=None):
 @app.route("/sv/artikel", endpoint="article_index_sv")
 def article_index(search=None):
     # search is only used by links in article text
+
     set_language_switch_link("article_index")
     search = search or request.args.get('search')
     if search is not None:
@@ -304,7 +305,7 @@ def article_index(search=None):
             # only one hit is found, redirect to that page
             page = redirect(url_for('article_' + g.language, id=id))
             return set_cache(page)
-        elif data["query"]["hits"]["total"] > 1:
+        elif data["hits"]["total"] > 1:
             # more than one hit is found, redirect to a listing
             page = redirect(url_for('search_' + g.language, q=search))
             return set_cache(page)
@@ -326,12 +327,11 @@ def article(id=None):
         lang = "en"
     pagename = 'article_' + id
     page = check_cache(pagename, lang=lang)
-    #return 'cached %s' % page
     if page is not None:
         return page
-    data = karp_query('querycount', {'q': "extended||and|url|equals|%s" % (id)})
-    if data['query']['hits']['total'] == 0:
-        data = karp_query('querycount', {'q': "extended||and|id.search|equals|%s" % (id)})
+    data = karp_query('query', {'q': "extended||and|url|equals|%s" % (id)})
+    if data['hits']['total'] == 0:
+        data = karp_query('query', {'q': "extended||and|id.search|equals|%s" % (id)})
     set_language_switch_link("article_index", id)
     page = show_article(data, lang)
     return set_cache(page, name=pagename, lang=lang, no_hits=1)
@@ -354,14 +354,14 @@ def find_link(searchstring):
     # Finds an article based on ISNI or name
     if re.search('^[0-9 ]*$', searchstring):
         searchstring = searchstring.replace(" ", "")
-        data = karp_query('querycount', {'q': "extended||and|swoid.search|equals|%s" % (searchstring)})
+        data = karp_query('query', {'q': "extended||and|swoid.search|equals|%s" % (searchstring)})
     else:
         parts = searchstring.split(" ")
         if "," in searchstring or len(parts) == 1:  # When there is only a first name (a queen or so)
             # case 1: "Margareta"
             # case 2: "Margareta, drottning"
             firstname = parts[0] if len(parts) == 1 else searchstring
-            data = karp_query('querycount', {'q': "extended||and|fornamn.search|contains|%s" % (firstname)})
+            data = karp_query('query', {'q': "extended||and|fornamn.search|contains|%s" % (firstname)})
         else:
             fornamn = " ".join(parts[0:-1])
             prefix = ""
@@ -370,11 +370,11 @@ def find_link(searchstring):
                 fornamn = " ".join(fornamn.split(" ")[0:-1])
                 prefix = last_fornamn + " "
             efternamn = prefix + parts[-1]
-            data = karp_query('querycount', {'q': "extended||and|fornamn.search|contains|%s||and|efternamn.search|contains|%s" % (fornamn, efternamn)})
+            data = karp_query('query', {'q': "extended||and|fornamn.search|contains|%s||and|efternamn.search|contains|%s" % (fornamn, efternamn)})
     # The expected case: only one hit is found
-    if data['query']['hits']['total'] == 1:
-        url = data['query']['hits']['hits'][0]['_source'].get('url')
-        es_id = data['query']['hits']['hits'][0]['_id']
+    if data['hits']['total'] == 1:
+        url = data['hits']['hits'][0]['_source'].get('url')
+        es_id = data['hits']['hits'][0]['_id']
         return data, (url or es_id)
         # Otherwise just return the data
     else:
@@ -382,10 +382,10 @@ def find_link(searchstring):
 
 
 def show_article(data, lang="sv"):
-    if data['query']['hits']['total'] == 1:
-        source = data['query']['hits']['hits'][0]['_source']
+    if data['hits']['total'] == 1:
+        source = data['hits']['hits'][0]['_source']
         source['url'] = source.get('url') or data['query']['hits']['hits'][0]['_id']
-        source['es_id'] = data['query']['hits']['hits'][0]['_id']
+        source['es_id'] = data['hits']['hits'][0]['_id']
 
         # Print html for the names with the calling name and last name in bold
         formatted_names = helpers.format_names(source, "b")
@@ -509,13 +509,13 @@ def institution(result=None):
 @app.route("/en/article/<id>.json", endpoint="article_json_en")
 @app.route("/sv/artikel/<id>.json", endpoint="article_json_sv")
 def article_json(id=None):
-    data = karp_query('querycount', {'q': "extended||and|url|equals|%s" % (id)})
-    if data['query']['hits']['total'] == 1:
-        page = jsonify(data['query']['hits']['hits'][0]['_source'])
+    data = karp_query('query', {'q': "extended||and|url|equals|%s" % (id)})
+    if data['hits']['total'] == 1:
+        page = jsonify(data['hits']['hits'][0]['_source'])
         return set_cache(page)
-    data = karp_query('querycount', {'q': "extended||and|id.search|equals|%s" % (id)})
-    if data['query']['hits']['total'] == 1:
-        page = jsonify(data['query']['hits']['hits'][0]['_source'])
+    data = karp_query('query', {'q': "extended||and|id.search|equals|%s" % (id)})
+    if data['hits']['total'] == 1:
+        page = jsonify(data['hits']['hits'][0]['_source'])
         return set_cache(page)
 
 

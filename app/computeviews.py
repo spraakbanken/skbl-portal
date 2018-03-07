@@ -61,17 +61,20 @@ def searchresult(result, name='', searchfield='', imagefolder='',
         if art is not None:
             return art
         qresult = result.encode('utf-8')
-        hits = karp_query('querycount', {'q': "extended||and|%s.search|%s|%s" % (searchfield, searchtype, qresult)})
+        show = ','.join(['name', 'url', 'undertitel', 'lifespan', 'undertitel_eng'])
+        hits = karp_query('minientry',
+                          {'q': "extended||and|%s.search|%s|%s" % (searchfield, searchtype, qresult),
+                           'show': show})
         title = title or result
 
-        no_hits = hits['query']['hits']['total']
+        no_hits = hits['hits']['total']
         if no_hits > 0:
             picture = None
             if os.path.exists(app.config.root_path + '/static/images/%s/%s.jpg' % (imagefolder, qresult)):
                 picture = '/static/images/%s/%s.jpg' % (imagefolder, qresult)
             page = render_template('list.html', picture=picture,
                                    alphabetic=True, title=title,
-                                   headline=title, hits=hits["query"]["hits"],
+                                   headline=title, hits=hits["hits"],
                                    authorinfo=authorinfo,
                                    show_lang_switch=show_lang_switch)
             if no_hits >= app.config['CACHE_HIT_LIMIT']:
