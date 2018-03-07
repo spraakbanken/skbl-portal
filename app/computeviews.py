@@ -91,7 +91,7 @@ def searchresult(result, name='', searchfield='', imagefolder='',
                                content="%s\n%s: extended||and|%s.search|%s|%s" % (e, app.config['KARP_BACKEND'], searchfield, searchtype, qresult))
 
 
-def compute_organisation(lang="", infotext="", cache=True):
+def compute_organisation(lang="", infotext="", cache=True, url=''):
     set_language_switch_link("organisation_index", lang=lang)
     art, lang = getcache('organisation', lang, cache)
     if art is not None:
@@ -115,7 +115,7 @@ def compute_organisation(lang="", infotext="", cache=True):
             nested_obj[orgtype][org.get('name', '-')].add(hit['_id'])
     art = render_template('nestedbucketresults.html',
                           results=nested_obj, title=gettext("Organisations"),
-                          infotext=infotext, name='organisation')
+                          infotext=infotext, name='organisation', page_url=url)
     try:
        with mc_pool.reserve() as client:
            client.set(cache_name('organisation', lang), art, time=app.config['CACHE_TIME'])
@@ -125,7 +125,7 @@ def compute_organisation(lang="", infotext="", cache=True):
     return art
 
 
-def compute_activity(lang="", cache=True):
+def compute_activity(lang="", cache=True, url=''):
     set_language_switch_link("activity_index", lang=lang)
     art, lang = getcache('activity', lang, cache)
 
@@ -142,7 +142,8 @@ def compute_activity(lang="", cache=True):
                      title=gettext("Activities"), infotext=infotext,
                      alphabetical=True,
                      description=helpers.get_shorttext(infotext),
-                     insert_entries=reference_list)
+                     insert_entries=reference_list,
+                     page_url=url)
     try:
        with mc_pool.reserve() as client:
            client.set(cache_name('activity', lang), art, time=app.config['CACHE_TIME'])
@@ -152,7 +153,7 @@ def compute_activity(lang="", cache=True):
     return art
 
 
-def compute_article(lang="", cache=True):
+def compute_article(lang="", cache=True, url=''):
     set_language_switch_link("article_index", lang=lang)
     art, lang = getcache('article', lang, cache)
     if art is not None:
@@ -175,7 +176,8 @@ def compute_article(lang="", cache=True):
                           alphabetic=True,
                           split_letters=True,
                           infotext=infotext,
-                          title='Articles')
+                          title='Articles',
+                          page_url=url)
     try:
        with mc_pool.reserve() as client:
            client.set(cache_name('article', lang), art, time=app.config['CACHE_TIME'])
@@ -185,7 +187,7 @@ def compute_article(lang="", cache=True):
     return art
 
 
-def compute_place(lang="", cache=True):
+def compute_place(lang="", cache=True, url=''):
     set_language_switch_link("place_index", lang=lang)
     art, lang = getcache('place', lang, cache)
     if art is not None:
@@ -219,7 +221,8 @@ def compute_place(lang="", cache=True):
                           places=stat_table,
                           title=gettext("Placenames"),
                           infotext=infotext,
-                          description=helpers.get_shorttext(infotext))
+                          description=helpers.get_shorttext(infotext),
+                          page_url=url)
     try:
        with mc_pool.reserve() as client:
            client.set(cache_name('place', lang), art, time=app.config['CACHE_TIME'])
@@ -229,7 +232,7 @@ def compute_place(lang="", cache=True):
     return art
 
 
-def compute_artikelforfattare(infotext='', description='', lang="", cache=True):
+def compute_artikelforfattare(infotext='', description='', lang="", cache=True, url=''):
     set_language_switch_link("articleauthor_index", lang=lang)
     art, lang = getcache('author', lang, cache)
     if art is not None:
@@ -257,7 +260,8 @@ def compute_artikelforfattare(infotext='', description='', lang="", cache=True):
     art = render_template('bucketresults.html', results=new_stat_table,
                           alphabetical=True, title=gettext('Article authors'),
                           name='articleauthor', infotext=infotext,
-                          description=description, sortnames=True)
+                          description=description, sortnames=True,
+                          page_url=url)
     try:
        with mc_pool.reserve() as client:
            client.set(cache_name('author', lang), art, time=app.config['CACHE_TIME'])
@@ -269,7 +273,7 @@ def compute_artikelforfattare(infotext='', description='', lang="", cache=True):
 
 def bucketcall(queryfield='', name='', title='', sortby='', lastnamefirst=False,
                infotext='', description='', query='', alphabetical=False,
-               insert_entries=None):
+               insert_entries=None, page_url=''):
     q_data = {'buckets': '%s.bucket' % queryfield}
     if query:
         q_data['q'] = query
@@ -291,7 +295,8 @@ def bucketcall(queryfield='', name='', title='', sortby='', lastnamefirst=False,
     return render_template('bucketresults.html', results=stat_table,
                            alphabetical=alphabetical, title=gettext(title),
                            name=name, infotext=infotext,
-                           description=description)
+                           description=description,
+                           page_url=page_url)
 
 
 def compute_emptycache(fields):

@@ -548,12 +548,19 @@ def fillcache():
     # This request will take some seconds, users may want to make an
     # asynchronous call
     # Compute new pages
-    computeviews.compute_article(cache=False)
-    computeviews.compute_activity(cache=False)
-    computeviews.compute_organisation(cache=False)
-    computeviews.compute_place(cache=False)
-    computeviews.compute_artikelforfattare(cache=False)
+    urls = {'activity': ('en/activity', 'sv/verksamhet'),
+            'article': ("en/article", "sv/artikel"),
+            'organisation': ("en/organisation", "sv/organisation"),
+            'place': ("en/place", "sv/ort"),
+            'forfattare': ("en/articleauthor/<result>","sv/artikelforfattare/<result>")
+            }
     lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
+    lix = 0 if lang == 'eng' else 1
+    computeviews.compute_article(cache=False, url=request.url_root+urls['article'][lix])
+    computeviews.compute_activity(cache=False, url=request.url_root+urls['activity'][lix])
+    computeviews.compute_organisation(cache=False, url=request.url_root+urls['organisation'][lix])
+    computeviews.compute_place(cache=False, url=request.url_root+urls['place'][lix])
+    computeviews.compute_artikelforfattare(cache=False, url=request.url_root+urls['forfattare'][lix])
     # Copy the pages to the backup fields
     computeviews.copytobackup(['article', 'activity', 'organisation', 'place', 'author'], lang)
     return jsonify({"cache_filled": True, "cached_language": lang})
