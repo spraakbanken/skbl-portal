@@ -490,6 +490,7 @@ li .glyphicon-link {
 
 #open_advanced_box {
   cursor: pointer;
+  margin-left: 5px;
 }
 
 #right-panel {
@@ -539,4 +540,7 @@ blockquote {
 
 .authorinfo{
     margin-top: 16px;
+}
+.no_anchor_decor:hover {
+    text-decoration: none;
 }

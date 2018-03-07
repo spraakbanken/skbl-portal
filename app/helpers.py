@@ -6,6 +6,7 @@ import markdown
 import re
 import datetime
 import static_info
+from flask_babel import gettext
 
 
 def get_first_name(source):
@@ -78,27 +79,35 @@ def group_by_type(objlist, name):
     return result
 
 
-def make_alphabetical_bucket(result):
+def make_alphabetical_bucket(result, sortnames=False, lang="sv"):
     def processname(bucket, results):
         results.append((bucket[0].replace(u"von ", "")[0].upper(), bucket))
-    return make_alphabetic(result, processname)
+    return make_alphabetic(result, processname, sortnames=sortnames, lang=lang)
 
 
-def rewrite_von(input):
-    if "von " in input:
-        return input.replace("von ", "") + " von"
-    else:
-        return input
+def rewrite_von(name):
+    """Move 'von' and 'av' to end of name."""
+    name = re.sub(r"^von (.+)$", r"\1 von", name)
+    name = re.sub(r"^af (.+)$", r"\1 af", name)
+    return name
 
 
-def make_placenames(places):
+def make_placenames(places, lang="sv"):
     def processname(hit, results):
         name = hit['name'].strip()
         results.append((name[0].upper(), (name, hit)))
-    return make_alphabetic(places, processname)
+    return make_alphabetic(places, processname, lang=lang)
 
 
-def make_alphabetic(hits, processname):
+def make_alpha_more_women(women, sortnames=True, lang="sv"):
+    """Sort more-women list alphabetically and divide into first letters."""
+    def processname(item, results):
+        firstletter = rewrite_von(item[0])[0].upper()
+        results.append((firstletter, item))
+    return make_alphabetic(women, processname, sortnames=sortnames, lang=lang)
+
+
+def make_alphabetic(hits, processname, sortnames=False, lang="sv"):
     """ Loops through hits, applies the function 'processname'
         on each object and then sorts the result in alphabetical
         order.
@@ -108,6 +117,10 @@ def make_alphabetic(hits, processname):
         where first_letter is the first_letter of each object (to sort on), and the result
         is what the html-template want e.g. a pair of (name, no_hits)
     """
+    def fix_lastname(name):
+        name = re.sub(r"(^von )|(^af )", r"", name)
+        return name.replace(" ", "z")
+
     results = []
     for hit in hits:
         processname(hit, results)
@@ -121,18 +134,28 @@ def make_alphabetic(hits, processname):
             first_letter = u'Ä'
         if first_letter == u'Ü':
             first_letter = u'Y'
+        if lang == "en" and first_letter == u"Ö":
+            first_letter = u"O"
+        if lang == "en" and first_letter in u"ÄÅ":
+            first_letter = u"A"
         if first_letter not in letter_results:
             letter_results[first_letter] = [result]
         else:
             letter_results[first_letter].append(result)
 
     # Sort result dictionary alphabetically into list
-    collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
+    if lang == "en":
+        collator = icu.Collator.createInstance(icu.Locale('en_EN.UTF-8'))
+    else:
+        collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
     for n, items in letter_results.items():
-        items.sort(key=lambda x: collator.getSortKey(x[0].replace("von ", "")))
+        if sortnames:
+            items.sort(key=lambda x: collator.getSortKey(fix_lastname(x[0]) + " " + x[1]))
+        else:
+            items.sort(key=lambda x: collator.getSortKey(x[0]))
+
     letter_results = sorted(letter_results.items(), key=lambda x: collator.getSortKey(x[0]))
     return letter_results
-
 
 
 def make_simplenamelist(hits):
@@ -257,7 +280,9 @@ def mk_links(text):
 
 
 def unescape(text):
-    return re.sub('&gt;', r'>', text)
+    text = re.sub('&gt;', r'>', text)
+    text = re.sub('&apos;', r"'", text)
+    return text
 
 
 def aggregate_by_type(items, use_markdown=False):
@@ -292,12 +317,12 @@ def make_placelist(hits, placename, lat, lon):
     for hit in hits["hits"]:
         source = hit["_source"]
         hit['url'] = source.get('url') or hit['_id']
-        placelocations = {"Bostadsort": source.get('places', []),
-                          "Verksamhetsort": source.get('occupation', []),
-                          "Utbildningsort": source.get('education', []),
-                          "Kontakter": source.get('contact', []),
-                          u"Födelseort": [source.get('lifespan', {}).get("from", {})],
-                          u"Dödsort": [source.get('lifespan', {}).get("to", {})]
+        placelocations = {gettext("Residence"): source.get('places', []),
+                          gettext("Place of activity"): source.get('occupation', []),
+                          gettext("Place of education"): source.get('education', []),
+                          gettext("Contacts"): source.get('contact', []),
+                          gettext("Birthplace"): [source.get('lifespan', {}).get("from", {})],
+                          gettext("Place of death"): [source.get('lifespan', {}).get("to", {})]
                           }
 
         for ptype, places in placelocations.items():

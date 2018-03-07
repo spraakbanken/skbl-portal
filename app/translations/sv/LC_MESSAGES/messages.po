@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-02-19 12:46+0000\n"
+"POT-Creation-Date: 2018-03-06 13:21+0000\n"
 "PO-Revision-Date: 2017-02-20 14:49+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sv\n"
@@ -18,78 +18,108 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.4.0\n"
 
-#: app/computeviews.py:65 app/templates/article.html:335
-#: app/templates/layout.html:131
+#: app/computeviews.py:108 app/templates/article.html:345
+#: app/templates/layout.html:138
 msgid "Organisations"
 msgstr "Organisationer"
 
-#: app/computeviews.py:86 app/templates/article.html:251
-#: app/templates/contact.html:42 app/templates/layout.html:124
+#: app/computeviews.py:129 app/templates/article.html:261
+#: app/templates/contact.html:42 app/templates/layout.html:131
 msgid "Activities"
 msgstr "Verksamhet"
 
-#: app/computeviews.py:112 app/templates/layout.html:97
+#: app/computeviews.py:157 app/templates/layout.html:101
 msgid "Women A-Z"
 msgstr "Kvinnor A-Ö"
 
-#: app/computeviews.py:156
+#: app/computeviews.py:199
 msgid "Placenames"
 msgstr "Orter"
 
-#: app/computeviews.py:192 app/templates/layout.html:100
+#: app/computeviews.py:233 app/templates/layout.html:104
 msgid "Article authors"
 msgstr "Artikelförfattare"
 
-#: app/computeviews.py:271
+#: app/computeviews.py:314
 msgid "Please enter all the fields!"
 msgstr "Alla fält måste vara ifyllda!"
 
-#: app/computeviews.py:275
+#: app/computeviews.py:318
 msgid "Please enter a valid email address!"
 msgstr "Du måste ange en giltig e-post-adress!"
 
-#: app/computeviews.py:281 app/templates/layout.html:105 app/views.py:71
+#: app/computeviews.py:324 app/templates/layout.html:109 app/views.py:76
 msgid "Contact"
 msgstr "Kontakt"
 
-#: app/computeviews.py:282 app/views.py:72
+#: app/computeviews.py:325 app/views.py:77
 msgid "Contact SKBL"
 msgstr "Kontakta SKBL"
 
-#: app/computeviews.py:342 app/computeviews.py:343
+#: app/computeviews.py:385 app/computeviews.py:386
 msgid "Thank you for your feedback"
 msgstr "Tack för din återkoppling"
 
-#: app/computeviews.py:344
+#: app/computeviews.py:387
 msgid "We will get back to you as soon as we can."
 msgstr "Vi återkommer så fort vi kan."
 
-#: app/templates/layout.html:103 app/views.py:36
+#: app/helpers.py:320
+msgid "Residence"
+msgstr "Bostadsort"
+
+#: app/helpers.py:321
+msgid "Place of activity"
+msgstr "Verksamhetsort"
+
+#: app/helpers.py:322
+msgid "Place of education"
+msgstr "Utbildningsort"
+
+#: app/helpers.py:323 app/templates/article.html:303
+msgid "Contacts"
+msgstr "Kontakter"
+
+#: app/helpers.py:324 app/templates/article.html:407
+#: app/templates/article.html:420 app/templates/article.html:436
+msgid "Birthplace"
+msgstr "Födelseort"
+
+#: app/helpers.py:325 app/templates/article.html:413
+#: app/templates/article.html:426
+msgid "Place of death"
+msgstr "Dödsort"
+
+#: app/views.py:23 app/views.py:150 app/views.py:302 app/views.py:422
+msgid "Contents could not be found!"
+msgstr "Innehållet kunde inte hittas!"
+
+#: app/templates/layout.html:107 app/views.py:41
 msgid "About SKBL"
 msgstr "Om SKBL"
 
-#: app/templates/layout.html:104 app/views.py:49
+#: app/templates/layout.html:108 app/views.py:54
 msgid "More women"
 msgstr "Fler kvinnor"
 
-#: app/views.py:56
+#: app/views.py:61
 msgid "Older biographies"
 msgstr "Äldre biografiska verk"
 
-#: app/views.py:105
+#: app/views.py:115
 #, python-format
 msgid "Hits for \"%s\""
 msgstr "Träffar för \"%s\""
 
-#: app/templates/article.html:90
+#: app/templates/article.html:98
 msgid "Work in progress"
 msgstr "Under utveckling"
 
-#: app/templates/article.html:107
+#: app/templates/article.html:115
 msgid "Remark"
 msgstr "Anmärkning"
 
-#: app/templates/article.html:128
+#: app/templates/article.html:136
 msgid ""
 "You are welcome to cite this article but always provide the author’s name"
 " as follows"
@@ -97,86 +127,86 @@ msgstr ""
 "Hänvisa gärna till denna artikel, men uppge alltid författarnamnet enligt"
 " följande"
 
-#: app/templates/article.html:140
+#: app/templates/article.html:137
+msgid "article by"
+msgstr "artikel av"
+
+#: app/templates/article.html:141
+msgid "retrieved"
+msgstr "hämtad"
+
+#: app/templates/article.html:148
 msgid "Show complete information"
 msgstr "Visa full information"
 
-#: app/templates/article.html:152
-msgid "Other names"
+#: app/templates/article.html:160
+msgid "Other Names"
 msgstr "Övriga namn"
 
-#: app/templates/article.html:165
+#: app/templates/article.html:174
 msgid "Family Relationships"
 msgstr "Familjeförhållanden"
 
-#: app/templates/article.html:167
+#: app/templates/article.html:177
 msgid "Civil Status"
 msgstr "Civilstånd"
 
-#: app/templates/article.html:209
+#: app/templates/article.html:219
 msgid "Education"
 msgstr "Utbildning"
 
-#: app/templates/article.html:293
-msgid "Contacts"
-msgstr "Kontakter"
-
-#: app/templates/article.html:389
+#: app/templates/article.html:399
 msgid "Residences"
 msgstr "Bostadsorter"
 
-#: app/templates/article.html:395 app/templates/article.html:408
-#: app/templates/article.html:424
-msgid "Birthplace"
-msgstr "Födelseort"
-
-#: app/templates/article.html:401 app/templates/article.html:414
-msgid "Place of death"
-msgstr "Dödsort"
-
-#: app/templates/article.html:445
+#: app/templates/article.html:457
 msgid "Prices/awards"
 msgstr "Priser/utmärkelser"
 
-#: app/templates/article.html:486
+#: app/templates/article.html:498
 msgid "Sources"
 msgstr "Källor"
 
-#: app/templates/article.html:510
+#: app/templates/article.html:523
 msgid "Further References"
 msgstr "Vidare referenser"
 
-#: app/templates/article.html:535
+#: app/templates/article.html:548
 msgid "Pictures"
 msgstr "Bilder"
 
-#: app/templates/article.html:548 app/templates/bucketresults.html:32
-#: app/templates/list.html:55 app/templates/list.html:87
-#: app/templates/list.html:92 app/templates/nestedbucketresults.html:68
+#: app/templates/article.html:561 app/templates/bucketresults.html:34
+#: app/templates/list.html:56 app/templates/list.html:88
+#: app/templates/list.html:93 app/templates/more_women.html:42
+#: app/templates/nestedbucketresults.html:68 app/templates/places.html:24
 msgid "TO THE TOP"
 msgstr "TILL TOPPEN"
 
-#: app/templates/article.html:553
+#: app/templates/article.html:566
 msgid "Show map"
 msgstr "Visa karta"
 
-#: app/templates/article.html:556
+#: app/templates/article.html:569
 msgid "Hide map"
 msgstr "Göm karta"
 
-#: app/templates/article.html:567 app/templates/layout.html:145
+#: app/templates/article.html:581 app/templates/layout.html:152
 msgid "Keywords"
 msgstr "Nyckelord"
 
-#: app/templates/article.html:582
+#: app/templates/article.html:589
+msgid "Open article in Karp"
+msgstr "Öppna denna artikel i Karp"
+
+#: app/templates/article.html:597
 msgid "Links"
 msgstr "Länkar"
 
-#: app/templates/author_presentations.html:12 app/templates/list.html:14
+#: app/templates/author_presentations.html:12 app/templates/list.html:15
 msgid "Has published (amongst others)"
 msgstr "Har bland annat publicerat"
 
-#: app/templates/bucketresults.html:27 app/templates/bucketresults.html:39
+#: app/templates/bucketresults.html:29 app/templates/bucketresults.html:41
 msgid "see"
 msgstr "se"
 
@@ -256,7 +286,7 @@ msgstr "Till avancerad sökning"
 msgid "To advanced search"
 msgstr "Till avancerad sökning"
 
-#: app/templates/layout.html:81
+#: app/templates/layout.html:83
 msgid ""
 "For more advanced searches and combinations please use the Språkbanken "
 "tool Karp."
@@ -264,7 +294,7 @@ msgstr ""
 "För att göra mer avancerade sökningar och sammanställningar kan du "
 "använda Språkbankens verktyg Karp."
 
-#: app/templates/layout.html:82
+#: app/templates/layout.html:84
 msgid ""
 "This is particularly relevant for researchers seeking to analyse the "
 "information contained in SKBL (Biographical Dictionary of Swedish Women)."
@@ -272,43 +302,43 @@ msgstr ""
 "Det rekommenderas i första hand för forskare som vill analysera de "
 "uppgifter som ligger till grund för SKBL."
 
-#: app/templates/layout.html:84
+#: app/templates/layout.html:86
 msgid "To Karp"
 msgstr "Till Karp"
 
-#: app/templates/layout.html:84 app/templates/list.html:97
+#: app/templates/layout.html:88 app/templates/list.html:98
 msgid "External link"
 msgstr "Extern länk"
 
-#: app/templates/layout.html:109
+#: app/templates/layout.html:115
 msgid "På "
 msgstr "In "
 
-#: app/templates/layout.html:138
+#: app/templates/layout.html:145
 msgid "Places"
 msgstr "Orter"
 
-#: app/templates/layout.html:153
+#: app/templates/layout.html:160
 msgid "Share page"
 msgstr "Dela sidan"
 
-#: app/templates/list.html:7
+#: app/templates/list.html:8
 msgid "of"
 msgstr "av"
 
-#: app/templates/list.html:22
+#: app/templates/list.html:23
 msgid "Articles in SKBL"
 msgstr "Artiklar i SKBL"
 
-#: app/templates/list.html:29
+#: app/templates/list.html:30
 msgid "No results found for"
 msgstr "Inga träffar för"
 
-#: app/templates/list.html:96
+#: app/templates/list.html:97
 msgid "Not all hits are shown."
 msgstr "Alla träffar visas inte."
 
-#: app/templates/list.html:96
+#: app/templates/list.html:97
 msgid "To see more hits, use Språkbanken's tool"
 msgstr "Vill du se fler, använd Språkbankens verktyg"
 

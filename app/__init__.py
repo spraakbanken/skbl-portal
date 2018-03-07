@@ -3,11 +3,10 @@ import json
 import os
 import os.path
 from pylibmc import Client, ClientPool
-import shutil
 import sys
 import urllib
 
-from flask import Flask, g, make_response, request, redirect, render_template, url_for
+from flask import Flask, g, make_response, redirect, request, render_template, url_for
 from flask_babel import Babel
 from setuptools import setup
 from urllib2 import Request, urlopen
@@ -30,10 +29,45 @@ babel = Babel(app)
 client = Client(app.config['MEMCACHED'])
 mc_pool = ClientPool(client, app.config['POOL_SIZE'])
 
-""" Browser cache handling
+
+def cache_name(pagename, lang=''):
+    if not lang:
+        lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
+    return '%s_%s' % (pagename, lang)
+
+
+def check_cache(page, lang=''):
+    # If the cache should not be used, return None
+    if app.config['TEST']:
+        return None
+    try:
+       with mc_pool.reserve() as client:
+           # Look for the page, return if found
+           art = client.get(cache_name(page, lang))
+           if art is not None:
+               return art
+    except:
+        # TODO what to do??
+        pass
+
+    # If nothing is found, return None
+    return None
+
+
+def set_cache(page, name='', lang='', no_hits=0):
+    """
+    Browser cache handling
     Adds header to the response
-"""
-def set_cache(page):
+    May also add the page to the memcache
+    """
+    pagename = cache_name(name, lang='')
+    if no_hits >= app.config['CACHE_HIT_LIMIT']:
+       try:
+            with mc_pool.reserve() as client:
+                client.set(pagename, page, time=app.config['LOW_CACHE_TIME'])
+       except:
+            # TODO what to do??
+            pass
     r = make_response(page)
     r.headers.set('Cache-Control', "public, max-age=%s" % app.config['BROWSER_CACHE_TIME'])
     return r
@@ -90,7 +124,6 @@ def karp_query(action, query, mode='skbl'):
 
 def karp_request(action):
     q = Request("%s/%s" % (app.config['KARP_BACKEND'], action))
-    # sys.stderr.write("\nREQUEST: %s/%s\n\n" % (app.config['KARP_BACKEND'], action))
     q.add_header('Authorization', "Basic %s" % (app.config['KARP_AUTH_HASH']))
     response = urlopen(q).read()
     data = json.loads(response)
@@ -115,6 +148,7 @@ app.jinja_env.globals.update(make_simplenamelist=helpers.make_simplenamelist)
 app.jinja_env.globals.update(make_placelist=helpers.make_placelist)
 app.jinja_env.globals.update(make_placenames=helpers.make_placenames)
 app.jinja_env.globals.update(make_alphabetical_bucket=helpers.make_alphabetical_bucket)
+app.jinja_env.globals.update(make_alpha_more_women=helpers.make_alpha_more_women)
 app.jinja_env.globals.update(get_date=helpers.get_date)
 app.jinja_env.globals.update(join_name=helpers.join_name)
 app.jinja_env.globals.update(sorted=sorted)
@@ -129,7 +163,6 @@ app.jinja_env.globals.update(get_current_date=helpers.get_current_date)
 
 @app.template_filter('deescape')
 def deescape_filter(s):
-    # return s.replace("&amp;", "&").replace("&apos;", "'").replace("&quot;", '"')
     html_parser = HTMLParser.HTMLParser()
     return html_parser.unescape(s)
 

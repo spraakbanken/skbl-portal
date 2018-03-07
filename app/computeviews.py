@@ -1,8 +1,7 @@
 # -*- coding=utf-8 -*-
-from app import app, karp_query, render_template, request, set_language_switch_link, mc_pool
+from app import app, karp_query, render_template, request, set_language_switch_link, mc_pool, cache_name, check_cache
 from collections import defaultdict
 from flask_babel import gettext
-import icu  # pip install PyICU
 import json
 import md5
 import urllib
@@ -11,6 +10,7 @@ import helpers
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.header import Header
+import os.path
 import smtplib
 import static_info
 
@@ -18,21 +18,26 @@ import static_info
 def getcache(page, lang, usecache):
     # Check if the requested page, in language 'lang', is in the cache
     # If not, use the backup cache.
+    # If the cache should not be used, return None
     # First, compute the language
     if not lang:
         lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
-    # If the cache should not be used, return None
     if not usecache or app.config['TEST']:
         return None, lang
-    with mc_pool.reserve() as client:
-        # Look for the page, return if found
-        art = client.get(page + lang)
-        if art is not None:
-            return art, lang
-        # if not, look for the backup of the page and return
-        art = client.get(page + lang + '_backup')
-        if art is not None:
-            return art, lang
+    pagename = cache_name(page, lang=lang)
+    try:
+        with mc_pool.reserve() as client:
+            # Look for the page, return if found
+            art = client.get(pagename)
+            if art is not None:
+                return art, lang
+            # if not, look for the backup of the page and return
+            art = client.get(pagename + '_backup')
+            if art is not None:
+                return art, lang
+    except:
+        # TODO what to do??
+        pass
     # If nothing is found, return None
     return None, lang
 
@@ -42,34 +47,87 @@ def copytobackup(fields, lang):
     for field in fields:
         with mc_pool.reserve() as client:
             art = client.get(field + lang)
-            client.set(field + lang + '_backup', art, time=app.config['CACHE_TIME'])
+            client.set(cache_name(field, lang) + '_backup', art, time=app.config['CACHE_TIME'])
 
 
-def compute_organisation(lang="", infotext="", cache=True):
+def searchresult(result, name='', searchfield='', imagefolder='',
+                 searchtype='equals', title='', authorinfo=False, lang='',
+                 show_lang_switch=True, cache=True):
+    set_language_switch_link("%s_index" % name, result)
+    try:
+        result = result.encode("UTF-8")
+        pagename = name+ '_' +urllib.quote(result)
+        art = check_cache(pagename, lang)
+        if art is not None:
+            return art
+        show = ','.join(['name', 'url', 'undertitel', 'lifespan', 'undertitel_eng'])
+        hits = karp_query('minientry',
+                          {'q': "extended||and|%s.search|%s|%s" % (searchfield, searchtype, result),
+                           'show': show})
+        title = title or result.decode("UTF-8")
+
+        no_hits = hits['hits']['total']
+        if no_hits > 0:
+            picture = None
+            if os.path.exists(app.config.root_path + '/static/images/%s/%s.jpg' % (imagefolder, result)):
+                picture = '/static/images/%s/%s.jpg' % (imagefolder, result)
+            page = render_template('list.html', picture=picture,
+                                   alphabetic=True, title=title,
+                                   headline=title, hits=hits["hits"],
+                                   authorinfo=authorinfo,
+                                   show_lang_switch=show_lang_switch)
+            if no_hits >= app.config['CACHE_HIT_LIMIT']:
+                try:
+                    with mc_pool.reserve() as client:
+                        client.set(cache_name(pagename, lang), page, time=app.config['CACHE_TIME'])
+                except:
+                    # TODO what to do?
+                    pass
+            return page
+
+        else:
+            return render_template('page.html', content=gettext('Contents could not be found!'))
+
+    except Exception as e:
+        return render_template('page.html',
+                               content="%s\n%s: extended||and|%s.search|%s|%s" % (e, app.config['KARP_BACKEND'], searchfield, searchtype, result))
+
+
+def compute_organisation(lang="", infotext="", cache=True, url=''):
     set_language_switch_link("organisation_index", lang=lang)
     art, lang = getcache('organisation', lang, cache)
     if art is not None:
             return art
 
     infotext = helpers.get_infotext("organisation", request.url_rule.rule)
-    data = karp_query('minientry', {'q': 'extended||and|anything|regexp|.*',
-                                    'show': 'organisationsnamn,organisationstyp'})
+    if lang == "en":
+        data = karp_query('minientry', {'q': 'extended||and|anything|regexp|.*',
+                                        'show': 'organisationsnamn,organisationstyp_eng'})
+        typefield = "type_eng"
+    else:
+        data = karp_query('minientry', {'q': 'extended||and|anything|regexp|.*',
+                                        'show': 'organisationsnamn,organisationstyp'})
+        typefield = "type"
     nested_obj = {}
     for hit in data['hits']['hits']:
         for org in hit['_source'].get('organisation', []):
-            orgtype = org.get('type', '-')
+            orgtype = helpers.unescape(org.get(typefield, '-'))
             if orgtype not in nested_obj:
                 nested_obj[orgtype] = defaultdict(set)
             nested_obj[orgtype][org.get('name', '-')].add(hit['_id'])
     art = render_template('nestedbucketresults.html',
                           results=nested_obj, title=gettext("Organisations"),
-                          infotext=infotext, name='organisation')
-    with mc_pool.reserve() as client:
-        client.set('organisation' + lang, art, time=app.config['CACHE_TIME'])
+                          infotext=infotext, name='organisation', page_url=url)
+    try:
+       with mc_pool.reserve() as client:
+           client.set(cache_name('organisation', lang), art, time=app.config['CACHE_TIME'])
+    except:
+        # TODO what to do?
+        pass
     return art
 
 
-def compute_activity(lang="", cache=True):
+def compute_activity(lang="", cache=True, url=''):
     set_language_switch_link("activity_index", lang=lang)
     art, lang = getcache('activity', lang, cache)
 
@@ -84,13 +142,20 @@ def compute_activity(lang="", cache=True):
 
     art = bucketcall(queryfield='verksamhetstext', name='activity',
                      title=gettext("Activities"), infotext=infotext,
-                     alphabetical=True, description=helpers.get_shorttext(infotext), insert_entries=reference_list)
-    with mc_pool.reserve() as client:
-        client.set('activity' + lang, art, time=app.config['CACHE_TIME'])
+                     alphabetical=True,
+                     description=helpers.get_shorttext(infotext),
+                     insert_entries=reference_list,
+                     page_url=url)
+    try:
+       with mc_pool.reserve() as client:
+           client.set(cache_name('activity', lang), art, time=app.config['CACHE_TIME'])
+    except:
+        # TODO what to do?
+        pass
     return art
 
 
-def compute_article(lang="", cache=True):
+def compute_article(lang="", cache=True, url=''):
     set_language_switch_link("article_index", lang=lang)
     art, lang = getcache('article', lang, cache)
     if art is not None:
@@ -113,13 +178,18 @@ def compute_article(lang="", cache=True):
                           alphabetic=True,
                           split_letters=True,
                           infotext=infotext,
-                          title='Articles')
-    with mc_pool.reserve() as client:
-        client.set('article' + lang, art, time=app.config['CACHE_TIME'])
+                          title='Articles',
+                          page_url=url)
+    try:
+       with mc_pool.reserve() as client:
+           client.set(cache_name('article', lang), art, time=app.config['CACHE_TIME'])
+    except:
+        # TODO what to do?
+        pass
     return art
 
 
-def compute_place(lang="", cache=True):
+def compute_place(lang="", cache=True, url=''):
     set_language_switch_link("place_index", lang=lang)
     art, lang = getcache('place', lang, cache)
     if art is not None:
@@ -149,18 +219,23 @@ def compute_place(lang="", cache=True):
     # To use the coordinates, use 'getplaces' instead of 'getplacenames'
     data = karp_query('getplacenames', {})
     stat_table = [parse(kw) for kw in data['places'] if has_name(kw)]
-    # Sort and translate
-    # stat_table = helpers.sort_places(stat_table, request.url_rule)
-    collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
-    stat_table.sort(key=lambda x: collator.getSortKey(x.get('name').strip()))
-    art = render_template('places.html', places=stat_table, title=gettext("Placenames"),
-                          infotext=infotext, description=helpers.get_shorttext(infotext))
-    with mc_pool.reserve() as client:
-        client.set('place' + lang, art, time=app.config['CACHE_TIME'])
+    art = render_template('places.html',
+                          places=stat_table,
+                          title=gettext("Placenames"),
+                          infotext=infotext,
+                          description=helpers.get_shorttext(infotext),
+                          page_url=url)
+    try:
+       with mc_pool.reserve() as client:
+           client.set(cache_name('place', lang), art, time=app.config['CACHE_TIME'])
+    except:
+        # TODO what to do?
+        pass
     return art
 
 
-def compute_artikelforfattare(infotext='', description='', lang="", cache=True):
+def compute_artikelforfattare(infotext='', description='', lang="", cache=True, url=''):
+    set_language_switch_link("articleauthor_index", lang=lang)
     art, lang = getcache('author', lang, cache)
     if art is not None:
         return art
@@ -168,11 +243,7 @@ def compute_artikelforfattare(infotext='', description='', lang="", cache=True):
     data = karp_query('statlist', q_data)
     # strip kw0 to get correct sorting
     stat_table = [[kw[0].strip()] + kw[1:] for kw in data['stat_table'] if kw[0] != ""]
-
     stat_table = [[kw[1] + ',', kw[0], kw[2]] for kw in stat_table]
-
-    collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
-    stat_table.sort(key=lambda x: collator.getSortKey(x[0] + x[1]))
 
     # Remove duplicates and some wrong ones (because of backend limitation):
     stoplist = {
@@ -189,16 +260,22 @@ def compute_artikelforfattare(infotext='', description='', lang="", cache=True):
             new_stat_table.append(item)
             added[fullname] = True
     art = render_template('bucketresults.html', results=new_stat_table,
-                           alphabetical=True, title=gettext('Article authors'),
-                           name='articleauthor', infotext=infotext, description=description)
-    with mc_pool.reserve() as client:
-        client.set('author' + lang, art, time=app.config['CACHE_TIME'])
+                          alphabetical=True, title=gettext('Article authors'),
+                          name='articleauthor', infotext=infotext,
+                          description=description, sortnames=True,
+                          page_url=url)
+    try:
+       with mc_pool.reserve() as client:
+           client.set(cache_name('author', lang), art, time=app.config['CACHE_TIME'])
+    except:
+        # TODO what to do?
+        pass
     return art
 
 
-def bucketcall(queryfield='', name='', title='', sortby='',
-               lastnamefirst=False, infotext='', description='', query='',
-               alphabetical=False, insert_entries=None):
+def bucketcall(queryfield='', name='', title='', sortby='', lastnamefirst=False,
+               infotext='', description='', query='', alphabetical=False,
+               insert_entries=None, page_url=''):
     q_data = {'buckets': '%s.bucket' % queryfield}
     if query:
         q_data['q'] = query
@@ -219,7 +296,9 @@ def bucketcall(queryfield='', name='', title='', sortby='',
     #     stat_table = [[showfield(kw), kw[2]] for kw in stat_table]
     return render_template('bucketresults.html', results=stat_table,
                            alphabetical=alphabetical, title=gettext(title),
-                           name=name, infotext=infotext, description=description)
+                           name=name, infotext=infotext,
+                           description=description,
+                           page_url=page_url)
 
 
 def compute_emptycache(fields):
