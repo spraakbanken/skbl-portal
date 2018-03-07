@@ -74,7 +74,7 @@ def searchresult(result, name='', searchfield='', imagefolder='',
                                    headline=title, hits=hits["query"]["hits"],
                                    authorinfo=authorinfo,
                                    show_lang_switch=show_lang_switch)
-            if no_hits > app.config['CACHE_HIT_LIMIT']:
+            if no_hits >= app.config['CACHE_HIT_LIMIT']:
                 try:
                     with mc_pool.reserve() as client:
                         client.set(cache_name(pagename, lang), page, time=app.config['CACHE_TIME'])
