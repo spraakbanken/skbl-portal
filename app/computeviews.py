@@ -25,15 +25,19 @@ def getcache(page, lang, usecache):
     if not usecache or app.config['TEST']:
         return None, lang
     pagename = cache_name(page, lang=lang)
-    with mc_pool.reserve() as client:
-        # Look for the page, return if found
-        art = client.get(pagename)
-        if art is not None:
-            return art, lang
-        # if not, look for the backup of the page and return
-        art = client.get(pagename + '_backup')
-        if art is not None:
-            return art, lang
+    try:
+        with mc_pool.reserve() as client:
+            # Look for the page, return if found
+            art = client.get(pagename)
+            if art is not None:
+                return art, lang
+            # if not, look for the backup of the page and return
+            art = client.get(pagename + '_backup')
+            if art is not None:
+                return art, lang
+    except:
+        # TODO what to do??
+        pass
     # If nothing is found, return None
     return None, lang
 
@@ -71,8 +75,12 @@ def searchresult(result, name='', searchfield='', imagefolder='',
                                    authorinfo=authorinfo,
                                    show_lang_switch=show_lang_switch)
             if no_hits > app.config['CACHE_HIT_LIMIT']:
-                with mc_pool.reserve() as client:
-                    client.set(cache_name(pagename, lang), page, time=app.config['CACHE_TIME'])
+                try:
+                    with mc_pool.reserve() as client:
+                        client.set(cache_name(pagename, lang), page, time=app.config['CACHE_TIME'])
+                except:
+                    # TODO what to do?
+                    pass
             return page
 
         else:
@@ -108,8 +116,12 @@ def compute_organisation(lang="", infotext="", cache=True):
     art = render_template('nestedbucketresults.html',
                           results=nested_obj, title=gettext("Organisations"),
                           infotext=infotext, name='organisation')
-    with mc_pool.reserve() as client:
-        client.set(cache_name('organisation', lang), art, time=app.config['CACHE_TIME'])
+    try:
+       with mc_pool.reserve() as client:
+           client.set(cache_name('organisation', lang), art, time=app.config['CACHE_TIME'])
+    except:
+        # TODO what to do?
+        pass
     return art
 
 
@@ -131,8 +143,12 @@ def compute_activity(lang="", cache=True):
                      alphabetical=True,
                      description=helpers.get_shorttext(infotext),
                      insert_entries=reference_list)
-    with mc_pool.reserve() as client:
-        client.set(cache_name('activity', lang), art, time=app.config['CACHE_TIME'])
+    try:
+       with mc_pool.reserve() as client:
+           client.set(cache_name('activity', lang), art, time=app.config['CACHE_TIME'])
+    except:
+        # TODO what to do?
+        pass
     return art
 
 
@@ -160,8 +176,12 @@ def compute_article(lang="", cache=True):
                           split_letters=True,
                           infotext=infotext,
                           title='Articles')
-    with mc_pool.reserve() as client:
-        client.set(cache_name('article', lang), art, time=app.config['CACHE_TIME'])
+    try:
+       with mc_pool.reserve() as client:
+           client.set(cache_name('article', lang), art, time=app.config['CACHE_TIME'])
+    except:
+        # TODO what to do?
+        pass
     return art
 
 
@@ -200,8 +220,12 @@ def compute_place(lang="", cache=True):
                           title=gettext("Placenames"),
                           infotext=infotext,
                           description=helpers.get_shorttext(infotext))
-    with mc_pool.reserve() as client:
-        client.set(cache_name('place', lang), art, time=app.config['CACHE_TIME'])
+    try:
+       with mc_pool.reserve() as client:
+           client.set(cache_name('place', lang), art, time=app.config['CACHE_TIME'])
+    except:
+        # TODO what to do?
+        pass
     return art
 
 
@@ -234,8 +258,12 @@ def compute_artikelforfattare(infotext='', description='', lang="", cache=True):
                           alphabetical=True, title=gettext('Article authors'),
                           name='articleauthor', infotext=infotext,
                           description=description, sortnames=True)
-    with mc_pool.reserve() as client:
-        client.set(cache_name('author', lang), art, time=app.config['CACHE_TIME'])
+    try:
+       with mc_pool.reserve() as client:
+           client.set(cache_name('author', lang), art, time=app.config['CACHE_TIME'])
+    except:
+        # TODO what to do?
+        pass
     return art
 
 

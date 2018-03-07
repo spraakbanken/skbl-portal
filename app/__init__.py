@@ -40,11 +40,16 @@ def check_cache(page, lang=''):
     # If the cache should not be used, return None
     if app.config['TEST']:
         return None
-    with mc_pool.reserve() as client:
-        # Look for the page, return if found
-        art = client.get(cache_name(page, lang))
-        if art is not None:
-            return art
+    try:
+       with mc_pool.reserve() as client:
+           # Look for the page, return if found
+           art = client.get(cache_name(page, lang))
+           if art is not None:
+               return art
+    except:
+        # TODO what to do??
+        pass
+
     # If nothing is found, return None
     return None
 
@@ -57,8 +62,12 @@ def set_cache(page, name='', lang='', no_hits=0):
     """
     pagename = cache_name(name, lang='')
     if no_hits >= app.config['CACHE_HIT_LIMIT']:
-        with mc_pool.reserve() as client:
-            client.set(pagename, page, time=app.config['LOW_CACHE_TIME'])
+       try:
+            with mc_pool.reserve() as client:
+                client.set(pagename, page, time=app.config['LOW_CACHE_TIME'])
+       except:
+            # TODO what to do??
+            pass
     r = make_response(page)
     r.headers.set('Cache-Control', "public, max-age=%s" % app.config['BROWSER_CACHE_TIME'])
     return r
