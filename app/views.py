@@ -97,7 +97,8 @@ def submit_contact_form():
 def search():
     set_language_switch_link("search")
     search = request.args.get('q', '').encode('utf-8')
-    pagename = 'search'+urllib.quote(search)
+    pagename = 'search' + urllib.quote(search)
+
     page = check_cache(pagename)
     if page is not None:
         return page
@@ -110,7 +111,6 @@ def search():
         if '*' in search:
             search = re.sub('(?<!\.)\*', '.*', search)
             karp_q['q'] = "extended||and|anything|regexp|%s" % search
-            # karp_q['sort'] = '_score'
         else:
             karp_q['q'] = "extended||and|anything|contains|%s" % search
 
@@ -273,6 +273,7 @@ def authors():
 @app.route("/en/articleauthor/<result>", endpoint="articleauthor_en")
 @app.route("/sv/artikelforfattare/<result>", endpoint="articleauthor_sv")
 def author(result=None):
+    set_language_switch_link("articleauthor_index")
     rule = request.url_rule
     lang = 'sv' if 'sv' in rule.rule else 'en'
     # Try to get authorinfo in correct language (with Swedish as fallback)
