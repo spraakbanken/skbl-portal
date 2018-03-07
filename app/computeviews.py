@@ -1,5 +1,5 @@
 # -*- coding=utf-8 -*-
-from app import app, karp_query, render_template, request, set_language_switch_link, mc_pool
+from app import app, karp_query, render_template, request, set_language_switch_link, mc_pool, cache_name, check_cache
 from collections import defaultdict
 from flask_babel import gettext
 import json
@@ -18,19 +18,20 @@ import static_info
 def getcache(page, lang, usecache):
     # Check if the requested page, in language 'lang', is in the cache
     # If not, use the backup cache.
+    # If the cache should not be used, return None
     # First, compute the language
     if not lang:
         lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
-    # If the cache should not be used, return None
     if not usecache or app.config['TEST']:
         return None, lang
+    pagename = cache_name(page, lang=lang)
     with mc_pool.reserve() as client:
         # Look for the page, return if found
-        art = client.get(page + lang)
+        art = client.get(pagename)
         if art is not None:
             return art, lang
         # if not, look for the backup of the page and return
-        art = client.get(page + lang + '_backup')
+        art = client.get(pagename + '_backup')
         if art is not None:
             return art, lang
     # If nothing is found, return None
@@ -42,7 +43,7 @@ def copytobackup(fields, lang):
     for field in fields:
         with mc_pool.reserve() as client:
             art = client.get(field + lang)
-            client.set(field + lang + '_backup', art, time=app.config['CACHE_TIME'])
+            client.set(cache_name(field, lang) + '_backup', art, time=app.config['CACHE_TIME'])
 
 
 def searchresult(result, name='', searchfield='', imagefolder='',
@@ -50,9 +51,9 @@ def searchresult(result, name='', searchfield='', imagefolder='',
                  show_lang_switch=True, cache=True):
     qresult = result
     try:
-        pagename = "%s_%s" % (name, urllib.quote(result.encode('utf8')))
+        pagename = name+ '_' +urllib.quote(result.encode('utf8'))
         set_language_switch_link("%s_index" % name, result)
-        art, lang = getcache(pagename, lang, cache)
+        art = check_cache(pagename, lang)
         if art is not None:
             return art
         qresult = result.encode('utf-8')
@@ -71,7 +72,7 @@ def searchresult(result, name='', searchfield='', imagefolder='',
                                    show_lang_switch=show_lang_switch)
             if no_hits > app.config['CACHE_HIT_LIMIT']:
                 with mc_pool.reserve() as client:
-                    client.set(pagename + lang, page, time=app.config['CACHE_TIME'])
+                    client.set(cache_name(pagename, lang), page, time=app.config['CACHE_TIME'])
             return page
 
         else:
@@ -108,7 +109,7 @@ def compute_organisation(lang="", infotext="", cache=True):
                           results=nested_obj, title=gettext("Organisations"),
                           infotext=infotext, name='organisation')
     with mc_pool.reserve() as client:
-        client.set('organisation' + lang, art, time=app.config['CACHE_TIME'])
+        client.set(cache_name('organisation', lang), art, time=app.config['CACHE_TIME'])
     return art
 
 
@@ -131,7 +132,7 @@ def compute_activity(lang="", cache=True):
                      description=helpers.get_shorttext(infotext),
                      insert_entries=reference_list)
     with mc_pool.reserve() as client:
-        client.set('activity' + lang, art, time=app.config['CACHE_TIME'])
+        client.set(cache_name('activity', lang), art, time=app.config['CACHE_TIME'])
     return art
 
 
@@ -160,7 +161,7 @@ def compute_article(lang="", cache=True):
                           infotext=infotext,
                           title='Articles')
     with mc_pool.reserve() as client:
-        client.set('article' + lang, art, time=app.config['CACHE_TIME'])
+        client.set(cache_name('article', lang), art, time=app.config['CACHE_TIME'])
     return art
 
 
@@ -200,7 +201,7 @@ def compute_place(lang="", cache=True):
                           infotext=infotext,
                           description=helpers.get_shorttext(infotext))
     with mc_pool.reserve() as client:
-        client.set('place' + lang, art, time=app.config['CACHE_TIME'])
+        client.set(cache_name('place', lang), art, time=app.config['CACHE_TIME'])
     return art
 
 
@@ -234,7 +235,7 @@ def compute_artikelforfattare(infotext='', description='', lang="", cache=True):
                           name='articleauthor', infotext=infotext,
                           description=description, sortnames=True)
     with mc_pool.reserve() as client:
-        client.set('author' + lang, art, time=app.config['CACHE_TIME'])
+        client.set(cache_name('author', lang), art, time=app.config['CACHE_TIME'])
     return art
 
 
