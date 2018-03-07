@@ -53,10 +53,10 @@ def copytobackup(fields, lang):
 def searchresult(result, name='', searchfield='', imagefolder='',
                  searchtype='equals', title='', authorinfo=False, lang='',
                  show_lang_switch=True, cache=True):
-    result = result.encode("UTF-8")
+    set_language_switch_link("%s_index" % name, result)
     try:
-        pagename = name+ '_' +urllib.quote(result.encode('utf8'))
-        set_language_switch_link("%s_index" % name, result)
+        result = result.encode("UTF-8")
+        pagename = name+ '_' +urllib.quote(result)
         art = check_cache(pagename, lang)
         if art is not None:
             return art
