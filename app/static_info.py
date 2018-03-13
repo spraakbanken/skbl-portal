@@ -607,7 +607,6 @@ more_women = [
     (u"Lösch", u"Maria Dorothea", "1730", "1799", u"Kapten"),
     (u"Löving", u"Concordia", "1843", "1927", u"Författare, pedagog"),
     (u"Löwstädt-Chadwick", u"Emma", "1855", "1932", u"Konstnär"),
-    (u"Magnusson", u"Torgil", "1922", "2015", u"Professor konsthistoria"),
     (u"Maria Eleonora", u"", "1599", "1655", u"Drottning"),
     (u"Maria Elisabet", u"", "1596", "1618", u"Prinsessa"),
     (u"Marstrander", u"Eva", "1913", "1922", u"Översättare"),
