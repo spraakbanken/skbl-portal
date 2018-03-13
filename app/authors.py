@@ -1639,7 +1639,7 @@ authors_dict = {
     },
 
     u"Fia Sundevall": {
-        "sv": u"filosofie doktor i ekonomisk historia vid Stockholms universitet"
+        "sv": u"docent i ekonomisk historia vid Stockholms universitet"
     },
 
     u"Alexandra Sundqvist": {

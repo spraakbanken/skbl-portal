@@ -250,7 +250,9 @@ def compute_artikelforfattare(infotext='', description='', lang="", cache=True, 
         u"Grevesmühl,Kajsa": True,
         u"Ohrlander,Anders": True,
         u"Myrberg Burström,Mats": True,
-        u"Burström,Nanouschka": True
+        u"Burström,Nanouschka": True,
+        u"Ljung,Yvonne": True,
+        u"Lindholm,Barbro": True
     }
     added = {}
     new_stat_table = []
