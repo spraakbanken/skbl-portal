@@ -160,7 +160,7 @@ def place(place=None):
                                headline=place, hits=hits["hits"])
     else:
         page = render_template('page.html', content=gettext('Contents could not be found!'))
-    return set_cache(set_cache(page, name=pagename, no_hits=no_hits))
+    return set_cache(page, name=pagename, no_hits=no_hits)
 
 
 @app.route("/en/organisation", endpoint="organisation_index_en")
