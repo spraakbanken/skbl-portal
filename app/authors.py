@@ -154,6 +154,14 @@ authors_dict = {
         ]
     },
 
+    u"Irja Bergström": {
+        "sv": u"Docent i konstvetenskap vid Göteborgs universitet",
+        "publications": [
+            u"*Skulptriserna. Alice Nordin och hennes samtida 1890-1940* (2012)",
+            u"*\"Ensam fågel - jag vet vem det är\". Ester Henning. Konstnärinna på hospital* (1989)",
+        ]
+    },
+
     u"Carin Bergström": {
         "sv": u"docent i historia",
         "publications": [
