@@ -50,20 +50,23 @@ def copytobackup(fields, lang):
             client.set(cache_name(field, lang) + '_backup', art, time=app.config['CACHE_TIME'])
 
 
-def searchresult(result, name='', searchfield='', imagefolder='',
+def searchresult(result, name='', searchfield='', imagefolder='', query='',
                  searchtype='equals', title='', authorinfo=False, lang='',
                  show_lang_switch=True, cache=True):
     set_language_switch_link("%s_index" % name, result)
     try:
         result = result.encode("UTF-8")
-        pagename = name+ '_' +urllib.quote(result)
+        pagename = name + '_' + urllib.quote(result)
         art = check_cache(pagename, lang)
         if art is not None:
             return art
         show = ','.join(['name', 'url', 'undertitel', 'lifespan', 'undertitel_eng'])
-        hits = karp_query('minientry',
-                          {'q': "extended||and|%s.search|%s|%s" % (searchfield, searchtype, result),
-                           'show': show})
+        if query:
+            hits = karp_query('minientry', {'q': query, 'show': show})
+        else:
+            hits = karp_query('minientry',
+                              {'q': "extended||and|%s.search|%s|%s" % (searchfield, searchtype, result),
+                               'show': show})
         title = title or result.decode("UTF-8")
 
         no_hits = hits['hits']['total']

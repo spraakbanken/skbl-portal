@@ -277,16 +277,18 @@ def author(result=None):
     rule = request.url_rule
     lang = 'sv' if 'sv' in rule.rule else 'en'
     # Try to get authorinfo in correct language (with Swedish as fallback)
-    author = result.split(", ")[-1].strip() + " " + result.split(", ")[0].strip()
-    authorinfo = authors_dict.get(author)
+    firstname = result.split(", ")[-1].strip()
+    lastname = result.split(", ")[0].strip()
+    authorinfo = authors_dict.get(firstname + " " + lastname)
     if authorinfo:
         authorinfo = [authorinfo.get(lang, authorinfo.get("sv")),
                       [helpers.markdown_html(i) for i in authorinfo.get("publications", [])]]
-    page = computeviews.searchresult(author,
+    query = "extended||and|artikel_forfattare_fornamn.lowerbucket|equals|%s||and|artikel_forfattare_efternamn.lowerbucket|equals|%s" % (firstname, lastname)
+
+    page = computeviews.searchresult(result,
                                      name='articleauthor',
-                                     searchfield='artikel_forfattare_fulltnamn',
+                                     query=query,
                                      imagefolder='authors',
-                                     searchtype='contains',
                                      authorinfo=authorinfo,
                                      show_lang_switch=False)
     return set_cache(page)
