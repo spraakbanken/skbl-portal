@@ -69,13 +69,14 @@ def group_by_type(objlist, name):
     newdict = {}
     for obj in objlist:
         val = obj.get(name, "")
-        key = obj.get('type', u'Övrigt')
-        if key not in newdict:
-            newdict[key] = []
-        newdict[key].append(val)
+        key_sv = obj.get('type', u'Övrigt')
+        key_en = obj.get('type_eng', u'Other')
+        if key_sv not in newdict:
+            newdict[key_sv] = (key_en, [])
+        newdict[key_sv][1].append(val)
     result = []
     for key, val in newdict.items():
-        result.append({'type': key, name: ', '.join(val)})
+        result.append({'type': key, 'type_eng': val[0], name: ', '.join(val[1])})
     return result
 
 
