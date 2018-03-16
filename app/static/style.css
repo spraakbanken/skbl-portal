@@ -544,3 +544,63 @@ blockquote {
 .no_anchor_decor:hover {
     text-decoration: none;
 }
+
+@media print {
+
+  body {
+    background: white;
+  }
+  #search {
+    display: none;
+  }
+  #open_advanced_box {
+    display: none;
+  }
+  #advanced_box {
+    display: none;
+  }
+  .toggle-dates {
+    display: none;
+  }
+  .top-link {
+    display: none;
+  }
+  .share-buttons {
+    display: none;
+  }
+  a[href]:after {
+    content: none !important;
+  }
+  .image-links {
+    display: none;
+  }
+  .karp-article-link {
+    display: none;
+  }
+  .bottom-logo {
+    width: 160px;
+    padding: 20px;
+  }
+  hr {
+    display: none;
+  }
+  .fadeout {
+    display: none;
+  }
+  .hidden_first {
+    display: block !important;
+  }
+  .shown_first {
+    display: none !important;
+  }
+  .portrait-description {
+    display: table;
+  }
+  .minimize_items {
+    display: none;
+  }
+  .logos {
+    margin-top: 4em;
+  }
+
+}

@@ -574,7 +574,7 @@
             <div class="image-overlay">
                 <img class="img-responsive" src="{{ article.portrait[0].url }}" itemprop="image" alt="{{ article_portrait_description }}" width="360px">
             </div>
-            {{ article_portrait_description | deescape}}
+            <span class="portrait-description">{{ article_portrait_description | deescape}}</span>
         {% endif %}
         {% if article.keyword %}
             {% set article_keyword = get_lang_text(article.keyword, article.keyword_eng, g.language) %}
@@ -586,7 +586,7 @@
             {% endfor %}
         {% endif %}
         <br/>
-        <a href="https://spraakbanken.gu.se/karp/#?mode=skbl&search=extended||and|id|equals|{{article.es_id}}" target="_blank" title="{{gettext('Open article in Karp')}}"><img src="{{ url_for('static', filename='images/logos/karp-mini-transparent.png') }}" style="max-height:20px; margin:10px 0px 0px 5px;"></a>
+        <a class="karp-article-link" href="https://spraakbanken.gu.se/karp/#?mode=skbl&search=extended||and|id|equals|{{article.es_id}}" target="_blank" title="{{gettext('Open article in Karp')}}"><img src="{{ url_for('static', filename='images/logos/karp-mini-transparent.png') }}" style="max-height:20px; margin:10px 0px 0px 5px;"></a>
 
         {# <h3>{{ gettext("Other names") }}</h3>
         {% for name in article.othernames %}

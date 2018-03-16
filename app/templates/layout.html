@@ -125,7 +125,7 @@
       </div>
       <hr />
       <div id="footer" class="container-fluid">
-        <div class="row">
+        <div class="row image-links">
           <div class="border col-md-3">
             <a href="{{ url_for('activity_index_'+g.language) }}">
               <div class="image-overlay"><img class="img-responsive bottom-image" src="{{ url_for('static', filename='images/skbl/verksamhet.png') }}">
@@ -157,7 +157,7 @@
         </div>
         <div class="row">
         <hr />
-          <div class="col-md-4" style="float: left;">
+          <div class="col-md-4 share-buttons" style="float: left;">
             <p>{{ gettext('Share page') }}</p>
             <!-- Sharingbutton Facebook -->
             <a class="resp-sharing-button__link" href="https://facebook.com/sharer/sharer.php?u={{ page_url or request.url }}" target="_blank" aria-label="Facebook">
