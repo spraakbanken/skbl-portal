@@ -283,8 +283,8 @@ def author(result=None):
     if authorinfo:
         authorinfo = [authorinfo.get(lang, authorinfo.get("sv")),
                       [helpers.markdown_html(i) for i in authorinfo.get("publications", [])]]
-    query = "extended||and|artikel_forfattare_fornamn.lowerbucket|equals|%s||and|artikel_forfattare_efternamn.lowerbucket|equals|%s" % (firstname, lastname)
-
+    query = "extended||and|artikel_forfattare_fornamn.lowerbucket|equals|%s||and|artikel_forfattare_efternamn.lowerbucket|equals|%s" % (
+            firstname.encode("UTF-8"), lastname.encode("UTF-8"))
     page = computeviews.searchresult(result,
                                      name='articleauthor',
                                      query=query,
