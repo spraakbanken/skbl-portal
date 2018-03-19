@@ -761,6 +761,14 @@ authors_dict = {
         ]
     },
 
+    u"Birgitta Johansson Lindh": {
+        "sv": u"filosofie doktor i litteraturvetenskap med inriktning mot teater vid Göteborgs universitet",
+        "publications": [
+            u"*Befrielsen är nära. Feminism och teaterpraktik i Margareta Garpes och Suzanne Ostens 1970-talsteater* (2006)",
+        ]
+
+    },
+
     u"Anders Johnson": {
         "sv": u"skriftställare med inriktning mot svensk politisk och ekonomisk historia",
         "publications": [
