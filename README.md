@@ -41,6 +41,11 @@ For memcached, run the config as below
 
 To get pylibmc to work with the locally installed mc packages, run:
 
+`LIBMEMCACHED=~/memcached/ pip install pylibmc`
+
+Where `~/memcached/` is the path to your locally installed memcached.
+
+If this does not work, try:
 ```
 pip install --global-option=build_ext --global-option="-I/home/fkskbl/dev.skbl.se/data/libmemcached/include/" --global-option="-L/home/fkskbl/dev.skbl.se/data/libmemcached/lib" --global-option="-R/home/fkskbl/dev.skbl.se/data/libmemcached/lib" pylibmc
 ```
