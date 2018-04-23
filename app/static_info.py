@@ -30,8 +30,8 @@ hur de rörde sig i världen, vad de åstadkom och mycket mera.</p>
 <p>Alla har de bidragit till samhällets utveckling.</p>
         """,
         "en": u"""
-<p>Read up on 1000 Swedish women from the Middle Ages to the present day.</p>
-<p>Use the search function to reveal what these women got up to, how they were educated, which organisations they belonged to,
+<p>Learn about 1000 Swedish women from the Middle Ages to the present day.</p>
+<p>Use the search function to reveal what these women were about, how they were educated, which organisations they belonged to,
 where they travelled, what they achieved, and much more.</p>
 <p>All of them contributed in a significant way to the development of Swedish society.</p>
         """
