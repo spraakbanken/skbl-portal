@@ -153,7 +153,7 @@ def place(place=None):
     lat = request.args.get('lat')
     lon = request.args.get('lon')
     set_language_switch_link("place_index", place)
-    hits = karp_query('query', {'q': "extended||and|plats.search|equals|%s" % (place.encode('utf-8'))})
+    hits = karp_query('query', {'q': "extended||and|plats.searchraw|equals|%s" % (place.encode('utf-8'))})
     no_hits = hits['hits']['total']
     if no_hits > 0:
         page = render_template('placelist.html', title=place, lat=lat, lon=lon,
