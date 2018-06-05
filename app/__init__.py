@@ -8,6 +8,7 @@ import urllib
 
 from flask import Flask, g, make_response, redirect, request, render_template, url_for
 from flask_babel import Babel
+from flask_compress import Compress
 from setuptools import setup
 from urllib2 import Request, urlopen
 import HTMLParser
@@ -24,7 +25,7 @@ else:
 
 
 babel = Babel(app)
-
+Compress(app)
 
 client = Client(app.config['MEMCACHED'])
 mc_pool = ClientPool(client, app.config['POOL_SIZE'])
