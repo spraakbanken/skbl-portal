@@ -1,10 +1,10 @@
 # SKBL.SE
 
 ## Run development
-
-`docker-compose up`
-
-Visit http://localhost:8080
+* Copy `app/config.default.cfg` to `app/config.cfg`
+* Set KARP_AUTH_HASH to secret value (retrieved from another developer)
+* Run `docker-compose up`
+* Visit http://localhost:8080
 
 ## Re-build container
     docker-compose down
