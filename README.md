@@ -40,11 +40,11 @@ For memcached, run the config as below
 ./configure --prefix=/var/www/sites/dev.skbl.se/data/memcached --with-libevent=/var/www/sites/dev.skbl.se/data/libevent
 ```
 
-To get pylibmc to work with the locally installed memcached packages, run:
+To get pylibmc to work with the locally installed libmemcached packages, run:
 
-`LIBMEMCACHED=~/memcached/ pip install pylibmc`
+`LIBMEMCACHED=~/libmemcached/ pip install pylibmc`
 
-Where `~/memcached/` is the path to your locally installed memcached.
+Where `~/libmemcached/` is the path to your locally installed libmemcached.
 
 If this does not work, try:
 ```
