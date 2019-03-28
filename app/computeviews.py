@@ -169,11 +169,11 @@ def compute_article(lang="", cache=True, url=''):
     if lang == 'sv':
         data = karp_query('minientry', {'q': "extended||and|namn|exists", 'show': show,
                                         'sort': 'sorteringsnamn.sort,sorteringsnamn.init,sorteringsnamn,tilltalsnamn.sort,tilltalsnamn'},
-                          mode="skbllinks")
+                          mode=app.config['SKBL_LINKS'])
     else:
         data = karp_query('minientry', {'q': "extended||and|namn|exists", 'show': show,
                                         'sort': 'sorteringsnamn.eng_sort,sorteringsnamn.eng_init,sorteringsnamn,tilltalsnamn.sort,tilltalsnamn'},
-                          mode="skbllinks")
+                          mode=app.config['SKBL_LINKS'])
 
     art = render_template('list.html',
                           hits=data["hits"],
@@ -321,7 +321,7 @@ def compute_emptycache(fields):
     contents = urlopen(server, urllib.urlencode(postdata)).read()
     auth_response = json.loads(contents)
     lexitems = auth_response.get("permitted_resources", {})
-    rights = lexitems.get("lexica", {}).get(app.config['SKBL'], {})
+    rights = lexitems.get("lexica", {}).get(app.config['KARP_LEXICON'], {})
     if rights.get('write'):
         with mc_pool.reserve() as client:
             for field in fields:

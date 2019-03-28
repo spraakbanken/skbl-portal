@@ -114,9 +114,9 @@ def set_language_switch_link(route, fragment=None, lang=''):
         g.switch_language['url'] += '/' + fragment
 
 
-def karp_query(action, query, mode='skbl'):
+def karp_query(action, query, mode=app.config['KARP_MODE']):
     query['mode'] = mode
-    query['resource'] = 'skbl'
+    query['resource'] = app.config['KARP_LEXICON']
     if 'size' not in query:
         query['size'] = app.config['RESULT_SIZE']
     params = urllib.urlencode(query)

@@ -114,10 +114,11 @@ def search():
         else:
             karp_q['q'] = "extended||and|anything|contains|%s" % search
 
-        data = karp_query('minientry', karp_q, mode='skbl')
+        mode = app.config['KARP_MODE']
+        data = karp_query('minientry', karp_q, mode=mode)
         with app.open_resource("static/pages/advanced-search/%s.html" % (g.language)) as f:
             advanced_search_text = f.read()
-        karp_url = "https://spraakbanken.gu.se/karp/#?mode=skbl&advanced=false&hpp=25&extended=and%7Cnamn%7Cequals%7C&searchTab=simple&page=1&search=simple%7C%7C" + search.decode("utf-8")
+        karp_url = "https://spraakbanken.gu.se/karp/#?mode=" + mode + "&advanced=false&hpp=25&extended=and%7Cnamn%7Cequals%7C&searchTab=simple&page=1&search=simple%7C%7C" + search.decode("utf-8")
     else:
         data = {"hits": {"total": 0, "hits": []}}
         karp_url = ""
