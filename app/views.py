@@ -1,24 +1,30 @@
 # -*- coding=utf-8 -*-
-from app import app, redirect, render_template, request, get_locale, set_language_switch_link, g, serve_static_page, karp_query, mc_pool, set_cache, check_cache
-import computeviews
+"""Define all available routes."""
+
+import re
+
+from flask import redirect, render_template, request
 from flask import jsonify, url_for
 from flask_babel import gettext
-import helpers
-import re
-import static_info
-from authors import authors_dict
-import icu  # pip install PyICU
+import icu
 import urllib
 
+from app import app, get_locale, set_language_switch_link, g, serve_static_page, karp_query, mc_pool, set_cache, check_cache
+from authors import authors_dict
+import computeviews
+import helpers
+import static_info
 
-# redirect to specific language landing-page
+
 @app.route('/')
 def index():
+    """Redirect to language specific landing-page."""
     return redirect('/' + get_locale())
 
 
 @app.errorhandler(404)
 def page_not_found(e):
+    """Generate view for 404."""
     set_language_switch_link("index")
     return render_template('page.html', content=gettext('Contents could not be found!')), 404
 
@@ -26,6 +32,7 @@ def page_not_found(e):
 @app.route('/en', endpoint='index_en')
 @app.route('/sv', endpoint='index_sv')
 def start():
+    """Generate view for landing page."""
     page = check_cache("start")
     if page is not None:
         return page
@@ -41,6 +48,7 @@ def start():
 @app.route("/en/about-skbl", endpoint="about-skbl_en")
 @app.route("/sv/om-skbl", endpoint="about-skbl_sv")
 def about_skbl():
+    """Generate view for about page."""
     page = serve_static_page("about-skbl", gettext("About SKBL"))
     return set_cache(page)
 
@@ -48,6 +56,7 @@ def about_skbl():
 @app.route("/en/more-women", endpoint="more-women_en")
 @app.route("/sv/fler-kvinnor", endpoint="more-women_sv")
 def more_women():
+    """Generate view for 'more women'."""
     page = check_cache("morewoman")
     if page is not None:
         return page
@@ -64,6 +73,7 @@ def more_women():
 @app.route("/en/biographies", endpoint="biographies_en")
 @app.route("/sv/biografiska-verk", endpoint="biographies_sv")
 def biographies():
+    """Generate view for biographies page."""
     page = serve_static_page("biographies", gettext("Older biographies"))
     return set_cache(page)
 
@@ -71,6 +81,7 @@ def biographies():
 @app.route("/en/contact", endpoint="contact_en")
 @app.route("/sv/kontakt", endpoint="contact_sv")
 def contact():
+    """Generate view for contact form."""
     set_language_switch_link("contact")
 
     # Set suggestion checkbox
@@ -89,12 +100,14 @@ def contact():
 @app.route('/en/contact/', methods=['POST'], endpoint="submitted_en")
 @app.route('/sv/kontakt/', methods=['POST'], endpoint="submitted_sv")
 def submit_contact_form():
+    """Generate view for submitted contact form."""
     return set_cache(computeviews.compute_contact_form())
 
 
 @app.route("/en/search", endpoint="search_en")
 @app.route("/sv/sok", endpoint="search_sv")
 def search():
+    """Generate view for search results."""
     set_language_switch_link("search")
     search = request.args.get('q', '').encode('utf-8')
     pagename = 'search' + urllib.quote(search)
@@ -109,7 +122,7 @@ def search():
         karp_q = {'highlight': True, 'size': app.config['SEARCH_RESULT_SIZE'],
                   'show': show}
         if '*' in search:
-            search = re.sub('(?<!\.)\*', '.*', search)
+            search = re.sub(r'(?<!\.)\*', '.*', search)
             karp_q['q'] = "extended||and|anything|regexp|%s" % search
         else:
             karp_q['q'] = "extended||and|anything|contains|%s" % search
@@ -141,13 +154,15 @@ def search():
 @app.route("/en/place", endpoint="place_index_en")
 @app.route("/sv/ort", endpoint="place_index_sv")
 def place_index():
+    """Generate view for places list."""
     return set_cache(computeviews.compute_place())
 
 
 @app.route("/en/place/<place>", endpoint="place_en")
 @app.route("/sv/ort/<place>", endpoint="place_sv")
 def place(place=None):
-    pagename = urllib.quote('place_'+place.encode('utf8'))
+    """Generate view for one place."""
+    pagename = urllib.quote('place_' + place.encode('utf8'))
     art = check_cache(pagename)
     if art is not None:
         return art
@@ -167,12 +182,14 @@ def place(place=None):
 @app.route("/en/organisation", endpoint="organisation_index_en")
 @app.route("/sv/organisation", endpoint="organisation_index_sv")
 def organisation_index():
+    """Generate view for organisations list."""
     return set_cache(computeviews.compute_organisation())
 
 
 @app.route("/en/organisation/<result>", endpoint="organisation_en")
 @app.route("/sv/organisation/<result>", endpoint="organisation_sv")
 def organisation(result=None):
+    """Generate view for one organisation."""
     title = request.args.get('title')
 
     lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
@@ -190,12 +207,14 @@ def organisation(result=None):
 @app.route("/en/activity", endpoint="activity_index_en")
 @app.route("/sv/verksamhet", endpoint="activity_index_sv")
 def activity_index():
+    """Generate view for activities list."""
     return set_cache(computeviews.compute_activity())
 
 
 @app.route("/en/activity/<result>", endpoint="activity_en")
 @app.route("/sv/verksamhet/<result>", endpoint="activity_sv")
 def activity(result=None):
+    """Generate view for one activity."""
     page = computeviews.searchresult(result, name='activity',
                                      searchfield='verksamhetstext',
                                      imagefolder='activities', title=result)
@@ -205,6 +224,7 @@ def activity(result=None):
 @app.route("/en/keyword", endpoint="keyword_index_en")
 @app.route("/sv/nyckelord", endpoint="keyword_index_sv")
 def keyword_index():
+    """Generate view for keywords list."""
     infotext = helpers.get_infotext("keyword", request.url_rule.rule)
     set_language_switch_link("keyword_index")
     lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
@@ -233,6 +253,7 @@ def keyword_index():
 @app.route("/en/keyword/<result>", endpoint="keyword_en")
 @app.route("/sv/nyckelord/<result>", endpoint="keyword_sv")
 def keyword(result=None):
+    """Generate view for one keyword."""
     lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
     if lang == "en":
         page = computeviews.searchresult(result, 'keyword', 'nyckelord_eng',
@@ -242,7 +263,7 @@ def keyword(result=None):
         page = computeviews.searchresult(result, 'keyword', 'nyckelord',
                                          'keywords', lang=lang,
                                          show_lang_switch=False)
-    # the page is memcached by searchrelust
+    # The page is memcached by search results
     return set_cache(page)
 
 
@@ -266,6 +287,7 @@ def keyword(result=None):
 @app.route("/en/articleauthor", endpoint="articleauthor_index_en")
 @app.route("/sv/artikelforfattare", endpoint="articleauthor_index_sv")
 def authors():
+    """Generate view for authors list."""
     infotext = helpers.get_infotext("articleauthor", request.url_rule.rule)
     set_language_switch_link("articleauthor_index")
     return set_cache(computeviews.compute_artikelforfattare(infotext=infotext, description=helpers.get_shorttext(infotext)))
@@ -274,6 +296,7 @@ def authors():
 @app.route("/en/articleauthor/<result>", endpoint="articleauthor_en")
 @app.route("/sv/artikelforfattare/<result>", endpoint="articleauthor_sv")
 def author(result=None):
+    """Generate view for one author."""
     set_language_switch_link("articleauthor_index")
     rule = request.url_rule
     lang = 'sv' if 'sv' in rule.rule else 'en'
@@ -298,23 +321,23 @@ def author(result=None):
 @app.route("/en/article", endpoint="article_index_en")
 @app.route("/sv/artikel", endpoint="article_index_sv")
 def article_index(search=None):
-    # search is only used by links in article text
-
+    """Generate view for A-Z list."""
     set_language_switch_link("article_index")
+    # Search is only used by links in article text
     search = search or request.args.get('search')
     if search is not None:
         search = search.encode("UTF-8")
         data, id = find_link(search)
         if id:
-            # only one hit is found, redirect to that page
+            # Only one hit is found, redirect to that page
             page = redirect(url_for('article_' + g.language, id=id))
             return set_cache(page)
         elif data["hits"]["total"] > 1:
-            # more than one hit is found, redirect to a listing
+            # More than one hit is found, redirect to a listing
             page = redirect(url_for('search_' + g.language, q=search))
             return set_cache(page)
         else:
-            # no hits are found redirect to a 'not found' page
+            # No hits are found redirect to a 'not found' page
             return render_template('page.html', content=gettext('Contents could not be found!')), 404
 
     art = computeviews.compute_article()
@@ -324,6 +347,7 @@ def article_index(search=None):
 @app.route("/en/article/<id>", endpoint="article_en")
 @app.route("/sv/artikel/<id>", endpoint="article_sv")
 def article(id=None):
+    """Generate view for one article."""
     rule = request.url_rule
     if 'sv' in rule.rule:
         lang = "sv"
@@ -344,6 +368,7 @@ def article(id=None):
 @app.route("/en/article/EmptyArticle", endpoint="article_empty_en")
 @app.route("/sv/artikel/TomArtikel", endpoint="article_empty_sv")
 def empty_article():
+    """Generate a view for a non-existing article."""
     set_language_switch_link("article_empty")
     rule = request.url_rule
     if 'sv' in rule.rule:
@@ -355,15 +380,15 @@ def empty_article():
 
 
 def find_link(searchstring):
-    # Finds an article based on ISNI or name
+    """Find an article based on ISNI or name."""
     if re.search('^[0-9 ]*$', searchstring):
         searchstring = searchstring.replace(" ", "")
         data = karp_query('query', {'q': "extended||and|swoid.search|equals|%s" % (searchstring)})
     else:
         parts = searchstring.split(" ")
         if "," in searchstring or len(parts) == 1:  # When there is only a first name (a queen or so)
-            # case 1: "Margareta"
-            # case 2: "Margareta, drottning"
+            # Case 1: "Margareta"
+            # Case 2: "Margareta, drottning"
             firstname = parts[0] if len(parts) == 1 else searchstring
             data = karp_query('query', {'q': "extended||and|fornamn.search|contains|%s" % (firstname)})
         else:
@@ -386,6 +411,7 @@ def find_link(searchstring):
 
 
 def show_article(data, lang="sv"):
+    """Prepare data for article view (helper function)."""
     if data['hits']['total'] == 1:
         source = data['hits']['hits'][0]['_source']
         source['url'] = source.get('url') or data['query']['hits']['hits'][0]['_id']
@@ -455,7 +481,7 @@ def find_linked_names(othernames, showname):
 
 
 def fix_name_order(name):
-    """Lastname, Firstname --> Firstname Lastname"""
+    """Lastname, Firstname --> Firstname Lastname."""
     nameparts = name.split(", ")
     if len(nameparts) == 1:
         return nameparts[0]
@@ -468,21 +494,26 @@ def fix_name_order(name):
 @app.route("/en/award", endpoint="award_index_en")
 @app.route("/sv/pris", endpoint="award_index_sv")
 def award_index():
-    # There are no links to this page, but might be wanted later on
-    # Exists only to support award/<result> below
+    """
+    List all awards.
+
+    There are no links to this page, but might be wanted later on
+    Exists only to support award/<result> below
+    """
     set_language_switch_link("award_index")
     pagename = 'award'
     art = check_cache(pagename)
     if art is not None:
         return art
     art = computeviews.bucketcall(queryfield='prisbeskrivning', name='award',
-                                   title='Award', infotext='')
+                                  title='Award', infotext='')
     return set_cache(art, name=pagename, no_hits=app.config['CACHE_HIT_LIMIT'])
 
 
 @app.route("/en/award/<result>", endpoint="award_en")
 @app.route("/sv/pris/<result>", endpoint="award_sv")
 def award(result=None):
+    """Search for award."""
     page = computeviews.searchresult(result, name='award',
                                      searchfield='prisbeskrivning',
                                      imagefolder='award', searchtype='equals')
@@ -492,10 +523,14 @@ def award(result=None):
 @app.route("/en/education_institution", endpoint="institution_index_en")
 @app.route("/sv/utbildningsinstitution", endpoint="institution_index_sv")
 def institution_index():
-    # There are no links to this page, but might be wanted later on
-    # Exists only to support institution/<result> below
+    """
+    List all education institutions.
+
+    There are no links to this page, but might be wanted later on
+    Exists only to support institution/<result> below
+    """
     set_language_switch_link("institution_index")
-    page = computeviews.bucketcall(queryfield='prisbeskrivning', name='award',
+    page = computeviews.bucketcall(queryfield='utbildningsinstitution', name='award',
                                    title='Institution', infotext='')
     return set_cache(page)
 
@@ -503,6 +538,7 @@ def institution_index():
 @app.route("/en/education_institution/<result>", endpoint="institution_en")
 @app.route("/sv/utbildningsinstitution/<result>", endpoint="institution_sv")
 def institution(result=None):
+    """Search for education institution."""
     page = computeviews.searchresult(result,
                                      name='institution',
                                      searchfield='utbildningsinstitution',
@@ -513,6 +549,7 @@ def institution(result=None):
 @app.route("/en/article/<id>.json", endpoint="article_json_en")
 @app.route("/sv/artikel/<id>.json", endpoint="article_json_sv")
 def article_json(id=None):
+    """Get article in JSON."""
     data = karp_query('query', {'q': "extended||and|url|equals|%s" % (id)})
     if data['hits']['total'] == 1:
         page = jsonify(data['hits']['hits'][0]['_source'])
@@ -526,7 +563,11 @@ def article_json(id=None):
 # ### Cache handling ###
 @app.route('/emptycache')
 def emptycache():
-    # Users with write premissions to skbl may empty the cache
+    """
+    Empty the cache.
+
+    Users with write premissions to skbl may use this call.
+    """
     emptied = False
     try:
         emptied = computeviews.compute_emptycache(['article', 'activity',
@@ -540,7 +581,7 @@ def emptycache():
 
 @app.route('/cachestats')
 def cachestats():
-    # Show stats of the cache
+    """Show stats of the cache."""
     with mc_pool.reserve() as client:
         return jsonify({"cached_stats": client.get_stats()})
 
@@ -548,23 +589,25 @@ def cachestats():
 @app.route("/en/fillcache", endpoint="fillcache_en")
 @app.route("/sv/fillcache", endpoint="fillcache_sv")
 def fillcache():
-    # Refill the cache (~ touch all pages)
-    # This request will take some seconds, users may want to make an
-    # asynchronous call
-    # Compute new pages
+    """
+    Refill the cache (~ touch all pages).
+
+    This request will take some seconds, users may want to make an
+    asynchronous call. Compute new pages
+    """
     urls = {'activity': ('en/activity', 'sv/verksamhet'),
             'article': ("en/article", "sv/artikel"),
             'organisation': ("en/organisation", "sv/organisation"),
             'place': ("en/place", "sv/ort"),
-            'forfattare': ("en/articleauthor/<result>","sv/artikelforfattare/<result>")
+            'forfattare': ("en/articleauthor/<result>", "sv/artikelforfattare/<result>")
             }
     lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
     lix = 0 if lang == 'eng' else 1
-    computeviews.compute_article(cache=False, url=request.url_root+urls['article'][lix])
-    computeviews.compute_activity(cache=False, url=request.url_root+urls['activity'][lix])
-    computeviews.compute_organisation(cache=False, url=request.url_root+urls['organisation'][lix])
-    computeviews.compute_place(cache=False, url=request.url_root+urls['place'][lix])
-    computeviews.compute_artikelforfattare(cache=False, url=request.url_root+urls['forfattare'][lix])
+    computeviews.compute_article(cache=False, url=request.url_root + urls['article'][lix])
+    computeviews.compute_activity(cache=False, url=request.url_root + urls['activity'][lix])
+    computeviews.compute_organisation(cache=False, url=request.url_root + urls['organisation'][lix])
+    computeviews.compute_place(cache=False, url=request.url_root + urls['place'][lix])
+    computeviews.compute_artikelforfattare(cache=False, url=request.url_root + urls['forfattare'][lix])
     # Copy the pages to the backup fields
     computeviews.copytobackup(['article', 'activity', 'organisation', 'place', 'author'], lang)
     return jsonify({"cache_filled": True, "cached_language": lang})
@@ -572,4 +615,5 @@ def fillcache():
 
 @app.route('/mcpoolid')
 def mcpoolid():
+    """Show memcached pool ID."""
     return jsonify({"id": id(mc_pool)})

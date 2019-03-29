@@ -1,4 +1,5 @@
 # -*- coding=utf-8 -*-
+"""Define some static strings used in the html."""
 
 keywords_reference_list = [
     # [ non_existing_keyword, existing_keyword]

@@ -1,24 +1,26 @@
 # -*- coding: utf-8 -*
-import json
+"""Initialise Flask application."""
+
 import os
-import os.path
-from pylibmc import Client, ClientPool
 import sys
 import urllib
 
-from flask import Flask, g, make_response, redirect, request, render_template, url_for
+from flask import Flask, g, make_response, request, render_template, url_for
 from flask_babel import Babel
 from flask_compress import Compress
-from setuptools import setup
-from urllib2 import Request, urlopen
 import HTMLParser
+import json
+# from setuptools import setup
+from pylibmc import Client, ClientPool
+from urllib2 import Request, urlopen
+
 import helpers
 
 
 app = Flask(__name__)
 
 if os.path.exists(app.config.root_path + '/config.cfg') is False:
-    print "copy config.default.cfg to config.cfg and add your settings"
+    print("copy config.default.cfg to config.cfg and add your settings")
     app.config.from_pyfile(app.config.root_path + '/config.default.cfg')
 else:
     app.config.from_pyfile(app.config.root_path + '/config.cfg')
@@ -42,12 +44,12 @@ def check_cache(page, lang=''):
     if app.config['TEST']:
         return None
     try:
-       with mc_pool.reserve() as client:
-           # Look for the page, return if found
-           art = client.get(cache_name(page, lang))
-           if art is not None:
-               return art
-    except:
+        with mc_pool.reserve() as client:
+            # Look for the page, return if found
+            art = client.get(cache_name(page, lang))
+            if art is not None:
+                return art
+    except Exception:
         # TODO what to do??
         pass
 
@@ -57,16 +59,17 @@ def check_cache(page, lang=''):
 
 def set_cache(page, name='', lang='', no_hits=0):
     """
-    Browser cache handling
-    Adds header to the response
-    May also add the page to the memcache
+    Browser cache handling.
+
+    Add header to the response.
+    May also add the page to the memcache.
     """
     pagename = cache_name(name, lang='')
     if no_hits >= app.config['CACHE_HIT_LIMIT']:
-       try:
+        try:
             with mc_pool.reserve() as client:
                 client.set(pagename, page, time=app.config['LOW_CACHE_TIME'])
-       except:
+        except Exception:
             # TODO what to do??
             pass
     r = make_response(page)
@@ -144,6 +147,7 @@ def func():
 def inject_custom():
     d = {'lurl_for': lambda ep, **kwargs: url_for(ep + '_' + g.language, **kwargs)}
     return d
+
 
 app.jinja_env.globals.update(get_life_range=helpers.get_life_range)
 app.jinja_env.globals.update(make_namelist=helpers.make_namelist)

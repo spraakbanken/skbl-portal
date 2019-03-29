@@ -1,4 +1,5 @@
 # -*- coding=utf-8 -*-
+"""Define data for article authors."""
 
 authors_dict = {
     u"Beata Agrell": {

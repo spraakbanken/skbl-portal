@@ -1,25 +1,34 @@
 # -*- coding=utf-8 -*-
-from app import app, karp_query, render_template, request, set_language_switch_link, mc_pool, cache_name, check_cache
+"""Define helper functions used to compute the different views."""
+
 from collections import defaultdict
-from flask_babel import gettext
-import json
 import md5
+import os.path
 import urllib
 from urllib2 import urlopen
-import helpers
+
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.header import Header
-import os.path
+from flask import render_template, request
+from flask_babel import gettext
+import json
 import smtplib
+
+from app import app, karp_query, set_language_switch_link, mc_pool, cache_name, check_cache
+import helpers
 import static_info
 
 
 def getcache(page, lang, usecache):
-    # Check if the requested page, in language 'lang', is in the cache
-    # If not, use the backup cache.
-    # If the cache should not be used, return None
-    # First, compute the language
+    """
+    Get cached page.
+
+    Check if the requested page, in language 'lang', is in the cache
+    If not, use the backup cache.
+    If the cache should not be used, return None
+    """
+    # Compute the language
     if not lang:
         lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
     if not usecache or app.config['TEST']:
@@ -31,11 +40,11 @@ def getcache(page, lang, usecache):
             art = client.get(pagename)
             if art is not None:
                 return art, lang
-            # if not, look for the backup of the page and return
+            # Ff not, look for the backup of the page and return
             art = client.get(pagename + '_backup')
             if art is not None:
                 return art, lang
-    except:
+    except Exception:
         # TODO what to do??
         pass
     # If nothing is found, return None
@@ -43,7 +52,7 @@ def getcache(page, lang, usecache):
 
 
 def copytobackup(fields, lang):
-    # Make backups of  all requested fields to their corresponding backup field
+    """Make backups of  all requested fields to their corresponding backup field."""
     for field in fields:
         with mc_pool.reserve() as client:
             art = client.get(field + lang)
@@ -53,6 +62,7 @@ def copytobackup(fields, lang):
 def searchresult(result, name='', searchfield='', imagefolder='', query='',
                  searchtype='equals', title='', authorinfo=False, lang='',
                  show_lang_switch=True, cache=True):
+    """Compute the search result."""
     set_language_switch_link("%s_index" % name, result)
     try:
         result = result.encode("UTF-8")
@@ -83,7 +93,7 @@ def searchresult(result, name='', searchfield='', imagefolder='', query='',
                 try:
                     with mc_pool.reserve() as client:
                         client.set(cache_name(pagename, lang), page, time=app.config['CACHE_TIME'])
-                except:
+                except Exception:
                     # TODO what to do?
                     pass
             return page
@@ -97,6 +107,7 @@ def searchresult(result, name='', searchfield='', imagefolder='', query='',
 
 
 def compute_organisation(lang="", infotext="", cache=True, url=''):
+    """Compute organisation view."""
     set_language_switch_link("organisation_index", lang=lang)
     art, lang = getcache('organisation', lang, cache)
     if art is not None:
@@ -122,15 +133,16 @@ def compute_organisation(lang="", infotext="", cache=True, url=''):
                           results=nested_obj, title=gettext("Organisations"),
                           infotext=infotext, name='organisation', page_url=url)
     try:
-       with mc_pool.reserve() as client:
-           client.set(cache_name('organisation', lang), art, time=app.config['CACHE_TIME'])
-    except:
+        with mc_pool.reserve() as client:
+            client.set(cache_name('organisation', lang), art, time=app.config['CACHE_TIME'])
+    except Exception:
         # TODO what to do?
         pass
     return art
 
 
-def compute_activity(lang="", cache=True, url=''):
+def compute_activity(lang='', cache=True, url=''):
+    """Compute activity view."""
     set_language_switch_link("activity_index", lang=lang)
     art, lang = getcache('activity', lang, cache)
 
@@ -150,15 +162,16 @@ def compute_activity(lang="", cache=True, url=''):
                      insert_entries=reference_list,
                      page_url=url)
     try:
-       with mc_pool.reserve() as client:
-           client.set(cache_name('activity', lang), art, time=app.config['CACHE_TIME'])
-    except:
+        with mc_pool.reserve() as client:
+            client.set(cache_name('activity', lang), art, time=app.config['CACHE_TIME'])
+    except Exception:
         # TODO what to do?
         pass
     return art
 
 
-def compute_article(lang="", cache=True, url=''):
+def compute_article(lang='', cache=True, url=''):
+    """Compute article view."""
     set_language_switch_link("article_index", lang=lang)
     art, lang = getcache('article', lang, cache)
     if art is not None:
@@ -184,15 +197,16 @@ def compute_article(lang="", cache=True, url=''):
                           title='Articles',
                           page_url=url)
     try:
-       with mc_pool.reserve() as client:
-           client.set(cache_name('article', lang), art, time=app.config['CACHE_TIME'])
-    except:
+        with mc_pool.reserve() as client:
+            client.set(cache_name('article', lang), art, time=app.config['CACHE_TIME'])
+    except Exception:
         # TODO what to do?
         pass
     return art
 
 
 def compute_place(lang="", cache=True, url=''):
+    """Compute place view."""
     set_language_switch_link("place_index", lang=lang)
     art, lang = getcache('place', lang, cache)
     if art is not None:
@@ -229,15 +243,16 @@ def compute_place(lang="", cache=True, url=''):
                           description=helpers.get_shorttext(infotext),
                           page_url=url)
     try:
-       with mc_pool.reserve() as client:
-           client.set(cache_name('place', lang), art, time=app.config['CACHE_TIME'])
-    except:
+        with mc_pool.reserve() as client:
+            client.set(cache_name('place', lang), art, time=app.config['CACHE_TIME'])
+    except Exception:
         # TODO what to do?
         pass
     return art
 
 
 def compute_artikelforfattare(infotext='', description='', lang="", cache=True, url=''):
+    """Compute authors view."""
     set_language_switch_link("articleauthor_index", lang=lang)
     art, lang = getcache('author', lang, cache)
     if art is not None:
@@ -270,9 +285,9 @@ def compute_artikelforfattare(infotext='', description='', lang="", cache=True, 
                           description=description, sortnames=True,
                           page_url=url)
     try:
-       with mc_pool.reserve() as client:
-           client.set(cache_name('author', lang), art, time=app.config['CACHE_TIME'])
-    except:
+        with mc_pool.reserve() as client:
+            client.set(cache_name('author', lang), art, time=app.config['CACHE_TIME'])
+    except Exception:
         # TODO what to do?
         pass
     return art
@@ -281,6 +296,7 @@ def compute_artikelforfattare(infotext='', description='', lang="", cache=True, 
 def bucketcall(queryfield='', name='', title='', sortby='', lastnamefirst=False,
                infotext='', description='', query='', alphabetical=False,
                insert_entries=None, page_url=''):
+    """Bucket call helper."""
     q_data = {'buckets': '%s.bucket' % queryfield}
     if query:
         q_data['q'] = query
@@ -307,9 +323,12 @@ def bucketcall(queryfield='', name='', title='', sortby='', lastnamefirst=False,
 
 
 def compute_emptycache(fields):
-    # Empty the cache (but leave the backupfields).
-    # Only users with write permission may do this
-    # May raise error, eg if the authorization does not work
+    """
+    Empty the cache (but leave the backupfields).
+
+    Only users with write permission may do this
+    May raise error, eg if the authorization does not work
+    """
     emptied = False
     auth = request.authorization
     postdata = {}
@@ -332,6 +351,7 @@ def compute_emptycache(fields):
 
 
 def compute_contact_form():
+    """Compute view for contact form ."""
     set_language_switch_link("contact")
 
     email = request.form['email'].strip()
@@ -381,7 +401,6 @@ def compute_contact_form():
 
 def make_email(form_data, mode="other"):
     """Compose and send email from contact form."""
-
     email = form_data["email"]
     msg = MIMEMultipart("alternative")
 

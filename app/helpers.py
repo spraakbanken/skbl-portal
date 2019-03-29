@@ -1,12 +1,16 @@
 # -*- coding=utf-8 -*-
-from app import g
-from flask import url_for
-import icu  # pip install PyICU
-import markdown
-import re
+"""Define different helper functions."""
+
 import datetime
-import static_info
+import re
+
+from flask import url_for
 from flask_babel import gettext
+import icu
+import markdown
+
+from app import g
+import static_info
 
 
 def get_first_name(source):
@@ -25,6 +29,7 @@ def format_names(source, fmt="strong"):
 def get_life_range(source):
     """
     Return the birth and death year from _source (as a tuple).
+
     Return empty strings if not available.
     """
     years = []
@@ -58,14 +63,17 @@ def get_date(source):
 
 
 def get_current_date():
+    """Get the current date."""
     return datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d")
 
 
 def markdown_html(text):
+    """Convert markdown text to html."""
     return markdown.markdown(text)
 
 
 def group_by_type(objlist, name):
+    """Group objects by their type (=name), e.g. 'othernames'."""
     newdict = {}
     for obj in objlist:
         val = obj.get(name, "")
@@ -109,14 +117,14 @@ def make_alpha_more_women(women, sortnames=True, lang="sv"):
 
 
 def make_alphabetic(hits, processname, sortnames=False, lang="sv"):
-    """ Loops through hits, applies the function 'processname'
-        on each object and then sorts the result in alphabetical
-        order.
-        The function processname should append zero or more processed form of
-        the object to the result list.
-        This processed forms should be a pair (first_letter, result)
-        where first_letter is the first_letter of each object (to sort on), and the result
-        is what the html-template want e.g. a pair of (name, no_hits)
+    """
+    Loop through hits, apply the function 'processname' on each object and then sort the result in alphabetical order.
+
+    The function processname should append zero or more processed form of
+    the object to the result list.
+    This processed forms should be a pair (first_letter, result)
+    where first_letter is the first_letter of each object (to sort on), and the result
+    is what the html-template want e.g. a pair of (name, no_hits)
     """
     def fix_lastname(name):
         name = re.sub(r"(^von )|(^af )", r"", name)
@@ -161,8 +169,9 @@ def make_alphabetic(hits, processname, sortnames=False, lang="sv"):
 
 def make_simplenamelist(hits):
     """
-    Creates a list with links to the entries url or _id
-    Sorts entries with names matching the query higher
+    Create a list with links to the entries url or _id.
+
+    Sort entries with names matching the query higher.
     """
     results = []
     used = set()
@@ -183,6 +192,7 @@ def make_simplenamelist(hits):
 def make_namelist(hits, exclude=set()):
     """
     Split hits into one list per first letter.
+
     Return only info necessary for listing of names.
     """
     results = []
@@ -266,21 +276,23 @@ def sort_places(stat_table, route):
 
 
 def mk_links(text):
+    """Fix display of links within an article text."""
     # TODO markdown should fix this itself
     try:
-        text = re.sub('\[\]\((.*?)\)', r'[\1](\1)', text)
-        for link in re.findall('\]\((.*?)\)', text):
+        text = re.sub(r'\[\]\((.*?)\)', r'[\1](\1)', text)
+        for link in re.findall(r'\]\((.*?)\)', text):
             if link in static_info.more_women:
-                text = re.sub('\(%s\)' % link, '(%s)' % url_for('more-women_' + g.language, linked_from=link), text)
+                text = re.sub(r'\(%s\)' % link, '(%s)' % url_for('more-women_' + g.language, linked_from=link), text)
             else:
-                text = re.sub('\(%s\)' % link, '(%s)' % url_for('article_index_' + g.language, search=link), text)
-    except:
+                text = re.sub(r'\(%s\)' % link, '(%s)' % url_for('article_index_' + g.language, search=link), text)
+    except Exception:
         # If there are parenthesis within the links, problems will occur.
         text = text
     return text
 
 
 def unescape(text):
+    """Unescape some html chars."""
     text = re.sub('&gt;', r'>', text)
     text = re.sub('&apos;', r"'", text)
     return text
@@ -329,8 +341,8 @@ def make_placelist(hits, placename, lat, lon):
         for ptype, places in placelocations.items():
             names = dict([(place.get('place', {}).get('place', '').strip(),
                            place.get('place', {}).get('pin', {})) for place in places])
-            # check if the name and the lat,lon is correct
-            # (we can't ask karp of this, since it would be a nested query)
+            # Check if the name and the lat, lon is correct
+            # (We can't ask karp of this, since it would be a nested query)
             if placename in names:
                 # Coordinates! If coordinates are used, uncomment the two lines below
                 # if names[placename].get('lat') == float(lat)\
@@ -344,7 +356,6 @@ def make_placelist(hits, placename, lat, lon):
                     # grouped_results['Fel'].append((join_name(source), hit))
 
     # Sort result dictionary alphabetically into list
-
     collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
     for n, items in grouped_results.items():
         items.sort(key=lambda x: collator.getSortKey(x[0]))
@@ -359,8 +370,8 @@ def make_placelist(hits, placename, lat, lon):
 def is_email_address_valid(email):
     """
     Validate the email address using a regex.
-    It may not include any whitespaces, has exactly one "@" and at least one
-    "." after the "@".
+
+    It may not include any whitespaces, has exactly one "@" and at least one "." after the "@".
     """
     if " " in email:
         return False
@@ -388,10 +399,7 @@ def get_lang_text(json_swe, json_eng, ui_lang):
 
 
 def get_shorttext(text):
-    """
-    Get the initial 200 characters of text.
-    Remove HTML and line breaks.
-    """
+    """Get the initial 200 characters of text. Remove HTML and line breaks."""
     shorttext = re.sub(r'<.*?>|\n|\t', ' ', text)
     shorttext = shorttext.strip()
     shorttext = re.sub(r'  ', ' ', shorttext)
@@ -399,7 +407,7 @@ def get_shorttext(text):
 
 
 def get_org_name(organisation):
-    """Get short name for organisation (--> org.)"""
+    """Get short name for organisation (--> org.)."""
     if organisation.endswith("organisation") or organisation.endswith("organization"):
         return organisation[:-9] + "."
     else:
@@ -413,6 +421,7 @@ def lowersorted(xs):
 def get_infotext(text, rule):
     """
     Get infotext in correct language with Swedish as fallback.
+
     text = key in the infotext dict
     rule = request.url_rule.rule
     """
