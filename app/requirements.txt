@@ -3,7 +3,6 @@ click==6.7
 Flask==0.12
 Flask-Babel==0.11.2
 flask-compress==1.4.0
-Flask-Sendmail==0.1
 itsdangerous==0.24
 Jinja2==2.9.6
 Markdown==2.6.8
