@@ -143,6 +143,11 @@ def karp_request(action):
     return data
 
 
+def karp_fe_url():
+    """Get URL for Karp frontend."""
+    return app.config["KARP_FRONTEND"] + "/#?mode=" + app.config["KARP_MODE"]
+
+
 @app.before_request
 def func():
     g.babel = Babel
@@ -179,6 +184,7 @@ app.jinja_env.globals.update(get_org_name=helpers.get_org_name)
 app.jinja_env.globals.update(rewrite_von=helpers.rewrite_von)
 app.jinja_env.globals.update(lowersorted=helpers.lowersorted)
 app.jinja_env.globals.update(get_current_date=helpers.get_current_date)
+app.jinja_env.globals.update(karp_fe_url=karp_fe_url)
 
 
 from app import views
