@@ -220,11 +220,11 @@ def compute_place(lang="", cache=True, url=''):
             return None
 
     # To use the coordinates, use 'getplaces' instead of 'getplacenames'
-    data = karp_query('getplacenames', {})
+    data = karp_query('getplacenames/' + app.config['KARP_MODE'], {})
     stat_table = [parse(kw) for kw in data['places'] if has_name(kw)]
     art = render_template('places.html',
                           places=stat_table,
-                          title=gettext("Placenames"),
+                          title=gettext('Placenames'),
                           infotext=infotext,
                           description=helpers.get_shorttext(infotext),
                           page_url=url)
