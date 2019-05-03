@@ -18,7 +18,7 @@ import helpers
 app = Flask(__name__)
 
 if os.path.exists(app.config.root_path + '/config.cfg') is False:
-    print "copy config.default.cfg to config.cfg and add your settings"
+    print("copy config.default.cfg to config.cfg and add your settings")
     app.config.from_pyfile(app.config.root_path + '/config.default.cfg')
 else:
     app.config.from_pyfile(app.config.root_path + '/config.cfg')
@@ -42,11 +42,11 @@ def check_cache(page, lang=''):
     if app.config['TEST']:
         return None
     try:
-       with mc_pool.reserve() as client:
-           # Look for the page, return if found
-           art = client.get(cache_name(page, lang))
-           if art is not None:
-               return art
+        with mc_pool.reserve() as client:
+            # Look for the page, return if found
+            art = client.get(cache_name(page, lang))
+            if art is not None:
+                return art
     except:
         # TODO what to do??
         pass
@@ -63,14 +63,15 @@ def set_cache(page, name='', lang='', no_hits=0):
     """
     pagename = cache_name(name, lang='')
     if no_hits >= app.config['CACHE_HIT_LIMIT']:
-       try:
+        try:
             with mc_pool.reserve() as client:
                 client.set(pagename, page, time=app.config['LOW_CACHE_TIME'])
-       except:
+        except:
             # TODO what to do??
             pass
     r = make_response(page)
-    r.headers.set('Cache-Control', "public, max-age=%s" % app.config['BROWSER_CACHE_TIME'])
+    r.headers.set('Cache-Control', "public, max-age=%s" %
+                  app.config['BROWSER_CACHE_TIME'])
     return r
 
 
@@ -141,16 +142,20 @@ def func():
 
 @app.context_processor
 def inject_custom():
-    d = {'lurl_for': lambda ep, **kwargs: url_for(ep + '_' + g.language, **kwargs)}
+    d = {'lurl_for': lambda ep, **
+         kwargs: url_for(ep + '_' + g.language, **kwargs)}
     return d
+
 
 app.jinja_env.globals.update(get_life_range=helpers.get_life_range)
 app.jinja_env.globals.update(make_namelist=helpers.make_namelist)
 app.jinja_env.globals.update(make_simplenamelist=helpers.make_simplenamelist)
 app.jinja_env.globals.update(make_placelist=helpers.make_placelist)
 app.jinja_env.globals.update(make_placenames=helpers.make_placenames)
-app.jinja_env.globals.update(make_alphabetical_bucket=helpers.make_alphabetical_bucket)
-app.jinja_env.globals.update(make_alpha_more_women=helpers.make_alpha_more_women)
+app.jinja_env.globals.update(
+    make_alphabetical_bucket=helpers.make_alphabetical_bucket)
+app.jinja_env.globals.update(
+    make_alpha_more_women=helpers.make_alpha_more_women)
 app.jinja_env.globals.update(get_date=helpers.get_date)
 app.jinja_env.globals.update(join_name=helpers.join_name)
 app.jinja_env.globals.update(sorted=sorted)

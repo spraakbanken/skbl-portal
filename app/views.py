@@ -109,7 +109,7 @@ def search():
         karp_q = {'highlight': True, 'size': app.config['SEARCH_RESULT_SIZE'],
                   'show': show}
         if '*' in search:
-            search = re.sub('(?<!\.)\*', '.*', search)
+            search = re.sub(r'(?<!\.)\*', '.*', search)
             karp_q['q'] = "extended||and|anything|regexp|%s" % search
         else:
             karp_q['q'] = "extended||and|anything|contains|%s" % search
