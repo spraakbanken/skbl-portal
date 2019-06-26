@@ -111,7 +111,7 @@ def compute_organisation(lang="", infotext="", cache=True, url=''):
     set_language_switch_link("organisation_index", lang=lang)
     art, lang = getcache('organisation', lang, cache)
     if art is not None:
-            return art
+        return art
 
     infotext = helpers.get_infotext("organisation", request.url_rule.rule)
     if lang == "en":
@@ -181,11 +181,11 @@ def compute_article(lang='', cache=True, url=''):
     infotext = helpers.get_infotext("article", request.url_rule.rule)
     if lang == 'sv':
         data = karp_query('minientry', {'q': "extended||and|namn|exists", 'show': show,
-                                        'sort': 'sorteringsnamn.sort,sorteringsnamn.init,sorteringsnamn,tilltalsnamn.sort,tilltalsnamn'},
+                                        'sort': 'sorteringsnamn.sort,sorteringsnamn.init,tilltalsnamn.sort'},
                           mode=app.config['SKBL_LINKS'])
     else:
         data = karp_query('minientry', {'q': "extended||and|namn|exists", 'show': show,
-                                        'sort': 'sorteringsnamn.eng_sort,sorteringsnamn.eng_init,sorteringsnamn,tilltalsnamn.sort,tilltalsnamn'},
+                                        'sort': 'sorteringsnamn.eng_sort,sorteringsnamn.eng_init,sorteringsnamn.sort,tilltalsnamn.sort'},
                           mode=app.config['SKBL_LINKS'])
 
     art = render_template('list.html',
@@ -210,7 +210,7 @@ def compute_place(lang="", cache=True, url=''):
     set_language_switch_link("place_index", lang=lang)
     art, lang = getcache('place', lang, cache)
     if art is not None:
-            return art
+        return art
     infotext = helpers.get_infotext("place", request.url_rule.rule)
 
     def parse(kw):
