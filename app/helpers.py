@@ -176,8 +176,10 @@ def make_simplenamelist(hits):
     results = []
     used = set()
     for order, hit in enumerate(hits["hits"]):
-        hitfields = hit["highlight"]
-        score = sum(1 for field in hitfields if field.startswith('name.'))
+        # ToDo: Ranking of search results partly broken!
+        # hitfields = hit["highlight"]
+        # score = sum(1 for field in hitfields if field.startswith('name.'))
+        score = None
         if score:
             name = join_name(hit["_source"], mk_bold=True)
             liferange = get_life_range(hit["_source"])
