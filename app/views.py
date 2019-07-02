@@ -412,7 +412,8 @@ def find_link(searchstring):
 
 def show_article(data, lang="sv"):
     """Prepare data for article view (helper function)."""
-    if data['hits']['total'] == 1:
+    # if len(data['hits']['hits']) == 1:
+    if len(data['hits']['hits']) > 0:
         source = data['hits']['hits'][0]['_source']
         source['url'] = source.get('url') or data['query']['hits']['hits'][0]['_id']
         source['es_id'] = data['hits']['hits'][0]['_id']
@@ -551,11 +552,13 @@ def institution(result=None):
 def article_json(id=None):
     """Get article in JSON."""
     data = karp_query('query', {'q': "extended||and|url|equals|%s" % (id)})
-    if data['hits']['total'] == 1:
+    # if data['hits']['total'] == 1:
+    if len(data['hits']['hits']) == 1:
         page = jsonify(data['hits']['hits'][0]['_source'])
         return set_cache(page)
     data = karp_query('query', {'q': "extended||and|id.search|equals|%s" % (id)})
-    if data['hits']['total'] == 1:
+    # if data['hits']['total'] == 1:
+    if len(data['hits']['hits']) == 1:
         page = jsonify(data['hits']['hits'][0]['_source'])
         return set_cache(page)
 
