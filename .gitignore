@@ -1,5 +1,14 @@
 app/config.cfg
 
+# Configs
+config.cfg
+app/auth.wsgi
+
+# Memcached stuff
+libevent*
+libmemcached*
+memcached*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
