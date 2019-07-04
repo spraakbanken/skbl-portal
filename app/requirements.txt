@@ -4,16 +4,16 @@
 #
 #    pip-compile requirements.in
 #
-babel==2.4.0              # via flask-babel
-click==6.7                # via flask
-flask-babel==0.11.2
+babel==2.7.0              # via flask-babel
+click==7.0                # via flask
+flask-babel==0.12.2
 flask-compress==1.4.0
-flask==0.12
-itsdangerous==0.24        # via flask
-jinja2==2.9.6             # via flask, flask-babel
-markdown==2.6.8
-markupsafe==1.0           # via jinja2
-pylibmc==1.5.2
+flask==1.0.3
+itsdangerous==1.1.0       # via flask
+jinja2==2.10.1            # via flask, flask-babel
+markdown==3.1.1
+markupsafe==1.1.1         # via jinja2
+pylibmc==1.6.0
 PyICU==1.9.7
-pytz==2017.2              # via babel
-werkzeug==0.12.2          # via flask
+pytz==2019.1              # via babel
+werkzeug==0.15.4          # via flask
