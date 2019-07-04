@@ -78,7 +78,8 @@ def set_cache(page, name='', lang='', no_hits=0):
             # TODO what to do??
             pass
     r = make_response(page)
-    r.headers.set('Cache-Control', "public, max-age=%s" % app.config['BROWSER_CACHE_TIME'])
+    r.headers.set('Cache-Control', "public, max-age=%s" %
+                  app.config['BROWSER_CACHE_TIME'])
     return r
 
 
@@ -157,7 +158,8 @@ def func():
 
 @app.context_processor
 def inject_custom():
-    d = {'lurl_for': lambda ep, **kwargs: url_for(ep + '_' + g.language, **kwargs)}
+    d = {'lurl_for': lambda ep, **
+         kwargs: url_for(ep + '_' + g.language, **kwargs)}
     return d
 
 
@@ -172,8 +174,10 @@ app.jinja_env.globals.update(make_namelist=helpers.make_namelist)
 app.jinja_env.globals.update(make_simplenamelist=helpers.make_simplenamelist)
 app.jinja_env.globals.update(make_placelist=helpers.make_placelist)
 app.jinja_env.globals.update(make_placenames=helpers.make_placenames)
-app.jinja_env.globals.update(make_alphabetical_bucket=helpers.make_alphabetical_bucket)
-app.jinja_env.globals.update(make_alpha_more_women=helpers.make_alpha_more_women)
+app.jinja_env.globals.update(
+    make_alphabetical_bucket=helpers.make_alphabetical_bucket)
+app.jinja_env.globals.update(
+    make_alpha_more_women=helpers.make_alpha_more_women)
 app.jinja_env.globals.update(get_date=helpers.get_date)
 app.jinja_env.globals.update(join_name=helpers.join_name)
 app.jinja_env.globals.update(sorted=sorted)
