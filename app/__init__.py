@@ -3,7 +3,6 @@
 import os
 import sys
 import urllib.parse
-import urllib.error
 
 from flask import Flask, g, make_response, request, render_template, url_for
 from flask_babel import Babel
@@ -104,7 +103,7 @@ def serve_static_page(page, title=''):
     """Serve static html."""
     set_language_switch_link(page)
     with app.open_resource("static/pages/%s/%s.html" % (page, g.language)) as f:
-        data = f.read()
+        data = f.read().decode("UTF-8")
 
     return render_template('page_static.html',
                            content=data,

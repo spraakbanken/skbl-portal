@@ -6,7 +6,9 @@ from flask import redirect, render_template, request
 from flask import jsonify, url_for
 from flask_babel import gettext
 import icu
-import urllib.request, urllib.parse, urllib.error
+import urllib.parse
+import urllib.request
+import urllib.error
 
 from app import app, get_locale, set_language_switch_link, g, serve_static_page, karp_query, mc_pool, set_cache, check_cache
 from .authors import authors_dict
@@ -230,7 +232,7 @@ def keyword_index():
     pagename = 'keyword'
     art = check_cache(pagename, lang=lang)
     if art is not None:
-            return art
+        return art
 
     if lang == "en":
         reference_list = []

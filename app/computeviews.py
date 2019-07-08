@@ -5,7 +5,6 @@ from collections import defaultdict
 from hashlib import md5
 import os.path
 import urllib.parse
-import urllib.error
 from urllib.request import urlopen
 
 from email.mime.multipart import MIMEMultipart
