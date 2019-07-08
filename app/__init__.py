@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*
 """Initialise Flask application."""
-
 import os
 import sys
-import urllib
+import urllib.parse
+import urllib.error
 
 from flask import Flask, g, make_response, request, render_template, url_for
 from flask_babel import Babel
 from flask_compress import Compress
-import HTMLParser
+import html.parser
 import json
 # from setuptools import setup
 from pylibmc import Client, ClientPool
-from urllib2 import Request, urlopen
+from urllib.request import Request, urlopen
 
-import helpers
+from . import helpers
 
 
 app = Flask(__name__)
@@ -91,7 +91,7 @@ def get_locale():
         return locale
     else:
         locale = 'sv'
-        for lang in request.accept_languages.values():
+        for lang in list(request.accept_languages.values()):
             if lang[:2] in ['sv', 'en']:
                 locale = lang[:2]
                 break
@@ -107,7 +107,7 @@ def serve_static_page(page, title=''):
         data = f.read()
 
     return render_template('page_static.html',
-                           content=data.decode('utf-8'),
+                           content=data,
                            title=title)
 
 
@@ -129,7 +129,7 @@ def karp_query(action, query, mode=app.config['KARP_MODE']):
     query['resource'] = app.config['KARP_LEXICON']
     if 'size' not in query:
         query['size'] = app.config['RESULT_SIZE']
-    params = urllib.urlencode(query)
+    params = urllib.parse.urlencode(query)
     return karp_request("%s?%s" % (action, params))
 
 
@@ -165,7 +165,7 @@ def inject_custom():
 
 @app.template_filter('deescape')
 def deescape_filter(s):
-    html_parser = HTMLParser.HTMLParser()
+    html_parser = html.parser.HTMLParser()
     return html_parser.unescape(s)
 
 

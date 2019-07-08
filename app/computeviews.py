@@ -2,10 +2,11 @@
 """Define helper functions used to compute the different views."""
 
 from collections import defaultdict
-import md5
+from hashlib import md5
 import os.path
-import urllib
-from urllib2 import urlopen
+import urllib.parse
+import urllib.error
+from urllib.request import urlopen
 
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -16,8 +17,8 @@ import json
 import smtplib
 
 from app import app, karp_query, set_language_switch_link, mc_pool, cache_name, check_cache
-import helpers
-import static_info
+from . import helpers
+from . import static_info
 
 
 def getcache(page, lang, usecache):
@@ -65,8 +66,8 @@ def searchresult(result, name='', searchfield='', imagefolder='', query='',
     """Compute the search result."""
     set_language_switch_link("%s_index" % name, result)
     try:
-        result = result.encode("UTF-8")
-        pagename = name + '_' + urllib.quote(result)
+        result = result
+        pagename = name + '_' + urllib.parse.quote(result)
         art = check_cache(pagename, lang)
         if art is not None:
             return art
@@ -77,7 +78,7 @@ def searchresult(result, name='', searchfield='', imagefolder='', query='',
             hits = karp_query('minientry',
                               {'q': "extended||and|%s.search|%s|%s" % (searchfield, searchtype, result),
                                'show': show})
-        title = title or result.decode("UTF-8")
+        title = title or result
 
         no_hits = hits['hits']['total']
         if no_hits > 0:
@@ -335,9 +336,9 @@ def compute_emptycache(fields):
     user, pw = auth.username, auth.password
     postdata["username"] = user
     postdata["password"] = pw
-    postdata["checksum"] = md5.new(user + pw + app.config['SECRET_KEY']).hexdigest()
+    postdata["checksum"] = md5(user + pw + app.config['SECRET_KEY'].encode()).hexdigest()
     server = app.config['WSAUTH_URL']
-    contents = urlopen(server, urllib.urlencode(postdata)).read()
+    contents = urlopen(server, urllib.parse.urlencode(postdata)).read()
     auth_response = json.loads(contents)
     lexitems = auth_response.get("permitted_resources", {})
     rights = lexitems.get("lexica", {}).get(app.config['KARP_LEXICON'], {})

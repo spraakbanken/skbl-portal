@@ -1,4 +1,4 @@
-FROM python:2.7
+FROM python:3.6
 MAINTAINER Spraakbanken "sb-info@svenska.gu.se"
 COPY . /app
 WORKDIR /app
@@ -7,5 +7,5 @@ RUN apt-get install libicu-dev -y
 RUN apt-get install python-dev -y
 RUN apt-get install libmemcached-dev -y
 RUN pip install -r app/requirements.txt
-ENTRYPOINT ["python"]
+ENTRYPOINT ["python3"]
 CMD ["run.py"]

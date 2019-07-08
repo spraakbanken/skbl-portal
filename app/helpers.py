@@ -10,7 +10,7 @@ import icu
 import markdown
 
 from app import g
-import static_info
+from . import static_info
 
 
 def get_first_name(source):
@@ -83,7 +83,7 @@ def group_by_type(objlist, name):
             newdict[key_sv] = (key_en, [])
         newdict[key_sv][1].append(val)
     result = []
-    for key, val in newdict.items():
+    for key, val in list(newdict.items()):
         result.append({'type': key, 'type_eng': val[0], name: ', '.join(val[1])})
     return result
 
@@ -157,13 +157,13 @@ def make_alphabetic(hits, processname, sortnames=False, lang="sv"):
         collator = icu.Collator.createInstance(icu.Locale('en_EN.UTF-8'))
     else:
         collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
-    for n, items in letter_results.items():
+    for n, items in list(letter_results.items()):
         if sortnames:
             items.sort(key=lambda x: collator.getSortKey(fix_lastname(x[0]) + " " + x[1]))
         else:
             items.sort(key=lambda x: collator.getSortKey(x[0]))
 
-    letter_results = sorted(letter_results.items(), key=lambda x: collator.getSortKey(x[0]))
+    letter_results = sorted(list(letter_results.items()), key=lambda x: collator.getSortKey(x[0]))
     return letter_results
 
 
@@ -314,13 +314,13 @@ def aggregate_by_type(items, use_markdown=False):
                     item["description"] = markdown_html(item["description"])
                     item["description_eng"] = markdown_html(item.get("description_eng", ""))
                 types[t].append(item)
-    return types.items()
+    return list(types.items())
 
 
 def collapse_kids(source):
     unkown_kids = 0
     for relation in source.get('relation', []):
-        if relation.get('type') == 'Barn' and len(relation.keys()) == 1:
+        if relation.get('type') == 'Barn' and len(list(relation.keys())) == 1:
             unkown_kids += 1
             relation['hide'] = True
     if unkown_kids:
@@ -340,7 +340,7 @@ def make_placelist(hits, placename, lat, lon):
                           gettext("Place of death"): [source.get('lifespan', {}).get("to", {})]
                           }
 
-        for ptype, places in placelocations.items():
+        for ptype, places in list(placelocations.items()):
             names = dict([(place.get('place', {}).get('place', '').strip(),
                            place.get('place', {}).get('pin', {})) for place in places])
             # Check if the name and the lat, lon is correct
@@ -359,9 +359,9 @@ def make_placelist(hits, placename, lat, lon):
 
     # Sort result dictionary alphabetically into list
     collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
-    for n, items in grouped_results.items():
+    for n, items in list(grouped_results.items()):
         items.sort(key=lambda x: collator.getSortKey(x[0]))
-    grouped_results = sorted(grouped_results.items(), key=lambda x: collator.getSortKey(x[0]))
+    grouped_results = sorted(list(grouped_results.items()), key=lambda x: collator.getSortKey(x[0]))
 
     # These two lines should be removed, but are kept for debugging
     # if not grouped_results:

@@ -1,19 +1,18 @@
 # -*- coding=utf-8 -*-
 """Define all available routes."""
-
 import re
 
 from flask import redirect, render_template, request
 from flask import jsonify, url_for
 from flask_babel import gettext
 import icu
-import urllib
+import urllib.request, urllib.parse, urllib.error
 
 from app import app, get_locale, set_language_switch_link, g, serve_static_page, karp_query, mc_pool, set_cache, check_cache
-from authors import authors_dict
-import computeviews
-import helpers
-import static_info
+from .authors import authors_dict
+from . import computeviews
+from . import helpers
+from . import static_info
 
 
 @app.route('/')
@@ -109,8 +108,8 @@ def submit_contact_form():
 def search():
     """Generate view for search results."""
     set_language_switch_link("search")
-    search = request.args.get('q', '').encode('utf-8')
-    pagename = 'search' + urllib.quote(search)
+    search = request.args.get('q', '')
+    pagename = 'search' + urllib.parse.quote(search)
 
     page = check_cache(pagename)
     if page is not None:
@@ -131,18 +130,18 @@ def search():
         data = karp_query('minientry', karp_q, mode=mode)
         with app.open_resource("static/pages/advanced-search/%s.html" % (g.language)) as f:
             advanced_search_text = f.read()
-        karp_url = "https://spraakbanken.gu.se/karp/#?mode=" + mode + "&advanced=false&hpp=25&extended=and%7Cnamn%7Cequals%7C&searchTab=simple&page=1&search=simple%7C%7C" + search.decode("utf-8")
+        karp_url = "https://spraakbanken.gu.se/karp/#?mode=" + mode + "&advanced=false&hpp=25&extended=and%7Cnamn%7Cequals%7C&searchTab=simple&page=1&search=simple%7C%7C" + search
     else:
         data = {"hits": {"total": 0, "hits": []}}
         karp_url = ""
-        search = u'\u200b'.encode('utf8')
+        search = u'\u200b'
 
     t = render_template('list.html', headline="",
-                        subheadline=gettext('Hits for "%s"') % search.decode("UTF-8"),
+                        subheadline=gettext('Hits for "%s"') % search,
                         hits_name=data["hits"],
                         hits=data["hits"],
-                        advanced_search_text=advanced_search_text.decode("UTF-8"),
-                        search=search.decode("UTF-8"),
+                        advanced_search_text=advanced_search_text,
+                        search=search,
                         alphabetic=True,
                         karp_url=karp_url,
                         more=data["hits"]["total"] > app.config["SEARCH_RESULT_SIZE"],
@@ -162,14 +161,14 @@ def place_index():
 @app.route("/sv/ort/<place>", endpoint="place_sv")
 def place(place=None):
     """Generate view for one place."""
-    pagename = urllib.quote('place_' + place.encode('utf8'))
+    pagename = urllib.parse.quote('place_' + place)
     art = check_cache(pagename)
     if art is not None:
         return art
     lat = request.args.get('lat')
     lon = request.args.get('lon')
     set_language_switch_link("place_index", place)
-    hits = karp_query('query', {'q': "extended||and|plats.searchraw|equals|%s" % (place.encode('utf-8'))})
+    hits = karp_query('query', {'q': "extended||and|plats.searchraw|equals|%s" % (place)})
     no_hits = hits['hits']['total']
     if no_hits > 0:
         page = render_template('placelist.html', title=place, lat=lat, lon=lon,
@@ -308,7 +307,7 @@ def author(result=None):
         authorinfo = [authorinfo.get(lang, authorinfo.get("sv")),
                       [helpers.markdown_html(i) for i in authorinfo.get("publications", [])]]
     query = "extended||and|artikel_forfattare_fornamn.lowerbucket|equals|%s||and|artikel_forfattare_efternamn.lowerbucket|equals|%s" % (
-            firstname.encode("UTF-8"), lastname.encode("UTF-8"))
+            firstname, lastname)
     page = computeviews.searchresult(result,
                                      name='articleauthor',
                                      query=query,
@@ -326,7 +325,7 @@ def article_index(search=None):
     # Search is only used by links in article text
     search = search or request.args.get('search')
     if search is not None:
-        search = search.encode("UTF-8")
+        search = search
         data, id = find_link(search)
         if id:
             # Only one hit is found, redirect to that page
