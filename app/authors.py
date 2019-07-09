@@ -67,7 +67,7 @@ authors_dict = {
     u"Ulrika Andersson": {
         "sv": u"docent i straffrätt vid Lunds universitet",
         "publications": [
-            u"\"Vulnerable subjects in criminal legal proceedings\", i *\Privatization, Vulnerability, and Social Responsibility.  A Comparative Perspective* (2017)",
+            u"\"Vulnerable subjects in criminal legal proceedings\", i *\"Privatization, Vulnerability, and Social Responsibility. A Comparative Perspective\"* (2017)",
             u"\"Gendering the legal subject. Historical Perspectives on the Nordic Field of Law and Gender\", i *Festskrift till Ann Numhauser-Henning* (2017)",
         ]
     },
@@ -515,14 +515,6 @@ authors_dict = {
         "publications": [
             u"*Bortom ödelandet. En studie i Stina Aronsons författarskap* (2003)",
             u"*Fiktionens mångfald. Om läromedel, läsarter och didaktisk design* (2015)",
-        ]
-    },
-
-    u"Pia Schmidt de Graaf": {
-        "sv": u"författare och bibliotekarie",
-        "publications": [
-            u"*Evert Taube. Brev från Bohuslän* (2015)",
-            u"*Astri Bergman Taube. Ett konstnärsliv* (2008)",
         ]
     },
 
@@ -1674,10 +1666,6 @@ authors_dict = {
         ]
     },
 
-    u"Hanna Stenström": {
-        "sv": u"teologie doktor i Nya testamentets exegetik och högskolektor vid Teologiska högskolan i Stockholm"
-    },
-
     u"Boel Hössjer Sundman": {
         "sv": u"forskare i kyrkovetenskap vid Uppsala universitet och präst i Svenska kyrkan",
         "publications": [
@@ -1912,7 +1900,7 @@ authors_dict = {
         ]
     },
 
-    u"Annelie Bränström-Öhman":{
+    u"Annelie Bränström-Öhman": {
         "sv": u"professor i litteraturvetenskap och genusvetenskap med inriktning mot humaniora vid Umeå universitet",
         "publications": [
             u"*Stilens munterhet. Sara Lidmans författardagböcker från Missenträsk 1975-1985* (2014)",
