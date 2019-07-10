@@ -18,5 +18,6 @@ flask-compress
 gunicorn
 markdown
 pylibmc
+PyICU
 
 #PyICU==1.9.7  # Must probably be installed manually

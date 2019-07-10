@@ -1,4 +1,4 @@
-# Run a test server.
+"""Run a test server."""
 
 from skbl import create_app
 
