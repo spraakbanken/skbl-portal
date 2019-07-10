@@ -15,6 +15,7 @@
 flask
 flask-babel
 flask-compress
+gunicorn
 markdown
 pylibmc
 

@@ -3,14 +3,118 @@
 
 import datetime
 import re
+import sys
+import urllib.parse
+from urllib.request import Request, urlopen
 
-from flask import url_for
+from flask import url_for, current_app, render_template, g, request, make_response
 from flask_babel import gettext
 import icu
+import json
 import markdown
 
-from app import g
 from . import static_info
+
+
+def set_language_switch_link(route, fragment=None, lang=''):
+    """Fix address and label for language switch button."""
+    if not lang:
+        lang = g.language
+    if lang == 'en':
+        g.switch_language = {'url': url_for("views." + route + '_sv'), 'label': 'Svenska'}
+    else:
+        g.switch_language = {'url': url_for("views." + route + '_en'), 'label': 'English'}
+    if fragment is not None:
+        g.switch_language['url'] += '/' + fragment
+
+
+def cache_name(pagename, lang=''):
+    """Get page from cache."""
+    if not lang:
+        lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
+    return '%s_%s' % (pagename, lang)
+
+
+def karp_query(action, query, mode=None):
+    """Generate query and send request to Karp."""
+    if not mode:
+        mode = current_app.config['KARP_MODE']
+    query['mode'] = mode
+    query['resource'] = current_app.config['KARP_LEXICON']
+    if 'size' not in query:
+        query['size'] = current_app.config['RESULT_SIZE']
+    params = urllib.parse.urlencode(query)
+    return karp_request("%s?%s" % (action, params))
+
+
+def karp_request(action):
+    """Send request to Karp backend."""
+    q = Request("%s/%s" % (current_app.config['KARP_BACKEND'], action))
+    if current_app.config['DEBUG']:
+        sys.stderr.write("\nREQUEST: %s/%s\n\n" % (current_app.config['KARP_BACKEND'], action))
+    q.add_header('Authorization', "Basic %s" % (current_app.config['KARP_AUTH_HASH']))
+    response = urlopen(q).read()
+    data = json.loads(response)
+    return data
+
+
+def karp_fe_url():
+    """Get URL for Karp frontend."""
+    return current_app.config["KARP_FRONTEND"] + "/#?mode=" + current_app.config["KARP_MODE"]
+
+
+def serve_static_page(page, title=''):
+    """Serve static html."""
+    set_language_switch_link(page)
+    with current_app.open_resource("static/pages/%s/%s.html" % (page, g.language)) as f:
+        data = f.read().decode("UTF-8")
+
+    return render_template('page_static.html',
+                           content=data,
+                           title=title)
+
+
+def check_cache(page, lang=''):
+    """
+    Check if page is in cache.
+
+    If the cache should not be used, return None.
+    """
+    if current_app.config['TEST']:
+        return None
+    try:
+        with g.mc_pool.reserve() as client:
+            # Look for the page, return if found
+            art = client.get(cache_name(page, lang))
+            if art is not None:
+                return art
+    except Exception:
+        # TODO what to do??
+        pass
+
+    # If nothing is found, return None
+    return None
+
+
+def set_cache(page, name='', lang='', no_hits=0):
+    """
+    Browser cache handling.
+
+    Add header to the response.
+    May also add the page to the memcache.
+    """
+    pagename = cache_name(name, lang='')
+    if no_hits >= current_app.config['CACHE_HIT_LIMIT']:
+        try:
+            with g.mc_pool.reserve() as client:
+                client.set(pagename, page, time=current_app.config['LOW_CACHE_TIME'])
+        except Exception:
+            # TODO what to do??
+            pass
+    r = make_response(page)
+    r.headers.set('Cache-Control', "public, max-age=%s" %
+                  current_app.config['BROWSER_CACHE_TIME'])
+    return r
 
 
 def get_first_name(source):
@@ -284,9 +388,9 @@ def mk_links(text):
         text = re.sub(r'\[\]\((.*?)\)', r'[\1](\1)', text)
         for link in re.findall(r'\]\((.*?)\)', text):
             if link in static_info.more_women:
-                text = re.sub(r'\(%s\)' % link, '(%s)' % url_for('more-women_' + g.language, linked_from=link), text)
+                text = re.sub(r'\(%s\)' % link, '(%s)' % url_for('views.more-women_' + g.language, linked_from=link), text)
             else:
-                text = re.sub(r'\(%s\)' % link, '(%s)' % url_for('article_index_' + g.language, search=link), text)
+                text = re.sub(r'\(%s\)' % link, '(%s)' % url_for('views.article_index_' + g.language, search=link), text)
     except Exception:
         # If there are parenthesis within the links, problems will occur.
         text = text
@@ -349,13 +453,13 @@ def make_placelist(hits, placename, lat, lon):
                 # Coordinates! If coordinates are used, uncomment the two lines below
                 # if names[placename].get('lat') == float(lat)\
                 #    and names[placename].get('lon') == float(lon):
-                    if ptype not in grouped_results:
-                        grouped_results[ptype] = []
-                    grouped_results[ptype].append((join_name(hit["_source"], mk_bold=True), hit))
+                if ptype not in grouped_results:
+                    grouped_results[ptype] = []
+                grouped_results[ptype].append((join_name(hit["_source"], mk_bold=True), hit))
                 # else:
-                    # These two lines should be removed, but are kept for debugging
-                    # if 'Fel' not in grouped_results: grouped_results['Fel'] = []
-                    # grouped_results['Fel'].append((join_name(source), hit))
+                #     # These two lines should be removed, but are kept for debugging
+                #     if 'Fel' not in grouped_results: grouped_results['Fel'] = []
+                #     grouped_results['Fel'].append((join_name(source), hit))
 
     # Sort result dictionary alphabetically into list
     collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
