@@ -13,7 +13,7 @@
         </div>
     {% endif %}
 
-    <form method="post" action="{{ url_for('submitted_'+g.language) }}">
+    <form method="post" action="{{ url_for('views.submitted_'+g.language) }}">
         <div id="mode_switch">
             <label for="suggest_new">
                 <input type="radio" id="suggest_new" value="suggest_new" name="mode_switch" {% if mode == "suggestion" %}{{ "checked=checked" }}{% endif %}>

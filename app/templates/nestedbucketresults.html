@@ -26,7 +26,7 @@
               {% for subtype, subval in lowersorted(val.items()) %}
               <ul>
                 <li class="keyword_list_item">
-                  <a href="{{ url_for(name+'_'+g.language, result='|'.join(subval), title=maintype+' - '+subtype) }}">{{ subtype }}&nbsp;
+                  <a href="{{ url_for('views.' + name + '_' + g.language, result='|'.join(subval), title=maintype + ' - ' + subtype) }}">{{ subtype }}&nbsp;
                     <span class="badge">{{ len(subval) }}</span>
                   </a>
                 </li>
@@ -37,7 +37,7 @@
                 {% for subtype, subval in lowersorted(val.items()) %}
                 <ul>
                   <li class="keyword_list_item">
-                    <a href="{{ url_for(name+'_'+g.language, result='|'.join(subval), title=maintype+' - '+subtype) }}">{{ subtype }}&nbsp;
+                    <a href="{{ url_for('views.' + name + '_'+g.language, result='|'.join(subval), title=maintype + ' - ' + subtype) }}">{{ subtype }}&nbsp;
                       <span class="badge">{{ len(subval) }}</span>
                     </a>
                   </li>
@@ -52,7 +52,7 @@
                 {% for subtype, subval in lowersorted(val.items()) %}
                   {% if loop.index < 8 %}
                   <li class="keyword_list_item">
-                    <a href="{{ url_for(name+'_'+g.language, result='|'.join(subval), title=maintype+' - '+subtype) }}">{{ subtype }}&nbsp;
+                    <a href="{{ url_for('views.' + name + '_' + g.language, result='|'.join(subval), title=maintype + ' - ' + subtype) }}">{{ subtype }}&nbsp;
                       <span class="badge">{{ len(subval) }}</span>
                     </a>
                   </li>

@@ -17,7 +17,7 @@
 {% macro educationMacro(education) %}
     <li class="keyword_list_item">
         {% set education_type = get_lang_text(education.type, education.type_eng, g.language) %}
-        <h5 class="toggled-by-button">{% if education_type %}{{ education_type }}, {%endif%}{% if education.place and education.place.place %} {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description | deescape }}{% endif %}{% if education.institution %}, <a href="{{ url_for('institution_'+g.language, result=education.institution) }}" class="visible_link">{{education.institution | deescape}}</a>{% endif %}</h5>
+        <h5 class="toggled-by-button">{% if education_type %}{{ education_type }}, {%endif%}{% if education.place and education.place.place %} {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description | deescape }}{% endif %}{% if education.institution %}, <a href="{{ url_for('views.institution_'+g.language, result=education.institution) }}" class="visible_link">{{education.institution | deescape}}</a>{% endif %}</h5>
         <h5 class="toggled-by-button" style="display:none">{% if education_type %}{{ education_type }}, {%endif%}{% if education.place and education.place.place %} {{ education.place.place }}{% endif %}{% if education.description %}: {{ education.description | deescape }}{% endif %}{% if education.institution %}, {{ education.institution | deescape }}{% endif %}
         {% if education.get("from")%} {% set from = education.get("from").get("comment") %} {% else %} {% set from = "" %} {% endif %}
         {% if education.get("to")%} {% set to = education.get("to").get("comment") %} {% else %} {% set to = "" %} {% endif %}
@@ -65,8 +65,8 @@
 {% macro awardMacro(award) %}
     <li class="keyword_list_item">
         {% set award_type = get_lang_text(award.type, award.type_eng, g.language) %}
-        <h5 class="toggled-by-button">{{ award_type }}{% if award.description %}: <a class="visible_link" href="{{url_for('award_'+g.language, result=award.description)}}">{{award.description | deescape}}</a>{% endif %}</h5>
-        <h5 class="toggled-by-button" style="display:none">{{ award_type }}{% if award.description %}: <a class="visible_link" href="{{url_for('award_'+g.language, result=award.description)}}">{{award.description | deescape}}</a>{% endif %}
+        <h5 class="toggled-by-button">{{ award_type }}{% if award.description %}: <a class="visible_link" href="{{url_for('views.award_'+g.language, result=award.description)}}">{{award.description | deescape}}</a>{% endif %}</h5>
+        <h5 class="toggled-by-button" style="display:none">{{ award_type }}{% if award.description %}: <a class="visible_link" href="{{url_for('views.award_'+g.language, result=award.description)}}">{{award.description | deescape}}</a>{% endif %}
         {% if award.get("date")%} {% set date = award.get("date").get("comment") %} {% else %} {% set date = "" %} {% endif %}
         {% if date %} ({{date}}){% endif %}</h5>
     </li>
@@ -89,7 +89,7 @@
 
 {% block head %}
 {{super()}}
-<link rel="alternate" type="application/json" href="{{ url_for('article_json_'+g.language, id=article_id) }}" />
+<link rel="alternate" type="application/json" href="{{ url_for('views.article_json_'+g.language, id=article_id) }}" />
 {% endblock %}
 
 {% block content %}
@@ -121,7 +121,7 @@
         <p>
             <em>
                 {% for author in article.article_author %}
-                    <a href="{{ url_for('articleauthor_'+g.language, result=author.lastname+", "+author.firstname) }}">{{author.firstname}} {{author.lastname}}</a><br/>
+                    <a href="{{ url_for('views.articleauthor_'+g.language, result=author.lastname+", "+author.firstname) }}">{{author.firstname}} {{author.lastname}}</a><br/>
                 {% endfor %}
                 {% if g.language == 'en' %}
                     {% if article.text_eng %}
@@ -581,7 +581,7 @@
             <h3>{{ gettext("Keywords") }}</h3>
             {% for keyword in article_keyword %}
                 {% if keyword %}
-                    <a href="{{ url_for('keyword_'+g.language, result=keyword) }}"><span class="badge">{{ keyword }}</span></a></span>
+                    <a href="{{ url_for('views.keyword_'+g.language, result=keyword) }}"><span class="badge">{{ keyword }}</span></a></span>
                 {% endif %}
             {% endfor %}
         {% endif %}

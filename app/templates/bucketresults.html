@@ -26,9 +26,9 @@
                 <h2><a class="no_anchor_decor" name="{{firstletter}}">{{ firstletter }}</a></h2>
             {% for result in namelist %}
                 {% if result[-1] == "reference" %}
-                    <li class="keyword_list_item">{{ result[0] | deescape }} {{ gettext("see") }} <a href="{{ url_for(name+'_'+g.language, result=result[1]) }}">{{ result[1] }}</span></a></li>
+                    <li class="keyword_list_item">{{ result[0] | deescape }} {{ gettext("see") }} <a href="{{ url_for('views.' + name+'_'+g.language, result=result[1]) }}">{{ result[1] }}</span></a></li>
                 {% else %}
-                    <li class="keyword_list_item"><a href="{{ url_for(name+'_'+g.language, result=' '.join(result[0:-1])) }}">{{ rewrite_von(' '.join(result[0:-1]) | deescape ) }}&nbsp;<span class="badge">{{ result[-1] }}</span></a></li>
+                    <li class="keyword_list_item"><a href="{{ url_for('views.' + name+'_'+g.language, result=' '.join(result[0:-1])) }}">{{ rewrite_von(' '.join(result[0:-1]) | deescape ) }}&nbsp;<span class="badge">{{ result[-1] }}</span></a></li>
                 {% endif %}
             {% endfor %}
             <div class="top-link"><a href="#top">[ {{gettext("TO THE TOP")}} ]</a></div>
@@ -38,9 +38,9 @@
     <ul>
         {% for result in results %}
             {% if result[-1] == "reference" %}
-                <li class="keyword_list_item">{{ result[0] | deescape }} {{ gettext("see") }} <a href="{{ url_for(name+'_'+g.language, result=result[1]) }}">{{ result[1] }}</span></a></li>
+                <li class="keyword_list_item">{{ result[0] | deescape }} {{ gettext("see") }} <a href="{{ url_for('views.' + name+'_'+g.language, result=result[1]) }}">{{ result[1] }}</span></a></li>
             {% else %}
-                <li class="keyword_list_item"><a href="{{ url_for(name+'_'+g.language, result=' '.join(result[0:-1])) }}">{{ rewrite_von(' '.join(result[0:-1]) | deescape ) }}&nbsp;<span class="badge">{{ result[-1] }}</span></a></li>
+                <li class="keyword_list_item"><a href="{{ url_for('views.' + name+'_'+g.language, result=' '.join(result[0:-1])) }}">{{ rewrite_von(' '.join(result[0:-1]) | deescape ) }}&nbsp;<span class="badge">{{ result[-1] }}</span></a></li>
             {% endif %}
         {% endfor %}
     </ul>
