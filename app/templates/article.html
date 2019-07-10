@@ -124,7 +124,7 @@
                     <a href="{{ url_for('views.articleauthor_'+g.language, result=author.lastname+", "+author.firstname) }}">{{author.firstname}} {{author.lastname}}</a><br/>
                 {% endfor %}
                 {% if g.language == 'en' %}
-                    {% if article.text_eng %}
+                    {% if article.text_eng and article.translator %}
                         (Translated by {{article.translator.firstname}} {{article.translator.lastname}})
                     {% endif %}
                 {% endif %}
