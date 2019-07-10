@@ -130,7 +130,7 @@ def search():
         mode = current_app.config['KARP_MODE']
         data = helpers.karp_query('minientry', karp_q, mode=mode)
         with current_app.open_resource("static/pages/advanced-search/%s.html" % (g.language)) as f:
-            advanced_search_text = f.read()
+            advanced_search_text = f.read().decode("UTF-8")
         karp_url = "https://spraakbanken.gu.se/karp/#?mode=" + mode + "&advanced=false&hpp=25&extended=and%7Cnamn%7Cequals%7C&searchTab=simple&page=1&search=simple%7C%7C" + search
     else:
         data = {"hits": {"total": 0, "hits": []}}

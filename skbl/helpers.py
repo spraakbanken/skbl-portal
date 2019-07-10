@@ -54,7 +54,7 @@ def karp_request(action):
         sys.stderr.write("\nREQUEST: %s/%s\n\n" % (current_app.config['KARP_BACKEND'], action))
     q.add_header('Authorization', "Basic %s" % (current_app.config['KARP_AUTH_HASH']))
     response = urlopen(q).read()
-    data = json.loads(response)
+    data = json.loads(response.decode("UTF-8"))
     return data
 
 

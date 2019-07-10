@@ -1,4 +1,4 @@
-FROM python:3.6
+FROM python:3.4
 MAINTAINER Spraakbanken "sb-info@svenska.gu.se"
 COPY . /skbl
 WORKDIR /skbl

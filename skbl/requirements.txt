@@ -12,7 +12,7 @@ flask==1.0.3
 gunicorn==19.9.0
 itsdangerous==1.1.0       # via flask
 jinja2==2.10.1            # via flask, flask-babel
-markdown==3.1.1
+markdown>=3.0.1
 markupsafe==1.1.1         # via jinja2
 PyICU==1.9.7
 pylibmc==1.6.0
