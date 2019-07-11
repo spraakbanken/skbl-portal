@@ -83,6 +83,7 @@ def create_app():
 
     from . import views
     app.register_blueprint(views.bp)
+    app.register_error_handler(Exception, views.page_not_found)
 
     return app
 
