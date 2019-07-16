@@ -11,6 +11,8 @@
     {% endif %}
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -101,8 +103,10 @@
             <ul class="nav navbar-nav">
               <li><a class="first-menu-item" href="{{ url_for('views.article_index_'+g.language) }}">{{ gettext('Women A-Z') }}</a></li>
 
+              <li><a href="{{ url_for('views.chronic_'+g.language, years='1700-2000') }}">{{ gettext('Chronic') }}</a></li>
+
               <li class="dropdown">
-              <a href="{{ url_for('views.articleauthor'+'_index_'+g.language) }}">{{ gettext('Article authors') }}</span></a>
+              <a href="{{ url_for('views.articleauthor_index_'+g.language) }}">{{ gettext('Article authors') }}</span></a>
               </li>
 
               <li><a href="{{ url_for('views.about-skbl_'+g.language) }}">{{ gettext('About SKBL') }}</a></li>

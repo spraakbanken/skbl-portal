@@ -1,0 +1,102 @@
+{% extends "layout.html" %}
+{% block title %}skbl.se - {{ title }}{% endblock %}
+{% block content %}
+<div class="col-md-10">
+    <h1>{{ headline }} <span id="years"></span></h1>
+
+    <div id="slider-range"></div>
+
+    <div class="date-list">
+      <ul>
+      {% for is_link, name, linked_name, liferange, subtitle, subtitle_eng, subject_id in make_datelist(hits) %}
+
+        <li>
+            {% if is_link %}
+                <a href="{{ url_for('views.article_'+g.language, id=subject_id) }}" title="{{ linked_name }}"><strong><em>{{ name }}</em></strong>&ensp;<span class="glyphicon glyphicon-link"></span><br />
+            {% else %}
+                <a href="{{ url_for('views.article_'+g.language, id=subject_id) }}">{{ name | safe }}<br />
+            {% endif %}
+            {% set article_subtitle = get_lang_text(subtitle, subtitle_eng, g.language) %}
+            {% if article_subtitle %} {{ article_subtitle | safe}}<br> {% endif %}
+            {% if liferange[0] or  liferange[1] %}
+                <span itemprop="birthDate">{{ liferange[0] }}</span> &mdash; <span itemprop="deathDate">{{ liferange[1] }}</span>
+            {% endif %}
+            </a>
+        </li>
+
+      {% endfor %}
+      </ul>
+    </div>
+
+
+</div>
+{% endblock %}
+{% block foot %}
+    {{ super() }}
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      $( function() {
+        $( "#slider-range" ).slider({
+          range: true,
+          min: {{ min }},
+          max: {{ max }},
+          values: [{{ default_low }}, {{ default_high }}],
+          create: function( event, ui ) {
+            setSliderTicks(event.target);
+          },
+          slide: function( event, ui ) {
+            $( "#years" ).text(ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+          }
+        });
+        $( "#years" ).text($( "#slider-range" ).slider( "values", 0 ) +
+          " - " + $( "#slider-range" ).slider( "values", 1 ) );
+      });
+
+      function setSliderTicks() {
+        var $slider = $("#slider-range");
+        var max =  $slider.slider("option", "max")
+        var min =  $slider.slider("option", "min")
+        var start =  Math.ceil(min/100)*100; // Year for first tick
+        var end =  Math.floor(max/100)*100; // Year for last tick
+        var offset = (start-min)*100 / (max-min); // Percentage of bar before first tick
+        var end_offset = (max-end)*100 / (max-min); // Percentage of bar after last tick
+        var ticks = (end-start)/100 + 1;
+        var spacing = (100 - end_offset - offset)/(ticks-1);
+        var current_label = start;
+
+        $slider.find('.ui-slider-tick-mark').remove();
+        for (var i = 0; i < ticks ; i++) {
+          $('<span class="ui-slider-tick-mark"></span>').css('left', offset + (i*spacing) +  '%').appendTo($slider);
+          $('<span class="ui-slider-tick-label"></span>').html(current_label).css('left', offset + (i*spacing) - 1.8 +  '%').appendTo($slider);
+          current_label += 100;
+         }
+      }
+    </script>
+
+    <style>
+    #slider-range {
+      margin: 0px 0px 40px 15px;
+    }
+    .ui-slider-handle {
+      cursor: pointer !important;
+    }
+    .ui-slider-tick-mark{
+      display: inline-block;
+      width: 1px;
+      background: black;
+      height: 8px;
+      position: absolute;
+      top: 10px;
+    }
+    .ui-slider-tick-label{
+      display: block;
+      position: absolute;
+      top: 18px;
+    }
+    .date-list {
+      column-count: 3;
+    }
+  </style>
+
+{% endblock %}

@@ -337,6 +337,27 @@ def make_namelist(hits, exclude=set()):
     return (first_letters, results)
 
 
+def make_datelist(hits):
+    """Extract information relevant for chronic list (same as make_namelist but without letter splitting)."""
+    result = []
+    for hit in hits["hits"]:
+        is_link = hit["_index"].startswith("link")
+        if is_link:
+            name = hit["_source"]["name"].get("sortname", "")
+            linked_name = join_name(hit["_source"])
+        else:
+            name = join_name(hit["_source"], mk_bold=True)
+            linked_name = False
+
+        liferange = get_life_range(hit["_source"])
+        subtitle = hit["_source"].get("subtitle", "")
+        subtitle_eng = hit["_source"].get("subtitle_eng", "")
+        subject_id = hit["_source"].get('url') or hit["_id"]
+
+        result.append((is_link, name, linked_name, liferange, subtitle, subtitle_eng, subject_id))
+    return result
+
+
 def join_name(source, mk_bold=False):
     """Retrieve and format name from source."""
     name = []

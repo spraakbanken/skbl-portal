@@ -104,6 +104,45 @@ def submit_contact_form():
     return helpers.set_cache(computeviews.compute_contact_form())
 
 
+@bp.route("/en/chronic/<years>", endpoint="chronic_en")
+@bp.route("/sv/kronologi/<years>", endpoint="chronic_sv")
+def chronic(years="1500-1900"):
+    """Generate view for chronic."""
+    startyear = years.split("-")[0]
+    endyear = years.split("-")[1]
+
+    lang = g.language
+    if lang == 'en':
+        g.switch_language = {'url': url_for("views.chronic_sv", years=years), 'label': "Svenska"}
+    else:
+        g.switch_language = {'url': url_for("views.chronic_en", years=years), 'label': "English"}
+
+    # years = helpers.karp_query('statlist',
+    #                            {'q': "extended||and|fornamn|exists",
+    #                             'buckets': 'fodd_comment.bucket,dod_comment.bucket'
+    #                             })
+
+    show = ','.join(['name', 'url', 'undertitel', 'lifespan', 'undertitel_eng'])
+    selection = helpers.karp_query('minientry',
+                                   {
+                                       'q': "extended||and|fodd.search|gte|%s||and|dod.search|lte|%s" % (startyear, endyear),
+                                       'show': show,
+                                       'sort': 'fodd_comment.bucket'
+                                   },
+                                   mode=current_app.config['SKBL_LINKS'])
+
+    page = render_template("chronic.html",
+                           title=gettext("Chronic"),
+                           headline=gettext("Chronic"),
+                           min="1100",
+                           max="2017",
+                           default_low=startyear,
+                           default_high=endyear,
+                           hits=selection["hits"]
+                           )
+    return helpers.set_cache(page)
+
+
 @bp.route("/en/search", endpoint="search_en")
 @bp.route("/sv/sok", endpoint="search_sv")
 def search():

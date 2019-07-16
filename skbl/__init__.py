@@ -62,6 +62,7 @@ def create_app():
 
     app.jinja_env.globals.update(get_life_range=helpers.get_life_range)
     app.jinja_env.globals.update(make_namelist=helpers.make_namelist)
+    app.jinja_env.globals.update(make_datelist=helpers.make_datelist)
     app.jinja_env.globals.update(make_simplenamelist=helpers.make_simplenamelist)
     app.jinja_env.globals.update(make_placelist=helpers.make_placelist)
     app.jinja_env.globals.update(make_placenames=helpers.make_placenames)

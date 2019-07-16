@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-03-06 13:21+0000\n"
+"POT-Creation-Date: 2019-07-15 12:18+0000\n"
 "PO-Revision-Date: 2017-02-20 14:49+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sv\n"
@@ -16,110 +16,115 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.4.0\n"
+"Generated-By: Babel 2.7.0\n"
 
-#: app/computeviews.py:108 app/templates/article.html:345
-#: app/templates/layout.html:138
-msgid "Organisations"
-msgstr "Organisationer"
-
-#: app/computeviews.py:129 app/templates/article.html:261
-#: app/templates/contact.html:42 app/templates/layout.html:131
-msgid "Activities"
-msgstr "Verksamhet"
-
-#: app/computeviews.py:157 app/templates/layout.html:101
-msgid "Women A-Z"
-msgstr "Kvinnor A-Ö"
-
-#: app/computeviews.py:199
-msgid "Placenames"
-msgstr "Orter"
-
-#: app/computeviews.py:233 app/templates/layout.html:104
-msgid "Article authors"
-msgstr "Artikelförfattare"
-
-#: app/computeviews.py:314
-msgid "Please enter all the fields!"
-msgstr "Alla fält måste vara ifyllda!"
-
-#: app/computeviews.py:318
-msgid "Please enter a valid email address!"
-msgstr "Du måste ange en giltig e-post-adress!"
-
-#: app/computeviews.py:324 app/templates/layout.html:109 app/views.py:76
-msgid "Contact"
-msgstr "Kontakt"
-
-#: app/computeviews.py:325 app/views.py:77
-msgid "Contact SKBL"
-msgstr "Kontakta SKBL"
-
-#: app/computeviews.py:385 app/computeviews.py:386
-msgid "Thank you for your feedback"
-msgstr "Tack för din återkoppling"
-
-#: app/computeviews.py:387
-msgid "We will get back to you as soon as we can."
-msgstr "Vi återkommer så fort vi kan."
-
-#: app/helpers.py:320
-msgid "Residence"
-msgstr "Bostadsort"
-
-#: app/helpers.py:321
-msgid "Place of activity"
-msgstr "Verksamhetsort"
-
-#: app/helpers.py:322
-msgid "Place of education"
-msgstr "Utbildningsort"
-
-#: app/helpers.py:323 app/templates/article.html:303
-msgid "Contacts"
-msgstr "Kontakter"
-
-#: app/helpers.py:324 app/templates/article.html:407
-#: app/templates/article.html:420 app/templates/article.html:436
-msgid "Birthplace"
-msgstr "Födelseort"
-
-#: app/helpers.py:325 app/templates/article.html:413
-#: app/templates/article.html:426
-msgid "Place of death"
-msgstr "Dödsort"
-
-#: app/views.py:23 app/views.py:150 app/views.py:302 app/views.py:422
+#: skbl/computeviews.py:101 skbl/views.py:29 skbl/views.py:195
+#: skbl/views.py:358 skbl/views.py:486
 msgid "Contents could not be found!"
 msgstr "Innehållet kunde inte hittas!"
 
-#: app/templates/layout.html:107 app/views.py:41
+#: skbl/computeviews.py:132 skbl/templates/article.html:345
+#: skbl/templates/layout.html:143
+msgid "Organisations"
+msgstr "Organisationer"
+
+#: skbl/computeviews.py:158 skbl/templates/article.html:261
+#: skbl/templates/contact.html:42 skbl/templates/layout.html:136
+msgid "Activities"
+msgstr "Verksamhet"
+
+#: skbl/computeviews.py:192 skbl/templates/layout.html:104
+msgid "Women A-Z"
+msgstr "Kvinnor A-Ö"
+
+#: skbl/computeviews.py:240
+msgid "Placenames"
+msgstr "Orter"
+
+#: skbl/computeviews.py:282 skbl/templates/layout.html:109
+msgid "Article authors"
+msgstr "Artikelförfattare"
+
+#: skbl/computeviews.py:374
+msgid "Please enter all the fields!"
+msgstr "Alla fält måste vara ifyllda!"
+
+#: skbl/computeviews.py:378
+msgid "Please enter a valid email address!"
+msgstr "Du måste ange en giltig e-post-adress!"
+
+#: skbl/computeviews.py:384 skbl/templates/layout.html:114 skbl/views.py:93
+msgid "Contact"
+msgstr "Kontakt"
+
+#: skbl/computeviews.py:385 skbl/views.py:94
+msgid "Contact SKBL"
+msgstr "Kontakta SKBL"
+
+#: skbl/computeviews.py:444 skbl/computeviews.py:445
+msgid "Thank you for your feedback"
+msgstr "Tack för din återkoppling"
+
+#: skbl/computeviews.py:446
+msgid "We will get back to you as soon as we can."
+msgstr "Vi återkommer så fort vi kan."
+
+#: skbl/helpers.py:439
+msgid "Residence"
+msgstr "Bostadsort"
+
+#: skbl/helpers.py:440
+msgid "Place of activity"
+msgstr "Verksamhetsort"
+
+#: skbl/helpers.py:441
+msgid "Place of education"
+msgstr "Utbildningsort"
+
+#: skbl/helpers.py:442 skbl/templates/article.html:303
+msgid "Contacts"
+msgstr "Kontakter"
+
+#: skbl/helpers.py:443 skbl/templates/article.html:407
+#: skbl/templates/article.html:420 skbl/templates/article.html:436
+msgid "Birthplace"
+msgstr "Födelseort"
+
+#: skbl/helpers.py:444 skbl/templates/article.html:413
+#: skbl/templates/article.html:426
+msgid "Place of death"
+msgstr "Dödsort"
+
+#: skbl/templates/layout.html:112 skbl/views.py:52
 msgid "About SKBL"
 msgstr "Om SKBL"
 
-#: app/templates/layout.html:108 app/views.py:54
+#: skbl/templates/layout.html:113 skbl/views.py:69
 msgid "More women"
 msgstr "Fler kvinnor"
 
-#: app/views.py:61
+#: skbl/views.py:77
 msgid "Older biographies"
 msgstr "Äldre biografiska verk"
 
-#: app/views.py:115
+#: skbl/templates/layout.html:106 skbl/views.py:114 skbl/views.py:115
+msgid "Chronic"
+msgstr "Kronologi"
+
+#: skbl/views.py:158
 #, python-format
 msgid "Hits for \"%s\""
 msgstr "Träffar för \"%s\""
 
-#: app/templates/article.html:98
+#: skbl/templates/article.html:98
 msgid "Work in progress"
 msgstr "Under utveckling"
 
-#: app/templates/article.html:115
+#: skbl/templates/article.html:115
 msgid "Remark"
 msgstr "Anmärkning"
 
-#: app/templates/article.html:136
+#: skbl/templates/article.html:136
 msgid ""
 "You are welcome to cite this article but always provide the author’s name"
 " as follows"
@@ -127,166 +132,166 @@ msgstr ""
 "Hänvisa gärna till denna artikel, men uppge alltid författarnamnet enligt"
 " följande"
 
-#: app/templates/article.html:137
+#: skbl/templates/article.html:137
 msgid "article by"
 msgstr "artikel av"
 
-#: app/templates/article.html:141
+#: skbl/templates/article.html:141
 msgid "retrieved"
 msgstr "hämtad"
 
-#: app/templates/article.html:148
+#: skbl/templates/article.html:148
 msgid "Show complete information"
 msgstr "Visa full information"
 
-#: app/templates/article.html:160
+#: skbl/templates/article.html:160
 msgid "Other Names"
 msgstr "Övriga namn"
 
-#: app/templates/article.html:174
+#: skbl/templates/article.html:174
 msgid "Family Relationships"
 msgstr "Familjeförhållanden"
 
-#: app/templates/article.html:177
+#: skbl/templates/article.html:177
 msgid "Civil Status"
 msgstr "Civilstånd"
 
-#: app/templates/article.html:219
+#: skbl/templates/article.html:219
 msgid "Education"
 msgstr "Utbildning"
 
-#: app/templates/article.html:399
+#: skbl/templates/article.html:399
 msgid "Residences"
 msgstr "Bostadsorter"
 
-#: app/templates/article.html:457
+#: skbl/templates/article.html:457
 msgid "Prices/awards"
 msgstr "Priser/utmärkelser"
 
-#: app/templates/article.html:498
+#: skbl/templates/article.html:498
 msgid "Sources"
 msgstr "Källor"
 
-#: app/templates/article.html:523
+#: skbl/templates/article.html:523
 msgid "Further References"
 msgstr "Vidare referenser"
 
-#: app/templates/article.html:548
+#: skbl/templates/article.html:548
 msgid "Pictures"
 msgstr "Bilder"
 
-#: app/templates/article.html:561 app/templates/bucketresults.html:34
-#: app/templates/list.html:56 app/templates/list.html:88
-#: app/templates/list.html:93 app/templates/more_women.html:42
-#: app/templates/nestedbucketresults.html:68 app/templates/places.html:24
+#: skbl/templates/article.html:561 skbl/templates/bucketresults.html:34
+#: skbl/templates/list.html:56 skbl/templates/list.html:88
+#: skbl/templates/list.html:93 skbl/templates/more_women.html:42
+#: skbl/templates/nestedbucketresults.html:68 skbl/templates/places.html:24
 msgid "TO THE TOP"
 msgstr "TILL TOPPEN"
 
-#: app/templates/article.html:566
+#: skbl/templates/article.html:566
 msgid "Show map"
 msgstr "Visa karta"
 
-#: app/templates/article.html:569
+#: skbl/templates/article.html:569
 msgid "Hide map"
 msgstr "Göm karta"
 
-#: app/templates/article.html:581 app/templates/layout.html:152
+#: skbl/templates/article.html:581 skbl/templates/layout.html:157
 msgid "Keywords"
 msgstr "Nyckelord"
 
-#: app/templates/article.html:589
+#: skbl/templates/article.html:589
 msgid "Open article in Karp"
 msgstr "Öppna denna artikel i Karp"
 
-#: app/templates/article.html:597
+#: skbl/templates/article.html:597
 msgid "Links"
 msgstr "Länkar"
 
-#: app/templates/author_presentations.html:12 app/templates/list.html:15
+#: skbl/templates/author_presentations.html:12 skbl/templates/list.html:15
 msgid "Has published (amongst others)"
 msgstr "Har bland annat publicerat"
 
-#: app/templates/bucketresults.html:29 app/templates/bucketresults.html:41
+#: skbl/templates/bucketresults.html:29 skbl/templates/bucketresults.html:41
 msgid "see"
 msgstr "se"
 
-#: app/templates/contact.html:20
+#: skbl/templates/contact.html:20
 msgid "Suggest biography about"
 msgstr "Föreslå biografi om"
 
-#: app/templates/contact.html:24
+#: skbl/templates/contact.html:24
 msgid "Suggest correction"
 msgstr "Föreslå rättelse"
 
-#: app/templates/contact.html:28
+#: skbl/templates/contact.html:28
 msgid "Other"
 msgstr "Övrigt"
 
-#: app/templates/contact.html:33 app/templates/contact.html:50
+#: skbl/templates/contact.html:33 skbl/templates/contact.html:50
 msgid "Name"
 msgstr "Namn"
 
-#: app/templates/contact.html:34
+#: skbl/templates/contact.html:34
 msgid "Name of subject..."
 msgstr "Kvinnans namn..."
 
-#: app/templates/contact.html:37
+#: skbl/templates/contact.html:37
 msgid "Lifetime"
 msgstr "Levnadstid"
 
-#: app/templates/contact.html:38
+#: skbl/templates/contact.html:38
 msgid "Date of birth and death..."
 msgstr "Födelse- och dödsdatum..."
 
-#: app/templates/contact.html:43
+#: skbl/templates/contact.html:43
 msgid "The subject's activities and occupation(s)..."
 msgstr "Kvinnans verksamhet och yrke(n)..."
 
-#: app/templates/contact.html:46
+#: skbl/templates/contact.html:46
 msgid "Why do you want this subject to appear in SKBL?"
 msgstr "Varför borde kvinnan läggas in i databasen?"
 
-#: app/templates/contact.html:47
+#: skbl/templates/contact.html:47
 msgid "Your motivation..."
 msgstr "Din motivering..."
 
-#: app/templates/contact.html:51
+#: skbl/templates/contact.html:51
 msgid "Your name..."
 msgstr "Ditt namn..."
 
-#: app/templates/contact.html:54
+#: skbl/templates/contact.html:54
 msgid "E-mail"
 msgstr "E-post"
 
-#: app/templates/contact.html:55
+#: skbl/templates/contact.html:55
 msgid "Your e-mail adress..."
 msgstr "Din e-post..."
 
-#: app/templates/contact.html:58
+#: skbl/templates/contact.html:58
 msgid "Message"
 msgstr "Meddelande"
 
-#: app/templates/contact.html:59
+#: skbl/templates/contact.html:59
 msgid "Your message..."
 msgstr "Ditt meddelande..."
 
-#: app/templates/contact.html:61
+#: skbl/templates/contact.html:61
 msgid "Submit"
 msgstr "Skicka"
 
-#: app/templates/layout.html:65
+#: skbl/templates/layout.html:67
 msgid "Free text search"
 msgstr "Fri sökning"
 
-#: app/templates/layout.html:73
+#: skbl/templates/layout.html:75
 msgid "Go to advanced search"
 msgstr "Till avancerad sökning"
 
-#: app/templates/layout.html:74
+#: skbl/templates/layout.html:76
 msgid "To advanced search"
 msgstr "Till avancerad sökning"
 
-#: app/templates/layout.html:83
+#: skbl/templates/layout.html:85
 msgid ""
 "For more advanced searches and combinations please use the Språkbanken "
 "tool Karp."
@@ -294,7 +299,7 @@ msgstr ""
 "För att göra mer avancerade sökningar och sammanställningar kan du "
 "använda Språkbankens verktyg Karp."
 
-#: app/templates/layout.html:84
+#: skbl/templates/layout.html:86
 msgid ""
 "This is particularly relevant for researchers seeking to analyse the "
 "information contained in SKBL (Biographical Dictionary of Swedish Women)."
@@ -302,46 +307,194 @@ msgstr ""
 "Det rekommenderas i första hand för forskare som vill analysera de "
 "uppgifter som ligger till grund för SKBL."
 
-#: app/templates/layout.html:86
+#: skbl/templates/layout.html:88
 msgid "To Karp"
 msgstr "Till Karp"
 
-#: app/templates/layout.html:88 app/templates/list.html:98
+#: skbl/templates/layout.html:91 skbl/templates/list.html:98
 msgid "External link"
 msgstr "Extern länk"
 
-#: app/templates/layout.html:115
+#: skbl/templates/layout.html:120
 msgid "På "
 msgstr "In "
 
-#: app/templates/layout.html:145
+#: skbl/templates/layout.html:150
 msgid "Places"
 msgstr "Orter"
 
-#: app/templates/layout.html:160
+#: skbl/templates/layout.html:165
 msgid "Share page"
 msgstr "Dela sidan"
 
-#: app/templates/list.html:8
+#: skbl/templates/list.html:8
 msgid "of"
 msgstr "av"
 
-#: app/templates/list.html:23
+#: skbl/templates/list.html:23
 msgid "Articles in SKBL"
 msgstr "Artiklar i SKBL"
 
-#: app/templates/list.html:30
+#: skbl/templates/list.html:30
 msgid "No results found for"
 msgstr "Inga träffar för"
 
-#: app/templates/list.html:97
+#: skbl/templates/list.html:97
 msgid "Not all hits are shown."
 msgstr "Alla träffar visas inte."
 
-#: app/templates/list.html:97
+#: skbl/templates/list.html:97
 msgid "To see more hits, use Språkbanken's tool"
 msgstr "Vill du se fler, använd Språkbankens verktyg"
 
-#: app/templates/more_women.html:8
+#: skbl/templates/more_women.html:8
 msgid "is not part of this resource yet."
 msgstr "saknas än så länge i den här resursen."
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:313
+msgid "usage: "
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:821
+msgid ".__call__() not defined"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:1105
+#, python-format
+msgid "unknown parser %r (choices: %s)"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:1146
+#, python-format
+msgid "argument \"-\" with mode %r"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:1349
+#, python-format
+msgid "cannot merge actions - two groups are named %r"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:1387
+msgid "'required' is an invalid argument for positionals"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:1407
+#, python-format
+msgid "invalid option string %r: must start with a character %r"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:1428
+#, python-format
+msgid "dest= is required for options like %r"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:1445
+#, python-format
+msgid "invalid conflict_resolution value: %r"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:1463
+#, python-format
+msgid "conflicting option string(s): %s"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:1526
+msgid "mutually exclusive arguments must be optional"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:1596
+msgid "positional arguments"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:1597
+msgid "optional arguments"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:1615
+msgid "show this help message and exit"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:1621
+msgid "show program's version number and exit"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:1653
+msgid "cannot have multiple subparser arguments"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:1705
+#, python-format
+msgid "unrecognized arguments: %s"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:1802
+#, python-format
+msgid "not allowed with argument %s"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:1848
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:1862
+#, python-format
+msgid "ignored explicit argument %r"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:1952
+msgid "too few arguments"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:1959
+#, python-format
+msgid "argument %s is required"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:1973
+#, python-format
+msgid "one of the arguments %s is required"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:2019
+msgid "expected one argument"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:2020
+msgid "expected at most one argument"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:2021
+msgid "expected at least one argument"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:2023
+#, python-format
+msgid "expected %s argument(s)"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:2080
+#, python-format
+msgid "ambiguous option: %s could match %s"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:2142
+#, python-format
+msgid "unexpected option string: %s"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:2243
+#, python-format
+msgid "%r is not callable"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:2259
+#, python-format
+msgid "invalid %s value: %r"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:2269
+#, python-format
+msgid "invalid choice: %r (choose from %s)"
+msgstr ""
+
+#: venv/lib/python3.7/site-packages/gunicorn/argparse_compat.py:2362
+#, python-format
+msgid "%s: error: %s\n"
+msgstr ""
