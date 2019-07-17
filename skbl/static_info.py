@@ -115,6 +115,17 @@ Selecting a placename reveals which women were born, worked, or died there.
 
         """
     },
+
+    "chronology": {
+        "sv": u"""
+Här behövs en förklaringstext för kronologin likt den på <a target='_blank' class='visible_link' href='https://litteraturbanken.se/%C3%B6vers%C3%A4ttarlexikon/listor/kronologi#1600-1900'>SÖL</a>.
+Vilka kvinnor visas? Hur ändrar man tidsspannet?
+
+        """,
+        "en": u"""
+Some help text for the chronology...
+        """
+    },
 }
 
 

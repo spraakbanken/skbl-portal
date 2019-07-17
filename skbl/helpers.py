@@ -338,7 +338,7 @@ def make_namelist(hits, exclude=set()):
 
 
 def make_datelist(hits):
-    """Extract information relevant for chronic list (same as make_namelist but without letter splitting)."""
+    """Extract information relevant for chronology list (same as make_namelist but without letter splitting)."""
     result = []
     for hit in hits["hits"]:
         is_link = hit["_index"].startswith("link")

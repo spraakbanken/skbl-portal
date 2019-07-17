@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-07-15 12:18+0000\n"
+"POT-Creation-Date: 2019-07-17 09:31+0000\n"
 "PO-Revision-Date: 2017-02-20 14:49+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sv\n"
@@ -18,8 +18,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
 
-#: skbl/computeviews.py:101 skbl/views.py:29 skbl/views.py:195
-#: skbl/views.py:358 skbl/views.py:486
+#: skbl/computeviews.py:101 skbl/views.py:29 skbl/views.py:222
+#: skbl/views.py:385 skbl/views.py:513
 msgid "Contents could not be found!"
 msgstr "Innehållet kunde inte hittas!"
 
@@ -69,28 +69,28 @@ msgstr "Tack för din återkoppling"
 msgid "We will get back to you as soon as we can."
 msgstr "Vi återkommer så fort vi kan."
 
-#: skbl/helpers.py:439
+#: skbl/helpers.py:460
 msgid "Residence"
 msgstr "Bostadsort"
 
-#: skbl/helpers.py:440
+#: skbl/helpers.py:461
 msgid "Place of activity"
 msgstr "Verksamhetsort"
 
-#: skbl/helpers.py:441
+#: skbl/helpers.py:462
 msgid "Place of education"
 msgstr "Utbildningsort"
 
-#: skbl/helpers.py:442 skbl/templates/article.html:303
+#: skbl/helpers.py:463 skbl/templates/article.html:303
 msgid "Contacts"
 msgstr "Kontakter"
 
-#: skbl/helpers.py:443 skbl/templates/article.html:407
+#: skbl/helpers.py:464 skbl/templates/article.html:407
 #: skbl/templates/article.html:420 skbl/templates/article.html:436
 msgid "Birthplace"
 msgstr "Födelseort"
 
-#: skbl/helpers.py:444 skbl/templates/article.html:413
+#: skbl/helpers.py:465 skbl/templates/article.html:413
 #: skbl/templates/article.html:426
 msgid "Place of death"
 msgstr "Dödsort"
@@ -107,11 +107,11 @@ msgstr "Fler kvinnor"
 msgid "Older biographies"
 msgstr "Äldre biografiska verk"
 
-#: skbl/templates/layout.html:106 skbl/views.py:114 skbl/views.py:115
-msgid "Chronic"
+#: skbl/templates/layout.html:106 skbl/views.py:138 skbl/views.py:139
+msgid "Chronology"
 msgstr "Kronologi"
 
-#: skbl/views.py:158
+#: skbl/views.py:185
 #, python-format
 msgid "Hits for \"%s\""
 msgstr "Träffar för \"%s\""
@@ -498,3 +498,4 @@ msgstr ""
 #, python-format
 msgid "%s: error: %s\n"
 msgstr ""
+

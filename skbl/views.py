@@ -104,19 +104,23 @@ def submit_contact_form():
     return helpers.set_cache(computeviews.compute_contact_form())
 
 
-@bp.route("/en/chronic/<years>", endpoint="chronic_en")
-@bp.route("/sv/kronologi/<years>", endpoint="chronic_sv")
-def chronic(years="1500-1900"):
-    """Generate view for chronic."""
+@bp.route("/en/chronology/<years>", endpoint="chronology_en")
+@bp.route("/sv/kronologi/<years>", endpoint="chronology_sv")
+def chronology(years=""):
+    """Generate view for chronology."""
     startyear = years.split("-")[0]
     endyear = years.split("-")[1]
+    # Todo: catch error if year has wrong format?
+
+    infotext = helpers.get_infotext("chronology", request.url_rule.rule)
 
     lang = g.language
     if lang == 'en':
-        g.switch_language = {'url': url_for("views.chronic_sv", years=years), 'label': "Svenska"}
+        g.switch_language = {'url': url_for("views.chronology_sv", years=years), 'label': "Svenska"}
     else:
-        g.switch_language = {'url': url_for("views.chronic_en", years=years), 'label': "English"}
+        g.switch_language = {'url': url_for("views.chronology_en", years=years), 'label': "English"}
 
+    # # Get a list of all birth and death date comment fields
     # years = helpers.karp_query('statlist',
     #                            {'q': "extended||and|fornamn|exists",
     #                             'buckets': 'fodd_comment.bucket,dod_comment.bucket'
@@ -131,14 +135,17 @@ def chronic(years="1500-1900"):
                                    },
                                    mode=current_app.config['SKBL_LINKS'])
 
-    page = render_template("chronic.html",
-                           title=gettext("Chronic"),
-                           headline=gettext("Chronic"),
+    # Todo: Calculate min and max from data
+    page = render_template("chronology.html",
+                           title=gettext("Chronology"),
+                           headline=gettext("Chronology"),
+                           infotext=infotext,
                            min="1100",
                            max="2017",
                            default_low=startyear,
                            default_high=endyear,
-                           hits=selection["hits"]
+                           hits=selection["hits"],
+                           lang=lang
                            )
     return helpers.set_cache(page)
 
