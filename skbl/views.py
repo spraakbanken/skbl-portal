@@ -104,6 +104,13 @@ def submit_contact_form():
     return helpers.set_cache(computeviews.compute_contact_form())
 
 
+@bp.route("/en/chronology", endpoint="chronology_index_en")
+@bp.route("/sv/kronologi", endpoint="chronology_index_sv")
+def chronology_index():
+    """Generate view for chronology and redirect to default time range."""
+    return redirect(url_for('views.chronology_' + g.language, years="1400-1800"))
+
+
 @bp.route("/en/chronology/<years>", endpoint="chronology_en")
 @bp.route("/sv/kronologi/<years>", endpoint="chronology_sv")
 def chronology(years=""):
@@ -376,11 +383,11 @@ def article_index(search=None):
         data, id = find_link(search)
         if id:
             # Only one hit is found, redirect to that page
-            page = redirect(url_for('article_' + g.language, id=id))
+            page = redirect(url_for('views.article_' + g.language, id=id))
             return helpers.set_cache(page)
         elif data["hits"]["total"] > 1:
             # More than one hit is found, redirect to a listing
-            page = redirect(url_for('search_' + g.language, q=search))
+            page = redirect(url_for('views.search_' + g.language, q=search))
             return helpers.set_cache(page)
         else:
             # No hits are found redirect to a 'not found' page
