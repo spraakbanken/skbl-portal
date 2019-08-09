@@ -97,7 +97,12 @@
         {{gettext("Not all hits are shown.")}} {{gettext("To see more hits, use Språkbanken's tool")}}
                 <a class="visible_link" href="{{karp_url}}" target="_blank">Karp</a> ({{ gettext('External link') }})
         </div>
-     {% endif %}
+    {% endif %}
+
+
+    <div id="mapid" style="height: 280px;"></div>
+
+
 </div>
 <div class="col-md-4">
     {{ advanced_search_text | safe}}
@@ -105,4 +110,41 @@
     <img src="{{ picture }}" alt="{{ headline }}" width="350px" />
     {% endif %}
 </div>
+{% endblock %}
+
+{% block foot %}
+    {{ super() }}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <script>
+        jQuery(document).ready(function() {
+            var indata = {{hits.hits|tojson}};
+
+            var mymap = L.map('mapid').setView([0, 0], 6);
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox.streets'
+            }).addTo(mymap);
+
+            console.log('indata', indata);
+
+            var markers = L.markerClusterGroup({singleMarkerMode: true});
+
+            for (var hit of indata) {
+                console.log('hit', hit);
+                if (hit._source.lifespan && hit._source.lifespan.from && hit._source.lifespan.from.place && hit._source.lifespan.from.place.pin) {
+                    var pin = hit._source.lifespan.from.place.pin;
+                    // L.marker([pin.lat, pin.lon]).addTo(mymap);
+                    markers.addLayer(L.marker([pin.lat, pin.lon])).addTo(mymap);
+                    mymap.addLayer(markers)
+                }
+            }
+
+            // L.marker([{{ request.args.get('lat') }}, {{ request.args.get('lon') }}]).addTo(mymap)
+        });
+    </script>
 {% endblock %}

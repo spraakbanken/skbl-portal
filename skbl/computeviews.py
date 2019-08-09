@@ -176,7 +176,7 @@ def compute_article(lang='', cache=True, url=''):
     if art is not None:
         return art
 
-    show = ','.join(['name', 'url', 'undertitel', 'lifespan', 'undertitel_eng'])
+    show = ','.join(['name', 'url', 'undertitel', 'lifespan', 'undertitel_eng', 'platspinlat.bucket', 'platspinlon.bucket'])
     infotext = helpers.get_infotext("article", request.url_rule.rule)
     if lang == 'sv':
         data = helpers.karp_query('minientry', {'q': "extended||and|namn|exists", 'show': show,

@@ -171,7 +171,7 @@ def search():
 
     advanced_search_text = ''
     if search:
-        show = ','.join(['name', 'url', 'undertitel', 'undertitel_eng', 'lifespan'])
+        show = ','.join(['name', 'url', 'undertitel', 'undertitel_eng', 'lifespan', 'platspinlat.bucket', 'platspinlon.bucket'])
         karp_q = {'highlight': True, 'size': current_app.config['SEARCH_RESULT_SIZE'],
                   'show': show}
         if '*' in search:
