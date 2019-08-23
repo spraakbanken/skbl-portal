@@ -326,6 +326,7 @@ def article_index(search=None):
     # Search is only used by links in article text
     search = search or request.args.get('search')
     if search is not None:
+        search = search.encode("UTF-8")
         data, id = find_link(search)
         if id:
             # Only one hit is found, redirect to that page
@@ -357,11 +358,11 @@ def article(id=None):
     page = check_cache(pagename, lang=lang)
     if page is not None:
         return page
-    data = helpers.karp_query('query', {'q': "extended||and|url|equals|%s" % (id)})
+    data = karp_query('query', {'q': "extended||and|url|equals|%s" % (id)})
     # if data['hits']['total'] == 0:
     if len(data['hits']['hits']) == 0:
-        data = helpers.karp_query('query', {'q': "extended||and|id.search|equals|%s" % (id)})
-    helpers.set_language_switch_link("article_index", id)
+        data = karp_query('query', {'q': "extended||and|id.search|equals|%s" % (id)})
+    set_language_switch_link("article_index", id)
     page = show_article(data, lang)
     return set_cache(page, name=pagename, lang=lang, no_hits=1)
 
