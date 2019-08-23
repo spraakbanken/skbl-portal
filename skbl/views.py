@@ -379,7 +379,6 @@ def article_index(search=None):
     # Search is only used by links in article text
     search = search or request.args.get('search')
     if search is not None:
-        search = search
         data, id = find_link(search)
         if id:
             # Only one hit is found, redirect to that page
@@ -411,7 +410,8 @@ def article(id=None):
     if page is not None:
         return page
     data = helpers.karp_query('query', {'q': "extended||and|url|equals|%s" % (id)})
-    if data['hits']['total'] == 0:
+    # if data['hits']['total'] == 0:
+    if len(data['hits']['hits']) == 0:
         data = helpers.karp_query('query', {'q': "extended||and|id.search|equals|%s" % (id)})
     helpers.set_language_switch_link("article_index", id)
     page = show_article(data, lang)
@@ -454,7 +454,8 @@ def find_link(searchstring):
             efternamn = prefix + parts[-1]
             data = helpers.karp_query('query', {'q': "extended||and|fornamn.search|contains|%s||and|efternamn.search|contains|%s" % (fornamn, efternamn)})
     # The expected case: only one hit is found
-    if data['hits']['total'] == 1:
+    # if data['hits']['total'] == 1:
+    if len(data['hits']['hits']) == 1:
         url = data['hits']['hits'][0]['_source'].get('url')
         es_id = data['hits']['hits'][0]['_id']
         return data, (url or es_id)
