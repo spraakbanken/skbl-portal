@@ -384,7 +384,8 @@ def article_index(search=None):
             # Only one hit is found, redirect to that page
             page = redirect(url_for('views.article_' + g.language, id=id))
             return helpers.set_cache(page)
-        elif data["hits"]["total"] > 1:
+        # elif data["hits"]["total"] > 1:
+        elif len(data["hits"]["hits"]) > 1:
             # More than one hit is found, redirect to a listing
             page = redirect(url_for('views.search_' + g.language, q=search))
             return helpers.set_cache(page)
