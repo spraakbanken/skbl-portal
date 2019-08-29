@@ -213,7 +213,7 @@ def compute_article(lang='', cache=True, url='', map=False):
 
 def compute_map(lang='', cache=True, url=''):
     """Compute article view."""
-    helpers.set_language_switch_link("article_index", lang=lang)
+    helpers.set_language_switch_link("map", lang=lang)
     art, lang = getcache('map', lang, cache)
     if art is not None:
         return art
