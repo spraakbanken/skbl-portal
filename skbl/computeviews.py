@@ -169,7 +169,7 @@ def compute_activity(lang='', cache=True, url=''):
     return art
 
 
-def compute_article(lang='', cache=True, url=''):
+def compute_article(lang='', cache=True, url='', map=False):
     """Compute article view."""
     helpers.set_language_switch_link("article_index", lang=lang)
     art, lang = getcache('article', lang, cache)
@@ -187,17 +187,58 @@ def compute_article(lang='', cache=True, url=''):
                                   'sort': 'sorteringsnamn.eng_sort,sorteringsnamn.eng_init,sorteringsnamn.sort,tilltalsnamn.sort'},
                                   mode=current_app.config['SKBL_LINKS'])
 
-    art = render_template('list.html',
-                          hits=data["hits"],
-                          headline=gettext(u'Women A-Z'),
-                          alphabetic=True,
-                          split_letters=True,
-                          infotext=infotext,
-                          title='Articles',
-                          page_url=url)
+    if map:
+        art = render_template('map.html',
+                              hits=data["hits"],
+                              headline=gettext(u'Map'),
+                              infotext=infotext,
+                              title='Map',
+                              page_url=url)
+    else:
+        art = render_template('list.html',
+                              hits=data["hits"],
+                              headline=gettext(u'Women A-Z'),
+                              alphabetic=True,
+                              split_letters=True,
+                              infotext=infotext,
+                              title='Articles',
+                              page_url=url)
     try:
         with g.mc_pool.reserve() as client:
             client.set(helpers.cache_name('article', lang), art, time=current_app.config['CACHE_TIME'])
+    except Exception:
+        # TODO what to do?
+        pass
+    return art
+
+def compute_map(lang='', cache=True, url=''):
+    """Compute article view."""
+    helpers.set_language_switch_link("article_index", lang=lang)
+    art, lang = getcache('map', lang, cache)
+    if art is not None:
+        return art
+
+    show = ','.join(['name', 'url', 'undertitel', 'lifespan', 'undertitel_eng', 'platspinlat.bucket', 'platspinlon.bucket'])
+    infotext = helpers.get_infotext("map", request.url_rule.rule)
+    if lang == 'sv':
+        data = helpers.karp_query('minientry', {'q': "extended||and|namn|exists", 'show': show,
+                                  'sort': 'sorteringsnamn.sort,sorteringsnamn.init,tilltalsnamn.sort'},
+                                  mode=current_app.config['SKBL_LINKS'])
+    else:
+        data = helpers.karp_query('minientry', {'q': "extended||and|namn|exists", 'show': show,
+                                  'sort': 'sorteringsnamn.eng_sort,sorteringsnamn.eng_init,sorteringsnamn.sort,tilltalsnamn.sort'},
+                                  mode=current_app.config['SKBL_LINKS'])
+
+    if map:
+        art = render_template('map.html',
+                              hits=data["hits"],
+                              headline=gettext(u'Map'),
+                              infotext=infotext,
+                              title='Map',
+                              page_url=url)
+    try:
+        with g.mc_pool.reserve() as client:
+            client.set(helpers.cache_name('map', lang), art, time=current_app.config['CACHE_TIME'])
     except Exception:
         # TODO what to do?
         pass
