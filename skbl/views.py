@@ -104,6 +104,14 @@ def submit_contact_form():
     return helpers.set_cache(computeviews.compute_contact_form())
 
 
+@bp.route("/en/map", endpoint="map_en")
+@bp.route("/sv/karta", endpoint="map_sv")
+def map():
+    """Generate view for the map."""
+    art = computeviews.compute_map()
+    return helpers.set_cache(art)
+
+
 @bp.route("/en/chronology", endpoint="chronology_index_en")
 @bp.route("/sv/kronologi", endpoint="chronology_index_sv")
 def chronology_index():

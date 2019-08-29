@@ -126,6 +126,15 @@ Vilka kvinnor visas? Hur ändrar man tidsspannet?
 Some help text for the chronology...
         """
     },
+
+    "map": {
+        "sv": u"""
+Info behövs här om kartan.
+        """,
+        "en": u"""
+Needs some info for the map.
+        """
+    },
 }
 
 
