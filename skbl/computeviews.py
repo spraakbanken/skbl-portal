@@ -2,22 +2,21 @@
 """Define helper functions used to compute the different views."""
 
 from collections import defaultdict
-import md5
+from hashlib import md5
 import os.path
-import urllib
-from urllib2 import urlopen
+import urllib.parse
+from urllib.request import urlopen
 
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.header import Header
-from flask import render_template, request
+from flask import g, render_template, request, current_app
 from flask_babel import gettext
 import json
 import smtplib
 
-from app import app, karp_query, set_language_switch_link, mc_pool, cache_name, check_cache
-import helpers
-import static_info
+from . import helpers
+from . import static_info
 
 
 def getcache(page, lang, usecache):
@@ -31,11 +30,11 @@ def getcache(page, lang, usecache):
     # Compute the language
     if not lang:
         lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
-    if not usecache or app.config['TEST']:
+    if not usecache or current_app.config['TEST']:
         return None, lang
-    pagename = cache_name(page, lang=lang)
+    pagename = helpers.cache_name(page, lang=lang)
     try:
-        with mc_pool.reserve() as client:
+        with g.mc_pool.reserve() as client:
             # Look for the page, return if found
             art = client.get(pagename)
             if art is not None:
@@ -54,45 +53,45 @@ def getcache(page, lang, usecache):
 def copytobackup(fields, lang):
     """Make backups of  all requested fields to their corresponding backup field."""
     for field in fields:
-        with mc_pool.reserve() as client:
+        with g.mc_pool.reserve() as client:
             art = client.get(field + lang)
-            client.set(cache_name(field, lang) + '_backup', art, time=app.config['CACHE_TIME'])
+            client.set(helpers.cache_name(field, lang) + '_backup', art, time=current_app.config['CACHE_TIME'])
 
 
 def searchresult(result, name='', searchfield='', imagefolder='', query='',
                  searchtype='equals', title='', authorinfo=False, lang='',
                  show_lang_switch=True, cache=True):
     """Compute the search result."""
-    set_language_switch_link("%s_index" % name, result)
+    helpers.set_language_switch_link("%s_index" % name, result)
     try:
-        result = result.encode("UTF-8")
-        pagename = name + '_' + urllib.quote(result)
-        art = check_cache(pagename, lang)
+        result = result
+        pagename = name + '_' + urllib.parse.quote(result)
+        art = helpers.check_cache(pagename, lang)
         if art is not None:
             return art
         show = ','.join(['name', 'url', 'undertitel', 'lifespan', 'undertitel_eng'])
         if query:
-            hits = karp_query('minientry', {'q': query, 'show': show})
+            hits = helpers.karp_query('minientry', {'q': query, 'show': show})
         else:
-            hits = karp_query('minientry',
-                              {'q': "extended||and|%s.search|%s|%s" % (searchfield, searchtype, result),
-                               'show': show})
-        title = title or result.decode("UTF-8")
+            hits = helpers.karp_query('minientry',
+                                      {'q': "extended||and|%s.search|%s|%s" % (searchfield, searchtype, result),
+                                       'show': show})
+        title = title or result
 
         no_hits = hits['hits']['total']
         if no_hits > 0:
             picture = None
-            if os.path.exists(app.config.root_path + '/static/images/%s/%s.jpg' % (imagefolder, result)):
+            if os.path.exists(current_app.config.root_path + '/static/images/%s/%s.jpg' % (imagefolder, result)):
                 picture = '/static/images/%s/%s.jpg' % (imagefolder, result)
             page = render_template('list.html', picture=picture,
                                    alphabetic=True, title=title,
                                    headline=title, hits=hits["hits"],
                                    authorinfo=authorinfo,
                                    show_lang_switch=show_lang_switch)
-            if no_hits >= app.config['CACHE_HIT_LIMIT']:
+            if no_hits >= current_app.config['CACHE_HIT_LIMIT']:
                 try:
-                    with mc_pool.reserve() as client:
-                        client.set(cache_name(pagename, lang), page, time=app.config['CACHE_TIME'])
+                    with g.mc_pool.reserve() as client:
+                        client.set(helpers.cache_name(pagename, lang), page, time=current_app.config['CACHE_TIME'])
                 except Exception:
                     # TODO what to do?
                     pass
@@ -103,24 +102,24 @@ def searchresult(result, name='', searchfield='', imagefolder='', query='',
 
     except Exception as e:
         return render_template('page.html',
-                               content="%s\n%s: extended||and|%s.search|%s|%s" % (e, app.config['KARP_BACKEND'], searchfield, searchtype, result))
+                               content="%s\n%s: extended||and|%s.search|%s|%s" % (e, current_app.config['KARP_BACKEND'], searchfield, searchtype, result))
 
 
 def compute_organisation(lang="", infotext="", cache=True, url=''):
     """Compute organisation view."""
-    set_language_switch_link("organisation_index", lang=lang)
+    helpers.set_language_switch_link("organisation_index", lang=lang)
     art, lang = getcache('organisation', lang, cache)
     if art is not None:
         return art
 
     infotext = helpers.get_infotext("organisation", request.url_rule.rule)
     if lang == "en":
-        data = karp_query('minientry', {'q': 'extended||and|anything|regexp|.*',
-                                        'show': 'organisationsnamn,organisationstyp_eng'})
+        data = helpers.karp_query('minientry', {'q': 'extended||and|anything|regexp|.*',
+                                  'show': 'organisationsnamn,organisationstyp_eng'})
         typefield = "type_eng"
     else:
-        data = karp_query('minientry', {'q': 'extended||and|anything|regexp|.*',
-                                        'show': 'organisationsnamn,organisationstyp'})
+        data = helpers.karp_query('minientry', {'q': 'extended||and|anything|regexp|.*',
+                                  'show': 'organisationsnamn,organisationstyp'})
         typefield = "type"
     nested_obj = {}
     for hit in data['hits']['hits']:
@@ -133,8 +132,8 @@ def compute_organisation(lang="", infotext="", cache=True, url=''):
                           results=nested_obj, title=gettext("Organisations"),
                           infotext=infotext, name='organisation', page_url=url)
     try:
-        with mc_pool.reserve() as client:
-            client.set(cache_name('organisation', lang), art, time=app.config['CACHE_TIME'])
+        with g.mc_pool.reserve() as client:
+            client.set(helpers.cache_name('organisation', lang), art, time=current_app.config['CACHE_TIME'])
     except Exception:
         # TODO what to do?
         pass
@@ -143,7 +142,7 @@ def compute_organisation(lang="", infotext="", cache=True, url=''):
 
 def compute_activity(lang='', cache=True, url=''):
     """Compute activity view."""
-    set_language_switch_link("activity_index", lang=lang)
+    helpers.set_language_switch_link("activity_index", lang=lang)
     art, lang = getcache('activity', lang, cache)
 
     if art is not None:
@@ -162,43 +161,84 @@ def compute_activity(lang='', cache=True, url=''):
                      insert_entries=reference_list,
                      page_url=url)
     try:
-        with mc_pool.reserve() as client:
-            client.set(cache_name('activity', lang), art, time=app.config['CACHE_TIME'])
+        with g.mc_pool.reserve() as client:
+            client.set(helpers.cache_name('activity', lang), art, time=current_app.config['CACHE_TIME'])
     except Exception:
         # TODO what to do?
         pass
     return art
 
 
-def compute_article(lang='', cache=True, url=''):
+def compute_article(lang='', cache=True, url='', map=False):
     """Compute article view."""
-    set_language_switch_link("article_index", lang=lang)
+    helpers.set_language_switch_link("article_index", lang=lang)
     art, lang = getcache('article', lang, cache)
     if art is not None:
         return art
 
-    show = ','.join(['name', 'url', 'undertitel', 'lifespan', 'undertitel_eng'])
+    show = ','.join(['name', 'url', 'undertitel', 'lifespan', 'undertitel_eng', 'platspinlat.bucket', 'platspinlon.bucket'])
     infotext = helpers.get_infotext("article", request.url_rule.rule)
     if lang == 'sv':
-        data = karp_query('minientry', {'q': "extended||and|namn|exists", 'show': show,
-                                        'sort': 'sorteringsnamn.sort,sorteringsnamn.init,tilltalsnamn.sort'},
-                          mode=app.config['SKBL_LINKS'])
+        data = helpers.karp_query('minientry', {'q': "extended||and|namn|exists", 'show': show,
+                                  'sort': 'sorteringsnamn.sort,sorteringsnamn.init,tilltalsnamn.sort'},
+                                  mode=current_app.config['SKBL_LINKS'])
     else:
-        data = karp_query('minientry', {'q': "extended||and|namn|exists", 'show': show,
-                                        'sort': 'sorteringsnamn.eng_sort,sorteringsnamn.eng_init,sorteringsnamn.sort,tilltalsnamn.sort'},
-                          mode=app.config['SKBL_LINKS'])
+        data = helpers.karp_query('minientry', {'q': "extended||and|namn|exists", 'show': show,
+                                  'sort': 'sorteringsnamn.eng_sort,sorteringsnamn.eng_init,sorteringsnamn.sort,tilltalsnamn.sort'},
+                                  mode=current_app.config['SKBL_LINKS'])
 
-    art = render_template('list.html',
-                          hits=data["hits"],
-                          headline=gettext(u'Women A-Z'),
-                          alphabetic=True,
-                          split_letters=True,
-                          infotext=infotext,
-                          title='Articles',
-                          page_url=url)
+    if map:
+        art = render_template('map.html',
+                              hits=data["hits"],
+                              headline=gettext(u'Map'),
+                              infotext=infotext,
+                              title='Map',
+                              page_url=url)
+    else:
+        art = render_template('list.html',
+                              hits=data["hits"],
+                              headline=gettext(u'Women A-Z'),
+                              alphabetic=True,
+                              split_letters=True,
+                              infotext=infotext,
+                              title='Articles',
+                              page_url=url)
     try:
-        with mc_pool.reserve() as client:
-            client.set(cache_name('article', lang), art, time=app.config['CACHE_TIME'])
+        with g.mc_pool.reserve() as client:
+            client.set(helpers.cache_name('article', lang), art, time=current_app.config['CACHE_TIME'])
+    except Exception:
+        # TODO what to do?
+        pass
+    return art
+
+def compute_map(lang='', cache=True, url=''):
+    """Compute article view."""
+    helpers.set_language_switch_link("map", lang=lang)
+    art, lang = getcache('map', lang, cache)
+    if art is not None:
+        return art
+
+    show = ','.join(['name', 'url', 'undertitel', 'lifespan', 'undertitel_eng', 'platspinlat.bucket', 'platspinlon.bucket'])
+    infotext = helpers.get_infotext("map", request.url_rule.rule)
+    if lang == 'sv':
+        data = helpers.karp_query('minientry', {'q': "extended||and|namn|exists", 'show': show,
+                                  'sort': 'sorteringsnamn.sort,sorteringsnamn.init,tilltalsnamn.sort'},
+                                  mode=current_app.config['SKBL_LINKS'])
+    else:
+        data = helpers.karp_query('minientry', {'q': "extended||and|namn|exists", 'show': show,
+                                  'sort': 'sorteringsnamn.eng_sort,sorteringsnamn.eng_init,sorteringsnamn.sort,tilltalsnamn.sort'},
+                                  mode=current_app.config['SKBL_LINKS'])
+
+    if map:
+        art = render_template('map.html',
+                              hits=data["hits"],
+                              headline=gettext(u'Map'),
+                              infotext=infotext,
+                              title='Map',
+                              page_url=url)
+    try:
+        with g.mc_pool.reserve() as client:
+            client.set(helpers.cache_name('map', lang), art, time=current_app.config['CACHE_TIME'])
     except Exception:
         # TODO what to do?
         pass
@@ -207,7 +247,7 @@ def compute_article(lang='', cache=True, url=''):
 
 def compute_place(lang="", cache=True, url=''):
     """Compute place view."""
-    set_language_switch_link("place_index", lang=lang)
+    helpers.set_language_switch_link("place_index", lang=lang)
     art, lang = getcache('place', lang, cache)
     if art is not None:
         return art
@@ -234,7 +274,7 @@ def compute_place(lang="", cache=True, url=''):
             return None
 
     # To use the coordinates, use 'getplaces' instead of 'getplacenames'
-    data = karp_query('getplacenames/' + app.config['KARP_MODE'], {})
+    data = helpers.karp_query('getplacenames/' + current_app.config['KARP_MODE'], {})
     stat_table = [parse(kw) for kw in data['places'] if has_name(kw)]
     art = render_template('places.html',
                           places=stat_table,
@@ -243,8 +283,8 @@ def compute_place(lang="", cache=True, url=''):
                           description=helpers.get_shorttext(infotext),
                           page_url=url)
     try:
-        with mc_pool.reserve() as client:
-            client.set(cache_name('place', lang), art, time=app.config['CACHE_TIME'])
+        with g.mc_pool.reserve() as client:
+            client.set(helpers.cache_name('place', lang), art, time=current_app.config['CACHE_TIME'])
     except Exception:
         # TODO what to do?
         pass
@@ -253,12 +293,12 @@ def compute_place(lang="", cache=True, url=''):
 
 def compute_artikelforfattare(infotext='', description='', lang="", cache=True, url=''):
     """Compute authors view."""
-    set_language_switch_link("articleauthor_index", lang=lang)
+    helpers.set_language_switch_link("articleauthor_index", lang=lang)
     art, lang = getcache('author', lang, cache)
     if art is not None:
         return art
     q_data = {'buckets': 'artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn.bucket'}
-    data = karp_query('statlist', q_data)
+    data = helpers.karp_query('statlist', q_data)
     # strip kw0 to get correct sorting
     stat_table = [[kw[0].strip()] + kw[1:] for kw in data['stat_table'] if kw[0] != ""]
     stat_table = [[kw[1] + ',', kw[0], kw[2]] for kw in stat_table]
@@ -285,8 +325,8 @@ def compute_artikelforfattare(infotext='', description='', lang="", cache=True, 
                           description=description, sortnames=True,
                           page_url=url)
     try:
-        with mc_pool.reserve() as client:
-            client.set(cache_name('author', lang), art, time=app.config['CACHE_TIME'])
+        with g.mc_pool.reserve() as client:
+            client.set(helpers.cache_name('author', lang), art, time=current_app.config['CACHE_TIME'])
     except Exception:
         # TODO what to do?
         pass
@@ -300,7 +340,7 @@ def bucketcall(queryfield='', name='', title='', sortby='', lastnamefirst=False,
     q_data = {'buckets': '%s.bucket' % queryfield}
     if query:
         q_data['q'] = query
-    data = karp_query('statlist', q_data)
+    data = helpers.karp_query('statlist', q_data)
     # Strip kw0 to get correct sorting
     stat_table = [[kw[0].strip()] + kw[1:] for kw in data['stat_table'] if kw[0] != ""]
 
@@ -335,14 +375,14 @@ def compute_emptycache(fields):
     user, pw = auth.username, auth.password
     postdata["username"] = user
     postdata["password"] = pw
-    postdata["checksum"] = md5.new(user + pw + app.config['SECRET_KEY']).hexdigest()
-    server = app.config['WSAUTH_URL']
-    contents = urlopen(server, urllib.urlencode(postdata)).read()
+    postdata["checksum"] = md5(user + pw + current_app.config['SECRET_KEY'].encode()).hexdigest()
+    server = current_app.config['WSAUTH_URL']
+    contents = urlopen(server, urllib.parse.urlencode(postdata)).read()
     auth_response = json.loads(contents)
     lexitems = auth_response.get("permitted_resources", {})
-    rights = lexitems.get("lexica", {}).get(app.config['KARP_LEXICON'], {})
+    rights = lexitems.get("lexica", {}).get(current_app.config['KARP_LEXICON'], {})
     if rights.get('write'):
-        with mc_pool.reserve() as client:
+        with g.mc_pool.reserve() as client:
             for field in fields:
                 client.delete(field + 'sv')
                 client.delete(field + 'en')
@@ -352,7 +392,7 @@ def compute_emptycache(fields):
 
 def compute_contact_form():
     """Compute view for contact form ."""
-    set_language_switch_link("contact")
+    helpers.set_language_switch_link("contact")
 
     email = request.form['email'].strip()
     required_fields = ["name", "email"]
@@ -427,7 +467,7 @@ def make_email(form_data, mode="other"):
     msg.attach(part2)
 
     msg["Subject"] = subject
-    msg['To'] = app.config['EMAIL_RECIPIENT']
+    msg['To'] = current_app.config['EMAIL_RECIPIENT']
 
     # Work-around: things won't be as pretty if email adress contains non-ascii chars
     if helpers.is_ascii(form_data["email"]):
@@ -437,7 +477,7 @@ def make_email(form_data, mode="other"):
         email = ""
 
     server = smtplib.SMTP("localhost")
-    server.sendmail(email, [app.config['EMAIL_RECIPIENT']], msg.as_string())
+    server.sendmail(email, [current_app.config['EMAIL_RECIPIENT']], msg.as_string())
     server.quit()
 
     # Render user feedback

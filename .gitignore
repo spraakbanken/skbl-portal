@@ -1,8 +1,8 @@
-app/config.cfg
+skbl/config.cfg
 
 # Configs
 config.cfg
-app/auth.wsgi
+skbl/auth.wsgi
 
 # Memcached stuff
 libevent*
@@ -97,6 +97,7 @@ celerybeat-schedule
 .venv
 venv/
 ENV/
+venv*/
 
 # Spyder project settings
 .spyderproject

@@ -4,7 +4,7 @@
 <div class="col-md-8">
     <h1>{{ title }}</h1>
     {% for hit in hits.hits %}
-        <li><a href="{{ url_for('article_'+g.language, id=hit._id) }}">{{ hit._source.name.firstname }} {{ hit._source.name.lastname }}</a></li>
+        <li><a href="{{ url_for('views.article_'+g.language, id=hit._id) }}">{{ hit._source.name.firstname }} {{ hit._source.name.lastname }}</a></li>
     {% endfor %}
 </div>
 {% if picture is not none %}

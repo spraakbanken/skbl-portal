@@ -1,0 +1,98 @@
+{% extends "layout.html" %}
+{% block title %}skbl.se - {{ title }}{% endblock %}
+{% block content %}
+<div class="col-md-10">
+    <h1>{{ headline }} <span id="years"></span></h1>
+
+    <p>{{ infotext | safe }}</p>
+    <br/>
+    <div id="mapid" style="height: 280px;width: 100%"></div>
+</div>
+{% endblock %}
+{% block foot %}
+    {{ super() }}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    <script>
+        jQuery(document).ready(function() {
+            var indata = {{hits.hits|tojson}};
+
+            var skblmap = L.map('mapid').setView([57.70887, 11.97456], 6);
+            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+                maxZoom: 18,
+                id: 'mapbox.streets'
+            }).addTo(skblmap);
+
+
+            window.mapInstance = skblmap;
+
+            var markersBorn = L.markerClusterGroup({singleMarkerMode: true, maxClusterRadius: 50});
+            var markersDeath = L.markerClusterGroup({singleMarkerMode: true, maxClusterRadius: 50});
+            var markersEducation = L.markerClusterGroup({singleMarkerMode: true, maxClusterRadius: 50});
+            var markersOccupation = L.markerClusterGroup({singleMarkerMode: true, maxClusterRadius: 50});
+            var markersPlaces = L.markerClusterGroup({singleMarkerMode: true, maxClusterRadius: 50});
+
+            $("#show-map-button").click(function() {
+                $("#mapid").show();
+                window.mapInstance.invalidateSize();
+            });
+
+            for (var hit of indata) {
+                var s = hit._source;
+                var name = s.name.lastname + ", " + s.name.firstname.replace(/\//g, '');
+                if (s.lifespan && s.lifespan.from && s.lifespan.from.place && s.lifespan.from.place.pin) {
+                    var pin = s.lifespan.from.place.pin;
+                    markersBorn.addLayer(L.marker([pin.lat, pin.lon]).bindTooltip(name).on('click', function() { console.log(name); })).addTo(skblmap);
+                }
+                if (s.lifespan && s.lifespan.to && s.lifespan.to.place && s.lifespan.to.place.pin) {
+                    var pin = s.lifespan.to.place.pin;
+                    markersDeath.addLayer(L.marker([pin.lat, pin.lon]).bindTooltip(name).on('click', function() { console.log(name); }));
+                }
+                if (s.education) {
+                    if (! $.isArray(s.education)) s.education = [s.education];
+                    for (edu of s.education) {
+                        if (edu.place && edu.place.pin) {
+                            var pin = edu.place.pin;
+                            markersEducation.addLayer(L.marker([pin.lat, pin.lon]).bindTooltip(name).on('click', function() { console.log(name); }));
+                        }
+                    }
+                }
+                if (s.occupation) {
+                    if (! $.isArray(s.occupation)) s.occupation = [s.occupation];
+                    for (occ of s.occupation) {
+                        if (occ.place && occ.place.pin) {
+                            var pin = occ.place.pin;
+                            markersOccupation.addLayer(L.marker([pin.lat, pin.lon]).bindTooltip(name).on('click', function() { console.log(name); }));
+                        }
+                    }
+                }
+                if (s.places) {
+                    if (! $.isArray(s.places)) s.places = [s.places];
+                    for (p of s.places) {
+                        if (p.place && p.place.pin) {
+                            var pin = p.place.pin;
+                            markersPlaces.addLayer(L.marker([pin.lat, pin.lon]).bindTooltip(name).on('click', function() { console.log(name); }));
+                        }
+                    }
+                }
+            }
+            var makerLayers = {
+                "Födelseorter": markersBorn,
+                "Dödsorter": markersDeath,
+                "Utbildningsorter": markersEducation,
+                "Verksamhetsorter": markersOccupation,
+                "Bostadsorter": markersPlaces,
+            };
+            L.control.layers(makerLayers, null).addTo(skblmap);
+        });
+    </script>
+
+    <style>
+
+    </style>
+
+{% endblock %}
