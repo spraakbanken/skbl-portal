@@ -153,6 +153,41 @@ def get_life_range(source):
     return years[0], years[1]
 
 
+def get_life_range_force(source):
+    """
+    Return the birth and death year from _source (as a tuple).
+
+    Try to also parse non-dates like "ca. 1500-talet".
+    Return -1, 1000000 if not available.
+    """
+
+    default_born = -1
+    default_died = 1000000
+
+    def convert(event, retval):
+        if source['lifespan'].get(event):
+            date = source['lifespan'][event].get('date', '')
+            if date:
+                date = date.get('comment', '')
+                match = re.search(r".*(\d{4}).*", date)
+                if match:
+                    retval = int(match.group(1))
+        return retval
+
+    born = convert('from', default_born)
+    dead = convert('to', default_died)
+
+    # Sorting hack: if there is no birth year, set it to dead -100 (and vice versa)
+    # to make is appear in a more reasonable position in the chronology
+    if born == default_born and dead != default_died:
+        born = dead - 100
+    if dead == default_died and born != default_born:
+        dead = born + 100
+        sys.stderr.write("new born: %s\n" % born)
+
+    return born, dead
+
+
 def get_date(source):
     """Get birth and death date if available. Return empty strings otherwise."""
     dates = []
@@ -340,7 +375,7 @@ def make_namelist(hits, exclude=set()):
 def make_datelist(hits):
     """Extract information relevant for chronology list (same as make_namelist but without letter splitting)."""
     result = []
-    for hit in hits["hits"]:
+    for hit in hits:
         is_link = hit["_index"].startswith("skbl2links")
         if is_link:
             name = hit["_source"]["name"].get("sortname", "")

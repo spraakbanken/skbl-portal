@@ -127,33 +127,48 @@ def chronology(years=""):
     else:
         g.switch_language = {'url': url_for("views.chronology_en", years=years), 'label': "English"}
 
-    # # Get a list of all birth and death date comment fields
-    # years = helpers.karp_query('statlist',
-    #                            {'q': "extended||and|fornamn|exists",
-    #                             'buckets': 'fodd_comment.bucket,dod_comment.bucket'
-    #                             })
-
     show = ','.join(['name', 'url', 'undertitel', 'lifespan', 'undertitel_eng'])
+
+    # Get minientry for all women
     selection = helpers.karp_query('minientry',
-                                   {
-                                       'q': "extended||and|fodd.search|gte|%s||and|dod.search|lte|%s" % (startyear, endyear),
-                                       'show': show,
-                                       'sort': 'fodd_comment.bucket'
-                                   },
+                                   {'q': "extended||and|namn|exists",
+                                    'show': show,
+                                    'sort': 'fodd_comment.bucket'},
                                    mode=current_app.config['SKBL_LINKS'])
 
-    # Todo: Calculate min and max from data
+    # Add birth and death years, convert non-dates like "ca. 1500-talet", sort resulting list by year
+    born_years = set()
+    died_years = set()
+    for woman in selection["hits"]["hits"]:
+        dates = helpers.get_life_range_force(woman["_source"])
+        woman["_source"]["lifespan_simple"] = dates
+        born_years.add(dates[0])
+        died_years.add(dates[1])
+    results = sorted(selection["hits"]["hits"], key=lambda i: i["_source"]["lifespan_simple"])
+
+    # Get boundaries for chronology
+    first_born = sorted(list(born_years))[0]
+    last_died = sorted(list(died_years))[-1]
+
+    # Remove all women who have not been living in the selected interval
+    new_results = []
+    for result in results:
+        dates = result["_source"]["lifespan_simple"]
+        born_in_interval = int(startyear) <= dates[0] <= int(endyear)
+        died_in_interval = int(startyear) <= dates[1] <= int(endyear)
+        if born_in_interval or died_in_interval:
+            new_results.append(result)
+
     page = render_template("chronology.html",
                            title=gettext("Chronology"),
                            headline=gettext("Chronology"),
                            infotext=infotext,
-                           min="1100",
-                           max="2017",
+                           min=first_born,
+                           max=last_died,
                            default_low=startyear,
                            default_high=endyear,
-                           hits=selection["hits"],
-                           lang=lang
-                           )
+                           hits=new_results,
+                           lang=lang)
     return helpers.set_cache(page)
 
 
