@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-02-03 13:14+0000\n"
+"POT-Creation-Date: 2020-02-03 13:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,12 +23,12 @@ msgid "Contents could not be found!"
 msgstr ""
 
 #: skbl/computeviews.py:132 skbl/templates/article.html:345
-#: skbl/templates/layout.html:145
+#: skbl/templates/layout.html:146
 msgid "Organisations"
 msgstr ""
 
 #: skbl/computeviews.py:158 skbl/templates/article.html:261
-#: skbl/templates/contact.html:42 skbl/templates/layout.html:138
+#: skbl/templates/contact.html:42 skbl/templates/layout.html:139
 msgid "Activities"
 msgstr ""
 
@@ -204,7 +204,7 @@ msgstr ""
 msgid "Hide map"
 msgstr ""
 
-#: skbl/templates/article.html:581 skbl/templates/layout.html:159
+#: skbl/templates/article.html:581 skbl/templates/layout.html:160
 msgid "Keywords"
 msgstr ""
 
@@ -320,15 +320,19 @@ msgstr ""
 msgid "External link"
 msgstr ""
 
-#: skbl/templates/layout.html:122
+#: skbl/templates/layout.html:117
+msgid "Quiz"
+msgstr ""
+
+#: skbl/templates/layout.html:123
 msgid "På "
 msgstr ""
 
-#: skbl/templates/layout.html:152
+#: skbl/templates/layout.html:153
 msgid "Places"
 msgstr ""
 
-#: skbl/templates/layout.html:167
+#: skbl/templates/layout.html:168
 msgid "Share page"
 msgstr ""
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-02-03 13:14+0000\n"
+"POT-Creation-Date: 2020-02-03 13:26+0000\n"
 "PO-Revision-Date: 2017-02-20 14:49+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sv\n"
@@ -24,12 +24,12 @@ msgid "Contents could not be found!"
 msgstr "Innehållet kunde inte hittas!"
 
 #: skbl/computeviews.py:132 skbl/templates/article.html:345
-#: skbl/templates/layout.html:145
+#: skbl/templates/layout.html:146
 msgid "Organisations"
 msgstr "Organisationer"
 
 #: skbl/computeviews.py:158 skbl/templates/article.html:261
-#: skbl/templates/contact.html:42 skbl/templates/layout.html:138
+#: skbl/templates/contact.html:42 skbl/templates/layout.html:139
 msgid "Activities"
 msgstr "Verksamhet"
 
@@ -207,7 +207,7 @@ msgstr "Visa karta"
 msgid "Hide map"
 msgstr "Göm karta"
 
-#: skbl/templates/article.html:581 skbl/templates/layout.html:159
+#: skbl/templates/article.html:581 skbl/templates/layout.html:160
 msgid "Keywords"
 msgstr "Nyckelord"
 
@@ -327,15 +327,19 @@ msgstr "Till Karp"
 msgid "External link"
 msgstr "Extern länk"
 
-#: skbl/templates/layout.html:122
+#: skbl/templates/layout.html:117
+msgid "Quiz"
+msgstr "Quiz"
+
+#: skbl/templates/layout.html:123
 msgid "På "
 msgstr "In "
 
-#: skbl/templates/layout.html:152
+#: skbl/templates/layout.html:153
 msgid "Places"
 msgstr "Orter"
 
-#: skbl/templates/layout.html:167
+#: skbl/templates/layout.html:168
 msgid "Share page"
 msgstr "Dela sidan"
 
