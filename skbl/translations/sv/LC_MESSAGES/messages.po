@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-08-29 14:30+0000\n"
+"POT-Creation-Date: 2020-02-03 13:04+0000\n"
 "PO-Revision-Date: 2017-02-20 14:49+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sv\n"
@@ -160,6 +160,13 @@ msgstr "Familjeförhållanden"
 #: skbl/templates/article.html:177
 msgid "Civil Status"
 msgstr "Civilstånd"
+
+#: skbl/templates/article.html:205 skbl/templates/article.html:246
+#: skbl/templates/article.html:288 skbl/templates/article.html:330
+#: skbl/templates/article.html:384 skbl/templates/article.html:445
+#: skbl/templates/article.html:484
+msgid "more ..."
+msgstr "fler ..."
 
 #: skbl/templates/article.html:219
 msgid "Education"
@@ -503,3 +510,4 @@ msgstr ""
 #, python-format
 msgid "%s: error: %s\n"
 msgstr ""
+
