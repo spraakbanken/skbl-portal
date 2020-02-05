@@ -114,6 +114,7 @@
               <li><a href="{{ url_for('views.about-skbl_'+g.language) }}">{{ gettext('About SKBL') }}</a></li>
               <li><a href="{{ url_for('views.more-women_'+g.language) }}">{{ gettext('More women') }}</a></li>
               <li><a href="{{ url_for('views.contact_'+g.language) }}">{{ gettext('Contact') }}</a></li>
+              <li><a href="{{ url_for('views.quiz_'+g.language) }}">{{ gettext('Quiz') }}</a></li>
             </ul>
 
             {% set show_lang_switch = show_lang_switch|default(True) %}
@@ -231,6 +232,24 @@
             });
         });
     </script>
+
+    <!-- Matomo -->
+    <script type="text/javascript">
+      var _paq = window._paq || [];
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(['trackPageView']);
+      _paq.push(['enableLinkTracking']);
+      (function() {
+        var u="https://spraakbanken.gu.se/stats/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '13']);
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+      })();
+    </script>
+    <noscript><p><img src="https://spraakbanken.gu.se/stats/matomo.php?idsite=13&amp;rec=1" style="border:0;" alt="" /></p></noscript>
+    <!-- End Matomo Code -->
+
     {% endblock %}
   </body>
 </html>

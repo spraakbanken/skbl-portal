@@ -135,6 +135,15 @@ Info behövs här om kartan.
 Needs some info for the map.
         """
     },
+
+    "quiz": {
+        "sv": u"""
+Quizinfo behövs här.
+        """,
+        "en": u"""
+Needs some info for the quiz.
+        """
+    },
 }
 
 
