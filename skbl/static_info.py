@@ -118,30 +118,42 @@ Selecting a placename reveals which women were born, worked, or died there.
 
     "chronology": {
         "sv": u"""
-Här behövs en förklaringstext för kronologin likt den på <a target='_blank' class='visible_link' href='https://litteraturbanken.se/%C3%B6vers%C3%A4ttarlexikon/listor/kronologi#1600-1900'>SÖL</a>.
-Vilka kvinnor visas? Hur ändrar man tidsspannet?
+Kronologin listar lexikonets kvinnor för en viss tidsperiod. Klicka och dra kontrollerna på tidsaxeln
+för att avgränsa tidsperioden. Kronologin baseras på kvinnornas levnadsperiod, i den mån den har kunnat fastställas.
+Den ger därmed en approximativ bild av deras verksamhetsperiod.
 
         """,
         "en": u"""
-Some help text for the chronology...
+The chronology lists the women in the lexicon during a certain period. Click and drag the controls on the time axis
+to delimit the period. The chronology is based on the women’s lifespan, to the degree it has been possible to establish it.
+It therefore gives an approximate idea of their period of activity.
         """
     },
 
     "map": {
         "sv": u"""
-Info behövs här om kartan.
+Kartan visar geografisk anknytning för lexikonets kvinnor. Klicka på + och – för att förstora eller förminska kartan.
+Varje cirkel på kartan anger antalet kvinnor med anknytning till respektive ort. Klicka på dessa cirklar tills de är
+gröna för att se namnen på varje kvinna. Klicka på rutan längst upp till höger på kartan för att sortera den geografiska
+anknytningen på orter för födelse, frånfälle, utbildning, verksamhet eller boende.
         """,
         "en": u"""
-Needs some info for the map.
+The map shows the geographical connections for the women in the lexicon. Click on + and – to make the map bigger or smaller.
+Each circle on the map shows the number of women with connections to each respective place.
+Click on these circles until they turn green to see the names of all the women.
+Click on the box to the right on the map to sort the women’s geographical connections according to birthdate,
+death, education, career or residence.
         """
     },
 
     "quiz": {
         "sv": u"""
-Quizinfo behövs här.
+Testa dina kvinnohistoriska kunskaper genom att besvara frågor i tre olika quiz. Klicka i den ruta du anser vara det rätta svaret.
+När frågorna i ett quiz besvarats kan du klicka på knappen ”skicka”  och sedan ”visa resultat” för att se de rätta svaren.
         """,
         "en": u"""
-Needs some info for the quiz.
+Test your knowledge of women’s history by answering the questions in three different quizzes. Click on the box for what you think is the correct answer.
+When all the questions in a quiz have been answered, you can click on the button “send” and then “show results” to see the correct answers.
         """
     },
 }
