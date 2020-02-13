@@ -53,23 +53,6 @@ def about_skbl():
     return helpers.set_cache(page)
 
 
-@bp.route("/en/more-women", endpoint="more-women_en")
-@bp.route("/sv/fler-kvinnor", endpoint="more-women_sv")
-def more_women():
-    """Generate view for 'more women'."""
-    page = helpers.check_cache("morewoman")
-    if page is not None:
-        return page
-    infotext = helpers.get_infotext("more-women", request.url_rule.rule)
-    helpers.set_language_switch_link("more-women")
-    page = render_template('more_women.html',
-                           women=static_info.more_women,
-                           infotext=infotext,
-                           linked_from=request.args.get('linked_from'),
-                           title=gettext("More women"))
-    return helpers.set_cache(page, name="morewoman", no_hits=len(static_info.more_women))
-
-
 @bp.route("/en/biographies", endpoint="biographies_en")
 @bp.route("/sv/biografiska-verk", endpoint="biographies_sv")
 def biographies():
