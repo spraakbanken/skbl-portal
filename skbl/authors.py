@@ -1953,7 +1953,7 @@ authors_dict = {
     "Johan Andersson": {
         "sv": "Arkivare, Västerås stadsarkiv",
         "publications": [
-            "”Arkiv på undantag: Dispensarkivväsendet inom Uppsala landsarkivdistrikt”, i *Arkiv och konflikt: Landsarkivet i Uppsala i blickfånget under tidigt 1900-tal*, Uppsala: Stiftelsen för utgivande av Arkivvetenskapliga studier 2008",
+            "\"Arkiv på undantag: Dispensarkivväsendet inom Uppsala landsarkivdistrikt\", i *Arkiv och konflikt: Landsarkivet i Uppsala i blickfånget under tidigt 1900-tal*, Uppsala: Stiftelsen för utgivande av Arkivvetenskapliga studier 2008",
         ]
     },
     "Caroline Bergström": {
@@ -1971,7 +1971,7 @@ authors_dict = {
     "Anna Bohlin": {
         "sv": "Docent i litteraturvetenskap, Stockholms universitet",
         "publications": [
-            "”Magi och nation. Häxor i finländsk och svensk 1800-talslitteratur”, *Historiska och litteraturhistoriska studier* 93, Helsingfors: Svenska litteratursällskapet i Finland 2018",
+            "\"Magi och nation. Häxor i finländsk och svensk 1800-talslitteratur\", *Historiska och litteraturhistoriska studier* 93, Helsingfors: Svenska litteratursällskapet i Finland 2018",
         ]
     },
     "Harald Bohlin": {
@@ -1995,7 +1995,7 @@ authors_dict = {
     "Dahlkild Gunilla Öhman": {
         "sv": "Filosofie doktor i sociologi",
         "publications": [
-            "”Fröken Hanson och Hertig Larson eller Till Kina i affärer med Gud i hågen”, i *Uppsalakvinnor berättar om Frimodiga kvinnor fångade i tiden*, Uppsala: Föreningen för kvinnors historia, eget förlag 2019",
+            "\"Fröken Hanson och Hertig Larson eller Till Kina i affärer med Gud i hågen\", i *Uppsalakvinnor berättar om Frimodiga kvinnor fångade i tiden*, Uppsala: Föreningen för kvinnors historia, eget förlag 2019",
         ]
     },
     "Aziza Dhaouadi": {
@@ -2058,7 +2058,7 @@ authors_dict = {
     "Birgitta Jordansson": {
         "sv": "Docent i arbetsvetenskap, Göteborgs universitet",
         "publications": [
-            "”Diskursiva förutsättningar för ett hållbart arbetsliv - sett ur ett arbetsmarknadsperspektiv”, *Att synliggöra och motverka ojämställdhet i arbetslivet. En vänbok till Annika Härenstam*, Helsingborg: Komlitt AB 2020",
+            "\"Diskursiva förutsättningar för ett hållbart arbetsliv - sett ur ett arbetsmarknadsperspektiv\", *Att synliggöra och motverka ojämställdhet i arbetslivet. En vänbok till Annika Härenstam*, Helsingborg: Komlitt AB 2020",
         ]
     },
     "Birgit Karlsson": {
@@ -2079,7 +2079,7 @@ authors_dict = {
     "Anu Lahtinen": {
         "sv": "Professor i historia, Helsingfors universitet",
         "publications": [
-            "”Stepfamilies in Sweden, 1400 to 1650”, i *Stepfamilies in Europé*, London & New York: Routledge 2018",
+            "\"Stepfamilies in Sweden, 1400 to 1650\", i *Stepfamilies in Europé*, London & New York: Routledge 2018",
         ]
     },
     "Susanne Langenskiöld": {
@@ -2094,7 +2094,7 @@ authors_dict = {
     "Berit Lindberg": {
         "sv": "Universitetslektor i pedagogik, Lunds universitet, pensionär",
         "publications": [
-            "”Honorine Hermelin Grönbech och den Kvinnliga Medborgarskolan”, i *Liberala pionjärer*, Uppsala: Uppsala Publishing House AB 2002",
+            "\"Honorine Hermelin Grönbech och den Kvinnliga Medborgarskolan\", i *Liberala pionjärer*, Uppsala: Uppsala Publishing House AB 2002",
         ]
     },
     "Bo S Lindberg": {
@@ -2124,7 +2124,7 @@ authors_dict = {
     "Stefan Nilsson": {
         "sv": "Filosofie kandidat i historia och arkivarie, Örebro stadsarkiv",
         "publications": [
-            "”En närking på resa i 1600-talets Europa – spåren efter Thomas Cletcher”, i *Bergslagshistoria*, Karlstad: Föreningen Bergslagsarkiv 2010",
+            "\"En närking på resa i 1600-talets Europa – spåren efter Thomas Cletcher\", i *Bergslagshistoria*, Karlstad: Föreningen Bergslagsarkiv 2010",
         ]
     },
     "Ola Nordebo": {
@@ -2151,7 +2151,7 @@ authors_dict = {
     "Kerstin Rydbeck": {
         "sv": "Professor i biblioteks- och informationsvetenskap, Umeå universitet",
         "publications": [
-            "”Folkbildningen - en heteronormativ historia eller...?”, i *Folkbildningens och ABF:s idéhistoria*, Stockholm: Arbetarnas bildningsförbund 2018",
+            "\"Folkbildningen - en heteronormativ historia eller...?\", i *Folkbildningens och ABF:s idéhistoria*, Stockholm: Arbetarnas bildningsförbund 2018",
         ]
     },
     "Jan Samuelson": {
@@ -2184,7 +2184,7 @@ authors_dict = {
     "Anna Svensson": {
         "sv": "Pensionerad stadsarkivarie, Malmö",
         "publications": [
-            "”Skola i exil - Några anteckningar om den danska skolan i Lund 1943-45”, *Rambam* 28/2019, Selskabet for dansk judisk historie 2019",
+            "\"Skola i exil - Några anteckningar om den danska skolan i Lund 1943-45\", *Rambam* 28/2019, Selskabet for dansk judisk historie 2019",
         ]
     },
     "Katarina Tullia von Sydow": {
@@ -2205,7 +2205,7 @@ authors_dict = {
     "Wallin Margareta Wictorin": {
         "sv": "Docent i konst- och bildvetenskap, Karlstad universitet",
         "publications": [
-            "”Women’s Liberation. Swedish Feminist Comics and Cartoons from the 1970s and 1980s” i *European Comic Art*, 2019:2 (med Anna Nordenstam)",
+            "\"Women’s Liberation. Swedish Feminist Comics and Cartoons from the 1970s and 1980s\" i *European Comic Art*, 2019:2 (med Anna Nordenstam)",
         ]
     },
     "Frida Wikström": {
@@ -2214,7 +2214,7 @@ authors_dict = {
     "Linnea Åshede": {
         "sv": "Genusforskare och bibliotekarie",
         "publications": [
-            "”*Neutrumque et Utrumque Videntur*: Reappriasing the Gender Role(s) of Hermaphroditus in Ancient Art”, i *Exploring Gender Diversity in the Ancient World*, Edinburgh: Edinburgh University Press 2020",
+            "\"*Neutrumque et Utrumque Videntur*: Reappriasing the Gender Role(s) of Hermaphroditus in Ancient Art\", i *Exploring Gender Diversity in the Ancient World*, Edinburgh: Edinburgh University Press 2020",
         ]
     },
     "Ulla Åshede": {

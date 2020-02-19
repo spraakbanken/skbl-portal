@@ -341,21 +341,20 @@ def keyword(result=None):
     return helpers.set_cache(page)
 
 
-# @bp.route("/en/author_presentations", endpoint="author_presentations_en")
-# @bp.route("/sv/forfattar_presentationer", endpoint="author_presentations_sv")
-# def author_presentations():
-#     # JUST FOR TESTING
-#     helpers.set_language_switch_link("author_presentations")
-#
-#     authorinfo = []
-#     keylist = authors_dict.keys()
-#     keylist.sort(key=lambda k: k.split()[-1])
-#     for key in keylist:
-#         if authors_dict[key].get("publications"):
-#             authors_dict[key]["publications"] = [helpers.markdown_html(i) for i in authors_dict[key].get("publications")]
-#         authorinfo.append((key, authors_dict[key]))
-#     page = render_template('author_presentations.html', authorinfo=authorinfo, title="Authors")
-#     return helpers.set_cache(page)
+@bp.route("/en/author_presentations", endpoint="author_presentations_en")
+@bp.route("/sv/forfattar_presentationer", endpoint="author_presentations_sv")
+def author_presentations():
+    """Generate view for author presentations (just for testing purposes)."""
+    helpers.set_language_switch_link("author_presentations")
+    authorinfo = []
+    keylist = list(authors_dict.keys())
+    keylist.sort(key=lambda k: k.split()[1])
+    for key in keylist:
+        if authors_dict[key].get("publications"):
+            authors_dict[key]["publications"] = [helpers.markdown_html(i) for i in authors_dict[key].get("publications")]
+        authorinfo.append((key, authors_dict[key]))
+    page = render_template('author_presentations.html', authorinfo=authorinfo, title="Authors")
+    return helpers.set_cache(page)
 
 
 @bp.route("/en/articleauthor", endpoint="articleauthor_index_en")
