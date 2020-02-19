@@ -183,7 +183,6 @@ def get_life_range_force(source):
         born = dead - 100
     if dead == default_died and born != default_born:
         dead = born + 100
-        sys.stderr.write("new born: %s\n" % born)
 
     return born, dead
 
