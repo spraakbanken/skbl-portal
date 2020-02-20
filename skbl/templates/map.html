@@ -41,23 +41,33 @@
                 window.mapInstance.invalidateSize();
             });
 
+            var gotoURL = function(url) {
+                var currURL = window.location.href;
+                var path = "/en/article/"
+                if (currURL.indexOf('/sv/') !== -1) {
+                    path = "/sv/artikel/";
+                }
+                window.location.href = path + url;
+            }
+
             for (var hit of indata) {
-                var s = hit._source;
-                var name = s.name.lastname + ", " + s.name.firstname.replace(/\//g, '');
+                let s = hit._source;
+                let url = hit._source.url;
+                let name = s.name.lastname + ", " + s.name.firstname.replace(/\//g, '');
                 if (s.lifespan && s.lifespan.from && s.lifespan.from.place && s.lifespan.from.place.pin) {
                     var pin = s.lifespan.from.place.pin;
-                    markersBorn.addLayer(L.marker([pin.lat, pin.lon]).bindTooltip(name).on('click', function() { console.log(name); })).addTo(skblmap);
+                    markersBorn.addLayer(L.marker([pin.lat, pin.lon]).bindTooltip(name).on('click', function() { gotoURL(url); })).addTo(skblmap);
                 }
                 if (s.lifespan && s.lifespan.to && s.lifespan.to.place && s.lifespan.to.place.pin) {
                     var pin = s.lifespan.to.place.pin;
-                    markersDeath.addLayer(L.marker([pin.lat, pin.lon]).bindTooltip(name).on('click', function() { console.log(name); }));
+                    markersDeath.addLayer(L.marker([pin.lat, pin.lon]).bindTooltip(name).on('click', function() { gotoURL(url); }));
                 }
                 if (s.education) {
                     if (! $.isArray(s.education)) s.education = [s.education];
                     for (edu of s.education) {
                         if (edu.place && edu.place.pin) {
                             var pin = edu.place.pin;
-                            markersEducation.addLayer(L.marker([pin.lat, pin.lon]).bindTooltip(name).on('click', function() { console.log(name); }));
+                            markersEducation.addLayer(L.marker([pin.lat, pin.lon]).bindTooltip(name).on('click', function() { gotoURL(url); }));
                         }
                     }
                 }
@@ -66,7 +76,7 @@
                     for (occ of s.occupation) {
                         if (occ.place && occ.place.pin) {
                             var pin = occ.place.pin;
-                            markersOccupation.addLayer(L.marker([pin.lat, pin.lon]).bindTooltip(name).on('click', function() { console.log(name); }));
+                            markersOccupation.addLayer(L.marker([pin.lat, pin.lon]).bindTooltip(name).on('click', function() { gotoURL(url); }));
                         }
                     }
                 }
@@ -75,7 +85,7 @@
                     for (p of s.places) {
                         if (p.place && p.place.pin) {
                             var pin = p.place.pin;
-                            markersPlaces.addLayer(L.marker([pin.lat, pin.lon]).bindTooltip(name).on('click', function() { console.log(name); }));
+                            markersPlaces.addLayer(L.marker([pin.lat, pin.lon]).bindTooltip(name).on('click', function() { gotoURL(url); }));
                         }
                     }
                 }
