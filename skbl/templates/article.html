@@ -574,7 +574,7 @@
             <div class="image-overlay">
                 <img class="img-responsive" src="{{ article.portrait[0].url }}" itemprop="image" alt="{{ article_portrait_description }}" width="360px">
             </div>
-            <span class="portrait-description">{{ article_portrait_description | deescape}}</span>
+            <span class="portrait-description">{{ article_portrait_description | deescape | cclink | safe}}</span>
         {% endif %}
         {% if article.keyword %}
             {% set article_keyword = get_lang_text(article.keyword, article.keyword_eng, g.language) %}

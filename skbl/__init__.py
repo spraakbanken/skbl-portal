@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*
 """Initialise Flask application."""
 import os
+import re
 
 from flask import Flask, g, request, url_for
 from flask_babel import Babel
@@ -57,6 +58,10 @@ def create_app():
     def deescape_filter(s):
         html_parser = html.parser.HTMLParser()
         return html_parser.unescape(s)
+
+    @app.template_filter('cclink')
+    def cclink_filter(s):
+        return re.sub(r'(CC-BY\S*)', '<a href="https://creativecommons.org/licenses/" target="_blank">\\1</a>', s)
 
     from . import helpers
 
