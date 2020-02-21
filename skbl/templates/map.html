@@ -53,7 +53,12 @@
             for (var hit of indata) {
                 let s = hit._source;
                 let url = hit._source.url;
-                let name = s.name.lastname + ", " + s.name.firstname.replace(/\//g, '');
+                let name;
+                if (s.name.lastname) {
+                    name = s.name.lastname + ", " + s.name.firstname.replace(/\//g, '');
+                } else {
+                    name = s.name.firstname.replace(/\//g, '');
+                }
                 if (s.lifespan && s.lifespan.from && s.lifespan.from.place && s.lifespan.from.place.pin) {
                     var pin = s.lifespan.from.place.pin;
                     markersBorn.addLayer(L.marker([pin.lat, pin.lon]).bindTooltip(name).on('click', function() { gotoURL(url); })).addTo(skblmap);
