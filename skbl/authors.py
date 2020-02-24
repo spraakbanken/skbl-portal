@@ -1953,7 +1953,7 @@ authors_dict = {
     "Johan Andersson": {
         "sv": "Arkivare, Västerås stadsarkiv",
         "publications": [
-            "\"Arkiv på undantag: Dispensarkivväsendet inom Uppsala landsarkivdistrikt\", i *Arkiv och konflikt: Landsarkivet i Uppsala i blickfånget under tidigt 1900-tal*, Uppsala: Stiftelsen för utgivande av Arkivvetenskapliga studier 2008",
+            "\"Arkiv på undantag: Dispensarkivväsendet inom Uppsala landsarkivdistrikt\", i *Arkiv och konflikt: Landsarkivet i Uppsala i blickfånget under tidigt 1900-tal* (2008)",
         ]
     },
     "Caroline Bergström": {
@@ -1962,7 +1962,7 @@ authors_dict = {
     "Boel Berner": {
         "sv": "Professor emeritus i sociologi, Linköpings universitet",
         "publications": [
-            "*Strange Blood*, Bielefeld: transcript Verlag 2020",
+            "*Strange Blood* (2020)",
         ]
     },
     "Martin Berntson": {
@@ -1971,7 +1971,7 @@ authors_dict = {
     "Anna Bohlin": {
         "sv": "Docent i litteraturvetenskap, Stockholms universitet",
         "publications": [
-            "\"Magi och nation. Häxor i finländsk och svensk 1800-talslitteratur\", *Historiska och litteraturhistoriska studier* 93, Helsingfors: Svenska litteratursällskapet i Finland 2018",
+            "\"Magi och nation. Häxor i finländsk och svensk 1800-talslitteratur\", *Historiska och litteraturhistoriska studier 93* (2018)",
         ]
     },
     "Harald Bohlin": {
@@ -1986,7 +1986,7 @@ authors_dict = {
     "Charlotte Cederbom": {
         "sv": "Filosofie doktor i historia, Helsingfors universitet",
         "publications": [
-            "*Married Women in Legal Practice: Agency and Norms in the Swedish Realm 1350-1450*, New York: Routledge 2019",
+            "*Married Women in Legal Practice: Agency and Norms in the Swedish Realm 1350-1450* (2019)",
         ]
     },
     "Emilie Cederquist": {
@@ -1995,7 +1995,7 @@ authors_dict = {
     "Dahlkild Gunilla Öhman": {
         "sv": "Filosofie doktor i sociologi",
         "publications": [
-            "\"Fröken Hanson och Hertig Larson eller Till Kina i affärer med Gud i hågen\", i *Uppsalakvinnor berättar om Frimodiga kvinnor fångade i tiden*, Uppsala: Föreningen för kvinnors historia, eget förlag 2019",
+            "\"Fröken Hanson och Hertig Larson eller Till Kina i affärer med Gud i hågen\", i *Uppsalakvinnor berättar om Frimodiga kvinnor fångade i tiden* (2019)",
         ]
     },
     "Aziza Dhaouadi": {
@@ -2004,7 +2004,7 @@ authors_dict = {
     "Charlotte Erlanson-Albertsson": {
         "sv": "Professor emeritus i medicinsk och fysiologisk kemi, Lunds universitet",
         "publications": [
-            "*Äta för livet*, Malmö: Roos & Tegner 2017",
+            "*Äta för livet* (2017)",
         ]
     },
     "Ingrid Erneman": {
@@ -2016,7 +2016,7 @@ authors_dict = {
     "Thomas Fahlander": {
         "sv": "Spelman och författare",
         "publications": [
-            "*En död häst, en död gris och en död gubbe i diket*, Falun: Fahlanders förlag 2019",
+            "*En död häst, en död gris och en död gubbe i diket* (2019)",
         ]
     },
     "Fredrik Fällman": {
@@ -2025,13 +2025,13 @@ authors_dict = {
     "Elisabeth Gålmark": {
         "sv": "Författare och skribent",
         "publications": [
-            "*Revolutionens rosenvatten*, Stockholm: Dela förlag 2016",
+            "*Revolutionens rosenvatten* (2016)",
         ]
     },
     "Anna Götlind": {
         "sv": "Professor i historia, Stockholms universitet",
         "publications": [
-            "*Spår av ett liv. En berättelse om sockenbarnet August Theodor och hans samtid*, Stockholm: Stockholmia 2019. Tillsammans med Rolf Lind.",
+            "*Spår av ett liv. En berättelse om sockenbarnet August Theodor och hans samtid* (2019)",
         ]
     },
     "Gunilla Hallset": {
@@ -2046,25 +2046,25 @@ authors_dict = {
     "Alexandra Herlitz": {
         "sv": "Filosofie doktor i Konst- och bildvetenskap, Göteborgs universitet",
         "publications": [
-            "*Grez-sur-Loing revisited. The international artists' colony in a different light*, Göteborg: Makadam 2013",
+            "*Grez-sur-Loing revisited. The international artists' colony in a different light* (2013)",
         ]
     },
     "Wojtek Jezierski": {
         "sv": "Docent i historia, Göteborgs universitet",
         "publications": [
-            "Redaktör för *Nordic Elites in Transformation, c. 1050-1250, Volume III: Legitimacy & Glory*, New York: Routledge 2020",
+            "Redaktör för *Nordic Elites in Transformation, c. 1050-1250, Volume III: Legitimacy & Glory* (2020)",
         ]
     },
     "Birgitta Jordansson": {
         "sv": "Docent i arbetsvetenskap, Göteborgs universitet",
         "publications": [
-            "\"Diskursiva förutsättningar för ett hållbart arbetsliv - sett ur ett arbetsmarknadsperspektiv\", *Att synliggöra och motverka ojämställdhet i arbetslivet. En vänbok till Annika Härenstam*, Helsingborg: Komlitt AB 2020",
+            "\"Diskursiva förutsättningar för ett hållbart arbetsliv - sett ur ett arbetsmarknadsperspektiv\", i *Att synliggöra och motverka ojämställdhet i arbetslivet. En vänbok till Annika Härenstam* (2020)",
         ]
     },
     "Birgit Karlsson": {
         "sv": "Professor i ekonomisk historia, Göteborgs universitet",
         "publications": [
-            "*De fattiges vänner 1819-2019*, Göteborg: Riksarkivet 2019",
+            "*De fattiges vänner 1819-2019* (2019)",
         ]
     },
     "Jules Kielmann": {
@@ -2073,19 +2073,19 @@ authors_dict = {
     "Maaret Koskinen": {
         "sv": "Professor emeritus i filmvetenskap, Stockholms universitet",
         "publications": [
-            "*Harry bit för bit. Harry Scheins många ansikten*, Stockholm: Carlssons Förlag 2017",
+            "*Harry bit för bit. Harry Scheins många ansikten* (2017)",
         ]
     },
     "Anu Lahtinen": {
         "sv": "Professor i historia, Helsingfors universitet",
         "publications": [
-            "\"Stepfamilies in Sweden, 1400 to 1650\", i *Stepfamilies in Europé*, London & New York: Routledge 2018",
+            "\"Stepfamilies in Sweden, 1400 to 1650\", i *Stepfamilies in Europe, 1400-1800* (2018)",
         ]
     },
     "Susanne Langenskiöld": {
         "sv": "Frilandsförfattare",
         "publications": [
-            "*Handen och känslan*, Stockholm: Max Ström 2019",
+            "*Handen och känslan* (2019)",
         ]
     },
     "Margareta Lilja-Svensson": {
@@ -2094,13 +2094,13 @@ authors_dict = {
     "Berit Lindberg": {
         "sv": "Universitetslektor i pedagogik, Lunds universitet, pensionär",
         "publications": [
-            "\"Honorine Hermelin Grönbech och den Kvinnliga Medborgarskolan\", i *Liberala pionjärer*, Uppsala: Uppsala Publishing House AB 2002",
+            "\"Honorine Hermelin Grönbech och den Kvinnliga Medborgarskolan\", i *Liberala pionjärer* (2002)",
         ]
     },
     "Bo S Lindberg": {
         "sv": "Medicine doktor, docent, Uppsala universitet",
         "publications": [
-            "*Obstetriska instrument. En historia om gamla förlossningsinstrument i Medicinhistoriska museet i Uppsala*, Uppsala: Medicinhistoriska museet, Uppsala universitet 2019",
+            "*Obstetriska instrument. En historia om gamla förlossningsinstrument i Medicinhistoriska museet i Uppsala* (2019)",
         ]
     },
     "Crister Lindström": {
@@ -2109,7 +2109,7 @@ authors_dict = {
     "Jane Morén": {
         "sv": "Författare, fotograf och journalist",
         "publications": [
-            "*Min kärlek har stannat mest hos er- en biografi om kvinnokämpen Anna Johansson-Visborg*, Stockholm: Hjalmarson & Högberg förlag 2018",
+            "*Min kärlek har stannat mest hos er- en biografi om kvinnokämpen Anna Johansson-Visborg* (2018)",
         ]
     },
     "Fiffi Myrström": {
@@ -2118,19 +2118,19 @@ authors_dict = {
     "Anna-Lena Nilsson": {
         "sv": "1:e arkivarie, Folkrörelsernas arkiv i norra Halland",
         "publications": [
-            "*Änka Fränka Fröken Fru - förr och nu i Varberg*, Halmstad: Utblick Media 2013",
+            "*Änka Fränka Fröken Fru - förr och nu i Varberg* (2013)",
         ]
     },
     "Stefan Nilsson": {
         "sv": "Filosofie kandidat i historia och arkivarie, Örebro stadsarkiv",
         "publications": [
-            "\"En närking på resa i 1600-talets Europa – spåren efter Thomas Cletcher\", i *Bergslagshistoria*, Karlstad: Föreningen Bergslagsarkiv 2010",
+            "\"En närking på resa i 1600-talets Europa – spåren efter Thomas Cletcher\", i *Bergslagshistoria* (2010)",
         ]
     },
     "Ola Nordebo": {
         "sv": "Politisk chefredaktör",
         "publications": [
-            "*50 skäl att fascineras av Västerbotten*, Umeå: Länsstyrelsen i Västerbotten, 2014",
+            "*50 skäl att fascineras av Västerbotten* (2014)",
         ]
     },
     "Lena Nygren": {
@@ -2139,37 +2139,37 @@ authors_dict = {
     "Maria Persson": {
         "sv": "Filosofie doktor i arkeologi, forskare, Göteborgs universitet",
         "publications": [
-            "*Minnen från vår samtid. Arkeologi, materialitet och samtidshistoria*, Göteborg: Göteborgs universitet 2014",
+            "*Minnen från vår samtid. Arkeologi, materialitet och samtidshistoria* (2014)",
         ]
     },
     "Per-Olov Qvist": {
         "sv": "Filosofie doktor i filmvetenskap",
         "publications": [
-            "*Folkhemmets bilder. Modernisering, motstånd och mentalitet i den svenska 30-talsfilmen*, Lund: Arkiv 1995",
+            "*Folkhemmets bilder. Modernisering, motstånd och mentalitet i den svenska 30-talsfilmen* (1995)",
         ]
     },
     "Kerstin Rydbeck": {
         "sv": "Professor i biblioteks- och informationsvetenskap, Umeå universitet",
         "publications": [
-            "\"Folkbildningen - en heteronormativ historia eller...?\", i *Folkbildningens och ABF:s idéhistoria*, Stockholm: Arbetarnas bildningsförbund 2018",
+            "\"Folkbildningen - en heteronormativ historia eller...?\", i *Folkbildningens och ABF:s idéhistoria* (2018)",
         ]
     },
     "Jan Samuelson": {
         "sv": "Professor i historia, Mittuniversitetet",
         "publications": [
-            "*Det åländska folkets historia II:2. Stormaktstiden från slutet av 1500-talet fram till 1721*, Mariehamn: Ålands kulturstiftelse 2015",
+            "*Det åländska folkets historia II:2. Stormaktstiden från slutet av 1500-talet fram till 1721* (2015)",
         ]
     },
     "Kekke Stadin": {
         "sv": "Professor emeritus i historia, Södertörns högskola",
         "publications": [
-            "*Maktens män bär rött. Historiska studier av manlighet, manligt framträdande och kläder*, Stockholm: Carlssons förlag 2010",
+            "*Maktens män bär rött. Historiska studier av manlighet, manligt framträdande och kläder* (2010)",
         ]
     },
     "Gunnel Svedberg": {
         "sv": "Sjuksköterska, psykoterapeut, medicine doktor",
         "publications": [
-            "Medverkar i *Psyksystrar berättar*, Malmköping: Exempla förlag 2019",
+            "Medverkar i *Psyksystrar berättar* (2019)",
         ]
     },
     "Catrin Svendsrud": {
@@ -2184,7 +2184,7 @@ authors_dict = {
     "Anna Svensson": {
         "sv": "Pensionerad stadsarkivarie, Malmö",
         "publications": [
-            "\"Skola i exil - Några anteckningar om den danska skolan i Lund 1943-45\", *Rambam* 28/2019, Selskabet for dansk judisk historie 2019",
+            "\"Skola i exil - Några anteckningar om den danska skolan i Lund 1943-45\", *Rambam* 28 (2019)",
         ]
     },
     "Katarina Tullia von Sydow": {
@@ -2193,19 +2193,19 @@ authors_dict = {
     "Kerstin Thörn": {
         "sv": "Filosofie doktor i idéhistoria",
         "publications": [
-            "'Skafferiet - rummet som försvann' i *Köket*, Stockholm: Nordiska museets förlag 2018",
+            "\"Skafferiet - rummet som försvann\", i *Köket* (2018)",
         ]
     },
     "Birgitta Tingdal": {
         "sv": "Filosofie kandidat i historia och samhällsämnen, folkhögskolelärare, journalist och författare",
         "publications": [
-            "*Gårdarna i Alslövs by*, Tölö: Tölö Hembygdsgille 2017",
+            "*Gårdarna i Alslövs by* (2017)",
         ]
     },
     "Wallin Margareta Wictorin": {
         "sv": "Docent i konst- och bildvetenskap, Karlstad universitet",
         "publications": [
-            "\"Women’s Liberation. Swedish Feminist Comics and Cartoons from the 1970s and 1980s\" i *European Comic Art*, 2019:2 (med Anna Nordenstam)",
+            "\"Women’s Liberation. Swedish Feminist Comics and Cartoons from the 1970s and 1980s\" i *European Comic Art* 2 (2019)",
         ]
     },
     "Frida Wikström": {
@@ -2214,13 +2214,19 @@ authors_dict = {
     "Linnea Åshede": {
         "sv": "Genusforskare och bibliotekarie",
         "publications": [
-            "\"*Neutrumque et Utrumque Videntur*: Reappriasing the Gender Role(s) of Hermaphroditus in Ancient Art\", i *Exploring Gender Diversity in the Ancient World*, Edinburgh: Edinburgh University Press 2020",
+            "\"*Neutrumque et Utrumque Videntur*: Reappraising the Gender Role(s) of Hermaphroditus in Ancient Art\", i *Exploring Gender Diversity in the Ancient World* (2020)",
         ]
     },
     "Ulla Åshede": {
-        "sv": "Speciallärare, frilansskribent",
+        "sv": "Speciallärare och frilansskribent",
         "publications": [
-            "*Vallda - kulturbygd med gåtfullt förflutet*, Vallda: Vallda hembygdsgille 2002",
+            "*Vallda - kulturbygd med gåtfullt förflutet* (2002)",
         ]
-    }
+    },
+    "Fredrik Tersmeden": {
+        "sv": "Arkivare",
+        "publications": [
+            "*Lundensare – Universitetsöden under fyra århundraden* (2018)",
+        ]
+    },
 }
