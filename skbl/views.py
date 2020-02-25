@@ -352,6 +352,8 @@ def author_presentations():
     for key in keylist:
         if authors_dict[key].get("publications"):
             authors_dict[key]["publications"] = [helpers.markdown_html(i) for i in authors_dict[key].get("publications")]
+        if authors_dict[key].get("sv"):
+            authors_dict[key]["sv"] = helpers.markdown_html(authors_dict[key].get("sv"))
         authorinfo.append((key, authors_dict[key]))
     page = render_template('author_presentations.html', authorinfo=authorinfo, title="Authors")
     return helpers.set_cache(page)
@@ -378,7 +380,7 @@ def author(result=None):
     lastname = result.split(", ")[0].strip()
     authorinfo = authors_dict.get(firstname + " " + lastname)
     if authorinfo:
-        authorinfo = [authorinfo.get(lang, authorinfo.get("sv")),
+        authorinfo = [helpers.markdown_html(authorinfo.get(lang, authorinfo.get("sv"))),
                       [helpers.markdown_html(i) for i in authorinfo.get("publications", [])]]
     query = "extended||and|artikel_forfattare_fornamn.lowerbucket|equals|%s||and|artikel_forfattare_efternamn.lowerbucket|equals|%s" % (
             firstname, lastname)
