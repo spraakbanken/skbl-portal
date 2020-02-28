@@ -223,11 +223,11 @@ def compute_map(lang='', cache=True, url=''):
     if lang == 'sv':
         data = helpers.karp_query('minientry', {'q': "extended||and|namn|exists", 'show': show,
                                   'sort': 'sorteringsnamn.sort,sorteringsnamn.init,tilltalsnamn.sort'},
-                                  mode=current_app.config['SKBL_LINKS'])
+                                  mode=current_app.config['KARP_MODE'])
     else:
         data = helpers.karp_query('minientry', {'q': "extended||and|namn|exists", 'show': show,
                                   'sort': 'sorteringsnamn.eng_sort,sorteringsnamn.eng_init,sorteringsnamn.sort,tilltalsnamn.sort'},
-                                  mode=current_app.config['SKBL_LINKS'])
+                                  mode=current_app.config['KARP_MODE'])
 
     if map:
         art = render_template('map.html',
