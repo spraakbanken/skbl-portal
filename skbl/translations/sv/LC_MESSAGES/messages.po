@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-02-03 13:26+0000\n"
+"POT-Creation-Date: 2020-02-28 14:01+0000\n"
 "PO-Revision-Date: 2017-02-20 14:49+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sv\n"
@@ -18,18 +18,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.7.0\n"
 
-#: skbl/computeviews.py:101 skbl/views.py:29 skbl/views.py:254
-#: skbl/views.py:417 skbl/views.py:547
+#: skbl/computeviews.py:101 skbl/views.py:29 skbl/views.py:252
+#: skbl/views.py:416 skbl/views.py:546
 msgid "Contents could not be found!"
 msgstr "Innehållet kunde inte hittas!"
 
-#: skbl/computeviews.py:132 skbl/templates/article.html:345
-#: skbl/templates/layout.html:146
+#: skbl/computeviews.py:132 skbl/templates/article.html:350
+#: skbl/templates/layout.html:145
 msgid "Organisations"
 msgstr "Organisationer"
 
-#: skbl/computeviews.py:158 skbl/templates/article.html:261
-#: skbl/templates/contact.html:42 skbl/templates/layout.html:139
+#: skbl/computeviews.py:158 skbl/templates/article.html:266
+#: skbl/templates/contact.html:42 skbl/templates/layout.html:138
 msgid "Activities"
 msgstr "Verksamhet"
 
@@ -58,11 +58,11 @@ msgstr "Alla fält måste vara ifyllda!"
 msgid "Please enter a valid email address!"
 msgstr "Du måste ange en giltig e-post-adress!"
 
-#: skbl/computeviews.py:425 skbl/templates/layout.html:116 skbl/views.py:93
+#: skbl/computeviews.py:425 skbl/templates/layout.html:115 skbl/views.py:91
 msgid "Contact"
 msgstr "Kontakt"
 
-#: skbl/computeviews.py:426 skbl/views.py:94
+#: skbl/computeviews.py:426 skbl/views.py:92
 msgid "Contact SKBL"
 msgstr "Kontakta SKBL"
 
@@ -74,29 +74,29 @@ msgstr "Tack för din återkoppling"
 msgid "We will get back to you as soon as we can."
 msgstr "Vi återkommer så fort vi kan."
 
-#: skbl/helpers.py:495
+#: skbl/helpers.py:494
 msgid "Residence"
 msgstr "Bostadsort"
 
-#: skbl/helpers.py:496
+#: skbl/helpers.py:495
 msgid "Place of activity"
 msgstr "Verksamhetsort"
 
-#: skbl/helpers.py:497
+#: skbl/helpers.py:496
 msgid "Place of education"
 msgstr "Utbildningsort"
 
-#: skbl/helpers.py:498 skbl/templates/article.html:303
+#: skbl/helpers.py:497 skbl/templates/article.html:308
 msgid "Contacts"
 msgstr "Kontakter"
 
-#: skbl/helpers.py:499 skbl/templates/article.html:407
-#: skbl/templates/article.html:420 skbl/templates/article.html:436
+#: skbl/helpers.py:498 skbl/templates/article.html:412
+#: skbl/templates/article.html:425 skbl/templates/article.html:441
 msgid "Birthplace"
 msgstr "Födelseort"
 
-#: skbl/helpers.py:500 skbl/templates/article.html:413
-#: skbl/templates/article.html:426
+#: skbl/helpers.py:499 skbl/templates/article.html:418
+#: skbl/templates/article.html:431
 msgid "Place of death"
 msgstr "Dödsort"
 
@@ -104,19 +104,19 @@ msgstr "Dödsort"
 msgid "About SKBL"
 msgstr "Om SKBL"
 
-#: skbl/templates/layout.html:115 skbl/views.py:69
-msgid "More women"
-msgstr "Fler kvinnor"
-
-#: skbl/views.py:77
+#: skbl/views.py:60
 msgid "Older biographies"
 msgstr "Äldre biografiska verk"
 
-#: skbl/templates/layout.html:106 skbl/views.py:171 skbl/views.py:172
+#: skbl/templates/layout.html:116 skbl/views.py:75
+msgid "Quiz"
+msgstr "Quiz"
+
+#: skbl/templates/layout.html:106 skbl/views.py:169 skbl/views.py:170
 msgid "Chronology"
 msgstr "Kronologi"
 
-#: skbl/views.py:217
+#: skbl/views.py:215
 #, python-format
 msgid "Hits for \"%s\""
 msgstr "Träffar för \"%s\""
@@ -130,6 +130,10 @@ msgid "Remark"
 msgstr "Anmärkning"
 
 #: skbl/templates/article.html:136
+msgid "Published"
+msgstr "Publicerat"
+
+#: skbl/templates/article.html:141
 msgid ""
 "You are welcome to cite this article but always provide the author’s name"
 " as follows"
@@ -137,89 +141,89 @@ msgstr ""
 "Hänvisa gärna till denna artikel, men uppge alltid författarnamnet enligt"
 " följande"
 
-#: skbl/templates/article.html:137
+#: skbl/templates/article.html:142
 msgid "article by"
 msgstr "artikel av"
 
-#: skbl/templates/article.html:141
+#: skbl/templates/article.html:146
 msgid "retrieved"
 msgstr "hämtad"
 
-#: skbl/templates/article.html:148
+#: skbl/templates/article.html:153
 msgid "Show complete information"
 msgstr "Visa full information"
 
-#: skbl/templates/article.html:160
+#: skbl/templates/article.html:165
 msgid "Other Names"
 msgstr "Övriga namn"
 
-#: skbl/templates/article.html:174
+#: skbl/templates/article.html:179
 msgid "Family Relationships"
 msgstr "Familjeförhållanden"
 
-#: skbl/templates/article.html:177
+#: skbl/templates/article.html:182
 msgid "Civil Status"
 msgstr "Civilstånd"
 
-#: skbl/templates/article.html:205 skbl/templates/article.html:246
-#: skbl/templates/article.html:288 skbl/templates/article.html:330
-#: skbl/templates/article.html:384 skbl/templates/article.html:445
-#: skbl/templates/article.html:484
+#: skbl/templates/article.html:210 skbl/templates/article.html:251
+#: skbl/templates/article.html:293 skbl/templates/article.html:335
+#: skbl/templates/article.html:389 skbl/templates/article.html:450
+#: skbl/templates/article.html:489
 msgid "more ..."
 msgstr "fler ..."
 
-#: skbl/templates/article.html:219
+#: skbl/templates/article.html:224
 msgid "Education"
 msgstr "Utbildning"
 
-#: skbl/templates/article.html:399
+#: skbl/templates/article.html:404
 msgid "Residences"
 msgstr "Bostadsorter"
 
-#: skbl/templates/article.html:457
+#: skbl/templates/article.html:462
 msgid "Prices/awards"
 msgstr "Priser/utmärkelser"
 
-#: skbl/templates/article.html:498
+#: skbl/templates/article.html:503
 msgid "Sources"
 msgstr "Källor"
 
-#: skbl/templates/article.html:523
+#: skbl/templates/article.html:528
 msgid "Further References"
 msgstr "Vidare referenser"
 
-#: skbl/templates/article.html:548
+#: skbl/templates/article.html:553
 msgid "Pictures"
 msgstr "Bilder"
 
-#: skbl/templates/article.html:561 skbl/templates/bucketresults.html:34
-#: skbl/templates/list.html:60 skbl/templates/list.html:92
-#: skbl/templates/list.html:97 skbl/templates/more_women.html:42
-#: skbl/templates/nestedbucketresults.html:68 skbl/templates/places.html:24
+#: skbl/templates/article.html:566 skbl/templates/bucketresults.html:34
+#: skbl/templates/list.html:59 skbl/templates/list.html:91
+#: skbl/templates/list.html:96 skbl/templates/nestedbucketresults.html:68
+#: skbl/templates/places.html:24
 msgid "TO THE TOP"
 msgstr "TILL TOPPEN"
 
-#: skbl/templates/article.html:566
+#: skbl/templates/article.html:571
 msgid "Show map"
 msgstr "Visa karta"
 
-#: skbl/templates/article.html:569
+#: skbl/templates/article.html:574
 msgid "Hide map"
 msgstr "Göm karta"
 
-#: skbl/templates/article.html:581 skbl/templates/layout.html:160
+#: skbl/templates/article.html:586 skbl/templates/layout.html:159
 msgid "Keywords"
 msgstr "Nyckelord"
 
-#: skbl/templates/article.html:589
+#: skbl/templates/article.html:594
 msgid "Open article in Karp"
 msgstr "Öppna denna artikel i Karp"
 
-#: skbl/templates/article.html:597
+#: skbl/templates/article.html:602
 msgid "Links"
 msgstr "Länkar"
 
-#: skbl/templates/author_presentations.html:12 skbl/templates/list.html:19
+#: skbl/templates/author_presentations.html:12 skbl/templates/list.html:18
 msgid "Has published (amongst others)"
 msgstr "Har bland annat publicerat"
 
@@ -323,46 +327,44 @@ msgstr ""
 msgid "To Karp"
 msgstr "Till Karp"
 
-#: skbl/templates/layout.html:91 skbl/templates/list.html:102
+#: skbl/templates/layout.html:91 skbl/templates/list.html:101
 msgid "External link"
 msgstr "Extern länk"
 
-#: skbl/templates/layout.html:117
-msgid "Quiz"
-msgstr "Quiz"
-
-#: skbl/templates/layout.html:123
+#: skbl/templates/layout.html:122
 msgid "På "
 msgstr "In "
 
-#: skbl/templates/layout.html:153
+#: skbl/templates/layout.html:152
 msgid "Places"
 msgstr "Orter"
 
-#: skbl/templates/layout.html:168
+#: skbl/templates/layout.html:167
 msgid "Share page"
 msgstr "Dela sidan"
 
-#: skbl/templates/list.html:12
+#: skbl/templates/list.html:11
 msgid "of"
 msgstr "av"
 
-#: skbl/templates/list.html:27
+#: skbl/templates/list.html:26
 msgid "Articles in SKBL"
 msgstr "Artiklar i SKBL"
 
-#: skbl/templates/list.html:34
+#: skbl/templates/list.html:33
 msgid "No results found for"
 msgstr "Inga träffar för"
 
-#: skbl/templates/list.html:101
+#: skbl/templates/list.html:100
 msgid "Not all hits are shown."
 msgstr "Alla träffar visas inte."
 
-#: skbl/templates/list.html:101
+#: skbl/templates/list.html:100
 msgid "To see more hits, use Språkbanken's tool"
 msgstr "Vill du se fler, använd Språkbankens verktyg"
 
-#: skbl/templates/more_women.html:8
-msgid "is not part of this resource yet."
-msgstr "saknas än så länge i den här resursen."
+#~ msgid "More women"
+#~ msgstr "Fler kvinnor"
+
+#~ msgid "is not part of this resource yet."
+#~ msgstr "saknas än så länge i den här resursen."
