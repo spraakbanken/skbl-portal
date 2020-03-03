@@ -52,7 +52,8 @@ def karp_request(action):
     q = Request("%s/%s" % (current_app.config['KARP_BACKEND'], action))
     if current_app.config['DEBUG']:
         sys.stderr.write("\nREQUEST: %s/%s\n\n" % (current_app.config['KARP_BACKEND'], action))
-    q.add_header('Authorization', "Basic %s" % (current_app.config['KARP_AUTH_HASH']))
+    if current_app.config.get('USE_AUTH', False):
+        q.add_header('Authorization', "Basic %s" % (current_app.config['KARP_AUTH_HASH']))
     response = urlopen(q).read()
     data = json.loads(response.decode("UTF-8"))
     return data
