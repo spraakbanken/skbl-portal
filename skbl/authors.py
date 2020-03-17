@@ -2149,7 +2149,7 @@ authors_dict = {
         ]
     },
     "Kerstin Rydbeck": {
-        "sv": "professor i biblioteks- och informationsvetenskap, Umeå universitet",
+        "sv": "professor i biblioteks- och informationsvetenskap, Uppsala universitet",
         "publications": [
             "\"Folkbildningen - en heteronormativ historia eller...?\", i *Folkbildningens och ABF:s idéhistoria* (2018)",
         ]
