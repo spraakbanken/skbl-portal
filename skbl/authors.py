@@ -1951,7 +1951,7 @@ authors_dict = {
     },
 
     "Johan Andersson": {
-        "sv": "arkivare, Västerås stadsarkiv",
+        "sv": "arkivarie, Västerås stadsarkiv",
         "publications": [
             "\"Arkiv på undantag: Dispensarkivväsendet inom Uppsala landsarkivdistrikt\", i *Arkiv och konflikt: Landsarkivet i Uppsala i blickfånget under tidigt 1900-tal* (2008)",
         ]
@@ -2224,7 +2224,7 @@ authors_dict = {
         ]
     },
     "Fredrik Tersmeden": {
-        "sv": "arkivare",
+        "sv": "arkivarie",
         "publications": [
             "*Lundensare – Universitetsöden under fyra århundraden* (2018)",
         ]
