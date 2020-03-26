@@ -247,14 +247,6 @@ def make_placenames(places, lang="sv"):
     return make_alphabetic(places, processname, lang=lang)
 
 
-def make_alpha_more_women(women, sortnames=True, lang="sv"):
-    """Sort more-women list alphabetically and divide into first letters."""
-    def processname(item, results):
-        firstletter = rewrite_von(item[0])[0].upper()
-        results.append((firstletter, item))
-    return make_alphabetic(women, processname, sortnames=sortnames, lang=lang)
-
-
 def make_alphabetic(hits, processname, sortnames=False, lang="sv"):
     """
     Loop through hits, apply the function 'processname' on each object and then sort the result in alphabetical order.
@@ -443,10 +435,7 @@ def mk_links(text):
     try:
         text = re.sub(r'\[\]\((.*?)\)', r'[\1](\1)', text)
         for link in re.findall(r'\]\((.*?)\)', text):
-            if link in static_info.more_women:
-                text = re.sub(r'\(%s\)' % link, '(%s)' % url_for('views.more-women_' + g.language, linked_from=link), text)
-            else:
-                text = re.sub(r'\(%s\)' % link, '(%s)' % url_for('views.article_index_' + g.language, search=link), text)
+            text = re.sub(r'\(%s\)' % link, '(%s)' % url_for('views.article_index_' + g.language, search=link), text)
     except Exception:
         # If there are parenthesis within the links, problems will occur.
         text = text
