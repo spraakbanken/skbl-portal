@@ -375,9 +375,9 @@ def compute_emptycache(fields):
     user, pw = auth.username, auth.password
     postdata["username"] = user
     postdata["password"] = pw
-    postdata["checksum"] = md5(user + pw + current_app.config['SECRET_KEY'].encode()).hexdigest()
+    postdata["checksum"] = md5(user.encode() + pw.encode() + current_app.config['SECRET_KEY'].encode()).hexdigest()
     server = current_app.config['WSAUTH_URL']
-    contents = urlopen(server, urllib.parse.urlencode(postdata)).read()
+    contents = urlopen(server, urllib.parse.urlencode(postdata).encode()).read()
     auth_response = json.loads(contents)
     lexitems = auth_response.get("permitted_resources", {})
     rights = lexitems.get("lexica", {}).get(current_app.config['KARP_LEXICON'], {})
