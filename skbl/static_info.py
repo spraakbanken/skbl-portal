@@ -25,13 +25,13 @@ activities_reference_list = [
 infotexter = {
     "start": {
         "sv": u"""
-<p>Läs om 1 000 svenska kvinnor från medeltid till nutid.</p>
+<p>Läs om fler än 1 000 svenska kvinnor från medeltid till nutid.</p>
 <p>Genom olika sökningar kan du se vad de arbetade med, vilken utbildning de fick, vilka organisationer de var med i,
 hur de rörde sig i världen, vad de åstadkom och mycket mera.</p>
 <p>Alla har de bidragit till samhällets utveckling.</p>
         """,
         "en": u"""
-<p>Learn about 1000 Swedish women from the Middle Ages to the present day.</p>
+<p>Learn about more than 1000 Swedish women from the Middle Ages to the present day.</p>
 <p>Use the search function to reveal what these women were about, how they were educated, which organisations they belonged to,
 where they travelled, what they achieved, and much more.</p>
 <p>All of them contributed in a significant way to the development of Swedish society.</p>
