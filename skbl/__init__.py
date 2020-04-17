@@ -6,6 +6,7 @@ import re
 from flask import Flask, g, request, url_for
 from flask_babel import Babel
 from flask_compress import Compress
+import flask_reverse_proxy
 import html.parser
 from pylibmc import Client, ClientPool
 
@@ -89,6 +90,7 @@ def create_app():
     app.register_blueprint(views.bp)
     app.register_error_handler(Exception, views.page_not_found)
 
+    app.wsgi_app = flask_reverse_proxy.ReverseProxied(app.wsgi_app)
     return app
 
 
