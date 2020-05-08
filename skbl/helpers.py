@@ -335,7 +335,7 @@ def make_namelist(hits, exclude=set()):
         if hit['_id'] in exclude:
             continue
         # Seperate names from linked names
-        is_link = hit["_index"].startswith("skbl2links")
+        is_link = hit["_index"].startswith(current_app.config['SKBL_LINKS'])
         if is_link:
             name = hit["_source"]["name"].get("sortname", "")
             linked_name = join_name(hit["_source"])
@@ -368,7 +368,7 @@ def make_datelist(hits):
     """Extract information relevant for chronology list (same as make_namelist but without letter splitting)."""
     result = []
     for hit in hits:
-        is_link = hit["_index"].startswith("skbl2links")
+        is_link = hit["_index"].startswith(current_app.config['SKBL_LINKS'])
         if is_link:
             name = hit["_source"]["name"].get("sortname", "")
             linked_name = join_name(hit["_source"])
