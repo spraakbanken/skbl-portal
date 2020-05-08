@@ -86,7 +86,20 @@ h3 {
 
 @media (max-width: 800px) {
   #header-title h1{
-    display: none;
+    font-size: 2em;
+    margin-top: 10px;
+    text-align: center;
+  }
+  #logo img{
+    display: block;
+    margin: auto;
+  }
+  #search {
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  #navbar {
+    margin-bottom: 0px;
   }
 }
 
