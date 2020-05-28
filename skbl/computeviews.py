@@ -465,10 +465,10 @@ def make_email(form_data, mode="other"):
         text = "".join(text)
         subject = "Förslag för ny ingång i skbl.se"
     elif mode == "correction":
-        text = "%s har skickat följande meddelande:\n\n%s" % (name, form_data["message"])
+        text = "%s har skickat följande meddelande:\n\n%s" % (complete_sender, form_data["message"])
         subject = "Förslag till rättelse (skbl.se)"
     else:
-        text = "%s har skickat följande meddelande:\n\n%s" % (name, form_data["message"])
+        text = "%s har skickat följande meddelande:\n\n%s" % (complete_sender, form_data["message"])
         subject = "Förfrågan från skbl.se"
 
     html = text.replace("\n", "<br>")
@@ -481,7 +481,7 @@ def make_email(form_data, mode="other"):
 
     msg["Subject"] = subject
     msg["To"] = recipient
-    msg["From"] = "%s <%s>" % (name, email)
+    msg["From"] = sender
 
     server = smtplib.SMTP(current_app.config["EMAIL_SERVER"])
     server.sendmail(sender, recipient, msg.as_string())
