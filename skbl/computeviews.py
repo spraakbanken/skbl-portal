@@ -445,15 +445,19 @@ def make_email(form_data, mode="other"):
     name = form_data["name"].strip()
     email = form_data["email"].strip()
     recipient = current_app.config["EMAIL_RECIPIENT"]
+    complete_sender = "%s <%s>" % (name, email)
 
-    # If email adress contains non-ascii chars it won't be accepted by the server as sender
-    if helpers.is_ascii(email):
-        sender = "%s <%s>" % (name, email)
+    # If email adress contains non-ascii chars it won't be accepted by the server as sender.
+    # Non-ascii chars in the name will produce weirdness in the from-field.
+    if helpers.is_ascii(email) and helpers.is_ascii(name):
+        sender = complete_sender
+    elif helpers.is_ascii(email):
+        sender = email
     else:
         sender = recipient
 
     if mode == "suggestion":
-        text = ["%s har skickat in ett förslag för en ny SKBL-ingång.\n\n" % name]
+        text = ["%s har skickat in ett förslag för en ny SKBL-ingång.\n\n" % complete_sender]
         text.append("Förslag på kvinna: %s\n" % form_data["subject_name"])
         text.append("Kvinnas levnadstid: %s\n" % form_data["subject_lifetime"])
         text.append("Kvinnas verksamhet: %s\n" % form_data["subject_activity"])
