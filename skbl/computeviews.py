@@ -443,8 +443,14 @@ def compute_contact_form():
 def make_email(form_data, mode="other"):
     """Compose and send email from contact form."""
     name = form_data["name"].strip()
-    sender = "%s <%s>" % (name, form_data["email"])
+    email = form_data["email"].strip()
     recipient = current_app.config["EMAIL_RECIPIENT"]
+
+    # If email adress contains non-ascii chars it won't be accepted by the server as sender
+    if helpers.is_ascii(email):
+        sender = "%s <%s>" % (name, email)
+    else:
+        sender = recipient
 
     if mode == "suggestion":
         text = ["%s har skickat in ett förslag för en ny SKBL-ingång.\n\n" % name]
@@ -471,7 +477,7 @@ def make_email(form_data, mode="other"):
 
     msg["Subject"] = subject
     msg["To"] = recipient
-    msg["From"] = sender
+    msg["From"] = "%s <%s>" % (name, email)
 
     server = smtplib.SMTP(current_app.config["EMAIL_SERVER"])
     server.sendmail(sender, recipient, msg.as_string())
