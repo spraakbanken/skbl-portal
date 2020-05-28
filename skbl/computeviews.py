@@ -211,6 +211,7 @@ def compute_article(lang='', cache=True, url='', map=False):
         pass
     return art
 
+
 def compute_map(lang='', cache=True, url=''):
     """Compute article view."""
     helpers.set_language_switch_link("map", lang=lang)
@@ -441,47 +442,43 @@ def compute_contact_form():
 
 def make_email(form_data, mode="other"):
     """Compose and send email from contact form."""
-    email = form_data["email"]
-    msg = MIMEMultipart("alternative")
+    name = form_data["name"].strip()
+    sender = "%s <%s>" % (name, form_data["email"])
+    recipient = current_app.config["EMAIL_RECIPIENT"]
 
     if mode == "suggestion":
-        text = [u"%s har skickat in ett förslag för en ny SKBL-ingång.\n\n" % form_data["name"]]
-        text.append(u"Förslag på kvinna: %s\n" % form_data["subject_name"])
-        text.append(u"Kvinnas levnadstid: %s\n" % form_data["subject_lifetime"])
-        text.append(u"Kvinnas verksamhet: %s\n" % form_data["subject_activity"])
-        text.append(u"Motivering: %s\n" % form_data["motivation"])
-        text = u"".join(text)
-        subject = u"Förslag för ny ingång i skbl.se"
+        text = ["%s har skickat in ett förslag för en ny SKBL-ingång.\n\n" % name]
+        text.append("Förslag på kvinna: %s\n" % form_data["subject_name"])
+        text.append("Kvinnas levnadstid: %s\n" % form_data["subject_lifetime"])
+        text.append("Kvinnas verksamhet: %s\n" % form_data["subject_activity"])
+        text.append("Motivering: %s\n" % form_data["motivation"])
+        text = "".join(text)
+        subject = "Förslag för ny ingång i skbl.se"
     elif mode == "correction":
-        text = u"%s har skickat följande meddelande:\n\n%s" % (form_data["name"], form_data["message"])
-        subject = u"Förslag till rättelse (skbl.se)"
+        text = "%s har skickat följande meddelande:\n\n%s" % (name, form_data["message"])
+        subject = "Förslag till rättelse (skbl.se)"
     else:
-        text = u"%s har skickat följande meddelande:\n\n%s" % (form_data["name"], form_data["message"])
-        subject = u"Förfrågan från skbl.se"
+        text = "%s har skickat följande meddelande:\n\n%s" % (name, form_data["message"])
+        subject = "Förfrågan från skbl.se"
 
     html = text.replace("\n", "<br>")
     part1 = MIMEText(text, "plain", "utf-8")
     part2 = MIMEText(html, "html", "utf-8")
 
+    msg = MIMEMultipart("alternative")
     msg.attach(part1)
     msg.attach(part2)
 
     msg["Subject"] = subject
-    msg['To'] = current_app.config['EMAIL_RECIPIENT']
+    msg["To"] = recipient
+    msg["From"] = sender
 
-    # Work-around: things won't be as pretty if email adress contains non-ascii chars
-    if helpers.is_ascii(form_data["email"]):
-        msg['From'] = "%s <%s>" % (Header(form_data["name"], 'utf-8'), form_data["email"])
-    else:
-        msg['From'] = u"%s <%s>" % (form_data["name"], form_data["email"])
-        email = ""
-
-    server = smtplib.SMTP("localhost")
-    server.sendmail(email, [current_app.config['EMAIL_RECIPIENT']], msg.as_string())
+    server = smtplib.SMTP(current_app.config["EMAIL_SERVER"])
+    server.sendmail(sender, recipient, msg.as_string())
     server.quit()
 
     # Render user feedback
     return render_template("form_submitted.html",
                            title=gettext("Thank you for your feedback") + "!",
-                           headline=gettext("Thank you for your feedback") + ", " + form_data["name"].strip() + "!",
+                           headline=gettext("Thank you for your feedback") + ", " + name + "!",
                            text=gettext("We will get back to you as soon as we can."))
