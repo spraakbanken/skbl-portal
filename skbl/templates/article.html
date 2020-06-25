@@ -104,6 +104,11 @@
         {% set article_subtitle = get_lang_text(article.subtitle, article.subtitle_eng, g.language) %}
         {% if article_subtitle %}<h4 itemprop="jobTitle">{{ article_subtitle | safe}}</h4>{% endif %}
         <div class="main_text">
+
+            {% if g.language == "en" and not article.text_eng %}
+            <p><em>This article is awaiting translation</em></p>
+            {% endif %}
+
             {% set article_text = get_lang_text(article.text, article.text_eng, g.language) %}
             {% if article_text %}{{ article_text | safe }}{% endif %}
         </div>
