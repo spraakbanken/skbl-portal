@@ -101,6 +101,9 @@ h3 {
   #navbar {
     margin-bottom: 0px;
   }
+  .searchtooltip {
+    display: none;
+  }
 }
 
 @media (min-width: 800px) {
@@ -116,6 +119,40 @@ h3 {
     margin-top: 10px;
     max-width: 300px;
     float: right;
+  }
+
+  .tooltip-parent {
+    position: relative;
+    display: inline-block;
+  }
+  .tooltip-parent .searchtooltip {
+    visibility: hidden;
+    width: 100%;
+    background-color: #ffc930;
+    color: #000;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 5px;
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    margin-top: 7px;
+  }
+  .tooltip-parent .searchtooltip:before {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    position: absolute;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #ffc930;
+    left: 48%;
+    top: -7px;
+  }
+
+  .tooltip-parent:hover .searchtooltip {
+    visibility: visible;
   }
 }
 
