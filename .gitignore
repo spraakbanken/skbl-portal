@@ -2,7 +2,7 @@ skbl/config.cfg
 
 # Configs
 config.cfg
-skbl/auth.wsgi
+auth.wsgi
 
 # Memcached stuff
 libevent*
