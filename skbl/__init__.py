@@ -1,13 +1,12 @@
-# -*- coding: utf-8 -*
 """Initialise Flask application."""
+import html.parser
 import os
 import re
 
+import flask_reverse_proxy
 from flask import Flask, g, request, url_for
 from flask_babel import Babel
 from flask_compress import Compress
-import flask_reverse_proxy
-import html.parser
 from pylibmc import Client, ClientPool
 
 

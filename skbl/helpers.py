@@ -1,59 +1,58 @@
-# -*- coding=utf-8 -*-
 """Define different helper functions."""
 
 import datetime
+import json
 import re
 import sys
 import urllib.parse
 from urllib.request import Request, urlopen
 
-from flask import url_for, current_app, render_template, g, request, make_response
-from flask_babel import gettext
 import icu
-import json
 import markdown
+from flask import current_app, g, make_response, render_template, request, url_for
+from flask_babel import gettext
 
 from . import static_info
 
 
-def set_language_switch_link(route, fragment=None, lang=''):
+def set_language_switch_link(route, fragment=None, lang=""):
     """Fix address and label for language switch button."""
     if not lang:
         lang = g.language
-    if lang == 'en':
-        g.switch_language = {'url': url_for("views." + route + '_sv'), 'label': 'Svenska'}
+    if lang == "en":
+        g.switch_language = {"url": url_for("views." + route + "_sv"), "label": "Svenska"}
     else:
-        g.switch_language = {'url': url_for("views." + route + '_en'), 'label': 'English'}
+        g.switch_language = {"url": url_for("views." + route + "_en"), "label": "English"}
     if fragment is not None:
-        g.switch_language['url'] += '/' + fragment
+        g.switch_language["url"] += "/" + fragment
 
 
-def cache_name(pagename, lang=''):
+def cache_name(pagename, lang=""):
     """Get page from cache."""
     if not lang:
-        lang = 'sv' if 'sv' in request.url_rule.rule else 'en'
-    return '%s_%s' % (pagename, lang)
+        lang = "sv" if "sv" in request.url_rule.rule else "en"
+    return "%s_%s" % (pagename, lang)
 
 
 def karp_query(action, query, mode=None):
     """Generate query and send request to Karp."""
     if not mode:
-        mode = current_app.config['KARP_MODE']
-    query['mode'] = mode
-    query['resource'] = current_app.config['KARP_LEXICON']
-    if 'size' not in query:
-        query['size'] = current_app.config['RESULT_SIZE']
+        mode = current_app.config["KARP_MODE"]
+    query["mode"] = mode
+    query["resource"] = current_app.config["KARP_LEXICON"]
+    if "size" not in query:
+        query["size"] = current_app.config["RESULT_SIZE"]
     params = urllib.parse.urlencode(query)
     return karp_request("%s?%s" % (action, params))
 
 
 def karp_request(action):
     """Send request to Karp backend."""
-    q = Request("%s/%s" % (current_app.config['KARP_BACKEND'], action))
-    if current_app.config['DEBUG']:
-        sys.stderr.write("\nREQUEST: %s/%s\n\n" % (current_app.config['KARP_BACKEND'], action))
-    if current_app.config.get('USE_AUTH', False):
-        q.add_header('Authorization', "Basic %s" % (current_app.config['KARP_AUTH_HASH']))
+    q = Request("%s/%s" % (current_app.config["KARP_BACKEND"], action))
+    if current_app.config["DEBUG"]:
+        sys.stderr.write("\nREQUEST: %s/%s\n\n" % (current_app.config["KARP_BACKEND"], action))
+    if current_app.config.get("USE_AUTH", False):
+        q.add_header("Authorization", "Basic %s" % (current_app.config["KARP_AUTH_HASH"]))
     response = urlopen(q).read()
     data = json.loads(response.decode("UTF-8"))
     return data
@@ -64,24 +63,24 @@ def karp_fe_url():
     return current_app.config["KARP_FRONTEND"] + "/#?mode=" + current_app.config["KARP_MODE"]
 
 
-def serve_static_page(page, title=''):
+def serve_static_page(page, title=""):
     """Serve static html."""
     set_language_switch_link(page)
     with current_app.open_resource("static/pages/%s/%s.html" % (page, g.language)) as f:
         data = f.read().decode("UTF-8")
 
-    return render_template('page_static.html',
+    return render_template("page_static.html",
                            content=data,
                            title=title)
 
 
-def check_cache(page, lang=''):
+def check_cache(page, lang=""):
     """
     Check if page is in cache.
 
     If the cache should not be used, return None.
     """
-    if current_app.config['TEST']:
+    if current_app.config["TEST"]:
         return None
     try:
         with g.mc_pool.reserve() as client:
@@ -97,38 +96,38 @@ def check_cache(page, lang=''):
     return None
 
 
-def set_cache(page, name='', lang='', no_hits=0):
+def set_cache(page, name="", lang="", no_hits=0):
     """
     Browser cache handling.
 
     Add header to the response.
     May also add the page to the memcache.
     """
-    pagename = cache_name(name, lang='')
-    if no_hits >= current_app.config['CACHE_HIT_LIMIT']:
+    pagename = cache_name(name, lang="")
+    if no_hits >= current_app.config["CACHE_HIT_LIMIT"]:
         try:
             with g.mc_pool.reserve() as client:
-                client.set(pagename, page, time=current_app.config['LOW_CACHE_TIME'])
+                client.set(pagename, page, time=current_app.config["LOW_CACHE_TIME"])
         except Exception:
             # TODO what to do??
             pass
     r = make_response(page)
-    r.headers.set('Cache-Control', "public, max-age=%s" %
-                  current_app.config['BROWSER_CACHE_TIME'])
+    r.headers.set("Cache-Control", "public, max-age=%s" %
+                  current_app.config["BROWSER_CACHE_TIME"])
     return r
 
 
 def get_first_name(source):
     """Return the given name (first name)."""
-    return re.sub('/', '', source['name'].get('firstname', '')).strip()
+    return re.sub("/", "", source["name"].get("firstname", "")).strip()
 
 
 def format_names(source, fmt="strong"):
     """Return the given name (first name), and the formatted callingname (tilltalsnamnet)."""
     if fmt:
-        return re.sub('(.*)/(.+)/(.*)', r'\1<%s>\2</%s>\3' % (fmt, fmt), source['name'].get('firstname', ''))
+        return re.sub("(.*)/(.+)/(.*)", r"\1<%s>\2</%s>\3" % (fmt, fmt), source["name"].get("firstname", ""))
     else:
-        return re.sub('(.*)/(.+)/(.*)', r'\1\2\3', source['name'].get('firstname', ''))
+        return re.sub("(.*)/(.+)/(.*)", r"\1\2\3", source["name"].get("firstname", ""))
 
 
 def get_life_range(source):
@@ -138,17 +137,17 @@ def get_life_range(source):
     Return empty strings if not available.
     """
     years = []
-    for event in ['from', 'to']:
-        if source['lifespan'].get(event):
-            date = source['lifespan'][event].get('date', '')
+    for event in ["from", "to"]:
+        if source["lifespan"].get(event):
+            date = source["lifespan"][event].get("date", "")
             if date:
-                date = date.get('comment', '')
-            if "-" in date and not re.search('[a-zA-Z]', date):
+                date = date.get("comment", "")
+            if "-" in date and not re.search("[a-zA-Z]", date):
                 year = date[:date.find("-")]
             else:
                 year = date
         else:
-            year = ''
+            year = ""
         years.append(year)
 
     return years[0], years[1]
@@ -161,22 +160,21 @@ def get_life_range_force(source):
     Try to also parse non-dates like "ca. 1500-talet".
     Return -1, 1000000 if not available.
     """
-
     default_born = -1
     default_died = 1000000
 
     def convert(event, retval):
-        if source['lifespan'].get(event):
-            date = source['lifespan'][event].get('date', '')
+        if source["lifespan"].get(event):
+            date = source["lifespan"][event].get("date", "")
             if date:
-                date = date.get('comment', '')
+                date = date.get("comment", "")
                 match = re.search(r".*(\d{4}).*", date)
                 if match:
                     retval = int(match.group(1))
         return retval
 
-    born = convert('from', default_born)
-    dead = convert('to', default_died)
+    born = convert("from", default_born)
+    dead = convert("to", default_died)
 
     # Sorting hack: if there is no birth year, set it to dead -100 (and vice versa)
     # to make is appear in a more reasonable position in the chronology
@@ -191,11 +189,11 @@ def get_life_range_force(source):
 def get_date(source):
     """Get birth and death date if available. Return empty strings otherwise."""
     dates = []
-    for event in ['from', 'to']:
-        if source['lifespan'][event].get('date'):
-            date = source['lifespan'][event]['date'].get('comment', '')
+    for event in ["from", "to"]:
+        if source["lifespan"][event].get("date"):
+            date = source["lifespan"][event]["date"].get("comment", "")
         else:
-            date = ''
+            date = ""
         dates.append(date)
 
     return dates[0], dates[1]
@@ -216,20 +214,20 @@ def group_by_type(objlist, name):
     newdict = {}
     for obj in objlist:
         val = obj.get(name, "")
-        key_sv = obj.get('type', u'Övrigt')
-        key_en = obj.get('type_eng', u'Other')
+        key_sv = obj.get("type", "Övrigt")
+        key_en = obj.get("type_eng", "Other")
         if key_sv not in newdict:
             newdict[key_sv] = (key_en, [])
         newdict[key_sv][1].append(val)
     result = []
     for key, val in list(newdict.items()):
-        result.append({'type': key, 'type_eng': val[0], name: ', '.join(val[1])})
+        result.append({"type": key, "type_eng": val[0], name: ", ".join(val[1])})
     return result
 
 
 def make_alphabetical_bucket(result, sortnames=False, lang="sv"):
     def processname(bucket, results):
-        results.append((bucket[0].replace(u"von ", "")[0].upper(), bucket))
+        results.append((bucket[0].replace("von ", "")[0].upper(), bucket))
     return make_alphabetic(result, processname, sortnames=sortnames, lang=lang)
 
 
@@ -242,7 +240,7 @@ def rewrite_von(name):
 
 def make_placenames(places, lang="sv"):
     def processname(hit, results):
-        name = hit['name'].strip()
+        name = hit["name"].strip()
         results.append((name[0].upper(), (name, hit)))
     return make_alphabetic(places, processname, lang=lang)
 
@@ -268,16 +266,16 @@ def make_alphabetic(hits, processname, sortnames=False, lang="sv"):
     letter_results = {}
     # Split the result into start letters
     for first_letter, result in results:
-        if first_letter == u'Ø':
-            first_letter = u'Ö'
-        if first_letter == u'Æ':
-            first_letter = u'Ä'
-        if first_letter == u'Ü':
-            first_letter = u'Y'
-        if lang == "en" and first_letter == u"Ö":
-            first_letter = u"O"
-        if lang == "en" and first_letter in u"ÄÅ":
-            first_letter = u"A"
+        if first_letter == "Ø":
+            first_letter = "Ö"
+        if first_letter == "Æ":
+            first_letter = "Ä"
+        if first_letter == "Ü":
+            first_letter = "Y"
+        if lang == "en" and first_letter == "Ö":
+            first_letter = "O"
+        if lang == "en" and first_letter in "ÄÅ":
+            first_letter = "A"
         if first_letter not in letter_results:
             letter_results[first_letter] = [result]
         else:
@@ -285,10 +283,10 @@ def make_alphabetic(hits, processname, sortnames=False, lang="sv"):
 
     # Sort result dictionary alphabetically into list
     if lang == "en":
-        collator = icu.Collator.createInstance(icu.Locale('en_EN.UTF-8'))
+        collator = icu.Collator.createInstance(icu.Locale("en_EN.UTF-8"))
     else:
-        collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
-    for n, items in list(letter_results.items()):
+        collator = icu.Collator.createInstance(icu.Locale("sv_SE.UTF-8"))
+    for _n, items in list(letter_results.items()):
         if sortnames:
             items.sort(key=lambda x: collator.getSortKey(fix_lastname(x[0]) + " " + x[1]))
         else:
@@ -306,17 +304,17 @@ def make_simplenamelist(hits):
     """
     results = []
     used = set()
-    for order, hit in enumerate(hits["hits"]):
+    for _order, hit in enumerate(hits["hits"]):
         # ToDo: Ranking of search results partly broken!
         # hitfields = hit["highlight"]
-        # score = sum(1 for field in hitfields if field.startswith('name.'))
-        score = None
+        # score = sum(1 for field in hitfields if field.startswith("name."))
+        score = 0
         if score:
             name = join_name(hit["_source"], mk_bold=True)
             liferange = get_life_range(hit["_source"])
             subtitle = hit["_source"].get("subtitle", "")
             subtitle_eng = hit["_source"].get("subtitle_eng", "")
-            subject_id = hit["_source"].get('url') or hit["_id"]
+            subject_id = hit["_source"].get("url") or hit["_id"]
             results.append((-score, name, liferange, subtitle, subtitle_eng, subject_id))
             used.add(hit["_id"])
     return sorted(results), used
@@ -332,10 +330,10 @@ def make_namelist(hits, exclude=set()):
     first_letters = []  # list only containing letters in alphabetical order
     current_letterlist = []  # list containing entries starting with the same letter
     for hit in hits["hits"]:
-        if hit['_id'] in exclude:
+        if hit["_id"] in exclude:
             continue
         # Seperate names from linked names
-        is_link = hit["_index"].startswith(current_app.config['SKBL_LINKS'])
+        is_link = hit["_index"].startswith(current_app.config["SKBL_LINKS"])
         if is_link:
             name = hit["_source"]["name"].get("sortname", "")
             linked_name = join_name(hit["_source"])
@@ -346,7 +344,7 @@ def make_namelist(hits, exclude=set()):
         liferange = get_life_range(hit["_source"])
         subtitle = hit["_source"].get("subtitle", "")
         subtitle_eng = hit["_source"].get("subtitle_eng", "")
-        subject_id = hit["_source"].get('url') or hit["_id"]
+        subject_id = hit["_source"].get("url") or hit["_id"]
 
         # Get first letter from sort[0]
         firstletter = hit["sort"][1].upper()
@@ -368,7 +366,7 @@ def make_datelist(hits):
     """Extract information relevant for chronology list (same as make_namelist but without letter splitting)."""
     result = []
     for hit in hits:
-        is_link = hit["_index"].startswith(current_app.config['SKBL_LINKS'])
+        is_link = hit["_index"].startswith(current_app.config["SKBL_LINKS"])
         if is_link:
             name = hit["_source"]["name"].get("sortname", "")
             linked_name = join_name(hit["_source"])
@@ -379,7 +377,7 @@ def make_datelist(hits):
         liferange = get_life_range(hit["_source"])
         subtitle = hit["_source"].get("subtitle", "")
         subtitle_eng = hit["_source"].get("subtitle_eng", "")
-        subject_id = hit["_source"].get('url') or hit["_id"]
+        subject_id = hit["_source"].get("url") or hit["_id"]
 
         result.append((is_link, name, linked_name, liferange, subtitle, subtitle_eng, subject_id))
     return result
@@ -388,8 +386,8 @@ def make_datelist(hits):
 def join_name(source, mk_bold=False):
     """Retrieve and format name from source."""
     name = []
-    lastname = source["name"].get("lastname", '')
-    match = re.search('(von |af |)(.*)', lastname)
+    lastname = source["name"].get("lastname", "")
+    match = re.search("(von |af |)(.*)", lastname)
     vonaf = match.group(1)
     lastname = match.group(2)
     if lastname:
@@ -400,7 +398,7 @@ def join_name(source, mk_bold=False):
     if mk_bold:
         name.append(format_names(source, fmt="strong"))
     else:
-        name.append(source['name'].get('firstname', ''))
+        name.append(source["name"].get("firstname", ""))
     name.append(vonaf)
     return " ".join(name)
 
@@ -410,7 +408,7 @@ def sort_places(stat_table, route):
     # Work in progress! Waiting for translation list.
     # Or should this be part of the data instead??
     place_translations = {
-        u"Göteborg": "Gothenburg"
+        "Göteborg": "Gothenburg"
     }
 
     if "place" in route.rule:
@@ -425,7 +423,7 @@ def sort_places(stat_table, route):
         for d in stat_table:
             d["display_name"] = d["name"]
 
-    stat_table.sort(key=lambda x: x.get('name').strip())
+    stat_table.sort(key=lambda x: x.get("name").strip())
     return stat_table
 
 
@@ -433,9 +431,9 @@ def mk_links(text):
     """Fix display of links within an article text."""
     # TODO markdown should fix this itself
     try:
-        text = re.sub(r'\[\]\((.*?)\)', r'[\1](\1)', text)
-        for link in re.findall(r'\]\((.*?)\)', text):
-            text = re.sub(r'\(%s\)' % link, '(%s)' % url_for('views.article_index_' + g.language, search=link), text)
+        text = re.sub(r"\[\]\((.*?)\)", r"[\1](\1)", text)
+        for link in re.findall(r"\]\((.*?)\)", text):
+            text = re.sub(r"\(%s\)" % link, "(%s)" % url_for("views.article_index_" + g.language, search=link), text)
     except Exception:
         # If there are parenthesis within the links, problems will occur.
         text = text
@@ -444,8 +442,8 @@ def mk_links(text):
 
 def unescape(text):
     """Unescape some html chars."""
-    text = re.sub('&gt;', r'>', text)
-    text = re.sub('&apos;', r"'", text)
+    text = re.sub("&gt;", r">", text)
+    text = re.sub("&apos;", r"'", text)
     return text
 
 
@@ -468,53 +466,53 @@ def aggregate_by_type(items, use_markdown=False):
 
 def collapse_kids(source):
     unkown_kids = 0
-    for relation in source.get('relation', []):
-        if relation.get('type') == 'Barn' and len(list(relation.keys())) == 1:
+    for relation in source.get("relation", []):
+        if relation.get("type") == "Barn" and len(list(relation.keys())) == 1:
             unkown_kids += 1
-            relation['hide'] = True
+            relation["hide"] = True
     if unkown_kids:
-        source['collapsedrelation'] = [{"type": "Barn", "count": unkown_kids}]
+        source["collapsedrelation"] = [{"type": "Barn", "count": unkown_kids}]
 
 
 def make_placelist(hits, placename, lat, lon):
     grouped_results = {}
     for hit in hits["hits"]:
         source = hit["_source"]
-        hit['url'] = source.get('url') or hit['_id']
-        placelocations = {gettext("Residence"): source.get('places', []),
-                          gettext("Place of activity"): source.get('occupation', []),
-                          gettext("Place of education"): source.get('education', []),
-                          gettext("Contacts"): source.get('contact', []),
-                          gettext("Birthplace"): [source.get('lifespan', {}).get("from", {})],
-                          gettext("Place of death"): [source.get('lifespan', {}).get("to", {})]
+        hit["url"] = source.get("url") or hit["_id"]
+        placelocations = {gettext("Residence"): source.get("places", []),
+                          gettext("Place of activity"): source.get("occupation", []),
+                          gettext("Place of education"): source.get("education", []),
+                          gettext("Contacts"): source.get("contact", []),
+                          gettext("Birthplace"): [source.get("lifespan", {}).get("from", {})],
+                          gettext("Place of death"): [source.get("lifespan", {}).get("to", {})]
                           }
 
         for ptype, places in list(placelocations.items()):
-            names = dict([(place.get('place', {}).get('place', '').strip(),
-                           place.get('place', {}).get('pin', {})) for place in places])
+            names = dict([(place.get("place", {}).get("place", "").strip(),
+                           place.get("place", {}).get("pin", {})) for place in places])
             # Check if the name and the lat, lon is correct
             # (We can't ask karp of this, since it would be a nested query)
             if placename in names:
                 # Coordinates! If coordinates are used, uncomment the two lines below
-                # if names[placename].get('lat') == float(lat)\
-                #    and names[placename].get('lon') == float(lon):
+                # if names[placename].get("lat") == float(lat)\
+                #    and names[placename].get("lon") == float(lon):
                 if ptype not in grouped_results:
                     grouped_results[ptype] = []
                 grouped_results[ptype].append((join_name(hit["_source"], mk_bold=True), hit))
                 # else:
                 #     # These two lines should be removed, but are kept for debugging
-                #     if 'Fel' not in grouped_results: grouped_results['Fel'] = []
-                #     grouped_results['Fel'].append((join_name(source), hit))
+                #     if "Fel" not in grouped_results: grouped_results["Fel"] = []
+                #     grouped_results["Fel"].append((join_name(source), hit))
 
     # Sort result dictionary alphabetically into list
-    collator = icu.Collator.createInstance(icu.Locale('sv_SE.UTF-8'))
-    for n, items in list(grouped_results.items()):
+    collator = icu.Collator.createInstance(icu.Locale("sv_SE.UTF-8"))
+    for _n, items in list(grouped_results.items()):
         items.sort(key=lambda x: collator.getSortKey(x[0]))
     grouped_results = sorted(list(grouped_results.items()), key=lambda x: collator.getSortKey(x[0]))
 
     # These two lines should be removed, but are kept for debugging
     # if not grouped_results:
-    #     grouped_results = [('Fel', [(join_name(hit['_source']), hit) for hit in hits['hits']])]
+    #     grouped_results = [("Fel", [(join_name(hit["_source"]), hit) for hit in hits["hits"]])]
     return grouped_results
 
 
@@ -551,9 +549,9 @@ def get_lang_text(json_swe, json_eng, ui_lang):
 
 def get_shorttext(text):
     """Get the initial 200 characters of text. Remove HTML and line breaks."""
-    shorttext = re.sub(r'<.*?>|\n|\t', ' ', text)
+    shorttext = re.sub(r"<.*?>|\n|\t", " ", text)
     shorttext = shorttext.strip()
-    shorttext = re.sub(r'  ', ' ', shorttext)
+    shorttext = re.sub(r"  ", " ", shorttext)
     return shorttext[:200]
 
 
@@ -566,6 +564,7 @@ def get_org_name(organisation):
 
 
 def lowersorted(xs):
+    """Sort case-insentitively."""
     return sorted(xs, key=lambda x: x[0].lower())
 
 
