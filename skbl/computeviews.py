@@ -305,6 +305,8 @@ def compute_artikelforfattare(infotext="", description="", lang="", cache=True, 
     stoplist = {
         "Grevesmühl,Kajsa": True,
         "Ohrlander,Anders": True,
+        "Petré,Stefan": True,
+        "Hammenbeck,Margareta": True,
         "Myrberg Burström,Mats": True,
         "Burström,Nanouschka": True,
         "Ljung,Yvonne": True,
