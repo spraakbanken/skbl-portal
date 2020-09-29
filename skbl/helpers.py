@@ -14,6 +14,8 @@ from flask_babel import gettext
 
 from . import static_info
 
+VONAV_LIST = ["von", "af", "av"]
+
 
 def set_language_switch_link(route, fragment=None, lang=""):
     """Fix address and label for language switch button."""
@@ -227,21 +229,22 @@ def group_by_type(objlist, name):
 
 def make_alphabetical_bucket(result, sortnames=False, lang="sv"):
     def processname(bucket, results):
-        results.append((bucket[0].replace("von ", "")[0].upper(), bucket))
+        vonaf_pattern = re.compile(r"^(%s) " % "|".join(VONAV_LIST))
+        name = re.sub(vonaf_pattern, r"", bucket[0])
+        results.append(name[0].upper(), bucket)
     return make_alphabetic(result, processname, sortnames=sortnames, lang=lang)
 
 
 def rewrite_von(name):
     """Move 'von' and 'av' to end of name."""
-    name = re.sub(r"^von (.+)$", r"\1 von", name)
-    name = re.sub(r"^af (.+)$", r"\1 af", name)
-    return name
+    vonaf_pattern = re.compile(r"^(%s) (.+)$" % "|".join(VONAV_LIST))
+    return re.sub(vonaf_pattern, r"\2 \1", name)
 
 
 def make_placenames(places, lang="sv"):
     def processname(hit, results):
         name = hit["name"].strip()
-        results.append((name[0].upper(), (name, hit)))
+        results.append(name[0].upper(), (name, hit))
     return make_alphabetic(places, processname, lang=lang)
 
 
@@ -256,7 +259,8 @@ def make_alphabetic(hits, processname, sortnames=False, lang="sv"):
     is what the html-template want e.g. a pair of (name, no_hits)
     """
     def fix_lastname(name):
-        name = re.sub(r"(^von )|(^af )", r"", name)
+        vonaf_pattern = re.compile(r"^(%s) " % "|".join(VONAV_LIST))
+        name = re.sub(vonaf_pattern, r"", name)
         return name.replace(" ", "z")
 
     results = []
@@ -387,7 +391,8 @@ def join_name(source, mk_bold=False):
     """Retrieve and format name from source."""
     name = []
     lastname = source["name"].get("lastname", "")
-    match = re.search("(von |af |)(.*)", lastname)
+    vonaf_pattern = re.compile(r"(%s |)(.*)" % " |".join(VONAV_LIST))
+    match = re.search(vonaf_pattern, lastname)
     vonaf = match.group(1)
     lastname = match.group(2)
     if lastname:

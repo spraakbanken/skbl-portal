@@ -469,7 +469,7 @@ def find_link(searchstring):
             fornamn = " ".join(parts[0:-1])
             prefix = ""
             last_fornamn = fornamn.split(" ")[-1]
-            if last_fornamn == "von" or last_fornamn == "af":
+            if last_fornamn in helpers.VONAV_LIST:
                 fornamn = " ".join(fornamn.split(" ")[0:-1])
                 prefix = last_fornamn + " "
             efternamn = prefix + parts[-1]
