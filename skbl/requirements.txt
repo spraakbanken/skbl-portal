@@ -15,7 +15,7 @@ itsdangerous==1.1.0       # via flask
 jinja2==2.10.1            # via flask, flask-babel
 markdown==3.2.1           # via -r skbl/requirements.in
 markupsafe==1.1.1         # via jinja2
-pyicu==1.9.7              # via -r skbl/requirements.in
+pyicu==2.5                # via -r skbl/requirements.in
 pylibmc==1.6.0            # via -r skbl/requirements.in
 pytz==2019.1              # via babel
 werkzeug==0.16.1          # via -r skbl/requirements.in, flask

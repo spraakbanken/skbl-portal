@@ -20,6 +20,5 @@ gunicorn
 markdown
 pylibmc
 werkzeug>=0.15.5,<1.0.0
-PyICU==1.9.7
 
-#PyICU==1.9.7  # Must probably be installed manually
+PyICU==2.5  # Must probably be installed manually
