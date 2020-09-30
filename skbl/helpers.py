@@ -52,7 +52,7 @@ def karp_request(action):
     """Send request to Karp backend."""
     q = Request("%s/%s" % (current_app.config["KARP_BACKEND"], action))
     if current_app.config["DEBUG"]:
-        sys.stderr.write("\nREQUEST: %s/%s\n\n" % (current_app.config["KARP_BACKEND"], action))
+        log("%s/%s\n" % (current_app.config["KARP_BACKEND"], action), "REQUEST")
     if current_app.config.get("USE_AUTH", False):
         q.add_header("Authorization", "Basic %s" % (current_app.config["KARP_AUTH_HASH"]))
     response = urlopen(q).read()
@@ -231,7 +231,7 @@ def make_alphabetical_bucket(result, sortnames=False, lang="sv"):
     def processname(bucket, results):
         vonaf_pattern = re.compile(r"^(%s) " % "|".join(VONAV_LIST))
         name = re.sub(vonaf_pattern, r"", bucket[0])
-        results.append(name[0].upper(), bucket)
+        results.append((name[0].upper(), bucket))
     return make_alphabetic(result, processname, sortnames=sortnames, lang=lang)
 
 
@@ -244,7 +244,7 @@ def rewrite_von(name):
 def make_placenames(places, lang="sv"):
     def processname(hit, results):
         name = hit["name"].strip()
-        results.append(name[0].upper(), (name, hit))
+        results.append((name[0].upper(), (name, hit)))
     return make_alphabetic(places, processname, lang=lang)
 
 
@@ -585,3 +585,11 @@ def get_infotext(text, rule):
         return textobj.get("sv")
     else:
         return textobj.get("en", textobj.get("sv"))
+
+
+def log(data, msg=""):
+    """Log data to stderr."""
+    if msg:
+        sys.stderr.write("\n" + msg + ": " + str(data) + "\n")
+    else:
+        sys.stderr.write("\n" + str(data) + "\n")

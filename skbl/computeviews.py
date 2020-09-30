@@ -350,7 +350,7 @@ def bucketcall(queryfield="", name="", title="", sortby="", lastnamefirst=False,
     if sortby:
         stat_table.sort(key=sortby)
     else:
-        stat_table.sort()
+        stat_table.sort(key=lambda x: x[0])
     if lastnamefirst:
         stat_table = [[kw[1] + ",", kw[0], kw[2]] for kw in stat_table]
     # if showfield:
