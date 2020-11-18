@@ -2141,7 +2141,7 @@ authors_dict = {
             "*Minnen från vår samtid. Arkeologi, materialitet och samtidshistoria* (2014)",
         ]
     },
-    "Per-Olov Qvist": {
+    "Per Olov Qvist": {
         "sv": "filosofie doktor i filmvetenskap",
         "publications": [
             "*Folkhemmets bilder. Modernisering, motstånd och mentalitet i den svenska 30-talsfilmen* (1995)",
