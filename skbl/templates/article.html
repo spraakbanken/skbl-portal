@@ -414,26 +414,26 @@
             {% if len_places <= 4 %}
                 <ul>
                     {% if birthplace %}
-                        <li class="keyword_list_item"> {{gettext('Birthplace')}}: {{birthplace}}</li>
+                        <li class="keyword_list_item"> {{gettext('Birthplace')}}: {{birthplace | deescape}}</li>
                     {% endif %}
                         {% for place in article.places %}
                             {{ placeMacro(place) }}
                         {% endfor %}
                     {% if deathplace %}
-                        <li class="keyword_list_item"> {{gettext('Place of death')}}: {{deathplace}}</li>
+                        <li class="keyword_list_item"> {{gettext('Place of death')}}: {{deathplace | deescape}}</li>
                     {% endif %}
                 </ul>
             {% else %}
                 <div style="display:none" class="nested_container hidden_first">
                     <ul>
                         {% if birthplace %}
-                            <li class="keyword_list_item"> {{gettext('Birthplace')}}: {{birthplace}}</li>
+                            <li class="keyword_list_item"> {{gettext('Birthplace')}}: {{birthplace | deescape}}</li>
                         {% endif %}
                             {% for place in article.places %}
                                 {{ placeMacro(place) }}
                             {% endfor %}
                         {% if deathplace %}
-                            <li class="keyword_list_item"> {{gettext('Place of death')}}: {{deathplace}}</li>
+                            <li class="keyword_list_item"> {{gettext('Place of death')}}: {{deathplace | deescape}}</li>
                         {% endif %}
                     </ul>
                     <div class="minimize_items">
@@ -443,7 +443,7 @@
                 <div style="" class="nested_container shown_first">
                     <ul>
                         {% if birthplace %}
-                            <li class="keyword_list_item"> {{gettext('Birthplace')}}: {{birthplace}}</li>
+                            <li class="keyword_list_item"> {{gettext('Birthplace')}}: {{birthplace | deescape}}</li>
                         {% endif %}
                         {% for place in article.places %}
                           {% if loop.index < 3 %}
