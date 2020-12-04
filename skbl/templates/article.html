@@ -53,8 +53,8 @@
 {% macro placeMacro(place) %}
     <li class="keyword_list_item">
         {% if place.place %}
-            <h5 class="toggled-by-button">{{place.place.place}}</h5>
-            <h5 class="toggled-by-button" style="display:none">{{place.place.place}}
+            <h5 class="toggled-by-button">{{place.place.place | deescape}}</h5>
+            <h5 class="toggled-by-button" style="display:none">{{place.place.place | deescape}}
             {% if place.get("from")%} {% set from = place.get("from").get("comment") %} {% else %} {% set from = "" %} {% endif %}
             {% if place.get("to")%} {% set to = place.get("to").get("comment") %} {% else %} {% set to = "" %} {% endif %}
             {% if from or to %} ({{from}} – {{to}}){% endif %}</h5>
@@ -417,7 +417,7 @@
                         <li class="keyword_list_item"> {{gettext('Birthplace')}}: {{birthplace | deescape}}</li>
                     {% endif %}
                         {% for place in article.places %}
-                            {{ placeMacro(place) }}
+                            {{ placeMacro(place)}}
                         {% endfor %}
                     {% if deathplace %}
                         <li class="keyword_list_item"> {{gettext('Place of death')}}: {{deathplace | deescape}}</li>
@@ -430,7 +430,7 @@
                             <li class="keyword_list_item"> {{gettext('Birthplace')}}: {{birthplace | deescape}}</li>
                         {% endif %}
                             {% for place in article.places %}
-                                {{ placeMacro(place) }}
+                                {{ placeMacro(place)}}
                             {% endfor %}
                         {% if deathplace %}
                             <li class="keyword_list_item"> {{gettext('Place of death')}}: {{deathplace | deescape}}</li>
@@ -447,7 +447,7 @@
                         {% endif %}
                         {% for place in article.places %}
                           {% if loop.index < 3 %}
-                            {{ placeMacro(place) }}
+                            {{ placeMacro(place)}}
                           {% endif %}
                         {% endfor %}
                     </ul>
@@ -468,14 +468,14 @@
             {% if len(article.awards) <= 4 %}
                 {% for award in article.awards %}
                 <ul>
-                    {{ awardMacro(award) }}
+                    {{ awardMacro(award)}}
                 </ul>
                 {% endfor %}
             {% else %}
                 <div style="display:none" class="nested_container hidden_first">
                     {% for award in article.awards %}
                     <ul>
-                      {{ awardMacro(award) }}
+                      {{ awardMacro(award)}}
                     </ul>
                     {% endfor %}
                     <div class="minimize_items">
@@ -486,7 +486,7 @@
                     <ul>
                     {% for award in article.awards %}
                       {% if loop.index < 4 %}
-                        {{ awardMacro(award) }}
+                        {{ awardMacro(award)}}
                       {% endif %}
                     {% endfor %}
                     </ul>
