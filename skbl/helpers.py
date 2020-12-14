@@ -300,7 +300,7 @@ def make_alphabetic(hits, processname, sortnames=False, lang="sv"):
     return letter_results
 
 
-def make_simplenamelist(hits):
+def make_simplenamelist(hits, search):
     """
     Create a list with links to the entries url or _id.
 
@@ -308,11 +308,12 @@ def make_simplenamelist(hits):
     """
     results = []
     used = set()
-    for _order, hit in enumerate(hits["hits"]):
-        # ToDo: Ranking of search results partly broken!
-        # hitfields = hit["highlight"]
-        # score = sum(1 for field in hitfields if field.startswith("name."))
-        score = 0
+    namefields = ["firstname", "lastname", "sortname"]
+    search_terms = [st.lower() for st in search.split()]
+    for hit in hits["hits"]:
+        # score = sum(1 for field in hit["highlight"] if field.startswith("name."))
+        hitname = hit["_source"]["name"]
+        score = sum(1 for nf in namefields if any(st in hitname.get(nf, "").lower() for st in search_terms))
         if score:
             name = join_name(hit["_source"], mk_bold=True)
             liferange = get_life_range(hit["_source"])

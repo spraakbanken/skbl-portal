@@ -37,7 +37,7 @@
     {% set firsthits = {}%}
     {% if hits_name %}
     <p>
-    {% set namelist, firsthits = make_simplenamelist(hits_name)%}
+    {% set namelist, firsthits = make_simplenamelist(hits_name, search)%}
         <ul>
         {% for score, name, liferange, subtitle, subtitle_eng, subject_id in namelist %}
             <li>
