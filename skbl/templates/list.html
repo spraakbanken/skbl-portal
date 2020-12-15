@@ -8,7 +8,7 @@
     <div id="mapid" style="height: 280px;display:none;width: 100%"></div>
 
     {% if subheadline %}
-    <h2>{{ subheadline | deescape }} {% if search and hits.hits%}({% if more %}{{hits.hits|length}} {{ gettext('of') }} {% endif %}{{ hits.total }}){% endif %}</h2>
+    <h2>{{ subheadline | deescape }} {% if search and hits.hits%}({% if more %}{{number_hits}} {{ gettext('of') }} {% endif %}{{ hits.total }}){% endif %}</h2>
        <br/>
     {% endif %}
     {% if authorinfo %}

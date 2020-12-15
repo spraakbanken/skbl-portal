@@ -332,8 +332,10 @@ def make_namelist(hits, exclude=set()):
     Return only info necessary for listing of names.
     """
     results = []
-    first_letters = []  # list only containing letters in alphabetical order
-    current_letterlist = []  # list containing entries starting with the same letter
+    first_letters = []  # List only containing letters in alphabetical order
+    current_letterlist = []  # List containing entries starting with the same letter
+    current_total = 0
+    max_len = current_app.config["SEARCH_RESULT_SIZE"] - len(exclude)
     for hit in hits["hits"]:
         if hit["_id"] in exclude:
             continue
@@ -359,6 +361,10 @@ def make_namelist(hits, exclude=set()):
                 current_letterlist = []
             first_letters.append(firstletter)
         current_letterlist.append((firstletter, is_link, name, linked_name, liferange, subtitle, subtitle_eng, subject_id))
+        current_total += 1
+        # Don't show more than SEARCH_RESULT_SIZE number of results
+        if current_total >= max_len:
+            break
 
     if current_letterlist:
         # Append last letterlist

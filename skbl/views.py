@@ -191,8 +191,7 @@ def search():
     advanced_search_text = ""
     if search:
         show = ",".join(["name", "url", "undertitel", "undertitel_eng", "lifespan", "platspinlat.bucket", "platspinlon.bucket"])
-        karp_q = {"highlight": True, "size": current_app.config["SEARCH_RESULT_SIZE"],
-                  "show": show}
+        karp_q = {"highlight": True, "size": current_app.config["RESULT_SIZE"], "show": show}
         if "*" in search:
             search = re.sub(r"(?<!\.)\*", ".*", search)
             karp_q["q"] = "extended||and|anything|regexp|%s" % search
@@ -209,6 +208,8 @@ def search():
         karp_url = ""
         search = "\u200b"
 
+    number_hits = data["hits"]["total"] if data["hits"]["total"] < current_app.config["SEARCH_RESULT_SIZE"] else current_app.config["SEARCH_RESULT_SIZE"]
+
     t = render_template("list.html", headline="",
                         subheadline=gettext("Hits for '%s'") % search,
                         hits_name=data["hits"],
@@ -217,6 +218,7 @@ def search():
                         search=search,
                         alphabetic=True,
                         karp_url=karp_url,
+                        number_hits=number_hits,
                         more=data["hits"]["total"] > current_app.config["SEARCH_RESULT_SIZE"],
                         show_lang_switch=False)
 
