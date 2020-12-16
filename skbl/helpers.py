@@ -325,7 +325,7 @@ def make_simplenamelist(hits, search):
     return sorted(results), used
 
 
-def make_namelist(hits, exclude=set()):
+def make_namelist(hits, exclude=set(), search=""):
     """
     Split hits into one list per first letter.
 
@@ -335,7 +335,10 @@ def make_namelist(hits, exclude=set()):
     first_letters = []  # List only containing letters in alphabetical order
     current_letterlist = []  # List containing entries starting with the same letter
     current_total = 0
-    max_len = current_app.config["SEARCH_RESULT_SIZE"] - len(exclude)
+    if search:
+        max_len = current_app.config["SEARCH_RESULT_SIZE"] - len(exclude)
+    else:
+        max_len = None
     for hit in hits["hits"]:
         if hit["_id"] in exclude:
             continue
@@ -363,7 +366,7 @@ def make_namelist(hits, exclude=set()):
         current_letterlist.append((firstletter, is_link, name, linked_name, liferange, subtitle, subtitle_eng, subject_id))
         current_total += 1
         # Don't show more than SEARCH_RESULT_SIZE number of results
-        if current_total >= max_len:
+        if max_len and current_total >= max_len:
             break
 
     if current_letterlist:

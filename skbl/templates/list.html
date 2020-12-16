@@ -54,7 +54,7 @@
     <p>
     {% endif %}
 
-    {% set firstletters, results = make_namelist(hits, firsthits)%}
+    {% set firstletters, results = make_namelist(hits, firsthits, search)%}
     {% if namelist and results %}
     <div class="top-link"><a href="#top">[ {{gettext("TO THE TOP")}} ]</a></div>
     {% endif %}
