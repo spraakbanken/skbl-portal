@@ -603,3 +603,15 @@ def log(data, msg=""):
         sys.stderr.write("\n" + msg + ": " + str(data) + "\n")
     else:
         sys.stderr.write("\n" + str(data) + "\n")
+
+
+def swedish_translator(firstname, lastname):
+    """Check if 'firstname lastname' is a Swedish translator."""
+    swedish_translators = [
+        "Linnea Åshede"
+    ]
+
+    name = firstname + " " + lastname
+    if name in swedish_translators:
+        return True
+    return False

@@ -129,8 +129,13 @@
                     <a href="{{ url_for('views.articleauthor_'+g.language, result=author.lastname+", "+author.firstname) }}">{{author.firstname}} {{author.lastname}}</a><br/>
                 {% endfor %}
                 {% if g.language == 'en' %}
-                    {% if article.text_eng and article.translator %}
+                    {% if article.text_eng and article.translator and not swedish_translator(article.translator.firstname, article.translator.lastname) %}
                         (Translated by {{article.translator.firstname}} {{article.translator.lastname}})
+                    {% endif %}
+                {% endif %}
+                {% if g.language == 'sv' %}
+                    {% if article.text and article.translator and swedish_translator(article.translator.firstname, article.translator.lastname) %}
+                        (Översatt av {{article.translator.firstname}} {{article.translator.lastname}})
                     {% endif %}
                 {% endif %}
             </em>

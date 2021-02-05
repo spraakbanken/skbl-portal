@@ -75,6 +75,7 @@ def create_app():
         make_alphabetical_bucket=helpers.make_alphabetical_bucket)
     app.jinja_env.globals.update(get_date=helpers.get_date)
     app.jinja_env.globals.update(join_name=helpers.join_name)
+    app.jinja_env.globals.update(swedish_translator=helpers.swedish_translator)
     app.jinja_env.globals.update(sorted=sorted)
     app.jinja_env.globals.update(len=len)
     app.jinja_env.globals.update(get_lang_text=helpers.get_lang_text)
