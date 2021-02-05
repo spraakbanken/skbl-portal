@@ -135,7 +135,7 @@
                 {% endif %}
                 {% if g.language == 'sv' %}
                     {% if article.text and article.translator and swedish_translator(article.translator.firstname, article.translator.lastname) %}
-                        (Översatt av {{article.translator.firstname}} {{article.translator.lastname}})
+                        (Svensk översättning: {{article.translator.firstname}} {{article.translator.lastname}})
                     {% endif %}
                 {% endif %}
             </em>
