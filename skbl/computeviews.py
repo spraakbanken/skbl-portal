@@ -301,7 +301,8 @@ def compute_artikelforfattare(infotext="", description="", lang="", cache=True, 
     stat_table = [[kw[0].strip()] + kw[1:] for kw in data["stat_table"] if kw[0] != ""]
     stat_table = [[kw[1] + ",", kw[0], kw[2]] for kw in stat_table]
 
-    # Remove duplicates and some wrong ones (because of backend limitation):
+    # Remove duplicates and some wrong ones (because of backend limitation)
+    # For articles that have more than one author the non existing name combinations are listed here.
     stoplist = {
         "Grevesmühl,Kajsa": True,
         "Ohrlander,Anders": True,
@@ -310,7 +311,9 @@ def compute_artikelforfattare(infotext="", description="", lang="", cache=True, 
         "Myrberg Burström,Mats": True,
         "Burström,Nanouschka": True,
         "Ljung,Yvonne": True,
-        "Lindholm,Barbro": True
+        "Lindholm,Barbro": True,
+        "Formark,Fredrik": True,
+        "Mandelin,Bodil": True
     }
     added = {}
     new_stat_table = []
