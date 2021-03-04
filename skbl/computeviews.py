@@ -313,7 +313,9 @@ def compute_artikelforfattare(infotext="", description="", lang="", cache=True, 
         "Ljung,Yvonne": True,
         "Lindholm,Barbro": True,
         "Formark,Fredrik": True,
-        "Mandelin,Bodil": True
+        "Mandelin,Bodil": True,
+        "Sedin,Els-Marie": True,
+        "Rådström,Inger": True
     }
     added = {}
     new_stat_table = []
