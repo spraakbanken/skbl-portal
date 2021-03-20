@@ -4,21 +4,43 @@
 #
 #    pip-compile --output-file=skbl/requirements.txt skbl/requirements.in
 #
-babel==2.7.0              # via flask-babel
-click==7.0                # via flask
-flask-babel==0.12.2       # via -r skbl/requirements.in
-flask-compress==1.4.0     # via -r skbl/requirements.in
-flask-reverse-proxy==0.2.0.2  # via -r skbl/requirements.in
-flask==1.0.3              # via -r skbl/requirements.in, flask-babel, flask-compress
-gunicorn==19.9.0          # via -r skbl/requirements.in
-itsdangerous==1.1.0       # via flask
-jinja2==2.10.1            # via flask, flask-babel
-markdown==3.2.1           # via -r skbl/requirements.in
-markupsafe==1.1.1         # via jinja2
-pyicu==2.5                # via -r skbl/requirements.in
-pylibmc==1.6.0            # via -r skbl/requirements.in
-pytz==2019.1              # via babel
-werkzeug==0.16.1          # via -r skbl/requirements.in, flask
+babel==2.7.0
+    # via flask-babel
+click==7.0
+    # via flask
+flask-babel==0.12.2
+    # via -r requirements.in
+flask-compress==1.4.0
+    # via -r requirements.in
+flask-reverse-proxy==0.2.0.2
+    # via -r requirements.in
+flask==1.0.3
+    # via
+    #   -r requirements.in
+    #   flask-babel
+    #   flask-compress
+gunicorn==19.9.0
+    # via -r requirements.in
+itsdangerous==1.1.0
+    # via flask
+jinja2==2.11.3
+    # via
+    #   flask
+    #   flask-babel
+markdown==3.2.1
+    # via -r requirements.in
+markupsafe==1.1.1
+    # via jinja2
+pyicu==2.5
+    # via -r requirements.in
+pylibmc==1.6.0
+    # via -r requirements.in
+pytz==2019.1
+    # via babel
+werkzeug==0.16.1
+    # via
+    #   -r requirements.in
+    #   flask
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
