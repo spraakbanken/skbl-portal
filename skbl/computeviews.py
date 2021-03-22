@@ -315,7 +315,24 @@ def compute_artikelforfattare(infotext="", description="", lang="", cache=True, 
         "Formark,Fredrik": True,
         "Mandelin,Bodil": True,
         "Sedin,Els-Marie": True,
-        "Rådström,Inger": True
+        "Rådström,Inger": True,
+
+        "Kärnekull,Anneka ": True,
+        "Kärnekull,Ingrid": True,
+        "Kärnekull,Paul": True,
+        "Kärnekull,Per": True,
+        "Lewis,Ingrid": True,
+        "Lewis,Kerstin": True,
+        "Lewis,Paul": True,
+        "Lewis,Per": True,
+        "Rydberg,Anette": True,
+        "Rydberg,Anneka": True,
+        "Rydberg,Kerstin": True,
+        "Rydberg,Paul": True,
+        "Rydberg,Per": True,
+        "Anderson,Anneka": True,
+        "Anderson,Ingrid": True,
+        "Anderson,Kerstin": True
     }
     added = {}
     new_stat_table = []
