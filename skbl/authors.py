@@ -51,6 +51,7 @@ authors_dict = {
     "Maria Andersson": {
         "sv": "lektor i litteraturvetenskap vid Stockholms universitet",
         "publications": [
+            "*Framtidens kvinnor. Mognad och medborgarskap i svenska flickböcker 1832-1921* (2020)",
             "*Mångkulturell barn- och ungdomslitteratur. Analyser* (2017)",
         ]
     },
@@ -155,10 +156,9 @@ authors_dict = {
     },
 
     "Irja Bergström": {
-        "sv": "docent i konstvetenskap vid Göteborgs universitet",
+        "sv": "docent i konstvetenskap, före detta universitetslektor vid Göteborgs universitet",
         "publications": [
             "*Skulptriserna. Alice Nordin och hennes samtida 1890-1940* (2012)",
-            "*\"Ensam fågel - jag vet vem det är\". Ester Henning. Konstnärinna på hospital* (1989)",
         ]
     },
 
@@ -304,15 +304,19 @@ authors_dict = {
     },
 
     "Maria Carlgren": {
-        "sv": "filosofie doktor och vikarierande lektor i konst- och bildvetenskap vid Linnéuniversitetet",
+        "sv": "konsthistoriker, filosofie doktor i konst- och bildvetenskap",
         "publications": [
-            "*Birgittaskolorna. Modeateljéer och sömnadsskolor mellan tradition och förnyelse* (2016)",
+            "\"Och hur hade sömmerskorna det? Om arbetsförhållanden och löneutvecklingunder Augusta Lundins tid\", i *Augusta Lundin. Haute couture på svenska* (2020)",
             "\"Från Derkert och duttografen till delaktighet. Konstfrämjandets konstpedagogik under 70 år\", i *Konstfrämjandet 70 år* (2017)",
+            "*Birgittaskolorna. Modeateljéer och sömnadsskolor mellan tradition och förnyelse* (2016)",
         ]
     },
 
     "Gunilla Carlstedt": {
-        "sv": "läkare och författare"
+        "sv": "läkare och livshistoriker",
+        "publications": [
+            "*Arbete för livet. Kvinnor berättar om svenskt 1900-tal* (2018).",
+        ]
     },
 
     "Eva Helena Cassel-Pihl": {
@@ -328,7 +332,10 @@ authors_dict = {
     },
 
     "Alva Dahl": {
-        "sv": "författare, översättare och filosofie doktor i nordiska språk vid Uppsala universitet"
+        "sv": "författare, översättare och filosofie doktor i nordiska språk vid Uppsala universitet",
+        "publications": [
+            "*Slå rot i förvandlingen: Gunnel Vallquists liv och livshållning* (2021)",
+        ]
     },
 
     "Johannes Daun": {
@@ -374,15 +381,16 @@ authors_dict = {
     },
 
     "Helene Ehriander": {
-        "sv": "lektor i litteraturvetenskap vid Linnéuniversitetet",
+        "sv": "professor i litteraturvetenskap, Linnéuniversitetet",
         "publications": [
-            "*Nya läsningar av Astrid Lindgrens författarskap* (2015)",
+            "\"Idyll på Småländska landsbygden. Astrid Lindgrens flickbok Kerstin och jag (1945)\", i *HumaNetten* (2020)",
         ]
     },
 
     "Katarina Ek-Nilsson": {
-        "sv": "filosofie doktor i etnologi",
+        "sv": "filosofie doktor i etnologi, arkivchef, museichef",
         "publications": [
+            "*Stort, smått, fint och fult. Museisamlingar - en nödvändig källa till kunskap (2020)",
             "*Talande ting, Berättelser och materialitet* (2014)",
         ]
     },
@@ -429,7 +437,10 @@ authors_dict = {
     },
 
     "Linda Fagerström": {
-        "sv": "docent i konstvetenskap vid Linnéuniversitetet"
+        "sv": "konsthistoriker, docent i konst- och bildvetenskap vid Linnéuniversitetet",
+        "publications": [
+            "\"Rösträttens garderob. Kvinnor, kropp, kläder\", i *Rösträttens århundrade. Kampen, utvecklingen och framtiden för demokratin i Sverige* (2018)",
+        ]
     },
 
     "Sune Fahlgren": {
@@ -499,8 +510,10 @@ authors_dict = {
     },
 
     "Gunnel Furuland": {
-        "sv": "bibliotekarie och filosofie doktor i litteraturvetenskap",
+        "sv": "bibliotekarie och filosofie doktor i litteraturvetenskap, vuxenbibliotekarie vid Knivsta bibliotek",
         "publications": [
+            "\"Tora Dahls och Ivar Lo-Johanssons förläggarkontakter\", i *Arbetarförfattaren. Litteratur* (2020)",
+            "Faksimilutgåva med kommentarer av Fredrika Bremers roman *Fader och dotter* (2019)",
             "En av utgivarna till Svenska Vitterhetssamfundets utgåva av Fredrika Bremers *Hertha* (2016)",
         ]
     },
@@ -518,7 +531,10 @@ authors_dict = {
     },
 
     "Sara Granath": {
-        "sv": "teatervetare och teaterkritiker i *Svenska Dagbladet*"
+        "sv": "teatervetare och teaterkritiker i *Svenska Dagbladet*",
+        "publications": [
+            "\"Medeas förvandlingar\", i *Kulturmöten: en vänbok till Christine Farhan* (2020)",
+        ]
     },
 
     "Malin Gregersen": {
@@ -539,8 +555,9 @@ authors_dict = {
     "Yvonne Gröning": {
         "sv": "författare och dramatiker",
         "publications": [
-            "*Fru Bob. En personlig biografi* (2009)",
+            "*Skuggorna* (2021)",
             "*Älskad. Florrie Hamilton - herrgårdsfröken på Högfors* (2014)",
+            "*Fru Bob. En personlig biografi* (2009)",
         ]
     },
 
@@ -605,7 +622,8 @@ authors_dict = {
     "Ann-Katrin Hatje": {
         "sv": "professor emeritus i historia vid Umeå universitet",
         "publications": [
-            "\"The Struggle over Christianity as a School Subject. The Democratic Role of the Press in a Church Campaign in 1963\", I *Reconsideing Religion, Law, and Democracy. New Challenges for Society and Research* (2016)",
+            "*Forskarliv. Självporträtt av samtida svenska historiker* (2020).",
+            "\"The Struggle over Christianity as a School Subject. The Democratic Role of the Press in a Church Campaign in 1963\", i *Reconsideing Religion, Law, and Democracy. New Challenges for Society and Research* (2016)",
             "\"Barnomsorgshistoria och den svenska daghemsmodellen\", i *Vägar till välfärd. Idéer, inspiratörer, kontroverser, perspektiv* (2013)",
         ]
     },
@@ -764,7 +782,7 @@ authors_dict = {
     "Anders Johnson": {
         "sv": "skriftställare med inriktning mot svensk politisk och ekonomisk historia",
         "publications": [
-            "*De gjorde skillnad. Liberala kvinnor från Anna Maria Lenngren till Marit Paulsen* (2009)"
+            "*Anna Whitlock – Reformpedagog och rösträttsledare* (2020)"
         ]
     },
 
@@ -788,8 +806,9 @@ authors_dict = {
     },
 
     "Cecilia Jonsson": {
-        "sv": "filosofie doktor i socialt arbete vid Linnéuniversitetet",
+        "sv": "filosofie doktor i socialt arbete, lektor vid Institutionen för polisiärt arbete, Linnéuniversitetet",
         "publications": [
+            "\"Suzanne Sandberg. Den internationella hemmafrun\", i *Personhistorisk Tidskrift* 2/2018",
             "*Pionjärvolontärerna. En internationell generation i en föränderlig tid* (2015)",
             "*Volontärerna. Internationellt hjälparbete från missionsorganisationer till volontärresebyråer* (2012)",
         ]
@@ -1016,7 +1035,7 @@ authors_dict = {
     "Louise Lindblom": {
         "sv": "filosofie magister i historia",
         "publications": [
-            "*De besvärliga. Skyddshemmets vanartiga flickor* (2016)",
+            "*Mamsell Henrika: en biografi* (2019)",
         ]
     },
 
@@ -1054,8 +1073,9 @@ authors_dict = {
     },
 
     "Anna Lindqvist": {
-        "sv": "avdelningschef på Östergötlands museum",
+        "sv": "intendent, Kulturen i Lund",
         "publications": [
+            "*Östgötakoftor – Stickat kulturarv från 1940-talet* (2020)",
             "*Broderier från 50-och 60-talen* (2015)",
             "*Tryckt till jul* (2014)",
         ]
@@ -1074,7 +1094,10 @@ authors_dict = {
     },
 
     "Rikard Loman": {
-        "sv": "lektor i litteratur och teater vid Lunds universitet och teaterkritiker i *Dagens Nyheter*"
+        "sv": "lektor och lärare vid Språk- och litteraturcentrum, Lunds universitet",
+        "publications": [
+            "*Historiska perspektiv på teater. Teaterperspektiv på historien* (2019)",
+        ]
     },
 
     "Anders Lundgren": {
@@ -1141,7 +1164,8 @@ authors_dict = {
     "Birgitta Meurling": {
         "sv": "professor i etnologi vid Uppsala universitet",
         "publications": [
-            "\"Med sportbil genom Europa. En förälskad kvinnas resebrev från 1950-talet.\", i *RIG* 3/2016",
+            "\"Frejdiga fruntimmer. Damsällskapet Concordia under luppen\", i *Kulturella Perspektiv* 1–2/2020",
+            "\"Krinolin, korsett, kaftan – om kläder, genus och kulturanalys\", i *Kulturella Perspektiv* 1–2/2019",
             "\"När livet blir text, när texten blir liv. Reflexioner utifrån två kvinnors dagböcker och brev.\", i *Laboratorium för folk och kultur* 3/2017",
         ]
     },
@@ -1177,8 +1201,9 @@ authors_dict = {
     },
 
     "Sari Nauman": {
-        "sv": "filosofie doktor i historia vid Göteborgs universitet",
+        "sv": "filosofie doktor i historia och forskare, Göteborgs universitet",
         "publications": [
+            "*Private/Public in 18th-Century Scandinavia* (2021)",
             "*Ordens kraft. Politiska eder i Sverige 1520-1718* (2017)",
             "\"Winning a war with words. Oaths as military means in Early Modern Scandinavia\", i *Scandinavian Journal of History* 2/2014",
         ]
@@ -1244,10 +1269,11 @@ authors_dict = {
     },
 
     "Anna Nordenstam": {
-        "sv": "docent och universitetslektor i litteraturvetenskap vid Göteborgs universitet och professor i svenska med didaktisk inriktning vid Luleå tekniska universitet",
+        "sv": "professor i litteraturvetenskap, Göteborgs universitet",
         "publications": [
-            "*Begynnelser. Litteraturforskningens pionjärkvinnor 1850–1930* (2001)",
+            "\"Comics craftivism: embroidery in contemporary Swedish feminist comics\", i *Journal of Graphic Novels and Comics* 2021",
             "*Från fabler till manga. Litteraturhistoriska perspektiv på barn- och ungdomslitteratur I-II* (2015-2016)",
+            "*Begynnelser. Litteraturforskningens pionjärkvinnor 1850–1930* (2001)",
         ]
     },
 
@@ -1290,9 +1316,10 @@ authors_dict = {
     },
 
     "Hélène Ohlsson": {
-        "sv": "skådespelerska, regissör och doktorand i teatervetenskap vid Stockholms universitet",
+        "sv": "filosofie doktor i teatervetenskap vid Stockholms universitet, samt skådespelerska och regissör",
         "publications": [
-            "*Teaterdivan Ellen Hartman - provokativ och folkkär* (avhandling, planerad disputation juni 2018)",
+            "“Performing Nordic White Femininity: Two Swedish Divas in the U.S. in the Nineteenth Century\", i *Nordic Theatre Studies on Transnational Influences* 1/2020",
+            "*\"Gudomlig, ingenting mindre än gudomlig!\" Skådespelerskan Ellen Hartmans iscensättningar på scen och i offentligheten* (2018)",
         ]
     },
 
@@ -1533,14 +1560,18 @@ authors_dict = {
     },
 
     "Cecilia Schwartz": {
-        "sv": "docent i italienska vid Stockholms universitet"
+        "sv": "docent i italienska vid Stockholms universitet",
+        "publications": [
+            "\"Ferrante Feud: The Italian Reception of the Neapolitan Novels before and after their International Success\", i *The Italianist* 1/2020",
+        ]
     },
 
     "Emma Severinsson": {
-        "sv": "doktorand i historia vid Lunds universitet",
+        "sv": "lektor i modevetenskap, Lunds universitet",
         "publications": [
+            "\"Lättledda modelejon och stilfulla män Svenska herrmoderådets arbete med att styra och vägleda mäns konsumtion\", i *Arr: idéhistorisk tidsskrift* 1-2/2020",
             "\"Korta kjolar och exponerade ben. Om 1920-talets uppstyckade kvinnokropp\", i *Gränsløs. Tidskrift för studier av Öresundsregionens historia, kultur och samhällsliv* 6/2016",
-            "\"Frihet eller kärlek? Äktenskap, singelliv och vägen till lycka i 1920- talets veckopress\", i *LIR Journal* 7/2016",
+            "\"Frihet eller kärlek? Äktenskap, singelliv och vägen till lycka i 1920- talets veckopress\", i *LIR Journal* 7/2016",
         ]
     },
 
@@ -1560,7 +1591,10 @@ authors_dict = {
     },
 
     "Christina Sjöblad": {
-        "sv": "professor emeritus i litteraturvetenskap vid Lunds universitet"
+        "sv": "professor emerita i litteraturvetenskap vid Språk- och litteraturcentrum, Lunds universitet",
+        "publications": [
+            "Bläck, äntligen! kan jag skriva. En studie i kvinnors dagböcker från 1800-talet* (2009)*",
+        ]
     },
 
     "Sara Sjöström": {
@@ -1627,7 +1661,10 @@ authors_dict = {
     },
 
     "Patrik Steorn": {
-        "sv": "museichef på Thielska Galleriet och docent i konstvetenskap vid Stockholms universitet"
+        "sv": "museichef Göteborgs konstmuseum, docent i konstvetenskap vid Stockholms universitet",
+        "publications": [
+            "\"Ernest Thiel – ett biografiskt porträtt\", i *Thielska Galleriet. Konsten, huset, tiden* (2021)",
+        ]
     },
 
     "Lina Sturfelt": {
@@ -1635,7 +1672,10 @@ authors_dict = {
     },
 
     "Mikael Strömberg": {
-        "sv": "filosofie doktor i teatervetenskap vid Göteborgs universitet"
+        "sv": "filosofie doktor i teatervetenskap, forskare, Göteborgs universitet",
+        "publications": [
+            "*Buskis: folkligt och underhållande* (2020)",
+        ]
     },
 
     "Ulrika Strömquist": {
@@ -1647,7 +1687,10 @@ authors_dict = {
     },
 
     "Fia Sundevall": {
-        "sv": "docent i ekonomisk historia vid Stockholms universitet"
+        "sv": "docent i ekonomisk historia vid Stockholms universitet",
+        "publications": [
+            "\"Försvarsfinansiärer utan anspråk på rösträtt: Svenska kvinnoföreningen för fosterlandets försvar under åren 1883–1920\", i *Personhistorisk tidskrift* 2/2020",
+        ]
     },
 
     "Alexandra Sundqvist": {
@@ -1658,8 +1701,9 @@ authors_dict = {
     },
 
     "Eva-Maria Svensson": {
-        "sv": "professor i rättsvetenskap vid Juridiska institutionen vid Göteborgs universitet",
+        "sv": "professor i rättsvetenskap, Juridiska Institutionen, Handelshögskolan vid Göteborgs universitet",
         "publications": [
+            "\"Exploiting Justice in a Transformative Swedish Society\", i *Nordic Journal on Law and Society* 2/2020",
             "\"Gender Equality in the Governance of the Arctic Region\", i *Nordic Journal on Law and Society* 1-2/2017",
             "\"En nordisk kvinderetsperformer\", i *Ketsch me if you can. Sociale rettigheder og ligestilling. Hyldest til Kirsten Ketscher* (2017)",
         ]
@@ -1793,16 +1837,18 @@ authors_dict = {
     "Eva Helen Ulvros": {
         "sv": "professor i historia vid Lunds universitet",
         "publications": [
+            "\"Historia - det roligaste ämnet i skolan\", i *Forskarliv. Självporträtt av samtida svenska historiker* (2020)",
+            "\"Sophie Elkan och Selma Lagerlöf - kärlek och kvinnorörelse\", i *Den kvinnliga tvåsamhetens frirum. Kvinnopar i kvinnorörelsen 1890-1940* (2018)",
             "*Kvinnors röster. Livsöden från det moderna Sveriges framväxt* (2016)",
-            "\"Släkten Berlin och Charlotte Berlin\", i *Den högst originella fröken Charlotte Berlin* (2016)",
         ]
     },
 
     "Anna Maria Ursing": {
-        "sv": "filosofie doktor i litteraturvetenskap och svenska med didaktisk inriktning vid Malmö universitet och Lunds universitet",
+        "sv": "filosofie doktor i litteraturvetenskap och svenska med didaktisk inriktning vid Malmö universitet och Lunds universitet, läroboksförfattare",
         "publications": [
+            "\"Läraren\", i *Tjänstemannen i litteraturen. Bilder av goda och mindre goda byråkrater* (2017)",
             "*Fantastiska fröknar. Studier av lärarinnegestalter i svensk skönlitteratur* (2004)",
-            "\"Läraren\", i *Tjänstemannen i litteraturen. Bilder av goda och mindre goda byråkrater* (2017)",
+            "*Läsa för livet : svenskundervisning på högstadiet* (1988)",
         ]
     },
 
@@ -1923,10 +1969,10 @@ authors_dict = {
     },
 
     "Eva Öhrström": {
-        "sv": "professor emeritus i musik och samhälle vid Kungliga Musikhögskolan i Stockholm",
+        "sv": "musikforskare, professor emerita, Kungliga musikhögskolan i Stockholm",
         "publications": [
-            "*Elfrida Andrée. Ett levnadsöde* (1999)",
-            "*Jenny Lind. The Swedish nightingale* (2000)",
+            "*Felix Mendelssohn Bartholdy och Adolf Fredrik Lindblad. Brevväxling 1827-1847* (2019)",
+            "*Adolf Fredrik Lindblad. En tonsättare och hans vänner* (2016)",
         ]
     },
 
@@ -1956,12 +2002,13 @@ authors_dict = {
         ]
     },
     "Caroline Bergström": {
-        "sv": "masterstudent i litteraturvetenskap, Uppsala universitet"
+        "sv": "frilansskribent, filosofie magister i litteraturvetenskap"
     },
     "Boel Berner": {
-        "sv": "professor emeritus i sociologi, Linköpings universitet",
+        "sv": "professor emerita i teknik och social förändring, Linköpings universitet",
         "publications": [
-            "*Strange Blood* (2020)",
+            "*Ifrågasättanden. Forskning om genus, teknik och naturvetenskap* (2004)",
+            "*Sakernas tillstånd. Kön, klass, teknisk expertis* (2003)",
         ]
     },
     "Martin Berntson": {
@@ -2001,9 +2048,9 @@ authors_dict = {
         "sv": "radiojournalist, dokumentärmakare"
     },
     "Charlotte Erlanson-Albertsson": {
-        "sv": "professor emeritus i medicinsk och fysiologisk kemi, Lunds universitet",
+        "sv": "professor i medicinsk och fysiologisk kemi, Lunds universitet",
         "publications": [
-            "*Äta för livet* (2017)",
+            "*Äta för livet* (2020)",
         ]
     },
     "Ingrid Erneman": {
@@ -2019,17 +2066,21 @@ authors_dict = {
         ]
     },
     "Fredrik Fällman": {
-        "sv": "docent i kinesiska, Göteborgs universitet"
+        "sv": "docent i sinologi, universitetslektor i kinesiska, Institutionen för språk och litteraturer, Göteborgs universitet",
+        "publications": [
+            "\"Både först och sist: Fredrik Coyet som opperhoofd i Dejima och guvernör över Formosa\", i *Kawauso: simmandes i språkströmmen* (2019)",
+        ]
     },
     "Elisabeth Gålmark": {
         "sv": "författare och skribent",
         "publications": [
-            "*Revolutionens rosenvatten* (2016)",
+            "*Revolutionens rosenvatten. Olympe de Gouges feministiska humanism* (2016).",
         ]
     },
     "Anna Götlind": {
         "sv": "professor i historia, Stockholms universitet",
         "publications": [
+            "*Syster Gerda. Sjuksköterskan, fackföreningsledaren och politikern Gerda Höjer* (2021).",
             "*Spår av ett liv. En berättelse om sockenbarnet August Theodor och hans samtid* (2019)",
         ]
     },
@@ -2043,20 +2094,23 @@ authors_dict = {
         "sv": "journalist och författare"
     },
     "Alexandra Herlitz": {
-        "sv": "filosofie doktor i Konst- och bildvetenskap, Göteborgs universitet",
+        "sv": "universitetslektor i konst- och bildvetenskap, Institutionen för kulturvetenskaper vid Göteborgs universitet",
         "publications": [
+            "\"Klivet in i konsthistorien. Pontus och Göthilda Fürstenbergs gärning för konstens Göteborg\", i *Skiascope 10: Kanon. Perspektiv på svensk konsthistorieskrivning* (2021)",
             "*Grez-sur-Loing revisited. The international artists' colony in a different light* (2013)",
         ]
     },
     "Wojtek Jezierski": {
-        "sv": "docent i historia, Göteborgs universitet",
+        "sv": "forskare och docent i historia vid Universitetet i Oslo, Södertörns högskola och Göteborgs universitet",
         "publications": [
-            "Redaktör för *Nordic Elites in Transformation, c. 1050-1250, Volume III: Legitimacy & Glory* (2020)",
+            "*Nordic Elites in Transformation, c. 1050–1250, Volume III: Legitimacy and Glory* (2021)",
+            "\"Sweden, Inc. Temporal Sovereignty of the Realm and the People from the Middle Ages to Modernity\", i *Scandinavian Studies* (2022)",
         ]
     },
     "Birgitta Jordansson": {
         "sv": "docent i arbetsvetenskap, Göteborgs universitet",
         "publications": [
+            "\"Vilka är 'vi' i jämställdhetspolitiken? Klass, kön och etnicitet i RUT-tjänsternas Sverige\", i *Klass i Sverige. Ojämlikheten, makten och politiken i det 21:a århundradet* (2021)",
             "\"Diskursiva förutsättningar för ett hållbart arbetsliv - sett ur ett arbetsmarknadsperspektiv\", i *Att synliggöra och motverka ojämställdhet i arbetslivet. En vänbok till Annika Härenstam* (2020)",
         ]
     },
@@ -2070,15 +2124,17 @@ authors_dict = {
         "sv": "doktorand i litteraturvetenskap, Uppsala universitet"
     },
     "Maaret Koskinen": {
-        "sv": "professor emeritus i filmvetenskap, Stockholms universitet",
+        "sv": "professor emerita i filmvetenskap, Stockholms universitet",
         "publications": [
+            "\"Anticipating Adaptation and Tracing the (In)Visible: David Lagercrantz’ The Girl in the Spider’s Web as Implicit Film Script\", i *Nordic Noir Adaptation and Appropriation: Film, Television, and Beyond* (2020)",
+            "\"Hur Rolf blev Lassgård. En skådespelares persona och den svenska självbilden i närhistoriskt perspektiv\", i *Historiska fiktioner – en antologi om film, tv och historia* (2020)",
             "*Harry bit för bit. Harry Scheins många ansikten* (2017)",
         ]
     },
     "Anu Lahtinen": {
-        "sv": "professor i historia, Helsingfors universitet",
+        "sv": "biträdande professor i Finlands och Nordens historia, Helsingfors universitet",
         "publications": [
-            "\"Stepfamilies in Sweden, 1400 to 1650\", i *Stepfamilies in Europe, 1400-1800* (2018)",
+            "\"The Secretary and Her Professor: Alli Hytti and L. A. Puntila\", i *Thanks for Typing: Remembering the Forgotten Women in History* (2021)",
         ]
     },
     "Susanne Langenskiöld": {
@@ -2097,8 +2153,9 @@ authors_dict = {
         ]
     },
     "Bo S Lindberg": {
-        "sv": "medicine doktor, docent, Uppsala universitet",
+        "sv": "medicine doktor, docent, pensionerad överläkare",
         "publications": [
+            "\"Munskyddets historia\", i *Läkartidningen* 2020",
             "*Obstetriska instrument. En historia om gamla förlossningsinstrument i Medicinhistoriska museet i Uppsala* (2019)",
         ]
     },
@@ -2106,7 +2163,7 @@ authors_dict = {
         "sv": "journalist"
     },
     "Jane Morén": {
-        "sv": "författare, fotograf och journalist",
+        "sv": "journalist, författare, redaktör, fotograf",
         "publications": [
             "*Min kärlek har stannat mest hos er- en biografi om kvinnokämpen Anna Johansson-Visborg* (2018)",
         ]
@@ -2192,11 +2249,11 @@ authors_dict = {
     "Kerstin Thörn": {
         "sv": "filosofie doktor i idéhistoria",
         "publications": [
-            "\"Skafferiet - rummet som försvann\", i *Köket* (2018)",
+            "\"Skafferiet: Rummet som försvann\" i *Köket. Rum för drömmar, ideal och vardagsliv under det långa 1900-talet* (2018)",
         ]
     },
     "Birgitta Tingdal": {
-        "sv": "filosofie kandidat i historia och samhällsämnen, folkhögskolelärare, journalist och författare",
+        "sv": "journalist, folkhögskollärare, läromedelsförfattare, fackboksförfattare",
         "publications": [
             "*Gårdarna i Alslövs by* (2017)",
         ]
@@ -2223,9 +2280,1034 @@ authors_dict = {
         ]
     },
     "Fredrik Tersmeden": {
-        "sv": "arkivarie",
+        "sv": "arkivarie, Lunds universitet",
         "publications": [
+            "\"Then för sin ogemena Lärdom och Dygd widtberömda Lycka Sophia Friis: Om en dansk-svensk skaldinna och hennes begränsade produktion\", i *Att dikta för livet, döden och evigheten: Tillfällesdiktning under tidigmodern tid* (2020)",
             "*Lundensare – Universitetsöden under fyra århundraden* (2018)",
+        ]
+    },
+
+
+    "Birgitta Calagos": {
+        "sv": "bibliotekarie, släktforskare",
+        "publications": [
+            "*Från bondmora till konstväverska. Cilluf Olsson 1847-1916* (2019)"
+        ]
+    },
+    "Göran Karlsson": {
+        "sv": "lokalhistorisk författare, pensionerad chefredaktör",
+        "publications": [
+            "*Den sorglöse brukspatronen* (2020)"
+        ]
+    },
+    "Anette Rydberg": {
+        "sv": "arkivarie och bibliotekarie",
+        "publications": []
+    },
+    "Nils Hansson": {
+        "sv": "akademiråd och forskare, Heinrich-Heine-universitetet i Düsseldorf, Tyskland",
+        "publications": [
+            "*Explorations in Baltic Medical History, 1850-2015* (2019)"
+        ]
+    },
+    "Ingvar Dahlbacka": {
+        "sv": "professor i kyrkohistoria, Åbo Akademi",
+        "publications": []
+    },
+    "Anja Petersen": {
+        "sv": "pedagog och projektledare, Dunkers kulturhus, Helsingborg",
+        "publications": [
+            "\"Ingeborg Holm - filmen som förändrade Sverige\", i *Historiskan* (1/2019)"
+        ]
+    },
+    "Christina von Arbin": {
+        "sv": "arkitekt och kulturvårdare",
+        "publications": []
+    },
+    "Bodil Andersson": {
+        "sv": "etnolog, førstekonsulent, Østfoldmuseene – Halden historiske Samlinger",
+        "publications": [
+            "\"Från liv till död\", i *1718 Bohuslän* (2018)"
+        ]
+    },
+    "Jan Malmstedt": {
+        "sv": "journalist, författare",
+        "publications": [
+            "*Brottsplats Lidingö i detektivromaner och i verkligheten* (2016)"
+        ]
+    },
+    "Birgitta Malmstedt": {
+        "sv": "bibliotekarie",
+        "publications": []
+    },
+    "Hans Lindholm Öjmyr": {
+        "sv": "museichef, Länsmuseet Gävleborg",
+        "publications": [
+            "*Josabeth Sjöbergs Stockholm. En unik bildskatt från 1800-talet* (2016)"
+        ]
+    },
+    "Johanna Sköld": {
+        "sv": "professor, Tema Barn, Linköpings universitet",
+        "publications": [
+            "\"Childcare for Sale: Mapping Private Institutions in Sweden 1900–1975\", i *Journal of the History of Childhood and Youth* 1/2021",
+            "\"Barns utsatthet och välfärdsstaten\", i *Barn & unga i utsatta livssituationer: perspektiv från forskning och praktik (2020)	"
+        ]
+    },
+    "Rikke Lie Halberg": {
+        "sv": "doktorand i historia, Lunds universitet",
+        "publications": [
+            "*Tyendet - det tjenende folks Danmarkshistorie* (2020)"
+        ]
+    },
+    "Elisabeth Hultcrantz": {
+        "sv": "seniorprofessor i öron-, näs- och halssjukdomar, Linköpings universitet",
+        "publications": [
+            "*Om dessa vore svenska barn...* (2020)"
+        ]
+    },
+    "Lars Nylander": {
+        "sv": "antikvarie vid Hälsinglands museum och doktorand i kulturvård vid Göteborgs universitet",
+        "publications": [
+            "*En vandring genom Söderhamns historia* (2018, andra rev uppl 2019)"
+        ]
+    },
+    "Annmari Kastrup": {
+        "sv": "utställningsproducent och före detta skådespelare",
+        "publications": [
+            "*Tala så alla lyssnar och förstår: retorikhandboken* (2018)"
+        ]
+    },
+    "Susanna Erlandsson": {
+        "sv": "historiker, Uppsala universitet",
+        "publications": [
+            "\"Off the record: Margaret van Kleffens and the gendered history of Dutch World War II diplomacy\", i *International Feminist Journal of Politics* 1/2019"
+        ]
+    },
+    "Bettina Pehrsson": {
+        "sv": "musei- och arkivchef, Kalmar konstmuseum och Designarkivet",
+        "publications": []
+    },
+    "Lars Kleberg": {
+        "sv": "professor emeritus i ryska, Södertörns högskola samt huvudredaktör, *Svenskt översättarlexikon*",
+        "publications": [
+            "\"Översättningskritik och språkdräkt\", i *Slavica antiqua et hodierna. En hyllningsskrift till Per Ambrosiani* (2019)"
+        ]
+    },
+    "Rikard Hoogland": {
+        "sv": "docent i tetervetenskap, Stockholms universitet",
+        "publications": [
+            "\"Lars Norén and Jon Fosse: Nordic grey or theatre innovators?\", i *Contemporary European Playwrights* (2021)"
+        ]
+    },
+    "Annika Sönnerberg": {
+        "sv": "rådgivare i informationsfrågor, frilansskribent, biträdande informationschef Kungl. Hovstaterna 2008-2015",
+        "publications": []
+    },
+    "Johan Hermelin": {
+        "sv": "släktforskare",
+        "publications": []
+    },
+    "Kristina Lauridsen": {
+        "sv": "författare och arkivarie, Riksarkivet Marieberg",
+        "publications": [
+            "\"Hedvig Indebetou - författarinna i ett gammalt släktarkiv\", i *Riksarkivets årsbok* (2019)",
+            "*Fånga lyckan i flykten: en roman om Agneta Horn* (2016)	"
+        ]
+    },
+    "Catrin Norrby": {
+        "sv": "professor i nordiska språk, Stockholms universitet",
+        "publications": [
+            "\"Att interagera på finlandssvenska och sverigesvenska. Hur hänger språkbruk, kultur och nation ihop?\", i *Svenskan i Finland 18* (2020)"
+        ]
+    },
+    "Michael Lundholm": {
+        "sv": "släktforskare",
+        "publications": [
+            "\"Släkten Behm från Gävle – dess historiografi och äldsta led i ljuset av ny forskning\", i *Släktforskarnas årsbok* (2020)"
+        ]
+    },
+    "Petra Nyberg": {
+        "sv": "arkivarie, Riksarkivet Lund",
+        "publications": [
+            "\"Och moderns oförvitliga klemande - Om hospitalsarkiv\", i *Riksarkivets årsbok* (2017)",
+            "\"Olivia Sandberg - barnamörderska\", i *Riksarkivets årsbok* (2015)	"
+        ]
+    },
+    "Johan Perwe": {
+        "sv": "forskare, journalist och författare",
+        "publications": [
+            "*Livräddare. Bombprästen Erik Perwe på uppdrag i krigets Berlin* (2018)",
+            "*Mörkläggning. Nazismen och motståndet i Norrköping 1933–1945* (2016)	"
+        ]
+    },
+    "Petter Eklund": {
+        "sv": "frilansskribent",
+        "publications": []
+    },
+    "Kristina Lindkvist": {
+        "sv": "intendent konst och formgivning, Länsmuseet Gävleborg",
+        "publications": [
+            "\"Att utveckla en konstsamling\", i *Möt konsten* (2019)"
+        ]
+    },
+    "Wictor Johansson": {
+        "sv": "forskningsarkivarie, Svenskt visarkiv/Statens musikverk",
+        "publications": [
+            "\"Hulda Källberg – en artistisk begåvning som nu lyfts fram i ljuset\", *Dragspelsnytt* 4/2020"
+        ]
+    },
+    "Sara Ellis Nilsson": {
+        "sv": "forskare och studierektor, Linnéuniversitetet",
+        "publications": [
+            "“Digital history: Digitizing and Communicating the Past, a Case Study\", i *Doing Digital Humanities: Concepts, Approaches, Cases* (2020"
+        ]
+    },
+    "Margareta Rönnberg": {
+        "sv": "professor emeritus i filmvetenskap",
+        "publications": [
+            "*Att träna och tävla är komiskt. Sport enligt svenska fiktionsfilmer 1930-2015* (2015)"
+        ]
+    },
+    "Anna Rosvall-Stuart": {
+        "sv": "verkställande direktör, Sverige-Amerika Stiftelsen",
+        "publications": []
+    },
+    "Boel Nordgren": {
+        "sv": "trädgårdshistoriker och trädgårdsantikvarie",
+        "publications": [
+            "\"Kvinnornas väg in i trädgårdsbranschen kring förra sekelskiftet\", i *Viola: Affärstidningen för trädgårdsföretagare* 9/2020"
+        ]
+    },
+    "Birgitta Åhlund": {
+        "sv": "konstpedagog/Curator Pedagogik, Bohusläns museum",
+        "publications": []
+    },
+    "Stefan Hammenbeck": {
+        "sv": "konsthistoriker, museiman emeritus",
+        "publications": [
+            "\"En kvinnlig konstnär åter på scenen!\", i *Djurmålare, skulptris och författare. Rosa Nordenskjölds konstnärskap och tragiska livsöde* (2020)"
+        ]
+    },
+    "Camilla Bergvall": {
+        "sv": "skribent, författare",
+        "publications": [
+            "*Att arbeta för en idé är att leva - en biografi om Nanny Palmkvist* (2020)"
+        ]
+    },
+    "Johannes Rudberg": {
+        "sv": "bibliotekschef, VItterhetsakademiens bibliotek, Riksantikvarieämbetet",
+        "publications": []
+    },
+    "Malin Lennartsson": {
+        "sv": "lekor i historia, Linnéuniversitetet",
+        "publications": [
+            "\"Arkiven och historikerna\", i *Historisk Tidskrift* 3/2020"
+        ]
+    },
+    "Christina Lindvall-Nordin": {
+        "sv": "filosofie licentiat i konsthistoria",
+        "publications": [
+            "*Design för doft: flaskor för flytande flärd* (2017)"
+        ]
+    },
+    "Sara Griberg": {
+        "sv": "författare och frilansskribent",
+        "publications": [
+            "*Baby Lindy och andra berömda kidnappningar* (2021)"
+        ]
+    },
+    "Gudrun Beméus": {
+        "sv": "sjuksköterska, adjunkt",
+        "publications": []
+    },
+    "Gunnel Atlestam": {
+        "sv": "journalist, författare",
+        "publications": [
+            "*Konstnär, maka, mor - berättelsen om Ester Elvira Nilsson* ( 2019)"
+        ]
+    },
+    "Torsten Sverenius": {
+        "sv": "journalist, författare, utredare",
+        "publications": [
+            "*Lars Wohlin – Stocksundspojken som blev riksbankschef och hjälpte Sverige säga nej till euron* (2018)"
+        ]
+    },
+    "Per Olof Nisser": {
+        "sv": "teologie doktor, domprost emeritus",
+        "publications": [
+            "\"Enhetens polyfoni\", i *Årsbok för Svenskt Gudstjänstliv* (2020)"
+        ]
+    },
+    "Katarina Olsson": {
+        "sv": "filosofie doktor i naturgeografi, författare",
+        "publications": [
+            "*I Gyrds landskap* (2020)"
+        ]
+    },
+    "Lena Bomler": {
+        "sv": "frilansskribent",
+        "publications": [
+            "Artiklar i *Historiskan* och *Svenska öden & äventyr*"
+        ]
+    },
+    "Martin Andersson": {
+        "sv": "journalist, Sydsvenskan",
+        "publications": [
+            "*Malmö då och nu* (2018)"
+        ]
+    },
+    "Lennart Wetterberg": {
+        "sv": "professor emeritus, Karolinska Institutet",
+        "publications": [
+            "“Loss of smell from COVID-19 - Snapshots at the start of 2021\" i *Epidemier, Strömstad akademi* (2021)"
+        ]
+    },
+    "Peter Olausson": {
+        "sv": "historiker, Karlstads universitet",
+        "publications": [
+            "\"Hur Värmland blev Värmland. Landskapets framväxt i sagornas och dokumentens belysning\", i *En värmländsk litteraturhistoria. Del I* ( 2020)"
+        ]
+    },
+    "Anna Svenson": {
+        "sv": "pensionerad arkivarie, tidigare Lunds landsarkiv, Malmöstadsarkiv, Nationernas förbunds arkiv, Open Society Archives",
+        "publications": [
+            "\"En saga i Paris. Om Malmö stadsteaters och Ingmar Bergmans gästspel i Paris 1959\", i *Elbogen* (2018)"
+        ]
+    },
+    "Kyllike Christensson": {
+        "sv": "professor emerita, Karolinska Institutet",
+        "publications": [
+            "\"Client Factors Affect Provider Adherence to Guidelines during First Antenatal Care in Public Health Facilities, Ethiopia: A Multi-Center Cross-Sectional Study\", i *Ethiopian Journal of Health Sciences* 6/2020",
+            "*Reproduktiv hälsa* (2016)	"
+        ]
+    },
+    "Mary Ingemansson": {
+        "sv": "lektor i svenska, litteraturvetenskap med diaktisk inriktning, Högskolan i Kristianstad",
+        "publications": [
+            "*Lärande genom skönlitteratur. Djupläsning, förståelse, kunskap* (2020)"
+        ]
+    },
+    "Ulrika Jannert Kallenberg": {
+        "sv": "författare, litterär översättare, journalist",
+        "publications": [
+            "*Det enda jag kan göra är att gå* (2020)"
+        ]
+    },
+    "Margareta Ridderstedt": {
+        "sv": "filosofie doktor i konstvetenskap, tidigare textilantikvarie vid Riksantikvarieämbetet",
+        "publications": [
+            "\"Kyrkliga textilier\" i *Alf Munthe: den mjuka arkitekturens mästare* (2020)"
+        ]
+    },
+    "Berit Lindberg Johansson": {
+        "sv": "lektor, Lunds universitet, före detta barnavårdslärare",
+        "publications": [
+            "*KFUK - en dynamisk internationell kvinnorörelse ur ett lundensiskt scoutperspektiv* (2015)"
+        ]
+    },
+    "Bo G Jansson": {
+        "sv": "professor emritus, litteraturvetenskap, Högskolan Dalarna",
+        "publications": [
+            "\"Hans textilkonst hänger världen över\", i *Falu-Kuriren*/*Dalarnas Tidningar* 4/11 2020"
+        ]
+    },
+    "Malin Stengård": {
+        "sv": "antikvarie och konstvetare",
+        "publications": [
+            "\"Founder and Facilitator: Swedish development aid aimed at cultural heritage in Bosnia and Herzegovina 1995-2008\", i *International Journal of Cultural Policy* 7/2019"
+        ]
+    },
+    "Kerstin Käll": {
+        "sv": "läkare, specialist i allmän psykiatri, filosofie doktor, Universitetssjukhuset i Linköping",
+        "publications": [
+            "\"Hair analysis for drugs in drivers’s license regranting. A Swedish pilot study\", i *Forensic Science International* 1-3 2010"
+        ]
+    },
+    "Kerstin Kärnekull": {
+        "sv": "arkitekt",
+        "publications": [
+            "*Gemenskap och samarbete i kollektivhus och bogemenskap* (2019)",
+            "\"Do-It-Yourself. The Stony Road to Cohousing in Sweden\", i *Built Environment* 3/2019	"
+        ]
+    },
+    "Margareta Wallin Wictorin": {
+        "sv": "docent i konst- och bildvetenskap, lektor i kulturstudier, Karlstads universitet",
+        "publications": [
+            "\"Comics craftivism: embroidery in contemporary Swedish feminist comics\", i *Journal of Graphic Novels and Comics* 2021"
+        ]
+    },
+    "Madelaine Sillfors": {
+        "sv": "konstnär samt verksamhetsledare och curator, Museum Anna Nordlander",
+        "publications": [
+            "*Latent* 2012"
+        ]
+    },
+    "Lotta Olsson": {
+        "sv": "journalist, *Dagens Nyheter*",
+        "publications": []
+    },
+    "Tommy Gustafsson": {
+        "sv": "professor i filmvetenskap, Linnéuniversitetet",
+        "publications": [
+            "*The Politics of Nordsploitation: History, Industry, Audiences* (2021).",
+            "*Masculinity in the Golden Age of Swedish Cinema: A Cultural Analysis of 1920s Films* (2014)	"
+        ]
+    },
+    "Håkan Bengtsson": {
+        "sv": "lektor i religionsvetenskap, Uppsala universitet",
+        "publications": [
+            "\"Didaktiska reflektioner om judendom, stereotyper och tankefigurer\", i *Nordisk judaistik* 2/2020"
+        ]
+    },
+    "Birgitta Sandström": {
+        "sv": "författare, filosofie doktor i konstvetenskap, samt tidigare museidirektör för Zornsamlingarna",
+        "publications": [
+            "*Emma Zorn* (2014)"
+        ]
+    },
+    "Thomas Gütebier": {
+        "sv": "föremålskonservator, frilansskribent",
+        "publications": [
+            "\"Sakletare och deras samlarintressen\", i *SamlarNytt, Samlarförbundet Nordstjärnan* 1:2021"
+        ]
+    },
+    "Louise Lönnroth": {
+        "sv": "pensionerad landsarkivarie, Riksarkivet Landsarkivet i Göteborg",
+        "publications": [
+            "*Doktor Dubb dikterar. Omsorg om fattiga barn i Göteborg 1800-1850* (2018)",
+            "*Hundrade och en Göteborgskvinnor* (2018)	"
+        ]
+    },
+    "Jonas Barros Eriksson": {
+        "sv": "antikvarie, konstvetare och frilansskribent",
+        "publications": [
+            "*Ystad-Metall 1919-1969* (2020)"
+        ]
+    },
+    "Susanne Wigorts Yngvesson": {
+        "sv": "professor i etik, Enskilda Högskolan Stockholm",
+        "publications": [
+            "*All din nåd är öppen famn. Psalmernas sjungna teologier* (2019)",
+            "\"Maskinen inom mig. Big Other, Gud och jag\", i *Teknoteologi. AI och människans villkor* (2021)	"
+        ]
+    },
+    "Theodor Stenevang Klemming": {
+        "sv": "släktforskare",
+        "publications": []
+    },
+    "Mariette Manktelow": {
+        "sv": "botaniker",
+        "publications": [
+            "\"Hotet mot Linnés växter\", i *Svensk Botanisk Tidskrift* 1/2021"
+        ]
+    },
+    "Karin Nordberg": {
+        "sv": "idéhistoriker",
+        "publications": [
+            "\"Radio Ellen tog vid efter husmorsprogrammen - kvinnoprogrammen i Sveriges Radio i ett historiskt perspektiv\", i *Västerbotten förr och nu* (2020)"
+        ]
+    },
+    "Gunilla Lundahl": {
+        "sv": "frilansskribent",
+        "publications": [
+            "\"Kollektivhus, en utopi i verkligheten\", i *Gubbängsutredningen fortsätter* (2019)"
+        ]
+    },
+    "Agneta Gefors": {
+        "sv": "länshemslöjdskonsulent, Kalmar läns hemslöjdsförening",
+        "publications": [
+            "\"Valet\", i *KÖRVERK för 136 röster: texter från Kalmar län* (2020)",
+            "\"Gerda Brütte – en märkeskvinna inom hemslöjden\", i *Om fjorton kvinnor i Kalmar* (1997)	"
+        ]
+    },
+    "Agneta Hovensjö": {
+        "sv": "civilekonom",
+        "publications": []
+    },
+    "Eva Dahlman": {
+        "sv": "fotohistoriker, etnolog, hedersdoktor, tidigare intendent vid Nordiska museet samt förstebibliotekarie vid Kungliga biblioteket",
+        "publications": [
+            "*Exponerad tid – Johan Emanuel Thorins fotografier 1890–1930* (2015)",
+            "*Lotten von Düben. I Lappland* (1991)	"
+        ]
+    },
+    "Fredrik Mandelin": {
+        "sv": "filosofie magister i historia",
+        "publications": []
+    },
+    "Erik Wångmar": {
+        "sv": "docent i historia samt universitetslektor i statsvetenskap och historia, Linnéuniversitetet",
+        "publications": [
+            "*Husebyfröken. En studie om Florence Stephens 1881-1979* (2020)"
+        ]
+    },
+    "Göran Janzon": {
+        "sv": "tidigare lektor vid Örebro Teologiska Högskola",
+        "publications": [
+            "*Minne och framtid - en liten handbok om dokumentation i mission* (2015)"
+        ]
+    },
+    "Gerlinde Böttcher": {
+        "sv": "pensionerad frälsningsofficer, lärare och journalist",
+        "publications": []
+    },
+    "Anna-Malin Karlsson": {
+        "sv": "professor i svenska vid Institutionen för svenska och flerspråkighet, Stockholms universitet",
+        "publications": [
+            "\"SFL och socialsemiotik : Verktyg eller holistisk teoriram?\" i *Globe: A Journal of Language, Culture and Communication* 10/2020"
+        ]
+    },
+    "Görel Cavalli-Björkman": {
+        "sv": "docent i konstvetenskap, författare",
+        "publications": [
+            "*Bilden av Maria Magdalena* (2020)"
+        ]
+    },
+    "Kristin Johansson": {
+        "sv": "doktorand i biblioteks- och informationsvetenskap, Högskolan i Borås",
+        "publications": [
+            "\"Poison, literary vermin, and misguided youths : Descriptions of immoral reading in early twentieth-century Sweden\", i *Forbidden Literature : Case Studies on Censorship* (2020)."
+        ]
+    },
+    "Göran Gademan": {
+        "sv": "dramaturg, castingkoordinator, GöteborgsOperan",
+        "publications": [
+            "*Operahistoria* (2015)"
+        ]
+    },
+    "Eva Kaijser": {
+        "sv": "frilansjournalist och författare",
+        "publications": [
+            "*Svenska Hem - den sanna historien om Fröken Frimans Krig* (2014)"
+        ]
+    },
+    "Barbro Norbelie": {
+        "sv": "filosofie doktor i engelsk litteratur och Master of Arts i konstvetenskap, pensionerad universitetslektor vid Uppsala universitet",
+        "publications": []
+    },
+    "Anders Nyholm": {
+        "sv": "astronom",
+        "publications": [
+            "\"När kosmos kom till Sverige\", i *Populär Astronomi* 4/2020"
+        ]
+    },
+    "Anders Annell": {
+        "sv": "psykiater och socialläkare vid Beckomberga sjukhus, Statens Bakteriologiska Laboratorrium, Socialförvaltningen Stockholms stad",
+        "publications": [
+            "\"Psykisk sjukdom och social utslagning\", i *Psykiatri* (2016)",
+            "\"Long-term mortality and causes of death among hospitalized Swedish drug users\", i *Scandinavian Journal of Public Health* 4/2014	"
+        ]
+    },
+    "Marika Eriksson": {
+        "sv": "föreläsare och Content Creator",
+        "publications": []
+    },
+    "Carina Agnesdotter": {
+        "sv": "universitetslektor i litteraturvetenskap, Göteborgs universitet",
+        "publications": [
+            "*Dikt i rörelse. Ingrid Sjöstrand och poesins retorik i kvinnornas fredsrörelse 1979–1982* (2014)"
+        ]
+    },
+    "Ulla Riis": {
+        "sv": "professor, Uppsala universitet",
+        "publications": [
+            "*Darr på ribban? Uppföljning av 1999 års befordringsreform vid Uppsala universitet* (2011)"
+        ]
+    },
+    "Marianne Larsson": {
+        "sv": "filosofie doktor i etnologi, intendent vid Avdelning Kulturhistoria, Stiftelsen Nordiska Museet",
+        "publications": [
+            "\"Friluftsfotografen Gunnar Lundh. Spår av trettiotalets friluftsliv i fotografiska serier och biografiska berättelser\", i *Rig. Kulturhistorisk tidskrift* 3–4/2020."
+        ]
+    },
+    "Karin Westin Tikkanen": {
+        "sv": "språkforskare, journalist, författare",
+        "publications": [
+            "\"LIVA (†). Orden som inte längre lever\", i *ESSÄ* 7/2020",
+            "*Latinet i Sverige: Bildning is the shit* (2020)",
+            "\"Lost – and found – in transmission. The Creation of the Oscan Alphabet\", i *Migration, Mobility and Language Contact in and around the Ancient Mediterranean* (2020)"
+        ]
+    },
+    "Fred Blomberg": {
+        "sv": "amatörhembygdsforskare, pensionär",
+        "publications": [
+            "*Stora gatan i Sigtuna: en livskraftig 1000-åring* (2017)"
+        ]
+    },
+    "Kerstin Wickman": {
+        "sv": "professor emeritus vid Konstfack, samt skribent och författare",
+        "publications": [
+            "*Boken om Wanja – ett färgstarkt designliv* (2020)"
+        ]
+    },
+    "Christina Jutterström": {
+        "sv": "tidigare chefredaktör vid *Dagens Nyheter* och *Expressen*, verkställande direktör för Sveriges Television samt gästprofessor vid Göteborgs universitet",
+        "publications": [
+            "*Kvinnorna runt sjön Björken och deras längtan efter bildning* (2019)"
+        ]
+    },
+    "Carl-Gunnar Åhlén": {
+        "sv": "filosofie doktor, musikvetare och musikjournalist, ledamot (nr. 946) av Kungliga Musikaliska Akademien",
+        "publications": [
+            "*Moses Pergament* (2016)",
+            "*Sjutton Beethoven-variationer* (2011)",
+            "*Patos och tradition – en bok om och med dirigenten Tor Mann* (2011)"
+        ]
+    },
+    "Anna-Stina Lindén Ivarsson": {
+        "sv": "frilansjournalist",
+        "publications": [
+            "\"Vackrare vardagsvara och jubileumsutställningen i Göteborg 1923\", i *Konsthantverk och Design Hundra år i Göteborg* (2019)",
+            "\"Hon skapade för lust och fägring\", i *Dagens Nyheter* 6/12/2020	"
+        ]
+    },
+    "Linda Lövkvist": {
+        "sv": "doktorand i arkeologi, Institutionen för historiska studier vid Göteborgs universitet, samt kommunantikvarie vid Marks kommun",
+        "publications": [
+            "	\"Berit Wallenberg och den spända bågens brustna sträng\", i *Allvarligt talat. Berättelser om livet* (2018)	"
+        ]
+    },
+    "Ann-Mari Häggman": {
+        "sv": "professor, intitutschef vid Finlands svenska folmusikinstitut och Svenska litteratursällskapet i Finland",
+        "publications": [
+            "\"Adolf Iwar Arwidssons Svenska fornsånger\" (faksimilutgåva 2015)",
+            "\"Svenska folkvisor från forntiden och dess betydelse för visforskningen i Finland\", i *'En alldeles egen och förträfflig National-Musik'. Nio författare om Svenska folk-visor från forntiden (1814-1818)* (2015)	"
+        ]
+    },
+    "Ulrika Eskilsson": {
+        "sv": "pressassistent, Landsorganisationen i Sverige (LO)",
+        "publications": [
+            "*Grob-Janis - Återkomsten* (2020)",
+            "*Här kom jag!* (2017)	"
+        ]
+    },
+    "Kristina Helgesson Kjellin": {
+        "sv": "forskare i kulturantropologi, docent vid Svenska kyrkans enhet för forskning och analys, Kyrkokansliet",
+        "publications": [
+            "\"Can we find other ways forward? Church Relations among Migrants and Non-Migrants in the Church of Sweden\", i *Nordic Journal of Migration Research* 1/2019"
+        ]
+    },
+    "Sara Hemmingsson": {
+        "sv": "konstvetare och curator, Kalmar konstmuseum",
+        "publications": []
+    },
+    "Gunilla Linde Bjur": {
+        "sv": "arkitekt SAR, filosofie doktorr i konstvetenskap vid Göteborgs universitet, professor emerita i arkitektur vid Chalmers tekniska högskola",
+        "publications": [
+            "*Kvinnor tar plats. Arkitekter i 100 år. Göteborg 1920–2020* (2021)",
+            "*Arkitekter och fasader. Göteborg 1850–1920* (2013)	"
+        ]
+    },
+    "Anna Locke": {
+        "sv": "doktorand i historia, Göteborgs universitet",
+        "publications": [
+            "\"Komajoren: Genus och identitetsskapande i en jordbrukares levnadsberättelse\", i *Järn i elden: kön, makt och relationer 1600-2020* (2020)"
+        ]
+    },
+    "Ann Carpenter Fridén": {
+        "sv": "filosofie doktor i litteraturvetenskap",
+        "publications": [
+            "\"Introduction: Ingmar Bergman and the Arts\", i *Nordic Theatre Studies: yearbook for theatre research in Scandinavia* (1998)"
+        ]
+    },
+    "Suzanne Lundvall": {
+        "sv": "professor i idrottsvetenskap, Göteborgs universitet",
+        "publications": [
+            "\"Physical literacy in Swedish physical education and health (PEH): What is (im)possible in becoming and being physically literate (educated)?\", i *Curriculum Studies in Health and Physical Education* 1/2021"
+        ]
+    },
+    "Christian Mehrstam": {
+        "sv": "litteraturvetare, Institutionen för litteraturer, idéhistoria och religion, Göteborgs universitet",
+        "publications": [
+            "“Silver Lining: The Emblematic Exemplum of Silver Surfer #40–43 (1990)“, i *The Comics Grid: Journal of Comics Scholarship* 1/2020"
+        ]
+    },
+    "Jan-Åke Alvarsson": {
+        "sv": "professor emeritus i kuturantropologi",
+        "publications": [
+            "*Varför reste Lewi Pethrus just till Chicago?: Relationer mellan Sverige och USA inom ramen för pentekostalismen* (2019)"
+        ]
+    },
+    "Ann-Christin Andréasson": {
+        "sv": "kommunikationschef, Högskolan i Borås",
+        "publications": [
+            "*Kunskapens trådar - Textilhögskolans historia från 1866-2013* (2013)"
+        ]
+    },
+    "Chris Bergendorff": {
+        "sv": "småskollärare och journalist, Aller media",
+        "publications": [
+            "*Vackrare Hemma I och II* (1997)"
+        ]
+    },
+    "Lena Waldau": {
+        "sv": "konstnär, skribent, filosof",
+        "publications": []
+    },
+    "Jan Thomasson": {
+        "sv": "journalist",
+        "publications": [
+            "*Bengt-Erik Grahn och hans fem bröder - alla svenska mästare* (2020)",
+            "*Sommar i Kittelfjäll och sagolika Vojmådalen* (2014)",
+            "*Kittelfjäll. Från bondesamhälle till skidparadis* (2012)"
+        ]
+    },
+    "Bibbi Wopenka": {
+        "sv": "journalist och kommunikatör, ledamot av Svenska Deckarakademin",
+        "publications": []
+    },
+    "Lisbeth Håkansson Petré": {
+        "sv": "bibliotekarie, kommunikatör och skribent",
+        "publications": [
+            "*Tisdagar med Tolfterna: nätverkande kvinnor i sekelskiftets Stockholm* (2019)"
+        ]
+    },
+    "Ingegerd Rydin": {
+        "sv": "professor emerita i medie- och kommunikationsvetenskap",
+        "publications": [
+            "\"Using Facebook as a co-learning community in higher education\", i *Learning Media and Technology* (2016)",
+            "*Mediated Crossroads. Identity, Youth Culture and Ethnicity* (2008)",
+            "*Barnens röster. Program för barn i Sveriges radio och television 1925-1999* (2000)"
+        ]
+    },
+    "Maj-Britt Andersson": {
+        "sv": "konsthistoriker, filosofie doktor, lektor vid Newmaninstitutet samt affilierad forskare vid Härjedalens Fjällmuseum",
+        "publications": [
+            "*Kristofers manifestation* (2020)"
+        ]
+    },
+    "Eva Haettner Aurelius": {
+        "sv": "professor emerita i litteraturvetenskap, Lunds universitet",
+        "publications": [
+            "\"Lovisa Ulrikas (1720–1782) akademi: Sveriges första vittra kungliga akademi / Lovisa Ulrika’s (1720–1782) academy: Sweden’s first learned society\", i *Women in European Academies* (2021)"
+        ]
+    },
+    "Daniel Olsson": {
+        "sv": "praktikant, Östasiatiska museet, hösten 2020",
+        "publications": []
+    },
+    "Johanna Overud": {
+        "sv": "universitetslektor, docent i historia, Umeå Centrum för genusstudier, Umeå universitet",
+        "publications": [
+            "\"När var strejken?’ Minnet av Algotssömmerskornas kamp, Västerbotten 1972–1986\", i *Tidskrift för genusvetenskap* 4/2020"
+        ]
+    },
+    "Annelie Henriksson": {
+        "sv": "kommunarkivarie, Karskoga kommun- och föreningsarkiv",
+        "publications": []
+    },
+    "Hege Vårdal": {
+        "sv": "intendent, Naturhistoriska riksmuseet",
+        "publications": [
+            "\"Den entomologiska verksamheten på Riksmuseet 1915-2013\", i *Entomologisk Tidskrift* (2019)"
+        ]
+    },
+    "Charlott Wikström": {
+        "sv": "doktorand vid Umeå universitet i ämnet historia med utbildningsvetenskaplig inriktning",
+        "publications": []
+    },
+    "Lena Näslund": {
+        "sv": "journalist",
+        "publications": [
+            "*Trelleborg 750 år* (2007)"
+        ]
+    },
+    "Hedvig Brander Jonsson": {
+        "sv": "docent, universitetslektor emerita i konstvetenskap, Uppsala universitet",
+        "publications": [
+            "\"Art and Society in the 19th Century\", i *Swedish Art History – a selection of introductory texts* (2018)"
+        ]
+    },
+    "Anders Lindkvist": {
+        "sv": "konstvetare, Master of Science, Uppsala universitet",
+        "publications": [
+            "*Anna Nordgren en kosmopolit på sekelskiftets konstscen* (2016)"
+        ]
+    },
+    "Anneli Jordahl": {
+        "sv": "författare, litteraturkritiker",
+        "publications": [
+            "*Orm med två huvuden* (2019)"
+        ]
+    },
+    "Charlotta Forss": {
+        "sv": "forskare, Historiska institutionen, Stockholms universitet",
+        "publications": [
+            "*Ulrika Eleonora: makten och den nya adeln 1719* (2019)"
+        ]
+    },
+    "Birgitta Theander": {
+        "sv": "doktor i litteraturvetenskap",
+        "publications": [
+            "*Till arbetet! Yrkesdrömmar och arbetsliv i flickboken 1920-1965* (2017)"
+        ]
+    },
+    "Ann-Sofi Forsmark": {
+        "sv": "kulturhistoriker och författare, utvecklingschef på Stockholms stadsarkiv",
+        "publications": [
+            "\"Med samma trohet som en spegel - tidigt porträttfotografi i Stockholm\", i *Släktforskarnas årsbok* (2019)"
+        ]
+    },
+    "Boel Sandskär": {
+        "sv": "hortonom, Sveriges lantbruksuniversitet",
+        "publications": [
+            "*Alnarpsliv* (2019)"
+        ]
+    },
+    "Jane Betts": {
+        "sv": "kulturjournalist och författare",
+        "publications": [
+            "*Susanne Demåne, Bland prinsessor och hondjävlar* (2020)",
+            "*Längs spåret. Tågluffa genom Sverige* (2020)",
+            "*Augusta Tonning. Ett liv - en röst (2019)"
+        ]
+    },
+    "Michaela Malmberg": {
+        "sv": "doktorand i historia, Stockholms universitet",
+        "publications": [
+            "\"Gynecological Massage - Gender, Conflict, and the Transfer of Knowledge in Medicine during the Fin de Siècle\", i *Explorations in Baltic Medical History, 1850-2015* (2019)"
+        ]
+    },
+    "Anders Dahlgren": {
+        "sv": "arkitekt och arkitekturhistoriker",
+        "publications": [
+            "“Stadspark, landskap och bebyggelse i Angereds centrum– en stigberoende planhistoria\", i *Bebyggelsehistorisk tidskrift* (2019)."
+        ]
+    },
+    "Mona Johansson": {
+        "sv": "släktforskare",
+        "publications": []
+    },
+    "Silke Neunsinger": {
+        "sv": "forskningsledare, Arbetarrörelsens arkiv och bibliotek",
+        "publications": [
+            "\"Transnational Activism and Equal Remuneration in India During the Twentieth Century,\" i *The Internationalisation of the Labour Question. Ideological Antagonism, Workers’ Movements and the ILO since 1919* (2020)"
+        ]
+    },
+    "Kristoffer Arvidsson": {
+        "sv": "konstvetare, forskningsledare, Göteborgs konstmuseum",
+        "publications": [
+            "*Det universella språket. Efterkrigstidens abstrakta konst* (2018)"
+        ]
+    },
+    "Kristina Widmark": {
+        "sv": "socionom, teologie kandidat och präst i Svenska kyrkan, Arnäs Gideå Trehörningsjö pastorat",
+        "publications": []
+    },
+    "Birgitta Andréasson": {
+        "sv": "bibliotekarie, Göteborgs universitetsbibliotek",
+        "publications": [
+            "\"På tandemcykel i Rösås: Om ett fotografi\", i *Objekt och samling: om det unika i Göteborgs universitetsbibliotek* (2021)"
+        ]
+    },
+    "Caroline Karlsson": {
+        "sv": "doktorand i statsvetenskap, Lunds universitet",
+        "publications": [
+            "\"Abort – vems rättighet? Om samtida abortdebatter i Sverige\", i *Tidskrift för genusvetenskap* 3-4/2019"
+        ]
+    },
+    "Inger Sedin": {
+        "sv": "tidigare pedagog vid Gunnebo Slott och Trädgårdar",
+        "publications": [
+            "*Från Sidensjö till Sedin, En släktkrönika. Om människor på och kring gästgiveriet och skjutsstationen i Mellerstbyn, Timrå* (2019)"
+        ]
+    },
+    "Els-Marie Rådström": {
+        "sv": "socionom, pensionär",
+        "publications": []
+    },
+    "Elsa Modin": {
+        "sv": "pensionär, tidigare bibliotekarie, Hassebladsstiftelsen",
+        "publications": []
+    },
+    "Gun-Britt Sundström": {
+        "sv": "författare och översättare",
+        "publications": [
+            "*Skrivliv. Från första boken till första barnet* (2018)"
+        ]
+    },
+    "Christer Wiklund": {
+        "sv": "professor emeritus i ekologisk zoologi, Stockholms universitet",
+        "publications": [
+            "\"Timing of mating, reproductive status and resource availability in relation to migration in the painted lady butterfly\", i *Animal Behaviour* (2021)",
+            "\"Fjärilars försvar mot predation\", i *Fauna och Flora* (2019)	"
+        ]
+    },
+    "Christina Svensson": {
+        "sv": "ämneslärare i svenska och religionskunskap",
+        "publications": []
+    },
+    "Martina Böök": {
+        "sv": "doktorand i historia, Linnéuniversitetet",
+        "publications": [
+            "*Mer för prakten än för nyttans skull: Statusmarkeringar i bouppteckningar från Virestads socken 1750-1759* (2013)"
+        ]
+    },
+    "Peter Schantz": {
+        "sv": "professor i humanbiologi, Gymnastik- och Idrottshögskolan",
+        "publications": [
+            "\"Perspectives on exercise intensity, volume and energy expenditure in habitual cycle commuting\", i *Frontiers in Sports and Active Living* (2020)"
+        ]
+    },
+    "Gunilla Bolinder": {
+        "sv": "legitimerad läkare, legitimerad tandläkare och docent, Karolinska Institutet",
+        "publications": [
+            "\"Erfarenheter av en 'ny' influensas förlopp i Sverige 1890\", i *Läkartidningen* 48/2009"
+        ]
+    },
+    "Anders Fröjmark": {
+        "sv": "universitetslektor och docent i historia, Linnéuniversitetet",
+        "publications": [
+            "“Telling the Miracle: The Meeting between Pilgrim and Scribe as Reflected in Swedish Miracle Collections\", i *Miracles in Medieval Canonization Processes: Structures, Functions, and Methodologies* (2018)"
+        ]
+    },
+    "Lars Lundquist": {
+        "sv": "docent emeritus, Biologiska museet, Lunds universitet",
+        "publications": []
+    },
+    "Agnes Hamberger": {
+        "sv": "doktorand i utbildningssociologi, Uppsala universitet",
+        "publications": [
+            "\"Konfirmationen – folkskolans avslutning\" i *Skolans högtider - Ceremoni, fest och firande i svenska skolhistoria* (2020)",
+            "\"Signerat: Om flickor i folkskolan\" i *Sans* (2020)	"
+        ]
+    },
+    "Tina Jeppson": {
+        "sv": "journalist, *Barometern-OT*",
+        "publications": [
+            "*En livs levande bok* (1999, 2020)"
+        ]
+    },
+    "Nils Hjort": {
+        "sv": "frilansskribent och föreläsare",
+        "publications": [
+            "*Dramatiska damer – sjuttiofem porträtt från femhundra år* (2019)"
+        ]
+    },
+    "Magdalena Fronczak": {
+        "sv": "producent på Göteborgs Symfoniker, musiker, skribent och repertoarkonsult",
+        "publications": []
+    },
+    "Mats Larsson": {
+        "sv": "teologie doktor i kyrkohistoria och folkhögskollärare, Akademi för ledarskap och teologi vid Örebro Folkhögskola",
+        "publications": [
+            "*\"Vi unga kristna qvinnor\" - Askers Jungfruförening 1865–1903 - identitet och intersektionalitet* (2015)"
+        ]
+    },
+    "Peter Ullgren": {
+        "sv": "författare, historiedocent",
+        "publications": [
+            "*Krigsbrev - Karl XII:s soldater i Norge 1716* (2021)"
+        ]
+    },
+    "Lisbet Ahnoff": {
+        "sv": "frilansskribent, konstpedagog, föreläsare",
+        "publications": [
+            "\"Elsa Agélii och textilkonstens förnyelse i Västsverige\" i *Konsthantverk och design. Hundra år i Göteborg* (2019)"
+        ]
+    },
+    "Margareta Klingberg": {
+        "sv": "bildkonstnär, skribent",
+        "publications": [
+            "\"Sara och hockeyhjältar - om nya bidrag till norrländsk livsmiljö\", i *VOLYM* (2021)",
+            "\"Att gå över gränsen\", i *Hjärnstorm* (2016)	"
+        ]
+    },
+    "Margareta Sturemyr": {
+        "sv": "bibliotekarie, Göteborgs universitetsbibliotek",
+        "publications": [
+            "\"Emilia och Gustaf, mor och son\", i *Värmländsk kultur* 2/2010",
+            "*En köpman i skärgården: Amandus Mattsson på Mollösund* (2005)",
+            "*Emilia Fröding: möt hennes liv och dikt* (1997, 2003)"
+        ]
+    },
+    "Gunvor Vretblad": {
+        "sv": "tidigare chef, Arkiv- och biblioteksenheten på Statens maritima museer, nuvarande redaktör för pensionärsföreningen Jarlbankes medlemstidning",
+        "publications": [
+            "*Exponerad tid. Johan Emanuel Thorins fotografier 1890-1930* (2015)"
+        ]
+    },
+    "Gerda Helena Lindskog": {
+        "sv": "författare, före detta bibliotekarie",
+        "publications": [
+            "*\"Först och främst misshagade namnet\"– arbetsstugor för barn i Tornedalen och Lappland 1930-1954. Tjugosex intervjuer* (2016)"
+        ]
+    },
+    "Gunilla Jungner": {
+        "sv": "högstadielärare, pensionär",
+        "publications": [
+            "*Mango grammatik* (2003)"
+        ]
+    },
+    "David Thorsén": {
+        "sv": "lektor i pedagogik, filosofie doktor i Idé- och lärdomshistoria vid Stockholms universitet",
+        "publications": [
+            "\"Dissektioner i svensk skolundervisning under tidigt 1900-tal\", i *Humanimalt* (2020)"
+        ]
+    },
+    "Jenny Moström": {
+        "sv": "arkivarie och historiker vid Värmlandsarkiv",
+        "publications": [
+            "*Dold kvinnohistoria: en skrift från Föreningsarkivet i Värmland 70 år* (2019)",
+            "“Hemkonsulent Magda Svensson\", i *Bergslagshistoria Årgång/Årsbok 30* (2018)	"
+        ]
+    },
+    "Bodil Formark": {
+        "sv": "filosofie doktor i historia och forskningssamordnare, Umeå universitet",
+        "publications": [
+            "*Girling together: A dialogue. Ett samverkansprojekt mellan scenkonstnärer och flickforskare om flickan i kulturen* (2019)"
+        ]
+    },
+    "Martin Nilsson": {
+        "sv": "redaktör, informatör och arkivvolontär, Evangeliska Fosterlands-Stiftelsens kansli och arkiv",
+        "publications": [
+            "\"EFS som berör - 1860-talet\", i *EFS Månadsblad* (2021).",
+            "*Må detta nå Monsieur Stjärne. Krigstidskorrespondens mellan Etiopiens kejsare Haile Sellassie I och en svensk missionär* (2017)",
+            "*Kenisha. The Roots and Development of The Evanglical Church of Eritrea* (2011)"
+        ]
+    },
+    "Katarina Sandström": {
+        "sv": "journalist",
+        "publications": []
+    },
+    "Björn Lundberg": {
+        "sv": "historiker, filosofie doktor, Lunds universitet",
+        "publications": [
+            "\"Lång väg till jämställt OS\", i *Historiskan* (2020)"
+        ]
+    },
+    "Siv Jägerung": {
+        "sv": "frilansskribent, hembygdsforskare, Bengtsfors kommuns kulturpristagare 2005",
+        "publications": [
+            "*Halmslöjden i Torp och ödegårdar i Ärtemark* (2019)",
+            "\"Sparkad brukspojke blev busspatron\", i *Nordmarken: Årjäng förr Fjâle boka* (2018)",
+            "*Bengtsfors kyrka* (2016)"
+        ]
+    },
+    "Magnus Kindstrand": {
+        "sv": "advokat",
+        "publications": []
+    },
+    "Dan Olsson": {
+        "sv": "musiker och universitetsadjunkt i musikhistoria vid Högskolan för scen och musik, Göteborgs universitet och Musikhögskolan Ingesund, Karlstads universitet",
+        "publications": [
+            "\"Franz Berwald och det nordiska\", i *Franz Berwald – belysningar och reflektioner* (2016)"
+        ]
+    },
+    "Annika Borg": {
+        "sv": "teologie doktor, skribent och präst i Svenska kyrkan",
+        "publications": [
+            "\"Hammaren, skäran, korset och svärdet\" i *Vänsterns idéer* (2019)"
+        ]
+    },
+    "Eva Nygårds": {
+        "sv": "intendent, Göteborgs konstmuseum",
+        "publications": []
+    },
+    "André Swanström": {
+        "sv": "docent i kyrkohistoria, Åbo Akademi",
+        "publications": [
+            "*Hakaristin ritarit* (2018)"
         ]
     },
 }
