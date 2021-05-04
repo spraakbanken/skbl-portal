@@ -208,7 +208,7 @@
                       <span class="label label-default"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></span>
                     </div>
                 </div>
-                <div style="" class="nested_container shown_first">
+                <div class="nested_container shown_first">
                     <ul>
                     {% for relation in article.relation %}
                       {% if loop.index < 4 %}
@@ -249,7 +249,7 @@
                       <span class="label label-default"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></span>
                     </div>
                 </div>
-                <div style="" class="nested_container shown_first">
+                <div class="nested_container shown_first">
                     <ul>
                     {% for education in article.education %}
                       {% if loop.index < 4 %}
@@ -291,7 +291,7 @@
                       <span class="label label-default"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></span>
                     </div>
                 </div>
-                <div style="" class="nested_container shown_first">
+                <div class="nested_container shown_first">
                     <ul>
                     {% for occupation in article.occupation %}
                       {% if loop.index < 4 %}
@@ -333,7 +333,7 @@
                       <span class="label label-default"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></span>
                     </div>
                 </div>
-                <div style="" class="nested_container shown_first">
+                <div class="nested_container shown_first">
                     <ul>
                     {% for contact in article.contact %}
                       {% if loop.index < 4 %}
@@ -383,7 +383,7 @@
                       <span class="label label-default"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></span>
                     </div>
                 </div>
-                <div style="" class="nested_container shown_first">
+                <div class="nested_container shown_first">
                     <ul>
                     {% for organisation in article.organisation %}
                       {% if loop.index < 4 %}
@@ -445,7 +445,7 @@
                       <span class="label label-default"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></span>
                     </div>
                 </div>
-                <div style="" class="nested_container shown_first">
+                <div class="nested_container shown_first">
                     <ul>
                         {% if birthplace %}
                             <li class="keyword_list_item"> {{gettext('Birthplace')}}: {{birthplace | deescape}}</li>
@@ -487,7 +487,7 @@
                       <span class="label label-default"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></span>
                     </div>
                     </div>
-                    <div style="" class="nested_container shown_first">
+                    <div class="nested_container shown_first">
                     <ul>
                     {% for award in article.awards %}
                       {% if loop.index < 4 %}
@@ -514,7 +514,7 @@
             {% for typename, type in article.source %}
                 {% set source_typename = get_lang_text(typename, type[0].type_eng, g.language) %}
                 <div>
-                    <h5>{{source_typename}}</h5>
+                    <h5>{{source_typename | deescape}}</h5>
                     <ul class="no_bullets">
                         {% for source in type %}
                         <li>
@@ -538,7 +538,7 @@
             <h4>{{gettext('Further References')}}</h4>
             {% for typename, type in article.furtherreference %}
                 <div>
-                    <h5>{{typename}}</h5>
+                    <h5>{{typename | deescape}}</h5>
                     <ul class="no_bullets">
                         {% for ref in type %}
                         <li>
