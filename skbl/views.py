@@ -534,6 +534,8 @@ def show_article(data, lang="sv"):
 
         under_development = True if source.get("skbl_status") == "Under utveckling" else False
 
+        littb_url = helpers.get_littb_id(source.get("url"))
+
         return render_template("article.html",
                                article=source,
                                article_id=source["es_id"],
@@ -541,7 +543,8 @@ def show_article(data, lang="sv"):
                                title=title,
                                description=description,
                                image=image,
-                               under_development=under_development)
+                               under_development=under_development,
+                               littb_id=littb_url)
     else:
         return render_template("page.html", content=gettext("Contents could not be found!")), 404
 

@@ -615,3 +615,16 @@ def swedish_translator(firstname, lastname):
     if name in swedish_translators:
         return True
     return False
+
+
+def get_littb_id(skbl_url):
+    """Get Litteraturbanken ID for an article if available."""
+    if not skbl_url:
+        return None
+    littb_url = ("https://litteraturbanken.se/api/list_all/author?filter_and={%22wikidata.skbl_link%22:%20%22" +
+                 skbl_url + "%22}&include=authorid")
+    contents = urlopen(littb_url).read()
+    resp = json.loads(contents)
+    if resp.get("data"):
+        return resp["data"][0]["authorid"]
+    return None

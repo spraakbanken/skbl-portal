@@ -532,28 +532,36 @@
             {% endfor %}
         </div>
         {% endif %}
-        {% if article.furtherreference %}
+        {% if article.furtherreference or littb_id %}
         <br/><br/>
         <div>
             <h4>{{gettext('Further References')}}</h4>
             {% for typename, type in article.furtherreference %}
-                <div>
-                    <h5>{{typename | deescape}}</h5>
-                    <ul class="no_bullets">
-                        {% for ref in type %}
-                        <li>
-                            {% set ref_description = get_lang_text(ref.description, ref.description_eng, g.language) %}
-                            {% if ref.url %}
-                                <a class="visible_link" href="{{ref.url | deescape}}" target="_blank">{{ref_description | safe}}</a>
-                            {% else %}
-                                <span>{{ref_description | safe}}</span>
-                            {% endif %}
-
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
+            <div>
+                <h5>{{typename | deescape}}</h5>
+                <ul class="no_bullets">
+                    {% for ref in type %}
+                    <li>
+                        {% set ref_description = get_lang_text(ref.description, ref.description_eng, g.language) %}
+                        {% if ref.url %}
+                        <a class="visible_link" href="{{ref.url | deescape}}" target="_blank">{{ref_description | safe}}</a>
+                        {% else %}
+                        <span>{{ref_description | safe}}</span>
+                        {% endif %}
+                        
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
             {% endfor %}
+            {% if littb_id %}
+            <div>
+                <h5>
+                    {{gettext('Read more at')}}
+                    <a class="visible_link" target="_blank" href="https://litteraturbanken.se/författare/{{littb_id}}">Litteraturbanken.se</a>
+                </h5>
+            </div>
+            {% endif %}
         </div>
         {% endif %}
 
