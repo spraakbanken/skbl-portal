@@ -2892,7 +2892,7 @@ authors_dict = {
         "publications": []
     },
     "Gunilla Linde Bjur": {
-        "sv": "arkitekt SAR, filosofie doktorr i konstvetenskap vid Göteborgs universitet, professor emerita i arkitektur vid Chalmers tekniska högskola",
+        "sv": "arkitekt SAR, filosofie doktor i konstvetenskap vid Göteborgs universitet, professor emerita i arkitektur vid Chalmers tekniska högskola",
         "publications": [
             "*Kvinnor tar plats. Arkitekter i 100 år. Göteborg 1920–2020* (2021)",
             "*Arkitekter och fasader. Göteborg 1850–1920* (2013)	"
@@ -3310,4 +3310,8 @@ authors_dict = {
             "*Hakaristin ritarit* (2018)"
         ]
     },
+    "Elisabeth Borg": {
+        "sv": "Dotter till Katie Borg",
+        "publications": []
+    }
 }
