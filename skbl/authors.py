@@ -1238,10 +1238,10 @@ authors_dict = {
     },
 
     "Ulrika Lagerlöf Nilsson": {
-        "sv": "filosofie doktor i historia, teologie doktor i kyrkohistoria och forskare vid Göteborgs universitet",
+        "sv": "docent i kyrkohistoria, filosofie doktor i historia och forskare vid Göteborgs universitet",
         "publications": [
+            "*Elisabeth Beskow. Liv och berättelser 1870–1928* (2021)",
             "*Med lust och bävan. Vägen till biskopsstolen inom Svenska kyrkan under 1900-talet* (2010)",
-            "*Tradition, modernitet och förnyelse. Elisabeth Beskow och hennes författarskap decennierna kring sekelskiftet 1900* (2017)",
         ]
     },
 
