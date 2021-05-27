@@ -457,7 +457,7 @@ def empty_article():
 
 def find_link(searchstring):
     """Find an article based on ISNI or name."""
-    if re.search(r"^[0-9 ]*$", searchstring):
+    if re.search(r"^[0-9 ]*X?$", searchstring):
         searchstring = searchstring.replace(" ", "")
         data = helpers.karp_query("query", {"q": "extended||and|swoid.search|equals|%s" % (searchstring)})
     else:
