@@ -566,7 +566,7 @@ authors_dict = {
     },
 
     "Karin Gustavsson": {
-        "sv": "filosofie doktor i etnologi vid Lunds universitet och antikvarie vid Kulturmagasinet i Helsingborg",
+        "sv": "filosofie doktor i etnologi vid Lunds universitet och chef för Folklivsarkivet med Skånes musiksamlingar",
         "publications": [
             "*Expeditioner i det förflutna. Etnologiska fältarbeten och försvinnande allmogekultur under 1900-talets början* (2014)",
             "*En ärans och lärdomens man. Bror Emil Hildebrand och Krapperup* (2009)",

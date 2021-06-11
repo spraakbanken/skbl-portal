@@ -316,6 +316,8 @@ def compute_artikelforfattare(infotext="", description="", lang="", cache=True, 
         "Mandelin,Bodil": True,
         "Sedin,Els-Marie": True,
         "Rådström,Inger": True,
+        "Mannerheim,Madeleine": True,
+        "Kleberg,Ylva": True,
 
         "Kärnekull,Anneka ": True,
         "Kärnekull,Ingrid": True,
