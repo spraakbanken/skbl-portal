@@ -1261,9 +1261,9 @@ authors_dict = {
     },
 
     "Catharina Nolin": {
-        "sv": "docent i konstvetenskap vid Stockholms universitet",
+        "sv": "professor i konstvetenskap vid Stockholms universitet",
         "publications": [
-            "\"Sylvia Gibson and Sweden's post-World War II welfare landscapes\", i *OEI* (2016)",
+            "\"Networking and collaborating – Notes on Swedish Women landscape architects 1935–1970\", i ArkDes Research Symposium on Architectural History 2018 (2020)",
             "\"Women planners and green space. Sweden 1930–1970\", i *Green Landscapes in the European City, 1750–2000* (2017)",
         ]
     },
