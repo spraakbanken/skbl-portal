@@ -573,7 +573,7 @@
                 {% for picture in article.picture %}
                     <li>
                         {% set picture_description = get_lang_text(picture.description, picture.description_eng, g.language) %}
-                        <a class="visible_link" href="{{picture.url | deescape}}" target="_blank">{{picture_description | safe}}</a>
+                        <a class="visible_link" href="{{picture.url | deescape}}" target="_blank">{{picture_description | safe }}</a>
                     </li>
                 {% endfor %}
             </ul>
@@ -604,7 +604,7 @@
             <h3>{{ gettext("Keywords") }}</h3>
             {% for keyword in article_keyword %}
                 {% if keyword %}
-                    <a href="{{ url_for('views.keyword_'+g.language, result=keyword) }}"><span class="badge">{{ keyword }}</span></a></span>
+                    <a href="{{ url_for('views.keyword_'+g.language, result=keyword) }}"><span class="badge">{{ keyword | deescape }}</span></a></span>
                 {% endif %}
             {% endfor %}
         {% endif %}
