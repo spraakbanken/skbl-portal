@@ -19,6 +19,6 @@ flask-reverse-proxy
 gunicorn
 markdown
 pylibmc
-werkzeug>=0.15.5,<1.0.0
+werkzeug
 
 PyICU==2.5  # Must probably be installed manually
