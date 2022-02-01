@@ -2021,7 +2021,7 @@ authors_dict = {
         ]
     },
     "Harald Bohlin": {
-        "sv": "filosofie licentitat i statsvetenskap, Uppsala universitet"
+        "sv": "filosofie licentitat i statskunskap, Uppsala universitet"
     },
     "Erik Brilioth": {
         "sv": "jurist, musiker"
