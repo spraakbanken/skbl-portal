@@ -623,7 +623,14 @@ def get_littb_id(skbl_url):
         return None
     littb_url = ("https://litteraturbanken.se/api/list_all/author?filter_and={%22wikidata.skbl_link%22:%20%22" +
                  skbl_url + "%22}&include=authorid")
-    contents = urlopen(littb_url).read()
+    try:
+        # Fake the user agent to avoid getting a 403
+        r = Request(littb_url, headers={"User-Agent" : "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) "
+                    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36"})
+        contents = urlopen(r).read()
+    except Exception as e:
+        log("Could not open URL %s. Error: %s" % (e, littb_url))
+        return None
     resp = json.loads(contents)
     if resp.get("data"):
         return resp["data"][0]["authorid"]
