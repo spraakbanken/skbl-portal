@@ -181,7 +181,7 @@ msgid "Residences"
 msgstr "Bostadsorter"
 
 #: skbl/templates/article.html:472
-msgid "Prices/awards"
+msgid "Prizes/awards"
 msgstr "Priser/utmärkelser"
 
 #: skbl/templates/article.html:513
