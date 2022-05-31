@@ -1,5 +1,5 @@
 """Initialise Flask application."""
-import html.parser
+import html
 import os
 import re
 
@@ -56,8 +56,7 @@ def create_app():
 
     @app.template_filter('deescape')
     def deescape_filter(s):
-        html_parser = html.parser.HTMLParser()
-        return html_parser.unescape(s)
+        return html.unescape(s)
 
     @app.template_filter('cclink')
     def cclink_filter(s):
