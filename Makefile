@@ -124,4 +124,4 @@ publish:
 prepare-release: tests/requirements-testing.txt
 
 tests/requirements-testing.txt: pyproject.toml
-	pdm lock --dev --output $@
+	pdm export --dev --format requirements --output $@
