@@ -48,7 +48,7 @@ jobs:
     # Cargo semver rules (i.e cargo does not update to a new major version unless explicitly told
     # to).
     runs-on: ubuntu-latest
-    name: ubuntu / 3.12 / updated
+    name: ubuntu / 3.12 / updates work
     # There's no point running this if no Cargo.lock was checked in in the first place, since we'd
     # just redo what happened in the regular test job. Unfortunately, hashFiles only works in if on
     # steps, so we repeat it.
@@ -68,3 +68,14 @@ jobs:
       - name: make test
         if: hashFiles('pdm.lock') != ''
         run: make test
+
+  check-for-updates:
+    runs-on: ubuntu-latest
+    name: ubuntu / create PR if updates exists
+    steps:
+      - uses: actions/checkout@v4
+      - name: check for update
+        uses: pdm-project/update-deps-action@d76795be3e5bc1d841dd3f45d1ff0d9c2d905725
+        with:
+          commit-message: "build: update pdm.lock"
+          update-strategy: reuse
