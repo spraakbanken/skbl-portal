@@ -60,10 +60,49 @@ jobs:
           name: .coverage-${{ matrix.os }}-${{ matrix.python-version }}
           path: .coverage
 
+  doctests:
+    name: "${{ matrix.os }} / 3.9 / doctest"
+    strategy:
+      max-parallel: 4
+      fail-fast: false
+      matrix:
+        os: [ubuntu] 
+
+    runs-on: ${{ matrix.os }}-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up the environment
+        uses: pdm-project/setup-pdm@v4
+        id: setup-python
+        with:
+          python-version: ${{ env.MINIMUM_PYTHON_VERSION }}
+      
+      - name: Load cached venv
+        id: cached-venv
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('.github/workflows/test.yml') }}
+  
+      - name: Install dependencies
+        if: steps.cached-venv.outputs.cache-hit != 'true'
+        run: make install-dev
+      #----------------------------------------------
+      # Run tests and upload coverage
+      #----------------------------------------------
+      - name: make doc-tests
+        run: make doc-tests
+
+      - name: Upload coverage files
+        uses: actions/upload-artifact@v4
+        with:
+          name: .coverage-${{ matrix.os }}-doctest-${{ matrix.json-lib }}
+          path: .coverage
 
   upload-coverage:
     name: Upload test coverage to CodeCov
-    needs: [coverage]
+    needs: [coverage, doctests]
     runs-on: ubuntu-latest
     permissions:
       statuses: write
@@ -101,10 +140,38 @@ jobs:
           # name: codecov-umbrella
           verbose: true
 
+  minimal:
+    # This action chooses the oldest version of the dependencies permitted by Cargo.toml to ensure
+    # that this crate is compatible with the minimal version that this crate and its dependencies
+    # require. This will pickup issues where this create relies on functionality that was introduced
+    # later than the actual version specified (e.g., when we choose just a major version, but a
+    # method was added after this version).
+    #
+    
+    runs-on: ubuntu-latest
+    name: ubuntu / 3.9 / minimal-versions
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up the environment
+        uses: pdm-project/setup-pdm@v4
+        id: setup-python
+        with:
+          python-version: ${{ env.MINIMUM_PYTHON_VERSION }}
+      
+      - name: pdm lock --strategy direct_minimal_versions
+        run: pdm lock --strategy direct_minimal_versions
+      - name: pdm sync --dev
+        run: pdm sync --dev
+      - name: make test
+        run: make test
   # https://github.com/marketplace/actions/alls-green#why used for branch protection checks
   test-check:
     if: always()
-    needs: [coverage, upload-coverage]
+    needs: 
+      - coverage
+      - doctests
+      - minimal
+      - upload-coverage
     runs-on: ubuntu-latest
     permissions: {}
     steps:
@@ -156,7 +223,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu]
-    name: ${{ matrix.os }} / ${{ env.MINIMUM_PYTHON_VERSION }}
+    name: ${{ matrix.os }} / 3.9
 
     runs-on: ${{ matrix.os }}-latest
     steps:
@@ -180,7 +247,9 @@ jobs:
       - run: pytest
 
   publish:
-    needs: [test-check, test-build]
+    needs: 
+      - test-check
+      - test-build
     if: success() && startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     environment: release

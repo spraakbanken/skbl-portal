@@ -91,7 +91,10 @@ jobs:
   # https://github.com/marketplace/actions/alls-green#why used for branch protection checks
   check-check:
     if: always()
-    needs: [fmt, lint, type-check]
+    needs: 
+      - fmt
+      - lint
+      - type-check
     runs-on: ubuntu-latest
     permissions: {}
     steps:
