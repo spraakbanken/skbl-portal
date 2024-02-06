@@ -1,0 +1,62 @@
+# Run scheduled (rolling) jobs on a nightly basis, as your crate may break independently of any
+# given PR. E.g., updates to rust nightly and updates to this crates dependencies. See check.yml for
+# information about how the concurrency cancellation and workflow triggering works
+permissions:
+  contents: read
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron:  '7 7 * * *'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+name: rolling
+
+jobs:
+  # https://twitter.com/mycoliza/status/1571295690063753218
+  nightly:
+    runs-on: ubuntu-latest
+    name: ubuntu / 3.13-dev
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install python
+        uses: pdm-project/setup-pdm@v4
+        with:
+          python-version: "3.13-dev"
+      - name: pdm lock
+        if: hashFiles('pdm.lock') == ''
+        run: pdm lock
+      - name: pdm sync
+        run: pdm sync
+      - name: make test
+        run: make test
+  # https://twitter.com/alcuadrado/status/1571291687837732873
+  update:
+    # This action checks that updating the dependencies of this crate to the latest available that
+    # satisfy the versions in Cargo.toml does not break this crate. This is important as consumers
+    # of this crate will generally use the latest available crates. This is subject to the standard
+    # Cargo semver rules (i.e cargo does not update to a new major version unless explicitly told
+    # to).
+    runs-on: ubuntu-latest
+    name: ubuntu / 3.12 / updated
+    # There's no point running this if no Cargo.lock was checked in in the first place, since we'd
+    # just redo what happened in the regular test job. Unfortunately, hashFiles only works in if on
+    # steps, so we repeat it.
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install 3.12
+        if: hashFiles('pdm.lock') != ''
+        uses: pdm-project/setup-pdm@v4
+        with:
+          python-version: "3.12"
+      - name: pdm update
+        if: hashFiles('pdm.lock') != ''
+        run: pdm update
+      - name: make test
+        if: hashFiles('pdm.lock') != ''
+        run: make test

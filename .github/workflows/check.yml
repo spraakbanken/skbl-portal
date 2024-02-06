@@ -1,0 +1,102 @@
+name: check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  merge_group:
+
+permissions:
+  contents: read
+
+env:
+  MINIMUM_PYTHON_VERSION: "3.9"
+
+# If new code is pushed to a PR branch, then cancel in progress workflows for that PR. Ensures that
+# we don't waste CI time, and returns results quicker https://github.com/jonhoo/rust-ci-conf/pull/5
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  fmt:
+    runs-on: ubuntu-latest
+    name: ubuntu / fmt
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up the python ${{ env.MINIMUM_PYTHON_VERSION }}
+        uses: pdm-project/setup-pdm@v4
+        id: setup-python
+        with:
+          python-version: ${{ env.MINIMUM_PYTHON_VERSION }}
+      
+      - name: Load cached venv
+        id: cached-venv
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('.github/workflows/check.yml') }}
+    
+      - name: Install dependencies
+        if: steps.cached-venv.outputs.cache-hit != 'true'
+        run: make install-dev
+      
+      - name: check formatting
+        run: make check-fmt
+  lint:
+    runs-on: ubuntu-latest
+    name: ubuntu / lint
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up the python ${{ env.MINIMUM_PYTHON_VERSION }}
+        uses: pdm-project/setup-pdm@v4
+        id: setup-python
+        with:
+          python-version: ${{ env.MINIMUM_PYTHON_VERSION }}
+      - name: Load cached venv
+        id: cached-venv
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('.github/workflows/check.yml') }}
+      - name: Install dependencies
+        if: steps.cached-venv.outputs.cache-hit != 'true'
+        run: make install-dev
+      - name: lint code
+        run: make lint
+  type-check:
+    runs-on: ubuntu-latest
+    name: ubuntu / type-check
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up the python ${{ env.MINIMUM_PYTHON_VERSION }}
+        uses: pdm-project/setup-pdm@v4
+        id: setup-python
+        with:
+          python-version: ${{ env.MINIMUM_PYTHON_VERSION }}
+      - name: Load cached venv
+        id: cached-venv
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('.github/workflows/check.yml') }}
+      - name: Install dependencies
+        if: steps.cached-venv.outputs.cache-hit != 'true'
+        run: make install-dev
+      - name: type-check code
+        run: make lint
+
+  # https://github.com/marketplace/actions/alls-green#why used for branch protection checks
+  test-check:
+    if: always()
+    needs: [fmt, lint, type-check]
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - name: Decide whether the needed jobs succeeded or failed
+        uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}
+          allowed-failures: upload-coverage
