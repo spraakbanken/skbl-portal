@@ -101,7 +101,7 @@ jobs:
           path: .coverage
 
   upload-coverage:
-    name: Upload test coverage to CodeCov
+    name: ubuntu / 3.9 / upload-coverage
     needs: [coverage, doctests]
     runs-on: ubuntu-latest
     permissions:
@@ -182,7 +182,7 @@ jobs:
           allowed-failures: upload-coverage
 
   build:
-    name: Build package
+    name: ubuntu / 3.9 / build package
      # only run on push to main and on release
     if: success() && (startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/main')
     runs-on: ubuntu-latest
@@ -223,7 +223,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu]
-    name: ${{ matrix.os }} / 3.9
+    name: ${{ matrix.os }} / 3.9 / test built package
 
     runs-on: ${{ matrix.os }}-latest
     steps:
