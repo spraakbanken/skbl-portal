@@ -97,12 +97,14 @@ jobs:
       - name: Upload coverage files
         uses: actions/upload-artifact@v4
         with:
-          name: .coverage-${{ matrix.os }}-doctest-${{ matrix.json-lib }}
+          name: .coverage-${{ matrix.os }}-doctest-${{ env.MINIMUM_PYTHON_VERSION }}
           path: .coverage
 
   upload-coverage:
     name: ubuntu / 3.9 / upload-coverage
-    needs: [coverage, doctests]
+    needs: 
+      - coverage
+      - doctests
     runs-on: ubuntu-latest
     permissions:
       statuses: write
