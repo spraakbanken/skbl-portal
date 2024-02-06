@@ -61,7 +61,7 @@ jobs:
         run: pdm update
       - name: pdm sync --dev
         if: hashFiles('pdm.lock') != ''
-        run: pdm dync --dev
+        run: pdm sync --dev
       - name: make test
         if: hashFiles('pdm.lock') != ''
         run: make test
