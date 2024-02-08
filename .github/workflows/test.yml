@@ -35,6 +35,9 @@ jobs:
           - "3.12"
 
     runs-on: ${{ matrix.os }}-latest
+    env:
+      OS: ${{ matrix.os }}-latest
+      PYTHON: ${{ matrix.python-version }}
     steps:
       - uses: actions/checkout@v4
 
@@ -58,11 +61,17 @@ jobs:
       - name: Run tests for coverage
         run: make test-w-coverage
 
-      - name: Upload coverage artifact
-        uses: actions/upload-artifact@v4
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
         with:
-          name: .coverage-${{ matrix.os }}-${{ matrix.python-version }}
-          path: .coverage
+          token: ${{ secrets.CODECOV_TOKEN }}
+          # directory: ./coverage
+          env_vars: OS,PYTHON
+          fail_ci_if_error: true
+          # files: ./coverage/coverage.xml
+          # flags: unittests
+          # name: codecov-umbrella
+          verbose: true
 
   doctests:
     name: "${{ matrix.os }} / 3.9 / doctest"
@@ -73,6 +82,8 @@ jobs:
         os: [ubuntu] 
 
     runs-on: ${{ matrix.os }}-latest
+    env:
+      OS: ${{ matrix.os }}-latest
     steps:
       - uses: actions/checkout@v4
 
@@ -98,53 +109,20 @@ jobs:
       - name: make doc-tests
         run: make doc-tests
 
-      - name: Upload coverage files
-        uses: actions/upload-artifact@v4
-        with:
-          name: .coverage-${{ matrix.os }}-doctest-${{ env.MINIMUM_PYTHON_VERSION }}
-          path: .coverage
-
-  upload-coverage:
-    name: ubuntu / 3.9 / upload-coverage
-    needs: 
-      - coverage
-      - doctests
-    runs-on: ubuntu-latest
-    permissions:
-      statuses: write
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up python ${{ env.MINIMUM_PYTHON_VERSION }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ env.MINIMUM_PYTHON_VERSION }}
-
-      - name: Install dependencies
-        run: pip install coverage
-
-      - name: Download coverage artifacts
-        uses: actions/download-artifact@v4
-        with:
-          pattern: .coverage-*
-
-      - name: convert coverage to xml
-        run: |
-          ls -aR
-          coverage combine .coverage*/.coverage
-          coverage xml -i 
-          ls -a
-
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           # directory: ./coverage
-          # env_vars: OS,PYTHON
-          fail_ci_if_error: false
+          env_vars: OS,PYTHON,TESTTYPE
+          fail_ci_if_error: true
           # files: ./coverage/coverage.xml
           # flags: unittests
           # name: codecov-umbrella
           verbose: true
+        env:
+          PYTHON: ${{ env.MINIMUM_PYTHON_VERSION }}
+          TESTTYPE: doctest
 
   minimal:
     # This action chooses the oldest version of the dependencies permitted by Cargo.toml to ensure
@@ -177,7 +155,6 @@ jobs:
       - coverage
       - doctests
       - minimal
-      - upload-coverage
     runs-on: ubuntu-latest
     permissions: {}
     steps:
@@ -185,7 +162,6 @@ jobs:
         uses: re-actors/alls-green@release/v1
         with:
           jobs: ${{ toJSON(needs) }}
-          allowed-failures: upload-coverage
 
   build:
     name: ubuntu / 3.9 / build package
