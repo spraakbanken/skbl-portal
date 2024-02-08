@@ -75,7 +75,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: check for update
-        uses: pdm-project/update-deps-action@d76795be3e5bc1d841dd3f45d1ff0d9c2d905725
+        uses: pdm-project/update-deps-action@53ff698bc3f48536910f1c6587b17e33a0d25e51
         with:
           commit-message: "build: update pdm.lock"
           update-strategy: reuse
