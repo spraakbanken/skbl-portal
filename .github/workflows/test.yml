@@ -224,7 +224,7 @@ jobs:
 
       - run: rm -r src/ocr_suggestion
       - run: pip install typing-extensions
-      - run: pip install -r tests/requirements-testing.txt
+      - run: pip install -r tests/requirements-testing.lock
       - run: pip install sparv-ocr-suggestion-plugin --no-index --no-deps --find-links dist --force-reinstall
       - run: pytest
 
