@@ -7,6 +7,11 @@ This folder can be merged using a `--allow-unrelated-histories` merge strategy f
 The workflows in this folder requires a root Makefile with a couple of targets defined.
 As base can the Makefile in <https://github.com/spraakbanken/python-pdm-make-conf> be used.
 
+## Publish
+
+The `publish`-step in [test.yml](./workflows/test.yml) is configured to use the GitHub environment `release`, create that or change to your preferred environment.
+To publish to PyPI you must also configure your Pypi-project settings to use Trusted Publisher Management, by setting repo, workflow and environment on PyPI.
+
 To perform this merge run:
 
 ```shell
