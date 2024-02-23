@@ -120,8 +120,10 @@ branch := "main"
 publish:
 	git push -u origin ${branch} --tags
 
+
 .PHONY: prepare-release
 prepare-release: tests/requirements-testing.lock
 
+# we use lock extension so that dependabot doesn't pick up changes in this file
 tests/requirements-testing.lock: pyproject.toml
 	pdm export --dev --format requirements --output $@
