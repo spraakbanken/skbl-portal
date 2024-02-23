@@ -68,14 +68,3 @@ jobs:
       - name: make test
         if: hashFiles('pdm.lock') != ''
         run: make test
-
-  check-for-updates:
-    runs-on: ubuntu-latest
-    name: ubuntu / create PR if updates exists
-    steps:
-      - uses: actions/checkout@v4
-      - name: check for update
-        uses: pdm-project/update-deps-action@53ff698bc3f48536910f1c6587b17e33a0d25e51
-        with:
-          commit-message: "build: update pdm.lock"
-          update-strategy: reuse
