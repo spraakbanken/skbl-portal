@@ -121,7 +121,7 @@ publish:
 	git push -u origin ${branch} --tags
 
 .PHONY: prepare-release
-prepare-release: tests/requirements-testing.txt
+prepare-release: tests/requirements-testing.lock
 
-tests/requirements-testing.txt: pyproject.toml
+tests/requirements-testing.lock: pyproject.toml
 	pdm export --dev --format requirements --output $@
