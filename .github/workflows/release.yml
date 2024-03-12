@@ -60,7 +60,7 @@ jobs:
     # This action runs the test suite on the built artifact in the `build` action.
     # The default is to run this in ubuntu, macos and windows
 
-    name: ${{ matrix.os }} / 3.8 / test buildt artifact
+    name: ${{ matrix.os }} / 3.8 / test built artifact
     needs: [build]
 
     strategy:
