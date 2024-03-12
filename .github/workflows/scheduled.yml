@@ -24,6 +24,8 @@ jobs:
     name: ubuntu / 3.13-dev
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
       - name: Install pdm
         uses: pdm-project/setup-pdm@v4
         with:
@@ -54,6 +56,8 @@ jobs:
     # steps, so we repeat it.
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
       - name: Install 3.12
         if: hashFiles('pdm.lock') != ''
         uses: pdm-project/setup-pdm@v4

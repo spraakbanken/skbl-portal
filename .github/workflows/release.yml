@@ -30,6 +30,8 @@ jobs:
       #----------------------------------------------
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          submodules: true
       
       #----------------------------------------------
       #  -----  setup python   -----
@@ -72,6 +74,8 @@ jobs:
     runs-on: ${{ matrix.os }}-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
 
       - name: set up python
         uses: actions/setup-python@v5

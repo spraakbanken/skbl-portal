@@ -46,6 +46,8 @@ jobs:
       PYTHON: ${{ matrix.python-version }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
 
       - name: Set up the environment
         uses: pdm-project/setup-pdm@v4
@@ -96,6 +98,8 @@ jobs:
       OS: ${{ matrix.os }}-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
 
       - name: Set up the environment
         uses: pdm-project/setup-pdm@v4
@@ -146,6 +150,8 @@ jobs:
     name: ubuntu / 3.8 / minimal-versions
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
       - name: Set up the environment
         uses: pdm-project/setup-pdm@v4
         id: setup-python
