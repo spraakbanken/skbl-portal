@@ -30,6 +30,9 @@ help:
 	@echo "lint"
 	@echo "   lint the code"
 	@echo ""
+	@echo "lint-fix"
+	@echo "   lint the code and try to fix it"
+	@echo ""
 	@echo "type-check"
 	@echo "   check types"
 	@echo ""
@@ -104,7 +107,12 @@ type-check:
 .PHONY: lint
 # lint the code
 lint:
-	${INVENV} ruff ${PROJECT_SRC} ${tests}
+	${INVENV} ruff check ${PROJECT_SRC} ${tests}
+
+.PHONY: lint-fix
+# lint the code (and fix if possible)
+lint-fix:
+	${INVENV} ruff check --fix ${PROJECT_SRC} ${tests}
 
 part := "patch"
 bumpversion: install-dev
