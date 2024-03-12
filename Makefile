@@ -15,6 +15,8 @@ help:
 	@echo "usage:"
 	@echo "dev | install-dev"
 	@echo "   setup development environment"
+	@echo "install"
+	@echo "   setup production environment"
 	@echo ""
 	@echo "info"
 	@echo "   print info about the system and project"
@@ -76,6 +78,10 @@ dev: install-dev
 # setup development environment
 install-dev:
 	pdm install --dev
+
+# setup production environment
+install:
+	pdm sync --prod
 
 .PHONY: test
 test:
