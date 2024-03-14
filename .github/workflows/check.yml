@@ -92,7 +92,7 @@ jobs:
         if: steps.cached-venv.outputs.cache-hit != 'true'
         run: make install-dev
       - name: type-check code
-        run: make lint
+        run: make type-check
 
   # https://github.com/marketplace/actions/alls-green#why used for branch protection checks
   check-check:
