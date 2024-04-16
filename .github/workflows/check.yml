@@ -39,7 +39,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .venv
-          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('.github/workflows/check.yml') }}
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('**/pdm.lock') }}-${{ hashFiles('.github/workflows/check.yml') }}
     
       - name: Install dependencies
         if: steps.cached-venv.outputs.cache-hit != 'true'
@@ -64,7 +64,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .venv
-          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('.github/workflows/check.yml') }}
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('**/pdm.lock') }}-${{ hashFiles('.github/workflows/check.yml') }}
       - name: Install dependencies
         if: steps.cached-venv.outputs.cache-hit != 'true'
         run: make install-dev
@@ -87,7 +87,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .venv
-          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('.github/workflows/check.yml') }}
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('**/pdm.lock') }}-${{ hashFiles('.github/workflows/check.yml') }}
       - name: Install dependencies
         if: steps.cached-venv.outputs.cache-hit != 'true'
         run: make install-dev
