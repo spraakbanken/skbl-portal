@@ -153,3 +153,8 @@ update-changelog: CHANGELOG.md
 
 CHANGELOG.md:
 	git cliff --unreleased --prepend $@
+
+# update snapshots for `syrupy`
+.PHONY: snapshot-update
+snapshot-update:
+	${INVENV} pytest --snapshot-update
