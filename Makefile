@@ -50,7 +50,7 @@ help:
 	@echo ""
 	@echo "publish [branch=]"
 	@echo "   pushes the given branch including tags to origin, for CI to publish based on tags. (Default: branch='main')"
-	@echo "   Typically used after `make bumpversion`"
+	@echo "   Typically used after 'make bumpversion'"
 	@echo ""
 	@echo "prepare-release"
 	@echo "   run tasks to prepare a release"
