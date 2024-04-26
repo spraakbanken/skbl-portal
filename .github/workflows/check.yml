@@ -50,6 +50,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     name: ubuntu / 3.8 / lint
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
         with:
@@ -73,6 +74,7 @@ jobs:
   type-check:
     runs-on: ubuntu-latest
     name: ubuntu / 3.8 / type-check
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
         with:

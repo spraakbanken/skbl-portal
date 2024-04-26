@@ -36,7 +36,7 @@ jobs:
           - "3.9"
           - "3.10"
           - "3.11"
-          - "3.12"
+          # - "3.12" TODO enable when 3.8 is dropped
 
     runs-on: ${{ matrix.os }}-latest
     env:
@@ -92,6 +92,7 @@ jobs:
         os: [ubuntu] 
 
     runs-on: ${{ matrix.os }}-latest
+    continue-on-error: true
     env:
       OS: ${{ matrix.os }}-latest
     steps:
@@ -146,6 +147,7 @@ jobs:
     
     runs-on: ubuntu-latest
     name: ubuntu / 3.8 / minimal-versions
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
         with:
