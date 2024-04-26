@@ -13,3 +13,16 @@ venv/req.installed: skbl/requirements.txt
 
 run-dev: install
 	venv/bin/python run.py
+
+.PHONY: update-translation-template
+update-translation-template: skbl/translations/messages.pot
+
+.PHONY: skbl/translations/messages.pot
+skbl/translations/messages.pot:
+	find skbl -type f -iname "*.py" -o -iname "*.html" | xgettext -j -o $@ --language Python --from-code=utf-8  -f -
+
+.PHONY: update-swedish-translation
+update-swedish-translation: skbl/translations/sv/LC_MESSAGES/messages.po
+
+skbl/translations/sv/LC_MESSAGES/messages.po: skbl/translations/messages.pot
+	msgmerge  --update $@ $<
