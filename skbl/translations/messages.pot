@@ -1,24 +1,25 @@
-# Translations template for PROJECT.
-# Copyright (C) 2021 ORGANIZATION
-# This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+# Translations template for SKBL-portal.
+# Copyright (C) 2021-2024 ORGANIZATION
+# This file is distributed under the same license as the SKBL-portal
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PROJECT VERSION\n"
+"Project-Id-Version: SKBL-portal VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2021-05-04 08:28+0000\n"
+"POT-Creation-Date: 2024-04-26 13:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.7.0\n"
+"Generated-By: Babel 2.14.0\n"
 
-#: skbl/computeviews.py:98 skbl/views.py:27 skbl/views.py:252 skbl/views.py:416
-#: skbl/views.py:546
+#: skbl/computeviews.py:98 skbl/views.py:38 skbl/views.py:313 skbl/views.py:521
+#: skbl/views.py:694
 msgid "Contents could not be found!"
 msgstr ""
 
@@ -45,31 +46,31 @@ msgstr ""
 msgid "Placenames"
 msgstr ""
 
-#: skbl/computeviews.py:345 skbl/templates/layout.html:112
+#: skbl/computeviews.py:347 skbl/templates/layout.html:112
 msgid "Article authors"
 msgstr ""
 
-#: skbl/computeviews.py:437
+#: skbl/computeviews.py:439
 msgid "Please enter all the fields!"
 msgstr ""
 
-#: skbl/computeviews.py:441
+#: skbl/computeviews.py:443
 msgid "Please enter a valid email address!"
 msgstr ""
 
-#: skbl/computeviews.py:447 skbl/templates/layout.html:116 skbl/views.py:89
+#: skbl/computeviews.py:449 skbl/templates/layout.html:116 skbl/views.py:102
 msgid "Contact"
 msgstr ""
 
-#: skbl/computeviews.py:448 skbl/views.py:90
+#: skbl/computeviews.py:450 skbl/views.py:103
 msgid "Contact SKBL"
 msgstr ""
 
-#: skbl/computeviews.py:513 skbl/computeviews.py:514
+#: skbl/computeviews.py:515 skbl/computeviews.py:516
 msgid "Thank you for your feedback"
 msgstr ""
 
-#: skbl/computeviews.py:515
+#: skbl/computeviews.py:517
 msgid "We will get back to you as soon as we can."
 msgstr ""
 
@@ -99,23 +100,23 @@ msgstr ""
 msgid "Place of death"
 msgstr ""
 
-#: skbl/templates/layout.html:115 skbl/views.py:50
+#: skbl/templates/layout.html:115 skbl/views.py:64
 msgid "About SKBL"
 msgstr ""
 
-#: skbl/views.py:58
+#: skbl/views.py:72
 msgid "Older biographies"
 msgstr ""
 
-#: skbl/templates/layout.html:117 skbl/views.py:73
+#: skbl/templates/layout.html:117 skbl/views.py:85
 msgid "Quiz"
 msgstr ""
 
-#: skbl/templates/layout.html:107 skbl/views.py:167 skbl/views.py:168
+#: skbl/templates/layout.html:107 skbl/views.py:190 skbl/views.py:191
 msgid "Chronology"
 msgstr ""
 
-#: skbl/views.py:214
+#: skbl/views.py:265
 #, python-format
 msgid "Hits for '%s'"
 msgstr ""
@@ -178,7 +179,7 @@ msgid "Residences"
 msgstr ""
 
 #: skbl/templates/article.html:472
-msgid "Prices/awards"
+msgid "Prizes/awards"
 msgstr ""
 
 #: skbl/templates/article.html:513
@@ -189,38 +190,38 @@ msgstr ""
 msgid "Further References"
 msgstr ""
 
-#: skbl/templates/article.html:558
+#: skbl/templates/article.html:560
 msgid "Read more at"
 msgstr ""
 
-#: skbl/templates/article.html:566
+#: skbl/templates/article.html:571
 msgid "Pictures"
 msgstr ""
 
-#: skbl/templates/article.html:579 skbl/templates/bucketresults.html:34
+#: skbl/templates/article.html:584 skbl/templates/bucketresults.html:34
 #: skbl/templates/list.html:59 skbl/templates/list.html:91
 #: skbl/templates/list.html:96 skbl/templates/nestedbucketresults.html:68
 #: skbl/templates/places.html:24
 msgid "TO THE TOP"
 msgstr ""
 
-#: skbl/templates/article.html:584
+#: skbl/templates/article.html:589
 msgid "Show map"
 msgstr ""
 
-#: skbl/templates/article.html:587
+#: skbl/templates/article.html:592
 msgid "Hide map"
 msgstr ""
 
-#: skbl/templates/article.html:599 skbl/templates/layout.html:160
+#: skbl/templates/article.html:604 skbl/templates/layout.html:160
 msgid "Keywords"
 msgstr ""
 
-#: skbl/templates/article.html:607
+#: skbl/templates/article.html:612
 msgid "Open article in Karp"
 msgstr ""
 
-#: skbl/templates/article.html:615
+#: skbl/templates/article.html:620
 msgid "Links"
 msgstr ""
 
@@ -294,6 +295,10 @@ msgstr ""
 
 #: skbl/templates/contact.html:61
 msgid "Submit"
+msgstr ""
+
+#: skbl/templates/contact_active.html:16
+msgid "Send minor corrections to:"
 msgstr ""
 
 #: skbl/templates/layout.html:67
