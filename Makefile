@@ -3,9 +3,6 @@ venv:
 	test -d venv || python3 -m venv venv
 	venv/bin/pip install pip-tools
 
-skbl/requirements.txt: venv skbl/requirements.in
-	venv/bin/pip-compile --output-file $@ skbl/requirements.in
-
 install: venv venv/req.installed
 venv/req.installed: skbl/requirements.txt
 	venv/bin/pip install -r $<
@@ -32,3 +29,9 @@ compile-swedish-translations: skbl/translations/sv/LC_MESSAGES/messages.mo
 
 skbl/translations/sv/LC_MESSAGES/messages.mo: skbl/translations/sv/LC_MESSAGES/messages.po
 	venv/bin/pybabel compile --output-file=$@ --input-file=$< --locale=sv
+
+.PHONY: generate-lockfile
+generate-lockfile: skbl/requirements.txt
+
+skbl/requirements.txt: pyproject.toml
+	pdm export -o $@ --without-hashes
