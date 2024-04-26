@@ -1,0 +1,180 @@
+name: test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  merge_group:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  MINIMUM_PYTHON_VERSION: "3.8"
+
+jobs:
+
+  coverage:
+    # This action runs tests for coverage collection and uploads them to codecov.io.
+    # This requires the secret `CODECOV_TOKEN` be set as secret on GitHub, both for 
+    # Actions and Dependabot
+
+    name: "${{ matrix.os }} / ${{ matrix.python-version }} / coverage"
+    strategy:
+      max-parallel: 4
+      fail-fast: false
+      matrix:
+        os: [ubuntu] 
+        python-version:
+          # remove the unused versions
+          - "3.8"
+          - "3.9"
+          - "3.10"
+          - "3.11"
+          - "3.12"
+
+    runs-on: ${{ matrix.os }}-latest
+    env:
+      OS: ${{ matrix.os }}-latest
+      PYTHON: ${{ matrix.python-version }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Set up the environment
+        uses: pdm-project/setup-pdm@v4
+        id: setup-python
+        with:
+          python-version: ${{ matrix.python-version }}
+      
+      - name: Load cached venv
+        id: cached-venv
+        uses: actions/cache@v4
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('**/pdm.lock') }}-${{ hashFiles('.github/workflows/test.yml') }}
+  
+      - name: Install dependencies
+        if: steps.cached-venv.outputs.cache-hit != 'true'
+        run: make install-dev
+     
+      - name: Run tests for coverage
+        run: make test-w-coverage cov_report=xml
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          # directory: ./coverage
+          env_vars: OS,PYTHON
+          fail_ci_if_error: true
+          # files: ./coverage/coverage.xml
+          # flags: unittests
+          # name: codecov-umbrella
+          verbose: true
+
+  doctests:
+    # This action runs doctests for coverage collection and uploads them to codecov.io.
+    # This requires the secret `CODECOV_TOKEN` be set as secret on GitHub, both for 
+    # Actions and Dependabot
+
+    name: "${{ matrix.os }} / 3.8 / doctest"
+    strategy:
+      max-parallel: 4
+      fail-fast: false
+      matrix:
+        os: [ubuntu] 
+
+    runs-on: ${{ matrix.os }}-latest
+    env:
+      OS: ${{ matrix.os }}-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Set up the environment
+        uses: pdm-project/setup-pdm@v4
+        id: setup-python
+        with:
+          python-version: ${{ env.MINIMUM_PYTHON_VERSION }}
+      
+      - name: Load cached venv
+        id: cached-venv
+        uses: actions/cache@v4
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('**/pdm.lock') }}-${{ hashFiles('.github/workflows/test.yml') }}
+  
+      - name: Install dependencies
+        if: steps.cached-venv.outputs.cache-hit != 'true'
+        run: make install-dev
+      #----------------------------------------------
+      # Run tests and upload coverage
+      #----------------------------------------------
+      - name: make doc-tests
+        run: make doc-tests cov_report=xml
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          # directory: ./coverage
+          env_vars: OS,PYTHON,TESTTYPE
+          fail_ci_if_error: true
+          # files: ./coverage/coverage.xml
+          # flags: unittests
+          # name: codecov-umbrella
+          verbose: true
+        env:
+          PYTHON: ${{ env.MINIMUM_PYTHON_VERSION }}
+          TESTTYPE: doctest
+
+  minimal:
+    # This action chooses the oldest version of the dependencies permitted by Cargo.toml to ensure
+    # that this crate is compatible with the minimal version that this crate and its dependencies
+    # require. This will pickup issues where this create relies on functionality that was introduced
+    # later than the actual version specified (e.g., when we choose just a major version, but a
+    # method was added after this version).
+    #
+    
+    runs-on: ubuntu-latest
+    name: ubuntu / 3.8 / minimal-versions
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Set up the environment
+        uses: pdm-project/setup-pdm@v4
+        id: setup-python
+        with:
+          python-version: ${{ env.MINIMUM_PYTHON_VERSION }}
+      
+      - name: pdm lock --strategy direct_minimal_versions
+        run: pdm lock --strategy direct_minimal_versions
+      - name: pdm sync --dev
+        run: pdm sync --dev
+      - name: make test
+        run: make test
+  
+  # https://github.com/marketplace/actions/alls-green#why used for branch protection checks
+  test-check:
+    if: always()
+    needs: 
+      - coverage
+      - doctests
+      - minimal
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - name: Decide whether the needed jobs succeeded or failed
+        uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}
+
