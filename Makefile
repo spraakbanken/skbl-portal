@@ -25,4 +25,4 @@ skbl/translations/messages.pot:
 update-swedish-translation: skbl/translations/sv/LC_MESSAGES/messages.po
 
 skbl/translations/sv/LC_MESSAGES/messages.po: skbl/translations/messages.pot
-	msgmerge  --update $@ $<
+	venv/bin/pybabel update --output-file=$@ --input-file=$< --locale=sv
