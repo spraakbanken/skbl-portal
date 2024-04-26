@@ -5,7 +5,7 @@
 groups = ["default", "dev"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.1"
-content_hash = "sha256:457d4f9def34b2b9562a45fee98bf36f5dc87ad4b451376282816a62f6c7ff86"
+content_hash = "sha256:3e86d07a889f1c9f516b977ddddbf7d01773cf4b89e44ffa2254242a94487cf9"
 
 [[package]]
 name = "babel"
@@ -414,19 +414,18 @@ files = [
 
 [[package]]
 name = "flask-babel"
-version = "3.1.0"
-requires_python = ">=3.7,<4.0"
-summary = "Adds i18n/l10n support for Flask applications."
+version = "2.0.0"
+summary = "Adds i18n/l10n support to Flask applications"
 groups = ["default"]
 dependencies = [
-    "Babel>=2.12",
-    "Flask>=2.0",
-    "Jinja2>=3.1",
-    "pytz>=2022.7",
+    "Babel>=2.3",
+    "Flask",
+    "Jinja2>=2.5",
+    "pytz",
 ]
 files = [
-    {file = "flask_babel-3.1.0-py3-none-any.whl", hash = "sha256:deb3ee272d5adf97f5974ed09ab501243d63e7fb4a047501a00de4bd4aca4830"},
-    {file = "flask_babel-3.1.0.tar.gz", hash = "sha256:be015772c5d7f046f3b99c508dcf618636eb93d21b713b356db79f3e79f69f39"},
+    {file = "Flask-Babel-2.0.0.tar.gz", hash = "sha256:f9faf45cdb2e1a32ea2ec14403587d4295108f35017a7821a2b1acb8cfd9257d"},
+    {file = "Flask_Babel-2.0.0-py3-none-any.whl", hash = "sha256:e6820a052a8d344e178cdd36dd4bb8aea09b4bda3d5f9fa9f008df2c7f2f5468"},
 ]
 
 [[package]]

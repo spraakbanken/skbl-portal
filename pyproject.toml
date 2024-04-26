@@ -5,7 +5,7 @@ description = "Default template for PDM package"
 authors = [{ name = "Språkbanken Text", email = "sb-info@svenska.gu.se" }]
 dependencies = [
     "flask>=2.2.5",
-    "flask-babel>=3.1.0",
+    "flask-babel<3",
     "flask-compress>=1.15",
     "flask-reverse-proxy>=0.2.0.2",
     "gunicorn>=22.0.0",
