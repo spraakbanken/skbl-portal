@@ -19,7 +19,7 @@ update-translation-template: skbl/translations/messages.pot
 
 .PHONY: skbl/translations/messages.pot
 skbl/translations/messages.pot:
-	find skbl -type f -iname "*.py" -o -iname "*.html" | xgettext -j -o $@ --language Python --from-code=utf-8  -f -
+	venv/bin/pybabel extract -F babel.cfg  --output=$@ --project="SKBL-portal" .
 
 .PHONY: update-swedish-translation
 update-swedish-translation: skbl/translations/sv/LC_MESSAGES/messages.po
