@@ -85,19 +85,21 @@ def contact():
         mode = "suggestion"
     else:
         mode = "other"
-    page = render_template("contact.html",
-                           title=gettext("Contact"),
-                           headline=gettext("Contact SKBL"),
-                           form_data={},
-                           mode=mode)
+    page = render_template(
+        "contact_active.html",
+        title=gettext("Contact"),
+        headline=gettext("Contact SKBL"),
+        form_data={},
+        mode=mode,
+    )
     return helpers.set_cache(page)
 
 
-@bp.route("/en/contact/", methods=["POST"], endpoint="submitted_en")
-@bp.route("/sv/kontakt/", methods=["POST"], endpoint="submitted_sv")
-def submit_contact_form():
-    """Generate view for submitted contact form."""
-    return helpers.set_cache(computeviews.compute_contact_form())
+# @bp.route("/en/contact/", methods=["POST"], endpoint="submitted_en")
+# @bp.route("/sv/kontakt/", methods=["POST"], endpoint="submitted_sv")
+# def submit_contact_form():
+#     """Generate view for submitted contact form."""
+#     return helpers.set_cache(computeviews.compute_contact_form())
 
 
 @bp.route("/en/map", endpoint="map_en")
