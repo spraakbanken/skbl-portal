@@ -26,3 +26,9 @@ update-swedish-translation: skbl/translations/sv/LC_MESSAGES/messages.po
 
 skbl/translations/sv/LC_MESSAGES/messages.po: skbl/translations/messages.pot
 	venv/bin/pybabel update --output-file=$@ --input-file=$< --locale=sv
+
+.PHONY: compile-swedish-translations
+compile-swedish-translations: skbl/translations/sv/LC_MESSAGES/messages.mo
+
+skbl/translations/sv/LC_MESSAGES/messages.mo: skbl/translations/sv/LC_MESSAGES/messages.po
+	venv/bin/pybabel compile --output-file=$@ --input-file=$< --locale=sv
