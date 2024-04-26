@@ -114,3 +114,4 @@ venv*/
 
 # Editor settings
 .vscode/
+.pdm-python

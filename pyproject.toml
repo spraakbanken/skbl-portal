@@ -1,0 +1,35 @@
+[project]
+name = "skbl-portal"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [{ name = "Språkbanken Text", email = "sb-info@svenska.gu.se" }]
+dependencies = [
+    "flask>=2.2.5",
+    "flask-babel<3",
+    "flask-compress>=1.15",
+    "flask-reverse-proxy>=0.2.0.2",
+    "gunicorn>=22.0.0",
+    "markdown>=3.4.4",
+    "pylibmc>=1.6.3",
+    "pyicu>=2.13",
+]
+requires-python = ">=3.7"
+readme = "README.md"
+license = { text = "MIT" }
+
+
+[tool.pdm]
+distribution = false
+
+[tool.pdm.build]
+includes = ["skbl/"]
+source-includes = ["tests/"]
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "pytest>=7.4.4",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.4.2",
+    "mypy>=1.4.1",
+    "syrupy>=3.0.6",
+]

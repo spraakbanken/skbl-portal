@@ -52,12 +52,26 @@ def copytobackup(fields, lang):
     for field in fields:
         with g.mc_pool.reserve() as client:
             art = client.get(field + lang)
-            client.set(helpers.cache_name(field, lang) + "_backup", art, time=current_app.config["CACHE_TIME"])
+            client.set(
+                helpers.cache_name(field, lang) + "_backup",
+                art,
+                time=current_app.config["CACHE_TIME"],
+            )
 
 
-def searchresult(result, name="", searchfield="", imagefolder="", query="",
-                 searchtype="equals", title="", authorinfo=False, lang="",
-                 show_lang_switch=True, cache=True):
+def searchresult(
+    result,
+    name="",
+    searchfield="",
+    imagefolder="",
+    query="",
+    searchtype="equals",
+    title="",
+    authorinfo=False,
+    lang="",
+    show_lang_switch=True,
+    cache=True,
+):
     """Compute the search result."""
     helpers.set_language_switch_link("%s_index" % name, result)
     try:
@@ -70,36 +84,58 @@ def searchresult(result, name="", searchfield="", imagefolder="", query="",
         if query:
             hits = helpers.karp_query("minientry", {"q": query, "show": show})
         else:
-            hits = helpers.karp_query("minientry",
-                                      {"q": "extended||and|%s.search|%s|%s" % (searchfield, searchtype, result),
-                                       "show": show})
+            hits = helpers.karp_query(
+                "minientry",
+                {
+                    "q": "extended||and|%s.search|%s|%s"
+                    % (searchfield, searchtype, result),
+                    "show": show,
+                },
+            )
         title = title or result
 
         no_hits = hits["hits"]["total"]
         if no_hits > 0:
             picture = None
-            if os.path.exists(current_app.config.root_path + "/static/images/%s/%s.jpg" % (imagefolder, result)):
+            if os.path.exists(
+                current_app.config.root_path
+                + "/static/images/%s/%s.jpg" % (imagefolder, result)
+            ):
                 picture = "/static/images/%s/%s.jpg" % (imagefolder, result)
-            page = render_template("list.html", picture=picture,
-                                   alphabetic=True, title=title,
-                                   headline=title, hits=hits["hits"],
-                                   authorinfo=authorinfo,
-                                   show_lang_switch=show_lang_switch)
+            page = render_template(
+                "list.html",
+                picture=picture,
+                alphabetic=True,
+                title=title,
+                headline=title,
+                hits=hits["hits"],
+                authorinfo=authorinfo,
+                show_lang_switch=show_lang_switch,
+            )
             if no_hits >= current_app.config["CACHE_HIT_LIMIT"]:
                 try:
                     with g.mc_pool.reserve() as client:
-                        client.set(helpers.cache_name(pagename, lang), page, time=current_app.config["CACHE_TIME"])
+                        client.set(
+                            helpers.cache_name(pagename, lang),
+                            page,
+                            time=current_app.config["CACHE_TIME"],
+                        )
                 except Exception:
                     # TODO what to do?
                     pass
             return page
 
         else:
-            return render_template("page.html", content=gettext("Contents could not be found!"))
+            return render_template(
+                "page.html", content=gettext("Contents could not be found!")
+            )
 
     except Exception as e:
-        return render_template("page.html",
-                               content="%s\n%s: extended||and|%s.search|%s|%s" % (e, current_app.config["KARP_BACKEND"], searchfield, searchtype, result))
+        return render_template(
+            "page.html",
+            content="%s\n%s: extended||and|%s.search|%s|%s"
+            % (e, current_app.config["KARP_BACKEND"], searchfield, searchtype, result),
+        )
 
 
 def compute_organisation(lang="", infotext="", cache=True, url=""):
@@ -111,12 +147,22 @@ def compute_organisation(lang="", infotext="", cache=True, url=""):
 
     infotext = helpers.get_infotext("organisation", request.url_rule.rule)
     if lang == "en":
-        data = helpers.karp_query("minientry", {"q": "extended||and|anything|regexp|.*",
-                                  "show": "organisationsnamn,organisationstyp_eng"})
+        data = helpers.karp_query(
+            "minientry",
+            {
+                "q": "extended||and|anything|regexp|.*",
+                "show": "organisationsnamn,organisationstyp_eng",
+            },
+        )
         typefield = "type_eng"
     else:
-        data = helpers.karp_query("minientry", {"q": "extended||and|anything|regexp|.*",
-                                  "show": "organisationsnamn,organisationstyp"})
+        data = helpers.karp_query(
+            "minientry",
+            {
+                "q": "extended||and|anything|regexp|.*",
+                "show": "organisationsnamn,organisationstyp",
+            },
+        )
         typefield = "type"
     nested_obj = {}
     for hit in data["hits"]["hits"]:
@@ -125,12 +171,21 @@ def compute_organisation(lang="", infotext="", cache=True, url=""):
             if orgtype not in nested_obj:
                 nested_obj[orgtype] = defaultdict(set)
             nested_obj[orgtype][org.get("name", "-")].add(hit["_id"])
-    art = render_template("nestedbucketresults.html",
-                          results=nested_obj, title=gettext("Organisations"),
-                          infotext=infotext, name="organisation", page_url=url)
+    art = render_template(
+        "nestedbucketresults.html",
+        results=nested_obj,
+        title=gettext("Organisations"),
+        infotext=infotext,
+        name="organisation",
+        page_url=url,
+    )
     try:
         with g.mc_pool.reserve() as client:
-            client.set(helpers.cache_name("organisation", lang), art, time=current_app.config["CACHE_TIME"])
+            client.set(
+                helpers.cache_name("organisation", lang),
+                art,
+                time=current_app.config["CACHE_TIME"],
+            )
     except Exception:
         # TODO what to do?
         pass
@@ -151,15 +206,23 @@ def compute_activity(lang="", cache=True, url=""):
     reference_list = static_info.activities_reference_list
     [ref.append("reference") for ref in reference_list]
 
-    art = bucketcall(queryfield="verksamhetstext", name="activity",
-                     title=gettext("Activities"), infotext=infotext,
-                     alphabetical=True,
-                     description=helpers.get_shorttext(infotext),
-                     insert_entries=reference_list,
-                     page_url=url)
+    art = bucketcall(
+        queryfield="verksamhetstext",
+        name="activity",
+        title=gettext("Activities"),
+        infotext=infotext,
+        alphabetical=True,
+        description=helpers.get_shorttext(infotext),
+        insert_entries=reference_list,
+        page_url=url,
+    )
     try:
         with g.mc_pool.reserve() as client:
-            client.set(helpers.cache_name("activity", lang), art, time=current_app.config["CACHE_TIME"])
+            client.set(
+                helpers.cache_name("activity", lang),
+                art,
+                time=current_app.config["CACHE_TIME"],
+            )
     except Exception:
         # TODO what to do?
         pass
@@ -173,36 +236,66 @@ def compute_article(lang="", cache=True, url="", map=False):
     if art is not None:
         return art
 
-    show = ",".join(["name", "url", "undertitel", "lifespan", "undertitel_eng", "platspinlat.bucket", "platspinlon.bucket"])
+    show = ",".join(
+        [
+            "name",
+            "url",
+            "undertitel",
+            "lifespan",
+            "undertitel_eng",
+            "platspinlat.bucket",
+            "platspinlon.bucket",
+        ]
+    )
     infotext = helpers.get_infotext("article", request.url_rule.rule)
     if lang == "sv":
-        data = helpers.karp_query("minientry", {"q": "extended||and|namn|exists", "show": show,
-                                  "sort": "sorteringsnamn.sort,sorteringsnamn.init,tilltalsnamn.sort"},
-                                  mode=current_app.config["SKBL_LINKS"])
+        data = helpers.karp_query(
+            "minientry",
+            {
+                "q": "extended||and|namn|exists",
+                "show": show,
+                "sort": "sorteringsnamn.sort,sorteringsnamn.init,tilltalsnamn.sort",
+            },
+            mode=current_app.config["SKBL_LINKS"],
+        )
     else:
-        data = helpers.karp_query("minientry", {"q": "extended||and|namn|exists", "show": show,
-                                  "sort": "sorteringsnamn.eng_sort,sorteringsnamn.eng_init,sorteringsnamn.sort,tilltalsnamn.sort"},
-                                  mode=current_app.config["SKBL_LINKS"])
+        data = helpers.karp_query(
+            "minientry",
+            {
+                "q": "extended||and|namn|exists",
+                "show": show,
+                "sort": "sorteringsnamn.eng_sort,sorteringsnamn.eng_init,sorteringsnamn.sort,tilltalsnamn.sort",
+            },
+            mode=current_app.config["SKBL_LINKS"],
+        )
 
     if map:
-        art = render_template("map.html",
-                              hits=data["hits"],
-                              headline=gettext("Map"),
-                              infotext=infotext,
-                              title="Map",
-                              page_url=url)
+        art = render_template(
+            "map.html",
+            hits=data["hits"],
+            headline=gettext("Map"),
+            infotext=infotext,
+            title="Map",
+            page_url=url,
+        )
     else:
-        art = render_template("list.html",
-                              hits=data["hits"],
-                              headline=gettext("Women A-Z"),
-                              alphabetic=True,
-                              split_letters=True,
-                              infotext=infotext,
-                              title="Articles",
-                              page_url=url)
+        art = render_template(
+            "list.html",
+            hits=data["hits"],
+            headline=gettext("Women A-Z"),
+            alphabetic=True,
+            split_letters=True,
+            infotext=infotext,
+            title="Articles",
+            page_url=url,
+        )
     try:
         with g.mc_pool.reserve() as client:
-            client.set(helpers.cache_name("article", lang), art, time=current_app.config["CACHE_TIME"])
+            client.set(
+                helpers.cache_name("article", lang),
+                art,
+                time=current_app.config["CACHE_TIME"],
+            )
     except Exception:
         # TODO what to do?
         pass
@@ -216,27 +309,55 @@ def compute_map(lang="", cache=True, url=""):
     if art is not None:
         return art
 
-    show = ",".join(["name", "url", "undertitel", "lifespan", "undertitel_eng", "platspinlat.bucket", "platspinlon.bucket"])
+    show = ",".join(
+        [
+            "name",
+            "url",
+            "undertitel",
+            "lifespan",
+            "undertitel_eng",
+            "platspinlat.bucket",
+            "platspinlon.bucket",
+        ]
+    )
     infotext = helpers.get_infotext("map", request.url_rule.rule)
     if lang == "sv":
-        data = helpers.karp_query("minientry", {"q": "extended||and|namn|exists", "show": show,
-                                  "sort": "sorteringsnamn.sort,sorteringsnamn.init,tilltalsnamn.sort"},
-                                  mode=current_app.config["KARP_MODE"])
+        data = helpers.karp_query(
+            "minientry",
+            {
+                "q": "extended||and|namn|exists",
+                "show": show,
+                "sort": "sorteringsnamn.sort,sorteringsnamn.init,tilltalsnamn.sort",
+            },
+            mode=current_app.config["KARP_MODE"],
+        )
     else:
-        data = helpers.karp_query("minientry", {"q": "extended||and|namn|exists", "show": show,
-                                  "sort": "sorteringsnamn.eng_sort,sorteringsnamn.eng_init,sorteringsnamn.sort,tilltalsnamn.sort"},
-                                  mode=current_app.config["KARP_MODE"])
+        data = helpers.karp_query(
+            "minientry",
+            {
+                "q": "extended||and|namn|exists",
+                "show": show,
+                "sort": "sorteringsnamn.eng_sort,sorteringsnamn.eng_init,sorteringsnamn.sort,tilltalsnamn.sort",
+            },
+            mode=current_app.config["KARP_MODE"],
+        )
 
     if map:
-        art = render_template("map.html",
-                              hits=data["hits"],
-                              headline=gettext("Map"),
-                              infotext=infotext,
-                              title="Map",
-                              page_url=url)
+        art = render_template(
+            "map.html",
+            hits=data["hits"],
+            headline=gettext("Map"),
+            infotext=infotext,
+            title="Map",
+            page_url=url,
+        )
     try:
         with g.mc_pool.reserve() as client:
-            client.set(helpers.cache_name("map", lang), art, time=current_app.config["CACHE_TIME"])
+            client.set(
+                helpers.cache_name("map", lang),
+                art,
+                time=current_app.config["CACHE_TIME"],
+            )
     except Exception:
         # TODO what to do?
         pass
@@ -261,8 +382,7 @@ def compute_place(lang="", cache=True, url=""):
             name = place.strip()
             lat, lon = 0, 0
         placename = name if name else "%s, %s" % (lat, lon)
-        return {"name": placename, "lat": lat, "lon": lon,
-                "count": kw.get("doc_count")}
+        return {"name": placename, "lat": lat, "lon": lon, "count": kw.get("doc_count")}
 
     def has_name(kw):
         name = kw.get("key").split("|")[0]
@@ -274,15 +394,21 @@ def compute_place(lang="", cache=True, url=""):
     # To use the coordinates, use "getplaces" instead of "getplacenames"
     data = helpers.karp_query("getplacenames/" + current_app.config["KARP_MODE"], {})
     stat_table = [parse(kw) for kw in data["places"] if has_name(kw)]
-    art = render_template("places.html",
-                          places=stat_table,
-                          title=gettext("Placenames"),
-                          infotext=infotext,
-                          description=helpers.get_shorttext(infotext),
-                          page_url=url)
+    art = render_template(
+        "places.html",
+        places=stat_table,
+        title=gettext("Placenames"),
+        infotext=infotext,
+        description=helpers.get_shorttext(infotext),
+        page_url=url,
+    )
     try:
         with g.mc_pool.reserve() as client:
-            client.set(helpers.cache_name("place", lang), art, time=current_app.config["CACHE_TIME"])
+            client.set(
+                helpers.cache_name("place", lang),
+                art,
+                time=current_app.config["CACHE_TIME"],
+            )
     except Exception:
         # TODO what to do?
         pass
@@ -295,7 +421,9 @@ def compute_artikelforfattare(infotext="", description="", lang="", cache=True, 
     art, lang = getcache("author", lang, cache)
     if art is not None:
         return art
-    q_data = {"buckets": "artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn.bucket"}
+    q_data = {
+        "buckets": "artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn.bucket"
+    }
     data = helpers.karp_query("statlist", q_data)
     # strip kw0 to get correct sorting
     stat_table = [[kw[0].strip()] + kw[1:] for kw in data["stat_table"] if kw[0] != ""]
@@ -318,7 +446,6 @@ def compute_artikelforfattare(infotext="", description="", lang="", cache=True, 
         "Rådström,Inger": True,
         "Mannerheim,Madeleine": True,
         "Kleberg,Ylva": True,
-
         "Kärnekull,Anneka ": True,
         "Kärnekull,Ingrid": True,
         "Kärnekull,Paul": True,
@@ -334,7 +461,7 @@ def compute_artikelforfattare(infotext="", description="", lang="", cache=True, 
         "Rydberg,Per": True,
         "Anderson,Anneka": True,
         "Anderson,Ingrid": True,
-        "Anderson,Kerstin": True
+        "Anderson,Kerstin": True,
     }
     added = {}
     new_stat_table = []
@@ -343,23 +470,43 @@ def compute_artikelforfattare(infotext="", description="", lang="", cache=True, 
         if fullname not in added and fullname not in stoplist:
             new_stat_table.append(item)
             added[fullname] = True
-    art = render_template("bucketresults.html", results=new_stat_table,
-                          alphabetical=True, title=gettext("Article authors"),
-                          name="articleauthor", infotext=infotext,
-                          description=description, sortnames=True,
-                          page_url=url)
+    art = render_template(
+        "bucketresults.html",
+        results=new_stat_table,
+        alphabetical=True,
+        title=gettext("Article authors"),
+        name="articleauthor",
+        infotext=infotext,
+        description=description,
+        sortnames=True,
+        page_url=url,
+    )
     try:
         with g.mc_pool.reserve() as client:
-            client.set(helpers.cache_name("author", lang), art, time=current_app.config["CACHE_TIME"])
+            client.set(
+                helpers.cache_name("author", lang),
+                art,
+                time=current_app.config["CACHE_TIME"],
+            )
     except Exception:
         # TODO what to do?
         pass
     return art
 
 
-def bucketcall(queryfield="", name="", title="", sortby="", lastnamefirst=False,
-               infotext="", description="", query="", alphabetical=False,
-               insert_entries=None, page_url=""):
+def bucketcall(
+    queryfield="",
+    name="",
+    title="",
+    sortby="",
+    lastnamefirst=False,
+    infotext="",
+    description="",
+    query="",
+    alphabetical=False,
+    insert_entries=None,
+    page_url="",
+):
     """Bucket call helper."""
     q_data = {"buckets": "%s.bucket" % queryfield}
     if query:
@@ -379,11 +526,16 @@ def bucketcall(queryfield="", name="", title="", sortby="", lastnamefirst=False,
         stat_table = [[kw[1] + ",", kw[0], kw[2]] for kw in stat_table]
     # if showfield:
     #     stat_table = [[showfield(kw), kw[2]] for kw in stat_table]
-    return render_template("bucketresults.html", results=stat_table,
-                           alphabetical=alphabetical, title=gettext(title),
-                           name=name, infotext=infotext,
-                           description=description,
-                           page_url=page_url)
+    return render_template(
+        "bucketresults.html",
+        results=stat_table,
+        alphabetical=alphabetical,
+        title=gettext(title),
+        name=name,
+        infotext=infotext,
+        description=description,
+        page_url=page_url,
+    )
 
 
 def compute_emptycache(fields):
@@ -399,7 +551,9 @@ def compute_emptycache(fields):
     user, pw = auth.username, auth.password
     postdata["username"] = user
     postdata["password"] = pw
-    postdata["checksum"] = md5(user.encode() + pw.encode() + current_app.config["SECRET_KEY"].encode()).hexdigest()
+    postdata["checksum"] = md5(
+        user.encode() + pw.encode() + current_app.config["SECRET_KEY"].encode()
+    ).hexdigest()
     server = current_app.config["WSAUTH_URL"]
     contents = urlopen(server, urllib.parse.urlencode(postdata).encode()).read()
     auth_response = json.loads(contents)
@@ -423,8 +577,9 @@ def compute_contact_form():
 
     if request.form["mode_switch"] == "suggest_new":
         mode = "suggestion"
-        required_fields.extend(["subject_name", "subject_lifetime",
-                               "subject_activity", "motivation"])
+        required_fields.extend(
+            ["subject_name", "subject_lifetime", "subject_activity", "motivation"]
+        )
     elif request.form["mode_switch"] == "correction":
         mode = "correction"
         required_fields.append("message")
@@ -445,19 +600,21 @@ def compute_contact_form():
     # Render error messages and tell user what went wrong
     error_msgs = list(set(error_msgs))
     if error_msgs:
-        return render_template("contact.html",
-                               title=gettext("Contact"),
-                               headline=gettext("Contact SKBL"),
-                               errors=error_msgs,
-                               name_error=True if "name" in errors else False,
-                               email_error=True if "email" in errors else False,
-                               message_error=True if "message" in errors else False,
-                               subject_name_error=True if "subject_name" in errors else False,
-                               subject_lifetime_error=True if "subject_lifetime" in errors else False,
-                               subject_activity_error=True if "subject_activity" in errors else False,
-                               motivation_error=True if "motivation" in errors else False,
-                               form_data=request.form,
-                               mode=mode)
+        return render_template(
+            "contact.html",
+            title=gettext("Contact"),
+            headline=gettext("Contact SKBL"),
+            errors=error_msgs,
+            name_error=True if "name" in errors else False,
+            email_error=True if "email" in errors else False,
+            message_error=True if "message" in errors else False,
+            subject_name_error=True if "subject_name" in errors else False,
+            subject_lifetime_error=True if "subject_lifetime" in errors else False,
+            subject_activity_error=True if "subject_activity" in errors else False,
+            motivation_error=True if "motivation" in errors else False,
+            form_data=request.form,
+            mode=mode,
+        )
 
     else:
         return make_email(request.form, mode)
@@ -480,7 +637,9 @@ def make_email(form_data, mode="other"):
         sender = recipient
 
     if mode == "suggestion":
-        text = ["%s har skickat in ett förslag för en ny SKBL-ingång.\n\n" % complete_sender]
+        text = [
+            "%s har skickat in ett förslag för en ny SKBL-ingång.\n\n" % complete_sender
+        ]
         text.append("Förslag på kvinna: %s\n" % form_data["subject_name"])
         text.append("Kvinnas levnadstid: %s\n" % form_data["subject_lifetime"])
         text.append("Kvinnas verksamhet: %s\n" % form_data["subject_activity"])
@@ -488,10 +647,16 @@ def make_email(form_data, mode="other"):
         text = "".join(text)
         subject = "Förslag för ny ingång i skbl.se"
     elif mode == "correction":
-        text = "%s har skickat följande meddelande:\n\n%s" % (complete_sender, form_data["message"])
+        text = "%s har skickat följande meddelande:\n\n%s" % (
+            complete_sender,
+            form_data["message"],
+        )
         subject = "Förslag till rättelse (skbl.se)"
     else:
-        text = "%s har skickat följande meddelande:\n\n%s" % (complete_sender, form_data["message"])
+        text = "%s har skickat följande meddelande:\n\n%s" % (
+            complete_sender,
+            form_data["message"],
+        )
         subject = "Förfrågan från skbl.se"
 
     html = text.replace("\n", "<br>")
@@ -511,7 +676,9 @@ def make_email(form_data, mode="other"):
     server.quit()
 
     # Render user feedback
-    return render_template("form_submitted.html",
-                           title=gettext("Thank you for your feedback") + "!",
-                           headline=gettext("Thank you for your feedback") + ", " + name + "!",
-                           text=gettext("We will get back to you as soon as we can."))
+    return render_template(
+        "form_submitted.html",
+        title=gettext("Thank you for your feedback") + "!",
+        headline=gettext("Thank you for your feedback") + ", " + name + "!",
+        text=gettext("We will get back to you as soon as we can."),
+    )
