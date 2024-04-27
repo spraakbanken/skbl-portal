@@ -6,7 +6,7 @@ permissions:
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   pull_request:
   schedule:
     - cron:  '7 7 * * *'
