@@ -62,6 +62,10 @@ jobs:
         if: steps.cached-venv.outputs.cache-hit != 'true'
         run: make install-dev
      
+      - name: Install libmemcached
+        if: matrix.python-version == '3.12'
+        run: apt install libmemcached-dev
+
       - name: Run tests for coverage
         run: make test-w-coverage cov_report=xml
 
@@ -82,7 +86,7 @@ jobs:
     # This requires the secret `CODECOV_TOKEN` be set as secret on GitHub, both for 
     # Actions and Dependabot
 
-    name: "${{ matrix.os }} / 3.8 / doctest"
+    name: "${{ matrix.os }} / 3.10 / doctest"
     strategy:
       max-parallel: 4
       fail-fast: false
