@@ -7,7 +7,7 @@ brotlicffi==1.1.0.0; platform_python_implementation == "PyPy"
 cffi==1.15.1; platform_python_implementation == "PyPy"
 click==8.1.7
 colorama==0.4.6; platform_system == "Windows"
-flask==2.2.5
+flask==3.0.3
 flask-babel==3.1.0
 flask-compress==1.15
 flask-reverse-proxy==0.2.0.2
