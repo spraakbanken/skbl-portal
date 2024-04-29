@@ -24,21 +24,7 @@ def create_app():
     babel = Babel(app)
     Compress(app)
 
-    @babel.localeselector
-    def get_locale():
-        """Get correct language from url."""
-        locale = request.path[1:].split("/", 1)[0]
-        if locale in ["sv", "en"]:
-            return locale
-        else:
-            locale = "sv"
-            for lang in list(request.accept_languages.values()):
-                if lang[:2] in ["sv", "en"]:
-                    locale = lang[:2]
-                    break
-
-            g.locale = locale
-            return locale
+    babel.init_app(app, locale_selector=get_locale)
 
     client = Client(app.config["MEMCACHED"])
 
@@ -97,6 +83,22 @@ def create_app():
 
     app.wsgi_app = flask_reverse_proxy.ReverseProxied(app.wsgi_app)
     return app
+
+
+def get_locale():
+    """Get correct language from url."""
+    locale = request.path[1:].split("/", 1)[0]
+    if locale in ["sv", "en"]:
+        return locale
+    else:
+        locale = "sv"
+        for lang in list(request.accept_languages.values()):
+            if lang[:2] in ["sv", "en"]:
+                locale = lang[:2]
+                break
+
+        g.locale = locale
+        return locale
 
 
 # if __name__ == '__main__':
