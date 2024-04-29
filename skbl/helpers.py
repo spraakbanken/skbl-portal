@@ -38,7 +38,7 @@ def set_language_switch_link(route, fragment=None, lang=""):
 def cache_name(pagename: str, lang: str = "") -> str:
     """Get page from cache."""
     if not lang:
-        lang = "sv" if "sv" in request.url_rule.rule else "en"
+        lang = "sv" if "sv" in request.url_rule.rule else "en"  # type: ignore[union-attr]
     return f"{pagename}_{lang}"
 
 
