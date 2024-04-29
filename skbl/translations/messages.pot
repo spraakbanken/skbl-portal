@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SKBL-portal VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-04-26 13:47+0200\n"
+"POT-Creation-Date: 2024-04-29 10:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,84 +18,84 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.14.0\n"
 
-#: skbl/computeviews.py:98 skbl/views.py:38 skbl/views.py:313 skbl/views.py:521
-#: skbl/views.py:694
+#: skbl/computeviews.py:130 skbl/views.py:38 skbl/views.py:313
+#: skbl/views.py:521 skbl/views.py:694
 msgid "Contents could not be found!"
 msgstr ""
 
-#: skbl/computeviews.py:129 skbl/templates/article.html:360
+#: skbl/computeviews.py:177 skbl/templates/article.html:360
 #: skbl/templates/layout.html:146
 msgid "Organisations"
 msgstr ""
 
-#: skbl/computeviews.py:155 skbl/templates/article.html:276
+#: skbl/computeviews.py:212 skbl/templates/article.html:276
 #: skbl/templates/contact.html:42 skbl/templates/layout.html:139
 msgid "Activities"
 msgstr ""
 
-#: skbl/computeviews.py:190 skbl/computeviews.py:233
+#: skbl/computeviews.py:276 skbl/computeviews.py:349
 #: skbl/templates/layout.html:109
 msgid "Map"
 msgstr ""
 
-#: skbl/computeviews.py:197 skbl/templates/layout.html:105
+#: skbl/computeviews.py:285 skbl/templates/layout.html:105
 msgid "Women A-Z"
 msgstr ""
 
-#: skbl/computeviews.py:279
+#: skbl/computeviews.py:400
 msgid "Placenames"
 msgstr ""
 
-#: skbl/computeviews.py:347 skbl/templates/layout.html:112
+#: skbl/computeviews.py:477 skbl/templates/layout.html:112
 msgid "Article authors"
 msgstr ""
 
-#: skbl/computeviews.py:439
+#: skbl/computeviews.py:594
 msgid "Please enter all the fields!"
 msgstr ""
 
-#: skbl/computeviews.py:443
+#: skbl/computeviews.py:598
 msgid "Please enter a valid email address!"
 msgstr ""
 
-#: skbl/computeviews.py:449 skbl/templates/layout.html:116 skbl/views.py:102
+#: skbl/computeviews.py:605 skbl/templates/layout.html:116 skbl/views.py:102
 msgid "Contact"
 msgstr ""
 
-#: skbl/computeviews.py:450 skbl/views.py:103
+#: skbl/computeviews.py:606 skbl/views.py:103
 msgid "Contact SKBL"
 msgstr ""
 
-#: skbl/computeviews.py:515 skbl/computeviews.py:516
+#: skbl/computeviews.py:681 skbl/computeviews.py:682
 msgid "Thank you for your feedback"
 msgstr ""
 
-#: skbl/computeviews.py:517
+#: skbl/computeviews.py:683
 msgid "We will get back to you as soon as we can."
 msgstr ""
 
-#: skbl/helpers.py:497
+#: skbl/helpers.py:543
 msgid "Residence"
 msgstr ""
 
-#: skbl/helpers.py:498
+#: skbl/helpers.py:544
 msgid "Place of activity"
 msgstr ""
 
-#: skbl/helpers.py:499
+#: skbl/helpers.py:545
 msgid "Place of education"
 msgstr ""
 
-#: skbl/helpers.py:500 skbl/templates/article.html:318
+#: skbl/helpers.py:546 skbl/templates/article.html:318
 msgid "Contacts"
 msgstr ""
 
-#: skbl/helpers.py:501 skbl/templates/article.html:422
+#: skbl/helpers.py:547 skbl/templates/article.html:422
 #: skbl/templates/article.html:435 skbl/templates/article.html:451
 msgid "Birthplace"
 msgstr ""
 
-#: skbl/helpers.py:502 skbl/templates/article.html:428
+#: skbl/helpers.py:548 skbl/templates/article.html:428
 #: skbl/templates/article.html:441
 msgid "Place of death"
 msgstr ""
@@ -298,7 +298,7 @@ msgid "Submit"
 msgstr ""
 
 #: skbl/templates/contact_active.html:16
-msgid "Send minor corrections to:"
+msgid "Send in minor corrections to:"
 msgstr ""
 
 #: skbl/templates/layout.html:67
