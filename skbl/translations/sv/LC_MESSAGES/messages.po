@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-04-26 13:47+0200\n"
+"POT-Creation-Date: 2024-04-29 10:36+0200\n"
 "PO-Revision-Date: 2017-02-20 14:49+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: sv\n"
@@ -18,84 +18,84 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.14.0\n"
 
-#: skbl/computeviews.py:98 skbl/views.py:38 skbl/views.py:313 skbl/views.py:521
-#: skbl/views.py:694
+#: skbl/computeviews.py:130 skbl/views.py:38 skbl/views.py:313
+#: skbl/views.py:521 skbl/views.py:694
 msgid "Contents could not be found!"
 msgstr "Innehållet kunde inte hittas!"
 
-#: skbl/computeviews.py:129 skbl/templates/article.html:360
+#: skbl/computeviews.py:177 skbl/templates/article.html:360
 #: skbl/templates/layout.html:146
 msgid "Organisations"
 msgstr "Organisationer"
 
-#: skbl/computeviews.py:155 skbl/templates/article.html:276
+#: skbl/computeviews.py:212 skbl/templates/article.html:276
 #: skbl/templates/contact.html:42 skbl/templates/layout.html:139
 msgid "Activities"
 msgstr "Verksamhet"
 
-#: skbl/computeviews.py:190 skbl/computeviews.py:233
+#: skbl/computeviews.py:276 skbl/computeviews.py:349
 #: skbl/templates/layout.html:109
 msgid "Map"
 msgstr "Karta"
 
-#: skbl/computeviews.py:197 skbl/templates/layout.html:105
+#: skbl/computeviews.py:285 skbl/templates/layout.html:105
 msgid "Women A-Z"
 msgstr "Kvinnor A-Ö"
 
-#: skbl/computeviews.py:279
+#: skbl/computeviews.py:400
 msgid "Placenames"
 msgstr "Orter"
 
-#: skbl/computeviews.py:347 skbl/templates/layout.html:112
+#: skbl/computeviews.py:477 skbl/templates/layout.html:112
 msgid "Article authors"
 msgstr "Artikelförfattare"
 
-#: skbl/computeviews.py:439
+#: skbl/computeviews.py:594
 msgid "Please enter all the fields!"
 msgstr "Alla fält måste vara ifyllda!"
 
-#: skbl/computeviews.py:443
+#: skbl/computeviews.py:598
 msgid "Please enter a valid email address!"
 msgstr "Du måste ange en giltig e-post-adress!"
 
-#: skbl/computeviews.py:449 skbl/templates/layout.html:116 skbl/views.py:102
+#: skbl/computeviews.py:605 skbl/templates/layout.html:116 skbl/views.py:102
 msgid "Contact"
 msgstr "Kontakt"
 
-#: skbl/computeviews.py:450 skbl/views.py:103
+#: skbl/computeviews.py:606 skbl/views.py:103
 msgid "Contact SKBL"
 msgstr "Kontakta SKBL"
 
-#: skbl/computeviews.py:515 skbl/computeviews.py:516
+#: skbl/computeviews.py:681 skbl/computeviews.py:682
 msgid "Thank you for your feedback"
 msgstr "Tack för din återkoppling"
 
-#: skbl/computeviews.py:517
+#: skbl/computeviews.py:683
 msgid "We will get back to you as soon as we can."
 msgstr "Vi återkommer så fort vi kan."
 
-#: skbl/helpers.py:497
+#: skbl/helpers.py:543
 msgid "Residence"
 msgstr "Bostadsort"
 
-#: skbl/helpers.py:498
+#: skbl/helpers.py:544
 msgid "Place of activity"
 msgstr "Verksamhetsort"
 
-#: skbl/helpers.py:499
+#: skbl/helpers.py:545
 msgid "Place of education"
 msgstr "Utbildningsort"
 
-#: skbl/helpers.py:500 skbl/templates/article.html:318
+#: skbl/helpers.py:546 skbl/templates/article.html:318
 msgid "Contacts"
 msgstr "Kontakter"
 
-#: skbl/helpers.py:501 skbl/templates/article.html:422
+#: skbl/helpers.py:547 skbl/templates/article.html:422
 #: skbl/templates/article.html:435 skbl/templates/article.html:451
 msgid "Birthplace"
 msgstr "Födelseort"
 
-#: skbl/helpers.py:502 skbl/templates/article.html:428
+#: skbl/helpers.py:548 skbl/templates/article.html:428
 #: skbl/templates/article.html:441
 msgid "Place of death"
 msgstr "Dödsort"
@@ -300,7 +300,7 @@ msgid "Submit"
 msgstr "Skicka"
 
 #: skbl/templates/contact_active.html:16
-msgid "Send minor corrections to:"
+msgid "Send in minor corrections to:"
 msgstr "Skicka in mindre korrigeringar till:"
 
 #: skbl/templates/layout.html:67
