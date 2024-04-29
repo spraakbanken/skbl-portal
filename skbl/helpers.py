@@ -234,9 +234,9 @@ def group_alphabetical_without_vonaf(bucket, results):
     """Find starting letter without 'von', 'af' and 'av' from name.
 
     >>> results = []
-    >>> drop_vonaf(["von Tupp"], results)
+    >>> group_alphabetical_without_vonaf(["von Tupp"], results)
     >>> results
-    [('T', 'von Tupp')]
+    [('T', ['von Tupp'])]
 
     Args:
         bucket (str): _description_
