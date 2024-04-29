@@ -27,16 +27,14 @@ bp = Blueprint("views", __name__)
 @bp.route("/")
 def index():
     """Redirect to language specific landing-page."""
-    return redirect("/" + g.language)
+    return redirect(f"/{g.language}")
 
 
 @bp.errorhandler(404)
-def page_not_found(e):
+def page_not_found(e):  # noqa: ARG001
     """Generate view for 404."""
     helpers.set_language_switch_link("index")
-    return render_template(
-        "page.html", content=gettext("Contents could not be found!")
-    ), 404
+    return render_template("page.html", content=gettext("Contents could not be found!")), 404
 
 
 @bp.route("/en", endpoint="index_en")
@@ -93,10 +91,7 @@ def contact():
     helpers.set_language_switch_link("contact")
 
     # Set suggestion checkbox
-    if request.args.get("suggest") == "true":
-        mode = "suggestion"
-    else:
-        mode = "other"
+    mode = "suggestion" if request.args.get("suggest") == "true" else "other"
     page = render_template(
         "contact_active.html",
         title=gettext("Contact"),
@@ -116,7 +111,7 @@ def contact():
 
 @bp.route("/en/map", endpoint="map_en")
 @bp.route("/sv/karta", endpoint="map_sv")
-def map():
+def show_map():
     """Generate view for the map."""
     art = computeviews.compute_map()
     return helpers.set_cache(art)
@@ -126,7 +121,7 @@ def map():
 @bp.route("/sv/kronologi", endpoint="chronology_index_sv")
 def chronology_index():
     """Generate view for chronology and redirect to default time range."""
-    return redirect(url_for("views.chronology_" + g.language, years="1400-1800"))
+    return redirect(url_for(f"views.chronology_{g.language}", years="1400-1800"))
 
 
 @bp.route("/en/chronology/<years>", endpoint="chronology_en")
@@ -151,7 +146,7 @@ def chronology(years=""):
             "label": "English",
         }
 
-    show = ",".join(["name", "url", "undertitel", "lifespan", "undertitel_eng"])
+    show = "name,url,undertitel,lifespan,undertitel_eng"
 
     # Get minientry for all women
     selection = helpers.karp_query(
@@ -160,7 +155,9 @@ def chronology(years=""):
         mode=current_app.config["SKBL_LINKS"],
     )
 
-    # Add birth and death years, convert non-dates like "ca. 1500-talet", sort resulting list by year
+    # Add birth and death years
+    # convert non-dates like "ca. 1500-talet"
+    # sort resulting list by year
     born_years = set()
     died_years = set()
     for woman in selection["hits"]["hits"]:
@@ -168,13 +165,11 @@ def chronology(years=""):
         woman["_source"]["lifespan_simple"] = dates
         born_years.add(dates[0])
         died_years.add(dates[1])
-    results = sorted(
-        selection["hits"]["hits"], key=lambda i: i["_source"]["lifespan_simple"]
-    )
+    results = sorted(selection["hits"]["hits"], key=lambda i: i["_source"]["lifespan_simple"])
 
     # Get boundaries for chronology
-    first_born = sorted(list(born_years))[0]
-    last_died = sorted(list(died_years))[-1]
+    first_born = min(list(born_years))
+    last_died = max(list(died_years))
 
     # Remove all women who have not been living in the selected interval
     new_results = []
@@ -206,7 +201,7 @@ def search():
     """Generate view for search results."""
     helpers.set_language_switch_link("search")
     search = request.args.get("q", "")
-    pagename = "search" + urllib.parse.quote(search)
+    pagename = f"search{urllib.parse.quote(search)}"
 
     page = helpers.check_cache(pagename)
     if page is not None:
@@ -214,16 +209,8 @@ def search():
 
     advanced_search_text = ""
     if search:
-        show = ",".join(
-            [
-                "name",
-                "url",
-                "undertitel",
-                "undertitel_eng",
-                "lifespan",
-                "platspinlat.bucket",
-                "platspinlon.bucket",
-            ]
+        show = (
+            "name,url,undertitel,undertitel_eng,lifespan,platspinlat.bucket,platspinlon.bucket"
         )
         karp_q = {
             "highlight": True,
@@ -232,20 +219,18 @@ def search():
         }
         if "*" in search:
             search = re.sub(r"(?<!\.)\*", ".*", search)
-            karp_q["q"] = "extended||and|anything|regexp|%s" % search
+            karp_q["q"] = f"extended||and|anything|regexp|{search}"
         else:
-            karp_q["q"] = "extended||and|anything|contains|%s" % search
+            karp_q["q"] = f"extended||and|anything|contains|{search}"
 
         mode = current_app.config["KARP_MODE"]
         data = helpers.karp_query("minientry", karp_q, mode=mode)
-        with current_app.open_resource(
-            "static/pages/advanced-search/%s.html" % (g.language)
-        ) as f:
+        with current_app.open_resource(f"static/pages/advanced-search/{g.language}.html") as f:
             advanced_search_text = f.read().decode("UTF-8")
         karp_url = (
             "https://spraakbanken.gu.se/karp/#?mode="
             + mode
-            + "&advanced=false&hpp=25&extended=and%7Cnamn%7Cequals%7C&searchTab=simple&page=1&search=simple%7C%7C"
+            + "&advanced=false&hpp=25&extended=and%7Cnamn%7Cequals%7C&searchTab=simple&page=1&search=simple%7C%7C"  # noqa: E501
             + search
         )
     else:
@@ -253,11 +238,7 @@ def search():
         karp_url = ""
         search = "\u200b"
 
-    number_hits = (
-        data["hits"]["total"]
-        if data["hits"]["total"] < current_app.config["SEARCH_RESULT_SIZE"]
-        else current_app.config["SEARCH_RESULT_SIZE"]
-    )
+    number_hits = min(current_app.config["SEARCH_RESULT_SIZE"], data["hits"]["total"])
 
     t = render_template(
         "list.html",
@@ -288,16 +269,14 @@ def place_index():
 @bp.route("/sv/ort/<place>", endpoint="place_sv")
 def place(place=None):
     """Generate view for one place."""
-    pagename = urllib.parse.quote("place_" + place)
+    pagename = urllib.parse.quote(f"place_{place}")
     art = helpers.check_cache(pagename)
     if art is not None:
         return art
     lat = request.args.get("lat")
     lon = request.args.get("lon")
     helpers.set_language_switch_link("place_index", place)
-    hits = helpers.karp_query(
-        "query", {"q": "extended||and|plats.searchraw|equals|%s" % (place)}
-    )
+    hits = helpers.karp_query("query", {"q": f"extended||and|plats.searchraw|equals|{place}"})
     no_hits = hits["hits"]["total"]
     if no_hits > 0:
         page = render_template(
@@ -309,9 +288,7 @@ def place(place=None):
             hits=hits["hits"],
         )
     else:
-        page = render_template(
-            "page.html", content=gettext("Contents could not be found!")
-        )
+        page = render_template("page.html", content=gettext("Contents could not be found!"))
     return helpers.set_cache(page, name=pagename, no_hits=no_hits)
 
 
@@ -329,26 +306,15 @@ def organisation(result=None):
     title = request.args.get("title")
 
     lang = "sv" if "sv" in request.url_rule.rule else "en"
-    if lang == "en":
-        page = computeviews.searchresult(
-            result,
-            "organisation",
-            "id",
-            "organisations",
-            title=title,
-            lang=lang,
-            show_lang_switch=False,
-        )
-    else:
-        page = computeviews.searchresult(
-            result,
-            "organisation",
-            "id",
-            "organisations",
-            title=title,
-            lang=lang,
-            show_lang_switch=False,
-        )
+    page = computeviews.searchresult(
+        result,
+        "organisation",
+        "id",
+        "organisations",
+        title=title,
+        lang=lang,
+        show_lang_switch=False,
+    )
     return helpers.set_cache(page)
 
 
@@ -445,7 +411,7 @@ def keyword(result=None):
 #     keylist.sort(key=lambda k: k.split()[1])
 #     for key in keylist:
 #         if authors_dict[key].get("publications"):
-#             authors_dict[key]["publications"] = [helpers.markdown_html(i) for i in authors_dict[key].get("publications")]
+#             authors_dict[key]["publications"] = [helpers.markdown_html(i) for i in authors_dict[key].get("publications")]  # noqa: E501
 #         if authors_dict[key].get("sv"):
 #             authors_dict[key]["sv"] = helpers.markdown_html(authors_dict[key].get("sv"))
 #         authorinfo.append((key, authors_dict[key]))
@@ -476,16 +442,13 @@ def author(result=None):
     # Try to get authorinfo in correct language (with Swedish as fallback)
     firstname = result.split(", ")[-1].strip()
     lastname = result.split(", ")[0].strip()
-    authorinfo = authors_dict.get(firstname + " " + lastname)
+    authorinfo = authors_dict.get(f"{firstname} {lastname}")
     if authorinfo:
         authorinfo = [
             helpers.markdown_html(authorinfo.get(lang, authorinfo.get("sv"))),
             [helpers.markdown_html(i) for i in authorinfo.get("publications", [])],
         ]
-    query = (
-        "extended||and|artikel_forfattare_fornamn.lowerbucket|equals|%s||and|artikel_forfattare_efternamn.lowerbucket|equals|%s"
-        % (firstname, lastname)
-    )
+    query = f"extended||and|artikel_forfattare_fornamn.lowerbucket|equals|{firstname}||and|artikel_forfattare_efternamn.lowerbucket|equals|{lastname}"  # noqa: E501
     page = computeviews.searchresult(
         result,
         name="articleauthor",
@@ -505,21 +468,18 @@ def article_index(search=None):
     # Search is only used by links in article text
     search = search or request.args.get("search")
     if search is not None:
-        data, id = find_link(search)
+        data, id = find_link(search)  # noqa: A001
         if id:
             # Only one hit is found, redirect to that page
-            page = redirect(url_for("views.article_" + g.language, id=id))
+            page = redirect(url_for(f"views.article_{g.language}", id=id))
             return helpers.set_cache(page)
         # elif data["hits"]["total"] > 1:
-        elif len(data["hits"]["hits"]) > 1:
+        if len(data["hits"]["hits"]) > 1:
             # More than one hit is found, redirect to a listing
-            page = redirect(url_for("views.search_" + g.language, q=search))
+            page = redirect(url_for(f"views.search_{g.language}", q=search))
             return helpers.set_cache(page)
-        else:
-            # No hits are found redirect to a "not found" page
-            return render_template(
-                "page.html", content=gettext("Contents could not be found!")
-            ), 404
+        # No hits are found redirect to a "not found" page
+        return render_template("page.html", content=gettext("Contents could not be found!")), 404
 
     art = computeviews.compute_article()
     return helpers.set_cache(art)
@@ -527,23 +487,18 @@ def article_index(search=None):
 
 @bp.route("/en/article/<id>", endpoint="article_en")
 @bp.route("/sv/artikel/<id>", endpoint="article_sv")
-def article(id=None):
+def article(id=None):  # noqa: A002
     """Generate view for one article."""
     rule = request.url_rule
-    if "sv" in rule.rule:
-        lang = "sv"
-    else:
-        lang = "en"
-    pagename = "article_" + id
+    lang = "sv" if "sv" in rule.rule else "en"
+    pagename = f"article_{id}"
     page = helpers.check_cache(pagename, lang=lang)
     if page is not None:
         return page
-    data = helpers.karp_query("query", {"q": "extended||and|url|equals|%s" % (id)})
+    data = helpers.karp_query("query", {"q": f"extended||and|url|equals|{id}"})
     # if data["hits"]["total"] == 0:
     if len(data["hits"]["hits"]) == 0:
-        data = helpers.karp_query(
-            "query", {"q": "extended||and|id.search|equals|%s" % (id)}
-        )
+        data = helpers.karp_query("query", {"q": f"extended||and|id.search|equals|{id}"})
     helpers.set_language_switch_link("article_index", id)
     page = show_article(data, lang)
     return helpers.set_cache(page, name=pagename, lang=lang, no_hits=1)
@@ -568,7 +523,7 @@ def find_link(searchstring):
     if re.search(r"^[0-9 ]*X?$", searchstring):
         searchstring = searchstring.replace(" ", "")
         data = helpers.karp_query(
-            "query", {"q": "extended||and|swoid.search|equals|%s" % (searchstring)}
+            "query", {"q": f"extended||and|swoid.search|equals|{searchstring}"}
         )
     else:
         parts = searchstring.split(" ")
@@ -579,7 +534,7 @@ def find_link(searchstring):
             # Case 2: "Margareta, drottning"
             firstname = parts[0] if len(parts) == 1 else searchstring
             data = helpers.karp_query(
-                "query", {"q": "extended||and|fornamn.search|contains|%s" % (firstname)}
+                "query", {"q": f"extended||and|fornamn.search|contains|{firstname}"}
             )
         else:
             fornamn = " ".join(parts[0:-1])
@@ -592,8 +547,7 @@ def find_link(searchstring):
             data = helpers.karp_query(
                 "query",
                 {
-                    "q": "extended||and|fornamn.search|contains|%s||and|efternamn.search|contains|%s"
-                    % (fornamn, efternamn)
+                    "q": f"extended||and|fornamn.search|contains|{fornamn}||and|efternamn.search|contains|{efternamn}"  # noqa: E501
                 },
             )
     # The expected case: only one hit is found
@@ -603,96 +557,75 @@ def find_link(searchstring):
         es_id = data["hits"]["hits"][0]["_id"]
         return data, (url or es_id)
         # Otherwise just return the data
-    else:
-        return data, ""
+    return data, ""
 
 
 def show_article(data, lang="sv"):
     """Prepare data for article view (helper function)."""
     # if len(data["hits"]["hits"]) == 1:
-    if len(data["hits"]["hits"]) > 0:
-        source = data["hits"]["hits"][0]["_source"]
-        source["url"] = source.get("url") or data["query"]["hits"]["hits"][0]["_id"]
-        source["es_id"] = data["hits"]["hits"][0]["_id"]
+    if len(data["hits"]["hits"]) <= 0:
+        return render_template("page.html", content=gettext("Contents could not be found!")), 404
+    source = data["hits"]["hits"][0]["_source"]
+    source["url"] = source.get("url") or data["query"]["hits"]["hits"][0]["_id"]
+    source["es_id"] = data["hits"]["hits"][0]["_id"]
 
-        # Print html for the names with the calling name and last name in bold
-        formatted_names = helpers.format_names(source, "b")
-        source["showname"] = "%s <b>%s</b>" % (
-            formatted_names,
-            source["name"].get("lastname", ""),
+    # Print html for the names with the calling name and last name in bold
+    formatted_names = helpers.format_names(source, "b")
+    source["showname"] = f'{formatted_names} <b>{source["name"].get("lastname", "")}</b>'
+    title = f'{helpers.format_names(source, "")} {source["name"].get("lastname", "")}'
+    if source.get("text"):
+        source["text"] = helpers.markdown_html(
+            helpers.unescape(helpers.mk_links(source["text"]))
         )
-        title = "%s %s" % (
-            helpers.format_names(source, ""),
-            source["name"].get("lastname", ""),
-        )
-        if source.get("text"):
-            source["text"] = helpers.markdown_html(
-                helpers.unescape(helpers.mk_links(source["text"]))
-            )
-        if source.get("text_eng"):
-            source["text_eng"] = helpers.markdown_html(
-                helpers.unescape(helpers.mk_links(source["text_eng"]))
-            )
-
-        # Extract linked names from source
-        source["linked_names"] = find_linked_names(
-            source.get("othernames", {}), source.get("showname")
-        )
-        source["othernames"] = helpers.group_by_type(
-            source.get("othernames", {}), "name"
+    if source.get("text_eng"):
+        source["text_eng"] = helpers.markdown_html(
+            helpers.unescape(helpers.mk_links(source["text_eng"]))
         )
 
-        helpers.collapse_kids(source)
-        if "source" in source:
-            source["source"] = helpers.aggregate_by_type(
-                source["source"], use_markdown=True
-            )
-        if "furtherreference" in source:
-            source["furtherreference"] = helpers.aggregate_by_type(
-                source["furtherreference"], use_markdown=True
-            )
-        if not isinstance(source["article_author"], list):
-            source["article_author"] = [source["article_author"]]
+    # Extract linked names from source
+    source["linked_names"] = find_linked_names(
+        source.get("othernames", {}), source.get("showname")
+    )
+    source["othernames"] = helpers.group_by_type(source.get("othernames", {}), "name")
 
-        # Set description for meta data
-        if lang == "sv":
-            description = helpers.get_shorttext(source.get("text", ""))
-        else:
-            description = helpers.get_shorttext(
-                source.get("text_eng", source.get("text", ""))
-            )
-
-        if source.get("portrait"):
-            image = source["portrait"][0].get("url", "")
-        else:
-            image = ""
-
-        # Sort keywords alphabetically
-        kw = source.get("keyword", [])
-        collator = icu.Collator.createInstance(icu.Locale("sv_SE.UTF-8"))
-        kw.sort(key=lambda x: collator.getSortKey(x))
-
-        under_development = (
-            True if source.get("skbl_status") == "Under utveckling" else False
+    helpers.collapse_kids(source)
+    if "source" in source:
+        source["source"] = helpers.aggregate_by_type(source["source"], use_markdown=True)
+    if "furtherreference" in source:
+        source["furtherreference"] = helpers.aggregate_by_type(
+            source["furtherreference"], use_markdown=True
         )
+    if not isinstance(source["article_author"], list):
+        source["article_author"] = [source["article_author"]]
 
-        littb_url = helpers.get_littb_id(source.get("url"))
-
-        return render_template(
-            "article.html",
-            article=source,
-            article_id=source["es_id"],
-            article_url=source["url"],
-            title=title,
-            description=description,
-            image=image,
-            under_development=under_development,
-            littb_id=littb_url,
-        )
+    # Set description for meta data
+    if lang == "sv":
+        description = helpers.get_shorttext(source.get("text", ""))
     else:
-        return render_template(
-            "page.html", content=gettext("Contents could not be found!")
-        ), 404
+        description = helpers.get_shorttext(source.get("text_eng", source.get("text", "")))
+
+    image = source["portrait"][0].get("url", "") if source.get("portrait") else ""
+
+    # Sort keywords alphabetically
+    kw = source.get("keyword", [])
+    collator = icu.Collator.createInstance(icu.Locale("sv_SE.UTF-8"))
+    kw.sort(key=collator.getSortKey)
+
+    under_development = source.get("skbl_status") == "Under utveckling"
+
+    littb_url = helpers.get_littb_id(source.get("url"))
+
+    return render_template(
+        "article.html",
+        article=source,
+        article_id=source["es_id"],
+        article_url=source["url"],
+        title=title,
+        description=description,
+        image=image,
+        under_development=under_development,
+        littb_id=littb_url,
+    )
 
 
 def find_linked_names(othernames, showname):
@@ -712,17 +645,17 @@ def fix_name_order(name):
     nameparts = name.split(", ")
     if len(nameparts) == 1:
         return nameparts[0]
-    elif len(nameparts) == 2:
-        return nameparts[1] + " " + nameparts[0]
-    elif len(nameparts) == 3:
-        return nameparts[2] + " " + nameparts[1] + " " + nameparts[0]
+    if len(nameparts) == 2:  # noqa: PLR2004
+        return f"{nameparts[1]} {nameparts[0]}"
+    if len(nameparts) == 3:  # noqa: PLR2004
+        return f"{nameparts[2]} {nameparts[1]} {nameparts[0]}"
+    return None
 
 
 @bp.route("/en/award", endpoint="award_index_en")
 @bp.route("/sv/pris", endpoint="award_index_sv")
 def award_index():
-    """
-    List all awards.
+    """List all awards.
 
     There are no links to this page, but might be wanted later on
     Exists only to support award/<result> below
@@ -735,9 +668,7 @@ def award_index():
     art = computeviews.bucketcall(
         queryfield="prisbeskrivning", name="award", title="Award", infotext=""
     )
-    return helpers.set_cache(
-        art, name=pagename, no_hits=current_app.config["CACHE_HIT_LIMIT"]
-    )
+    return helpers.set_cache(art, name=pagename, no_hits=current_app.config["CACHE_HIT_LIMIT"])
 
 
 @bp.route("/en/award/<result>", endpoint="award_en")
@@ -757,8 +688,7 @@ def award(result=None):
 @bp.route("/en/education_institution", endpoint="institution_index_en")
 @bp.route("/sv/utbildningsinstitution", endpoint="institution_index_sv")
 def institution_index():
-    """
-    List all education institutions.
+    """List all education institutions.
 
     There are no links to this page, but might be wanted later on
     Exists only to support institution/<result> below
@@ -785,29 +715,27 @@ def institution(result=None):
 
 @bp.route("/en/article/<id>.json", endpoint="article_json_en")
 @bp.route("/sv/artikel/<id>.json", endpoint="article_json_sv")
-def article_json(id=None):
+def article_json(id=None):  # noqa: A002
     """Get article in JSON."""
-    data = helpers.karp_query("query", {"q": "extended||and|url|equals|%s" % (id)})
+    data = helpers.karp_query("query", {"q": f"extended||and|url|equals|{id}"})
     # if data["hits"]["total"] == 1:
     if len(data["hits"]["hits"]) == 1:
         page = jsonify(data["hits"]["hits"][0]["_source"])
         return helpers.set_cache(page)
-    data = helpers.karp_query(
-        "query", {"q": "extended||and|id.search|equals|%s" % (id)}
-    )
+    data = helpers.karp_query("query", {"q": f"extended||and|id.search|equals|{id}"})
     # if data["hits"]["total"] == 1:
     if len(data["hits"]["hits"]) == 1:
         page = jsonify(data["hits"]["hits"][0]["_source"])
         return helpers.set_cache(page)
+    return None
 
 
 # ### Cache handling ###
 @bp.route("/emptycache")
 def emptycache():
-    """
-    Empty the cache.
+    """Empty the cache.
 
-    Users with write premissions to skbl may use this call.
+    Users with write permissions to skbl may use this call.
     """
     emptied = False
     try:
@@ -830,8 +758,7 @@ def cachestats():
 @bp.route("/en/fillcache", endpoint="fillcache_en")
 @bp.route("/sv/fillcache", endpoint="fillcache_sv")
 def fillcache():
-    """
-    Refill the cache (~ touch all pages).
+    """Refill the cache (~ touch all pages).
 
     This request will take some seconds, users may want to make an
     asynchronous call. Compute new pages
@@ -845,12 +772,8 @@ def fillcache():
     }
     lang = "sv" if "sv" in request.url_rule.rule else "en"
     lix = 0 if lang == "eng" else 1
-    computeviews.compute_article(
-        cache=False, url=request.url_root + urls["article"][lix]
-    )
-    computeviews.compute_activity(
-        cache=False, url=request.url_root + urls["activity"][lix]
-    )
+    computeviews.compute_article(cache=False, url=request.url_root + urls["article"][lix])
+    computeviews.compute_activity(cache=False, url=request.url_root + urls["activity"][lix])
     computeviews.compute_organisation(
         cache=False, url=request.url_root + urls["organisation"][lix]
     )
@@ -859,9 +782,7 @@ def fillcache():
         cache=False, url=request.url_root + urls["forfattare"][lix]
     )
     # Copy the pages to the backup fields
-    computeviews.copytobackup(
-        ["article", "activity", "organisation", "place", "author"], lang
-    )
+    computeviews.copytobackup(["article", "activity", "organisation", "place", "author"], lang)
     return jsonify({"cache_filled": True, "cached_language": lang})
 
 

@@ -5,7 +5,7 @@ description = "Default template for PDM package"
 authors = [{ name = "Språkbanken Text", email = "sb-info@svenska.gu.se" }]
 dependencies = [
     "flask>=2.2.5",
-    "flask-babel<3",
+    "flask-babel",
     "flask-compress>=1.15",
     "flask-reverse-proxy>=0.2.0.2",
     "gunicorn>=22.0.0",
@@ -13,7 +13,7 @@ dependencies = [
     "pylibmc>=1.6.3",
     "pyicu>=2.13",
 ]
-requires-python = ">=3.7"
+requires-python = ">=3.10"
 readme = "README.md"
 license = { text = "MIT" }
 

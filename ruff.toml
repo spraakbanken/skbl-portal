@@ -1,0 +1,62 @@
+line-length = 97
+
+target-version = "py310"
+
+[lint]
+select = [
+  "A", # flake8-builtins
+  # "ANN",  # flake8-annotations
+  "ARG",  # flake8-unused-arguments
+  "B",    # flake8-bugbear
+  "C4",   # flake8-comprehensions
+  "COM",  # flake8-commas
+  "D",    # pydocstyle
+  "D400", # pydocstyle: ends-in-period
+  "D401", # pydocstyle: non-imperative-mood
+  "E",    # pycodestyle: errors
+  "F",    # Pyflakes
+  "FLY",  # flynt
+  "FURB", # refurb
+  "G",    # flake8-logging-format
+  "I",    # isort
+  "ISC",  # flake8-implicit-str-concat
+  "N",    # pep8-naming
+  "PERF", # Perflint
+  "PIE",  # flake8-pie
+  "PL",   # Pylint
+  "PT",   # flake8-pytest-style
+  "PTH",  # flake8-use-pathlib
+  "Q",    # flake8-quotes
+  "RET",  # flake8-return
+  "RSE",  # flake8-raise
+  "RUF",  # Ruff-specific rules
+  "SIM",  # flake8-simplify
+  "T20",  # flake8-print
+  "TID",  # flake8-tidy-imports
+  "UP",   # pyupgrade
+  "W",    # pycodestyle: warnings
+]
+ignore = [
+  "ANN101", # flake8-annotations: missing-type-self (deprecated)
+  "ANN102", # flake8-annotations: missing-type-cls (deprecated)
+  "ANN401", # flake8-annotations: any-type
+  "B008",   # flake8-bugbear: function-call-in-default-argument
+  "COM812", # flake8-commas: missing-trailing-comma
+  "PLR09",  # Pylint: too-many-*
+  "SIM105", # flake8-simplify: suppressible-exception
+]
+preview = true
+
+# Avoid trying to fix flake8-bugbear (`B`) violations.
+unfixable = ["B"]
+
+
+[lint.pydocstyle]
+convention = "google"
+
+
+# Ignore `E402` (import violations) in all `__init__.py` files, and in `path/to/file.py`.
+[lint.per-file-ignores]
+"skbl/authors.py" = ["E501", "RUF001"]
+"skbl/static_info.py" = ["E501", "RUF001"]
+"tests/*" = ["D100", "D101", "D102", "D103", "D104", "S101"]

@@ -30,9 +30,7 @@ authors_dict = {
             '"The blessings and perils of female rule: New perspectives on the reigning queens of Patani, c. 1584–1718", i *Journal of Southeast Asian Studies*, 2/2011',
         ],
     },
-    "Andreas Anderberg": {
-        "sv": "universitetslektor i rättsvetenskap vid Linnéuniversitetet"
-    },
+    "Andreas Anderberg": {"sv": "universitetslektor i rättsvetenskap vid Linnéuniversitetet"},
     "Irene Andersson": {
         "sv": "docent i historia vid Malmö universitet",
         "publications": [
@@ -268,9 +266,7 @@ authors_dict = {
             "*Arbete för livet. Kvinnor berättar om svenskt 1900-tal* (2018).",
         ],
     },
-    "Eva Helena Cassel-Pihl": {
-        "sv": "före detta chef vid Hallwylska museet i Stockholm"
-    },
+    "Eva Helena Cassel-Pihl": {"sv": "före detta chef vid Hallwylska museet i Stockholm"},
     "Martin Dackling": {
         "sv": "historiker vid Göteborgs universitet",
         "publications": [
@@ -609,9 +605,7 @@ authors_dict = {
         ],
     },
     "Karin Holmgren": {"sv": "förste arkivarie vid Folkrörelsearkivet i Västerbotten"},
-    "Ingrid Holmquist": {
-        "sv": "professor emeritus i genusvetenskap vid Göteborgs universitet"
-    },
+    "Ingrid Holmquist": {"sv": "professor emeritus i genusvetenskap vid Göteborgs universitet"},
     "Björn Horgby": {
         "sv": "professor emeritus i historia vid Örebro universitet",
         "publications": [
@@ -629,9 +623,7 @@ authors_dict = {
             "*Tröskelkvinnor. Barnafödande som kultur* (2000)",
         ],
     },
-    "Ulf Högberg": {
-        "sv": "senior professor i obstetrik och gynekologi vid Uppsala universitet"
-    },
+    "Ulf Högberg": {"sv": "senior professor i obstetrik och gynekologi vid Uppsala universitet"},
     "Evelina Ivarsson": {
         "sv": "kulturskribent och masterstudent i litteraturvetenskap vid Göteborgs universitet"
     },
@@ -982,9 +974,7 @@ authors_dict = {
             "*Fantasiens morgonrodnad. En studie i Clas Livijns romaner* (2017)",
         ],
     },
-    "Hans Modig": {
-        "sv": "docent och före detta akademisekreterare vid Lunds universitet"
-    },
+    "Hans Modig": {"sv": "docent och före detta akademisekreterare vid Lunds universitet"},
     "Birgit Munkhammar": {
         "sv": "kritiker i *Dagens Nyheter* 1983-2007",
         "publications": [
@@ -1084,9 +1074,7 @@ authors_dict = {
         ],
     },
     "Susanne Odell": {"sv": "arkivarie vid Folkrörelsearkivet i Västerbotten"},
-    "Ann-Sofie Ohlander": {
-        "sv": "professor emeritus i historia vid Örebro universitet"
-    },
+    "Ann-Sofie Ohlander": {"sv": "professor emeritus i historia vid Örebro universitet"},
     "Hélène Ohlsson": {
         "sv": "filosofie doktor i teatervetenskap vid Stockholms universitet, samt skådespelerska och regissör",
         "publications": [
@@ -1178,9 +1166,7 @@ authors_dict = {
             "*Förnuft eller känsla. Adel, kärlek och äktenskap* (2018)",
         ],
     },
-    "Jenny von Platen": {
-        "sv": "antikhandlare, föredragshållare och skribent baserad i Malmö."
-    },
+    "Jenny von Platen": {"sv": "antikhandlare, föredragshållare och skribent baserad i Malmö."},
     "Jöns Posse": {"sv": "skribent"},
     "Sara Backman Prytz": {
         "sv": "lektor i barn- och ungdomsvetenskap vid Stockholms universitet",
@@ -1196,9 +1182,7 @@ authors_dict = {
             '"A discursive analysis concerning information on "ADHD" presented to parents by the National Institute of Mental Health (USA)", i *International Journal of Qualitative Studies on Health and Well-being* 11/2016',
         ],
     },
-    "Roger Qvarsell": {
-        "sv": "idéhistoriker och professor emeritus vid Linköpings universitet"
-    },
+    "Roger Qvarsell": {"sv": "idéhistoriker och professor emeritus vid Linköpings universitet"},
     "Marie Rehnberg": {
         "sv": "filosofie magister i konstvetenskap vid Lunds universitet",
         "publications": [
@@ -1409,9 +1393,7 @@ authors_dict = {
             "*Äntligen stod hon i predikstolen!* (2008)",
         ],
     },
-    "Lisa Svensson": {
-        "sv": "doktorand i idé- och lärdomshistoria vid Göteborgs universitet"
-    },
+    "Lisa Svensson": {"sv": "doktorand i idé- och lärdomshistoria vid Göteborgs universitet"},
     "Ingegerd Särlvik": {
         "sv": "filosofie doktor och museichef för Göteborgs industrihistoriska museum",
         "publications": [
@@ -1425,9 +1407,7 @@ authors_dict = {
             "*I skuggan av Nathan* (2014)",
         ],
     },
-    "Jonas Söderqvist": {
-        "sv": "doktorand i ekonomisk historia vid Uppsala universitet"
-    },
+    "Jonas Söderqvist": {"sv": "doktorand i ekonomisk historia vid Uppsala universitet"},
     "Anna Tellgren": {
         "sv": "filosofie doktor, intendent för fotografi och forskningsledare vid Moderna museet i Stockholm",
         "publications": [
@@ -1642,9 +1622,7 @@ authors_dict = {
             '"Arkiv på undantag: Dispensarkivväsendet inom Uppsala landsarkivdistrikt", i *Arkiv och konflikt: Landsarkivet i Uppsala i blickfånget under tidigt 1900-tal* (2008)',
         ],
     },
-    "Caroline Bergström": {
-        "sv": "frilansskribent, filosofie magister i litteraturvetenskap"
-    },
+    "Caroline Bergström": {"sv": "frilansskribent, filosofie magister i litteraturvetenskap"},
     "Boel Berner": {
         "sv": "professor emerita i teknik och social förändring, Linköpings universitet",
         "publications": [
@@ -1899,9 +1877,7 @@ authors_dict = {
     },
     "Birgitta Calagos": {
         "sv": "bibliotekarie, släktforskare",
-        "publications": [
-            "*Från bondmora till konstväverska. Cilluf Olsson 1847-1916* (2019)"
-        ],
+        "publications": ["*Från bondmora till konstväverska. Cilluf Olsson 1847-1916* (2019)"],
     },
     "Göran Karlsson": {
         "sv": "lokalhistorisk författare, pensionerad chefredaktör",
@@ -1929,9 +1905,7 @@ authors_dict = {
     },
     "Jan Malmstedt": {
         "sv": "journalist, författare",
-        "publications": [
-            "*Brottsplats Lidingö i detektivromaner och i verkligheten* (2016)"
-        ],
+        "publications": ["*Brottsplats Lidingö i detektivromaner och i verkligheten* (2016)"],
     },
     "Birgitta Malmstedt": {"sv": "bibliotekarie", "publications": []},
     "Hans Lindholm Öjmyr": {
@@ -1957,9 +1931,7 @@ authors_dict = {
     },
     "Lars Nylander": {
         "sv": "antikvarie vid Hälsinglands museum och doktorand i kulturvård vid Göteborgs universitet",
-        "publications": [
-            "*En vandring genom Söderhamns historia* (2018, andra rev uppl 2019)"
-        ],
+        "publications": ["*En vandring genom Söderhamns historia* (2018, andra rev uppl 2019)"],
     },
     "Annmari Kastrup": {
         "sv": "utställningsproducent och före detta skådespelare",
@@ -2093,9 +2065,7 @@ authors_dict = {
     "Gudrun Beméus": {"sv": "sjuksköterska, adjunkt", "publications": []},
     "Gunnel Atlestam": {
         "sv": "journalist, författare",
-        "publications": [
-            "*Konstnär, maka, mor - berättelsen om Ester Elvira Nilsson* ( 2019)"
-        ],
+        "publications": ["*Konstnär, maka, mor - berättelsen om Ester Elvira Nilsson* ( 2019)"],
     },
     "Torsten Sverenius": {
         "sv": "journalist, författare, utredare",
@@ -2105,9 +2075,7 @@ authors_dict = {
     },
     "Per Olof Nisser": {
         "sv": "teologie doktor, domprost emeritus",
-        "publications": [
-            '"Enhetens polyfoni", i *Årsbok för Svenskt Gudstjänstliv* (2020)'
-        ],
+        "publications": ['"Enhetens polyfoni", i *Årsbok för Svenskt Gudstjänstliv* (2020)'],
     },
     "Katarina Olsson": {
         "sv": "filosofie doktor i naturgeografi, författare",
@@ -2248,9 +2216,7 @@ authors_dict = {
     "Theodor Stenevang Klemming": {"sv": "släktforskare", "publications": []},
     "Mariette Manktelow": {
         "sv": "botaniker",
-        "publications": [
-            '"Hotet mot Linnés växter", i *Svensk Botanisk Tidskrift* 1/2021'
-        ],
+        "publications": ['"Hotet mot Linnés växter", i *Svensk Botanisk Tidskrift* 1/2021'],
     },
     "Karin Nordberg": {
         "sv": "idéhistoriker",
@@ -2282,9 +2248,7 @@ authors_dict = {
     "Fredrik Mandelin": {"sv": "filosofie magister i historia", "publications": []},
     "Erik Wångmar": {
         "sv": "docent i historia samt universitetslektor i statsvetenskap och historia, Linnéuniversitetet",
-        "publications": [
-            "*Husebyfröken. En studie om Florence Stephens 1881-1979* (2020)"
-        ],
+        "publications": ["*Husebyfröken. En studie om Florence Stephens 1881-1979* (2020)"],
     },
     "Göran Janzon": {
         "sv": "tidigare lektor vid Örebro Teologiska Högskola",
@@ -2318,9 +2282,7 @@ authors_dict = {
     },
     "Eva Kaijser": {
         "sv": "frilansjournalist och författare",
-        "publications": [
-            "*Svenska Hem - den sanna historien om Fröken Frimans Krig* (2014)"
-        ],
+        "publications": ["*Svenska Hem - den sanna historien om Fröken Frimans Krig* (2014)"],
     },
     "Barbro Norbelie": {
         "sv": "filosofie doktor i engelsk litteratur och Master of Arts i konstvetenskap, pensionerad universitetslektor vid Uppsala universitet",
@@ -2543,9 +2505,7 @@ authors_dict = {
     },
     "Anders Lindkvist": {
         "sv": "konstvetare, Master of Science, Uppsala universitet",
-        "publications": [
-            "*Anna Nordgren en kosmopolit på sekelskiftets konstscen* (2016)"
-        ],
+        "publications": ["*Anna Nordgren en kosmopolit på sekelskiftets konstscen* (2016)"],
     },
     "Anneli Jordahl": {
         "sv": "författare, litteraturkritiker",
@@ -2600,9 +2560,7 @@ authors_dict = {
     },
     "Kristoffer Arvidsson": {
         "sv": "konstvetare, forskningsledare, Göteborgs konstmuseum",
-        "publications": [
-            "*Det universella språket. Efterkrigstidens abstrakta konst* (2018)"
-        ],
+        "publications": ["*Det universella språket. Efterkrigstidens abstrakta konst* (2018)"],
     },
     "Kristina Widmark": {
         "sv": "socionom, teologie kandidat och präst i Svenska kyrkan, Arnäs Gideå Trehörningsjö pastorat",
@@ -2687,9 +2645,7 @@ authors_dict = {
     },
     "Nils Hjort": {
         "sv": "frilansskribent och föreläsare",
-        "publications": [
-            "*Dramatiska damer – sjuttiofem porträtt från femhundra år* (2019)"
-        ],
+        "publications": ["*Dramatiska damer – sjuttiofem porträtt från femhundra år* (2019)"],
     },
     "Magdalena Fronczak": {
         "sv": "producent på Göteborgs Symfoniker, musiker, skribent och repertoarkonsult",
@@ -2728,9 +2684,7 @@ authors_dict = {
     },
     "Gunvor Vretblad": {
         "sv": "tidigare chef, Arkiv- och biblioteksenheten på Statens maritima museer, nuvarande redaktör för pensionärsföreningen Jarlbankes medlemstidning",
-        "publications": [
-            "*Exponerad tid. Johan Emanuel Thorins fotografier 1890-1930* (2015)"
-        ],
+        "publications": ["*Exponerad tid. Johan Emanuel Thorins fotografier 1890-1930* (2015)"],
     },
     "Gerda Helena Lindskog": {
         "sv": "författare, före detta bibliotekarie",
@@ -2791,9 +2745,7 @@ authors_dict = {
     },
     "Annika Borg": {
         "sv": "teologie doktor, skribent och präst i Svenska kyrkan",
-        "publications": [
-            '"Hammaren, skäran, korset och svärdet" i *Vänsterns idéer* (2019)'
-        ],
+        "publications": ['"Hammaren, skäran, korset och svärdet" i *Vänsterns idéer* (2019)'],
     },
     "Eva Nygårds": {"sv": "intendent, Göteborgs konstmuseum", "publications": []},
     "André Swanström": {

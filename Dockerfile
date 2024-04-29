@@ -1,4 +1,4 @@
-FROM python:3.8
+FROM python:3.10
 LABEL maintainer="sb-info@svenska.gu.se"
 COPY . /skbl
 WORKDIR /skbl
