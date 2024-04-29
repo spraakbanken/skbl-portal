@@ -32,4 +32,5 @@ dev = [
     "ruff>=0.4.2",
     "mypy>=1.4.1",
     "syrupy>=3.0.6",
+    "types-markdown>=3.5.0.3",
 ]

@@ -5,7 +5,7 @@
 groups = ["default", "dev"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.1"
-content_hash = "sha256:3e86d07a889f1c9f516b977ddddbf7d01773cf4b89e44ffa2254242a94487cf9"
+content_hash = "sha256:9366568a4f617942f5b381e4432791844e1edf7fc16a3415a4e53961a3f3ea44"
 
 [[package]]
 name = "babel"
@@ -872,6 +872,17 @@ files = [
     {file = "typed_ast-1.5.5-cp39-cp39-musllinux_1_1_x86_64.whl", hash = "sha256:429ae404f69dc94b9361bb62291885894b7c6fb4640d561179548c849f8492ba"},
     {file = "typed_ast-1.5.5-cp39-cp39-win_amd64.whl", hash = "sha256:335f22ccb244da2b5c296e6f96b06ee9bed46526db0de38d2f0e5a6597b81155"},
     {file = "typed_ast-1.5.5.tar.gz", hash = "sha256:94282f7a354f36ef5dbce0ef3467ebf6a258e370ab33d5b40c249fa996e590dd"},
+]
+
+[[package]]
+name = "types-markdown"
+version = "3.5.0.3"
+requires_python = ">=3.7"
+summary = "Typing stubs for Markdown"
+groups = ["dev"]
+files = [
+    {file = "types-Markdown-3.5.0.3.tar.gz", hash = "sha256:9afd38a8f53e19d43de3f8d89742b3674b5736767806ed9356d64ccb09f76439"},
+    {file = "types_Markdown-3.5.0.3-py3-none-any.whl", hash = "sha256:2299b9086c695f408a3ebabf820f1fba3b239f1b3bfdbb32bf42d530b42cdd83"},
 ]
 
 [[package]]
