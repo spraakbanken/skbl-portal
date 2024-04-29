@@ -1,4 +1,5 @@
 import pytest
+
 from skbl import create_app
 
 
@@ -13,7 +14,7 @@ def app():
 
     # other setup can go here
 
-    yield app
+    return app
 
     # clean up / reset resources here
 

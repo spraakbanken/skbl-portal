@@ -57,4 +57,6 @@ convention = "google"
 
 # Ignore `E402` (import violations) in all `__init__.py` files, and in `path/to/file.py`.
 [lint.per-file-ignores]
+"skbl/authors.py" = ["E501", "RUF001"]
+"skbl/static_info.py" = ["E501", "RUF001"]
 "tests/*" = ["D100", "D101", "D102", "D103", "D104", "S101"]

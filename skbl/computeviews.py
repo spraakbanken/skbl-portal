@@ -1,6 +1,8 @@
 """Define helper functions used to compute the different views."""
 
+import contextlib
 import json
+import operator
 import os.path
 import smtplib
 import urllib.parse
@@ -17,8 +19,7 @@ from . import helpers, static_info
 
 
 def getcache(page, lang, usecache):
-    """
-    Get cached page.
+    """Get cached page.
 
     Check if the requested page, in language 'lang', is in the cache
     If not, use the backup cache.
@@ -70,25 +71,23 @@ def searchresult(
     authorinfo=False,
     lang="",
     show_lang_switch=True,
-    cache=True,
+    _cache=True,
 ):
     """Compute the search result."""
-    helpers.set_language_switch_link("%s_index" % name, result)
+    helpers.set_language_switch_link(f"{name}_index", result)
     try:
-        result = result
-        pagename = name + "_" + urllib.parse.quote(result)
+        pagename = f"{name}_{urllib.parse.quote(result)}"
         art = helpers.check_cache(pagename, lang)
         if art is not None:
             return art
-        show = ",".join(["name", "url", "undertitel", "lifespan", "undertitel_eng"])
+        show = "name,url,undertitel,lifespan,undertitel_eng"
         if query:
             hits = helpers.karp_query("minientry", {"q": query, "show": show})
         else:
             hits = helpers.karp_query(
                 "minientry",
                 {
-                    "q": "extended||and|%s.search|%s|%s"
-                    % (searchfield, searchtype, result),
+                    "q": f"extended||and|{searchfield}.search|{searchtype}|{result}",
                     "show": show,
                 },
             )
@@ -97,11 +96,10 @@ def searchresult(
         no_hits = hits["hits"]["total"]
         if no_hits > 0:
             picture = None
-            if os.path.exists(
-                current_app.config.root_path
-                + "/static/images/%s/%s.jpg" % (imagefolder, result)
+            if os.path.exists(  # noqa: PTH110
+                f"{current_app.config.root_path}/static/images/{imagefolder}/{result}.jpg"
             ):
-                picture = "/static/images/%s/%s.jpg" % (imagefolder, result)
+                picture = f"/static/images/{imagefolder}/{result}.jpg"
             page = render_template(
                 "list.html",
                 picture=picture,
@@ -113,28 +111,20 @@ def searchresult(
                 show_lang_switch=show_lang_switch,
             )
             if no_hits >= current_app.config["CACHE_HIT_LIMIT"]:
-                try:
-                    with g.mc_pool.reserve() as client:
-                        client.set(
-                            helpers.cache_name(pagename, lang),
-                            page,
-                            time=current_app.config["CACHE_TIME"],
-                        )
-                except Exception:
-                    # TODO what to do?
-                    pass
+                with contextlib.suppress(Exception), g.mc_pool.reserve() as client:
+                    client.set(
+                        helpers.cache_name(pagename, lang),
+                        page,
+                        time=current_app.config["CACHE_TIME"],
+                    )
             return page
 
-        else:
-            return render_template(
-                "page.html", content=gettext("Contents could not be found!")
-            )
+        return render_template("page.html", content=gettext("Contents could not be found!"))
 
     except Exception as e:
         return render_template(
             "page.html",
-            content="%s\n%s: extended||and|%s.search|%s|%s"
-            % (e, current_app.config["KARP_BACKEND"], searchfield, searchtype, result),
+            content=f'{e}\n{current_app.config["KARP_BACKEND"]}: extended||and|{searchfield}.search|{searchtype}|{result}',  # noqa: E501
         )
 
 
@@ -236,17 +226,7 @@ def compute_article(lang="", url="", *, cache=True, with_map=False):
     if art is not None:
         return art
 
-    show = ",".join(
-        [
-            "name",
-            "url",
-            "undertitel",
-            "lifespan",
-            "undertitel_eng",
-            "platspinlat.bucket",
-            "platspinlon.bucket",
-        ]
-    )
+    show = "name,url,undertitel,lifespan,undertitel_eng,platspinlat.bucket,platspinlon.bucket"
     infotext = helpers.get_infotext("article", request.url_rule.rule)
     if lang == "sv":
         data = helpers.karp_query(
@@ -264,7 +244,7 @@ def compute_article(lang="", url="", *, cache=True, with_map=False):
             {
                 "q": "extended||and|namn|exists",
                 "show": show,
-                "sort": "sorteringsnamn.eng_sort,sorteringsnamn.eng_init,sorteringsnamn.sort,tilltalsnamn.sort",
+                "sort": "sorteringsnamn.eng_sort,sorteringsnamn.eng_init,sorteringsnamn.sort,tilltalsnamn.sort",  # noqa: E501
             },
             mode=current_app.config["SKBL_LINKS"],
         )
@@ -309,17 +289,7 @@ def compute_map(lang="", cache=True, url=""):
     if art is not None:
         return art
 
-    show = ",".join(
-        [
-            "name",
-            "url",
-            "undertitel",
-            "lifespan",
-            "undertitel_eng",
-            "platspinlat.bucket",
-            "platspinlon.bucket",
-        ]
-    )
+    show = "name,url,undertitel,lifespan,undertitel_eng,platspinlat.bucket,platspinlon.bucket"
     infotext = helpers.get_infotext("map", request.url_rule.rule)
     if lang == "sv":
         data = helpers.karp_query(
@@ -337,7 +307,7 @@ def compute_map(lang="", cache=True, url=""):
             {
                 "q": "extended||and|namn|exists",
                 "show": show,
-                "sort": "sorteringsnamn.eng_sort,sorteringsnamn.eng_init,sorteringsnamn.sort,tilltalsnamn.sort",
+                "sort": "sorteringsnamn.eng_sort,sorteringsnamn.eng_init,sorteringsnamn.sort,tilltalsnamn.sort",  # noqa: E501
             },
             mode=current_app.config["KARP_MODE"],
         )
@@ -380,15 +350,12 @@ def compute_place(lang="", cache=True, url=""):
         else:
             name = place.strip()
             lat, lon = 0, 0
-        placename = name if name else "%s, %s" % (lat, lon)
+        placename = name or f"{lat}, {lon}"
         return {"name": placename, "lat": lat, "lon": lon, "count": kw.get("doc_count")}
 
     def has_name(kw):
         name = kw.get("key").split("|")[0]
-        if name and "(osäker uppgift)" not in name:
-            return name
-        else:
-            return None
+        return name if name and "(osäker uppgift)" not in name else None
 
     # To use the coordinates, use "getplaces" instead of "getplacenames"
     data = helpers.karp_query("getplacenames/" + current_app.config["KARP_MODE"], {})
@@ -420,16 +387,15 @@ def compute_artikelforfattare(infotext="", description="", lang="", cache=True, 
     art, lang = getcache("author", lang, cache)
     if art is not None:
         return art
-    q_data = {
-        "buckets": "artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn.bucket"
-    }
+    q_data = {"buckets": "artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn.bucket"}
     data = helpers.karp_query("statlist", q_data)
     # strip kw0 to get correct sorting
-    stat_table = [[kw[0].strip()] + kw[1:] for kw in data["stat_table"] if kw[0] != ""]
-    stat_table = [[kw[1] + ",", kw[0], kw[2]] for kw in stat_table]
+    stat_table = [[kw[0].strip()] + kw[1:] for kw in data["stat_table"] if kw[0]]
+    stat_table = [[f"{kw[1]},", kw[0], kw[2]] for kw in stat_table]
 
     # Remove duplicates and some wrong ones (because of backend limitation)
-    # For articles that have more than one author the non existing name combinations are listed here.
+    # For articles that have more than one author the non existing name combinations are
+    # listed here.
     stoplist = {
         "Grevesmühl,Kajsa": True,
         "Ohrlander,Anders": True,
@@ -507,12 +473,12 @@ def bucketcall(
     page_url="",
 ):
     """Bucket call helper."""
-    q_data = {"buckets": "%s.bucket" % queryfield}
+    q_data = {"buckets": f"{queryfield}.bucket"}
     if query:
         q_data["q"] = query
     data = helpers.karp_query("statlist", q_data)
     # Strip kw0 to get correct sorting
-    stat_table = [[kw[0].strip()] + kw[1:] for kw in data["stat_table"] if kw[0] != ""]
+    stat_table = [[kw[0].strip()] + kw[1:] for kw in data["stat_table"] if kw[0]]
 
     # Insert entries that function as references
     if insert_entries:
@@ -520,9 +486,9 @@ def bucketcall(
     if sortby:
         stat_table.sort(key=sortby)
     else:
-        stat_table.sort(key=lambda x: x[0])
+        stat_table.sort(key=operator.itemgetter(0))
     if lastnamefirst:
-        stat_table = [[kw[1] + ",", kw[0], kw[2]] for kw in stat_table]
+        stat_table = [[f"{kw[1]},", kw[0], kw[2]] for kw in stat_table]
     # if showfield:
     #     stat_table = [[showfield(kw), kw[2]] for kw in stat_table]
     return render_template(
@@ -538,21 +504,21 @@ def bucketcall(
 
 
 def compute_emptycache(fields):
-    """
-    Empty the cache (but leave the backupfields).
+    """Empty the cache (but leave the backupfields).
 
     Only users with write permission may do this
     May raise error, eg if the authorization does not work
     """
     emptied = False
     auth = request.authorization
-    postdata = {}
     user, pw = auth.username, auth.password
-    postdata["username"] = user
-    postdata["password"] = pw
-    postdata["checksum"] = md5(
-        user.encode() + pw.encode() + current_app.config["SECRET_KEY"].encode()
-    ).hexdigest()
+    postdata = {
+        "username": user,
+        "password": pw,
+        "checksum": md5(
+            user.encode() + pw.encode() + current_app.config["SECRET_KEY"].encode()
+        ).hexdigest(),
+    }
     server = current_app.config["WSAUTH_URL"]
     contents = urlopen(server, urllib.parse.urlencode(postdata).encode()).read()
     auth_response = json.loads(contents)
@@ -561,8 +527,8 @@ def compute_emptycache(fields):
     if rights.get("write"):
         with g.mc_pool.reserve() as client:
             for field in fields:
-                client.delete(field + "sv")
-                client.delete(field + "en")
+                client.delete(f"{field}sv")
+                client.delete(f"{field}en")
         emptied = True
     return emptied
 
@@ -596,27 +562,24 @@ def compute_contact_form():
     if email and not helpers.is_email_address_valid(email):
         error_msgs.append(gettext("Please enter a valid email address!"))
 
-    # Render error messages and tell user what went wrong
-    error_msgs = list(set(error_msgs))
-    if error_msgs:
+    if error_msgs := list(set(error_msgs)):
         return render_template(
             "contact.html",
             title=gettext("Contact"),
             headline=gettext("Contact SKBL"),
             errors=error_msgs,
-            name_error=True if "name" in errors else False,
-            email_error=True if "email" in errors else False,
-            message_error=True if "message" in errors else False,
-            subject_name_error=True if "subject_name" in errors else False,
-            subject_lifetime_error=True if "subject_lifetime" in errors else False,
-            subject_activity_error=True if "subject_activity" in errors else False,
-            motivation_error=True if "motivation" in errors else False,
+            name_error="name" in errors,
+            email_error="email" in errors,
+            message_error="message" in errors,
+            subject_name_error="subject_name" in errors,
+            subject_lifetime_error="subject_lifetime" in errors,
+            subject_activity_error="subject_activity" in errors,
+            motivation_error="motivation" in errors,
             form_data=request.form,
             mode=mode,
         )
 
-    else:
-        return make_email(request.form, mode)
+    return make_email(request.form, mode)
 
 
 def make_email(form_data, mode="other"):
@@ -624,9 +587,9 @@ def make_email(form_data, mode="other"):
     name = form_data["name"].strip()
     email = form_data["email"].strip()
     recipient = current_app.config["EMAIL_RECIPIENT"]
-    complete_sender = "%s <%s>" % (name, email)
+    complete_sender = f"{name} <{email}>"
 
-    # If email adress contains non-ascii chars it won't be accepted by the server as sender.
+    # If email address contains non-ascii chars it won't be accepted by the server as sender.
     # Non-ascii chars in the name will produce weirdness in the from-field.
     if helpers.is_ascii(email) and helpers.is_ascii(name):
         sender = complete_sender
@@ -636,23 +599,25 @@ def make_email(form_data, mode="other"):
         sender = recipient
 
     if mode == "suggestion":
-        text = [
-            "%s har skickat in ett förslag för en ny SKBL-ingång.\n\n" % complete_sender
-        ]
-        text.append("Förslag på kvinna: %s\n" % form_data["subject_name"])
-        text.append("Kvinnas levnadstid: %s\n" % form_data["subject_lifetime"])
-        text.append("Kvinnas verksamhet: %s\n" % form_data["subject_activity"])
-        text.append("Motivering: %s\n" % form_data["motivation"])
+        text = [f"{complete_sender} har skickat in ett förslag för en ny SKBL-ingång.\n\n"]
+        text.extend(
+            (
+                f"Förslag på kvinna: {form_data['subject_name']}\n",
+                "Kvinnas levnadstid: {}\n".format(form_data["subject_lifetime"]),
+                "Kvinnas verksamhet: {}\n".format(form_data["subject_activity"]),
+                "Motivering: {}\n".format(form_data["motivation"]),
+            )
+        )
         text = "".join(text)
         subject = "Förslag för ny ingång i skbl.se"
     elif mode == "correction":
-        text = "%s har skickat följande meddelande:\n\n%s" % (
+        text = "{} har skickat följande meddelande:\n\n{}".format(
             complete_sender,
             form_data["message"],
         )
         subject = "Förslag till rättelse (skbl.se)"
     else:
-        text = "%s har skickat följande meddelande:\n\n%s" % (
+        text = "{} har skickat följande meddelande:\n\n{}".format(
             complete_sender,
             form_data["message"],
         )

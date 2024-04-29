@@ -1,8 +1,9 @@
 """Initialise Flask application."""
 
 import html
-import os
+import logging
 import re
+from pathlib import Path
 
 import flask_reverse_proxy
 from flask import Flask, g, request, url_for
@@ -10,16 +11,18 @@ from flask_babel import Babel
 from flask_compress import Compress
 from pylibmc import Client, ClientPool
 
+logger = logging.getLogger(__name__)
+
 
 def create_app():
-    """Instanciate app."""
+    """Instantiate app."""
     app = Flask(__name__)
 
-    if os.path.exists(app.config.root_path + "/config.cfg") is False:
-        print("copy config.default.cfg to config.cfg and add your settings")
-        app.config.from_pyfile(app.config.root_path + "/config.default.cfg")
+    if not Path(f"{app.config.root_path}/config.cfg").exists():
+        logger.warning("copy config.default.cfg to config.cfg and add your settings")
+        app.config.from_pyfile(f"{app.config.root_path}/config.default.cfg")
     else:
-        app.config.from_pyfile(app.config.root_path + "/config.cfg")
+        app.config.from_pyfile(f"{app.config.root_path}/config.cfg")
 
     babel = Babel(app)
     Compress(app)
@@ -37,8 +40,7 @@ def create_app():
 
     @app.context_processor
     def inject_custom():
-        d = {"lurl_for": lambda ep, **kwargs: url_for(ep + "_" + g.language, **kwargs)}
-        return d
+        return {"lurl_for": lambda ep, **kwargs: url_for(f"{ep}_{g.language}", **kwargs)}
 
     @app.template_filter("deescape")
     def deescape_filter(s):
@@ -52,7 +54,7 @@ def create_app():
             s,
         )
 
-    from . import helpers
+    from . import helpers  # noqa: PLC0415
 
     app.jinja_env.globals.update(get_life_range=helpers.get_life_range)
     app.jinja_env.globals.update(make_namelist=helpers.make_namelist)
@@ -60,9 +62,7 @@ def create_app():
     app.jinja_env.globals.update(make_simplenamelist=helpers.make_simplenamelist)
     app.jinja_env.globals.update(make_placelist=helpers.make_placelist)
     app.jinja_env.globals.update(make_placenames=helpers.make_placenames)
-    app.jinja_env.globals.update(
-        make_alphabetical_bucket=helpers.make_alphabetical_bucket
-    )
+    app.jinja_env.globals.update(make_alphabetical_bucket=helpers.make_alphabetical_bucket)
     app.jinja_env.globals.update(get_date=helpers.get_date)
     app.jinja_env.globals.update(join_name=helpers.join_name)
     app.jinja_env.globals.update(swedish_translator=helpers.swedish_translator)
@@ -76,7 +76,7 @@ def create_app():
     app.jinja_env.globals.update(get_current_date=helpers.get_current_date)
     app.jinja_env.globals.update(karp_fe_url=helpers.karp_fe_url)
 
-    from . import views
+    from . import views  # noqa: PLC0415
 
     app.register_blueprint(views.bp)
     app.register_error_handler(Exception, views.page_not_found)
@@ -85,20 +85,22 @@ def create_app():
     return app
 
 
+SUPPORTED_LOCALES = {"sv", "en"}
+
+
 def get_locale():
     """Get correct language from url."""
     locale = request.path[1:].split("/", 1)[0]
-    if locale in ["sv", "en"]:
+    if locale in SUPPORTED_LOCALES:
         return locale
-    else:
-        locale = "sv"
-        for lang in list(request.accept_languages.values()):
-            if lang[:2] in ["sv", "en"]:
-                locale = lang[:2]
-                break
+    locale = "sv"
+    for lang in list(request.accept_languages.values()):
+        if lang[:2] in SUPPORTED_LOCALES:
+            locale = lang[:2]
+            break
 
-        g.locale = locale
-        return locale
+    g.locale = locale
+    return locale
 
 
 # if __name__ == '__main__':
