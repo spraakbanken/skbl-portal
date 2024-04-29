@@ -92,7 +92,6 @@ jobs:
         os: [ubuntu] 
 
     runs-on: ${{ matrix.os }}-latest
-    continue-on-error: true
     env:
       OS: ${{ matrix.os }}-latest
     steps:
@@ -147,7 +146,6 @@ jobs:
     
     runs-on: ubuntu-latest
     name: ubuntu / 3.8 / minimal-versions
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
         with:
@@ -179,4 +177,5 @@ jobs:
         uses: re-actors/alls-green@release/v1
         with:
           jobs: ${{ toJSON(needs) }}
+          allowed-failures: doctests, minimal
 

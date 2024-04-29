@@ -229,7 +229,7 @@ def compute_activity(lang="", cache=True, url=""):
     return art
 
 
-def compute_article(lang="", cache=True, url="", map=False):
+def compute_article(lang="", url="", *, cache=True, with_map=False):
     """Compute article view."""
     helpers.set_language_switch_link("article_index", lang=lang)
     art, lang = getcache("article", lang, cache)
@@ -269,7 +269,7 @@ def compute_article(lang="", cache=True, url="", map=False):
             mode=current_app.config["SKBL_LINKS"],
         )
 
-    if map:
+    if with_map:
         art = render_template(
             "map.html",
             hits=data["hits"],
@@ -342,15 +342,14 @@ def compute_map(lang="", cache=True, url=""):
             mode=current_app.config["KARP_MODE"],
         )
 
-    if map:
-        art = render_template(
-            "map.html",
-            hits=data["hits"],
-            headline=gettext("Map"),
-            infotext=infotext,
-            title="Map",
-            page_url=url,
-        )
+    art = render_template(
+        "map.html",
+        hits=data["hits"],
+        headline=gettext("Map"),
+        infotext=infotext,
+        title="Map",
+        page_url=url,
+    )
     try:
         with g.mc_pool.reserve() as client:
             client.set(

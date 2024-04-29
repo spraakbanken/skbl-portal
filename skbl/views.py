@@ -651,7 +651,7 @@ def show_article(data, lang="sv"):
             source["furtherreference"] = helpers.aggregate_by_type(
                 source["furtherreference"], use_markdown=True
             )
-        if type(source["article_author"]) != list:
+        if not isinstance(source["article_author"], list):
             source["article_author"] = [source["article_author"]]
 
         # Set description for meta data
