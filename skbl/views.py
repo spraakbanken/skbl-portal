@@ -1,5 +1,6 @@
 """Define all available routes."""
 
+import logging
 import re
 import urllib.error
 import urllib.parse
@@ -23,6 +24,8 @@ from .authors import authors_dict
 
 bp = Blueprint("views", __name__)
 
+logger = logging.getLogger(__name__)
+
 
 @bp.route("/")
 def index():
@@ -31,9 +34,10 @@ def index():
 
 
 @bp.errorhandler(404)
-def page_not_found(e):  # noqa: ARG001
+def page_not_found(e):
     """Generate view for 404."""
     helpers.set_language_switch_link("index")
+    logger.error("Error: %s", str(e))
     return render_template("page.html", content=gettext("Contents could not be found!")), 404
 
 
@@ -492,15 +496,21 @@ def article(id=None):  # noqa: A002
     rule = request.url_rule
     lang = "sv" if "sv" in rule.rule else "en"
     pagename = f"article_{id}"
+    logger.debug("pagename=%s", pagename)
     page = helpers.check_cache(pagename, lang=lang)
     if page is not None:
+        logger.debug("found pagename in cache. page=%s", page)
         return page
+    logger.info("Did not find pagename=%s in cache, generating", pagename)
     data = helpers.karp_query("query", {"q": f"extended||and|url|equals|{id}"})
     # if data["hits"]["total"] == 0:
     if len(data["hits"]["hits"]) == 0:
+        logger.info("karp_query included no hits, search for 'id.search'")
         data = helpers.karp_query("query", {"q": f"extended||and|id.search|equals|{id}"})
     helpers.set_language_switch_link("article_index", id)
     page = show_article(data, lang)
+    # logger.debug("page=%s", page)
+    logger.debug("set cache")
     return helpers.set_cache(page, name=pagename, lang=lang, no_hits=1)
 
 
@@ -564,6 +574,7 @@ def show_article(data, lang="sv"):
     """Prepare data for article view (helper function)."""
     # if len(data["hits"]["hits"]) == 1:
     if len(data["hits"]["hits"]) <= 0:
+        logger.debug("data['hits']['hits']=%s", data["hits"]["hits"])
         return render_template("page.html", content=gettext("Contents could not be found!")), 404
     source = data["hits"]["hits"][0]["_source"]
     source["url"] = source.get("url") or data["query"]["hits"]["hits"][0]["_id"]
@@ -615,6 +626,12 @@ def show_article(data, lang="sv"):
 
     littb_url = helpers.get_littb_id(source.get("url"))
 
+    logger.debug(
+        "render article_id=%s article_url=%s title=%s",
+        source["es_id"],
+        source["url"],
+        title,
+    )
     return render_template(
         "article.html",
         article=source,
