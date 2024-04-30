@@ -61,7 +61,9 @@ def karp_request(action):
     if current_app.config.get("USE_AUTH", False):
         q.add_header("Authorization", f'Basic {current_app.config["KARP_AUTH_HASH"]}')
     response = urlopen(q).read()
-    return json.loads(response.decode("UTF-8"))
+    karp_response = json.loads(response.decode("UTF-8"))
+    logger.debug("Karp returned %d hit", karp_response["hits"]["total"])
+    return karp_response
 
 
 def karp_fe_url():
@@ -93,7 +95,7 @@ def check_cache(page, lang=""):
                 return art
     except Exception:
         # TODO what to do??
-        pass
+        logger.exception("Error when setting cache")
 
     # If nothing is found, return None
     return None
@@ -106,13 +108,14 @@ def set_cache(page, name="", no_hits=0, lang: str = ""):
     May also add the page to the memcache.
     """
     pagename = cache_name(name, lang=lang)
+    logger.debug("Checking cache for name=%s pagename=%s", name, pagename)
     if no_hits >= current_app.config["CACHE_HIT_LIMIT"]:
         try:
             with g.mc_pool.reserve() as client:
                 client.set(pagename, page, time=current_app.config["LOW_CACHE_TIME"])
         except Exception:
             # TODO what to do??
-            pass
+            logger.exception("Error when setting cache")
     r = make_response(page)
     r.headers.set(
         "Cache-Control",
