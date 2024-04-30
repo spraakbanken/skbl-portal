@@ -37,7 +37,7 @@ def index():
 def page_not_found(e):
     """Generate view for 404."""
     helpers.set_language_switch_link("index")
-    logger.error("Error: %s", str(e))
+    logger.error("Error: '%s' Info: %s", str(e), repr(e))
     return render_template("page.html", content=gettext("Contents could not be found!")), 404
 
 
@@ -789,17 +789,43 @@ def fillcache():
     }
     lang = "sv" if "sv" in request.url_rule.rule else "en"
     lix = 0 if lang == "eng" else 1
-    computeviews.compute_article(cache=False, url=request.url_root + urls["article"][lix])
-    computeviews.compute_activity(cache=False, url=request.url_root + urls["activity"][lix])
-    computeviews.compute_organisation(
-        cache=False, url=request.url_root + urls["organisation"][lix]
-    )
-    computeviews.compute_place(cache=False, url=request.url_root + urls["place"][lix])
-    computeviews.compute_artikelforfattare(
-        cache=False, url=request.url_root + urls["forfattare"][lix]
-    )
-    # Copy the pages to the backup fields
-    computeviews.copytobackup(["article", "activity", "organisation", "place", "author"], lang)
+    try:
+        computeviews.compute_article(cache=False, url=request.url_root + urls["article"][lix])
+    except Exception:
+        logger.exception("Error computing article")
+        raise
+    try:
+        computeviews.compute_activity(cache=False, url=request.url_root + urls["activity"][lix])
+    except Exception:
+        logger.exception("Error computing activity")
+        raise
+    try:
+        computeviews.compute_organisation(
+            cache=False, url=request.url_root + urls["organisation"][lix]
+        )
+    except Exception:
+        logger.exception("Error computing organisation")
+        raise
+    try:
+        computeviews.compute_place(cache=False, url=request.url_root + urls["place"][lix])
+    except Exception:
+        logger.exception("Error computing place")
+        raise
+    try:
+        computeviews.compute_artikelforfattare(
+            cache=False, url=request.url_root + urls["forfattare"][lix]
+        )
+    except Exception:
+        logger.exception("Error computing artikelforfattare")
+        raise
+    try:
+        # Copy the pages to the backup fields
+        computeviews.copytobackup(
+            ["article", "activity", "organisation", "place", "author"], lang
+        )
+    except Exception:
+        logger.exception("Error copytobackup")
+        raise
     return jsonify({"cache_filled": True, "cached_language": lang})
 
 

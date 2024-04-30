@@ -71,7 +71,7 @@ def searchresult(
     authorinfo=False,
     lang="",
     show_lang_switch=True,
-    _cache=True,
+    cache=True,  # noqa: ARG001
 ):
     """Compute the search result."""
     helpers.set_language_switch_link(f"{name}_index", result)
