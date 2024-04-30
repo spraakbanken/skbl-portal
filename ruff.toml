@@ -42,6 +42,7 @@ ignore = [
   "ANN401", # flake8-annotations: any-type
   "B008",   # flake8-bugbear: function-call-in-default-argument
   "COM812", # flake8-commas: missing-trailing-comma
+  "ISC001", # flake8-implicit-str-concat: single-line-implicit-string-concatenation (conflicts with ruff formatter)
   "PLR09",  # Pylint: too-many-*
   "SIM105", # flake8-simplify: suppressible-exception
 ]
