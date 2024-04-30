@@ -62,7 +62,10 @@ def karp_request(action):
         q.add_header("Authorization", f'Basic {current_app.config["KARP_AUTH_HASH"]}')
     response = urlopen(q).read()
     karp_response = json.loads(response.decode("UTF-8"))
-    logger.debug("Karp returned %d hit", karp_response["hits"]["total"])
+    if "hits" in karp_response:
+        logger.debug("Karp returned %d hits", karp_response["hits"]["total"])
+    else:
+        logger.debug("Karp response=%s", karp_response)
     return karp_response
 
 
