@@ -99,13 +99,13 @@ def check_cache(page, lang=""):
     return None
 
 
-def set_cache(page, name="", no_hits=0):
+def set_cache(page, name="", no_hits=0, lang: str = ""):
     """Browser cache handling.
 
     Add header to the response.
     May also add the page to the memcache.
     """
-    pagename = cache_name(name, lang="")
+    pagename = cache_name(name, lang=lang)
     if no_hits >= current_app.config["CACHE_HIT_LIMIT"]:
         try:
             with g.mc_pool.reserve() as client:
