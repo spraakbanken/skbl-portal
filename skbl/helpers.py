@@ -71,7 +71,7 @@ def karp_request(action):
 
 def karp_fe_url():
     """Get URL for Karp frontend."""
-    return current_app.config["KARP_FRONTEND"] + "/#?mode=" + current_app.config["KARP_MODE"]
+    return f"{current_app.config['KARP_FRONTEND']}/#?mode={current_app.config['KARP_MODE']}"
 
 
 def serve_static_page(page, title=""):
