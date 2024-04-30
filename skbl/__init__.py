@@ -11,11 +11,15 @@ from flask_babel import Babel
 from flask_compress import Compress
 from pylibmc import Client, ClientPool
 
+from skbl import telemetry
+
 logger = logging.getLogger(__name__)
 
 
 def create_app():
     """Instantiate app."""
+    telemetry.configure_logging()
+
     app = Flask(__name__)
 
     if not Path(f"{app.config.root_path}/config.cfg").exists():
@@ -24,6 +28,7 @@ def create_app():
     else:
         app.config.from_pyfile(f"{app.config.root_path}/config.cfg")
 
+    logger.warning("config=%s", app.config)
     babel = Babel(app)
     Compress(app)
 
@@ -37,6 +42,11 @@ def create_app():
         g.language = get_locale()
         g.config = app.config
         g.mc_pool = ClientPool(client, app.config["POOL_SIZE"])
+
+    @app.after_request
+    def append_request_id(response):
+        response.headers.add("X-REQUEST-ID", telemetry.request_id())
+        return response
 
     @app.context_processor
     def inject_custom():
