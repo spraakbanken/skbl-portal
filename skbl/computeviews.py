@@ -292,32 +292,24 @@ def compute_map(lang="", cache=True, url=""):
     show = "name,url,undertitel,lifespan,undertitel_eng,platspinlat.bucket,platspinlon.bucket"
     infotext = helpers.get_infotext("map", request.url_rule.rule)
     if lang == "sv":
-        data = helpers.karp_query(
-            "minientry",
-            {
-                "q": "extended||and|namn|exists",
-                "show": show,
-                "sort": "sorteringsnamn.sort,sorteringsnamn.init,tilltalsnamn.sort",
-            },
-            mode=current_app.config["KARP_MODE"],
-        )
+        sort = ("sorteringsnamn.sort,sorteringsnamn.init,tilltalsnamn.sort",)
+
     else:
-        data = helpers.karp_query(
-            "minientry",
-            {
-                "q": "extended||and|namn|exists",
-                "show": show,
-                "sort": "sorteringsnamn.eng_sort,sorteringsnamn.eng_init,sorteringsnamn.sort,tilltalsnamn.sort",  # noqa: E501
-            },
-            mode=current_app.config["KARP_MODE"],
+        sort = (
+            "sorteringsnamn.eng_sort,sorteringsnamn.eng_init,sorteringsnamn.sort,tilltalsnamn.sort",
         )
+    data = helpers.karp_query(
+        "minientry",
+        {"q": "extended||and|namn|exists", "show": show, "sort": sort},
+        mode=current_app.config["KARP_MODE"],
+    )
 
     art = render_template(
         "map.html",
         hits=data["hits"],
         headline=gettext("Map"),
         infotext=infotext,
-        title="Map",
+        title=gettext("Map"),
         page_url=url,
     )
     try:
