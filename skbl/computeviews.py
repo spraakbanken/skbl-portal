@@ -317,7 +317,7 @@ def compute_map(lang="", cache=True, url=""):
         hits=data["hits"],
         headline=gettext("Map"),
         infotext=infotext,
-        title="Map",
+        title=gettext("Map"),
         page_url=url,
     )
     try:
