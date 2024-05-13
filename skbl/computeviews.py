@@ -2,6 +2,7 @@
 
 import contextlib
 import json
+import logging
 import operator
 import os.path
 import smtplib
@@ -16,6 +17,8 @@ from flask import current_app, g, render_template, request
 from flask_babel import gettext
 
 from . import helpers, static_info
+
+logger = logging.getLogger(__name__)
 
 
 def getcache(page, lang, usecache):
@@ -292,12 +295,11 @@ def compute_map(lang="", cache=True, url=""):
     show = "name,url,undertitel,lifespan,undertitel_eng,platspinlat.bucket,platspinlon.bucket"
     infotext = helpers.get_infotext("map", request.url_rule.rule)
     if lang == "sv":
-        sort = ("sorteringsnamn.sort,sorteringsnamn.init,tilltalsnamn.sort",)
+        sort = "sorteringsnamn.sort,sorteringsnamn.init,tilltalsnamn.sort"
 
     else:
-        sort = (
-            "sorteringsnamn.eng_sort,sorteringsnamn.eng_init,sorteringsnamn.sort,tilltalsnamn.sort",
-        )
+        sort = "sorteringsnamn.eng_sort,sorteringsnamn.eng_init,sorteringsnamn.sort,tilltalsnamn.sort"  # noqa: E501
+
     data = helpers.karp_query(
         "minientry",
         {"q": "extended||and|namn|exists", "show": show, "sort": sort},
@@ -309,7 +311,7 @@ def compute_map(lang="", cache=True, url=""):
         hits=data["hits"],
         headline=gettext("Map"),
         infotext=infotext,
-        title=gettext("Map"),
+        title="Map",
         page_url=url,
     )
     try:
@@ -321,7 +323,7 @@ def compute_map(lang="", cache=True, url=""):
             )
     except Exception:
         # TODO what to do?
-        pass
+        logger.exception("error setting cache")
     return art
 
 
