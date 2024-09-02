@@ -32,7 +32,7 @@ jobs:
         with:
           submodules: true
       - name: Set up uv
-        run: curl -LsSf https://astral.sh/uv/${{ UV_VERSION }}/install.sh | sh
+        run: curl -LsSf https://astral.sh/uv/${{ env.UV_VERSION }}/install.sh | sh
       - name: Install python
         uses: actions/setup-python@v5
         with:
@@ -74,7 +74,7 @@ jobs:
           submodules: true
       - name: Set up uv
         if: hashFiles('uv.lock') != ''
-        run: curl -LsSf https://astral.sh/uv/${{ UV_VERSION }}/install.sh | sh
+        run: curl -LsSf https://astral.sh/uv/${{ env.UV_VERSION }}/install.sh | sh
       - name: Install 3.12
         if: hashFiles('uv.lock') != ''
         uses: actions/setup-python@v5
