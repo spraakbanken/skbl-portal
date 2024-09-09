@@ -300,8 +300,8 @@ msgid "Submit"
 msgstr "Skicka"
 
 #: skbl/templates/contact_active.html:16
-msgid "Send in minor corrections to:"
-msgstr "Skicka in mindre korrigeringar till:"
+msgid "The SKBL project is a published project. If you have questions about this resource you can contact KvinnSam: skbl [at] ub.gu.se"
+msgstr "Projektet SKBL är avslutat. Har du frågor om resursen kontakta KvinnSam: skbl [at] ub.gu.se"
 
 #: skbl/templates/layout.html:67
 msgid "Free text search"
@@ -385,4 +385,3 @@ msgstr "Vill du se fler, använd Språkbankens verktyg"
 
 #~ msgid "Hits for \"%s\""
 #~ msgstr "Träffar för \"%s\""
-
