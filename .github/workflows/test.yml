@@ -16,7 +16,7 @@ permissions:
 
 env:
   MINIMUM_PYTHON_VERSION: "3.8"
-  UV_VERSION: "0.3.5"
+  UV_VERSION: "0.4.18"
   UV_CACHE_DIR: /tmp/.uv-cache
 
 jobs:
