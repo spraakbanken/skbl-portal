@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 env:
-  MINIMUM_PYTHON_VERSION: "3.8"
+  MINIMUM_PYTHON_VERSION: "3.9"
   UV_VERSION: "0.4.18"
   UV_CACHE_DIR: /tmp/.uv-cache
 
@@ -24,7 +24,7 @@ concurrency:
 jobs:
   fmt:
     runs-on: ubuntu-latest
-    name: ubuntu / 3.8 / fmt
+    name: ubuntu / 3.9 / fmt
     steps:
       - uses: actions/checkout@v4
         with:
@@ -69,7 +69,7 @@ jobs:
         run: uv cache prune --ci
   lint:
     runs-on: ubuntu-latest
-    name: ubuntu / 3.8 / lint
+    name: ubuntu / 3.9 / lint
     steps:
       - uses: actions/checkout@v4
         with:
@@ -112,7 +112,7 @@ jobs:
 
   type-check:
     runs-on: ubuntu-latest
-    name: ubuntu / 3.8 / type-check
+    name: ubuntu / 3.9 / type-check
     steps:
       - uses: actions/checkout@v4
         with:
