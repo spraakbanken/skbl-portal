@@ -25,7 +25,7 @@ jobs:
   # https://twitter.com/mycoliza/status/1571295690063753218
   nightly:
     runs-on: ubuntu-latest
-    name: ubuntu / 3.13-dev
+    name: ubuntu / 3.14-dev
     steps:
       - uses: actions/checkout@v4
         with:
@@ -35,7 +35,7 @@ jobs:
       - name: Install python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.13-dev"
+          python-version: "3.14-dev"
       - name: Restore uv cache
         uses: actions/cache@v4
         with:
