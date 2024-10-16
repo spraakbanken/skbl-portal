@@ -16,7 +16,7 @@ permissions:
   contents: read
 
 env:
-  MINIMUM_PYTHON_VERSION: "3.8"
+  MINIMUM_PYTHON_VERSION: "3.9"
   UV_VERSION: "0.4.18"
   UV_CACHE_DIR: /tmp/.uv-cache
 
@@ -24,7 +24,7 @@ jobs:
   build:
     # This action builds distribution files for upload to PyPI
 
-    name: ubuntu / 3.8 / build
+    name: ubuntu / 3.9 / build
     runs-on: ubuntu-latest
     steps:
       #----------------------------------------------
@@ -80,7 +80,7 @@ jobs:
     # This action runs the test suite on the built artifact in the `build` action.
     # The default is to run this in ubuntu, macos and windows
 
-    name: ${{ matrix.os }} / 3.8 / test built artifact
+    name: ${{ matrix.os }} / 3.9 / test built artifact
     needs: [build]
 
     strategy:
