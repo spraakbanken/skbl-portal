@@ -12,7 +12,7 @@ permissions:
 
 env:
   MINIMUM_PYTHON_VERSION: "3.9"
-  UV_VERSION: "0.4.18"
+  UV_VERSION: "0.5.1"
   UV_CACHE_DIR: /tmp/.uv-cache
 
 # If new code is pushed to a PR branch, then cancel in progress workflows for that PR. Ensures that
