@@ -13,7 +13,6 @@ permissions:
 env:
   MINIMUM_PYTHON_VERSION: "3.9"
   UV_VERSION: "0.5.1"
-  UV_CACHE_DIR: /tmp/.uv-cache
 
 # If new code is pushed to a PR branch, then cancel in progress workflows for that PR. Ensures that
 # we don't waste CI time, and returns results quicker https://github.com/jonhoo/rust-ci-conf/pull/5
@@ -40,16 +39,10 @@ jobs:
       #  -----  setup uv and load cache   -----
       #----------------------------------------------
       - name: Set up uv
-        run: curl -LsSf https://astral.sh/uv/${{ env.UV_VERSION }}/install.sh | sh
-
-      - name: Restore uv cache
-        uses: actions/cache@v4
+        uses: astral-sh/setup-uv@v3
         with:
-          path: /tmp/.uv-cache
-          key: uv-${{ runner.os }}-${{ hashFiles('uv.lock') }}
-          restore-keys: |
-            uv-${{ runner.os }}-${{ hashFiles('uv.lock') }}
-            uv-${{ runner.os }}
+          version: ${{ env.UV_VERSION }}
+          enable-cache: true
 
       - name: Load cached venv
         id: cached-venv
@@ -65,8 +58,6 @@ jobs:
       - name: check formatting
         run: make check-fmt
 
-      - name: Minimize uv cache
-        run: uv cache prune --ci
   lint:
     runs-on: ubuntu-latest
     name: ubuntu / 3.9 / lint
@@ -84,16 +75,10 @@ jobs:
       #  -----  setup uv and load cache   -----
       #----------------------------------------------
       - name: Set up uv
-        run: curl -LsSf https://astral.sh/uv/${{ env.UV_VERSION }}/install.sh | sh
-
-      - name: Restore uv cache
-        uses: actions/cache@v4
+        uses: astral-sh/setup-uv@v3
         with:
-          path: /tmp/.uv-cache
-          key: uv-${{ runner.os }}-${{ hashFiles('uv.lock') }}
-          restore-keys: |
-            uv-${{ runner.os }}-${{ hashFiles('uv.lock') }}
-            uv-${{ runner.os }}
+          version: ${{ env.UV_VERSION }}
+          enable-cache: true
 
       - name: Load cached venv
         id: cached-venv
@@ -101,14 +86,13 @@ jobs:
         with:
           path: .venv
           key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('**/uv.lock') }}
+
       - name: Install dependencies
         if: steps.cached-venv.outputs.cache-hit != 'true'
         run: make install-dev
+
       - name: lint code
         run: make lint
-
-      - name: Minimize uv cache
-        run: uv cache prune --ci
 
   type-check:
     runs-on: ubuntu-latest
@@ -127,16 +111,10 @@ jobs:
       #  -----  setup uv and load cache   -----
       #----------------------------------------------
       - name: Set up uv
-        run: curl -LsSf https://astral.sh/uv/${{ env.UV_VERSION }}/install.sh | sh
-
-      - name: Restore uv cache
-        uses: actions/cache@v4
+        uses: astral-sh/setup-uv@v3
         with:
-          path: /tmp/.uv-cache
-          key: uv-${{ runner.os }}-${{ hashFiles('uv.lock') }}
-          restore-keys: |
-            uv-${{ runner.os }}-${{ hashFiles('uv.lock') }}
-            uv-${{ runner.os }}
+          version: ${{ env.UV_VERSION }}
+          enable-cache: true
 
       - name: Load cached venv
         id: cached-venv
@@ -144,14 +122,13 @@ jobs:
         with:
           path: .venv
           key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('**/uv.lock') }}
+
       - name: Install dependencies
         if: steps.cached-venv.outputs.cache-hit != 'true'
         run: make install-dev
+
       - name: type-check code
         run: make type-check
-
-      - name: Minimize uv cache
-        run: uv cache prune --ci
 
   # https://github.com/marketplace/actions/alls-green#why used for branch protection checks
   check-check:
