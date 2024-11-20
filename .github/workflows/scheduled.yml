@@ -48,7 +48,7 @@ jobs:
         run: uv lock
 
       - name: uv sync --dev
-        run: uv sync --dev
+        run: uv sync --dev --all-packages
 
       - name: make test
         run: make test
@@ -85,7 +85,7 @@ jobs:
 
       - name: uv sync --dev --upgrade
         if: hashFiles('uv.lock') != ''
-        run: uv sync --dev --upgrade
+        run: uv sync --dev --upgrade --all-packages
 
       - name: make test
         if: hashFiles('uv.lock') != ''
