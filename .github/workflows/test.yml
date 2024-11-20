@@ -160,7 +160,7 @@ jobs:
           python-version: ${{ env.MINIMUM_PYTHON_VERSION }}
 
       - name: install lowest direct dependencies
-        run: uv sync --resolution lowest-direct --all-extras --dev
+        run: uv sync --resolution lowest-direct --all-extras --all-packages --dev
 
       - name: make test
         run: make test
