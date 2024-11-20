@@ -44,15 +44,7 @@ jobs:
           version: ${{ env.UV_VERSION }}
           enable-cache: true
 
-      - name: Load cached venv
-        id: cached-venv
-        uses: actions/cache@v4
-        with:
-          path: .venv
-          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('**/uv.lock') }}
-
       - name: Install dependencies
-        if: steps.cached-venv.outputs.cache-hit != 'true'
         run: make install-dev
 
       - name: check formatting
@@ -80,15 +72,7 @@ jobs:
           version: ${{ env.UV_VERSION }}
           enable-cache: true
 
-      - name: Load cached venv
-        id: cached-venv
-        uses: actions/cache@v4
-        with:
-          path: .venv
-          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('**/uv.lock') }}
-
       - name: Install dependencies
-        if: steps.cached-venv.outputs.cache-hit != 'true'
         run: make install-dev
 
       - name: lint code
@@ -116,15 +100,7 @@ jobs:
           version: ${{ env.UV_VERSION }}
           enable-cache: true
 
-      - name: Load cached venv
-        id: cached-venv
-        uses: actions/cache@v4
-        with:
-          path: .venv
-          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('**/uv.lock') }}
-
       - name: Install dependencies
-        if: steps.cached-venv.outputs.cache-hit != 'true'
         run: make install-dev
 
       - name: type-check code
