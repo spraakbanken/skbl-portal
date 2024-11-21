@@ -60,7 +60,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - name: Install dependencies
-        run: uv sync --all-extras --dev
+        run: make install-dev
 
       - name: Run tests for coverage
         run: make test-w-coverage cov_report=xml
@@ -110,7 +110,7 @@ jobs:
           python-version: ${{ env.MINIMUM_PYTHON_VERSION }}
 
       - name: Install dependencies
-        run: uv sync --all-extras --dev
+        run: make install-dev
       #----------------------------------------------
       # Run tests and upload coverage
       #----------------------------------------------
