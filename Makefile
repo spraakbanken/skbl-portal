@@ -83,11 +83,11 @@ dev: install-dev
 
 # setup development environment
 install-dev:
-	uv sync --dev
+	uv sync --all-packages --dev
 
 # setup production environment
 install:
-	uv sync --no-dev
+	uv sync --all-packages --no-dev
 
 lock: uv.lock
 
