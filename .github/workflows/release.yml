@@ -17,7 +17,7 @@ permissions:
 
 env:
   MINIMUM_PYTHON_VERSION: "3.9"
-  UV_VERSION: "0.5.1"
+  UV_VERSION: "0.5.4"
 
 jobs:
   build:
