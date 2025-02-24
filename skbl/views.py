@@ -582,8 +582,8 @@ def show_article(data, lang="sv"):
 
     # Print html for the names with the calling name and last name in bold
     formatted_names = helpers.format_names(source, "b")
-    source["showname"] = f'{formatted_names} <b>{source["name"].get("lastname", "")}</b>'
-    title = f'{helpers.format_names(source, "")} {source["name"].get("lastname", "")}'
+    source["showname"] = f"{formatted_names} <b>{source['name'].get('lastname', '')}</b>"
+    title = f"{helpers.format_names(source, '')} {source['name'].get('lastname', '')}"
     if source.get("text"):
         source["text"] = helpers.markdown_html(
             helpers.unescape(helpers.mk_links(source["text"]))

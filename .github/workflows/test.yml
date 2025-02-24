@@ -3,7 +3,7 @@ name: test
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
   merge_group:
 
@@ -16,12 +16,12 @@ permissions:
 
 env:
   MINIMUM_PYTHON_VERSION: "3.10"
+  UV_VERSION: "0.5.15"
 
 jobs:
-
   coverage:
     # This action runs tests for coverage collection and uploads them to codecov.io.
-    # This requires the secret `CODECOV_TOKEN` be set as secret on GitHub, both for 
+    # This requires the secret `CODECOV_TOKEN` be set as secret on GitHub, both for
     # Actions and Dependabot
 
     name: "${{ matrix.os }} / ${{ matrix.python-version }} / coverage"
@@ -29,12 +29,13 @@ jobs:
       max-parallel: 4
       fail-fast: false
       matrix:
-        os: [ubuntu] 
+        os: [ubuntu]
         python-version:
           # remove the unused versions
           - "3.10"
           - "3.11"
-          - "3.12" 
+          # - "3.12" TODO: memcache build fails
+          # - "3.13" TODO: memcache build fails
 
     runs-on: ${{ matrix.os }}-latest
     env:
@@ -45,32 +46,26 @@ jobs:
         with:
           submodules: true
 
-      - name: Set up the environment
-        uses: pdm-project/setup-pdm@v4
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: ${{ env.UV_VERSION }}
+          enable-cache: true
+
+      - name: Set up Python ${{ matrix.python-version }}
         id: setup-python
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-  
-      - name: Install libmemcached
-        if: matrix.python-version == '3.12'
-        run: sudo apt install libmemcached-dev
 
-      - name: Load cached venv
-        id: cached-venv
-        uses: actions/cache@v4
-        with:
-          path: .venv
-          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('**/pdm.lock') }}-${{ hashFiles('.github/workflows/test.yml') }}
-  
       - name: Install dependencies
-        if: steps.cached-venv.outputs.cache-hit != 'true'
         run: make install-dev
-     
+
       - name: Run tests for coverage
         run: make test-w-coverage cov_report=xml
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           # directory: ./coverage
@@ -83,7 +78,7 @@ jobs:
 
   doctests:
     # This action runs doctests for coverage collection and uploads them to codecov.io.
-    # This requires the secret `CODECOV_TOKEN` be set as secret on GitHub, both for 
+    # This requires the secret `CODECOV_TOKEN` be set as secret on GitHub, both for
     # Actions and Dependabot
 
     name: "${{ matrix.os }} / 3.10 / doctest"
@@ -91,7 +86,7 @@ jobs:
       max-parallel: 4
       fail-fast: false
       matrix:
-        os: [ubuntu] 
+        os: [ubuntu]
 
     runs-on: ${{ matrix.os }}-latest
     env:
@@ -101,21 +96,19 @@ jobs:
         with:
           submodules: true
 
-      - name: Set up the environment
-        uses: pdm-project/setup-pdm@v4
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: ${{ env.UV_VERSION }}
+          enable-cache: true
+
+      - name: Set up Python ${{ env.MINIMUM_PYTHON_VERSION }}
         id: setup-python
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ env.MINIMUM_PYTHON_VERSION }}
-      
-      - name: Load cached venv
-        id: cached-venv
-        uses: actions/cache@v4
-        with:
-          path: .venv
-          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/pyproject.toml') }}-${{ hashFiles('**/pdm.lock') }}-${{ hashFiles('.github/workflows/test.yml') }}
-  
+
       - name: Install dependencies
-        if: steps.cached-venv.outputs.cache-hit != 'true'
         run: make install-dev
       #----------------------------------------------
       # Run tests and upload coverage
@@ -124,7 +117,7 @@ jobs:
         run: make doc-tests cov_report=xml
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           # directory: ./coverage
@@ -137,11 +130,11 @@ jobs:
         env:
           PYTHON: ${{ env.MINIMUM_PYTHON_VERSION }}
           TESTTYPE: doctest
-  
+
   # https://github.com/marketplace/actions/alls-green#why used for branch protection checks
   test-check:
     if: always()
-    needs: 
+    needs:
       - coverage
       - doctests
     runs-on: ubuntu-latest
@@ -151,4 +144,3 @@ jobs:
         uses: re-actors/alls-green@release/v1
         with:
           jobs: ${{ toJSON(needs) }}
-

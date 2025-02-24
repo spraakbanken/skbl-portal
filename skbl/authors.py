@@ -2080,9 +2080,9 @@ authors_dict = {
     "Katarina Olsson": {
         "sv": "filosofie doktor i naturgeografi, författare",
         "publications": [
-                "*I Gyrds landskap* (2020)",
-                "*Sigrid, Augusta, Anna och de andra -Modiga blekingskor kring 1900* (2017)"
-            ],
+            "*I Gyrds landskap* (2020)",
+            "*Sigrid, Augusta, Anna och de andra -Modiga blekingskor kring 1900* (2017)",
+        ],
     },
     "Lena Bomler": {
         "sv": "frilansskribent",

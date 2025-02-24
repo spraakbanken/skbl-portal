@@ -127,7 +127,7 @@ def searchresult(
     except Exception as e:
         return render_template(
             "page.html",
-            content=f'{e}\n{current_app.config["KARP_BACKEND"]}: extended||and|{searchfield}.search|{searchtype}|{result}',  # noqa: E501
+            content=f"{e}\n{current_app.config['KARP_BACKEND']}: extended||and|{searchfield}.search|{searchtype}|{result}",  # noqa: E501
         )
 
 

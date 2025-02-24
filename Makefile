@@ -1,6 +1,6 @@
 
 # use this Makefile as base in your project by running
-# git remote add make https://github.com/spraakbanken/python-pdm-make-conf
+# git remote add make https://github.com/spraakbanken/python-uv-make-conf
 # git fetch make
 # git merge --allow-unrelated-histories make/main
 #
@@ -57,12 +57,12 @@ help:
 	@echo ""
 
 PLATFORM := `uname -o`
-REPO := "skbl-portal"
-PROJECT_SRC := "skbl"
+REPO := skbl-portal
+PROJECT_SRC := skbl
 
 ifeq (${VIRTUAL_ENV},)
   VENV_NAME = .venv
-  INVENV = pdm run
+  INVENV = uv run
 else
   VENV_NAME = ${VIRTUAL_ENV}
   INVENV =
@@ -83,16 +83,16 @@ dev: install-dev
 
 # setup development environment
 install-dev:
-	pdm install --dev
+	uv sync --all-packages --dev
 
 # setup production environment
 install:
-	pdm sync --prod
+	uv sync --all-packages --no-dev
 
-lock: pdm.lock
+lock: uv.lock
 
-pdm.lock: pyproject.toml
-	pdm lock
+uv.lock: pyproject.toml
+	uv lock
 
 .PHONY: test
 test:
@@ -139,7 +139,7 @@ check-fmt:
 	${INVENV} ruff format --check ${PROJECT_SRC} ${tests}
 
 build:
-	pdm build
+	uvx --from build pyproject-build --installer uv
 
 branch := "main"
 publish:
@@ -150,12 +150,13 @@ publish:
 prepare-release: update-changelog tests/requirements-testing.lock
 
 # we use lock extension so that dependabot doesn't pick up changes in this file
-tests/requirements-testing.lock: pyproject.toml pdm.lock
-	pdm export --dev --format requirements --output $@
+tests/requirements-testing.lock: pyproject.toml
+	uv export --dev --format requirements-txt --no-hashes --no-emit-project --output-file $@
 
 .PHONY: update-changelog
 update-changelog: CHANGELOG.md
 
+.PHONY: CHANGELOG.md
 CHANGELOG.md:
 	git cliff --unreleased --prepend $@
 
@@ -164,6 +165,7 @@ CHANGELOG.md:
 snapshot-update:
 	${INVENV} pytest --snapshot-update
 
+### === project targets below this line ===
 run-dev: install
 	${INVENV} python run.py
 
@@ -189,5 +191,5 @@ skbl/translations/sv/LC_MESSAGES/messages.mo: skbl/translations/sv/LC_MESSAGES/m
 .PHONY: generate-lockfile
 generate-lockfile: skbl/requirements.txt
 
-skbl/requirements.txt: pyproject.toml pdm.lock
+skbl/requirements.txt: pyproject.toml uv.lock
 	pdm export -o $@ --without-hashes

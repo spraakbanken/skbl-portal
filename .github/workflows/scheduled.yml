@@ -6,10 +6,10 @@ permissions:
 
 on:
   push:
-    branches: [master]
+    branches: [main]
   pull_request:
   schedule:
-    - cron:  '7 7 * * *'
+    - cron: "7 7 * * *"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
@@ -17,37 +17,44 @@ concurrency:
 
 name: rolling
 
+env:
+  UV_VERSION: "0.5.15"
+
 jobs:
   # https://twitter.com/alcuadrado/status/1571291687837732873
   update:
     # This action checks that updating the dependencies of this crate to the latest available that
-    # satisfy the versions in Cargo.toml does not break this crate. This is important as consumers
+    # satisfy the versions in pyproject.toml does not break this crate. This is important as consumers
     # of this crate will generally use the latest available crates. This is subject to the standard
     # Cargo semver rules (i.e cargo does not update to a new major version unless explicitly told
     # to).
     runs-on: ubuntu-latest
-    name: ubuntu / 3.12 / updates work
-    # There's no point running this if no Cargo.lock was checked in in the first place, since we'd
+    name: ubuntu / 3.11 / updates work
+    # There's no point running this if no uv.lock was checked in in the first place, since we'd
     # just redo what happened in the regular test job. Unfortunately, hashFiles only works in if on
     # steps, so we repeat it.
     steps:
       - uses: actions/checkout@v4
         with:
           submodules: true
-      - name: Install 3.12
-        if: hashFiles('pdm.lock') != ''
-        uses: pdm-project/setup-pdm@v4
+
+      - name: Set up uv
+        if: hashFiles('uv.lock') != ''
+        uses: astral-sh/setup-uv@v5
         with:
-          python-version: "3.12"
-      - name: Install libmemcached
-        if: hashFiles('pdm.lock') != ''
-        run: sudo apt install libmemcached-dev
-      - name: pdm update
-        if: hashFiles('pdm.lock') != ''
-        run: pdm update
-      - name: pdm sync --dev
-        if: hashFiles('pdm.lock') != ''
-        run: pdm sync --dev
+          version: ${{ env.UV_VERSION }}
+          enable-cache: true
+
+      - name: Install 3.11
+        if: hashFiles('uv.lock') != ''
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: uv sync --dev --upgrade
+        if: hashFiles('uv.lock') != ''
+        run: uv sync --dev --upgrade --all-packages --all-extras
+
       - name: make test
-        if: hashFiles('pdm.lock') != ''
+        if: hashFiles('uv.lock') != ''
         run: make test
