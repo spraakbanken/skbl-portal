@@ -21,38 +21,6 @@ env:
   UV_VERSION: "0.5.15"
 
 jobs:
-  # https://twitter.com/mycoliza/status/1571295690063753218
-  nightly:
-    runs-on: ubuntu-latest
-    name: ubuntu / 3.14-dev
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: true
-
-      - name: Set up uv
-        uses: astral-sh/setup-uv@v5
-        with:
-          version: ${{ env.UV_VERSION }}
-          enable-cache: true
-
-      - name: Install python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.14-dev"
-
-      - run: python --version
-
-      - name: uv lock
-        if: hashFiles('uv.lock') == ''
-        run: uv lock
-
-      - name: uv sync --dev
-        run: uv sync --dev --all-packages --all-extras
-
-      - name: make test
-        run: make test
-
   # https://twitter.com/alcuadrado/status/1571291687837732873
   update:
     # This action checks that updating the dependencies of this crate to the latest available that
