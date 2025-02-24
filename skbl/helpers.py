@@ -17,8 +17,8 @@ from flask_babel import gettext
 from . import static_info
 
 VONAV_LIST = ["von", "af", "av"]
-VONAF_PATTERN_1 = re.compile(f'^({"|".join(VONAV_LIST)}) ')
-VONAF_PATTERN_2 = re.compile(f'^({"|".join(VONAV_LIST)}) (.+)$')
+VONAF_PATTERN_1 = re.compile(f"^({'|'.join(VONAV_LIST)}) ")
+VONAF_PATTERN_2 = re.compile(f"^({'|'.join(VONAV_LIST)}) (.+)$")
 
 logger = logging.getLogger(__name__)
 
@@ -56,10 +56,10 @@ def karp_query(action, query, mode=None):
 
 def karp_request(action):
     """Send request to Karp backend."""
-    q = Request(f'{current_app.config["KARP_BACKEND"]}/{action}')
+    q = Request(f"{current_app.config['KARP_BACKEND']}/{action}")
     logger.debug("REQUEST: %s/%s", current_app.config["KARP_BACKEND"], action)
     if current_app.config.get("USE_AUTH", False):
-        q.add_header("Authorization", f'Basic {current_app.config["KARP_AUTH_HASH"]}')
+        q.add_header("Authorization", f"Basic {current_app.config['KARP_AUTH_HASH']}")
     response = urlopen(q).read()
     karp_response = json.loads(response.decode("UTF-8"))
     if "hits" in karp_response:
@@ -122,25 +122,25 @@ def set_cache(page, name="", no_hits=0, lang: str = ""):
     r = make_response(page)
     r.headers.set(
         "Cache-Control",
-        f'public, max-age={current_app.config["BROWSER_CACHE_TIME"]}',
+        f"public, max-age={current_app.config['BROWSER_CACHE_TIME']}",
     )
     return r
 
 
 def get_first_name(source):
     """Return the given name (first name)."""
-    return re.sub("/", "", source["name"].get("firstname", "")).strip()
+    return source["name"].get("firstname", "").replace("/", "").strip()
 
 
 def format_names(source, fmt="strong"):
     """Return the given name (first name), and the formatted callingname (tilltalsnamnet)."""
     if fmt:
         return re.sub(
-            "(.*)/(.+)/(.*)",
+            r"(.*)/(.+)/(.*)",
             rf"\1<{fmt}>\2</{fmt}>\3",
             source["name"].get("firstname", ""),
         )
-    return re.sub("(.*)/(.+)/(.*)", r"\1\2\3", source["name"].get("firstname", ""))
+    return re.sub(r"(.*)/(.+)/(.*)", r"\1\2\3", source["name"].get("firstname", ""))
 
 
 def get_life_range(source):
@@ -154,7 +154,7 @@ def get_life_range(source):
             date = source["lifespan"][event].get("date", "")
             if date:
                 date = date.get("comment", "")
-            if "-" in date and not re.search("[a-zA-Z]", date):
+            if "-" in date and not re.search(r"[a-zA-Z]", date):
                 year = date[: date.find("-")]
             else:
                 year = date
@@ -293,7 +293,7 @@ def make_alphabetic(hits, processname, sortnames=False, lang="sv"):
     """  # noqa: E501
 
     def fix_lastname(name):
-        vonaf_pattern = re.compile(f'^({"|".join(VONAV_LIST)}) ')
+        vonaf_pattern = re.compile(f"^({'|'.join(VONAV_LIST)}) ")
         name = re.sub(vonaf_pattern, r"", name)
         return name.replace(" ", "z")
 
@@ -451,7 +451,7 @@ def join_name(source, mk_bold=False):
     """Retrieve and format name from source."""
     name = []
     lastname = source["name"].get("lastname", "")
-    vonaf_pattern = re.compile(f'({" |".join(VONAV_LIST)} |)(.*)')
+    vonaf_pattern = re.compile(f"({' |'.join(VONAV_LIST)} |)(.*)")
     match = re.search(vonaf_pattern, lastname)
     vonaf = match[1]
     if lastname := match[2]:
@@ -501,8 +501,8 @@ def mk_links(text):
 
 def unescape(text):
     """Unescape some html chars."""
-    text = re.sub("&gt;", r">", text)
-    return re.sub("&apos;", r"'", text)
+    text = text.replace("&gt;", r">")
+    return text.replace("&apos;", r"'")
 
 
 def aggregate_by_type(items, use_markdown=False):  # noqa: D103
@@ -594,7 +594,7 @@ def get_shorttext(text):
     """Get the initial 200 characters of text. Remove HTML and line breaks."""
     shorttext = re.sub(r"<.*?>|\n|\t", " ", text)
     shorttext = shorttext.strip()
-    shorttext = re.sub(r"  ", " ", shorttext)
+    shorttext = shorttext.replace(r"  ", " ")
     return shorttext[:200]
 
 

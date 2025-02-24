@@ -3,7 +3,7 @@ import pytest
 from skbl import create_app
 
 
-@pytest.fixture()
+@pytest.fixture
 def app():
     app = create_app()
     app.config.update(
@@ -19,11 +19,11 @@ def app():
     # clean up / reset resources here
 
 
-@pytest.fixture()
+@pytest.fixture
 def client(app):
     return app.test_client()
 
 
-@pytest.fixture()
+@pytest.fixture
 def runner(app):
     return app.test_cli_runner()
