@@ -1,7 +1,7 @@
 [project]
 name = "skbl-portal"
 version = "0.1.0"
-description = "SKBL portal"
+description = "SKBL portal behind skbl.se"
 authors = [{ name = "Språkbanken Text", email = "sb-info@svenska.gu.se" }]
 dependencies = [
     "flask>=2.2.5",
