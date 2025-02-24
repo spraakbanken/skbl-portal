@@ -57,8 +57,8 @@ help:
 	@echo ""
 
 PLATFORM := `uname -o`
-REPO := "<REPO-NAME-HERE>"
-PROJECT_SRC := "<SRC-FOLDER-HERE>"
+REPO := skbl-portal
+PROJECT_SRC := skbl
 
 ifeq (${VIRTUAL_ENV},)
   VENV_NAME = .venv
@@ -166,3 +166,30 @@ snapshot-update:
 	${INVENV} pytest --snapshot-update
 
 ### === project targets below this line ===
+run-dev: install
+	${INVENV} python run.py
+
+.PHONY: update-translation-template
+update-translation-template: skbl/translations/messages.pot
+
+.PHONY: skbl/translations/messages.pot
+skbl/translations/messages.pot:
+	${INVENV} pybabel extract -F babel.cfg  --output=$@ --project="SKBL-portal" .
+
+.PHONY: update-swedish-translation
+update-swedish-translation: skbl/translations/sv/LC_MESSAGES/messages.po
+
+skbl/translations/sv/LC_MESSAGES/messages.po: skbl/translations/messages.pot
+	${INVENV} pybabel update --output-file=$@ --input-file=$< --locale=sv
+
+.PHONY: compile-swedish-translations
+compile-swedish-translations: skbl/translations/sv/LC_MESSAGES/messages.mo
+
+skbl/translations/sv/LC_MESSAGES/messages.mo: skbl/translations/sv/LC_MESSAGES/messages.po
+	${INVENV} pybabel compile --output-file=$@ --input-file=$< --locale=sv
+
+.PHONY: generate-lockfile
+generate-lockfile: skbl/requirements.txt
+
+skbl/requirements.txt: pyproject.toml uv.lock
+	pdm export -o $@ --without-hashes
