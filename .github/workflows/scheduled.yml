@@ -61,7 +61,7 @@ jobs:
     # Cargo semver rules (i.e cargo does not update to a new major version unless explicitly told
     # to).
     runs-on: ubuntu-latest
-    name: ubuntu / 3.12 / updates work
+    name: ubuntu / 3.13 / updates work
     # There's no point running this if no uv.lock was checked in in the first place, since we'd
     # just redo what happened in the regular test job. Unfortunately, hashFiles only works in if on
     # steps, so we repeat it.
@@ -77,11 +77,11 @@ jobs:
           version: ${{ env.UV_VERSION }}
           enable-cache: true
 
-      - name: Install 3.12
+      - name: Install 3.13
         if: hashFiles('uv.lock') != ''
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: "3.13"
 
       - name: uv sync --dev --upgrade
         if: hashFiles('uv.lock') != ''
