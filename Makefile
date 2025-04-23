@@ -192,4 +192,4 @@ skbl/translations/sv/LC_MESSAGES/messages.mo: skbl/translations/sv/LC_MESSAGES/m
 generate-lockfile: skbl/requirements.txt
 
 skbl/requirements.txt: pyproject.toml uv.lock
-	pdm export -o $@ --without-hashes
+	uv export --no-dev --format requirements-txt  --no-hashes --output-file $@
