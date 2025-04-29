@@ -103,6 +103,11 @@ test:
 test-w-coverage:
 	${INVENV} pytest -vv ${cov}  --cov-report=${cov_report} ${all_tests}
 
+.PHONY: test-w-coverage-junit
+# run all tests with coverage collection
+test-w-coverage-junit:
+	${INVENV} pytest -vv ${cov}  --junitxml=junit.xml -o junit_family=legacy ${all_tests}
+
 .PHONY: doc-tests
 doc-tests:
 	${INVENV} pytest ${cov} --cov-report=${cov_report} --doctest-modules ${PROJECT_SRC}
