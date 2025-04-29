@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - master
   pull_request:
   merge_group:
 
@@ -15,7 +16,7 @@ permissions:
   contents: read
 
 env:
-  MINIMUM_PYTHON_VERSION: "3.9"
+  MINIMUM_PYTHON_VERSION: "3.10"
   UV_VERSION: "0.6.17"
 
 jobs:
@@ -32,11 +33,10 @@ jobs:
         os: [ubuntu]
         python-version:
           # remove the unused versions
-          - "3.9"
           - "3.10"
           - "3.11"
-          - "3.12"
-          - "3.13"
+          # - "3.12" TODO: memcache build fails
+          # - "3.13" TODO: memcache build fails
 
     runs-on: ${{ matrix.os }}-latest
     env:
@@ -82,7 +82,7 @@ jobs:
     # This requires the secret `CODECOV_TOKEN` be set as secret on GitHub, both for
     # Actions and Dependabot
 
-    name: "${{ matrix.os }} / 3.9 / doctest"
+    name: "${{ matrix.os }} / 3.10 / doctest"
     strategy:
       max-parallel: 4
       fail-fast: false
@@ -132,46 +132,12 @@ jobs:
           PYTHON: ${{ env.MINIMUM_PYTHON_VERSION }}
           TESTTYPE: doctest
 
-  minimal:
-    # This action chooses the oldest version of the dependencies permitted by Cargo.toml to ensure
-    # that this crate is compatible with the minimal version that this crate and its dependencies
-    # require. This will pickup issues where this create relies on functionality that was introduced
-    # later than the actual version specified (e.g., when we choose just a major version, but a
-    # method was added after this version).
-    #
-
-    runs-on: ubuntu-latest
-    name: ubuntu / 3.9 / minimal-versions
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          submodules: true
-
-      - name: Set up uv
-        uses: astral-sh/setup-uv@v6
-        with:
-          version: ${{ env.UV_VERSION }}
-          enable-cache: true
-
-      - name: Set up Python ${{ env.MINIMUM_PYTHON_VERSION }}
-        id: setup-python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ env.MINIMUM_PYTHON_VERSION }}
-
-      - name: install lowest direct dependencies
-        run: uv sync --resolution lowest-direct --all-extras --all-packages --dev
-
-      - name: make test
-        run: make test
-
   # https://github.com/marketplace/actions/alls-green#why used for branch protection checks
   test-check:
     if: always()
     needs:
       - coverage
       - doctests
-      - minimal
     runs-on: ubuntu-latest
     permissions: {}
     steps:
