@@ -112,6 +112,10 @@ test-w-coverage-junit:
 doc-tests:
 	${INVENV} pytest ${cov} --cov-report=${cov_report} --doctest-modules ${PROJECT_SRC}
 
+.PHONY: doc-tests
+doc-tests-w-coverage-junit:
+	${INVENV} pytest ${cov} --junitxml=junit.xml -o junit_family=legacy --doctest-modules ${PROJECT_SRC}
+
 .PHONY: type-check
 # check types
 type-check:
