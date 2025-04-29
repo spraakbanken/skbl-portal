@@ -6,7 +6,9 @@ permissions:
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - master
   pull_request:
   schedule:
     - cron: "7 7 * * *"
@@ -18,7 +20,7 @@ concurrency:
 name: rolling
 
 env:
-  UV_VERSION: "0.5.15"
+  UV_VERSION: "0.6.17"
 
 jobs:
   # https://twitter.com/alcuadrado/status/1571291687837732873
@@ -40,7 +42,7 @@ jobs:
 
       - name: Set up uv
         if: hashFiles('uv.lock') != ''
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@v6
         with:
           version: ${{ env.UV_VERSION }}
           enable-cache: true

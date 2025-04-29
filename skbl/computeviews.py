@@ -384,7 +384,7 @@ def compute_artikelforfattare(infotext="", description="", lang="", cache=True, 
     q_data = {"buckets": "artikel_forfattare_fornamn.bucket,artikel_forfattare_efternamn.bucket"}
     data = helpers.karp_query("statlist", q_data)
     # strip kw0 to get correct sorting
-    stat_table = [[kw[0].strip()] + kw[1:] for kw in data["stat_table"] if kw[0]]
+    stat_table = [[kw[0].strip(), *kw[1:]] for kw in data["stat_table"] if kw[0]]
     stat_table = [[f"{kw[1]},", kw[0], kw[2]] for kw in stat_table]
 
     # Remove duplicates and some wrong ones (because of backend limitation)
@@ -472,7 +472,7 @@ def bucketcall(
         q_data["q"] = query
     data = helpers.karp_query("statlist", q_data)
     # Strip kw0 to get correct sorting
-    stat_table = [[kw[0].strip()] + kw[1:] for kw in data["stat_table"] if kw[0]]
+    stat_table = [[kw[0].strip(), *kw[1:]] for kw in data["stat_table"] if kw[0]]
 
     # Insert entries that function as references
     if insert_entries:
