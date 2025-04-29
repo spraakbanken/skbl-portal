@@ -114,7 +114,7 @@ jobs:
       # Run tests and upload coverage
       #----------------------------------------------
       - name: make doc-tests
-        run: make doc-tests
+        run: make doc-tests cov_report=xml
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
