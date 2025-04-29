@@ -120,7 +120,7 @@ jobs:
       # Run tests and upload coverage
       #----------------------------------------------
       - name: make doc-tests
-        run: make doc-tests cov_report=xml
+        run: make doc-tests-w-coverage-junit
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
@@ -129,13 +129,18 @@ jobs:
           # directory: ./coverage
           env_vars: OS,PYTHON,TESTTYPE
           fail_ci_if_error: true
-          # files: ./coverage/coverage.xml
+          files: ./junit.xml
           # flags: unittests
           # name: codecov-umbrella
           verbose: true
         env:
           PYTHON: ${{ env.MINIMUM_PYTHON_VERSION }}
           TESTTYPE: doctest
+      - name: Upload test results to Codecov
+        if: ${{ !cancelled() }}
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   minimal:
     # This action chooses the oldest version of the dependencies permitted by Cargo.toml to ensure
