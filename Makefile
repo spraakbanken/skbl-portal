@@ -101,20 +101,11 @@ test:
 .PHONY: test-w-coverage
 # run all tests with coverage collection
 test-w-coverage:
-	${INVENV} pytest -vv ${cov}  --cov-report=${cov_report} ${all_tests}
-
-.PHONY: test-w-coverage-junit
-# run all tests with coverage collection
-test-w-coverage-junit:
-	${INVENV} pytest -vv ${cov}  --junitxml=junit.xml -o junit_family=legacy ${all_tests}
+	${INVENV} pytest -vv ${cov} --cov-report=term-missing --cov-report=xml:coverage.xml --cov-report=lcov:coverage.lcov ${all_tests}
 
 .PHONY: doc-tests
 doc-tests:
-	${INVENV} pytest ${cov} --cov-report=${cov_report} --doctest-modules ${PROJECT_SRC}
-
-.PHONY: doc-tests
-doc-tests-w-coverage-junit:
-	${INVENV} pytest ${cov} --junitxml=junit.xml -o junit_family=legacy --doctest-modules ${PROJECT_SRC}
+	${INVENV} pytest ${cov} --cov-report=term-missing --cov-report=xml:coverage.xml --cov-report=lcov:coverage.lcov --doctest-modules ${PROJECT_SRC}
 
 .PHONY: type-check
 # check types
