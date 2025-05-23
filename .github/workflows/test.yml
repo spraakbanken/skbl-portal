@@ -63,7 +63,7 @@ jobs:
         run: make install-dev
 
       - name: Run tests for coverage
-        run: make test-w-coverage cov_report=xml
+        run: make test-w-coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
@@ -75,6 +75,14 @@ jobs:
           # flags: unittests
           # name: codecov-umbrella
           verbose: true
+      - name: Install codescene coverage tool
+        if: secrets.CS_ACCESS_TOKEN != ''
+        run: curl https://downloads.codescene.io/enterprise/cli/install-cs-coverage-tool.sh | bash -s -- -y
+      - name: Upload coverage data to CodeScene
+        if: secrets.CS_ACCESS_TOKEN != ''
+        run: cs-coverage upload --format "lcov" --metric "line-coverage" coverage.lcov
+        env:
+          CS_ACCESS_TOKEN: ${{ secrets.CS_ACCESS_TOKEN }}
 
   doctests:
     # This action runs doctests for coverage collection and uploads them to codecov.io.
@@ -129,6 +137,14 @@ jobs:
         env:
           PYTHON: ${{ env.MINIMUM_PYTHON_VERSION }}
           TESTTYPE: doctest
+      - name: Install codescene coverage tool
+        if: secrets.CS_ACCESS_TOKEN != ''
+        run: curl https://downloads.codescene.io/enterprise/cli/install-cs-coverage-tool.sh | bash -s -- -y
+      - name: Upload coverage data to CodeScene
+        if: secrets.CS_ACCESS_TOKEN != ''
+        run: cs-coverage upload --format "lcov" --metric "line-coverage" coverage.lcov
+        env:
+          CS_ACCESS_TOKEN: ${{ secrets.CS_ACCESS_TOKEN }}
 
   minimal:
     # This action chooses the oldest version of the dependencies permitted by Cargo.toml to ensure
