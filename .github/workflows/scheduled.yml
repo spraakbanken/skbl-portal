@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     name: ubuntu / 3.14-dev
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@ff7abcd0c3c05ccf6adc123a8cd1fd4fb30fb493 # v5.0.0
         with:
           persist-credentials: false
           submodules: true
@@ -68,7 +68,7 @@ jobs:
     # just redo what happened in the regular test job. Unfortunately, hashFiles only works in if on
     # steps, so we repeat it.
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@ff7abcd0c3c05ccf6adc123a8cd1fd4fb30fb493 # v5.0.0
         with:
           persist-credentials: false
           submodules: true
