@@ -31,7 +31,7 @@ jobs:
           submodules: true
 
       - name: Set up the python ${{ env.MINIMUM_PYTHON_VERSION }}
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         id: setup-python
         with:
           python-version: ${{ env.MINIMUM_PYTHON_VERSION }}
@@ -59,7 +59,7 @@ jobs:
         with:
           submodules: true
       - name: Set up the python ${{ env.MINIMUM_PYTHON_VERSION }}
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         id: setup-python
         with:
           python-version: ${{ env.MINIMUM_PYTHON_VERSION }}
@@ -87,7 +87,7 @@ jobs:
         with:
           submodules: true
       - name: Set up the python ${{ env.MINIMUM_PYTHON_VERSION }}
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         id: setup-python
         with:
           python-version: ${{ env.MINIMUM_PYTHON_VERSION }}
