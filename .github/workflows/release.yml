@@ -94,7 +94,7 @@ jobs:
           python-version: ${{ env.MINIMUM_PYTHON_VERSION }}
 
       - name: get dist artifacts
-        uses: actions/download-artifact@de96f4613b77ec03b5cf633e7c350c32bd3c5660 # v5.0.0
+        uses: actions/download-artifact@abefc31eafcfbdf6c5336127c1346fdae79ff41c
         with:
           name: pypi_files
           path: dist
@@ -141,7 +141,7 @@ jobs:
         with:
           python-version: ${{ env.MINIMUM_PYTHON_VERSION }}
       - name: get dist artifacts
-        uses: actions/download-artifact@de96f4613b77ec03b5cf633e7c350c32bd3c5660 # v5.0.0
+        uses: actions/download-artifact@abefc31eafcfbdf6c5336127c1346fdae79ff41c
         with:
           name: pypi_files
           path: dist
