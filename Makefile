@@ -139,7 +139,7 @@ check-fmt:
 	${INVENV} ruff format --check ${PROJECT_SRC} ${tests}
 
 build:
-	uvx --from build pyproject-build --installer uv
+	uv build
 
 branch := "main"
 publish:
