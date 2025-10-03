@@ -82,8 +82,13 @@ info:
 dev: install-dev
 
 # setup development environment
-install-dev:
+install-dev: install-pre-commit
 	uv sync --all-packages --dev
+
+# install pre-commit hooks
+install-pre-commit: .git/hooks/pre-commit
+.git/hooks/pre-commit: .pre-commit-config.yaml
+	pre-commit install
 
 # setup production environment
 install:
