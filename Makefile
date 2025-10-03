@@ -88,7 +88,7 @@ install-dev: install-pre-commit
 # install pre-commit hooks
 install-pre-commit: .git/hooks/pre-commit
 .git/hooks/pre-commit: .pre-commit-config.yaml
-	pre-commit install
+	@if command -v pre-commit > /dev/null; then pre-commit install; else echo "WARN: 'pre-commit' not installed"; fi
 
 # setup production environment
 install:
