@@ -19,7 +19,7 @@ concurrency:
 name: rolling
 
 env:
-  UV_VERSION: "0.8.13"
+  UV_VERSION: "0.9.1"
 
 jobs:
   # https://twitter.com/mycoliza/status/1571295690063753218
