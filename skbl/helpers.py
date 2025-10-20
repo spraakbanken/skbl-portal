@@ -93,18 +93,21 @@ def check_cache(page, lang=""):
     try:
         with g.mc_pool.reserve() as client:
             # Look for the page, return if found
-            art = client.get(cache_name(page, lang))
+            cache_name_ = cache_name(page, lang)
+            art = client.get(cache_name_)
             if art is not None:
                 return art
+    except ValueError:
+        logger.exception("Failed to getting cache with name=%s", cache_name_)
     except Exception:
         # TODO what to do??
-        logger.exception("Error when setting cache")
+        logger.exception("Error when getting cache with name=%s", cache_name_)
 
     # If nothing is found, return None
     return None
 
 
-def set_cache(page, name="", no_hits=0, lang: str = ""):
+def set_cache(page: str, name: str = "", no_hits: int = 0, lang: str = ""):
     """Browser cache handling.
 
     Add header to the response.
@@ -118,7 +121,12 @@ def set_cache(page, name="", no_hits=0, lang: str = ""):
                 client.set(pagename, page, time=current_app.config["LOW_CACHE_TIME"])
         except Exception:
             # TODO what to do??
-            logger.exception("Error when setting cache")
+            logger.exception(
+                "Error when setting cache with pagename=%s, size of page=%d, size of page(in bytes)=%d",  # noqa: E501
+                pagename,
+                len(page),
+                len(page.encode("utf-8")),
+            )
     r = make_response(page)
     r.headers.set(
         "Cache-Control",
