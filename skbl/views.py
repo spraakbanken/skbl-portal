@@ -2,9 +2,7 @@
 
 import logging
 import re
-import urllib.error
 import urllib.parse
-import urllib.request
 
 import icu
 from flask import (
@@ -37,7 +35,7 @@ def index():
 def page_not_found(e):
     """Generate view for 404."""
     helpers.set_language_switch_link("index")
-    logger.error("Error: '%s' Info: %s", str(e), repr(e))
+    logger.error("Error: '%s' Info: %s", e, repr(e))
     return render_template("page.html", content=gettext("Contents could not be found!")), 404
 
 
