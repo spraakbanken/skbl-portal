@@ -4,14 +4,13 @@ import logging
 import re
 import urllib.parse
 
+import flask
 import icu
 from flask import (
     Blueprint,
     current_app,
     g,
     jsonify,
-    redirect,
-    render_template,
     request,
     url_for,
 )
@@ -28,7 +27,7 @@ logger = logging.getLogger(__name__)
 @bp.route("/")
 def index():
     """Redirect to language specific landing-page."""
-    return redirect(f"/{g.language}")
+    return flask.redirect(f"/{g.language}")
 
 
 @bp.errorhandler(404)
@@ -36,7 +35,9 @@ def page_not_found(e):
     """Generate view for 404."""
     helpers.set_language_switch_link("index")
     logger.error("Error: '%s' Info: %s", e, repr(e))
-    return render_template("page.html", content=gettext("Contents could not be found!")), 404
+    return flask.render_template(
+        "page.html", content=gettext("Contents could not be found!")
+    ), 404
 
 
 @bp.route("/en", endpoint="index_en")
@@ -48,7 +49,7 @@ def start():
         return page
     infotext = helpers.get_infotext("start", request.url_rule.rule)
     helpers.set_language_switch_link("index")
-    page = render_template(
+    page = flask.render_template(
         "start.html",
         title="Svenskt kvinnobiografiskt lexikon",
         infotext=infotext,
@@ -82,7 +83,7 @@ def quiz():
         return page
     infotext = helpers.get_infotext("quiz", request.url_rule.rule)
     helpers.set_language_switch_link("quiz")
-    page = render_template("quiz.html", infotext=infotext, title=gettext("Quiz"))
+    page = flask.render_template("quiz.html", infotext=infotext, title=gettext("Quiz"))
     return helpers.set_cache(page)
 
 
@@ -94,7 +95,7 @@ def contact():
 
     # Set suggestion checkbox
     mode = "suggestion" if request.args.get("suggest") == "true" else "other"
-    page = render_template(
+    page = flask.render_template(
         "contact_active.html",
         title=gettext("Contact"),
         headline=gettext("Contact SKBL"),
@@ -123,7 +124,7 @@ def show_map():
 @bp.route("/sv/kronologi", endpoint="chronology_index_sv")
 def chronology_index():
     """Generate view for chronology and redirect to default time range."""
-    return redirect(url_for(f"views.chronology_{g.language}", years="1400-1800"))
+    return flask.redirect(url_for(f"views.chronology_{g.language}", years="1400-1800"))
 
 
 @bp.route("/en/chronology/<years>", endpoint="chronology_en")
@@ -182,7 +183,7 @@ def chronology(years=""):
         if born_in_interval or died_in_interval:
             new_results.append(result)
 
-    page = render_template(
+    page = flask.render_template(
         "chronology.html",
         title=gettext("Chronology"),
         headline=gettext("Chronology"),
@@ -242,7 +243,7 @@ def search():
 
     number_hits = min(current_app.config["SEARCH_RESULT_SIZE"], data["hits"]["total"])
 
-    t = render_template(
+    t = flask.render_template(
         "list.html",
         headline="",
         subheadline=gettext("Hits for '%s'") % search,
@@ -281,7 +282,7 @@ def place(place=None):
     hits = helpers.karp_query("query", {"q": f"extended||and|plats.searchraw|equals|{place}"})
     no_hits = hits["hits"]["total"]
     if no_hits > 0:
-        page = render_template(
+        page = flask.render_template(
             "placelist.html",
             title=place,
             lat=lat,
@@ -290,7 +291,9 @@ def place(place=None):
             hits=hits["hits"],
         )
     else:
-        page = render_template("page.html", content=gettext("Contents could not be found!"))
+        page = flask.render_template(
+            "page.html", content=gettext("Contents could not be found!")
+        )
     return helpers.set_cache(page, name=pagename, no_hits=no_hits)
 
 
@@ -417,7 +420,7 @@ def keyword(result=None):
 #         if authors_dict[key].get("sv"):
 #             authors_dict[key]["sv"] = helpers.markdown_html(authors_dict[key].get("sv"))
 #         authorinfo.append((key, authors_dict[key]))
-#     page = render_template("author_presentations.html", authorinfo=authorinfo, title="Authors")
+#     page = flask.render_template("author_presentations.html", authorinfo=authorinfo, title="Authors")  # noqa: E501
 #     return helpers.set_cache(page)
 
 
@@ -473,15 +476,17 @@ def article_index(search=None):
         data, id = find_link(search)  # noqa: A001
         if id:
             # Only one hit is found, redirect to that page
-            page = redirect(url_for(f"views.article_{g.language}", id=id))
+            page = flask.redirect(url_for(f"views.article_{g.language}", id=id))
             return helpers.set_cache(page)
         # elif data["hits"]["total"] > 1:
         if len(data["hits"]["hits"]) > 1:
             # More than one hit is found, redirect to a listing
-            page = redirect(url_for(f"views.search_{g.language}", q=search))
+            page = flask.redirect(url_for(f"views.search_{g.language}", q=search))
             return helpers.set_cache(page)
         # No hits are found redirect to a "not found" page
-        return render_template("page.html", content=gettext("Contents could not be found!")), 404
+        return flask.render_template(
+            "page.html", content=gettext("Contents could not be found!")
+        ), 404
 
     art = computeviews.compute_article()
     return helpers.set_cache(art)
@@ -522,7 +527,7 @@ def empty_article():
         content = """Den här kvinnan saknas än så länge."""
     else:
         content = """This entry does not exist yet."""
-    page = render_template("page.html", content=content)
+    page = flask.render_template("page.html", content=content)
     return helpers.set_cache(page)
 
 
@@ -573,7 +578,9 @@ def show_article(data, lang="sv"):
     # if len(data["hits"]["hits"]) == 1:
     if len(data["hits"]["hits"]) <= 0:
         logger.debug("data['hits']['hits']=%s", data["hits"]["hits"])
-        return render_template("page.html", content=gettext("Contents could not be found!")), 404
+        return flask.render_template(
+            "page.html", content=gettext("Contents could not be found!")
+        ), 404
     source = data["hits"]["hits"][0]["_source"]
     source["url"] = source.get("url") or data["query"]["hits"]["hits"][0]["_id"]
     source["es_id"] = data["hits"]["hits"][0]["_id"]
@@ -630,7 +637,7 @@ def show_article(data, lang="sv"):
         source["url"],
         title,
     )
-    return render_template(
+    return flask.render_template(
         "article.html",
         article=source,
         article_id=source["es_id"],

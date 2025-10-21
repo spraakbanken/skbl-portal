@@ -9,9 +9,10 @@ import sys
 import urllib.parse
 from urllib.request import Request, urlopen
 
+import flask
 import icu
 import markdown
-from flask import current_app, g, make_response, render_template, request, url_for
+from flask import current_app, g, request, url_for
 from flask_babel import gettext
 
 from . import static_info
@@ -80,7 +81,7 @@ def serve_static_page(page, title=""):
     with current_app.open_resource(f"static/pages/{page}/{g.language}.html") as f:
         data = f.read().decode("UTF-8")
 
-    return render_template("page_static.html", content=data, title=title)
+    return flask.render_template("page_static.html", content=data, title=title)
 
 
 def check_cache(page, lang=""):
@@ -127,7 +128,7 @@ def set_cache(page: str, name: str = "", no_hits: int = 0, lang: str = ""):
                 len(page),
                 len(page.encode("utf-8")),
             )
-    r = make_response(page)
+    r = flask.make_response(page)
     r.headers.set(
         "Cache-Control",
         f"public, max-age={current_app.config['BROWSER_CACHE_TIME']}",
