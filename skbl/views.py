@@ -171,8 +171,8 @@ def chronology(years=""):
     results = sorted(selection["hits"]["hits"], key=lambda i: i["_source"]["lifespan_simple"])
 
     # Get boundaries for chronology
-    first_born = min(list(born_years))
-    last_died = max(list(died_years))
+    first_born = min(born_years)
+    last_died = max(died_years)
 
     # Remove all women who have not been living in the selected interval
     new_results = []
