@@ -6,12 +6,14 @@ import json
 import logging
 import re
 import sys
+import typing as t
 import urllib.parse
 from urllib.request import Request, urlopen
 
+import flask
 import icu
 import markdown
-from flask import current_app, g, make_response, render_template, request, url_for
+from flask import current_app, g, request, url_for
 from flask_babel import gettext
 
 from . import static_info
@@ -42,7 +44,20 @@ def cache_name(pagename: str, lang: str = "") -> str:
     return f"{pagename}_{lang}"
 
 
-def karp_query(action, query, mode=None):
+class KarpQueryHits(t.TypedDict):
+    """Hits structure of Karp query."""
+
+    total: int
+    hits: list[t.Any]
+
+
+class KarpQueryResponse(t.TypedDict):
+    """Response from a Karp query."""
+
+    hits: KarpQueryHits
+
+
+def karp_query(action, query, mode=None) -> KarpQueryResponse:
     """Generate query and send request to Karp."""
     if not mode:
         mode = current_app.config["KARP_MODE"]
@@ -54,7 +69,7 @@ def karp_query(action, query, mode=None):
     return karp_request(f"{action}?{params}")
 
 
-def karp_request(action):
+def karp_request(action: str) -> KarpQueryResponse:
     """Send request to Karp backend."""
     q = Request(f"{current_app.config['KARP_BACKEND']}/{action}")
     logger.debug("REQUEST: %s/%s", current_app.config["KARP_BACKEND"], action)
@@ -80,10 +95,10 @@ def serve_static_page(page, title=""):
     with current_app.open_resource(f"static/pages/{page}/{g.language}.html") as f:
         data = f.read().decode("UTF-8")
 
-    return render_template("page_static.html", content=data, title=title)
+    return flask.render_template("page_static.html", content=data, title=title)
 
 
-def check_cache(page, lang=""):
+def check_cache(page, lang="") -> flask.Response | str | None:
     """Check if page is in cache.
 
     If the cache should not be used, return None.
@@ -93,18 +108,23 @@ def check_cache(page, lang=""):
     try:
         with g.mc_pool.reserve() as client:
             # Look for the page, return if found
-            art = client.get(cache_name(page, lang))
+            cache_name_ = cache_name(page, lang)
+            art = client.get(cache_name_)
             if art is not None:
                 return art
+    except ValueError:
+        logger.exception("Failed to getting cache with name=%s", cache_name_)
     except Exception:
         # TODO what to do??
-        logger.exception("Error when setting cache")
+        logger.exception("Error when getting cache with name=%s", cache_name_)
 
     # If nothing is found, return None
     return None
 
 
-def set_cache(page, name="", no_hits=0, lang: str = ""):
+def set_cache(
+    page: flask.Response | str, name: str = "", no_hits: int = 0, lang: str = ""
+) -> flask.Response:
     """Browser cache handling.
 
     Add header to the response.
@@ -118,8 +138,16 @@ def set_cache(page, name="", no_hits=0, lang: str = ""):
                 client.set(pagename, page, time=current_app.config["LOW_CACHE_TIME"])
         except Exception:
             # TODO what to do??
-            logger.exception("Error when setting cache")
-    r = make_response(page)
+            if isinstance(page, flask.Response):
+                page_size = page.content_length
+            else:
+                page_size = len(page.encode("utf-8"))
+            logger.exception(
+                "Error when setting cache with pagename=%s, size of page=%d",
+                pagename,
+                page_size,
+            )
+    r = flask.make_response(page)
     r.headers.set(
         "Cache-Control",
         f"public, max-age={current_app.config['BROWSER_CACHE_TIME']}",
