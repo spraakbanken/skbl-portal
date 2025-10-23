@@ -6,6 +6,7 @@ import json
 import logging
 import re
 import sys
+import typing as t
 import urllib.parse
 from urllib.request import Request, urlopen
 
@@ -43,7 +44,20 @@ def cache_name(pagename: str, lang: str = "") -> str:
     return f"{pagename}_{lang}"
 
 
-def karp_query(action, query, mode=None):
+class KarpQueryHits(t.TypedDict):
+    """Hits structure of Karp query."""
+
+    total: int
+    hits: list[t.Any]
+
+
+class KarpQueryResponse(t.TypedDict):
+    """Response from a Karp query."""
+
+    hits: KarpQueryHits
+
+
+def karp_query(action, query, mode=None) -> KarpQueryResponse:
     """Generate query and send request to Karp."""
     if not mode:
         mode = current_app.config["KARP_MODE"]
@@ -55,7 +69,7 @@ def karp_query(action, query, mode=None):
     return karp_request(f"{action}?{params}")
 
 
-def karp_request(action):
+def karp_request(action: str) -> KarpQueryResponse:
     """Send request to Karp backend."""
     q = Request(f"{current_app.config['KARP_BACKEND']}/{action}")
     logger.debug("REQUEST: %s/%s", current_app.config["KARP_BACKEND"], action)
@@ -84,7 +98,7 @@ def serve_static_page(page, title=""):
     return flask.render_template("page_static.html", content=data, title=title)
 
 
-def check_cache(page, lang=""):
+def check_cache(page, lang="") -> flask.Response | str | None:
     """Check if page is in cache.
 
     If the cache should not be used, return None.
@@ -108,7 +122,9 @@ def check_cache(page, lang=""):
     return None
 
 
-def set_cache(page: str, name: str = "", no_hits: int = 0, lang: str = ""):
+def set_cache(
+    page: flask.Response | str, name: str = "", no_hits: int = 0, lang: str = ""
+) -> flask.Response:
     """Browser cache handling.
 
     Add header to the response.
@@ -122,11 +138,14 @@ def set_cache(page: str, name: str = "", no_hits: int = 0, lang: str = ""):
                 client.set(pagename, page, time=current_app.config["LOW_CACHE_TIME"])
         except Exception:
             # TODO what to do??
+            if isinstance(page, flask.Response):
+                page_size = page.content_length
+            else:
+                page_size = len(page.encode("utf-8"))
             logger.exception(
-                "Error when setting cache with pagename=%s, size of page=%d, size of page(in bytes)=%d",  # noqa: E501
+                "Error when setting cache with pagename=%s, size of page=%d",
                 pagename,
-                len(page),
-                len(page.encode("utf-8")),
+                page_size,
             )
     r = flask.make_response(page)
     r.headers.set(

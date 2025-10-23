@@ -200,7 +200,7 @@ def chronology(years=""):
 
 @bp.route("/en/search", endpoint="search_en")
 @bp.route("/sv/sok", endpoint="search_sv")
-def search():
+def search() -> flask.Response | str:
     """Generate view for search results."""
     helpers.set_language_switch_link("search")
     search = request.args.get("q", "")
@@ -211,6 +211,8 @@ def search():
         return page
 
     advanced_search_text = ""
+
+    data: helpers.KarpQueryResponse = {"hits": {"total": 0, "hits": []}}
     if search:
         show = (
             "name,url,undertitel,undertitel_eng,lifespan,platspinlat.bucket,platspinlon.bucket"
@@ -229,7 +231,7 @@ def search():
         mode = current_app.config["KARP_MODE"]
         data = helpers.karp_query("minientry", karp_q, mode=mode)
         with current_app.open_resource(f"static/pages/advanced-search/{g.language}.html") as f:
-            advanced_search_text = f.read().decode("UTF-8")
+            advanced_search_text = f.read().decode("UTF-8")  # type: ignore[attr-defined]
         karp_url = (
             "https://spraakbanken.gu.se/karp/#?mode="
             + mode
@@ -237,7 +239,6 @@ def search():
             + search
         )
     else:
-        data = {"hits": {"total": 0, "hits": []}}
         karp_url = ""
         search = "\u200b"
 
