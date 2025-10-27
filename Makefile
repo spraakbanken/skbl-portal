@@ -82,8 +82,13 @@ info:
 dev: install-dev
 
 # setup development environment
-install-dev:
+install-dev: install-pre-commit
 	uv sync --all-packages --dev
+
+# install pre-commit hooks
+install-pre-commit: .git/hooks/pre-commit
+.git/hooks/pre-commit: .pre-commit-config.yaml
+	@if command -v pre-commit > /dev/null; then pre-commit install; else echo "WARN: 'pre-commit' not installed"; fi
 
 # setup production environment
 install:
@@ -101,11 +106,11 @@ test:
 .PHONY: test-w-coverage
 # run all tests with coverage collection
 test-w-coverage:
-	${INVENV} pytest -vv ${cov}  --cov-report=${cov_report} ${all_tests}
+	${INVENV} pytest -vv ${cov} --cov-report=term-missing --cov-report=xml:coverage.xml --cov-report=lcov:coverage.lcov ${all_tests}
 
 .PHONY: doc-tests
 doc-tests:
-	${INVENV} pytest ${cov} --cov-report=${cov_report} --doctest-modules ${PROJECT_SRC}
+	${INVENV} pytest ${cov} --cov-report=term-missing --cov-report=xml:coverage.xml --cov-report=lcov:coverage.lcov --doctest-modules ${PROJECT_SRC}
 
 .PHONY: type-check
 # check types
@@ -139,7 +144,7 @@ check-fmt:
 	${INVENV} ruff format --check ${PROJECT_SRC} ${tests}
 
 build:
-	uvx --from build pyproject-build --installer uv
+	uv build
 
 branch := "main"
 publish:
