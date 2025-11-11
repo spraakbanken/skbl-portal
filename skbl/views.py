@@ -74,19 +74,6 @@ def biographies():
     return helpers.set_cache(page)
 
 
-@bp.route("/en/quiz", endpoint="quiz_en")
-@bp.route("/sv/quiz", endpoint="quiz_sv")
-def quiz():
-    """Generate view for 'Quiz'."""
-    page = helpers.check_cache("quiz")
-    if page is not None:
-        return page
-    infotext = helpers.get_infotext("quiz", request.url_rule.rule)
-    helpers.set_language_switch_link("quiz")
-    page = flask.render_template("quiz.html", infotext=infotext, title=gettext("Quiz"))
-    return helpers.set_cache(page)
-
-
 @bp.route("/en/contact", endpoint="contact_en")
 @bp.route("/sv/kontakt", endpoint="contact_sv")
 def contact():

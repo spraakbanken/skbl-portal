@@ -137,14 +137,4 @@ Click on the box to the right on the map to sort the women’s geographical conn
 death, education, career or residence.
         """,
     },
-    "quiz": {
-        "sv": """
-Testa dina kvinnohistoriska kunskaper genom att besvara frågor i tre olika quiz. Klicka i den ruta du anser vara det rätta svaret.
-När frågorna i ett quiz besvarats kan du klicka på knappen ”skicka”  och sedan ”visa resultat” för att se de rätta svaren.
-        """,
-        "en": """
-Test your knowledge of women’s history by answering the questions in three different quizzes. Click on the box for what you think is the correct answer.
-When all the questions in a quiz have been answered, you can click on the button “send” and then “show results” to see the correct answers.
-        """,
-    },
 }
