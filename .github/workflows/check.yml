@@ -41,7 +41,7 @@ jobs:
       #  -----  setup uv and load cache   -----
       #----------------------------------------------
       - name: Set up uv
-        uses: astral-sh/setup-uv@3259c6206f993105e3a61b142c2d97bf4b9ef83d # 7.1.0
+        uses: astral-sh/setup-uv@681c641aba71e4a1c380be3ab5e12ad51f415867 # 7.1.6
         with:
           version: ${{ env.UV_VERSION }}
           enable-cache: true
@@ -70,7 +70,7 @@ jobs:
       #  -----  setup uv and load cache   -----
       #----------------------------------------------
       - name: Set up uv
-        uses: astral-sh/setup-uv@3259c6206f993105e3a61b142c2d97bf4b9ef83d # 7.1.0
+        uses: astral-sh/setup-uv@681c641aba71e4a1c380be3ab5e12ad51f415867 # 7.1.6
         with:
           version: ${{ env.UV_VERSION }}
           enable-cache: true
@@ -99,7 +99,7 @@ jobs:
       #  -----  setup uv and load cache   -----
       #----------------------------------------------
       - name: Set up uv
-        uses: astral-sh/setup-uv@3259c6206f993105e3a61b142c2d97bf4b9ef83d # 7.1.0
+        uses: astral-sh/setup-uv@681c641aba71e4a1c380be3ab5e12ad51f415867 # 7.1.6
         with:
           version: ${{ env.UV_VERSION }}
           enable-cache: true
