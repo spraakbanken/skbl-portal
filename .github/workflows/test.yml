@@ -45,7 +45,7 @@ jobs:
       PYTHON: ${{ matrix.python-version }}
       CS_ACCESS_TOKEN: ${{ secrets.CS_ACCESS_TOKEN }}
     steps:
-      - uses: actions/checkout@ff7abcd0c3c05ccf6adc123a8cd1fd4fb30fb493 # v5.0.0
+      - uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98 # v5.0.0
         with:
           persist-credentials: false
           submodules: true
@@ -105,7 +105,7 @@ jobs:
       OS: ${{ matrix.os }}-latest
       CS_ACCESS_TOKEN: ${{ secrets.CS_ACCESS_TOKEN }}
     steps:
-      - uses: actions/checkout@ff7abcd0c3c05ccf6adc123a8cd1fd4fb30fb493 # v5.0.0
+      - uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98 # v5.0.0
         with:
           persist-credentials: false
           submodules: true
