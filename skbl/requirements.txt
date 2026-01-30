@@ -27,7 +27,7 @@ flask-compress==1.20
     # via skbl-portal
 flask-reverse-proxy==0.2.0.2
     # via skbl-portal
-gunicorn==23.0.0
+gunicorn==24.1.0
     # via skbl-portal
 itsdangerous==2.2.0
     # via flask
