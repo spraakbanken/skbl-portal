@@ -45,7 +45,7 @@ markupsafe==3.0.3
     #   werkzeug
 packaging==25.0
     # via gunicorn
-pycparser==2.23 ; implementation_name != 'PyPy' and platform_python_implementation == 'PyPy'
+pycparser==3.0 ; implementation_name != 'PyPy' and platform_python_implementation == 'PyPy'
     # via cffi
 pyicu==2.15.3
     # via skbl-portal
