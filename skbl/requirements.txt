@@ -43,7 +43,7 @@ markupsafe==3.0.3
     #   flask
     #   jinja2
     #   werkzeug
-packaging==25.0
+packaging==26.0
     # via gunicorn
 pycparser==2.23 ; implementation_name != 'PyPy' and platform_python_implementation == 'PyPy'
     # via cffi
