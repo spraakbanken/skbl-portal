@@ -6,7 +6,7 @@ backports-zstd==1.0.0 ; python_full_version < '3.14'
     # via flask-compress
 blinker==1.9.0
     # via flask
-brotli==1.1.0 ; platform_python_implementation != 'PyPy'
+brotli==1.2.0 ; platform_python_implementation != 'PyPy'
     # via flask-compress
 brotlicffi==1.1.0.0 ; platform_python_implementation == 'PyPy'
     # via flask-compress
